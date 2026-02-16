@@ -1,10 +1,11 @@
 'use server'
 
 import { ProviderFilters } from '@/lib/types'
+import { getSupabaseServer } from '@/lib/supabase/factory'
+import { cookies } from 'next/headers'
 
 export async function getProviders(filters: ProviderFilters = {}) {
-    const { createClient } = await import('@/lib/supabase/server')
-    const supabase = await createClient()
+    const supabase = await getSupabaseServer(await cookies())
 
     let query = supabase
         .from('providers')
@@ -39,8 +40,7 @@ export async function getProviders(filters: ProviderFilters = {}) {
 }
 
 export async function getProviderBySlug(slug: string) {
-    const { createClient } = await import('@/lib/supabase/server')
-    const supabase = await createClient()
+    const supabase = await getSupabaseServer(await cookies())
 
     const { data, error } = await supabase
         .from('providers')
@@ -57,8 +57,7 @@ export async function getProviderBySlug(slug: string) {
 }
 
 export async function getCityStats(city: string) {
-    const { createClient } = await import('@/lib/supabase/server')
-    const supabase = await createClient()
+    const supabase = await getSupabaseServer(await cookies())
 
     const { data, error } = await supabase
         .from('providers')
@@ -78,8 +77,7 @@ export async function getCityStats(city: string) {
 }
 
 export async function getProviderDashboardData() {
-    const { createClient } = await import('@/lib/supabase/server')
-    const supabase = await createClient()
+    const supabase = await getSupabaseServer(await cookies())
 
     const { data: { session } } = await supabase.auth.getSession()
 
@@ -122,8 +120,7 @@ export async function getProviderDashboardData() {
 }
 
 export async function updateProviderProfile(formData: FormData) {
-    const { createClient } = await import('@/lib/supabase/server')
-    const supabase = await createClient()
+    const supabase = await getSupabaseServer(await cookies())
     const { data: { session } } = await supabase.auth.getSession()
 
     if (!session) return { error: 'Not authenticated' }

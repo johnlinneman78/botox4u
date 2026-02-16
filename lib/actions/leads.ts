@@ -2,6 +2,8 @@
 
 import { z } from 'zod'
 import { Resend } from 'resend'
+import { getSupabaseServer } from '@/lib/supabase/factory'
+import { cookies } from 'next/headers'
 
 const resend = new Resend(process.env.SENDGRID_API_KEY || process.env.RESEND_API_KEY)
 
@@ -15,8 +17,7 @@ const leadSchema = z.object({
 })
 
 export async function submitLead(formData: FormData) {
-    const { createClient } = await import('@/lib/supabase/server')
-    const supabase = await createClient()
+    const supabase = await getSupabaseServer(await cookies())
 
     const rawData = {
         provider_id: formData.get('provider_id'),

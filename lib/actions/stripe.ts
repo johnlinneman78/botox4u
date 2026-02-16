@@ -2,10 +2,11 @@
 
 import { stripe } from '@/lib/stripe'
 import { redirect } from 'next/navigation'
+import { getSupabaseServer } from '@/lib/supabase/factory'
+import { cookies } from 'next/headers'
 
 export async function createCheckoutSession(tier: 'featured' | 'premium') {
-    const { createClient } = await import('@/lib/supabase/server')
-    const supabase = await createClient()
+    const supabase = await getSupabaseServer(await cookies())
     const { data: { session: authSession } } = await supabase.auth.getSession()
 
     if (!authSession) {

@@ -1,14 +1,14 @@
 import Link from 'next/link'
-import { createClient } from '@/lib/supabase/server'
+import { getSupabaseServer } from '@/lib/supabase/factory'
+import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { Button } from '@/components/ui/Button'
 
 export default async function DashboardLayout({
     children,
 }: {
     children: React.ReactNode
 }) {
-    const supabase = await createClient()
+    const supabase = await getSupabaseServer(await cookies())
     const { data: { session } } = await supabase.auth.getSession()
 
     if (!session) {
