@@ -1,7 +1,9 @@
 import { createServerClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
 
 export const createClient = async () => {
+    // We dynamically import next/headers inside the function to prevent 
+    // the "next/headers" leak into client components during the build phase.
+    const { cookies } = await import('next/headers')
     const cookieStore = await cookies()
 
     return createServerClient(
@@ -18,9 +20,7 @@ export const createClient = async () => {
                             cookieStore.set(name, value, options)
                         )
                     } catch {
-                        // The `setAll` method was called from a Server Component.
-                        // This can be ignored if you have middleware refreshing
-                        // user sessions.
+                        // Safe to ignore in Server Components
                     }
                 },
             },
