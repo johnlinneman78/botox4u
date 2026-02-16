@@ -25,5 +25,6 @@ export interface Provider {
     description?: string
     credentials?: string[]
     services_offered?: any[]
+    treatment_slugs?: string[]
     created_at: string
 }

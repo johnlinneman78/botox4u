@@ -25,8 +25,12 @@ export async function generateMetadata({ params }: TreatmentCityPageProps): Prom
     if (!treatment) return { title: 'Treatment Not Found' }
 
     return {
-        title: `${treatment.name} in ${city}, ${state} | Cost & Best Providers`,
-        description: `Everything you need to know about ${treatment.name} in ${city}. Compare local pricing, see patient results, and find verified medical injectors near you.`,
+        title: `${treatment.name} in ${city}, ${state} | 2024 Cost & Best Injectors`,
+        description: `Compare ${treatment.name} costs, units, and results in ${city}. See average pricing from ${state} clinics and book top-rated specialized medical injectors.`,
+        openGraph: {
+            title: `${treatment.name} in ${city}: What to Expect & Local Costs`,
+            description: `A complete guide to ${treatment.name} in ${city}, including pricing, unit estimates, and clinic recommendations.`,
+        }
     }
 }
 
@@ -43,8 +47,58 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
     const providers = await getProviders({ city: cityName, state: stateCode, treatment: treatment.slug })
     const stats = await getTreatmentStats(treatment.slug, cityName, stateCode)
 
+    // JSON-LD Schema
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "MedicalProcedure",
+        "name": treatment.name,
+        "description": treatment.description,
+        "location": {
+            "@type": "City",
+            "name": cityName
+        },
+        "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "USD",
+            "lowPrice": stats?.lowPrice || 10,
+            "highPrice": stats?.highPrice || 20,
+            "offerCount": providers.length
+        }
+    }
+
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": `How much does ${treatment.name} cost in ${cityName}?`,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": `In ${cityName}, the average cost for ${treatment.name} is approximately $${stats?.avgCost || 15} per unit. Total treatment session costs typically range from $${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 40 : 15)} to $${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 60 : 25)} depending on your anatomy.`
+                }
+            },
+            {
+                "@type": "Question",
+                "name": `How many units of Botox are needed for ${treatment.name}?`,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": `For ${treatment.name}, patients usually require between ${treatment.slug.includes('masseter') ? '40 and 60' : '15 and 25'} units for optimal results.`
+                }
+            }
+        ]
+    }
+
     return (
         <main className="bg-gray-50 min-h-screen pb-20">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
             {/* Breadcrumbs */}
             <div className="bg-primary/95 border-b border-white/10">
                 <div className="container mx-auto px-4 py-3 flex items-center gap-2 text-xs font-medium text-white/60">

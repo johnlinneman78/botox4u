@@ -44,6 +44,7 @@ async function seed() {
                 min_treatment_price: provider.min_treatment_price,
                 description: provider.description,
                 services_offered: provider.services_offered,
+                treatment_slugs: provider.treatment_slugs,
                 credentials: provider.credentials,
             }, { onConflict: 'slug' })
 

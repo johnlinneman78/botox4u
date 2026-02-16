@@ -23,8 +23,8 @@ export async function getProviders(filters: {
         query = query.eq('listing_tier', filters.tier)
     }
     if (filters.treatment) {
-        // services_offered is a text[] column in Supabase
-        query = query.contains('services_offered', [filters.treatment])
+        // treatment_slugs is a text[] column in Supabase
+        query = query.contains('treatment_slugs', [filters.treatment])
     }
 
     const { data, error } = await query.order('listing_tier', { ascending: false })
@@ -131,7 +131,7 @@ export async function getTreatmentStats(treatment: string, city: string, state: 
         .select('price_per_unit, min_treatment_price')
         .eq('city', city)
         .eq('state', state)
-        .contains('services_offered', [treatment])
+        .contains('treatment_slugs', [treatment])
 
     if (error || !data || data.length === 0) return null
 

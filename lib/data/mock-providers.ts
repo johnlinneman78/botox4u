@@ -16,6 +16,7 @@ export interface MockProvider {
     image_url?: string
     description: string
     services_offered: { name: string; price: string }[]
+    treatment_slugs: string[]
     credentials: string[]
 }
 
@@ -39,7 +40,9 @@ export const mockProviders: MockProvider[] = [
         services_offered: [
             { name: 'Botox Cosmetic', price: '$18/unit' },
             { name: 'Lip Fillers', price: 'From $700' },
+            { name: 'Masseter Slimming', price: '$600' },
         ],
+        treatment_slugs: ['masseter-botox', 'lip-flip', 'forehead-botox'],
         credentials: ['Board Certified', 'Allergan Top 100'],
     },
     {
@@ -61,7 +64,9 @@ export const mockProviders: MockProvider[] = [
         services_offered: [
             { name: 'Botox', price: '$14/unit' },
             { name: 'Dermal Fillers', price: 'From $600' },
+            { name: 'TMJ Relief', price: '$500' },
         ],
+        treatment_slugs: ['tmj-botox', 'crows-feet', 'forehead-botox'],
         credentials: ['Certified Injectors'],
     },
     {
@@ -83,6 +88,7 @@ export const mockProviders: MockProvider[] = [
         services_offered: [
             { name: 'Botox', price: '$12/unit' },
         ],
+        treatment_slugs: ['forehead-botox', 'crows-feet'],
         credentials: ['State Licensed'],
     },
     {
@@ -105,6 +111,7 @@ export const mockProviders: MockProvider[] = [
             { name: 'Botox Cosmetic', price: '$22/unit' },
             { name: 'Jawline Contouring', price: 'From $1200' },
         ],
+        treatment_slugs: ['masseter-botox', 'tmj-botox', 'forehead-botox'],
         credentials: ['Board Certified Plastic Surgeon', 'Galderma Excellence Award'],
     },
     {
@@ -127,6 +134,7 @@ export const mockProviders: MockProvider[] = [
             { name: 'Botox', price: '$15/unit' },
             { name: 'Cheek Filler', price: 'From $800' },
         ],
+        treatment_slugs: ['lip-flip', 'forehead-botox', 'baby-botox'],
         credentials: ['Certified Aesthetic Nursing Specialist'],
     },
     {
@@ -149,6 +157,7 @@ export const mockProviders: MockProvider[] = [
             { name: 'Botox', price: '$13/unit' },
             { name: 'IV Therapy', price: 'From $150' },
         ],
+        treatment_slugs: ['forehead-botox', 'crows-feet', 'tmj-botox'],
         credentials: ['Texas Medical Board Licensed'],
     },
     {
@@ -170,6 +179,7 @@ export const mockProviders: MockProvider[] = [
         services_offered: [
             { name: 'Baby Botox', price: '$11/unit' },
         ],
+        treatment_slugs: ['baby-botox', 'forehead-botox'],
         credentials: ['Certified Laser Technician'],
     },
     {
@@ -192,6 +202,7 @@ export const mockProviders: MockProvider[] = [
             { name: 'Botox', price: '$16/unit' },
             { name: 'Sculptra', price: 'From $900' },
         ],
+        treatment_slugs: ['masseter-botox', 'lip-flip', 'crows-feet'],
         credentials: ['GAIN Trainer', 'Board Certified Dermatologist'],
     },
     {
@@ -214,6 +225,7 @@ export const mockProviders: MockProvider[] = [
             { name: 'Botox', price: '$14/unit' },
             { name: 'Lip Flip', price: '$150' },
         ],
+        treatment_slugs: ['lip-flip', 'forehead-botox', 'crows-feet'],
         credentials: ['Certified Master Injector'],
     },
     {
@@ -236,6 +248,7 @@ export const mockProviders: MockProvider[] = [
             { name: 'Botox Cosmetic', price: '$17/unit' },
             { name: 'Laser Hair Removal', price: 'From $200' },
         ],
+        treatment_slugs: ['forehead-botox', 'crows-feet', 'tmj-botox'],
         credentials: ['Board Certified Dermatologists', 'ASDS Member'],
     },
     {
@@ -257,6 +270,7 @@ export const mockProviders: MockProvider[] = [
         services_offered: [
             { name: 'Botox', price: '$12/unit' },
         ],
+        treatment_slugs: ['forehead-botox', 'crows-feet'],
         credentials: ['Licensed Medical Estheticians'],
     },
     {
@@ -279,6 +293,7 @@ export const mockProviders: MockProvider[] = [
             { name: 'Botox', price: '$13/unit' },
             { name: 'Kybella', price: 'From $600/vial' },
         ],
+        treatment_slugs: ['masseter-botox', 'tmj-botox', 'forehead-botox'],
         credentials: ['Allergan Platinum Provider'],
     },
     {
@@ -301,6 +316,7 @@ export const mockProviders: MockProvider[] = [
             { name: 'Botox Cosmetic', price: '$19/unit' },
             { name: 'Cheek Enhancement', price: 'From $900' },
         ],
+        treatment_slugs: ['lip-flip', 'forehead-botox', 'crows-feet'],
         credentials: ['Board Certified ARNP'],
     },
 ]
