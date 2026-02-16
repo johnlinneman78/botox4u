@@ -3,14 +3,14 @@ import { Card, CardContent } from '@/components/ui/Card'
 import { formatCurrency } from '@/lib/utils'
 
 const featuredCities = [
-    { name: 'Los Angeles', state: 'CA', slug: 'los-angeles-ca', avgCost: 525, providers: 150 },
-    { name: 'New York', state: 'NY', slug: 'new-york-ny', avgCost: 650, providers: 200 },
-    { name: 'Miami', state: 'FL', slug: 'miami-fl', avgCost: 475, providers: 85 },
-    { name: 'Chicago', state: 'IL', slug: 'chicago-il', avgCost: 450, providers: 120 },
-    { name: 'Houston', state: 'TX', slug: 'houston-tx', avgCost: 425, providers: 95 },
-    { name: 'Phoenix', state: 'AZ', slug: 'phoenix-az', avgCost: 400, providers: 70 },
-    { name: 'Dallas', state: 'TX', slug: 'dallas-tx', avgCost: 440, providers: 90 },
-    { name: 'San Diego', state: 'CA', slug: 'san-diego-ca', avgCost: 500, providers: 80 },
+    { name: 'Los Angeles', state: 'CA', slug: 'los-angeles', avgCost: 525, providers: 150 },
+    { name: 'New York', state: 'NY', slug: 'new-york', avgCost: 650, providers: 200 },
+    { name: 'Miami', state: 'FL', slug: 'miami', avgCost: 475, providers: 85 },
+    { name: 'Chicago', state: 'IL', slug: 'chicago', avgCost: 450, providers: 120 },
+    { name: 'Houston', state: 'TX', slug: 'houston', avgCost: 425, providers: 95 },
+    { name: 'Phoenix', state: 'AZ', slug: 'phoenix', avgCost: 400, providers: 70 },
+    { name: 'Dallas', state: 'TX', slug: 'dallas', avgCost: 440, providers: 90 },
+    { name: 'San Diego', state: 'CA', slug: 'san-diego', avgCost: 500, providers: 80 },
 ]
 
 export default function FeaturedCities() {

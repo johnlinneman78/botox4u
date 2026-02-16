@@ -22,8 +22,13 @@ export default function Header() {
                         Cost Guide
                     </Link>
                     <Link href="/provider/login">
+                        <Button variant="ghost" size="sm" className="hidden lg:inline-flex">
+                            Portal
+                        </Button>
+                    </Link>
+                    <Link href="/provider/register">
                         <Button variant="outline" size="sm">
-                            Provider Login
+                            Add Clinic
                         </Button>
                     </Link>
                 </nav>
