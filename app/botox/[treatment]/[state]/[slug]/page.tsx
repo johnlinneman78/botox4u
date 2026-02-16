@@ -1,6 +1,7 @@
 import { getProviders, getTreatmentStats } from '@/lib/actions/providers'
 import { AtAGlance } from '@/components/seo/AtAGlance'
 import { CostComparisonTable } from '@/components/seo/CostComparisonTable'
+import { PriceMeter } from '@/components/city/PriceMeter'
 import { ProviderCard } from '@/components/providers/ProviderCard'
 import { TREATMENTS, REVERSE_STATE_MAP } from '@/lib/constants'
 import { Badge } from '@/components/ui/Badge'
@@ -145,6 +146,13 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                         { label: 'Duration', value: '4-6', suffix: 'months' }
                     ]}
                 />
+
+                <div className="mt-12">
+                    <PriceMeter
+                        avgCost={stats?.avgCost || 15}
+                        city={cityName}
+                    />
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-20">
                     <div className="md:col-span-2">

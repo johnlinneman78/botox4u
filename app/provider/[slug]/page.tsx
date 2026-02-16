@@ -177,7 +177,11 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                             <div className="sticky top-24 space-y-8">
                                 {/* Lead Form */}
                                 <div id="quote-form">
-                                    <LeadForm providerId={provider.id} providerName={provider.name} />
+                                    <LeadForm
+                                        providerId={provider.id}
+                                        providerName={provider.name}
+                                        isPremium={provider.listing_tier === 'premium'}
+                                    />
                                 </div>
 
                                 {/* Quick Contact */}
@@ -210,6 +214,19 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                         </Button>
                                     </div>
                                 </div>
+
+                                {/* Claim Listing CTA */}
+                                {!provider.verified && (
+                                    <div className="bg-gradient-to-br from-primary to-primary/90 p-8 rounded-3xl text-white shadow-xl shadow-primary/20">
+                                        <h3 className="text-xl font-display font-bold mb-4">Are you the owner?</h3>
+                                        <p className="text-sm text-primary-foreground/80 leading-relaxed mb-6">
+                                            Claim your profile to update pricing, respond to reviews, and reach more patients in {provider.city}.
+                                        </p>
+                                        <Button className="w-full bg-secondary hover:bg-secondary/90 text-white border-0 py-6 text-md font-bold shadow-lg">
+                                            Claim This Listing
+                                        </Button>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

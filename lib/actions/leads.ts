@@ -4,6 +4,7 @@ import { z } from 'zod'
 import { Resend } from 'resend'
 import { getSupabaseServer } from '@/lib/supabase/factory'
 import { cookies } from 'next/headers'
+import { checkRateLimit, sanitizeString } from '@/lib/validation'
 
 const getResend = () => {
     const apiKey = process.env.SENDGRID_API_KEY || process.env.RESEND_API_KEY;
@@ -11,17 +12,41 @@ const getResend = () => {
     return new Resend(apiKey);
 }
 
+// Enhanced schema with security validation
 const leadSchema = z.object({
     provider_id: z.string().uuid(),
-    full_name: z.string().min(2, 'Name is required'),
-    email: z.string().email('Invalid email'),
-    phone: z.string().optional(),
-    treatment_type: z.string().optional(),
-    message: z.string().optional(),
+    full_name: z.string()
+        .min(2, 'Name is required')
+        .max(100, 'Name too long')
+        .regex(/^[a-zA-Z\s'-]+$/, 'Name contains invalid characters'),
+    email: z.string()
+        .email('Invalid email')
+        .max(254, 'Email too long'),
+    phone: z.string()
+        .regex(/^\d{10,11}$/, 'Invalid phone number')
+        .optional()
+        .or(z.literal('')),
+    treatment_type: z.string().max(100).optional(),
+    message: z.string()
+        .max(1000, 'Message too long (max 1000 characters)')
+        .refine(
+            (val) => !/<script|javascript:|onerror=/i.test(val || ''),
+            'Message contains invalid content'
+        )
+        .optional(),
 })
 
 export async function submitLead(formData: FormData) {
     const supabase = await getSupabaseServer(await cookies())
+
+    // Rate limiting: 5 submissions per minute per email
+    const email = formData.get('email') as string
+    if (!checkRateLimit(email, 5, 60000)) {
+        return {
+            error: 'Too many requests. Please try again in a minute.',
+            details: null
+        }
+    }
 
     const rawData = {
         provider_id: formData.get('provider_id'),
@@ -38,10 +63,20 @@ export async function submitLead(formData: FormData) {
         return { error: 'Validation failed', details: validated.error.flatten() }
     }
 
+    // Sanitize all text inputs to prevent XSS
+    const sanitizedData = {
+        ...validated.data,
+        full_name: sanitizeString(validated.data.full_name),
+        email: sanitizeString(validated.data.email),
+        phone: validated.data.phone ? sanitizeString(validated.data.phone) : undefined,
+        treatment_type: validated.data.treatment_type ? sanitizeString(validated.data.treatment_type) : undefined,
+        message: validated.data.message ? sanitizeString(validated.data.message) : undefined,
+    }
+
     // 1. Save to DB
     const { data: lead, error: dbError } = await supabase
         .from('leads')
-        .insert([validated.data])
+        .insert([sanitizedData])
         .select('*, providers(name, email)')
         .single()
 

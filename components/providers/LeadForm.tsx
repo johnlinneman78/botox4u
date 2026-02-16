@@ -22,9 +22,10 @@ type LeadFormData = z.infer<typeof leadFormSchema>
 interface LeadFormProps {
     providerId: string
     providerName: string
+    isPremium?: boolean
 }
 
-export function LeadForm({ providerId, providerName }: LeadFormProps) {
+export function LeadForm({ providerId, providerName, isPremium }: LeadFormProps) {
     const [step, setStep] = useState(1)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
@@ -102,6 +103,12 @@ export function LeadForm({ providerId, providerName }: LeadFormProps) {
                     style={{ width: `${(step / 3) * 100}%` }}
                 />
             </div>
+            {isPremium && (
+                <div className="bg-secondary/10 px-4 py-2 flex items-center justify-center gap-2 border-b border-secondary/10">
+                    <span className="text-secondary">💎</span>
+                    <span className="text-[10px] font-black text-secondary uppercase tracking-tight">VIP Fast-Track Request</span>
+                </div>
+            )}
             <CardHeader>
                 <CardTitle className="text-xl">Request a Consultation</CardTitle>
                 <p className="text-xs text-gray-500">Get a direct callback from {providerName}</p>
@@ -125,8 +132,8 @@ export function LeadForm({ providerId, providerName }: LeadFormProps) {
                                     <label
                                         key={option.id}
                                         className={`flex items-center p-3 border rounded-lg cursor-pointer transition-all ${getValues('treatment_type') === option.id
-                                                ? 'border-secondary bg-secondary/5 ring-1 ring-secondary'
-                                                : 'border-gray-200 hover:bg-gray-50'
+                                            ? 'border-secondary bg-secondary/5 ring-1 ring-secondary'
+                                            : 'border-gray-200 hover:bg-gray-50'
                                             }`}
                                     >
                                         <input

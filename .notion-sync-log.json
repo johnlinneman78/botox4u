@@ -1,0 +1,29 @@
+{
+  "lastSync": "2026-02-16T09:21:15.298Z",
+  "metrics": {
+    "taskStats": {
+      "total": 12,
+      "done": 2,
+      "inProgress": 1,
+      "backlog": 9
+    },
+    "contentStats": {
+      "total": 14,
+      "published": 0,
+      "inProgress": 0,
+      "planned": 14
+    },
+    "providerStats": {
+      "total": 3,
+      "claimed": 0,
+      "paid": 0
+    }
+  },
+  "databases": [
+    "tasks",
+    "revenue",
+    "seo",
+    "content",
+    "providers"
+  ]
+}

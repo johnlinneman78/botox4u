@@ -4,6 +4,8 @@ import { CityHero } from '@/components/city/CityHero'
 import { CityStats } from '@/components/city/CityStats'
 import { CostComparisonTable } from '@/components/seo/CostComparisonTable'
 import { CityFAQ } from '@/components/city/CityFAQ'
+import { PriceMeter } from '@/components/city/PriceMeter'
+import { PromoteClinicCard } from '@/components/providers/PromoteClinicCard'
 import { ProviderCard } from '@/components/providers/ProviderCard'
 import { Badge } from '@/components/ui/Badge'
 import Link from 'next/link'
@@ -27,10 +29,11 @@ function parseSlug(slug: string) {
 export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
     const resolvedParams = await params
     const { cityName, stateCode } = parseSlug(resolvedParams.slug)
+    const stats = await getCityStats(cityName)
 
     return {
         title: `Best Botox in ${cityName}, ${stateCode} | 2024 Pricing & Reviews`,
-        description: `Find top-rated Botox injectors in ${cityName}. Compare prices from ${providers.length} verified clinics, see patient reviews, and book consultations. Average cost: $${stats?.avgCost || 14}/unit.`,
+        description: `Find top-rated Botox injectors in ${cityName}. Compare prices from ${stats?.providerCount || 0} verified clinics, see patient reviews, and book consultations.`,
         openGraph: {
             title: `Botox in ${cityName}, ${stateCode}: Top Clinics & Pricing`,
             description: `A complete directory of verified Botox providers in ${cityName}, TX. Compare costs and reviews.`,
@@ -139,6 +142,13 @@ export default async function CityPage({ params }: CityPageProps) {
                     />
                 )}
 
+                <div className="mb-12">
+                    <PriceMeter
+                        avgCost={stats?.avgCost || 15}
+                        city={cityName}
+                    />
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                     <div className="md:col-span-2">
                         <div className="flex justify-between items-center mb-6">
@@ -204,18 +214,7 @@ export default async function CityPage({ params }: CityPageProps) {
                             </ul>
                         </div>
 
-                        {/* Cost Table Stub */}
-                        <div className="bg-primary text-white p-8 rounded-2xl shadow-lg">
-                            <h3 className="text-xl font-display font-bold mb-4">
-                                Save on Treatments
-                            </h3>
-                            <p className="text-sm text-gray-300 mb-6 font-light">
-                                Many clinics in {cityName} offer discounts for first-time patients or memberships.
-                            </p>
-                            <button className="w-full py-3 bg-secondary text-white font-bold rounded-xl hover:bg-secondary/90 transition-all">
-                                Get Multi-Clinic Quote
-                            </button>
-                        </div>
+                        <PromoteClinicCard city={cityName} />
                     </div>
                 </div>
 

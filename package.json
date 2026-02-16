@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "notion:populate": "node scripts/populate_notion_data.js",
+    "notion:sync": "node scripts/daily_notion_sync.js",
+    "notion:update": "node scripts/notion_update.js",
+    "notion:import-keywords": "node scripts/keyword_import.js",
+    "notion:link-pages": "node scripts/auto_link_pages.js",
+    "notion:setup-advanced": "node scripts/create_advanced_databases.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -14,6 +20,8 @@
     "@supabase/auth-helpers-nextjs": "^0.15.0",
     "@supabase/supabase-js": "^2.95.3",
     "clsx": "^2.1.1",
+    "csv-parser": "^3.2.0",
+    "lucide-react": "^0.564.0",
     "next": "16.1.6",
     "next-sitemap": "^4.2.3",
     "react": "19.2.3",

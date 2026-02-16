@@ -27,14 +27,25 @@ export async function getProviders(filters: {
         query = query.contains('treatment_slugs', [filters.treatment])
     }
 
-    const { data, error } = await query.order('listing_tier', { ascending: false })
+    const { data, error } = await query
 
     if (error) {
         console.error('Error fetching providers:', error)
         return []
     }
 
-    return data
+    // Custom sort: Premium > Featured > Free
+    const tierWeight = {
+        'premium': 3,
+        'featured': 2,
+        'free': 1
+    }
+
+    return (data || []).sort((a: any, b: any) => {
+        const weightA = tierWeight[a.listing_tier as keyof typeof tierWeight] || 0
+        const weightB = tierWeight[b.listing_tier as keyof typeof tierWeight] || 0
+        return weightB - weightA
+    })
 }
 
 export async function getCityStats(city: string) {
@@ -167,4 +178,39 @@ export async function submitLead(leadData: any) {
     // Lead submission logic
     console.log('Lead submitted:', leadData)
     return { success: true }
+}
+
+export async function updateProviderProfile(formData: FormData) {
+    'use server'
+
+    const supabase = await getSupabaseServer(await cookies())
+
+    try {
+        const providerId = formData.get('provider_id') as string
+
+        const updates = {
+            name: formData.get('name') as string,
+            business_type: formData.get('business_type') as string,
+            description: formData.get('description') as string,
+            price_per_unit: parseFloat(formData.get('price_per_unit') as string),
+            phone: formData.get('phone') as string,
+            website: formData.get('website') as string,
+            address: formData.get('address') as string,
+        }
+
+        const { error } = await supabase
+            .from('providers')
+            .update(updates)
+            .eq('id', providerId)
+
+        if (error) {
+            console.error('Error updating provider:', error)
+            return { success: false, error: error.message }
+        }
+
+        return { success: true }
+    } catch (error) {
+        console.error('Error updating provider profile:', error)
+        return { success: false, error: 'Failed to update profile' }
+    }
 }

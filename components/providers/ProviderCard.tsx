@@ -24,13 +24,26 @@ interface ProviderCardProps {
 }
 
 export function ProviderCard({ provider }: ProviderCardProps) {
+    const isPremium = provider.listingTier === 'premium'
+    const isFeatured = provider.listingTier === 'featured'
+
     return (
-        <Card className={`overflow-hidden transition-all duration-300 hover:ring-2 hover:ring-secondary/20 ${provider.listingTier === 'premium' ? 'border-secondary/30 bg-secondary/[0.02]' : ''
+        <Card className={`relative overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 ${isPremium ? 'border-secondary/40 ring-1 ring-secondary/20 bg-gradient-to-br from-secondary/[0.03] to-white shadow-xl shadow-secondary/5' : ''
             }`}>
+            {isPremium && (
+                <div className="absolute top-0 right-0 z-30">
+                    <div className="bg-secondary text-white text-[10px] font-black px-4 py-1.5 rounded-bl-2xl shadow-lg border-l border-b border-white/20 tracking-tighter uppercase">
+                        ⭐ Top National Choice
+                    </div>
+                </div>
+            )}
             <div className="flex flex-col md:flex-row">
                 {/* Provider Photo Placeholder */}
-                <div className="relative w-full md:w-48 h-48 md:h-auto bg-gray-100 flex items-center justify-center shrink-0">
-                    <span className="text-4xl">🏥</span>
+                <div className="relative w-full md:w-56 h-56 md:h-auto bg-gray-100 flex items-center justify-center shrink-0 overflow-hidden">
+                    <span className="text-5xl group-hover:scale-110 transition-transform duration-500">🏥</span>
+                    {isPremium && (
+                        <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent pointer-events-none" />
+                    )}
                     {provider.listingTier !== 'free' && (
                         <div className="absolute top-2 left-2">
                             <Badge variant={provider.listingTier === 'premium' ? 'premium' : 'featured'}>
@@ -93,6 +106,13 @@ export function ProviderCard({ provider }: ProviderCardProps) {
                                 Book Consultation
                             </Button>
                         </div>
+
+                        {provider.minTreatmentPrice && isPremium && (
+                            <div className="mt-4 p-3 bg-secondary/5 border border-secondary/10 rounded-xl text-xs text-secondary-foreground font-medium flex items-center gap-2">
+                                <span className="bg-secondary text-white p-1 rounded-full text-[8px] leading-none">★</span>
+                                This clinic is a verified Botox 4U Premium Partner
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
