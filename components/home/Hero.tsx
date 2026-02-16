@@ -49,6 +49,25 @@ export default function Hero() {
                         </div>
                     </form>
 
+                    <div className="flex flex-wrap justify-center gap-4 mb-12">
+                        <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={() => router.push('/calculator')}
+                            className="bg-white/10 hover:bg-white/20 border-white/20"
+                        >
+                            📊 Treatment Cost Estimator
+                        </Button>
+                        <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={() => router.push('/botox/beverly-hills-ca')}
+                            className="bg-white/10 hover:bg-white/20 border-white/20"
+                        >
+                            📍 Botox in Beverly Hills
+                        </Button>
+                    </div>
+
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-sm">
                         <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
                             <div className="text-4xl font-bold mb-2">1,000+</div>

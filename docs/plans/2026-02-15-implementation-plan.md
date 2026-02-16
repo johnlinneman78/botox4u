@@ -150,9 +150,32 @@ Create helper to generate structured data for all page types.
 
 ---
 
-## PHASE 2: PROGRAMMATIC SEO EXPANSION (3 WEEKS)
+### Task 11: State Pages (SSG/ISR)
+**Files:**
+- Create: `app/botox/state/[slug]/page.tsx`
+- Create: `components/state/StateHero.tsx`
+- Create: `components/state/CityList.tsx`
 
-[Details to be added as we approach this phase]
+**Step 1: Create State Page Template**
+Show aggregate data for the state (avg cost, provider count) and a categorized list of cities.
+
+**Step 2: Implement dynamic state metadata**
+Generate title/description tags for all 50 states.
+
+**Task 12: Treatment-Specific Pages (Programmatic)**
+**Files:**
+- Create: `app/[treatment]/[slug]/page.tsx` (e.g. `/masseter-botox/los-angeles-ca`)
+
+**Step 1: Create Treatment Page Template**
+Focus on specific use cases: Masseter, Crows Feet, TMJ, etc.
+
+**Task 13: Internal Linking & UX Polish**
+- Add "Nearby Cities" to city pages.
+- Add breadcrumbs (Home > State > City).
+- Improve mobile navigation.
+
+**Task 14: Sitemap Expansion**
+- Ensure all 50 states and 300+ target cities are in the sitemap.
 
 ---
 

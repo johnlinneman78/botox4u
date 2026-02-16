@@ -8,7 +8,7 @@ export default function Footer() {
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
-                        <h3 className="font-display font-bold text-lg mb-4 text-primary">Botox Directory</h3>
+                        <h3 className="font-display font-bold text-lg mb-4 text-primary">Botox <span className="text-secondary">4U</span></h3>
                         <p className="text-sm text-gray-600">
                             Find the best Botox providers near you. Compare costs, read reviews, and book consultations.
                         </p>
@@ -18,7 +18,7 @@ export default function Footer() {
                         <h4 className="font-semibold mb-4 text-primary">For Patients</h4>
                         <ul className="space-y-2 text-sm">
                             <li><Link href="/find-providers" className="text-gray-600 hover:text-primary transition-colors">Find Providers</Link></li>
-                            <li><Link href="/cost-calculator" className="text-gray-600 hover:text-primary transition-colors">Cost Calculator</Link></li>
+                            <li><Link href="/calculator" className="text-gray-600 hover:text-primary transition-colors">Cost Calculator</Link></li>
                             <li><Link href="/guide/botox-cost-guide" className="text-gray-600 hover:text-primary transition-colors">Cost Guide</Link></li>
                             <li><Link href="/faq" className="text-gray-600 hover:text-primary transition-colors">FAQ</Link></li>
                         </ul>
@@ -44,7 +44,7 @@ export default function Footer() {
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-600">
-                    <p>© {currentYear} Botox Directory. All rights reserved.</p>
+                    <p>© {currentYear} Botox 4U. All rights reserved.</p>
                     <p className="mt-2">
                         <strong>Medical Disclaimer:</strong> This website provides general information only.
                         Consult with a licensed medical professional before any treatment.

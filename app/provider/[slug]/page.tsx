@@ -5,9 +5,27 @@ import { formatCurrency } from '@/lib/utils'
 import { getProviderBySlug } from '@/lib/actions/providers'
 import { LeadForm } from '@/components/providers/LeadForm'
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
 
-export default async function ProviderProfilePage({ params }: { params: { slug: string } }) {
-    const provider = await getProviderBySlug(params.slug)
+interface ProviderProfileProps {
+    params: { slug: string }
+}
+
+export async function generateMetadata({ params }: ProviderProfileProps): Promise<Metadata> {
+    const resolvedParams = await params
+    const provider = await getProviderBySlug(resolvedParams.slug)
+
+    if (!provider) return { title: 'Provider Not Found' }
+
+    return {
+        title: `${provider.name} in ${provider.city} | Botox Prices & Reviews`,
+        description: `View pricing, services, and reviews for ${provider.name} in ${provider.city}, ${provider.state}. Book a consultation for Botox and aesthetic treatments.`
+    }
+}
+
+export default async function ProviderProfilePage({ params }: ProviderProfileProps) {
+    const resolvedParams = await params
+    const provider = await getProviderBySlug(resolvedParams.slug)
 
     if (!provider) {
         notFound()
@@ -16,46 +34,61 @@ export default async function ProviderProfilePage({ params }: { params: { slug: 
     return (
         <div className="bg-gray-50 min-h-screen">
             {/* Profile Header */}
-            <section className="bg-white border-b border-gray-200 pt-12 pb-8">
-                <div className="container mx-auto px-4">
-                    <div className="flex flex-col md:flex-row gap-8 items-start">
+            <section className="relative bg-primary pt-20 pb-12 overflow-hidden">
+                {/* Background Decor */}
+                <div className="absolute top-0 right-0 w-1/3 h-full bg-secondary/5 skew-x-12 transform origin-top-right"></div>
+
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left">
                         {/* Logo/Photo Placeholder */}
-                        <div className="w-32 h-32 md:w-40 md:h-40 bg-primary/5 rounded-2xl flex items-center justify-center border-2 border-gray-100 relative overflow-hidden shrink-0">
-                            <span className="text-5xl">🏥</span>
+                        <div className="w-40 h-40 bg-white/10 rounded-3xl flex items-center justify-center border border-white/20 shadow-2xl backdrop-blur-md relative overflow-hidden shrink-0">
+                            <span className="text-6xl">🏥</span>
+                            {provider.listing_tier === 'premium' && (
+                                <div className="absolute -bottom-2 -right-2 bg-secondary text-white p-2 text-xl rounded-full shadow-lg">
+                                    ★
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex-1">
-                            <div className="flex flex-wrap items-center gap-3 mb-3">
-                                <h1 className="text-3xl md:text-4xl font-display font-bold text-primary">
+                            <div className="flex flex-wrap justify-center md:justify-start items-center gap-3 mb-4">
+                                <h1 className="text-4xl md:text-5xl font-display font-bold text-white">
                                     {provider.name}
                                 </h1>
-                                {provider.verified && <Badge variant="verified">VERIFIED PROVIDER</Badge>}
-                                {provider.listing_tier === 'premium' && <Badge variant="premium">PREMIUM LISTING</Badge>}
+                                {provider.verified && (
+                                    <Badge variant="verified" className="bg-success/20 text-success-foreground border-success/30">
+                                        VERIFIED
+                                    </Badge>
+                                )}
                             </div>
 
-                            <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600 mb-6">
-                                <div className="flex items-center gap-1">
-                                    <span className="text-accent font-bold">★</span>
-                                    <span className="font-bold text-primary">{Number(provider.average_rating)}</span>
-                                    <span>({provider.review_count} reviews)</span>
+                            <div className="flex flex-wrap justify-center md:justify-start items-center gap-6 text-gray-300 mb-8 font-medium">
+                                <div className="flex items-center gap-1.5">
+                                    <span className="text-secondary text-lg">★</span>
+                                    <span className="text-white font-bold">{Number(provider.average_rating)}</span>
+                                    <span className="text-sm opacity-60">({provider.review_count} reviews)</span>
                                 </div>
-                                <div className="flex items-center gap-1">
-                                    <span>📍 {provider.city}, {provider.state}</span>
+                                <div className="flex items-center gap-1.5">
+                                    <span className="text-secondary opacity-60">📍</span>
+                                    <span>{provider.city}, {provider.state}</span>
                                 </div>
-                                <div className="flex items-center gap-1">
-                                    <span>💼 {provider.business_type}</span>
+                                <div className="flex items-center gap-1.5">
+                                    <span className="text-secondary opacity-60">💼</span>
+                                    <span>{provider.business_type}</span>
                                 </div>
                             </div>
 
-                            <div className="flex flex-wrap gap-4">
+                            <div className="flex flex-wrap justify-center md:justify-start gap-4">
                                 <a href="#quote-form">
-                                    <Button variant="primary" size="lg" className="px-8 shadow-lg shadow-secondary/20">
-                                        Get a Quote
+                                    <Button variant="primary" size="lg" className="px-10 h-14 text-lg bg-secondary hover:bg-secondary/90 shadow-xl shadow-secondary/20">
+                                        Book Consultation
                                     </Button>
                                 </a>
                                 {provider.website && (
                                     <a href={provider.website} target="_blank" rel="noopener noreferrer">
-                                        <Button variant="outline" size="lg">Visit Website</Button>
+                                        <Button variant="outline" size="lg" className="h-14 px-8 border-white/20 text-white hover:bg-white/10">
+                                            Official Website
+                                        </Button>
                                     </a>
                                 )}
                             </div>
@@ -67,112 +100,116 @@ export default async function ProviderProfilePage({ params }: { params: { slug: 
             {/* Main Content Sections */}
             <section className="py-12">
                 <div className="container mx-auto px-4">
-                    <div className="flex flex-col lg:flex-row gap-8">
-                        <div className="lg:w-2/3 space-y-8">
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>About This Provider</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-gray-700 leading-relaxed mb-6">
-                                        {provider.description || "The provider has not yet added a description. Contact them directly to learn more about their services."}
-                                    </p>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        {provider.credentials && Array.isArray(provider.credentials) && provider.credentials.map((cred: string, i: number) => (
-                                            <div key={i} className="flex items-center gap-2 text-sm text-gray-700">
-                                                <span className="text-success">✔</span> {cred}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </CardContent>
-                            </Card>
+                    <div className="flex flex-col lg:flex-row gap-12">
+                        <div className="lg:w-2/3 space-y-12">
+                            {/* About */}
+                            <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-sm">
+                                <h2 className="text-2xl font-display font-bold text-primary mb-6">About the Clinic</h2>
+                                <p className="text-gray-600 leading-relaxed text-lg mb-8">
+                                    {provider.description || `${provider.name} is a premier ${provider.business_type} located in ${provider.city}. They specialize in providing high-quality aesthetic treatments tailored to individual patient goals.`}
+                                </p>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-6 rounded-2xl">
+                                    {provider.credentials && Array.isArray(provider.credentials) && provider.credentials.map((cred: string, i: number) => (
+                                        <div key={i} className="flex items-center gap-3 text-sm font-semibold text-primary">
+                                            <span className="text-secondary">✔</span> {cred}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
 
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>Services & Estimated Pricing</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="divide-y divide-gray-100">
-                                        {provider.price_per_unit && (
-                                            <div className="py-4 flex justify-between items-center">
-                                                <span className="font-medium text-gray-900">Price Per Unit</span>
-                                                <span className="text-secondary font-bold">{formatCurrency(Number(provider.price_per_unit))}/unit</span>
-                                            </div>
-                                        )}
-                                        {provider.services_offered && Array.isArray(provider.services_offered) && provider.services_offered.map((service: any, i: number) => (
-                                            <div key={i} className="py-4 flex justify-between items-center">
-                                                <span className="font-medium text-gray-900">{service.name}</span>
-                                                <span className="text-secondary font-bold">{service.price}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <p className="text-[10px] text-gray-400 mt-4 italic">
-                                        *Prices are estimates based on local averages or provider-supplied data. Final cost determined at consultation.
-                                    </p>
-                                </CardContent>
-                            </Card>
-
-                            <Card>
-                                <CardHeader className="flex flex-row items-center justify-between">
-                                    <CardTitle>Patient Reviews</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="space-y-8">
-                                        {provider.reviews && provider.reviews.length > 0 ? (
-                                            provider.reviews.map((review: any, i: number) => (
-                                                <div key={i} className="border-b border-gray-100 pb-6 last:border-0 last:pb-0">
-                                                    <div className="flex justify-between items-center mb-2">
-                                                        <div className="flex items-center gap-2">
-                                                            <span className="font-bold text-primary">{review.author_name}</span>
-                                                            <span className="text-accent">{'★'.repeat(review.rating)}</span>
-                                                        </div>
-                                                        <span className="text-xs text-gray-400">{new Date(review.created_at).toLocaleDateString()}</span>
-                                                    </div>
-                                                    <p className="text-sm text-gray-600 leading-relaxed">
-                                                        {review.content}
-                                                    </p>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <p className="text-sm text-gray-500 italic">No reviews yet for this provider.</p>
-                                        )}
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </div>
-
-                        <div className="lg:w-1/3 space-y-8">
-                            <Card className="bg-primary text-white border-none shadow-xl">
-                                <CardHeader>
-                                    <CardTitle className="text-white text-xl">Contact Information</CardTitle>
-                                </CardHeader>
-                                <CardContent className="space-y-6">
-                                    {provider.phone && (
-                                        <div className="flex items-start gap-3">
-                                            <span className="text-secondary text-xl">📱</span>
-                                            <div>
-                                                <div className="text-white/60 text-xs mb-1 uppercase tracking-wider">Phone</div>
-                                                <div className="text-lg font-bold">{provider.phone}</div>
-                                            </div>
+                            {/* Services */}
+                            <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-sm">
+                                <h2 className="text-2xl font-display font-bold text-primary mb-6">Services & Pricing</h2>
+                                <div className="space-y-4">
+                                    {provider.price_per_unit && (
+                                        <div className="flex justify-between items-center p-4 bg-secondary/5 rounded-xl border border-secondary/10">
+                                            <span className="font-bold text-primary">Botox / Dysport Pricing</span>
+                                            <span className="text-secondary font-black text-xl">{formatCurrency(Number(provider.price_per_unit))}/unit</span>
                                         </div>
                                     )}
-                                    <div className="flex items-start gap-3">
-                                        <span className="text-secondary text-xl">🏠</span>
-                                        <div>
-                                            <div className="text-white/60 text-xs mb-1 uppercase tracking-wider">Address</div>
-                                            <div className="text-sm">{provider.address}</div>
-                                            <div className="text-sm">{provider.city}, {provider.state} {provider.zip_code}</div>
+                                    {provider.services_offered && Array.isArray(provider.services_offered) && provider.services_offered.map((service: any, i: number) => (
+                                        <div key={i} className="flex justify-between items-center p-4 border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors rounded-lg">
+                                            <span className="text-gray-700 font-medium">{service.name}</span>
+                                            <span className="font-bold text-primary">{service.price}</span>
                                         </div>
-                                    </div>
-                                    <Button className="w-full bg-secondary hover:bg-secondary/90 text-white font-bold py-6">
-                                        Get Directions
-                                    </Button>
-                                </CardContent>
-                            </Card>
+                                    ))}
+                                </div>
+                                <p className="text-[11px] text-gray-400 mt-6 italic bg-gray-50 p-3 rounded-lg text-center">
+                                    Note: Final treatment costs vary by patient. A formal consultation is required for exact pricing.
+                                </p>
+                            </div>
 
-                            {/* Advanced Lead Form Widget */}
-                            <div id="quote-form" className="sticky top-24">
-                                <LeadForm providerId={provider.id} providerName={provider.name} />
+                            {/* Reviews */}
+                            <div>
+                                <h2 className="text-2xl font-display font-bold text-primary mb-6">Patient Feedback</h2>
+                                <div className="space-y-6">
+                                    {provider.reviews && provider.reviews.length > 0 ? (
+                                        provider.reviews.map((review: any, i: number) => (
+                                            <div key={i} className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm transition-transform hover:-translate-y-1">
+                                                <div className="flex justify-between items-start mb-4">
+                                                    <div>
+                                                        <div className="flex items-center gap-1 text-accent mb-1">
+                                                            {[...Array(5)].map((_, star) => (
+                                                                <span key={star} className={star < review.rating ? 'text-accent' : 'text-gray-200'}>★</span>
+                                                            ))}
+                                                        </div>
+                                                        <span className="font-bold text-primary text-lg">{review.author_name}</span>
+                                                    </div>
+                                                    <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">
+                                                        {new Date(review.created_at).toLocaleDateString()}
+                                                    </span>
+                                                </div>
+                                                <p className="text-gray-600 leading-relaxed italic">
+                                                    &quot;{review.content}&quot;
+                                                </p>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div className="bg-white p-12 text-center rounded-3xl border border-gray-100 border-dashed">
+                                            <p className="text-gray-400">Be the first to review this provider.</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="lg:w-1/3">
+                            <div className="sticky top-24 space-y-8">
+                                {/* Lead Form */}
+                                <div id="quote-form">
+                                    <LeadForm providerId={provider.id} providerName={provider.name} />
+                                </div>
+
+                                {/* Quick Contact */}
+                                <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                                    <h3 className="text-xl font-display font-bold text-primary mb-6">Clinic Info</h3>
+                                    <div className="space-y-6">
+                                        {provider.phone && (
+                                            <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl">
+                                                <span className="text-2xl">📱</span>
+                                                <div>
+                                                    <div className="text-xs text-gray-400 font-bold uppercase mb-0.5">Phone</div>
+                                                    <a href={`tel:${provider.phone}`} className="text-lg font-bold text-primary hover:text-secondary transition-colors">
+                                                        {provider.phone}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        )}
+                                        <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl">
+                                            <span className="text-2xl">🏠</span>
+                                            <div>
+                                                <div className="text-xs text-gray-400 font-bold uppercase mb-0.5">Location</div>
+                                                <div className="text-sm font-semibold text-gray-700">
+                                                    {provider.address}<br />
+                                                    {provider.city}, {provider.state}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <Button variant="outline" className="w-full h-12 rounded-xl">
+                                            Get Directions
+                                        </Button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
