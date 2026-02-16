@@ -2,6 +2,7 @@ import { ProviderCard } from '@/components/providers/ProviderCard'
 import { Badge } from '@/components/ui/Badge'
 import { Card, CardContent } from '@/components/ui/Card'
 import { formatCurrency } from '@/lib/utils'
+import { Button } from '@/components/ui/Button'
 import { getProviders, getCityStats } from '@/lib/actions/providers'
 
 export default async function CityPage({ params }: { params: { 'city-slug': string } }) {
