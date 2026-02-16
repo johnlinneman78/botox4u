@@ -1,6 +1,5 @@
 'use server'
 
-import { createClient } from '@/lib/supabase/server'
 import { z } from 'zod'
 import { Resend } from 'resend'
 
@@ -16,6 +15,7 @@ const leadSchema = z.object({
 })
 
 export async function submitLead(formData: FormData) {
+    const { createClient } = await import('@/lib/supabase/server')
     const supabase = await createClient()
 
     const rawData = {
@@ -45,7 +45,7 @@ export async function submitLead(formData: FormData) {
         return { error: 'Failed to submit lead. Please try again.' }
     }
 
-    // 2. Fetch Provider Email if not in Join (Supabase might not return nested on insert)
+    // 2. Fetch Provider Email
     const { data: provider } = await supabase
         .from('providers')
         .select('name, email')

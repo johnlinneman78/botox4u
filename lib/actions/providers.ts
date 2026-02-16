@@ -1,21 +1,15 @@
 'use server'
 
-import { createClient } from '@/lib/supabase/server'
-
-export interface ProviderFilters {
-    query?: string
-    city?: string
-    state?: string
-    tier?: string
-}
+import { ProviderFilters } from '@/lib/types'
 
 export async function getProviders(filters: ProviderFilters = {}) {
+    const { createClient } = await import('@/lib/supabase/server')
     const supabase = await createClient()
 
     let query = supabase
         .from('providers')
         .select('*')
-        .order('listing_tier', { ascending: false }) // Premium/Featured first
+        .order('listing_tier', { ascending: false })
         .order('average_rating', { ascending: false })
 
     if (filters.query) {
@@ -45,6 +39,7 @@ export async function getProviders(filters: ProviderFilters = {}) {
 }
 
 export async function getProviderBySlug(slug: string) {
+    const { createClient } = await import('@/lib/supabase/server')
     const supabase = await createClient()
 
     const { data, error } = await supabase
@@ -62,6 +57,7 @@ export async function getProviderBySlug(slug: string) {
 }
 
 export async function getCityStats(city: string) {
+    const { createClient } = await import('@/lib/supabase/server')
     const supabase = await createClient()
 
     const { data, error } = await supabase
@@ -82,6 +78,7 @@ export async function getCityStats(city: string) {
 }
 
 export async function getProviderDashboardData() {
+    const { createClient } = await import('@/lib/supabase/server')
     const supabase = await createClient()
 
     const { data: { session } } = await supabase.auth.getSession()
@@ -118,13 +115,14 @@ export async function getProviderDashboardData() {
         leads: leads || [],
         stats: {
             totalLeads: totalLeads || 0,
-            profileViews: '1.2k', // Mock for now until we add tracking
+            profileViews: '1.2k',
             avgRating: provider.average_rating
         }
     }
 }
 
 export async function updateProviderProfile(formData: FormData) {
+    const { createClient } = await import('@/lib/supabase/server')
     const supabase = await createClient()
     const { data: { session } } = await supabase.auth.getSession()
 

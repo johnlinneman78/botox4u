@@ -1,10 +1,10 @@
 'use server'
 
 import { stripe } from '@/lib/stripe'
-import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 
 export async function createCheckoutSession(tier: 'featured' | 'premium') {
+    const { createClient } = await import('@/lib/supabase/server')
     const supabase = await createClient()
     const { data: { session: authSession } } = await supabase.auth.getSession()
 
