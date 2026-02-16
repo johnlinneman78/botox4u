@@ -7,9 +7,17 @@ import { createServerClient } from '@supabase/auth-helpers-nextjs'
  * This is isolated to prevent "next/headers" leaks during the build process.
  */
 export async function getSupabaseServer(cookieList: any) {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+    if (!url || !key) {
+        console.warn('Supabase server variables missing')
+        return null as any
+    }
+
     return createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        url,
+        key,
         {
             cookies: {
                 getAll() {

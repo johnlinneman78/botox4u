@@ -5,7 +5,11 @@ import { Resend } from 'resend'
 import { getSupabaseServer } from '@/lib/supabase/factory'
 import { cookies } from 'next/headers'
 
-const resend = new Resend(process.env.SENDGRID_API_KEY || process.env.RESEND_API_KEY)
+const getResend = () => {
+    const apiKey = process.env.SENDGRID_API_KEY || process.env.RESEND_API_KEY;
+    if (!apiKey) return null;
+    return new Resend(apiKey);
+}
 
 const leadSchema = z.object({
     provider_id: z.string().uuid(),
@@ -55,12 +59,14 @@ export async function submitLead(formData: FormData) {
 
     // 3. Send Email Notification
     if (provider?.email) {
-        try {
-            await resend.emails.send({
-                from: 'Botox Directory <leads@botox-directory.com>',
-                to: provider.email,
-                subject: `New Patient Lead: ${lead.full_name}`,
-                html: `
+        const resend = getResend();
+        if (resend) {
+            try {
+                await resend.emails.send({
+                    from: 'Botox Directory <leads@botox-directory.com>',
+                    to: provider.email,
+                    subject: `New Patient Lead: ${lead.full_name}`,
+                    html: `
           <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
             <h2 style="color: #1a2332;">New Patient Inquiry</h2>
             <p>You have received a new lead from the National Botox Directory.</p>
@@ -74,9 +80,10 @@ export async function submitLead(formData: FormData) {
             <p style="font-size: 12px; color: #666;">View all leads in your <a href="${process.env.NEXT_PUBLIC_APP_URL}/provider/dashboard">Provider Dashboard</a>.</p>
           </div>
         `
-            })
-        } catch (emailError) {
-            console.error('Error sending email:', emailError)
+                })
+            } catch (emailError) {
+                console.error('Error sending email:', emailError)
+            }
         }
     }
 

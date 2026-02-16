@@ -66,13 +66,13 @@ export async function getCityStats(city: string) {
 
     if (error || !data) return null
 
-    const validPrices = data.map(p => Number(p.price_per_unit)).filter(p => !isNaN(p) && p > 0)
-    const avgCost = validPrices.length > 0 ? validPrices.reduce((a, b) => a + b, 0) / validPrices.length : 15
+    const validPrices = data.map((p: any) => Number(p.price_per_unit)).filter((p: number) => !isNaN(p) && p > 0)
+    const avgCost = validPrices.length > 0 ? validPrices.reduce((a: number, b: number) => a + b, 0) / validPrices.length : 15
 
     return {
         avgCost: Math.round(avgCost),
         providerCount: data.length,
-        avgRating: data.reduce((a, b) => a + Number(b.average_rating), 0) / data.length || 0
+        avgRating: data.reduce((a: number, b: any) => a + Number(b.average_rating), 0) / data.length || 0
     }
 }
 

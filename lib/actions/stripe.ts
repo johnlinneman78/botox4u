@@ -1,11 +1,16 @@
 'use server'
 
-import { stripe } from '@/lib/stripe'
+import { getStripe } from '@/lib/stripe'
 import { redirect } from 'next/navigation'
 import { getSupabaseServer } from '@/lib/supabase/factory'
 import { cookies } from 'next/headers'
 
 export async function createCheckoutSession(tier: 'featured' | 'premium') {
+    const stripe = getStripe()
+    if (!stripe) {
+        throw new Error('Stripe is not configured')
+    }
+
     const supabase = await getSupabaseServer(await cookies())
     const { data: { session: authSession } } = await supabase.auth.getSession()
 
