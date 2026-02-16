@@ -2,6 +2,7 @@ import { getProviders, getCityStats, getNearbyCities } from '@/lib/actions/provi
 import { REVERSE_STATE_MAP, TREATMENTS } from '@/lib/constants'
 import { CityHero } from '@/components/city/CityHero'
 import { CityStats } from '@/components/city/CityStats'
+import { CostComparisonTable } from '@/components/seo/CostComparisonTable'
 import { CityFAQ } from '@/components/city/CityFAQ'
 import { ProviderCard } from '@/components/providers/ProviderCard'
 import { Badge } from '@/components/ui/Badge'
@@ -108,6 +109,17 @@ export default async function CityPage({ params }: CityPageProps) {
                                 }} />
                             ))}
                         </div>
+
+                        <CostComparisonTable
+                            title={`Typical Botox Costs in ${cityName} by Area`}
+                            rows={[
+                                { label: 'Forehead Lines', units: '10-20 Units', costRange: `$${(stats?.avgCost || 14) * 10} - $${(stats?.avgCost || 14) * 20}`, notes: 'Horizontal lines above brows.' },
+                                { label: 'Frown Lines (11s)', units: '15-25 Units', costRange: `$${(stats?.avgCost || 14) * 15} - $${(stats?.avgCost || 14) * 25}`, notes: 'Vertical lines between brows.' },
+                                { label: 'Crow\'s Feet', units: '12-24 Units', costRange: `$${(stats?.avgCost || 14) * 12} - $${(stats?.avgCost || 14) * 24}`, notes: 'Lines around the eyes.' },
+                                { label: 'Masseter (Slimming)', units: '40-60 Units', costRange: `$${(stats?.avgCost || 14) * 40} - $${(stats?.avgCost || 14) * 60}`, notes: 'Jaw slimming and TNJ relief.' },
+                            ]}
+                            footer={`*Pricing estimates in ${cityName} are based on a local average of $${stats?.avgCost || 14}/unit.`}
+                        />
 
                         {providers.length === 0 && (
                             <div className="bg-white p-12 text-center rounded-2xl border border-gray-100 shadow-sm">

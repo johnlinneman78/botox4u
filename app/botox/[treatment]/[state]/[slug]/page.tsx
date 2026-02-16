@@ -1,5 +1,6 @@
 import { getProviders, getTreatmentStats } from '@/lib/actions/providers'
 import { AtAGlance } from '@/components/seo/AtAGlance'
+import { CostComparisonTable } from '@/components/seo/CostComparisonTable'
 import { ProviderCard } from '@/components/providers/ProviderCard'
 import { TREATMENTS, REVERSE_STATE_MAP } from '@/lib/constants'
 import { Badge } from '@/components/ui/Badge'
@@ -110,6 +111,31 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                                 }} />
                             ))}
                         </div>
+
+                        <CostComparisonTable
+                            title={`${treatment.name} Pricing Details`}
+                            rows={[
+                                {
+                                    label: 'Conservative / Natural',
+                                    units: treatment.slug.includes('masseter') ? '30-40 Units' : '10-15 Units',
+                                    costRange: `$${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 30 : 10)} - $${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 40 : 15)}`,
+                                    notes: 'Ideal for first-time patients or subtle results.'
+                                },
+                                {
+                                    label: 'Standard Treatment',
+                                    units: treatment.slug.includes('masseter') ? '50-60 Units' : '20-30 Units',
+                                    costRange: `$${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 50 : 20)} - $${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 60 : 30)}`,
+                                    notes: 'Most common dose for long-lasting results.'
+                                },
+                                {
+                                    label: 'Strong / Robust',
+                                    units: treatment.slug.includes('masseter') ? '60-80 Units' : '30-40 Units',
+                                    costRange: `$${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 60 : 30)} - $${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 80 : 40)}`,
+                                    notes: 'Required for larger muscle mass or minimal movement.'
+                                }
+                            ]}
+                            footer={`*Estimates based on an average cost of $${stats?.avgCost || 15} per unit in ${cityName}. Actual units required vary by individual anatomy.`}
+                        />
 
                         {providers.length === 0 && (
                             <div className="bg-white p-12 text-center rounded-2xl border border-gray-100 shadow-sm">
