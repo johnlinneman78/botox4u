@@ -1,42 +1,56 @@
+import { createServerClient } from '@supabase/auth-helpers-nextjs'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest) {
-    // MAINTENANCE MODE: Block all requests except Next.js assets
-    const path = request.nextUrl.pathname
+export async function middleware(request: NextRequest) {
+    let response = NextResponse.next({
+        request: {
+            headers: request.headers,
+        },
+    })
 
-    if (path.startsWith('/_next') || path.startsWith('/static')) {
-        return NextResponse.next()
-    }
-
-    return new NextResponse(
-        `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>Under Maintenance</title>
-        <style>
-          body { font-family: system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f9f9f9; color: #333; }
-          .container { text-align: center; padding: 2rem; }
-          h1 { margin-bottom: 1rem; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <h1>Site Temporarily Unavailable</h1>
-          <p>We are performing critical security updates.</p>
-          <p>Please check back soon.</p>
-        </div>
-      </body>
-    </html>
-    `,
+    const supabase = createServerClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
         {
-            status: 503,
-            headers: { 'content-type': 'text/html' }
+            cookies: {
+                getAll() {
+                    return request.cookies.getAll()
+                },
+                setAll(cookiesToSet) {
+                    cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
+                    response = NextResponse.next({
+                        request: {
+                            headers: request.headers,
+                        },
+                    })
+                    cookiesToSet.forEach(({ name, value, options }) =>
+                        response.cookies.set(name, value, options)
+                    )
+                },
+            },
         }
     )
+
+    const {
+        data: { session },
+    } = await supabase.auth.getSession()
+
+    // Protect dashboard routes
+    if (request.nextUrl.pathname.startsWith('/provider/dashboard')) {
+        if (!session) {
+            return NextResponse.redirect(new URL('/provider/login', request.url))
+        }
+    }
+
+    // Redirect to dashboard if logged in and trying to access login/register
+    if (session && (request.nextUrl.pathname === '/provider/login' || request.nextUrl.pathname === '/provider/register')) {
+        return NextResponse.redirect(new URL('/provider/dashboard', request.url))
+    }
+
+    return response
 }
 
 export const config = {
-    matcher: '/:path*',
+    matcher: ['/provider/:path*'],
 }
