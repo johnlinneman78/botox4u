@@ -1,32 +1,48 @@
-# ⏸️ Resume Instructions
-**Last Session:** 2026-02-16 (Deployment Success)
+# ⏸️ Resume Instructions: SECURITY FIX REQUIRED
 
-## 📍 Where We Left Off
-We successfully deployed the MVP to Vercel! The site is live at:
-👉 **https://fiery-cosmos.vercel.app**
+**Last Session:** 2026-02-16
+**Status:** 🔴 SITE TAKEN DOWN (Maintenance Mode)
 
-However, the **database is not connected** because we haven't added the Environment Variables to Vercel yet.
+## 🚨 CRITICAL Security Situation
+We disabled the live site because a **critical security vulnerability** was detected in your local config (Service Role Key used as Public Key).
 
-## 🛑 security Warning
-Your local `.env.local` file has a **Security Issue**. It uses the **Service Role Key** (Admin) as the **Anon Key** (Public).
-**DO NOT** copy the local Anon Key to Vercel. You must get the correct one from the Supabase Dashboard.
+The site is currently showing a "Site Temporarily Unavailable" page via `middleware.ts`.
 
-## ▶️ Immediate Actions for Next Session
+## 🛠️ Step 1: Fix Security Credentials (FIRST)
 
-1.  **Open Supabase & Vercel:**
-    -   Supabase: `https://supabase.com/dashboard/project/tgqgsmaqmyeguapcogel/settings/api`
-    -   Vercel: `https://vercel.com/john-linnemans-projects/fiery-cosmos/settings/environment-variables`
+1.  **Go to Supabase Dashboard:**
+    [https://supabase.com/dashboard/project/tgqgsmaqmyeguapcogel/settings/api](https://supabase.com/dashboard/project/tgqgsmaqmyeguapcogel/settings/api)
+    *   Find the `anon` / `public` key. It is NOT the `service_role` key.
 
-2.  **Add Envrionment Variables to Vercel:**
-    -   `NEXT_PUBLIC_SUPABASE_URL`: `https://tgqgsmaqmyeguapcogel.supabase.co`
-    -   `NEXT_PUBLIC_SUPABASE_ANON_KEY`: **[Get from Supabase Dashboard - 'anon' key]**
-    -   `SUPABASE_SERVICE_ROLE_KEY`: **[Get from Supabase Dashboard - 'service_role' key]**
-    -   `NEXT_PUBLIC_APP_URL`: `https://fiery-cosmos.vercel.app`
+2.  **Go to Vercel Dashboard:**
+    [https://vercel.com/john-linnemans-projects/fiery-cosmos/settings/environment-variables](https://vercel.com/john-linnemans-projects/fiery-cosmos/settings/environment-variables)
+    *   **DELETE** any existing `NEXT_PUBLIC_SUPABASE_ANON_KEY` if you added it.
+    *   **ADD** the correct `anon` key as `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+    *   Add `NEXT_PUBLIC_SUPABASE_URL` if missing.
+    *   Add `SUPABASE_SERVICE_ROLE_KEY` (secret) if missing.
+    *   Add `NEXT_PUBLIC_APP_URL` (`https://fiery-cosmos.vercel.app`).
+
+3.  **Fix Local Config:**
+    *   Update your local `.env.local` to use the correct Anon key too!
+
+## 🚀 Step 2: Restore Site (AFTER FIXING KEYS)
+
+1.  **Restore the original middleware:**
+    ```bash
+    git mv middleware.ts.bak middleware.ts
+    # (Or manually rename middleware.ts.bak back to middleware.ts)
+    ```
+
+2.  **Commit and Push:**
+    ```bash
+    git add middleware.ts
+    git commit -m "restore: bring site back online with fixed security"
+    git push
+    ```
 
 3.  **Redeploy:**
-    -   Go to Vercel Deployments -> Redeploy.
+    ```bash
+    npx vercel --prod
+    ```
 
-4.  **Test:**
-    -   Submit a lead form on the live site to verify DB connection.
-
-See `docs/DEPLOYMENT_SUCCESS.md` for the detailed guide we created.
+This will bring the site back live ONLY when you are ready.

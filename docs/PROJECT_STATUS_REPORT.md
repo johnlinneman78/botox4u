@@ -1,23 +1,25 @@
 # 🚀 Project Status Report
 **Date:** 2026-02-16
-**Status:** 🟢 LIVE (Deployed)
-**Current Phase:** MVP Deployment & Setup
+**Status:** 🔴 TAKEN DOWN (Maintenance Mode)
+**Reason:** Security Issue detected (Service Role key used as Anon key in config)
 
-## 🏆 Achievements
-- **Deployed to Vercel:** `https://fiery-cosmos.vercel.app`
-- **Database:** Supabase schema created (needs connection).
-- **Security:** Implemented rate limiting, input validation, and medical disclaimers.
-- **Content:** Generated SEO-optimized city pages and provider directory structure.
+## ⚠️ CRITICAL NOTICE
+The live site `https://fiery-cosmos.vercel.app` is currently showing a **"Site Temporarily Unavailable"** page due to a critical security risk.
 
-## ⚠️ Critical Next Steps (Start Here Next Session)
-1.  **Fix Environment Variables:**
-    -   Go to Vercel Dashboard.
-    -   Add `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` (Get correct one!), `SUPABASE_SERVICE_ROLE_KEY`.
-    -   **SECURITY WARNING:** Do NOT use the local `.env.local` anon key (it is the Admin key!).
-2.  **Redeploy:** Trigger a redeploy in Vercel to pick up the new keys.
-3.  **Verify Database:** Check if lead submission works on the live site.
+## 🛠️ Required Actions (Next Session)
+1.  **Fix Security Keys:**
+    -  Go to Supabase Dashboard.
+    -  Get strict `anon` key.
+    -  Delete/Rotate any exposed keys if necessary.
+    -  Add correct Env Vars to Vercel (Production).
+2.  **Restore Site:**
+    -  Rename `middleware.ts.bak` -> `middleware.ts`.
+    -  Redeploy.
 
-## 📅 Week 1 Plan (Upcoming)
--   Execute `docs/MVP_WEEK1_PLAN.md`.
--   Verify SEO indexing.
--   Start outreach to providers.
+## ✅ Accomplished (Before Maintenance)
+-  Deployed Next.js 16 app successfully.
+-  Database schema ready (Supabase).
+-  Security middleware implemented.
+-  SEO pages generated.
+
+The site is SAFE (offline) until you fix the keys.
