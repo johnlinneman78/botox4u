@@ -17,7 +17,7 @@ const resend = new Resend(resendApiKey);
 
 // Config
 const BATCH_SIZE = 50;
-const FROM_EMAIL = 'hello@botox-4-u.com'; // Or whatever verified domain you have
+const FROM_EMAIL = process.env.CONTACT_EMAIL || 'hello@botox-4-u.com';
 const YOUR_NAME = 'John Linneman';
 
 async function sendOutreach() {

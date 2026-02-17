@@ -12,6 +12,10 @@ const getResend = () => {
     return new Resend(apiKey);
 }
 
+const getSenderEmail = () => {
+    return process.env.CONTACT_EMAIL || 'hello@botox-4-u.com';
+}
+
 const getLeadEmailHtml = (lead: any, providerName: string) => `
   <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
     <h2 style="color: #1a2332;">New Patient Inquiry</h2>
@@ -128,7 +132,7 @@ export async function submitLead(formData: FormData) {
             if (resend) {
                 try {
                     await resend.emails.send({
-                        from: 'Botox-4-U.com <leads@botox-4-u.com>',
+                        from: `Botox-4-U.com <${getSenderEmail()}>`,
                         to: provider.email,
                         subject: `New Patient Lead: ${lead.full_name}`,
                         html: getLeadEmailHtml(lead, provider.name)
@@ -148,7 +152,7 @@ export async function submitLead(formData: FormData) {
     if (resend && process.env.ADMIN_EMAIL) {
         try {
             await resend.emails.send({
-                from: 'System <notifications@botox-4-u.com>',
+                from: `System <${getSenderEmail()}>`,
                 to: process.env.ADMIN_EMAIL,
                 subject: `🚨 LEAD ALERT: ${lead.city || 'Direct'} - ${lead.full_name}`,
                 html: getLeadEmailHtml(lead, lead.providers?.name || 'City-Wide Request')

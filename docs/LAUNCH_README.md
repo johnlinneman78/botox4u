@@ -54,6 +54,7 @@ We have successfully transitioned the branding to **Botox-4-U.com** and implemen
     Ensure `.env.local` has:
     *   `RESEND_API_KEY`: For sending emails.
     *   `ADMIN_EMAIL`: Where you receive lead notifications.
+    *   `CONTACT_EMAIL`: The 'From' address (e.g., hello@botox-4-u.com).
     *   `NOTION_API_KEY`: For Notion syncing.
 
 3.  **Deploy:**
