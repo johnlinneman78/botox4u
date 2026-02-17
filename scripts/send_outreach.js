@@ -105,6 +105,27 @@ async function sendOutreach() {
     }
 
     console.log(`\n🎉 Done! Sent ${sentCount} emails.`);
+
+    // 4. Notify Admin
+    if (process.env.ADMIN_EMAIL) {
+        try {
+            await resend.emails.send({
+                from: `System <${FROM_EMAIL}>`,
+                to: process.env.ADMIN_EMAIL,
+                subject: `Outreach Summary: ${sentCount} Emails Sent`,
+                html: `
+                    <h1>Outreach Run Complete</h1>
+                    <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
+                    <p><strong>Processed:</strong> ${providers.length} providers</p>
+                    <p><strong>Sent:</strong> ${sentCount} emails</p>
+                    <p>Check your <a href="${process.env.NEXT_PUBLIC_APP_URL}/admin/dashboard">Admin Dashboard</a> for details.</p>
+                `
+            });
+            console.log(`📧 Summary sent to ${process.env.ADMIN_EMAIL}`);
+        } catch (emailErr) {
+            console.error('Failed to send summary email:', emailErr);
+        }
+    }
 }
 
 sendOutreach();

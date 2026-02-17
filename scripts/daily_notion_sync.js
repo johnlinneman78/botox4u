@@ -6,6 +6,11 @@ const NOTION_TOKEN = process.env.NOTION_API_KEY || 'ntn_501902733486C9MSTGDjAniI
 const NOTION_VERSION = '2022-06-28';
 const LOG_FILE = path.join(__dirname, '../.notion-sync-log.json');
 
+const { Resend } = require('resend');
+require('dotenv').config({ path: '.env.local' });
+const resend = new Resend(process.env.RESEND_API_KEY);
+const FROM_EMAIL = process.env.CONTACT_EMAIL || 'hello@botox-4-u.com';
+
 function makeNotionRequest(method, path, data = null) {
     return new Promise((resolve, reject) => {
         const options = {
@@ -231,6 +236,44 @@ async function main() {
             metrics,
             databases: Object.keys(databases)
         });
+
+        // Send Dashboard Summary Email
+        if (process.env.ADMIN_EMAIL) {
+            try {
+                await resend.emails.send({
+                    from: `System <${FROM_EMAIL}>`,
+                    to: process.env.ADMIN_EMAIL,
+                    subject: `Daily Briefing: ${new Date().toLocaleDateString()}`,
+                    html: `
+                        <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee;">
+                            <h2 style="color: #1a2332;">Botox-4-U.com Daily Briefing</h2>
+                            <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
+                            
+                            <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+                            
+                            <h3 style="margin-bottom: 5px;">📊 Key Metrics</h3>
+                            <ul>
+                                <li><strong>Tasks:</strong> ${metrics.taskStats.done} done, ${metrics.taskStats.inProgress} in progress</li>
+                                <li><strong>Content:</strong> ${metrics.contentStats.published} published</li>
+                                <li><strong>Providers:</strong> ${metrics.providerStats.total} total (${metrics.providerStats.claimed} claimed)</li>
+                            </ul>
+
+                            <h3 style="margin-bottom: 5px;">📈 SEO Update</h3>
+                            <ul>
+                                <li>Rankings updated based on simulated performance.</li>
+                            </ul>
+
+                            <p style="margin-top: 20px;">
+                                <a href="${process.env.NEXT_PUBLIC_APP_URL}/admin/dashboard" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Open Admin Dashboard</a>
+                            </p>
+                        </div>
+                    `
+                });
+                console.log(`📧 Daily briefing sent to ${process.env.ADMIN_EMAIL}`);
+            } catch (emailErr) {
+                console.error('Failed to send daily briefing email:', emailErr);
+            }
+        }
 
         console.log('\n✨ Daily sync complete!');
 
