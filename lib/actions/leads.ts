@@ -13,13 +13,13 @@ const getResend = () => {
 }
 
 const getSenderEmail = () => {
-    return process.env.CONTACT_EMAIL || 'hello@botox-4-u.com';
+    return process.env.CONTACT_EMAIL || 'hello@botox-4u.com';
 }
 
 const getLeadEmailHtml = (lead: any, providerName: string) => `
   <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
     <h2 style="color: #1a2332;">New Patient Inquiry</h2>
-    <p>You have received a new lead from <strong>Botox-4-U.com</strong> for <strong>${providerName}</strong>.</p>
+    <p>You have received a new lead from <strong>Botox-4u.com</strong> for <strong>${providerName}</strong>.</p>
     <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
     <p><strong>Patient Name:</strong> ${lead.full_name}</p>
     <p><strong>Email:</strong> ${lead.email}</p>
@@ -132,7 +132,7 @@ export async function submitLead(formData: FormData) {
             if (resend) {
                 try {
                     await resend.emails.send({
-                        from: `Botox-4-U.com <${getSenderEmail()}>`,
+                        from: `Botox-4u.com <${getSenderEmail()}>`,
                         to: provider.email,
                         subject: `New Patient Lead: ${lead.full_name}`,
                         html: getLeadEmailHtml(lead, provider.name)

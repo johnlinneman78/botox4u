@@ -7,7 +7,7 @@ export default function Header() {
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
                 <Link href="/" className="flex items-center space-x-2 group">
                     <span className="text-2xl font-display font-bold text-primary group-hover:text-secondary transition-colors">
-                        Botox-<span className="text-secondary group-hover:text-primary">4-U</span>.com
+                        Botox-<span className="text-secondary group-hover:text-primary">4u</span>.com
                     </span>
                 </Link>
 

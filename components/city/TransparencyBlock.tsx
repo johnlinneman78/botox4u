@@ -38,13 +38,13 @@ export function TransparencyBlock({ city }: { city?: string }) {
 
                         <div className="bg-primary p-8 md:p-10 rounded-[2.5rem] text-white shadow-2xl shadow-primary/20 relative">
                             <blockquote className="relative italic text-xl md:text-2xl font-light leading-relaxed mb-8">
-                                &quot;In an industry known for opaque pricing and 'hidden' costs, we built Botox-4-U.com to bring actual transparency to aesthetic medicine.&quot;
+                                &quot;In an industry known for opaque pricing and 'hidden' costs, we built Botox-4u.com to bring actual transparency to aesthetic medicine.&quot;
                             </blockquote>
                             <div className="flex items-center gap-4">
                                 <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center font-black text-white">JL</div>
                                 <div>
                                     <div className="font-bold">John Linneman</div>
-                                    <div className="text-xs text-gray-400 uppercase tracking-widest font-bold">Founder, Botox-4-U.com</div>
+                                    <div className="text-xs text-gray-400 uppercase tracking-widest font-bold">Founder, Botox-4u.com</div>
                                 </div>
                             </div>
                         </div>

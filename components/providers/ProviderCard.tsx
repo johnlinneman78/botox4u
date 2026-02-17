@@ -190,7 +190,7 @@ export function ProviderCard({ provider }: ProviderCardProps) {
                         {provider.minTreatmentPrice && isPremium && (
                             <div className="mt-4 p-3 bg-secondary/5 border border-secondary/10 rounded-xl text-xs text-secondary-foreground font-medium flex items-center gap-2">
                                 <span className="bg-secondary text-white p-1 rounded-full text-[8px] leading-none">★</span>
-                                This clinic is a verified Botox-4-U.com Premium Partner
+                                This clinic is a verified Botox-4u.com Premium Partner
                             </div>
                         )}
                     </div>
