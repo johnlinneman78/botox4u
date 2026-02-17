@@ -205,7 +205,7 @@ function loadSyncLog() {
 }
 
 async function main() {
-    console.log('🔄 Daily Notion Sync - National Botox Directory');
+    console.log('🔄 Daily Notion Sync - Botox-4-U.com');
     console.log(`⏰ ${new Date().toLocaleString()}\n`);
 
     try {

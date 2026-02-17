@@ -1,12 +1,14 @@
 import { Badge } from '@/components/ui/Badge'
+import { Button } from '@/components/ui/Button'
 
 interface CityHeroProps {
     city: string
     state: string
+    treatmentName: string
     providerCount: number
 }
 
-export function CityHero({ city, state, providerCount }: CityHeroProps) {
+export function CityHero({ city, state, treatmentName, providerCount }: CityHeroProps) {
     return (
         <section className="relative py-20 bg-primary text-white overflow-hidden">
             {/* Background Pattern */}
@@ -25,20 +27,28 @@ export function CityHero({ city, state, providerCount }: CityHeroProps) {
                         2026 LOCAL PROVIDER GUIDE
                     </Badge>
                     <h1 className="text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
-                        Best Botox Injectors in <span className="text-secondary">{city}, {state}</span>
+                        Find Botox providers in <span className="text-secondary">{city}</span> with real per-unit pricing
                     </h1>
-                    <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                        Compare {providerCount} top-rated aesthetic clinics in {city}. Explore transparent pricing, verified reviews, and book with the most trusted professionals in your area.
+                    <p className="text-xl text-gray-300 mb-10 leading-relaxed font-light">
+                        Compare injectors, see credentials, and request quotes from {providerCount} top-rated aesthetic clinics in {city}, {state}.
                     </p>
                     <div className="flex flex-wrap gap-4">
-                        <div className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10">
-                            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                            <span className="text-sm font-medium">{providerCount} Verified Providers</span>
-                        </div>
-                        <div className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10">
-                            <span className="text-secondary font-bold">✓</span>
-                            <span className="text-sm font-medium">Price Transparency</span>
-                        </div>
+                        <Button
+                            variant="secondary"
+                            size="lg"
+                            className="px-8 py-7 text-lg font-bold shadow-xl shadow-secondary/20"
+                            onClick={() => document.getElementById('listings')?.scrollIntoView({ behavior: 'smooth' })}
+                        >
+                            Find providers & check prices
+                        </Button>
+                        <Button
+                            variant="outline"
+                            size="lg"
+                            className="px-8 py-7 text-lg font-bold border-white/20 hover:bg-white/10 text-white"
+                            onClick={() => document.getElementById('quick-quote')?.scrollIntoView({ behavior: 'smooth' })}
+                        >
+                            Get a quote
+                        </Button>
                     </div>
                 </div>
             </div>

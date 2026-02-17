@@ -26,5 +26,16 @@ export interface Provider {
     credentials?: string[]
     services_offered?: any[]
     treatment_slugs?: string[]
+    enriched_attrs?: {
+        offers_masseter_botox?: boolean
+        offers_gummy_smile?: boolean
+        offers_hyperhidrosis?: boolean
+        price_per_unit_stated?: number
+        new_patient_special?: string
+        injector_credentials?: string[]
+        years_in_business?: number
+    }
     created_at: string
+    outreach_status?: 'not_sent' | 'sent' | 'responded' | 'claimed'
+    date_sent?: string
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Create Notion databases for National Botox Directory
+Create Notion databases for Botox-4-U.com
 """
 import os
 import requests
@@ -237,7 +237,7 @@ dev_tasks_properties = {
 }
 
 # Create all databases
-print("\n🚀 Creating Notion Databases for National Botox Directory...\n")
+print("\n🚀 Creating Notion Databases for Botox-4-U.com...\n")
 
 provider_db = create_database("Provider Database", provider_db_properties)
 content_calendar_db = create_database("Content Calendar", content_calendar_properties)

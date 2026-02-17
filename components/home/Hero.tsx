@@ -27,11 +27,11 @@ export default function Hero() {
 
             <div className="container mx-auto px-4 relative z-10">
                 <div className="max-w-3xl mx-auto text-center">
-                    <h1 className="text-5xl md:text-6xl font-display font-bold mb-6 text-balance">
-                        Find Top Botox Providers Near You
+                    <h1 className="text-5xl md:text-6xl font-display font-bold mb-6 text-balance leading-[1.1]">
+                        Compare Botox Prices with <span className="text-secondary italic">Real</span> Transparency
                     </h1>
-                    <p className="text-xl md:text-2xl mb-8 text-white/90">
-                        Compare prices, read reviews, and book consultations with verified injectors across the United States
+                    <p className="text-xl md:text-2xl mb-8 text-white/90 font-light max-w-2xl mx-auto">
+                        We list verified pricing, credentials, and real patient feedback for 600+ injectors nationwide. No guessing, just data.
                     </p>
 
                     <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-12">

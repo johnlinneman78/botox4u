@@ -3,10 +3,14 @@ import { Card, CardContent } from '@/components/ui/Card'
 import { formatCurrency } from '@/lib/utils'
 
 const featuredCities = [
-    { name: 'Beverly Hills', state: 'CA', slug: 'beverly-hills-ca', avgCost: 525, providers: 15 },
-    { name: 'Miami', state: 'FL', slug: 'miami-fl', avgCost: 475, providers: 12 },
-    { name: 'Dallas', state: 'TX', slug: 'dallas-tx', avgCost: 440, providers: 10 },
-    { name: 'Chicago', state: 'IL', slug: 'chicago-il', avgCost: 450, providers: 8 },
+    { name: 'Scottsdale', state: 'AZ', slug: 'scottsdale-az', avgCost: 425, providers: 12 },
+    { name: 'Plano', state: 'TX', slug: 'plano-tx', avgCost: 395, providers: 10 },
+    { name: 'Bellevue', state: 'WA', slug: 'bellevue-wa', avgCost: 450, providers: 8 },
+    { name: 'Boca Raton', state: 'FL', slug: 'boca-raton-fl', avgCost: 485, providers: 15 },
+    { name: 'Ann Arbor', state: 'MI', slug: 'ann-arbor-mi', avgCost: 375, providers: 6 },
+    { name: 'Rochester', state: 'NY', slug: 'rochester-ny', avgCost: 410, providers: 8 },
+    { name: 'Grand Rapids', state: 'MI', slug: 'grand-rapids-mi', avgCost: 385, providers: 7 },
+    { name: 'Reno', state: 'NV', slug: 'reno-nv', avgCost: 390, providers: 5 },
 ]
 
 export default function FeaturedCities() {

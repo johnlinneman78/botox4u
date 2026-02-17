@@ -34,6 +34,24 @@ export async function getProviders(filters: {
         return []
     }
 
+    const mappedData = (data || []).map((p: any) => ({
+        id: p.id,
+        name: p.name,
+        slug: p.slug,
+        businessType: p.business_type,
+        address: p.address,
+        city: p.city,
+        state: p.state,
+        averageRating: parseFloat(p.average_rating || 0),
+        reviewCount: p.review_count || 0,
+        listingTier: p.listing_tier || 'free',
+        verified: p.verified || false,
+        pricePerUnit: p.price_per_unit,
+        minTreatmentPrice: p.min_treatment_price,
+        imageUrl: p.image_url,
+        enriched_attrs: p.enriched_attrs
+    }))
+
     // Custom sort: Premium > Featured > Free
     const tierWeight = {
         'premium': 3,
@@ -41,9 +59,9 @@ export async function getProviders(filters: {
         'free': 1
     }
 
-    return (data || []).sort((a: any, b: any) => {
-        const weightA = tierWeight[a.listing_tier as keyof typeof tierWeight] || 0
-        const weightB = tierWeight[b.listing_tier as keyof typeof tierWeight] || 0
+    return mappedData.sort((a: any, b: any) => {
+        const weightA = tierWeight[a.listingTier as keyof typeof tierWeight] || 0
+        const weightB = tierWeight[b.listingTier as keyof typeof tierWeight] || 0
         return weightB - weightA
     })
 }
@@ -166,12 +184,25 @@ export async function getProviderBySlug(slug: string) {
         .eq('slug', slug)
         .single()
 
-    if (error) {
-        console.error('Error fetching provider:', error)
-        return null
-    }
+    if (!data) return null
 
-    return data
+    return {
+        id: data.id,
+        name: data.name,
+        slug: data.slug,
+        businessType: data.business_type,
+        address: data.address,
+        city: data.city,
+        state: data.state,
+        averageRating: parseFloat(data.average_rating || 0),
+        reviewCount: data.review_count || 0,
+        listingTier: data.listing_tier || 'free',
+        verified: data.verified || false,
+        pricePerUnit: data.price_per_unit,
+        minTreatmentPrice: data.min_treatment_price,
+        imageUrl: data.image_url,
+        enriched_attrs: data.enriched_attrs
+    }
 }
 
 export async function submitLead(leadData: any) {

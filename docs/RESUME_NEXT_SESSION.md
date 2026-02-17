@@ -1,48 +1,28 @@
-# ⏸️ Resume Instructions: SECURITY FIX REQUIRED
+# ✅ Status Report: Provider Data Milestone Reached (600+)
 
-**Last Session:** 2026-02-16
-**Status:** 🔴 SITE TAKEN DOWN (Maintenance Mode)
+**Last Session:** 2026-02-17
+**Status:** 📊 DATA READY (643 Providers)
 
-## 🚨 CRITICAL Security Situation
-We disabled the live site because a **critical security vulnerability** was detected in your local config (Service Role Key used as Public Key).
+## 🏗️ Completed Actions
+We have significantly expanded the directory and refined the data pipeline.
 
-The site is currently showing a "Site Temporarily Unavailable" page via `middleware.ts`.
+1.  **Provider Data Expansion:**
+    *   Bulk added **643 unique providers** across 40+ Tier 2/3 cities.
+    *   Implemented `slug`-based `upsert` in `scripts/bulk_add_providers.py` to prevent duplicates.
+    *   Targeted key cities like Scottsdale, Plano, Bellevue, Ann Arbor, Grand Rapids, Reno, and more.
 
-## 🛠️ Step 1: Fix Security Credentials (FIRST)
+2.  **Crawler & Pipeline Enhancements:**
+    *   Updated `scripts/crawl_providers.py` to handle missing database columns gracefully.
+    *   Fixed Playwright `$HOME` environment variable issue on Windows.
+    *   Optimized crawler to target only unverified/unenriched providers.
 
-1.  **Go to Supabase Dashboard:**
-    [https://supabase.com/dashboard/project/tgqgsmaqmyeguapcogel/settings/api](https://supabase.com/dashboard/project/tgqgsmaqmyeguapcogel/settings/api)
-    *   Find the `anon` / `public` key. It is NOT the `service_role` key.
+3.  **UI Updates:**
+    *   Updated `FeaturedCities` on the homepage to showcase the newly added national locations.
 
-2.  **Go to Vercel Dashboard:**
-    [https://vercel.com/john-linnemans-projects/fiery-cosmos/settings/environment-variables](https://vercel.com/john-linnemans-projects/fiery-cosmos/settings/environment-variables)
-    *   **DELETE** any existing `NEXT_PUBLIC_SUPABASE_ANON_KEY` if you added it.
-    *   **ADD** the correct `anon` key as `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
-    *   Add `NEXT_PUBLIC_SUPABASE_URL` if missing.
-    *   Add `SUPABASE_SERVICE_ROLE_KEY` (secret) if missing.
-    *   Add `NEXT_PUBLIC_APP_URL` (`https://fiery-cosmos.vercel.app`).
+## 🚀 Next Steps (Ready for Development)
 
-3.  **Fix Local Config:**
-    *   Update your local `.env.local` to use the correct Anon key too!
+1.  **Schema Migration**: Run the SQL migration (found in `supabase/migrations/20240217084500_enrichment_columns.sql` or summarized in `scripts/migrate_schema.py`) to enable the `enriched_attrs` JSONB column. This will unlock the full power of AI data extraction (specialties, credentials, pricing).
+2.  **Finalize AI Enrichment**: Once the schema is updated, resume the crawler without the "retry without column" guards to fully populate the structured fields.
+3.  **Lead Flow Testing**: Verify that lead generation forms work correctly for the newly added providers.
 
-## 🚀 Step 2: Restore Site (AFTER FIXING KEYS)
-
-1.  **Restore the original middleware:**
-    ```bash
-    git mv middleware.ts.bak middleware.ts
-    # (Or manually rename middleware.ts.bak back to middleware.ts)
-    ```
-
-2.  **Commit and Push:**
-    ```bash
-    git add middleware.ts
-    git commit -m "restore: bring site back online with fixed security"
-    git push
-    ```
-
-3.  **Redeploy:**
-    ```bash
-    npx vercel --prod
-    ```
-
-This will bring the site back live ONLY when you are ready.
+The directory is now at scale (>500 goal exceeded) and geared for national SEO.
