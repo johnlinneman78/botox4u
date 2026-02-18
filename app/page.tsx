@@ -6,12 +6,8 @@ import HowItWorks from '@/components/home/HowItWorks'
 
 export default function HomePage() {
   return (
-    <>
-      <Hero />
-      <FeaturedCities />
-      <TransparencyBlock />
-      <FeaturedProviders />
-      <HowItWorks />
-    </>
+    <div className="flex h-screen items-center justify-center bg-white text-black">
+      <h1 className="text-4xl font-bold">Botox-4u.com is coming soon</h1>
+    </div>
   )
 }
