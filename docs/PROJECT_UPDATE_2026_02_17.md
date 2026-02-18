@@ -1,4 +1,4 @@
-# Botox4U Project Update - February 17, 2026
+# Botox-4U Project Update - February 17, 2026
 
 ## 🚀 Key Accomplishments
 

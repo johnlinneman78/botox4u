@@ -8,7 +8,9 @@ export async function getProvidersWithSearch(filters: {
     tier?: string,
     treatment?: string
 } = {}) {
+    console.log('DEBUG: getProvidersWithSearch started')
     const supabase = await getSupabaseServer(await cookies())
+    console.log('DEBUG: supabase client created:', !!supabase)
 
     let queryBuilder = supabase
         .from('providers')
@@ -31,7 +33,9 @@ export async function getProvidersWithSearch(filters: {
         queryBuilder = queryBuilder.contains('treatment_slugs', [filters.treatment])
     }
 
+    console.log('DEBUG: queryBuilder configured, executing query...')
     const { data, error } = await queryBuilder
+    console.log('DEBUG: query result:', { dataLength: data?.length, error })
 
     if (error) {
         console.error('Error fetching providers:', error)
