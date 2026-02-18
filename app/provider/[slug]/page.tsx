@@ -169,6 +169,24 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                 </p>
                             </div>
 
+                            {/* Gallery */}
+                            {provider.gallery && provider.gallery.length > 0 && (
+                                <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-sm">
+                                    <h2 className="text-2xl font-display font-bold text-primary mb-6">Clinic Gallery</h2>
+                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                        {provider.gallery.map((url: string, i: number) => (
+                                            <div key={i} className="relative aspect-square rounded-2xl overflow-hidden group">
+                                                <img
+                                                    src={url}
+                                                    alt={`${provider.name} gallery image ${i + 1}`}
+                                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
                             {/* Reviews */}
                             <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-sm">
                                 <ReviewCarousel
