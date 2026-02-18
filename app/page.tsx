@@ -12,9 +12,9 @@ export default function HomePage() {
       <Hero />
       <FeaturedCities />
       <TransparencyBlock />
-      <Suspense fallback={<div className="h-96 flex items-center justify-center bg-gray-50">Loading Featured Providers...</div>}>
+      {/* <Suspense fallback={<div className="h-96 flex items-center justify-center bg-gray-50">Loading Featured Providers...</div>}>
         <FeaturedProviders />
-      </Suspense>
+      </Suspense> */}
       <HowItWorks />
     </>
   )
