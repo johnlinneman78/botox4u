@@ -1,163 +1,468 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { Card } from '@/components/ui/Card'
+import React, { useState, useEffect } from 'react'
+import { Card, CardContent } from '@/components/ui/Card'
+import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
-import { formatCurrency } from '@/lib/utils'
+import { Slider } from '@/components/ui/Slider'
+import Link from 'next/link'
+import { Info, HelpCircle, Check, ArrowRight, ShieldCheck } from 'lucide-react'
+import { PricingMethodology } from './Methodology'
 
-const AREAS = [
-    { id: 'forehead', name: 'Forehead Lines', min: 10, max: 20, default: 15 },
-    { id: 'glabella', name: 'Glabella (11 Lines)', min: 15, max: 25, default: 20 },
-    { id: 'crows', name: 'Crow\'s Feet', min: 12, max: 24, default: 18 },
-    { id: 'brows', name: 'Brow Lift', min: 4, max: 10, default: 6 },
-    { id: 'lipflip', name: 'Lip Flip', min: 4, max: 8, default: 4 },
-    { id: 'masseter', name: 'Masseter (Jaw)', min: 40, max: 60, default: 50 },
+// --- Types ---
+type Tier = 'budget' | 'mid' | 'premium'
+
+type PricingTier = {
+    budget: number
+    mid: number
+    premium: number
+}
+
+type CityPricing = {
+    botox: PricingTier
+    dysport: PricingTier
+    xeomin: PricingTier
+    tier: 'high' | 'mid' | 'low'
+    providerCount: number
+    benchmarkDelta: number // % vs national median (+ means more expensive)
+}
+
+type TreatmentArea = {
+    id: string
+    label: string
+    units: number
+}
+
+// --- Constants ---
+const TREATMENT_AREAS: TreatmentArea[] = [
+    { id: 'forehead', label: 'Forehead Lines', units: 20 },
+    { id: 'glabella', label: 'Frown Lines (11s)', units: 20 },
+    { id: 'crow', label: "Crow's Feet", units: 24 },
+    { id: 'brow', label: 'Brow Lift', units: 4 },
+    { id: 'lip', label: 'Lip Flip', units: 4 },
+    { id: 'masseter', label: 'Masseter / TMJ', units: 50 }, // 25 per side
+    { id: 'chin', label: 'Chin Dimpling', units: 6 },
+    { id: 'neck', label: 'Neck Bands', units: 40 },
 ]
 
-export function CostCalculator() {
-    const [selectedAreas, setSelectedAreas] = useState<string[]>([])
-    const [intensity, setIntensity] = useState<'light' | 'moderate' | 'full'>('moderate')
-    const [pricePerUnit, setPricePerUnit] = useState(14)
+const PRICING_DATA: Record<string, CityPricing> = {
+    'new-york': {
+        botox: { budget: 14, mid: 18, premium: 24 },
+        dysport: { budget: 5, mid: 7, premium: 9 },
+        xeomin: { budget: 11, mid: 14, premium: 18 },
+        tier: 'high',
+        providerCount: 142,
+        benchmarkDelta: 28
+    },
+    'los-angeles': {
+        botox: { budget: 13, mid: 16, premium: 22 },
+        dysport: { budget: 4.5, mid: 6, premium: 8 },
+        xeomin: { budget: 10, mid: 13, premium: 17 },
+        tier: 'high',
+        providerCount: 189,
+        benchmarkDelta: 22
+    },
+    'miami': {
+        botox: { budget: 12, mid: 15, premium: 19 },
+        dysport: { budget: 4, mid: 5.5, premium: 7.5 },
+        xeomin: { budget: 9.5, mid: 12, premium: 16 },
+        tier: 'mid',
+        providerCount: 94,
+        benchmarkDelta: 12
+    },
+    'chicago': {
+        botox: { budget: 13, mid: 16, premium: 20 },
+        dysport: { budget: 4.5, mid: 6, premium: 8 },
+        xeomin: { budget: 10, mid: 13, premium: 17 },
+        tier: 'mid',
+        providerCount: 76,
+        benchmarkDelta: 15
+    },
+    'scottsdale': {
+        botox: { budget: 11, mid: 13, premium: 17 },
+        dysport: { budget: 4, mid: 5, premium: 7 },
+        xeomin: { budget: 9, mid: 11, premium: 14 },
+        tier: 'mid',
+        providerCount: 62,
+        benchmarkDelta: 8
+    },
+    'dallas': {
+        botox: { budget: 11, mid: 14, premium: 18 },
+        dysport: { budget: 4, mid: 5.5, premium: 7 },
+        xeomin: { budget: 9.5, mid: 12, premium: 15 },
+        tier: 'mid',
+        providerCount: 88,
+        benchmarkDelta: 5
+    },
+    'austin': {
+        botox: { budget: 12, mid: 14, premium: 19 },
+        dysport: { budget: 4.5, mid: 5.5, premium: 7.5 },
+        xeomin: { budget: 10, mid: 12, premium: 16 },
+        tier: 'mid',
+        providerCount: 54,
+        benchmarkDelta: 10
+    },
+    'houston': {
+        botox: { budget: 11, mid: 13.5, premium: 17 },
+        dysport: { budget: 4, mid: 5, premium: 6.5 },
+        xeomin: { budget: 9, mid: 11, premium: 14 },
+        tier: 'low',
+        providerCount: 71,
+        benchmarkDelta: -2
+    },
+    'phoenix': {
+        botox: { budget: 10.5, mid: 13, premium: 16 },
+        dysport: { budget: 3.5, mid: 5, premium: 6.5 },
+        xeomin: { budget: 8.5, mid: 11, premium: 13.5 },
+        tier: 'low',
+        providerCount: 48,
+        benchmarkDelta: -5
+    },
+    'denver': {
+        botox: { budget: 12, mid: 14.5, premium: 18 },
+        dysport: { budget: 4.5, mid: 5.5, premium: 7 },
+        xeomin: { budget: 10, mid: 12.5, premium: 15 },
+        tier: 'mid',
+        providerCount: 39,
+        benchmarkDelta: 4
+    },
+    'seattle': {
+        botox: { budget: 13, mid: 16, premium: 20 },
+        dysport: { budget: 5, mid: 6.5, premium: 8 },
+        xeomin: { budget: 11, mid: 14, premium: 17 },
+        tier: 'high',
+        providerCount: 52,
+        benchmarkDelta: 18
+    },
+    'san-francisco': {
+        botox: { budget: 15, mid: 19, premium: 26 },
+        dysport: { budget: 5.5, mid: 7.5, premium: 10 },
+        xeomin: { budget: 12, mid: 15, premium: 19 },
+        tier: 'high',
+        providerCount: 85,
+        benchmarkDelta: 35
+    },
+    'atlanta': {
+        botox: { budget: 11.5, mid: 14, premium: 17.5 },
+        dysport: { budget: 4, mid: 5.5, premium: 7 },
+        xeomin: { budget: 9.5, mid: 12, premium: 15 },
+        tier: 'mid',
+        providerCount: 67,
+        benchmarkDelta: 6
+    },
+    'boston': {
+        botox: { budget: 14, mid: 17, premium: 22 },
+        dysport: { budget: 5, mid: 6.5, premium: 8.5 },
+        xeomin: { budget: 11, mid: 14, premium: 18 },
+        tier: 'high',
+        providerCount: 58,
+        benchmarkDelta: 24
+    },
+    'las-vegas': {
+        botox: { budget: 10, mid: 13, premium: 16.5 },
+        dysport: { budget: 3.5, mid: 5, premium: 6.5 },
+        xeomin: { budget: 8.5, mid: 11, premium: 14 },
+        tier: 'low',
+        providerCount: 73,
+        benchmarkDelta: -8
+    },
+    'philadelphia': {
+        botox: { budget: 12, mid: 15, premium: 18 },
+        dysport: { budget: 4.5, mid: 5.5, premium: 7 },
+        xeomin: { budget: 10, mid: 12.5, premium: 15.5 },
+        tier: 'mid',
+        providerCount: 45,
+        benchmarkDelta: 7
+    },
+    'san-diego': {
+        botox: { budget: 12.5, mid: 15.5, premium: 19 },
+        dysport: { budget: 4.5, mid: 6, premium: 7.5 },
+        xeomin: { budget: 10, mid: 13, premium: 16 },
+        tier: 'high',
+        providerCount: 61,
+        benchmarkDelta: 14
+    },
+    'nashville': {
+        botox: { budget: 11.5, mid: 14, premium: 17 },
+        dysport: { budget: 4, mid: 5.5, premium: 7 },
+        xeomin: { budget: 9.5, mid: 12, premium: 15 },
+        tier: 'mid',
+        providerCount: 36,
+        benchmarkDelta: 3
+    },
+    'boise': {
+        botox: { budget: 9.5, mid: 12, premium: 15 },
+        dysport: { budget: 3.5, mid: 4.5, premium: 6 },
+        xeomin: { budget: 8, mid: 10, premium: 13 },
+        tier: 'low',
+        providerCount: 22,
+        benchmarkDelta: -12
+    },
+    'orlando': {
+        botox: { budget: 11, mid: 13.5, premium: 16.5 },
+        dysport: { budget: 4, mid: 5, premium: 6.5 },
+        xeomin: { budget: 9, mid: 11.5, premium: 14.5 },
+        tier: 'low',
+        providerCount: 41,
+        benchmarkDelta: -3
+    }
+}
 
+const CITY_OPTIONS = Object.keys(PRICING_DATA).map(slug => ({
+    value: slug,
+    label: slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+    tier: PRICING_DATA[slug].tier
+})).sort((a, b) => a.label.localeCompare(b.label))
+
+export function CostCalculator() {
+    // --- State ---
+    const [city, setCity] = useState<string>('new-york')
+    const [toxin, setToxin] = useState<'botox' | 'dysport' | 'xeomin'>('botox')
+    const [selectedAreas, setSelectedAreas] = useState<Set<string>>(new Set(['forehead', 'glabella', 'crow']))
+    const [tierValue, setTierValue] = useState<number[]>([50]) // 0-100 slider
+
+    // --- Derived Values ---
+    const cityData = PRICING_DATA[city]
+    const totalUnits = Array.from(selectedAreas).reduce((sum, areaId) => {
+        const area = TREATMENT_AREAS.find(a => a.id === areaId)
+        return sum + (area?.units || 0)
+    }, 0)
+
+    // Determine Tier Category from Slider (0-33: Budget, 34-66: Mid, 67-100: Premium)
+    const tierCategory: Tier = tierValue[0] <= 33 ? 'budget' : tierValue[0] <= 66 ? 'mid' : 'premium'
+
+    // Get price per unit based on city + toxin + calculated tier
+    const unitPrice = cityData[toxin][tierCategory]
+
+    // Calculate Range (Headline)
+    // We show a range around the calculated price to be realistic
+    // e.g. calculated is $500, range is $450 - $550
+    const calculatedTotal = totalUnits * unitPrice
+    const rangeLow = Math.round(calculatedTotal * 0.9)
+    const rangeHigh = Math.round(calculatedTotal * 1.1)
+
+    // Benchmark Delta Text
+    const deltaText = cityData.benchmarkDelta > 0
+        ? `${cityData.benchmarkDelta}% higher`
+        : `${Math.abs(cityData.benchmarkDelta)}% lower`
+
+    // Gradient Position (for visual bar)
+    // Map slider 0-100 to position on bar
+    const markerPosition = tierValue[0]
+
+    // --- Handlers ---
     const toggleArea = (id: string) => {
-        setSelectedAreas(prev =>
-            prev.includes(id) ? prev.filter(a => a !== id) : [...prev, id]
-        )
+        const next = new Set(selectedAreas)
+        if (next.has(id)) next.delete(id)
+        else next.add(id)
+        setSelectedAreas(next)
     }
 
-    const calculation = useMemo(() => {
-        let units = 0
-        selectedAreas.forEach(areaId => {
-            const area = AREAS.find(a => a.id === areaId)
-            if (area) {
-                if (intensity === 'light') units += area.min
-                else if (intensity === 'full') units += area.max
-                else units += area.default
-            }
-        })
-        return {
-            units,
-            totalCost: units * pricePerUnit
-        }
-    }, [selectedAreas, intensity, pricePerUnit])
-
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-8">
-                <section>
-                    <h3 className="text-xl font-display font-bold text-primary mb-6 flex items-center gap-2">
-                        <span className="w-8 h-8 rounded-full bg-secondary/10 text-secondary flex items-center justify-center text-sm">1</span>
-                        Select Treatment Areas
-                    </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {AREAS.map(area => (
+        <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            {/* Left Panel: Inputs */}
+            <div className="lg:col-span-5 space-y-8">
+
+                {/* 1. Location */}
+                <div className="space-y-3">
+                    <label className="text-sm font-bold text-gray-900 uppercase tracking-wide flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs">1</span>
+                        Your Location
+                    </label>
+                    <select
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        className="w-full p-4 bg-white border border-gray-200 rounded-xl text-lg font-medium shadow-sm focus:ring-2 focus:ring-secondary/50 focus:border-secondary outline-none appearance-none cursor-pointer hover:border-gray-300 transition-colors"
+                        style={{ backgroundImage: 'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%231a2332%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1.5rem center', backgroundSize: '0.75rem' }}
+                    >
+                        {CITY_OPTIONS.map(opt => (
+                            <option key={opt.value} value={opt.value}>
+                                {opt.label} {opt.tier === 'high' ? '($$$)' : opt.tier === 'low' ? '($)' : ''}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                {/* 2. Neurotoxin */}
+                <div className="space-y-3">
+                    <label className="text-sm font-bold text-gray-900 uppercase tracking-wide flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs">2</span>
+                        Treatment Type
+                    </label>
+                    <div className="grid grid-cols-3 gap-2 p-1 bg-gray-100 rounded-xl">
+                        {(['botox', 'dysport', 'xeomin'] as const).map((t) => (
                             <button
+                                key={t}
+                                onClick={() => setToxin(t)}
+                                className={`py-2.5 text-sm font-bold rounded-lg transition-all ${toxin === t
+                                    ? 'bg-white text-primary shadow-sm'
+                                    : 'text-gray-500 hover:text-gray-900'
+                                    }`}
+                            >
+                                {t.charAt(0).toUpperCase() + t.slice(1)}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* 3. Treatment Areas */}
+                <div className="space-y-3">
+                    <label className="text-sm font-bold text-gray-900 uppercase tracking-wide flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs">3</span>
+                        Target Areas
+                    </label>
+                    <div className="grid grid-cols-1 gap-2">
+                        {TREATMENT_AREAS.map(area => (
+                            <div
                                 key={area.id}
                                 onClick={() => toggleArea(area.id)}
-                                className={`flex items-center justify-between p-4 rounded-2xl border-2 transition-all text-left ${selectedAreas.includes(area.id)
-                                        ? 'border-secondary bg-secondary/[0.03] shadow-md'
-                                        : 'border-gray-100 bg-white hover:border-gray-200'
+                                className={`group flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-all ${selectedAreas.has(area.id)
+                                    ? 'bg-secondary/5 border-secondary/50 shadow-sm'
+                                    : 'bg-white border-gray-100 hover:border-gray-200'
                                     }`}
                             >
-                                <span className={`font-semibold ${selectedAreas.includes(area.id) ? 'text-secondary' : 'text-primary'}`}>
-                                    {area.name}
-                                </span>
-                                <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${selectedAreas.includes(area.id) ? 'border-secondary bg-secondary text-white' : 'border-gray-200'
-                                    }`}>
-                                    {selectedAreas.includes(area.id) && '✓'}
+                                <div className="flex items-center gap-3">
+                                    <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${selectedAreas.has(area.id) ? 'bg-secondary border-secondary' : 'border-gray-300 bg-white'
+                                        }`}>
+                                        {selectedAreas.has(area.id) && <Check className="w-3.5 h-3.5 text-white" />}
+                                    </div>
+                                    <span className={`font-medium ${selectedAreas.has(area.id) ? 'text-primary' : 'text-gray-600'}`}>
+                                        {area.label}
+                                    </span>
                                 </div>
-                            </button>
+                                <Badge variant="outline" className={`bg-white font-mono text-xs ${selectedAreas.has(area.id) ? 'text-secondary border-secondary/20' : 'text-gray-400 border-gray-100'
+                                    }`}>
+                                    {area.units}u
+                                </Badge>
+                            </div>
                         ))}
                     </div>
-                </section>
+                </div>
 
-                <section>
-                    <h3 className="text-xl font-display font-bold text-primary mb-6 flex items-center gap-2">
-                        <span className="w-8 h-8 rounded-full bg-secondary/10 text-secondary flex items-center justify-center text-sm">2</span>
-                        Desired Results
-                    </h3>
-                    <div className="flex p-1 bg-gray-100 rounded-2xl">
-                        {(['light', 'moderate', 'full'] as const).map(level => (
-                            <button
-                                key={level}
-                                onClick={() => setIntensity(level)}
-                                className={`flex-1 py-3 px-4 rounded-xl font-bold transition-all capitalize ${intensity === level
-                                        ? 'bg-white text-secondary shadow-sm'
-                                        : 'text-gray-400 hover:text-gray-600'
-                                    }`}
-                            >
-                                {level}
-                            </button>
-                        ))}
+                {/* 4. Provider Tier */}
+                <div className="space-y-4 pt-4 border-t border-gray-100">
+                    <div className="flex justify-between items-center">
+                        <label className="text-sm font-bold text-gray-900 uppercase tracking-wide flex items-center gap-2">
+                            <span className="w-6 h-6 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs">4</span>
+                            Provider Level
+                        </label>
+                        <div className="group relative cursor-help">
+                            <HelpCircle className="w-4 h-4 text-gray-300 hover:text-gray-500 transition-colors" />
+                            <div className="absolute bottom-full right-0 mb-2 w-64 p-3 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-xl">
+                                Tier includes experience, credentials, and location overhead. Budget clinics often use nurse injectors; Premium often feature board-certified MDs.
+                            </div>
+                        </div>
                     </div>
-                    <p className="text-sm text-gray-500 mt-4 leading-relaxed">
-                        {intensity === 'light' && 'Subtle improvement while maintaining full facial movement ("Baby Botox").'}
-                        {intensity === 'moderate' && 'Smooth out lines while preserving natural expressions. Our most popular choice.'}
-                        {intensity === 'full' && 'Maximum smoothing and longevity. Ideal for deeper lines or longer intervals.'}
-                    </p>
-                </section>
+
+                    <div className="px-2">
+                        <Slider
+                            value={tierValue}
+                            onValueChange={setTierValue}
+                            max={100}
+                            step={1}
+                            className="py-4"
+                        />
+                        <div className="flex justify-between text-xs font-bold text-gray-400 uppercase tracking-wider mt-1">
+                            <span className={tierCategory === 'budget' ? 'text-green-600' : ''}>Budget ($)</span>
+                            <span className={tierCategory === 'mid' ? 'text-yellow-600' : ''}>Standard ($$)</span>
+                            <span className={tierCategory === 'premium' ? 'text-red-500' : ''}>Premium ($$$)</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div className="lg:col-span-1">
-                <Card className="sticky top-24 border-none shadow-2xl bg-primary text-white overflow-hidden p-0">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 -mr-16 -mt-16 rounded-full blur-3xl"></div>
-
-                    <div className="p-8 relative z-10">
-                        <div className="mb-8">
-                            <h4 className="text-secondary font-bold text-xs uppercase tracking-widest mb-2">Estimated Totals</h4>
-                            <div className="flex items-baseline gap-2">
-                                <span className="text-5xl font-display font-bold">{formatCurrency(calculation.totalCost)}</span>
-                                <span className="text-gray-400 font-medium">approx.</span>
-                            </div>
+            {/* Right Panel: Output */}
+            <div className="lg:col-span-7">
+                <div className="sticky top-24 space-y-6">
+                    <Card className="border-0 shadow-2xl shadow-slate-200/50 overflow-hidden bg-white ring-1 ring-black/5">
+                        <div className="h-2 bg-gradient-to-r from-green-400 via-yellow-400 to-red-500 w-full relative">
+                            <div
+                                className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.3)] z-10 transition-all duration-300 ease-out transform -translate-x-1/2"
+                                style={{ left: `${markerPosition}%` }}
+                            />
+                            <div
+                                className="absolute -top-1 w-3 h-4 bg-primary rounded-b-full transform -translate-x-1/2 transition-all duration-300 ease-out"
+                                style={{ left: `${markerPosition}%` }}
+                            />
                         </div>
 
-                        <div className="space-y-4 mb-8">
-                            <div className="flex justify-between items-center py-3 border-b border-white/10">
-                                <span className="text-gray-400 text-sm">Total Units</span>
-                                <span className="font-bold">{calculation.units} Units</span>
-                            </div>
-                            <div className="flex justify-between items-center py-3 border-b border-white/10">
-                                <span className="text-gray-400 text-sm">Price per Unit</span>
-                                <div className="flex items-center gap-2">
-                                    <span className="font-bold">{formatCurrency(pricePerUnit)}</span>
-                                    <input
-                                        type="range"
-                                        min="10"
-                                        max="25"
-                                        value={pricePerUnit}
-                                        onChange={(e) => setPricePerUnit(Number(e.target.value))}
-                                        className="w-16 accent-secondary"
-                                    />
+                        <CardContent className="p-8 lg:p-10 space-y-8">
+                            {/* Headline */}
+                            <div className="text-center space-y-2">
+                                <p className="text-gray-500 font-medium text-sm tracking-wide uppercase">Estimated Total Cost</p>
+                                <div className="text-5xl lg:text-7xl font-display font-bold text-primary tracking-tight tabular-nums">
+                                    ${rangeLow} – ${rangeHigh}
+                                </div>
+                                <div className="flex items-center justify-center gap-3 pt-2">
+                                    <Badge variant="secondary" className="bg-green-50 text-green-700 border-green-200">
+                                        <ShieldCheck className="w-3 h-3 mr-1" />
+                                        Verified Data
+                                    </Badge>
+                                    <span className="text-sm text-gray-400 font-medium">
+                                        Based on {cityData.providerCount} {CITY_OPTIONS.find(c => c.value === city)?.label} Providers
+                                    </span>
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="bg-white/5 rounded-2xl p-4 mb-8 border border-white/10">
-                            <h5 className="text-xs font-bold text-secondary uppercase mb-2">Area Breakdown</h5>
-                            {selectedAreas.length === 0 ? (
-                                <p className="text-xs text-gray-500 italic">No areas selected yet.</p>
-                            ) : (
-                                <div className="space-y-2">
-                                    {selectedAreas.map(id => {
-                                        const area = AREAS.find(a => a.id === id)
-                                        return (
-                                            <div key={id} className="flex justify-between text-xs">
-                                                <span className="text-gray-300">{area?.name}</span>
-                                                <span className="text-white">
-                                                    {intensity === 'light' ? area?.min : intensity === 'full' ? area?.max : area?.default} units
-                                                </span>
-                                            </div>
-                                        )
-                                    })}
+                            {/* Breakdown Grid */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 rounded-2xl p-6 border border-gray-100">
+                                <div className="space-y-1">
+                                    <p className="text-xs font-bold text-gray-400 uppercase">Unit Breakdown</p>
+                                    <p className="text-2xl font-bold text-primary tabular-nums">{totalUnits} <span className="text-base font-normal text-gray-500">units</span></p>
+                                    <div className="flex flex-wrap gap-1 mt-2">
+                                        {Array.from(selectedAreas).map(id => (
+                                            <span key={id} className="text-[10px] bg-white border border-gray-200 px-1.5 py-0.5 rounded text-gray-500">
+                                                {TREATMENT_AREAS.find(a => a.id === id)?.label}
+                                            </span>
+                                        ))}
+                                        {selectedAreas.size === 0 && <span className="text-xs text-gray-400 italic">Select areas to see units</span>}
+                                    </div>
                                 </div>
-                            )}
-                        </div>
+                                <div className="space-y-1 md:text-right">
+                                    <p className="text-xs font-bold text-gray-400 uppercase">Est. Price Per Unit</p>
+                                    <p className="text-2xl font-bold text-primary tabular-nums">${unitPrice} <span className="text-base font-normal text-gray-500">/ unit</span></p>
+                                    <p className="text-xs text-gray-400">
+                                        Market Avg: ${cityData[toxin].mid}
+                                    </p>
+                                </div>
+                            </div>
 
-                        <Button className="w-full h-14 bg-secondary hover:bg-secondary/90 text-white font-bold text-lg shadow-lg shadow-secondary/20">
-                            Find Local Providers
-                        </Button>
-                    </div>
-                </Card>
+                            {/* Benchmark Context */}
+                            <div className="bg-blue-50/50 rounded-xl p-4 flex items-start gap-3 border border-blue-100">
+                                <Info className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                                <div>
+                                    <p className="text-sm text-blue-900 font-medium">
+                                        Market Insight
+                                    </p>
+                                    <p className="text-sm text-blue-700/80 leading-relaxed mt-1">
+                                        Providers in <span className="font-semibold">{CITY_OPTIONS.find(c => c.value === city)?.label}</span> average <span className={cityData.benchmarkDelta > 0 ? "text-red-600 font-bold" : "text-green-600 font-bold"}>{deltaText}</span> than the national median.
+                                        {tierCategory === 'budget' && " You have selected a budget-friendly tier."}
+                                        {tierCategory === 'premium' && " Premium providers typically offer concierge service and board-certified expertise."}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* CTA */}
+                            <Link href={`/botox/${city}`} className="block">
+                                <Button className="w-full text-lg py-7 rounded-xl shadow-xl shadow-primary/10 hover:shadow-primary/20 transition-all bg-primary hover:bg-slate-800 text-white font-bold group">
+                                    See {cityData.providerCount} Verified Providers in {CITY_OPTIONS.find(c => c.value === city)?.label}
+                                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                </Button>
+                            </Link>
+
+                            <p className="text-xs text-center text-gray-400">
+                                *Estimates only. Final pricing requires an in-person consultation.
+                            </p>
+                        </CardContent>
+                    </Card>
+                </div>
+            </div>
+
+            {/* Methodology Footnote */}
+            <div className="lg:col-span-12 mt-8 pt-8 border-t border-gray-200">
+                <div className="max-w-3xl mx-auto text-center">
+                    <PricingMethodology />
+                </div>
             </div>
         </div>
     )
