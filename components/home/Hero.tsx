@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
+import { Search, ShieldCheck, Star, TrendingUp } from 'lucide-react'
 
 export default function Hero() {
     const [searchQuery, setSearchQuery] = useState('')
@@ -16,70 +17,121 @@ export default function Hero() {
     }
 
     return (
-        <section className="relative bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-white py-20 md:py-28">
-            {/* Subtle pattern overlay */}
-            <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0" style={{
-                    backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
-                    backgroundSize: '40px 40px'
+        <section className="relative bg-[#1a2332] text-white py-24 md:py-32 overflow-hidden">
+            {/* Premium Background Effects */}
+            <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#1a2332] via-[#151b26] to-[#0f141c]" />
+                <div className="absolute inset-0 opacity-[0.03]" style={{
+                    backgroundImage: 'radial-gradient(#d4af37 1px, transparent 1px)',
+                    backgroundSize: '32px 32px'
                 }} />
+                {/* Gold Glow Effect */}
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#d4af37] opacity-[0.05] blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
             </div>
 
             <div className="container mx-auto px-4 relative z-10">
-                <div className="max-w-3xl mx-auto text-center">
-                    <h1 className="text-5xl md:text-6xl font-display font-bold mb-6 text-balance leading-[1.1]">
-                        Compare Botox Prices with <span className="text-secondary italic">Real</span> Transparency
-                    </h1>
-                    <p className="text-xl md:text-2xl mb-8 text-white/90 font-light max-w-2xl mx-auto">
-                        We list verified pricing, credentials, and real patient feedback for 600+ injectors nationwide. No guessing, just data.
-                    </p>
+                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
-                    <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-12">
-                        <div className="flex flex-col sm:flex-row gap-2">
-                            <input
-                                type="text"
-                                placeholder="Enter city or zip code..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="flex-1 px-6 py-4 rounded-lg text-gray-900 text-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                            />
-                            <Button type="submit" size="lg" className="bg-accent hover:bg-accent/90 text-primary font-semibold">
-                                Search
-                            </Button>
+                    {/* Left Column: Text & Search */}
+                    <div className="flex-1 max-w-2xl text-center lg:text-left">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#d4af37] text-xs font-bold tracking-widest uppercase mb-6 animate-fade-in">
+                            <Star className="w-3 h-3 fill-current" />
+                            2026 Official Pricing Guide
                         </div>
-                    </form>
 
-                    <div className="flex flex-wrap justify-center gap-4 mb-12">
-                        <Button
-                            variant="secondary"
-                            size="sm"
-                            onClick={() => router.push('/calculator')}
-                            className="bg-white/10 hover:bg-white/20 border-white/20"
-                        >
-                            📊 Treatment Cost Estimator
-                        </Button>
-                        <Button
-                            variant="secondary"
-                            size="sm"
-                            onClick={() => router.push('/botox/beverly-hills-ca')}
-                            className="bg-white/10 hover:bg-white/20 border-white/20"
-                        >
-                            📍 Botox in Beverly Hills
-                        </Button>
+                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-[1.1] text-balance">
+                            Transparent Pricing for <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] to-[#f3e5ab]">Aesthetic Medicine</span>
+                        </h1>
+
+                        <p className="text-lg md:text-xl text-gray-300 mb-10 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+                            We've verified credentials and scraped real per-unit pricing for <strong>600+ top injectors</strong>. No hidden fees, no pay-to-play rankings.
+                        </p>
+
+                        <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto lg:mx-0 mb-12 shadow-2xl shadow-black/20 rounded-xl">
+                            <div className="relative flex-1">
+                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <Search className="h-5 w-5 text-gray-400" />
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder="Enter city or zip code..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="w-full h-14 pl-12 pr-4 rounded-xl sm:rounded-r-none bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#d4af37] text-base"
+                                />
+                            </div>
+                            <Button
+                                type="submit"
+                                className="h-14 px-8 rounded-xl sm:rounded-l-none bg-[#d4af37] hover:bg-[#c0a030] text-[#1a2332] font-bold text-lg transition-all hover:scale-105"
+                            >
+                                Find Providers
+                            </Button>
+                        </form>
+
+                        {/* Trust Indicators */}
+                        <div className="grid grid-cols-3 gap-6 border-t border-white/10 pt-8">
+                            <div>
+                                <div className="flex items-center justify-center lg:justify-start gap-2 mb-1 text-[#d4af37]">
+                                    <ShieldCheck className="w-5 h-5" />
+                                    <span className="font-bold text-xl">1,200+</span>
+                                </div>
+                                <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Verified MDs & RNs</div>
+                            </div>
+                            <div>
+                                <div className="flex items-center justify-center lg:justify-start gap-2 mb-1 text-[#d4af37]">
+                                    <TrendingUp className="w-5 h-5" />
+                                    <span className="font-bold text-xl">$12.50</span>
+                                </div>
+                                <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Avg. Unit Price</div>
+                            </div>
+                            <div>
+                                <div className="flex items-center justify-center lg:justify-start gap-2 mb-1 text-[#d4af37]">
+                                    <Star className="w-5 h-5" />
+                                    <span className="font-bold text-xl">4.9/5</span>
+                                </div>
+                                <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Patient Satisfaction</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-sm">
-                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-                            <div className="text-4xl font-bold mb-2">1,000+</div>
-                            <div className="text-white/80">Verified Providers</div>
-                        </div>
-                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-                            <div className="text-4xl font-bold mb-2">$475</div>
-                            <div className="text-white/80">Average Cost</div>
-                        </div>
-                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-                            <div className="text-4xl font-bold mb-2">50</div>
-                            <div className="text-white/80">States Covered</div>
+                    {/* Right Column: Visual */}
+                    <div className="flex-1 w-full max-w-lg lg:max-w-none hidden lg:block">
+                        <div className="relative">
+                            {/* Decorative background blob */}
+                            <div className="absolute -inset-4 bg-gradient-to-tr from-[#d4af37]/20 to-transparent blur-3xl rounded-full" />
+
+                            <div className="relative grid grid-cols-2 gap-4">
+                                <div className="space-y-4 translate-y-8">
+                                    <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-800 border border-white/10 shadow-2xl relative group">
+                                        <div className="absolute inset-0 bg-gray-900 flex items-center justify-center text-gray-700">
+                                            {/* In production: <img src="/images/hero-1.jpg" alt="Treatment" className="object-cover w-full h-full" /> */}
+                                            <span className="text-sm font-medium">Treatment Room</span>
+                                        </div>
+                                        <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                                            <div className="text-white text-xs font-bold">Clean & Sterile</div>
+                                        </div>
+                                    </div>
+                                    <div className="p-6 rounded-2xl bg-[#151b26] border border-white/10 shadow-xl">
+                                        <div className="text-[#d4af37] text-3xl font-bold mb-1">100%</div>
+                                        <div className="text-sm text-gray-400 leading-snug">Verification rate for licensing and board certifications</div>
+                                    </div>
+                                </div>
+                                <div className="space-y-4">
+                                    <div className="p-6 rounded-2xl bg-[#d4af37] text-[#1a2332] shadow-xl">
+                                        <div className="font-bold text-lg mb-2">Real Pricing</div>
+                                        <div className="h-1.5 w-full bg-[#1a2332]/10 rounded-full mb-3">
+                                            <div className="h-full w-3/4 bg-[#1a2332] rounded-full" />
+                                        </div>
+                                        <div className="text-sm leading-snug opacity-90">We track price-per-unit across 50 states daily.</div>
+                                    </div>
+                                    <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-800 border border-white/10 shadow-2xl relative">
+                                        <div className="absolute inset-0 bg-gray-900 flex items-center justify-center text-gray-700">
+                                            {/* In production: <img src="/images/hero-2.jpg" alt="Result" className="object-cover w-full h-full" /> */}
+                                            <span className="text-sm font-medium">Natural Results</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

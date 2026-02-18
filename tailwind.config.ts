@@ -10,11 +10,13 @@ export default {
         extend: {
             colors: {
                 primary: '#1a2332',
-                secondary: '#b76e79',
-                accent: '#d4af37',
+                secondary: '#d4af37',
+                accent: '#c0a030', // Slightly darker gold for hover states
                 background: '#fafaf8',
                 success: '#6b8e7f',
                 error: '#c94d4d',
+                navy: '#1a2332',
+                gold: '#d4af37',
             },
             fontFamily: {
                 display: ['var(--font-display)', 'serif'],

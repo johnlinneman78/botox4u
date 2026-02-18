@@ -48,6 +48,8 @@ export async function getProviders(filters: {
         verified: p.verified || false,
         pricePerUnit: p.price_per_unit,
         minTreatmentPrice: p.min_treatment_price,
+        lat: p.lat || 0,
+        lng: p.lng || 0,
         imageUrl: p.image_url,
         enriched_attrs: p.enriched_attrs
     }))

@@ -1,5 +1,6 @@
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
+import { MapPin, Star, ShieldCheck } from 'lucide-react'
 
 interface CityHeroProps {
     city: string
@@ -10,45 +11,74 @@ interface CityHeroProps {
 
 export function CityHero({ city, state, treatmentName, providerCount }: CityHeroProps) {
     return (
-        <section className="relative py-20 bg-primary text-white overflow-hidden">
+        <section className="relative py-20 md:py-32 bg-[#1a2332] text-white overflow-hidden">
             {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-10 pointer-events-none">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-secondary via-transparent to-transparent opacity-30"></div>
-                <div className="grid grid-cols-6 h-full w-full">
-                    {[...Array(6)].map((_, i) => (
-                        <div key={i} className="border-r border-white/10 h-full"></div>
-                    ))}
-                </div>
+            <div className="absolute inset-0 opacity-[0.03]">
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        backgroundImage: 'radial-gradient(circle at 1px 1px, #d4af37 1px, transparent 0)',
+                        backgroundSize: '40px 40px'
+                    }}
+                />
             </div>
 
+            {/* Glowing Orbs */}
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#d4af37] opacity-[0.03] blur-[150px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500 opacity-[0.05] blur-[120px] rounded-full -translate-x-1/3 translate-y-1/3 pointer-events-none" />
+
             <div className="container mx-auto px-4 relative z-10">
-                <div className="max-w-3xl">
-                    <Badge variant="premium" className="mb-6 bg-secondary/20 text-secondary border-secondary/30">
-                        2026 LOCAL PROVIDER GUIDE
-                    </Badge>
-                    <h1 className="text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
-                        Find Botox providers in <span className="text-secondary">{city}</span> with real per-unit pricing
+                <div className="max-w-4xl mx-auto text-center">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#d4af37] text-xs font-bold tracking-widest uppercase mb-6 animate-fade-in shadow-lg">
+                        <MapPin className="w-3 h-3" />
+                        {city}, {state} Official Guide
+                    </div>
+
+                    <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 leading-[1.1] text-balance">
+                        Verified {treatmentName} Providers in <span className="text-[#d4af37]">{city}</span>
                     </h1>
-                    <p className="text-xl text-gray-300 mb-10 leading-relaxed font-light">
-                        Compare injectors, see credentials, and request quotes from {providerCount} top-rated aesthetic clinics in {city}, {state}.
+
+                    <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed font-light max-w-2xl mx-auto">
+                        Compare {providerCount} medical professionals, view real per-unit pricing, and check verified credentials.
+                        No hidden fees. No pay-to-play.
                     </p>
-                    <div className="flex flex-wrap gap-4">
+
+                    <div className="flex flex-wrap justify-center gap-4 mb-12">
                         <Button
-                            variant="secondary"
-                            size="lg"
-                            className="px-8 py-7 text-lg font-bold shadow-xl shadow-secondary/20"
+                            className="h-14 px-8 rounded-xl bg-[#d4af37] hover:bg-[#c0a030] text-[#1a2332] font-bold text-lg transition-all hover:scale-105 shadow-xl shadow-[#d4af37]/10"
                             onClick={() => document.getElementById('listings')?.scrollIntoView({ behavior: 'smooth' })}
                         >
-                            Find providers & check prices
+                            Find Verified Providers
                         </Button>
                         <Button
                             variant="outline"
-                            size="lg"
-                            className="px-8 py-7 text-lg font-bold border-white/20 hover:bg-white/10 text-white"
+                            className="h-14 px-8 rounded-xl border-white/20 hover:bg-white/5 text-white font-medium text-lg"
                             onClick={() => document.getElementById('quick-quote')?.scrollIntoView({ behavior: 'smooth' })}
                         >
-                            Get a quote
+                            Get A Quote
                         </Button>
+                    </div>
+
+                    {/* City Trust Metrics */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                        <div className="text-center md:text-left md:border-r border-white/10 px-4">
+                            <div className="text-2xl font-bold text-white mb-1">{providerCount}</div>
+                            <div className="text-[10px] uppercase tracking-wider text-gray-400">Clinics</div>
+                        </div>
+                        <div className="text-center md:text-left md:border-r border-white/10 px-4">
+                            <div className="text-2xl font-bold text-[#d4af37] mb-1">$10-16</div>
+                            <div className="text-[10px] uppercase tracking-wider text-gray-400">Price Range</div>
+                        </div>
+                        <div className="text-center md:text-left md:border-r border-white/10 px-4">
+                            <div className="text-2xl font-bold text-white mb-1">4.8/5</div>
+                            <div className="text-[10px] uppercase tracking-wider text-gray-400">Avg Rating</div>
+                        </div>
+                        <div className="text-center md:text-left px-4 flex flex-col justify-center">
+                            <div className="flex items-center justify-center md:justify-start gap-1 text-green-400 text-sm font-bold mb-1">
+                                <ShieldCheck className="w-4 h-4" /> Verified
+                            </div>
+                            <div className="text-[10px] uppercase tracking-wider text-gray-400">Medical Data</div>
+                        </div>
                     </div>
                 </div>
             </div>

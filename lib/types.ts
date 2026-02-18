@@ -20,6 +20,8 @@ export interface Provider {
     review_count: number
     listing_tier: 'free' | 'featured' | 'premium'
     verified: boolean
+    lat?: number
+    lng?: number
     price_per_unit?: number
     min_treatment_price?: number
     description?: string

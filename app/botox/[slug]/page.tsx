@@ -1,6 +1,9 @@
+import Link from 'next/link'
+import { Metadata } from 'next'
+import Hero from '@/components/Hero' // Updated import
+import CityMap from '@/components/CityMap' // New import
 import { getProviders, getCityStats, getNearbyCities } from '@/lib/actions/providers'
 import { REVERSE_STATE_MAP, TREATMENTS } from '@/lib/constants'
-import { CityHero } from '@/components/city/CityHero'
 import { CityStats } from '@/components/city/CityStats'
 import { CostComparisonTable } from '@/components/seo/CostComparisonTable'
 import { CityFAQ } from '@/components/city/CityFAQ'
@@ -8,8 +11,6 @@ import { PriceMeter } from '@/components/city/PriceMeter'
 import { PromoteClinicCard } from '@/components/providers/PromoteClinicCard'
 import { ProviderCard } from '@/components/providers/ProviderCard'
 import { Badge } from '@/components/ui/Badge'
-import Link from 'next/link'
-import { Metadata } from 'next'
 
 interface CityPageProps {
     params: { slug: string }
@@ -49,6 +50,10 @@ export default async function CityPage({ params }: CityPageProps) {
     const stats = await getCityStats(cityName)
     const nearbyCities = await getNearbyCities(cityName, stateCode)
     const stateSlug = REVERSE_STATE_MAP[stateCode]
+
+    // Default map center (if no providers or first provider lacks location)
+    // In real app, we might want to geocode the city name on server or client
+    const mapCenter = providers.find(p => p.lat && p.lng) || { lat: 34.0522, lng: -118.2437 } // Default to LA or first provider
 
     // JSON-LD Schema
     const jsonLd = {
@@ -108,7 +113,7 @@ export default async function CityPage({ params }: CityPageProps) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
             />
             {/* Breadcrumbs */}
-            <div className="bg-primary/95 border-b border-white/10">
+            <div className="bg-[#1a2332] border-b border-white/10">
                 <div className="container mx-auto px-4 py-3 flex items-center gap-2 text-xs font-medium text-white/60">
                     <Link href="/" className="hover:text-white transition-colors">Home</Link>
                     <span>/</span>
@@ -126,10 +131,9 @@ export default async function CityPage({ params }: CityPageProps) {
                 </div>
             </div>
 
-            <CityHero
+            <Hero
                 city={cityName}
                 state={stateCode}
-                providerCount={providers.length}
             />
 
             <div className="container mx-auto px-4 -mt-12 relative z-20">
@@ -141,6 +145,14 @@ export default async function CityPage({ params }: CityPageProps) {
                         avgRating={stats.avgRating}
                     />
                 )}
+
+                {/* Interactive Map Section */}
+                <div className="mt-8">
+                    <CityMap
+                        providers={providers}
+                        citySlug={resolvedParams.slug}
+                    />
+                </div>
 
                 <div className="mb-12">
                     <PriceMeter
