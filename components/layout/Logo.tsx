@@ -10,20 +10,8 @@ interface LogoProps {
 export function LogoPrecision({ className = "" }) {
     return (
         <svg className={className} viewBox="0 0 500 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="goldGradFinal" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#f4e4bc" />
-                    <stop offset="50%" stopColor="#d4af37" />
-                    <stop offset="100%" stopColor="#b8941f" />
-                </linearGradient>
-            </defs>
-            <path d="M22 18 Q28 12 38 18 V82 Q33 88 22 82 Z" fill="url(#goldGradFinal)" stroke="#1a2332" strokeWidth="1.5" />
-            <path d="M38 18 Q44 12 54 18 V82 Q49 88 38 82 Z" fill="url(#goldGradFinal)" stroke="#1a2332" strokeWidth="1.5" />
-            <path d="M44 28 Q50 38 47 48 Q44 58 50 65" stroke="#1a2332" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-            <text x="75" y="68" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '42px', fontWeight: '700' }} fill="#1a2332" letterSpacing="-0.025em">otox</text>
-            <text x="75" y="68" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '42px', fontWeight: '700' }} fill="url(#goldGradFinal)" letterSpacing="-0.025em">B</text>
-            <text x="165" y="68" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '42px', fontWeight: '800' }} fill="#d4af37" letterSpacing="0em">-4u</text>
-            <text x="250" y="62" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '20px', fontWeight: '500' }} fill="#64748b">.com</text>
+            <text x="25" y="60" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '48px', fontWeight: '700' }} fill="#1a2332">Botox-4u.com</text>
+            <text x="28" y="82" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '14px', fontWeight: '600' }} fill="#d4af37" letterSpacing="0.3em">MEDICAL DIRECTORY</text>
         </svg>
     )
 }

@@ -24,6 +24,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const supabase = await getSupabaseServer(cookieStore)
 
+    if (!supabase) {
+        return [...staticRoutes]
+    }
+
     // 2. Fetch Providers for sitemap
     const { data: providers } = await supabase
         .from('providers')

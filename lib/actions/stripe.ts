@@ -12,6 +12,10 @@ export async function createCheckoutSession(tier: 'featured' | 'premium') {
     }
 
     const supabase = await getSupabaseServer(await cookies())
+    if (!supabase) {
+        throw new Error('Supabase not initialized')
+    }
+
     const { data: { user } } = await supabase.auth.getUser()
 
     if (!user) {
@@ -47,7 +51,7 @@ export async function createCheckoutSession(tier: 'featured' | 'premium') {
             providerId: provider.id,
             tier: tier,
         },
-        customer_email: authSession.user.email,
+        customer_email: user.email,
     })
 
     return { url: session.url }

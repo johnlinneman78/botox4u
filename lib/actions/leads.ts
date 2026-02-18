@@ -64,6 +64,10 @@ const leadSchema = z.object({
 export async function submitLead(formData: FormData) {
     const supabase = await getSupabaseServer(await cookies())
 
+    if (!supabase) {
+        return { error: 'Database connection failed. Please try again later.' }
+    }
+
     // Rate limiting: 5 submissions per minute per email
     const email = formData.get('email') as string
     if (!checkRateLimit(email, 5, 60000)) {
@@ -167,6 +171,15 @@ export async function submitLead(formData: FormData) {
 
 export async function getLeadStats() {
     const supabase = await getSupabaseServer(await cookies())
+
+    if (!supabase) {
+        return {
+            todayLeads: 0,
+            totalLeads: 0,
+            leadsPerCity: [],
+            quietProviders: 0
+        }
+    }
     const today = new Date()
     today.setHours(0, 0, 0, 0)
 

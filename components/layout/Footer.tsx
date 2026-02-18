@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
+import Logo from '@/components/layout/Logo'
 
 export default function Footer() {
     const currentYear = new Date().getFullYear()
@@ -9,7 +10,11 @@ export default function Footer() {
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
-                        <h3 className="font-display font-bold text-lg mb-4 text-primary">Botox-<span className="text-secondary">4u</span>.com</h3>
+                        <div className="h-12 w-auto mb-4 -ml-4">
+                            <Link href="/">
+                                <Logo className="h-full w-auto" variant="precision" />
+                            </Link>
+                        </div>
                         <p className="text-sm text-gray-600">
                             Find the best Botox providers near you. Compare costs, read reviews, and book consultations.
                         </p>
