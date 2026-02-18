@@ -2,7 +2,7 @@ import { getProvidersWithSearch, getTreatmentStats } from '@/lib/actions/provide
 import { AtAGlance } from '@/components/seo/AtAGlance'
 import { CostComparisonTable } from '@/components/seo/CostComparisonTable'
 import { PriceMeter } from '@/components/city/PriceMeter'
-import { ProviderCard } from '@/components/providers/ProviderCard'
+import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCard'
 import { TREATMENTS, REVERSE_STATE_MAP } from '@/lib/constants'
 import { Badge } from '@/components/ui/Badge'
 import Link from 'next/link'
@@ -160,17 +160,9 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                             Top Specialized Injectors in {cityName}
                         </h2>
 
-                        <div className="space-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {providers.map((provider: any) => (
-                                <ProviderCard key={provider.id} provider={{
-                                    ...provider,
-                                    averageRating: Number(provider.average_rating),
-                                    reviewCount: Number(provider.review_count),
-                                    listingTier: provider.listing_tier,
-                                    pricePerUnit: Number(provider.price_per_unit),
-                                    minTreatmentPrice: Number(provider.min_treatment_price),
-                                    imageUrl: provider.image_url
-                                }} />
+                                <EnhancedProviderCard key={provider.id} provider={provider} />
                             ))}
                         </div>
 

@@ -1,5 +1,5 @@
 import { getProvidersWithSearch } from '@/lib/actions/providers'
-import { ProviderCard } from '@/components/providers/ProviderCard'
+import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCard'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 
@@ -29,9 +29,9 @@ export default async function FeaturedProviders() {
                     </Link>
                 </div>
 
-                <div className="grid grid-cols-1 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {displayProviders.map((provider: any) => (
-                        <ProviderCard key={provider.id} provider={provider} />
+                        <EnhancedProviderCard key={provider.id} provider={provider} />
                     ))}
                 </div>
             </div>

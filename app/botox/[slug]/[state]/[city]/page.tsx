@@ -1,6 +1,6 @@
 import { getProvidersWithSearch, getCityStats } from '@/lib/actions/providers'
 import { TREATMENTS, getStateName } from '@/lib/constants'
-import { ProviderCard } from '@/components/providers/ProviderCard'
+import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCard'
 import { CityHero } from '@/components/city/CityHero'
 import { CostComparisonTable } from '@/components/seo/CostComparisonTable'
 import { Metadata } from 'next'
@@ -81,21 +81,21 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                                         <Star className="w-4 h-4 fill-secondary" />
                                         Excellence Awards: Top Rated in {cityName}
                                     </div>
-                                    <div className="space-y-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {providers
                                             .filter((p: any) => p.averageRating >= 4.8)
                                             .slice(0, 2)
                                             .map((provider: any) => (
-                                                <ProviderCard key={`top-${provider.id}`} provider={provider} />
+                                                <EnhancedProviderCard key={`top-${provider.id}`} provider={provider} />
                                             ))}
                                     </div>
                                 </div>
                             )}
 
-                            <div className="space-y-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {providers.length > 0 ? (
                                     providers.map((provider: any) => (
-                                        <ProviderCard key={provider.id} provider={provider} />
+                                        <EnhancedProviderCard key={provider.id} provider={provider} />
                                     ))
                                 ) : (
                                     <div className="bg-white p-12 text-center rounded-2xl border border-gray-100 shadow-sm">

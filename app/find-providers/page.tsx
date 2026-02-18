@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { ProviderCard } from '@/components/providers/ProviderCard'
+import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCard'
 import { ProviderFilters } from '@/components/providers/ProviderFilters'
 import { Button } from '@/components/ui/Button'
 import { getProvidersWithSearch } from '@/lib/actions/providers'
@@ -41,16 +41,9 @@ export default async function FindProvidersPage({
                     <ProviderFilters currentCity={city} currentState={state} />
                 </Suspense>
 
-                <div className="grid grid-cols-1 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {providers.map((provider: any) => (
-                        <ProviderCard key={provider.id} provider={{
-                            ...provider,
-                            averageRating: Number(provider.average_rating),
-                            pricePerUnit: Number(provider.price_per_unit),
-                            minTreatmentPrice: Number(provider.min_treatment_price),
-                            listingTier: provider.listing_tier,
-                            imageUrl: provider.image_url
-                        }} />
+                        <EnhancedProviderCard key={provider.id} provider={provider} />
                     ))}
                 </div>
 
