@@ -11,6 +11,7 @@ import { PriceMeter } from '@/components/city/PriceMeter'
 import { PromoteClinicCard } from '@/components/providers/PromoteClinicCard'
 import { ProviderCard } from '@/components/providers/ProviderCard'
 import { Badge } from '@/components/ui/Badge'
+import { Provider } from '@/lib/types'
 
 interface CityPageProps {
     params: { slug: string }
@@ -53,7 +54,7 @@ export default async function CityPage({ params }: CityPageProps) {
 
     // Default map center (if no providers or first provider lacks location)
     // In real app, we might want to geocode the city name on server or client
-    const mapCenter = providers.find(p => p.lat && p.lng) || { lat: 34.0522, lng: -118.2437 } // Default to LA or first provider
+    const mapCenter = providers.find((p: Provider) => p.lat && p.lng) || { lat: 34.0522, lng: -118.2437 } // Default to LA or first provider
 
     // JSON-LD Schema
     const jsonLd = {

@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { ProviderCard } from '@/components/providers/ProviderCard'
 import { ProviderFilters } from '@/components/providers/ProviderFilters'
 import { Button } from '@/components/ui/Button'
@@ -36,7 +37,9 @@ export default async function FindProvidersPage({
                     </p>
                 </div>
 
-                <ProviderFilters currentCity={city} currentState={state} />
+                <Suspense fallback={<div className="h-32 bg-gray-50 animate-pulse rounded-2xl mb-8" />}>
+                    <ProviderFilters currentCity={city} currentState={state} />
+                </Suspense>
 
                 <div className="grid grid-cols-1 gap-6">
                     {providers.map((provider: any) => (
