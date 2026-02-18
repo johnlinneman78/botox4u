@@ -11,12 +11,12 @@ import { LeadForm } from '@/components/providers/LeadForm'
 import { Star } from 'lucide-react'
 
 interface TreatmentCityPageProps {
-    params: { treatment: string; state: string; city: string }
+    params: { slug: string; state: string; city: string }
 }
 
 export async function generateMetadata({ params }: TreatmentCityPageProps): Promise<Metadata> {
     const resolvedParams = await params
-    const treatment = TREATMENTS.find(t => t.slug === resolvedParams.treatment)
+    const treatment = TREATMENTS.find(t => t.slug === resolvedParams.slug)
     const cityName = resolvedParams.city.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
     const stateName = getStateName(resolvedParams.state)
 
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: TreatmentCityPageProps): Prom
 
 export default async function TreatmentCityPage({ params }: TreatmentCityPageProps) {
     const resolvedParams = await params
-    const treatment = TREATMENTS.find(t => t.slug === resolvedParams.treatment)
+    const treatment = TREATMENTS.find(t => t.slug === resolvedParams.slug)
     const stateCode = resolvedParams.state.toUpperCase()
     const citySlug = resolvedParams.city
     const cityName = citySlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
