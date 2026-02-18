@@ -30,7 +30,7 @@ export default async function FeaturedProviders() {
                 </div>
 
                 <div className="grid grid-cols-1 gap-8">
-                    {displayProviders.map((provider) => (
+                    {displayProviders.map((provider: any) => (
                         <ProviderCard key={provider.id} provider={provider} />
                     ))}
                 </div>

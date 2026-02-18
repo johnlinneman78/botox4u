@@ -55,7 +55,11 @@ export async function getProvidersWithSearch(filters: {
         lat: p.lat || 0,
         lng: p.lng || 0,
         imageUrl: p.image_url,
-        enriched_attrs: p.enriched_attrs
+        enriched_attrs: p.enriched_attrs,
+        website: p.website,
+        phone: p.phone,
+        description: p.description,
+        reviews: []
     }))
 
     // Custom sort: Premium > Featured > Free
@@ -207,7 +211,11 @@ export async function getProviderBySlug(slug: string) {
         pricePerUnit: data.price_per_unit,
         minTreatmentPrice: data.min_treatment_price,
         imageUrl: data.image_url,
-        enriched_attrs: data.enriched_attrs
+        enriched_attrs: data.enriched_attrs,
+        website: data.website,
+        phone: data.phone,
+        description: data.description,
+        reviews: []
     }
 }
 

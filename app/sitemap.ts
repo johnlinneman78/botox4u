@@ -69,9 +69,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
 
     // 5. Generate State Routes
-    const uniqueStateCodes = Array.from(new Set((locations || []).map((s: any) => s.state.toUpperCase())))
+    const uniqueStateCodes = Array.from(new Set((locations || []).map((s: any) => s.state?.toUpperCase()))) as string[]
     const stateRoutes = uniqueStateCodes.map(code => ({
-        url: `${baseUrl}/botox/state/${REVERSE_STATE_MAP[code]}`,
+        url: `${baseUrl}/botox/state/${(REVERSE_STATE_MAP as Record<string, string>)[code]}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.7,
