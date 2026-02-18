@@ -63,6 +63,15 @@ export async function getProvidersWithSearch(filters: {
         website: p.website,
         phone: p.phone,
         description: p.description,
+
+        // Enriched Fields
+        google_place_id: p.google_place_id,
+        rating: p.rating,
+        num_reviews: p.num_reviews,
+        badges: p.badges,
+        ai_description: p.ai_description,
+        ai_description_confirmed: p.ai_description_confirmed,
+        gallery: p.gallery,
         reviews: []
     }))
 
