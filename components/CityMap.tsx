@@ -25,8 +25,8 @@ const mapContainerStyle = {
 export default function CityMap({ providers, citySlug }: CityMapProps) {
     // Optimized: Use fallback coords from lib/cityCoords.ts (Zero API cost for geocoding city)
     const center = {
-        lat: CITY_COORDS[citySlug as keyof typeof CITY_COORDS]?.lat || providers.find(p => p.lat)?.lat || 40.7128,
-        lng: CITY_COORDS[citySlug as keyof typeof CITY_COORDS]?.lng || providers.find(p => p.lng)?.lng || -74.0060
+        lat: CITY_COORDS[citySlug as keyof typeof CITY_COORDS]?.lat || providers.find(p => !!p.lat)?.lat || 40.7128,
+        lng: CITY_COORDS[citySlug as keyof typeof CITY_COORDS]?.lng || providers.find(p => !!p.lng)?.lng || -74.0060
     }
 
     const markers = providers

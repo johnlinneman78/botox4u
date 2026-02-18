@@ -19,8 +19,8 @@ export default {
                 gold: '#d4af37',
             },
             fontFamily: {
-                display: ['var(--font-display)', 'serif'],
-                sans: ['var(--font-sans)', 'sans-serif'],
+                display: ['var(--font-playfair)', 'serif'],
+                sans: ['var(--font-inter)', 'sans-serif'],
                 mono: ['var(--font-mono)', 'monospace'],
             },
         },

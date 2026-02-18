@@ -10,7 +10,7 @@ export async function getProvidersWithSearch(filters: {
 } = {}) {
     console.log('DEBUG: getProvidersWithSearch started')
     const supabase = await getSupabaseServer(await cookies())
-    console.log('DEBUG: supabase client created:', !!supabase)
+    if (!supabase) return []
 
     let queryBuilder = supabase
         .from('providers')
@@ -56,8 +56,8 @@ export async function getProvidersWithSearch(filters: {
         verified: p.verified || false,
         pricePerUnit: p.price_per_unit,
         minTreatmentPrice: p.min_treatment_price,
-        lat: p.lat || 0,
-        lng: p.lng || 0,
+        lat: p.latitude || 0,
+        lng: p.longitude || 0,
         imageUrl: p.image_url,
         enriched_attrs: p.enriched_attrs,
         website: p.website,
@@ -82,6 +82,7 @@ export async function getProvidersWithSearch(filters: {
 
 export async function getCityStats(city: string) {
     const supabase = await getSupabaseServer(await cookies())
+    if (!supabase) return null
 
     const { data, error } = await supabase
         .from('providers')
@@ -102,6 +103,7 @@ export async function getCityStats(city: string) {
 
 export async function getStateStats(state: string) {
     const supabase = await getSupabaseServer(await cookies())
+    if (!supabase) return null
 
     const { data, error } = await supabase
         .from('providers')
@@ -122,6 +124,7 @@ export async function getStateStats(state: string) {
 
 export async function getCitiesInState(state: string) {
     const supabase = await getSupabaseServer(await cookies())
+    if (!supabase) return []
 
     const { data, error } = await supabase
         .from('providers')
@@ -143,6 +146,7 @@ export async function getCitiesInState(state: string) {
 
 export async function getNearbyCities(city: string, state: string, limit: number = 5) {
     const supabase = await getSupabaseServer(await cookies())
+    if (!supabase) return []
 
     const { data, error } = await supabase
         .from('providers')
@@ -168,6 +172,7 @@ export async function getNearbyCities(city: string, state: string, limit: number
 
 export async function getTreatmentStats(treatment: string, city: string, state: string) {
     const supabase = await getSupabaseServer(await cookies())
+    if (!supabase) return null
 
     const { data, error } = await supabase
         .from('providers')
@@ -191,6 +196,7 @@ export async function getTreatmentStats(treatment: string, city: string, state: 
 
 export async function getProviderBySlug(slug: string) {
     const supabase = await getSupabaseServer(await cookies())
+    if (!supabase) return null
 
     const { data, error } = await supabase
         .from('providers')
@@ -229,37 +235,4 @@ export async function submitLead(leadData: any) {
     return { success: true }
 }
 
-export async function updateProviderProfile(formData: FormData) {
-    'use server'
 
-    const supabase = await getSupabaseServer(await cookies())
-
-    try {
-        const providerId = formData.get('provider_id') as string
-
-        const updates = {
-            name: formData.get('name') as string,
-            business_type: formData.get('business_type') as string,
-            description: formData.get('description') as string,
-            price_per_unit: parseFloat(formData.get('price_per_unit') as string),
-            phone: formData.get('phone') as string,
-            website: formData.get('website') as string,
-            address: formData.get('address') as string,
-        }
-
-        const { error } = await supabase
-            .from('providers')
-            .update(updates)
-            .eq('id', providerId)
-
-        if (error) {
-            console.error('Error updating provider:', error)
-            return { success: false, error: error.message }
-        }
-
-        return { success: true }
-    } catch (error) {
-        console.error('Error updating provider profile:', error)
-        return { success: false, error: 'Failed to update profile' }
-    }
-}

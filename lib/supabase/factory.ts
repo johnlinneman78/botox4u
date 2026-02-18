@@ -8,31 +8,39 @@ import { createServerClient } from '@supabase/auth-helpers-nextjs'
  */
 export async function getSupabaseServer(cookieList: any) {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
-    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim()
+    const key = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)?.trim()
 
     if (!url || !key) {
-        console.warn('Supabase server variables missing')
-        return null as any
+        console.error('CRITICAL: Supabase configuration missing in production environment.')
+        console.error('URL:', url ? 'Present' : 'MISSING')
+        console.error('Key:', key ? 'Present' : 'MISSING')
+        return null
     }
 
-    return createServerClient(
-        url,
-        key,
-        {
-            cookies: {
-                getAll() {
-                    return cookieList.getAll()
+    try {
+        const client = createServerClient(
+            url,
+            key,
+            {
+                cookies: {
+                    getAll() {
+                        return cookieList.getAll()
+                    },
+                    setAll(cookiesToSet) {
+                        try {
+                            cookiesToSet.forEach(({ name, value, options }) =>
+                                cookieList.set(name, value, options)
+                            )
+                        } catch {
+                            // Safe to ignore in Server Components
+                        }
+                    },
                 },
-                setAll(cookiesToSet) {
-                    try {
-                        cookiesToSet.forEach(({ name, value, options }) =>
-                            cookieList.set(name, value, options)
-                        )
-                    } catch {
-                        // Safe to ignore in Server Components
-                    }
-                },
-            },
-        }
-    )
+            }
+        )
+        return client
+    } catch (err) {
+        console.error('Failed to initialize Supabase server client:', err)
+        return null
+    }
 }

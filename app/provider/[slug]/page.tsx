@@ -6,6 +6,7 @@ import { getProviderBySlug } from '@/lib/actions/providers'
 import { LeadForm } from '@/components/providers/LeadForm'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
+import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
 
 interface ProviderProfileProps {
     params: { slug: string }
@@ -257,6 +258,10 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                 )}
                             </div>
                         </div>
+                    </div>
+
+                    <div className="mt-12">
+                        <MedicalDisclaimer variant="compact" />
                     </div>
                 </div>
             </section>

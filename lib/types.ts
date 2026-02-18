@@ -10,20 +10,21 @@ export interface Provider {
     user_id?: string
     name: string
     slug: string
-    business_type: string
+    businessType: string
     city: string
     state: string
     address?: string
     phone?: string
     website?: string
-    average_rating: number
-    review_count: number
-    listing_tier: 'free' | 'featured' | 'premium'
+    averageRating: number
+    reviewCount: number
+    listingTier: 'free' | 'featured' | 'premium'
     verified: boolean
     lat?: number
     lng?: number
-    price_per_unit?: number
-    min_treatment_price?: number
+    pricePerUnit?: number
+    minTreatmentPrice?: number
+    imageUrl?: string
     description?: string
     credentials?: string[]
     services_offered?: any[]
@@ -37,7 +38,7 @@ export interface Provider {
         injector_credentials?: string[]
         years_in_business?: number
     }
-    created_at: string
+    created_at?: string
     outreach_status?: 'not_sent' | 'sent' | 'responded' | 'claimed'
     date_sent?: string
 }

@@ -12,10 +12,13 @@ import { PromoteClinicCard } from '@/components/providers/PromoteClinicCard'
 import { ProviderCard } from '@/components/providers/ProviderCard'
 import { Badge } from '@/components/ui/Badge'
 import { Provider } from '@/lib/types'
+import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
 
 interface CityPageProps {
     params: { slug: string }
 }
+
+export const dynamic = 'force-dynamic'
 
 // Helper to parse slug "los-angeles-ca" into "Los Angeles" and "CA"
 function parseSlug(slug: string) {
@@ -54,7 +57,7 @@ export default async function CityPage({ params }: CityPageProps) {
 
     // Default map center (if no providers or first provider lacks location)
     // In real app, we might want to geocode the city name on server or client
-    const mapCenter = providers.find((p: Provider) => p.lat && p.lng) || { lat: 34.0522, lng: -118.2437 } // Default to LA or first provider
+    const mapCenter = providers.find((p: Provider) => !!p.lat && !!p.lng) || { lat: 34.0522, lng: -118.2437 } // Default to LA or first provider
 
     // JSON-LD Schema
     const jsonLd = {
@@ -71,7 +74,7 @@ export default async function CityPage({ params }: CityPageProps) {
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": stats?.avgRating || 4.8,
-            "reviewCount": stats?.providerCount * 12 || 50
+            "reviewCount": (stats?.providerCount || 4) * 12 || 50
         }
     }
 
@@ -175,15 +178,7 @@ export default async function CityPage({ params }: CityPageProps) {
 
                         <div className="space-y-6">
                             {providers.map((provider: any) => (
-                                <ProviderCard key={provider.id} provider={{
-                                    ...provider,
-                                    averageRating: Number(provider.average_rating),
-                                    reviewCount: Number(provider.review_count),
-                                    listingTier: provider.listing_tier,
-                                    pricePerUnit: Number(provider.price_per_unit),
-                                    minTreatmentPrice: Number(provider.min_treatment_price),
-                                    imageUrl: provider.image_url
-                                }} />
+                                <ProviderCard key={provider.id} provider={provider} />
                             ))}
                         </div>
 
@@ -275,6 +270,10 @@ export default async function CityPage({ params }: CityPageProps) {
                 </div>
 
                 <CityFAQ city={cityName} avgCost={stats?.avgCost || 14} />
+
+                <div className="mt-12">
+                    <MedicalDisclaimer />
+                </div>
             </div>
         </main>
     )

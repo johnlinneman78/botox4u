@@ -103,12 +103,14 @@ export default function Hero() {
                             <div className="relative grid grid-cols-2 gap-4">
                                 <div className="space-y-4 translate-y-8">
                                     <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-800 border border-white/10 shadow-2xl relative group">
-                                        <div className="absolute inset-0 bg-gray-900 flex items-center justify-center text-gray-700">
-                                            {/* In production: <img src="/images/hero-1.jpg" alt="Treatment" className="object-cover w-full h-full" /> */}
-                                            <span className="text-sm font-medium">Treatment Room</span>
-                                        </div>
+                                        <img
+                                            src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000"
+                                            alt="Professional Treatment Environment"
+                                            className="grow object-cover w-full h-full opacity-60 group-hover:scale-110 transition-transform duration-1000"
+                                        />
+                                        <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/0 transition-colors" />
                                         <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                                            <div className="text-white text-xs font-bold">Clean & Sterile</div>
+                                            <div className="text-white text-xs font-bold uppercase tracking-widest">Clinical Excellence</div>
                                         </div>
                                     </div>
                                     <div className="p-6 rounded-2xl bg-[#151b26] border border-white/10 shadow-xl">
@@ -124,10 +126,15 @@ export default function Hero() {
                                         </div>
                                         <div className="text-sm leading-snug opacity-90">We track price-per-unit across 50 states daily.</div>
                                     </div>
-                                    <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-800 border border-white/10 shadow-2xl relative">
-                                        <div className="absolute inset-0 bg-gray-900 flex items-center justify-center text-gray-700">
-                                            {/* In production: <img src="/images/hero-2.jpg" alt="Result" className="object-cover w-full h-full" /> */}
-                                            <span className="text-sm font-medium">Natural Results</span>
+                                    <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-800 border border-white/10 shadow-2xl relative group">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1512290923902-8a9f81dc2069?auto=format&fit=crop&q=80&w=1000"
+                                            alt="Natural Treatment Results"
+                                            className="grow object-cover w-full h-full opacity-60 group-hover:scale-110 transition-transform duration-1000"
+                                        />
+                                        <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/0 transition-colors" />
+                                        <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                                            <div className="text-white text-xs font-bold uppercase tracking-widest">Natural Results</div>
                                         </div>
                                     </div>
                                 </div>

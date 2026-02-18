@@ -1,40 +1,34 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
+import Logo from './Logo'
 
 export default function Header() {
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-            <div className="container mx-auto flex h-16 items-center justify-between px-4">
-                <Link href="/" className="flex items-center space-x-2 group">
-                    <span className="text-2xl font-display font-bold text-primary group-hover:text-secondary transition-colors">
-                        Botox-<span className="text-secondary group-hover:text-primary">4u</span>.com
-                    </span>
+        <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-md transition-all duration-300">
+            <div className="max-w-7xl mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
+                <Link href="/" className="flex items-center h-10 w-auto">
+                    <Logo className="h-full" variant="precision" />
                 </Link>
 
-                <nav className="hidden md:flex items-center space-x-6">
-                    <Link href="/find-providers" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors">
+                <nav className="hidden md:flex items-center space-x-8">
+                    <Link href="/find-providers" className="text-[#1a2332] hover:text-[#d4af37] font-semibold transition-colors">
                         Find Providers
                     </Link>
-                    <Link href="/calculator" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors">
+                    <Link href="/guide/safety-guide" className="text-slate-500 hover:text-[#1a2332] font-medium transition-colors">
+                        Safety Guide
+                    </Link>
+                    <Link href="/calculator" className="text-slate-500 hover:text-[#1a2332] font-medium transition-colors">
                         Cost Calculator
                     </Link>
-                    <Link href="/guide/botox-cost-guide" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors">
-                        Cost Guide
-                    </Link>
-                    <Link href="/provider/login">
-                        <Button variant="ghost" size="sm" className="hidden lg:inline-flex">
-                            Portal
-                        </Button>
-                    </Link>
-                    <Link href="/provider/register">
-                        <Button variant="outline" size="sm">
-                            Add Clinic
+                    <Link href="/#quick-quote">
+                        <Button className="bg-[#1a2332] hover:bg-slate-800 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-lg shadow-navy-900/10">
+                            Get Quote
                         </Button>
                     </Link>
                 </nav>
 
-                {/* Mobile menu button - will implement later */}
-                <button className="md:hidden p-2">
+                {/* Mobile menu button */}
+                <button className="md:hidden p-2 text-slate-500">
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                     </svg>

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
 
 export default function Footer() {
     const currentYear = new Date().getFullYear()
@@ -45,10 +46,9 @@ export default function Footer() {
 
                 <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-600">
                     <p>© {currentYear} Botox-4u.com All rights reserved.</p>
-                    <p className="mt-2">
-                        <strong>Medical Disclaimer:</strong> This website provides general information only.
-                        Consult with a licensed medical professional before any treatment.
-                    </p>
+                    <div className="mt-4">
+                        <MedicalDisclaimer variant="inline" />
+                    </div>
                 </div>
             </div>
         </footer>

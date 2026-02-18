@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
-import { updateProviderProfile } from '@/lib/actions/providers'
+import { updateProviderProfile } from '@/lib/actions/provider-actions'
 
 export function ProfileForm({ provider }: { provider: any }) {
     const [loading, setLoading] = useState(false)
@@ -33,6 +33,8 @@ export function ProfileForm({ provider }: { provider: any }) {
                     {message.text}
                 </div>
             )}
+
+            <input type="hidden" name="provider_id" value={provider.id} />
 
             <Card>
                 <CardHeader>

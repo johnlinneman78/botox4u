@@ -12,16 +12,16 @@ export async function createCheckoutSession(tier: 'featured' | 'premium') {
     }
 
     const supabase = await getSupabaseServer(await cookies())
-    const { data: { session: authSession } } = await supabase.auth.getSession()
+    const { data: { user } } = await supabase.auth.getUser()
 
-    if (!authSession) {
+    if (!user) {
         redirect('/provider/login')
     }
 
     const { data: provider } = await supabase
         .from('providers')
         .select('id, name')
-        .eq('user_id', authSession.user.id)
+        .eq('user_id', user.id)
         .single()
 
     if (!provider) {
