@@ -15,6 +15,9 @@ export async function getProvidersWithSearch(filters: {
     let queryBuilder = supabase
         .from('providers')
         .select('*')
+        .not('google_place_id', 'is', null) // Only show providers linked to Google
+        .order('listing_tier', { ascending: false }) // Premium first
+        .order('average_rating', { ascending: false })
 
     if (filters.query) {
         queryBuilder = queryBuilder.ilike('name', `%${filters.query}%`)
@@ -46,18 +49,20 @@ export async function getProvidersWithSearch(filters: {
         id: p.id,
         name: p.name,
         slug: p.slug,
-        businessType: p.business_type,
+        business_type: p.business_type,
+        businessType: p.business_type, // Legacy support
         address: p.address,
         city: p.city,
         state: p.state,
-        averageRating: parseFloat(p.average_rating || 0),
+        averageRating: parseFloat(p.rating || p.average_rating || 0),
         reviewCount: p.review_count || 0,
         listingTier: p.listing_tier || 'free',
         verified: p.verified || false,
-        pricePerUnit: p.price_per_unit,
+        price_per_unit: p.price_per_unit,
+        pricePerUnit: p.price_per_unit, // Legacy support
         minTreatmentPrice: p.min_treatment_price,
-        lat: p.latitude || 0,
-        lng: p.longitude || 0,
+        latitude: p.latitude || 0,
+        longitude: p.longitude || 0,
         imageUrl: p.image_url,
         enriched_attrs: p.enriched_attrs,
         website: p.website,
@@ -66,13 +71,15 @@ export async function getProvidersWithSearch(filters: {
 
         // Enriched Fields
         google_place_id: p.google_place_id,
-        rating: p.rating,
-        num_reviews: p.num_reviews,
-        badges: p.badges,
+        rating: p.rating || parseFloat(p.average_rating || 0), // Use manual rating as fallback
+        review_count: p.review_count || 0,
+        top_reviews: p.top_reviews || [],
+        badges: p.badges || [],
         ai_description: p.ai_description,
         ai_description_confirmed: p.ai_description_confirmed,
-        gallery: p.gallery,
-        reviews: []
+        gallery: p.gallery || [],
+        hero_image_url: p.hero_image_url || p.image_url,
+        reviews: p.top_reviews || []
     }))
 
     // Custom sort: Premium > Featured > Free
@@ -97,6 +104,7 @@ export async function getCityStats(city: string) {
         .from('providers')
         .select('price_per_unit, average_rating')
         .eq('city', city)
+        .not('google_place_id', 'is', null)
 
     if (error || !data || data.length === 0) return null
 
@@ -219,22 +227,35 @@ export async function getProviderBySlug(slug: string) {
         id: data.id,
         name: data.name,
         slug: data.slug,
-        businessType: data.business_type,
+        business_type: data.business_type,
+        businessType: data.business_type, // Legacy support
         address: data.address,
         city: data.city,
         state: data.state,
-        averageRating: parseFloat(data.average_rating || 0),
+        averageRating: parseFloat(data.rating || data.average_rating || 0),
         reviewCount: data.review_count || 0,
         listingTier: data.listing_tier || 'free',
         verified: data.verified || false,
-        pricePerUnit: data.price_per_unit,
+        price_per_unit: data.price_per_unit,
+        pricePerUnit: data.price_per_unit, // Legacy support
         minTreatmentPrice: data.min_treatment_price,
         imageUrl: data.image_url,
         enriched_attrs: data.enriched_attrs,
         website: data.website,
         phone: data.phone,
         description: data.description,
-        reviews: []
+
+        // Enriched Fields
+        google_place_id: data.google_place_id,
+        rating: data.rating || parseFloat(data.average_rating || 0), // Use manual rating as fallback
+        review_count: data.review_count || 0,
+        top_reviews: data.top_reviews || [],
+        badges: data.badges || [],
+        ai_description: data.ai_description,
+        ai_description_confirmed: data.ai_description_confirmed,
+        gallery: data.gallery || [],
+        hero_image_url: data.hero_image_url || data.image_url,
+        reviews: data.top_reviews || []
     }
 }
 

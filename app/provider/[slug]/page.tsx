@@ -7,6 +7,7 @@ import { LeadForm } from '@/components/providers/LeadForm'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
+import { ReviewCarousel } from '@/components/providers/ReviewCarousel'
 
 interface ProviderProfileProps {
     params: { slug: string }
@@ -169,36 +170,12 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                             </div>
 
                             {/* Reviews */}
-                            <div>
-                                <h2 className="text-2xl font-display font-bold text-primary mb-6">Patient Feedback</h2>
-                                <div className="space-y-6">
-                                    {provider.reviews && provider.reviews.length > 0 ? (
-                                        provider.reviews.map((review: any, i: number) => (
-                                            <div key={i} className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm transition-transform hover:-translate-y-1">
-                                                <div className="flex justify-between items-start mb-4">
-                                                    <div>
-                                                        <div className="flex items-center gap-1 text-accent mb-1">
-                                                            {[...Array(5)].map((_, star) => (
-                                                                <span key={star} className={star < review.rating ? 'text-accent' : 'text-gray-200'}>★</span>
-                                                            ))}
-                                                        </div>
-                                                        <span className="font-bold text-primary text-lg">{review.author_name}</span>
-                                                    </div>
-                                                    <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">
-                                                        {new Date(review.created_at).toLocaleDateString()}
-                                                    </span>
-                                                </div>
-                                                <p className="text-gray-600 leading-relaxed italic">
-                                                    &quot;{review.content}&quot;
-                                                </p>
-                                            </div>
-                                        ))
-                                    ) : (
-                                        <div className="bg-white p-12 text-center rounded-3xl border border-gray-100 border-dashed">
-                                            <p className="text-gray-400">Be the first to review this provider.</p>
-                                        </div>
-                                    )}
-                                </div>
+                            <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-sm">
+                                <ReviewCarousel
+                                    reviews={provider.top_reviews || provider.reviews || []}
+                                    totalReviews={provider.reviewCount || 0}
+                                    googlePlaceId={provider.google_place_id || ''}
+                                />
                             </div>
                         </div>
 

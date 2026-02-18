@@ -3,14 +3,18 @@ import { createClient } from '@supabase/supabase-js';
 import * as fs from 'fs';
 import * as path from 'path';
 
-// Load environment variables from .env.local
-const envPath = path.resolve(process.cwd(), '.env.local');
-if (fs.existsSync(envPath)) {
-    const envConfig = require('dotenv').parse(fs.readFileSync(envPath));
-    for (const k in envConfig) {
-        process.env[k] = envConfig[k];
+// Load environment variables
+const loadEnv = (name: string) => {
+    const p = path.resolve(process.cwd(), name);
+    if (fs.existsSync(p)) {
+        const config = require('dotenv').parse(fs.readFileSync(p));
+        for (const k in config) {
+            if (!process.env[k]) process.env[k] = config[k];
+        }
     }
-}
+};
+loadEnv('.env.local');
+loadEnv('.env.prod');
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!; // Must use service role for admin updates
@@ -45,31 +49,60 @@ const CREDENTIAL_PATTERNS = [
 ];
 
 async function fetchGooglePlaceData(name: string, city: string, state: string, address?: string) {
-    // 1. Find Place ID
-    // Try text search with name + city
+    // 1. Find Place ID (Using New Places API)
     const query = `${name} ${city} ${state}`;
-    const searchUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${GOOGLE_API_KEY}`;
+    const searchUrl = `https://places.googleapis.com/v1/places:searchText`;
 
     try {
-        const searchRes = await fetch(searchUrl);
+        const searchRes = await fetch(searchUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Goog-Api-Key': GOOGLE_API_KEY,
+                'X-Goog-FieldMask': 'places.id,places.displayName,places.formattedAddress',
+                'Referer': process.env.NEXT_PUBLIC_APP_URL || 'https://botox-4u.com'
+            },
+            body: JSON.stringify({ textQuery: query })
+        });
+
         const searchData = await searchRes.json();
 
-        if (!searchData.results || searchData.results.length === 0) {
+        if (!searchData.places || searchData.places.length === 0) {
             console.log(`No Google Place found for: ${query}`);
             return null;
         }
 
-        const placeId = searchData.results[0].place_id;
+        const placeId = searchData.places[0].id;
 
-        // 2. Get Place Details
-        // Fields: rating, user_ratings_total, reviews, photos, editorial_summary (description)
-        const fields = 'place_id,rating,user_ratings_total,reviews,photos,editorial_summary,website';
-        const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=${fields}&key=${GOOGLE_API_KEY}`;
+        // 2. Get Place Details (Using New Places API)
+        const fields = 'id,rating,userRatingCount,reviews,photos,editorialSummary,websiteUri';
+        const detailsUrl = `https://places.googleapis.com/v1/places/${placeId}?fields=${fields}&key=${GOOGLE_API_KEY}`;
 
-        const detailsRes = await fetch(detailsUrl);
+        const detailsRes = await fetch(detailsUrl, {
+            headers: {
+                'Referer': process.env.NEXT_PUBLIC_APP_URL || 'https://botox-4u.com'
+            }
+        });
         const detailsData = await detailsRes.json();
 
-        return detailsData.result;
+        // Map New API response back to familiar structure for the script
+        return {
+            place_id: detailsData.id,
+            rating: detailsData.rating,
+            user_ratings_total: detailsData.userRatingCount,
+            reviews: (detailsData.reviews || []).map((r: any) => ({
+                author_name: r.authorAttribution?.displayName,
+                rating: r.rating,
+                text: r.text?.text,
+                time: Math.floor(new Date(r.publishTime).getTime() / 1000),
+                relative_time_description: r.relativePublishTimeDescription,
+                profile_photo_url: r.authorAttribution?.photoUri,
+                author_url: r.authorAttribution?.uri
+            })),
+            photos: detailsData.photos,
+            editorial_summary: detailsData.editorialSummary?.text,
+            website: detailsData.websiteUri
+        };
     } catch (e) {
         console.error('Google Places API Error:', e);
         return null;
@@ -185,7 +218,7 @@ async function enrichProvider(provider: any, options: EnrichmentOptions) {
         // "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=..."
 
         const photos = googleData.photos.slice(0, 3).map((p: any) =>
-            `https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=${p.photo_reference}&key=${GOOGLE_API_KEY}`
+            `https://places.googleapis.com/v1/${p.name}/media?maxHeightPx=800&maxWidthPx=800&key=${GOOGLE_API_KEY}`
         );
 
         enrichedData.hero_image_url = photos[0];
@@ -245,15 +278,46 @@ async function enrichProvider(provider: any, options: EnrichmentOptions) {
 async function main() {
     const args = process.argv.slice(2);
     const dryRun = args.includes('--dry-run');
+    const all = args.includes('--all');
 
-    console.log(`Starting Enrichment Pipeline (Dry Run: ${dryRun})...`);
+    let limit = 50;
+    const limitIdx = args.indexOf('--limit');
+    if (limitIdx !== -1 && args[limitIdx + 1]) {
+        limit = parseInt(args[limitIdx + 1], 10);
+    }
 
-    // Fetch providers that haven't been enriched or enriched > 30 days ago
-    const { data: providers, error } = await supabase
+    let cityFilter = null;
+    const cityIdx = args.indexOf('--city');
+    if (cityIdx !== -1 && args[cityIdx + 1]) {
+        cityFilter = args[cityIdx + 1];
+    }
+
+    let idFilter = null;
+    const idIdx = args.indexOf('--id');
+    if (idIdx !== -1 && args[idIdx + 1]) {
+        idFilter = args[idIdx + 1];
+    }
+
+    console.log(`Starting Enrichment Pipeline (Dry Run: ${dryRun}, ID: ${idFilter || 'Any'}, City: ${cityFilter || 'All'})...`);
+
+    // Fetch providers
+    let queryBuilder = supabase
         .from('providers')
-        .select('*')
-        .or('enriched_at.is.null,enriched_at.lt.2025-01-01') // simplified logic
-        .limit(10);
+        .select('*');
+
+    if (idFilter) {
+        queryBuilder = queryBuilder.eq('id', idFilter);
+    } else {
+        queryBuilder = queryBuilder.or('enriched_at.is.null,enriched_at.lt.2025-01-01');
+        if (cityFilter) {
+            queryBuilder = queryBuilder.eq('city', cityFilter);
+        }
+        if (!all) {
+            queryBuilder = queryBuilder.limit(limit);
+        }
+    }
+
+    const { data: providers, error } = await queryBuilder;
 
     if (error || !providers) {
         console.error('Error fetching providers:', error);

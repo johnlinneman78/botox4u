@@ -1,38 +1,41 @@
-require('dotenv').config({ path: '.env.local' });
+
 const { createClient } = require('@supabase/supabase-js');
+const fs = require('fs');
+const path = require('path');
 
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY
-);
+// Manual env load if dotenv fails
+const envRaw = fs.readFileSync(path.join(process.cwd(), '.env.local'), 'utf8');
+const env = {};
+envRaw.split('\n').forEach(line => {
+    const [key, ...vals] = line.split('=');
+    if (key && vals.length) env[key.trim()] = vals.join('=').trim().replace(/^"(.*)"$/, '$1');
+});
 
-async function checkColumns() {
-    const { data, error } = await supabase.rpc('get_table_columns', { table_name: 'providers' });
+async function checkSchema() {
+    const url = env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = env.SUPABASE_SERVICE_ROLE_KEY;
 
+    if (!url || !key) {
+        console.error('Missing URL or KEY', { url: !!url, key: !!key });
+        return;
+    }
+
+    const supabase = createClient(url, key);
+    const { data, error } = await supabase.from('providers').select('*').limit(1).single();
     if (error) {
-        // Fallback: try a direct query to see if it fails on lat/lng
-        const { error: queryError } = await supabase.from('providers').select('lat').limit(1);
-        if (queryError) {
-            console.error('Column check failed:', queryError.message);
-        } else {
-            console.log('Columns lat/lng exist.');
-        }
+        console.error('Error:', error);
     } else {
-        console.log('Columns:', data);
+        console.log('Columns:', Object.keys(data).sort().join(', '));
+        console.log('Enriched Data Keys:', Object.keys(data).filter(k => k.includes('enriched') || k.includes('google') || k.includes('rating') || k.includes('review') || k.includes('badges') || k.includes('gallery') || k.includes('description') || k.includes('image')));
+        console.log('Sample Values:', {
+            google_place_id: data.google_place_id,
+            rating: data.rating,
+            review_count: data.review_count,
+            top_reviews: data.top_reviews ? 'Found' : 'Missing',
+            top_reviews_first: data.top_reviews?.[0]?.author_name,
+            hero_image_url: data.hero_image_url,
+            image_url: data.image_url
+        });
     }
 }
-
-async function runRaw() {
-    const { data, error } = await supabase
-        .from('providers')
-        .select('*')
-        .limit(1);
-
-    if (error) {
-        console.error('Fetch error:', error);
-    } else {
-        console.log('Available columns in first row:', Object.keys(data[0] || {}));
-    }
-}
-
-runRaw();
+checkSchema();
