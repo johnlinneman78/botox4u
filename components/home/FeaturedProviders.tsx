@@ -1,11 +1,11 @@
-import { getProviders } from '@/lib/actions/providers'
+import { getProvidersWithSearch } from '@/lib/actions/providers'
 import { ProviderCard } from '@/components/providers/ProviderCard'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 
 export default async function FeaturedProviders() {
     // Fetch premium providers for the homepage
-    const providers = await getProviders({ tier: 'premium' })
+    const providers = await getProvidersWithSearch({ tier: 'premium' })
     const displayProviders = providers.slice(0, 3)
 
     if (displayProviders.length === 0) return null

@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { ProviderCard } from '@/components/providers/ProviderCard'
 import { ProviderFilters } from '@/components/providers/ProviderFilters'
 import { Button } from '@/components/ui/Button'
-import { getProviders } from '@/lib/actions/providers'
+import { getProvidersWithSearch } from '@/lib/actions/providers'
 
 export default async function FindProvidersPage({
     searchParams,
@@ -15,7 +15,7 @@ export default async function FindProvidersPage({
     const state = sParams.state || ''
     const tier = sParams.tier || ''
 
-    const providers = await getProviders({
+    const providers = await getProvidersWithSearch({
         query,
         city,
         state,

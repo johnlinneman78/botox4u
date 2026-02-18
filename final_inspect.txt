@@ -1,0 +1,42 @@
+﻿node.exe : Vercel CLI 50.18.2
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" 
+"C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified 
+   : (Vercel CLI 50.18.2:String) [], Remo  
+  teException
+    + FullyQualifiedErrorId : NativeComman 
+   dError
+ 
+Fetching Domain botox-4u.com under 
+john-linnemans-projects
+> Domain botox-4u.com found under 
+john-linnemans-projects [2s]
+
+  General
+
+    Name			botox-4u.com
+    Registrar			Third Party
+    Expiration Date		-
+    Creator			john-linneman
+    Created At			15 February 2026 23:16:53 
+[2d ago]
+    Edge Network		yes
+    Renewal Price		-
+
+  Nameservers
+
+    Intended Nameservers    Current 
+Nameservers            
+    -                       
+ns73.domaincontrol.com    Γÿô    
+    -                       
+ns74.domaincontrol.com    Γÿô    
+
+  Projects
+   
+    Project            Domains             
+    fiery-cosmos       botox-4u.com        
+   

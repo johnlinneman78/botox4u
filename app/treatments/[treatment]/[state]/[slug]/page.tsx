@@ -1,4 +1,4 @@
-import { getProviders, getTreatmentStats } from '@/lib/actions/providers'
+import { getProvidersWithSearch, getTreatmentStats } from '@/lib/actions/providers'
 import { AtAGlance } from '@/components/seo/AtAGlance'
 import { CostComparisonTable } from '@/components/seo/CostComparisonTable'
 import { PriceMeter } from '@/components/city/PriceMeter'
@@ -45,7 +45,7 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
 
     if (!treatment) notFound()
 
-    const providers = await getProviders({ city: cityName, state: stateCode, treatment: treatment.slug })
+    const providers = await getProvidersWithSearch({ city: cityName, state: stateCode, treatment: treatment.slug })
     const stats = await getTreatmentStats(treatment.slug, cityName, stateCode)
 
     // JSON-LD Schema

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 import Hero from '@/components/Hero' // Updated import
 import CityMap from '@/components/CityMap' // New import
-import { getProviders, getCityStats, getNearbyCities } from '@/lib/actions/providers'
+import { getProvidersWithSearch, getCityStats, getNearbyCities } from '@/lib/actions/providers'
 import { REVERSE_STATE_MAP, TREATMENTS } from '@/lib/constants'
 import { CityStats } from '@/components/city/CityStats'
 import { CostComparisonTable } from '@/components/seo/CostComparisonTable'
@@ -47,7 +47,7 @@ export default async function CityPage({ params }: CityPageProps) {
     const resolvedParams = await params
     const { cityName, stateCode } = parseSlug(resolvedParams.slug)
 
-    const providers = await getProviders({ city: cityName, state: stateCode })
+    const providers = await getProvidersWithSearch({ city: cityName, state: stateCode })
     const stats = await getCityStats(cityName)
     const nearbyCities = await getNearbyCities(cityName, stateCode)
     const stateSlug = REVERSE_STATE_MAP[stateCode]

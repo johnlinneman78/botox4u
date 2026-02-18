@@ -1,4 +1,4 @@
-import { getProviders, getCityStats } from '@/lib/actions/providers'
+import { getProvidersWithSearch, getCityStats } from '@/lib/actions/providers'
 import { TREATMENTS, getStateName } from '@/lib/constants'
 import { ProviderCard } from '@/components/providers/ProviderCard'
 import { CityHero } from '@/components/city/CityHero'
@@ -38,7 +38,7 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
     if (!treatment) notFound()
 
     // Fetch providers who offer this treatment in this city
-    const providers = await getProviders({
+    const providers = await getProvidersWithSearch({
         city: cityName,
         state: stateCode,
         treatment: treatment.slug

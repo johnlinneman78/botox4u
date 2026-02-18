@@ -1,7 +1,8 @@
 import { cookies } from 'next/headers'
 import { getSupabaseServer } from '@/lib/supabase/factory'
 
-export async function getProviders(filters: {
+export async function getProvidersWithSearch(filters: {
+    query?: string,
     city?: string,
     state?: string,
     tier?: string,
@@ -9,25 +10,28 @@ export async function getProviders(filters: {
 } = {}) {
     const supabase = await getSupabaseServer(await cookies())
 
-    let query = supabase
+    let queryBuilder = supabase
         .from('providers')
         .select('*')
 
+    if (filters.query) {
+        queryBuilder = queryBuilder.ilike('name', `%${filters.query}%`)
+    }
     if (filters.city) {
-        query = query.eq('city', filters.city)
+        queryBuilder = queryBuilder.eq('city', filters.city)
     }
     if (filters.state) {
-        query = query.eq('state', filters.state)
+        queryBuilder = queryBuilder.eq('state', filters.state)
     }
     if (filters.tier) {
-        query = query.eq('listing_tier', filters.tier)
+        queryBuilder = queryBuilder.eq('listing_tier', filters.tier)
     }
     if (filters.treatment) {
         // treatment_slugs is a text[] column in Supabase
-        query = query.contains('treatment_slugs', [filters.treatment])
+        queryBuilder = queryBuilder.contains('treatment_slugs', [filters.treatment])
     }
 
-    const { data, error } = await query
+    const { data, error } = await queryBuilder
 
     if (error) {
         console.error('Error fetching providers:', error)
