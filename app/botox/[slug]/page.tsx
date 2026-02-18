@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
-import Hero from '@/components/Hero' // Updated import
-import CityMap from '@/components/CityMap' // New import
+import Hero from '@/components/Hero'
+import CityMap from '@/components/CityMap'
 import { getProvidersWithSearch, getCityStats, getNearbyCities } from '@/lib/actions/providers'
 import { REVERSE_STATE_MAP, TREATMENTS } from '@/lib/constants'
 import { CityStats } from '@/components/city/CityStats'
@@ -9,7 +9,7 @@ import { CostComparisonTable } from '@/components/seo/CostComparisonTable'
 import { CityFAQ } from '@/components/city/CityFAQ'
 import { PriceMeter } from '@/components/city/PriceMeter'
 import { PromoteClinicCard } from '@/components/providers/PromoteClinicCard'
-import { ProviderCard } from '@/components/providers/ProviderCard'
+import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCard'
 import { Badge } from '@/components/ui/Badge'
 import { Provider } from '@/lib/types'
 import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
@@ -178,7 +178,7 @@ export default async function CityPage({ params }: CityPageProps) {
 
                         <div className="space-y-6">
                             {providers.map((provider: any) => (
-                                <ProviderCard key={provider.id} provider={provider} />
+                                <EnhancedProviderCard key={provider.id} provider={provider} />
                             ))}
                         </div>
 
