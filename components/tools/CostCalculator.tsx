@@ -269,18 +269,22 @@ export function CostCalculator() {
                         <span className="w-6 h-6 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs">1</span>
                         Your Location
                     </label>
-                    <select
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        className="w-full p-4 bg-white border border-gray-200 rounded-xl text-lg font-medium shadow-sm focus:ring-2 focus:ring-secondary/50 focus:border-secondary outline-none appearance-none cursor-pointer hover:border-gray-300 transition-colors"
-                        style={{ backgroundImage: 'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%231a2332%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1.5rem center', backgroundSize: '0.75rem' }}
-                    >
-                        {CITY_OPTIONS.map(opt => (
-                            <option key={opt.value} value={opt.value}>
-                                {opt.label} {opt.tier === 'high' ? '($$$)' : opt.tier === 'low' ? '($)' : ''}
-                            </option>
-                        ))}
-                    </select>
+                    <div className="relative">
+                        <select
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                            className="w-full p-4 pr-12 bg-white border border-gray-200 rounded-xl text-lg font-medium shadow-sm focus:ring-2 focus:ring-secondary/50 focus:border-secondary outline-none appearance-none cursor-pointer hover:border-gray-300 transition-colors z-10 relative"
+                        >
+                            {CITY_OPTIONS.map(opt => (
+                                <option key={opt.value} value={opt.value}>
+                                    {opt.label} {opt.tier === 'high' ? '($$$)' : opt.tier === 'low' ? '($)' : ''}
+                                </option>
+                            ))}
+                        </select>
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 z-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down w-5 h-5"><path d="m6 9 6 6 6-6" /></svg>
+                        </div>
+                    </div>
                 </div>
 
                 {/* 2. Neurotoxin */}

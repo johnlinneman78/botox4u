@@ -139,27 +139,27 @@ CREATE POLICY "Only service role can update leads"
 -- ============================================
 
 -- New York providers
-INSERT INTO providers (name, slug, city, state, address, phone, website, business_type, price_per_unit, listing_tier, treatment_slugs)
+INSERT INTO providers (name, slug, city, state, address, phone, website, business_type, price_per_unit, listing_tier, treatment_slugs, latitude, longitude)
 VALUES
-  ('Manhattan Aesthetics', 'manhattan-aesthetics-ny', 'New York', 'NY', '123 5th Ave, New York, NY 10001', '(212) 555-0100', 'https://example.com', 'Medspa', 15.00, 'free', ARRAY['botox', 'filler', 'masseter-botox']),
-  ('NYC Dermatology', 'nyc-dermatology', 'New York', 'NY', '456 Park Ave, New York, NY 10022', '(212) 555-0200', 'https://example.com', 'Dermatology', 16.00, 'free', ARRAY['botox', 'dysport']),
-  ('Fifth Avenue Med Spa', 'fifth-avenue-med-spa', 'New York', 'NY', '789 Madison Ave, New York, NY 10065', '(212) 555-0300', 'https://example.com', 'Medspa', 14.50, 'free', ARRAY['botox', 'filler', 'lip-filler'])
+  ('Manhattan Aesthetics', 'manhattan-aesthetics-ny', 'New York', 'NY', '123 5th Ave, New York, NY 10001', '(212) 555-0100', 'https://example.com', 'Medspa', 15.00, 'free', ARRAY['botox', 'filler', 'masseter-botox'], 40.739772, -73.990494),
+  ('NYC Dermatology', 'nyc-dermatology', 'New York', 'NY', '456 Park Ave, New York, NY 10022', '(212) 555-0200', 'https://example.com', 'Dermatology', 16.00, 'free', ARRAY['botox', 'dysport'], 40.761569, -73.971661),
+  ('Fifth Avenue Med Spa', 'fifth-avenue-med-spa', 'New York', 'NY', '789 Madison Ave, New York, NY 10065', '(212) 555-0300', 'https://example.com', 'Medspa', 14.50, 'free', ARRAY['botox', 'filler', 'lip-filler'], 40.768681, -73.967283)
 ON CONFLICT (slug) DO NOTHING;
 
 -- Los Angeles providers
-INSERT INTO providers (name, slug, city, state, address, phone, website, business_type, price_per_unit, listing_tier, treatment_slugs)
+INSERT INTO providers (name, slug, city, state, address, phone, website, business_type, price_per_unit, listing_tier, treatment_slugs, latitude, longitude)
 VALUES
-  ('Beverly Hills Aesthetics', 'beverly-hills-aesthetics', 'Los Angeles', 'CA', '123 Rodeo Dr, Beverly Hills, CA 90210', '(310) 555-0100', 'https://example.com', 'Medspa', 16.00, 'free', ARRAY['botox', 'filler', 'masseter-botox']),
-  ('LA Dermatology Center', 'la-dermatology-center', 'Los Angeles', 'CA', '456 Wilshire Blvd, Los Angeles, CA 90010', '(213) 555-0200', 'https://example.com', 'Dermatology', 15.50, 'free', ARRAY['botox', 'dysport', 'xeomin']),
-  ('West Hollywood Med Spa', 'west-hollywood-med-spa', 'Los Angeles', 'CA', '789 Santa Monica Blvd, West Hollywood, CA 90069', '(323) 555-0300', 'https://example.com', 'Medspa', 14.00, 'free', ARRAY['botox', 'filler'])
+  ('Beverly Hills Aesthetics', 'beverly-hills-aesthetics', 'Los Angeles', 'CA', '123 Rodeo Dr, Beverly Hills, CA 90210', '(310) 555-0100', 'https://example.com', 'Medspa', 16.00, 'free', ARRAY['botox', 'filler', 'masseter-botox'], 34.067332, -118.401494),
+  ('LA Dermatology Center', 'la-dermatology-center', 'Los Angeles', 'CA', '456 Wilshire Blvd, Los Angeles, CA 90010', '(213) 555-0200', 'https://example.com', 'Dermatology', 15.50, 'free', ARRAY['botox', 'dysport', 'xeomin'], 34.062147, -118.300645),
+  ('West Hollywood Med Spa', 'west-hollywood-med-spa', 'Los Angeles', 'CA', '789 Santa Monica Blvd, West Hollywood, CA 90069', '(323) 555-0300', 'https://example.com', 'Medspa', 14.00, 'free', ARRAY['botox', 'filler'], 34.084478, -118.384196)
 ON CONFLICT (slug) DO NOTHING;
 
 -- Miami providers
-INSERT INTO providers (name, slug, city, state, address, phone, website, business_type, price_per_unit, listing_tier, treatment_slugs)
+INSERT INTO providers (name, slug, city, state, address, phone, website, business_type, price_per_unit, listing_tier, treatment_slugs, latitude, longitude)
 VALUES
-  ('South Beach Aesthetics', 'south-beach-aesthetics', 'Miami', 'FL', '123 Ocean Dr, Miami Beach, FL 33139', '(305) 555-0100', 'https://example.com', 'Medspa', 13.50, 'free', ARRAY['botox', 'filler', 'masseter-botox']),
-  ('Miami Dermatology', 'miami-dermatology', 'Miami', 'FL', '456 Brickell Ave, Miami, FL 33131', '(305) 555-0200', 'https://example.com', 'Dermatology', 14.00, 'free', ARRAY['botox', 'dysport']),
-  ('Coral Gables Med Spa', 'coral-gables-med-spa', 'Miami', 'FL', '789 Miracle Mile, Coral Gables, FL 33134', '(305) 555-0300', 'https://example.com', 'Medspa', 12.50, 'free', ARRAY['botox', 'filler', 'lip-filler'])
+  ('South Beach Aesthetics', 'south-beach-aesthetics', 'Miami', 'FL', '123 Ocean Dr, Miami Beach, FL 33139', '(305) 555-0100', 'https://example.com', 'Medspa', 13.50, 'free', ARRAY['botox', 'filler', 'masseter-botox'], 25.770281, -80.132717),
+  ('Miami Dermatology', 'miami-dermatology', 'Miami', 'FL', '456 Brickell Ave, Miami, FL 33131', '(305) 555-0200', 'https://example.com', 'Dermatology', 14.00, 'free', ARRAY['botox', 'dysport'], 25.767931, -80.189574),
+  ('Coral Gables Med Spa', 'coral-gables-med-spa', 'Miami', 'FL', '789 Miracle Mile, Coral Gables, FL 33134', '(305) 555-0300', 'https://example.com', 'Medspa', 12.50, 'free', ARRAY['botox', 'filler', 'lip-filler'], 25.749666, -80.259740)
 ON CONFLICT (slug) DO NOTHING;
 
 -- ============================================
