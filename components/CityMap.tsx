@@ -40,6 +40,8 @@ export default function CityMap({ providers, citySlug }: CityMapProps) {
             title: provider.name
         }))
 
+    if (markers.length === 0) return null
+
     return (
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8 border border-gray-100">
             <div className="bg-[#1a2332] p-6 text-white bg-gradient-to-r from-[#1a2332] to-[#1e2b3e]">

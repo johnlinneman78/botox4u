@@ -38,11 +38,11 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     const stats = await getCityStats(cityName)
 
     return {
-        title: `Best Botox in ${cityName}, ${stateCode} | 2024 Pricing & Reviews`,
+        title: `Best Botox in ${cityName}, ${stateCode} | 2026 Pricing & Reviews`,
         description: `Find top-rated Botox injectors in ${cityName}. Compare prices from ${stats?.providerCount || 0} verified clinics, see patient reviews, and book consultations.`,
         openGraph: {
             title: `Botox in ${cityName}, ${stateCode}: Top Clinics & Pricing`,
-            description: `A complete directory of verified Botox providers in ${cityName}, TX. Compare costs and reviews.`,
+            description: `A complete directory of verified Botox providers in ${cityName}, ${stateCode}. Compare costs and reviews.`,
         }
     }
 }

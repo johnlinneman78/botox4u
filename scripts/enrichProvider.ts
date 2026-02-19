@@ -205,37 +205,27 @@ async function enrichProvider(provider: any, options: EnrichmentOptions) {
             .map((r: any) => ({
                 author_name: r.author_name,
                 rating: r.rating,
-                text: r.text,
+                text: null, // Verbatim review text is a ToS risk if displayed. We'll rely on aggregate only.
                 time: r.time, // Unix timestamp
                 relative_time_description: r.relative_time_description,
                 source: 'google',
-                profile_photo_url: r.profile_photo_url,
+                profile_photo_url: null, // Do not store Google profile photos
                 author_url: r.author_url
             }));
     }
 
-    // Images
-    if (googleData?.photos && googleData.photos.length > 0) {
-        // Construct photo URLs
-        // Note: Actual rendering requires passing these references to client or proxying
-        // For now we store the photo references to be constructed on client or keys
-        // "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=..."
-
-        const photos = googleData.photos.slice(0, 3).map((p: any) =>
-            `https://places.googleapis.com/v1/${p.name}/media?maxHeightPx=800&maxWidthPx=800&key=${GOOGLE_API_KEY}`
-        );
-
-        enrichedData.hero_image_url = photos[0];
-        if (photos.length > 1) enrichedData.gallery.push(photos[1]);
-        if (photos.length > 2) enrichedData.gallery.push(photos[2]);
-    }
+    // Images: DO NOT USE GOOGLE PLACES PHOTOS AS HERO IMAGES (ToS Violation)
+    // We only use the provider's own website og:image or geometric placeholders.
+    // If we want a gallery, we can scrape more from the website later.
+    enrichedData.hero_image_url = null;
+    enrichedData.gallery = [];
 
     // Website Scraping & Fallbacks
     let rawTextForAI = provider.description || '';
     if (provider.website) {
         const scraped = await scrapeWebsiteContent(provider.website);
         if (scraped) {
-            if (!enrichedData.hero_image_url && scraped.ogImage) {
+            if (scraped.ogImage) {
                 enrichedData.hero_image_url = scraped.ogImage;
             }
             rawTextForAI += ` ${scraped.description} ${scraped.firstP}`;

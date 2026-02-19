@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Star, MapPin, CheckCircle, ChevronRight, ExternalLink, X } from 'lucide-react'
+import { Star, MapPin, CheckCircle, ExternalLink, X } from 'lucide-react'
 import { EnrichedProvider } from '@/lib/types/enrichment'
 import { LeadForm } from './LeadForm'
 
@@ -12,19 +12,7 @@ interface EnhancedProviderCardProps {
 }
 
 export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
-    const [currentReviewIndex, setCurrentReviewIndex] = useState(0)
     const [isModalOpen, setIsModalOpen] = useState(false)
-
-    // Auto-rotate reviews every 5s
-    useEffect(() => {
-        if (!provider.top_reviews || provider.top_reviews.length <= 1) return
-
-        const interval = setInterval(() => {
-            setCurrentReviewIndex((prev) => (prev + 1) % provider.top_reviews.length)
-        }, 5000)
-
-        return () => clearInterval(interval)
-    }, [provider.top_reviews])
 
     // trust the mapped imageUrl from the action
     const heroImage = provider.imageUrl || 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800'
@@ -98,36 +86,31 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                         </div>
                     </div>
 
-                    {/* Rotating Review Quote */}
-                    {provider.top_reviews && provider.top_reviews.length > 0 && (
-                        <div className="mb-4 relative h-16 overflow-hidden">
-                            {provider.top_reviews.map((review, idx) => {
-                                // Truncate to first 2 sentences
-                                const sentences = (review.text || '').match(/[^.!?]+[.!?]+/g) || [review.text || ''];
-                                const truncatedText = sentences.slice(0, 2).join(' ');
-                                const isTruncated = sentences.length > 2;
-
-                                return (
-                                    <div
-                                        key={idx}
-                                        className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-start ${idx === currentReviewIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-                                            }`}
-                                    >
-                                        <figure className="border-l-2 border-primary/20 pl-3">
-                                            <blockquote className="text-[11px] text-gray-600 italic leading-relaxed">
-                                                "{truncatedText}"
-                                                {isTruncated && (
-                                                    <Link href={`/provider/${provider.slug}`} className="ml-1 text-primary font-bold hover:underline not-italic">
-                                                        Read more
-                                                    </Link>
-                                                )}
-                                            </blockquote>
-                                        </figure>
-                                    </div>
-                                );
-                            })}
+                    {/* Aggregate Review Summary (ToS Compliant) */}
+                    <div className="mb-6 p-4 bg-gray-50/80 rounded-2xl border border-gray-100 flex items-center justify-between group/reviews">
+                        <div className="flex flex-col">
+                            <div className="flex items-center gap-1.5 mb-1">
+                                <div className="flex">
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star
+                                            key={i}
+                                            className={`w-3 h-3 ${i < Math.floor(provider.rating || 0) ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-200 text-gray-200'}`}
+                                        />
+                                    ))}
+                                </div>
+                                <span className="text-xs font-bold text-gray-900">{provider.rating} Rating</span>
+                            </div>
+                            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">{provider.review_count} Patient Reviews</span>
                         </div>
-                    )}
+                        <Link
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(provider.name + ' ' + provider.city)}&query_place_id=${provider.google_place_id}`}
+                            target="_blank"
+                            className="bg-white p-2 rounded-full border border-gray-200 text-gray-400 group-hover/reviews:text-secondary group-hover/reviews:border-secondary/20 transition-all shadow-sm"
+                            title="View reviews on Google"
+                        >
+                            <ExternalLink className="w-4 h-4" />
+                        </Link>
+                    </div>
 
                     {/* Pricing Tags */}
                     <div className="flex flex-wrap gap-2 mb-4 text-xs font-semibold">

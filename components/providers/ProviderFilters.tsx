@@ -91,10 +91,10 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
                 <div className="flex gap-2">
                     <Button
                         variant="primary"
-                        className="flex-1 py-2.5"
+                        className="flex-1 py-3 font-bold shadow-lg shadow-primary/10 hover:shadow-primary/20 transition-all text-sm uppercase tracking-wider"
                         onClick={handleSearch}
                     >
-                        Apply Filters
+                        Find Providers
                     </Button>
                     <Button
                         variant="outline"

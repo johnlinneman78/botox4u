@@ -9,14 +9,8 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: '**.supabase.co',
       },
-      {
-        protocol: 'https',
-        hostname: 'places.googleapis.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-      },
+      // Google Places ToS Blocklist - Do not add these hostnames back.
+      // We use og:image scraping and provider-uploaded images only.
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',

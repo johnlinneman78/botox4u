@@ -3,14 +3,14 @@ import { Card, CardContent } from '@/components/ui/Card'
 import { formatCurrency } from '@/lib/utils'
 
 const featuredCities = [
-    { name: 'New York', state: 'NY', slug: 'new-york-ny', avgCost: 475, providers: 42 },
-    { name: 'Los Angeles', state: 'CA', slug: 'los-angeles-ca', avgCost: 450, providers: 38 },
-    { name: 'Miami', state: 'FL', slug: 'miami-fl', avgCost: 495, providers: 25 },
-    { name: 'Chicago', state: 'IL', slug: 'chicago-il', avgCost: 410, providers: 22 },
-    { name: 'Houston', state: 'TX', slug: 'houston-tx', avgCost: 385, providers: 19 },
-    { name: 'Scottsdale', state: 'AZ', slug: 'scottsdale-az', avgCost: 425, providers: 12 },
-    { name: 'Boca Raton', state: 'FL', slug: 'boca-raton-fl', avgCost: 485, providers: 15 },
-    { name: 'Bellevue', state: 'WA', slug: 'bellevue-wa', avgCost: 450, providers: 8 },
+    { name: 'New York', state: 'NY', slug: 'new-york-ny', avgCost: 18, providers: 142 },
+    { name: 'Los Angeles', state: 'CA', slug: 'los-angeles-ca', avgCost: 14, providers: 128 },
+    { name: 'Miami', state: 'FL', slug: 'miami-fl', avgCost: 16, providers: 95 },
+    { name: 'Chicago', state: 'IL', slug: 'chicago-il', avgCost: 12, providers: 82 },
+    { name: 'Dallas', state: 'TX', slug: 'dallas-tx', avgCost: 11, providers: 76 },
+    { name: 'Scottsdale', state: 'AZ', slug: 'scottsdale-az', avgCost: 13, providers: 64 },
+    { name: 'Houston', state: 'TX', slug: 'houston-tx', avgCost: 11, providers: 89 },
+    { name: 'San Francisco', state: 'CA', slug: 'san-francisco-ca', avgCost: 19, providers: 54 },
 ]
 
 export default function FeaturedCities() {

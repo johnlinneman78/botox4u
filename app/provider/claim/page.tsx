@@ -1,14 +1,17 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
+import { Card, CardContent } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import Link from 'next/link'
 
 export default function ClaimListingPage() {
+    const searchParams = useSearchParams()
+    const prefilledId = searchParams.get('id')
+
     const [searchQuery, setSearchQuery] = useState('')
     const [results, setResults] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
@@ -16,6 +19,24 @@ export default function ClaimListingPage() {
 
     const router = useRouter()
     const supabase = createClient()
+
+    useEffect(() => {
+        if (prefilledId) {
+            fetchPrefilledProvider(prefilledId)
+        }
+    }, [prefilledId])
+
+    const fetchPrefilledProvider = async (id: string) => {
+        setLoading(true)
+        const { data, error } = await supabase
+            .from('providers')
+            .select('*')
+            .eq('id', id)
+            .single()
+
+        if (!error && data) setResults([data])
+        setLoading(false)
+    }
 
     const handleSearch = async (e: React.FormEvent) => {
         e.preventDefault()

@@ -3,29 +3,35 @@ import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCar
 import { ProviderFilters } from '@/components/providers/ProviderFilters'
 import { Button } from '@/components/ui/Button'
 import { getProvidersWithSearch } from '@/lib/actions/providers'
+import { GeolocationSorter } from '@/components/providers/GeolocationSorter'
 
 export default async function FindProvidersPage({
     searchParams,
 }: {
-    searchParams: { q?: string; city?: string; state?: string; tier?: string }
+    searchParams: { q?: string; city?: string; state?: string; tier?: string; lat?: string; lng?: string }
 }) {
     const sParams = await searchParams
     const query = sParams.q || ''
     const city = sParams.city || ''
     const state = sParams.state || ''
     const tier = sParams.tier || ''
+    const userLat = sParams.lat ? parseFloat(sParams.lat) : undefined
+    const userLng = sParams.lng ? parseFloat(sParams.lng) : undefined
 
     const providers = await getProvidersWithSearch({
         query,
         city,
         state,
-        tier
+        tier,
+        userLat,
+        userLng
     })
 
     return (
         <div className="bg-gray-50 min-h-screen py-12">
             <div className="container mx-auto px-4">
                 <div className="mb-8">
+                    <GeolocationSorter />
                     <h1 className="text-4xl font-display font-bold text-primary mb-2">
                         Explore Botox Providers
                     </h1>

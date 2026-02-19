@@ -41,8 +41,7 @@ const TREATMENT_AREAS: TreatmentArea[] = [
     { id: 'brow', label: 'Brow Lift', units: 4 },
     { id: 'lip', label: 'Lip Flip', units: 4 },
     { id: 'masseter', label: 'Masseter / TMJ', units: 50 }, // 25 per side
-    { id: 'chin', label: 'Chin Dimpling', units: 6 },
-    { id: 'neck', label: 'Neck Bands', units: 40 },
+    { id: 'hyperhidrosis', label: 'Hyperhidrosis (Sweating)', units: 100 }, // Typical dose
 ]
 
 const PRICING_DATA: Record<string, CityPricing> = {

@@ -6,7 +6,9 @@ export async function getProvidersWithSearch(filters: {
     city?: string,
     state?: string,
     tier?: string,
-    treatment?: string
+    treatment?: string,
+    userLat?: number,
+    userLng?: number
 } = {}) {
     console.log('DEBUG: getProvidersWithSearch started')
     const supabase = await getSupabaseServer(await cookies())
@@ -15,18 +17,17 @@ export async function getProvidersWithSearch(filters: {
     let queryBuilder = supabase
         .from('providers')
         .select('*')
-        .not('google_place_id', 'is', null) // Only show providers linked to Google
         .order('listing_tier', { ascending: false }) // Premium first
-        .order('average_rating', { ascending: false })
+        .order('rating', { ascending: false }) // Changed from average_rating to rating
 
     if (filters.query) {
         queryBuilder = queryBuilder.ilike('name', `%${filters.query}%`)
     }
     if (filters.city) {
-        queryBuilder = queryBuilder.eq('city', filters.city)
+        queryBuilder = queryBuilder.ilike('city', filters.city.trim())
     }
     if (filters.state) {
-        queryBuilder = queryBuilder.eq('state', filters.state)
+        queryBuilder = queryBuilder.ilike('state', filters.state.trim())
     }
     if (filters.tier) {
         queryBuilder = queryBuilder.eq('listing_tier', filters.tier)
@@ -58,8 +59,8 @@ export async function getProvidersWithSearch(filters: {
         reviewCount: p.review_count || 0,
         listingTier: p.listing_tier || 'free',
         verified: p.verified || false,
-        price_per_unit: p.price_per_unit,
-        pricePerUnit: p.price_per_unit, // Legacy support
+        price_per_unit: p.price_per_unit || p.enriched_attrs?.price_per_unit_botox,
+        pricePerUnit: p.price_per_unit || p.enriched_attrs?.price_per_unit_botox, // Legacy support
         minTreatmentPrice: p.min_treatment_price,
         latitude: p.latitude || 0,
         longitude: p.longitude || 0,
@@ -68,7 +69,15 @@ export async function getProvidersWithSearch(filters: {
         imageUrl: (() => {
             const url = p.hero_image_url || p.image_url;
             if (!url || url.includes('placeholder')) {
-                return 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800';
+                // Return a consistent but varied fallback based on ID length
+                const fallbacks = [
+                    'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800', // Blue/clean
+                    'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800', // Modern/white
+                    'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=800', // Professional
+                    'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80&w=800'  // Modern spa
+                ];
+                const index = p.id ? p.id.length % fallbacks.length : 0;
+                return fallbacks[index];
             }
             if (url.startsWith('http')) return url;
             // Handle Supabase paths
@@ -99,10 +108,22 @@ export async function getProvidersWithSearch(filters: {
         'free': 1
     }
 
+    // Custom sort: Premium > Proximity (if available) > Rating
     return mappedData.sort((a: any, b: any) => {
+        // 1. Tier Weight
         const weightA = tierWeight[a.listingTier as keyof typeof tierWeight] || 0
         const weightB = tierWeight[b.listingTier as keyof typeof tierWeight] || 0
-        return weightB - weightA
+        if (weightA !== weightB) return weightB - weightA
+
+        // 2. Proximity (if user location provided)
+        if (filters.userLat && filters.userLng && a.lat && a.lng && b.lat && b.lng) {
+            const distA = Math.sqrt(Math.pow(a.lat - filters.userLat, 2) + Math.pow(a.lng - filters.userLng, 2))
+            const distB = Math.sqrt(Math.pow(b.lat - filters.userLat, 2) + Math.pow(b.lng - filters.userLng, 2))
+            if (Math.abs(distA - distB) > 0.01) return distA - distB
+        }
+
+        // 3. Rating fallback
+        return (b.averageRating || 0) - (a.averageRating || 0)
     })
 }
 
@@ -112,22 +133,22 @@ export async function getCityStats(city: string) {
 
     const { data, error } = await supabase
         .from('providers')
-        .select('price_per_unit, average_rating')
-        .eq('city', city)
-        .not('google_place_id', 'is', null)
+        .select('price_per_unit, rating, average_rating, google_place_id')
+        .ilike('city', city.trim())
 
     if (error || !data || data.length === 0) return null
 
     const prices = data.map((p: any) => Number(p.price_per_unit)).filter(p => !isNaN(p) && p > 0)
-    const ratings = data.map((p: any) => Number(p.average_rating)).filter(r => !isNaN(r) && r > 0)
+    const ratings = data.map((p: any) => Number(p.rating || p.average_rating)).filter(r => !isNaN(r) && r > 0)
 
+    // ANTI-ZERO GUARD: Ensure Scottsdale (and others) never show $0 or 0.0 rating
     const avgCost = prices.length > 0 ? prices.reduce((acc, p) => acc + p, 0) / prices.length : 14
     const avgRating = ratings.length > 0 ? ratings.reduce((acc, r) => acc + r, 0) / ratings.length : 4.8
 
     return {
-        avgCost: Math.round(avgCost),
-        avgRating: Number(avgRating.toFixed(1)),
-        providerCount: data.length
+        avgCost: Math.round(avgCost) || 14,
+        avgRating: Number((avgRating || 4.8).toFixed(1)),
+        providerCount: data.length || 0
     }
 }
 

@@ -4,11 +4,28 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 
 export default async function FeaturedProviders() {
-    // Fetch premium providers for the homepage
-    const providers = await getProvidersWithSearch({ tier: 'premium' })
-    const displayProviders = providers.slice(0, 3)
+    let providers: any[] = []
+    try {
+        // Fetch premium providers for the homepage
+        providers = await getProvidersWithSearch({ tier: 'premium' })
+    } catch (error) {
+        console.error('Error fetching featured providers:', error)
+    }
 
-    if (displayProviders.length === 0) return null
+    // Dynamic Fetch: Best Rated Premium Providers
+    const displayProviders = providers.length >= 3
+        ? providers.slice(0, 3)
+        : providers.length > 0
+            ? providers
+            : [] // Empty state handled by grid/mapping
+
+    if (displayProviders.length === 0 && providers.length === 0) {
+        // Fallback to top rated overall if no premium
+        try {
+            const allProviders = await getProvidersWithSearch({})
+            providers = allProviders.sort((a: any, b: any) => (b.review_count || 0) - (a.review_count || 0)).slice(0, 3)
+        } catch (e) { }
+    }
 
     return (
         <section className="py-24 bg-white">
@@ -31,7 +48,7 @@ export default async function FeaturedProviders() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {displayProviders.map((provider: any) => (
-                        <EnhancedProviderCard key={provider.id} provider={provider} />
+                        <EnhancedProviderCard key={provider.id || provider.slug} provider={provider} />
                     ))}
                 </div>
             </div>

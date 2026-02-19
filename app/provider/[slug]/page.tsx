@@ -212,7 +212,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                         <div className="space-y-3 pt-4 border-t border-gray-50">
                                             <p className="text-sm text-gray-500 font-medium mb-2">Available Treatments:</p>
                                             <div className="flex flex-wrap gap-2">
-                                                {['Neurotoxins', 'Dermal Fillers', 'Lip Augmentation', 'Chemical Peels', 'Microneedling'].map(s => (
+                                                {['Forehead Lines', "Crow's Feet", 'Frown Lines (Glabella)', 'Masseter (TMJ)', 'Lip Flip', 'Hyperhidrosis'].map(s => (
                                                     <span key={s} className="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">
                                                         {s}
                                                     </span>
@@ -313,9 +313,11 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                         <p className="text-sm text-primary-foreground/80 leading-relaxed mb-6">
                                             Claim your profile to update pricing, respond to reviews, and reach more patients in {provider.city}.
                                         </p>
-                                        <Button className="w-full bg-secondary hover:bg-secondary/90 text-white border-0 py-6 text-md font-bold shadow-lg">
-                                            Claim This Listing
-                                        </Button>
+                                        <Link href={`/provider/claim?id=${provider.id}`} className="block">
+                                            <Button className="w-full bg-secondary hover:bg-secondary/90 text-white border-0 py-6 text-md font-bold shadow-lg">
+                                                Claim This Listing
+                                            </Button>
+                                        </Link>
                                     </div>
                                 )}
                             </div>
