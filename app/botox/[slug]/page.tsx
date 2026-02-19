@@ -13,6 +13,7 @@ import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCar
 import { Badge } from '@/components/ui/Badge'
 import { Provider } from '@/lib/types'
 import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
+import { LeadForm } from '@/components/providers/LeadForm'
 
 interface CityPageProps {
     params: { slug: string }
