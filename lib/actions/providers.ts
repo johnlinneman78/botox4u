@@ -17,7 +17,7 @@ export async function getProvidersWithSearch(filters: {
     let queryBuilder = supabase
         .from('providers')
         .select('*')
-        .eq('display_status', 'live') // Only show live providers
+        // .eq('display_status', 'live') // Disabled until migration is confirmed to be run
         .order('listing_tier', { ascending: false }) // Premium first
         .order('rating', { ascending: false }) // Changed from average_rating to rating
 
@@ -135,7 +135,7 @@ export async function getCityStats(city: string) {
     const { data, error } = await supabase
         .from('providers')
         .select('price_per_unit, rating, average_rating, google_place_id')
-        .eq('display_status', 'live')
+        // .eq('display_status', 'live')
         .ilike('city', city.trim())
 
     if (error || !data || data.length === 0) return null

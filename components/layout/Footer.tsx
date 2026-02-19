@@ -33,9 +33,9 @@ export default function Footer() {
                     <div>
                         <h4 className="font-semibold mb-4 text-primary">For Providers</h4>
                         <ul className="space-y-2 text-sm">
-                            <li><Link href="/provider/claim-listing" className="text-gray-600 hover:text-primary transition-colors">Claim Listing</Link></li>
+                            <li><Link href="/provider/claim" className="text-gray-600 hover:text-primary transition-colors">Claim Listing</Link></li>
                             <li><Link href="/provider/login" className="text-gray-600 hover:text-primary transition-colors">Provider Login</Link></li>
-                            <li><Link href="/provider/pricing" className="text-gray-600 hover:text-primary transition-colors">Pricing</Link></li>
+                            <li><Link href="/pricing" className="text-gray-600 hover:text-primary transition-colors">Pricing</Link></li>
                         </ul>
                     </div>
 

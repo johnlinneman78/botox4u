@@ -72,7 +72,14 @@ export function CityHero({ city, state, treatmentName, providerCount }: CityHero
                         </div>
                         <div className="text-center md:text-left md:border-r border-white/10 px-4">
                             <div className="text-2xl font-bold text-white mb-1">4.8/5</div>
-                            <div className="text-[10px] uppercase tracking-wider text-gray-400">Avg Rating</div>
+                            <div className="flex flex-col gap-1 items-center md:items-start">
+                                <div className="text-[10px] uppercase tracking-wider text-gray-400">Avg Rating</div>
+                                <img
+                                    src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-non-white2.png"
+                                    alt="Powered by Google"
+                                    className="h-2.5 opacity-60"
+                                />
+                            </div>
                         </div>
                         <div className="text-center md:text-left px-4 flex flex-col justify-center">
                             <div className="flex items-center justify-center md:justify-start gap-1 text-green-400 text-sm font-bold mb-1">

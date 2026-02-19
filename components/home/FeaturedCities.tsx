@@ -11,6 +11,7 @@ const featuredCities = [
     { name: 'Scottsdale', state: 'AZ', slug: 'scottsdale-az', avgCost: 13, providers: 64 },
     { name: 'Houston', state: 'TX', slug: 'houston-tx', avgCost: 11, providers: 89 },
     { name: 'San Francisco', state: 'CA', slug: 'san-francisco-ca', avgCost: 19, providers: 54 },
+    { name: 'Portland', state: 'OR', slug: 'portland-or', avgCost: 14, providers: 42 },
 ]
 
 export default function FeaturedCities() {

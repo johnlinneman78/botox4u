@@ -83,11 +83,11 @@ export default function PricingPage() {
 
             {/* Pricing Section */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10 pb-24">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {tiers.map((tier) => (
                         <div
                             key={tier.name}
-                            className={`flex flex-col rounded-3xl bg-white p-8 shadow-xl border transition-all duration-300 hover:scale-[1.02] ${tier.highlight ? 'border-primary ring-2 ring-primary/20 scale-105 z-20' : 'border-gray-100'
+                            className={`flex flex-col rounded-3xl bg-white p-6 sm:p-8 shadow-xl border transition-all duration-300 hover:scale-[1.02] ${tier.highlight ? 'border-primary ring-2 ring-primary/20 lg:scale-105 z-20' : 'border-gray-100'
                                 }`}
                         >
                             {tier.badge && (
@@ -132,8 +132,8 @@ export default function PricingPage() {
                             <Link
                                 href={`/auth/login?plan=${tier.priceId}`}
                                 className={`w-full py-6 rounded-2xl text-sm font-bold tracking-wide uppercase transition-all shadow-lg flex items-center justify-center ${tier.highlight
-                                        ? 'bg-primary hover:bg-slate-800 text-white shadow-primary/20'
-                                        : 'bg-white border-2 border-gray-900 text-gray-900 hover:bg-gray-50 shadow-gray-200'
+                                    ? 'bg-primary hover:bg-slate-800 text-white shadow-primary/20'
+                                    : 'bg-white border-2 border-gray-900 text-gray-900 hover:bg-gray-50 shadow-gray-200'
                                     }`}
                             >
                                 Get Started Now

@@ -75,14 +75,14 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                             <div className="flex items-center gap-1.5 bg-gray-50 px-2 py-1 rounded-md border border-gray-100/50">
                                 <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
                                 <span className="font-bold text-gray-900">{provider.rating}</span>
-                                <span className="text-gray-400 text-xs">({provider.review_count})</span>
+                                <span className="text-gray-400 text-[10px]">({provider.review_count} on Google)</span>
                             </div>
                         ) : (
                             <span className="text-xs text-gray-400 italic bg-gray-50 px-2 py-1 rounded">No ratings</span>
                         )}
 
-                        <div className="flex items-center gap-1 text-gray-500 truncate max-w-[140px]" title={`${provider.city}, ${provider.state}`}>
-                            <span className="truncate">{provider.city}, {provider.state}</span>
+                        <div className="flex items-center gap-1 text-gray-500 truncate max-w-[140px]" title={`${provider.city || 'Local Area'}, ${provider.state || ''}`}>
+                            <span className="truncate">{provider.city || 'Local Area'}{provider.state ? `, ${provider.state}` : ''}</span>
                         </div>
                     </div>
 

@@ -10,7 +10,7 @@ interface ReviewCarouselProps {
     googleUrl?: string
 }
 
-export function ReviewCarousel({ totalReviews, googlePlaceId }: ReviewCarouselProps) {
+export function ReviewCarousel({ reviews, totalReviews, googlePlaceId }: ReviewCarouselProps) {
     const googleReviewLink = `https://www.google.com/maps/search/?api=1&query=provider&query_place_id=${googlePlaceId}`
 
     return (
@@ -31,6 +31,37 @@ export function ReviewCarousel({ totalReviews, googlePlaceId }: ReviewCarouselPr
                 <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                     Based on <span className="font-bold text-primary">{totalReviews} verified patient reviews</span> on Google. We prioritize clinics with consistent high ratings and positive patient outcomes.
                 </p>
+
+                {/* Top Reviews Display */}
+                {reviews && reviews.length > 0 && (
+                    <div className="space-y-6 mb-10 text-left">
+                        {reviews.slice(0, 2).map((review, i) => (
+                            <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm relative overflow-hidden">
+                                <div className="flex items-center gap-0.5 mb-3">
+                                    {[...Array(5)].map((_, starIdx) => (
+                                        <Star key={starIdx} className={`w-3 h-3 ${starIdx < (review.rating || 5) ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-100 text-gray-100'}`} />
+                                    ))}
+                                </div>
+                                <p className="text-sm text-gray-700 italic leading-relaxed mb-4">
+                                    "{review.text?.substring(0, 200)}{review.text?.length > 200 ? '...' : ''}"
+                                </p>
+                                <div className="flex justify-between items-center">
+                                    <div className="flex flex-col">
+                                        <span className="text-xs font-bold text-primary">{review.author_name}</span>
+                                        <span className="text-[10px] text-gray-400 font-medium">Verified Patient • Review from Google</span>
+                                    </div>
+                                    <div className="opacity-40">
+                                        <img
+                                            src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png"
+                                            alt="Powered by Google"
+                                            className="h-3 w-fit"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <a
