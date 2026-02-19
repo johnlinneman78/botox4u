@@ -68,8 +68,6 @@ export const TREATMENTS = [
     { slug: 'forehead-botox', name: 'Forehead Botox', description: 'Eliminating horizontal forehead lines.' },
     { slug: 'tmj-botox', name: 'TMJ Botox', description: 'Pain relief for jaw clenching.' },
     { slug: 'baby-botox', name: 'Baby Botox', description: 'Micro-dosing for natural movement.' },
-    { slug: 'dental-implants', name: 'Dental Implants', description: 'Permanent tooth replacement solutions.' },
-    { slug: 'all-on-4', name: 'All-on-4 Implants', description: 'Full-arch dental restoration.' },
     { slug: 'hyperhidrosis', name: 'Hyperhidrosis', description: 'Botox for excessive sweating.' },
     { slug: 'gummy-smile', name: 'Gummy Smile', description: 'Correcting excessive gum visibility.' },
 ]

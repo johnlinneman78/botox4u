@@ -101,20 +101,32 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
 
                 {/* Rotating Review Quote */}
                 {provider.top_reviews && provider.top_reviews.length > 0 && (
-                    <div className="mb-4 relative h-14 overflow-hidden">
-                        {provider.top_reviews.map((review, idx) => (
-                            <div
-                                key={idx}
-                                className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center ${idx === currentReviewIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-                                    }`}
-                            >
-                                <figure className="border-l-2 border-primary/20 pl-3">
-                                    <blockquote className="text-xs text-gray-600 italic line-clamp-2">
-                                        "{review.text}"
-                                    </blockquote>
-                                </figure>
-                            </div>
-                        ))}
+                    <div className="mb-4 relative h-16 overflow-hidden">
+                        {provider.top_reviews.map((review, idx) => {
+                            // Truncate to first 2 sentences
+                            const sentences = review.text.match(/[^.!?]+[.!?]+/g) || [review.text];
+                            const truncatedText = sentences.slice(0, 2).join(' ');
+                            const isTruncated = sentences.length > 2;
+
+                            return (
+                                <div
+                                    key={idx}
+                                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-start ${idx === currentReviewIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                                        }`}
+                                >
+                                    <figure className="border-l-2 border-primary/20 pl-3">
+                                        <blockquote className="text-[11px] text-gray-600 italic leading-relaxed">
+                                            "{truncatedText}"
+                                            {isTruncated && (
+                                                <Link href={`/provider/${provider.slug}`} className="ml-1 text-primary font-bold hover:underline not-italic">
+                                                    Read more
+                                                </Link>
+                                            )}
+                                        </blockquote>
+                                    </figure>
+                                </div>
+                            );
+                        })}
                     </div>
                 )}
 
@@ -125,8 +137,8 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                             Botox ${provider.price_per_unit}/u
                         </span>
                     ) : (
-                        <span className="bg-gray-50 text-gray-500 px-2 py-1 rounded-md border border-gray-100">
-                            Request pricing
+                        <span className="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-md border border-emerald-100/50">
+                            Botox $14/u est.
                         </span>
                     )}
                 </div>
