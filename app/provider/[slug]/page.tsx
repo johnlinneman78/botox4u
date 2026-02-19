@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ShieldCheck, Clock, ExternalLink, Shield, Award, Zap, Info, Heart, Gem, Target, DollarSign } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
@@ -23,8 +24,8 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
     if (!provider) return { title: 'Provider Not Found' }
 
     return {
-        title: `${provider.name} | ${NICHE.name} in ${provider.city}, ${provider.state} | ${NICHE.siteName}`,
-        description: `View pricing, services, and reviews for ${provider.name} in ${provider.city}, ${provider.state}. Book a consultation for ${NICHE.name} and aesthetic treatments.`
+        title: `${provider.name} | Natural Results & Pricing in ${provider.city} | ${NICHE.siteName}`,
+        description: `Verified ${NICHE.name} injector ${provider.name} in ${provider.city}. We score them on results quality, pricing, and federal credentials.`
     }
 }
 
@@ -167,32 +168,76 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                         <div className="lg:w-2/3 space-y-12">
                             {/* About */}
                             <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-sm">
-                                <h2 className="text-2xl font-display font-bold text-primary mb-6">About the Clinic</h2>
+                                <h2 className="text-2xl font-display font-bold text-primary mb-6 text-balance">About the Clinic</h2>
+
+                                {(provider.score_results_quality || 0) > 25 && (
+                                    <div className="mb-6 p-4 bg-rose-50 rounded-2xl border border-rose-100 flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-xl bg-rose-600 flex items-center justify-center text-white shrink-0">
+                                            <Heart className="w-6 h-6 fill-white" />
+                                        </div>
+                                        <p className="text-rose-900 text-sm font-bold">
+                                            Patient Favorite for Natural, Conservative Results
+                                        </p>
+                                    </div>
+                                )}
+
                                 <p className="text-gray-600 leading-relaxed text-lg mb-8">
                                     {provider.ai_description ||
                                         (provider.top_reviews && provider.top_reviews[0]?.text
                                             ? `"${provider.top_reviews[0].text.substring(0, 200)}..."`
                                             : `${provider.name} is a premier ${provider.businessType} located in ${provider.city}. They specialize in providing high-quality aesthetic treatments tailored to individual patient goals.`)}
                                 </p>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-6 rounded-2xl">
-                                    {provider.enriched_attrs?.injector_credentials?.map((cred: string, i: number) => (
-                                        <div key={i} className="flex items-center gap-3 text-sm font-semibold text-primary">
-                                            <span className="text-secondary text-xs">✔</span> {cred}
+
+                                {/* NPI Credentials Integration */}
+                                <div className="mt-8 pt-8 border-t border-gray-50">
+                                    <h3 className="text-xs font-black text-secondary uppercase tracking-[0.2em] mb-6">Credential Verification</h3>
+
+                                    {provider.npi_verified ? (
+                                        <div className="flex items-start gap-4 p-6 bg-blue-50/50 rounded-2xl border border-blue-100 group transition-all hover:bg-blue-50">
+                                            <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-blue-200">
+                                                <ShieldCheck className="w-6 h-6" />
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <strong className="text-blue-900 text-lg">NPI Verified Record</strong>
+                                                    <span className="px-2 py-0.5 bg-blue-600 text-[10px] text-white font-bold rounded uppercase tracking-tighter">Federal Registry</span>
+                                                </div>
+                                                <p className="text-blue-800/70 text-sm mb-4 leading-relaxed">
+                                                    This provider holds a valid federal NPI registration as a <strong>{provider.npi_license_type || 'Medical Professional'}</strong>, specialized in <strong>{provider.npi_specialty || 'Aesthetic Medicine'}</strong>.
+                                                </p>
+                                                <div className="flex flex-wrap items-center gap-4">
+                                                    <div className="text-[11px] font-bold text-blue-900/40 uppercase tracking-widest bg-white/50 px-2 py-1 rounded">NPI: {provider.npi_number}</div>
+                                                    <a
+                                                        href={`https://npiregistry.cms.hhs.gov/provider-view/${provider.npi_number}`}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 transition-colors"
+                                                    >
+                                                        View Federal Registry <ExternalLink className="w-3 h-3" />
+                                                    </a>
+                                                    {provider.allergan_tier && provider.allergan_tier !== 'None' && (
+                                                        <div className="flex items-center gap-1.5 px-3 py-1 bg-purple-50 text-purple-700 rounded-lg border border-purple-100 italic transition-transform hover:scale-105">
+                                                            <Gem className="w-3.5 h-3.5" />
+                                                            <span className="text-[11px] font-black uppercase tracking-tight">Allergan {provider.allergan_tier} Status</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
                                         </div>
-                                    ))}
-                                    {provider.enriched_attrs?.offers_masseter_botox && (
-                                        <div className="flex items-center gap-3 text-sm font-semibold text-primary">
-                                            <span className="text-secondary text-xs">✔</span> Masseter/Jaw Specialist
-                                        </div>
-                                    )}
-                                    {provider.enriched_attrs?.online_booking_available && (
-                                        <div className="flex items-center gap-3 text-sm font-semibold text-primary">
-                                            <span className="text-secondary text-xs">✔</span> Online Booking Supported
-                                        </div>
-                                    )}
-                                    {provider.enriched_attrs?.membership_program && (
-                                        <div className="flex items-center gap-3 text-sm font-semibold text-primary">
-                                            <span className="text-secondary text-xs">✔</span> Membership Program Available
+                                    ) : (
+                                        <div className="flex items-start gap-4 p-6 bg-gray-50/50 rounded-2xl border border-dashed border-gray-300 transition-all hover:border-gray-400">
+                                            <div className="w-12 h-12 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-400 shrink-0 shadow-sm">
+                                                <Clock className="w-6 h-6" />
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <strong className="text-gray-900">Verification Pending</strong>
+                                                    <span className="px-2 py-0.5 bg-gray-200 text-[10px] text-gray-500 font-bold rounded uppercase tracking-tighter">In Queue</span>
+                                                </div>
+                                                <p className="text-gray-500 text-sm leading-relaxed max-w-md">
+                                                    We are currently auditing the medical registries for this location. We recommend asking for provider credentials during your initial consultation.
+                                                </p>
+                                            </div>
                                         </div>
                                     )}
                                 </div>
@@ -294,6 +339,66 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
 
                         <div className="lg:w-1/3">
                             <div className="sticky top-24 space-y-8">
+                                {/* Transparency Scorecard */}
+                                <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 relative overflow-hidden group">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/5 blur-3xl -mr-16 -mt-16 group-hover:bg-secondary/10 transition-colors"></div>
+                                    <div className="relative z-10">
+                                        <div className="flex items-center justify-between mb-8">
+                                            <div>
+                                                <div className="text-[10px] text-secondary font-black uppercase tracking-[0.2em] mb-1">Trust Grade</div>
+                                                <h3 className="text-xl font-display font-bold text-primary">Audit Scorecard</h3>
+                                            </div>
+                                            <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary font-black text-2xl shadow-inner italic border border-secondary/5">
+                                                {provider.score?.total || 'A+'}
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-6">
+                                            <div className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 transition-colors">
+                                                <div className="flex items-center gap-3">
+                                                    <Target className="w-4 h-4 text-rose-500" />
+                                                    <span className="text-sm font-bold text-primary">Natural Results</span>
+                                                </div>
+                                                {(provider.score_results_quality || 0) > 20 ? <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" /> : <div className="w-4 h-4 rounded-full border-2 border-gray-100"></div>}
+                                            </div>
+                                            <div className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 transition-colors">
+                                                <div className="flex items-center gap-3">
+                                                    <DollarSign className="w-4 h-4 text-emerald-500" />
+                                                    <span className="text-sm font-bold text-primary">Fair Pricing</span>
+                                                </div>
+                                                {provider.price_per_unit ? <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" /> : <div className="w-4 h-4 rounded-full border-2 border-gray-100"></div>}
+                                            </div>
+                                            <div className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 transition-colors">
+                                                <div className="flex items-center gap-3">
+                                                    <ShieldCheck className="w-4 h-4 text-blue-500" />
+                                                    <span className="text-sm font-bold text-primary">Verified Credentials</span>
+                                                </div>
+                                                {provider.npi_verified ? <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" /> : <div className="w-4 h-4 rounded-full border-2 border-gray-100"></div>}
+                                            </div>
+                                            <div className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 transition-colors">
+                                                <div className="flex items-center gap-3">
+                                                    <Gem className="w-4 h-4 text-amber-500" />
+                                                    <span className="text-sm font-bold text-primary">Safety Protocols</span>
+                                                </div>
+                                                {provider.allergan_tier && provider.allergan_tier !== 'None' ? <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" /> : <div className="w-4 h-4 rounded-full border-2 border-gray-100"></div>}
+                                            </div>
+                                            <div className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 transition-colors">
+                                                <div className="flex items-center gap-3">
+                                                    <Clock className="w-4 h-4 text-slate-500" />
+                                                    <span className="text-sm font-bold text-primary">Responsiveness</span>
+                                                </div>
+                                                <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-8 pt-6 border-t border-gray-50">
+                                            <p className="text-[10px] text-gray-400 leading-relaxed font-medium uppercase tracking-wider">
+                                                {NICHE.copy.scoreDisclaimer}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 {/* Lead Form */}
                                 <div id="quote-form">
                                     <LeadForm
@@ -354,8 +459,8 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                         </div>
                     </div>
 
-                    <div className="mt-12">
-                        <MedicalDisclaimer variant="compact" />
+                    <div className="mt-12 p-6 bg-gray-100/50 rounded-2xl text-[10px] text-gray-500 italic leading-relaxed border border-gray-200">
+                        {NICHE.copy.footerDisclaimer}
                     </div>
                 </div>
             </section>

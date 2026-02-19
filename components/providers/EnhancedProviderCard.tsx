@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Star, MapPin, CheckCircle, ExternalLink, X } from 'lucide-react'
+import { Star, MapPin, CheckCircle, ExternalLink, X, ShieldCheck, Gem, Sparkles, AlertTriangle, Clock, Heart } from 'lucide-react'
 import { EnrichedProvider } from '@/lib/types/enrichment'
 import { LeadForm } from './LeadForm'
 import { NICHE } from '@/config/niche'
@@ -52,17 +52,33 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
 
                     {/* Botox-4U Score Badge */}
                     {provider.score && (
-                        <div className="absolute bottom-3 left-3 bg-primary text-white px-3 py-1.5 rounded-xl shadow-lg border border-white/10 flex items-center gap-2 group/score transition-all">
+                        <div
+                            className="absolute bottom-3 left-3 bg-primary text-white px-3 py-1.5 rounded-xl shadow-lg border border-white/10 flex items-center gap-2 group/score transition-all z-10 cursor-help"
+                            title="Scored on natural results, fair pricing, verified credentials, and real patient trust. Nobody pays for a higher score."
+                        >
                             <div className="flex flex-col">
                                 <span className="text-[10px] font-bold uppercase tracking-tighter opacity-80 leading-none mb-0.5">{NICHE.name}-4U Score</span>
-                                <span className="text-xl font-display font-black leading-none">{provider.score.total}</span>
+                                <div className="flex items-center gap-1">
+                                    <span className="text-xl font-display font-black leading-none">{provider.score.points}</span>
+                                    <Clock className="w-2.5 h-2.5 opacity-50" />
+                                </div>
                             </div>
                             <div className="w-[1px] h-6 bg-white/20" />
-                            <div className="flex flex-col">
+                            <div className="flex flex-col text-center">
                                 <span className="text-[8px] font-bold uppercase tracking-widest opacity-70">Grade</span>
-                                <span className="text-xs font-black">
-                                    {provider.score.total >= 90 ? 'A+' : provider.score.total >= 80 ? 'A' : provider.score.total >= 70 ? 'B' : 'C'}
+                                <span className="text-sm font-black text-secondary leading-none">
+                                    {provider.score.total}
                                 </span>
+                            </div>
+                        </div>
+                    )}
+                    {/* Warning Flag Overlay */}
+                    {provider.warning_flag && (
+                        <div className="absolute inset-x-0 top-0 bg-red-600 text-white p-2 z-30 flex items-center justify-center gap-2 shadow-lg">
+                            <AlertTriangle className="w-4 h-4" />
+                            <div className="flex flex-col">
+                                <span className="text-[10px] font-black uppercase tracking-widest leading-none">⚠️ Verify Before Booking</span>
+                                <span className="text-[8px] font-medium opacity-90">Some reviews mention unexpected results. Research carefully.</span>
                             </div>
                         </div>
                     )}
@@ -76,9 +92,13 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                             <h3 className="text-lg font-bold text-gray-900 leading-tight group-hover:text-primary transition-colors">
                                 {provider.name}
                             </h3>
-                            {isVerified && (
-                                <div className="mt-1 flex-shrink-0" title="Verified Provider">
-                                    <CheckCircle className="w-4 h-4 text-blue-500 fill-blue-50" />
+                            {provider.npi_verified && (
+                                <div
+                                    className="mt-1 flex-shrink-0 bg-secondary/10 text-secondary px-2 py-0.5 rounded-md flex items-center gap-1"
+                                    title="Credentials verified against the federal NPI database"
+                                >
+                                    <ShieldCheck className="w-3 h-3" />
+                                    <span className="text-[9px] font-black uppercase tracking-tight">NPI Verified</span>
                                 </div>
                             )}
                         </div>
@@ -137,15 +157,41 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                         </Link>
                     </div>
 
+                    {/* Results Quality & Responsiveness Badges */}
+                    <div className="flex flex-wrap gap-2 mb-4 text-[10px] font-bold tracking-tight">
+                        {(provider.score_results_quality || 0) > 25 && (
+                            <span className="bg-rose-50 text-rose-600 px-2 py-1 rounded-md border border-rose-100 flex items-center gap-1">
+                                <Heart className="w-3 h-3 fill-rose-600" />
+                                Patient Love: Natural Results
+                            </span>
+                        )}
+                        <span className="bg-blue-50 text-blue-600 px-2 py-1 rounded-md border border-blue-100 flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            Avg Response: &lt; 2 Hours
+                        </span>
+                    </div>
+
                     {/* Pricing Tags */}
                     <div className="flex flex-wrap gap-2 mb-4 text-xs font-semibold">
                         {provider.price_per_unit ? (
-                            <span className="bg-blue-50 text-blue-700 px-2 py-1 rounded-md border border-blue-100/50">
+                            <span className="bg-white text-primary px-2 py-1 rounded-md border border-gray-200">
                                 {NICHE.name} {NICHE.priceCurrency}{provider.price_per_unit}/{NICHE.priceUnit.split(' ').slice(-1)}
                             </span>
                         ) : (
-                            <span className="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-md border border-emerald-100/50">
-                                {NICHE.name} {NICHE.priceCurrency}{NICHE.priceRange.min + 4}/{NICHE.priceUnit.split(' ').slice(-1)} est.
+                            <span className="bg-white text-gray-500 px-2 py-1 rounded-md border border-gray-200 italic">
+                                Pricing Pending
+                            </span>
+                        )}
+                        {provider.allergan_tier && provider.allergan_tier !== 'None' && (
+                            <span className="bg-[#1a2332] text-[#d4af37] px-2 py-1 rounded-md border border-[#d4af37]/20 flex items-center gap-1 shadow-sm">
+                                <Gem className="w-3 h-3" />
+                                {provider.allergan_tier}
+                            </span>
+                        )}
+                        {provider.npi_verified && (
+                            <span className="bg-blue-600 text-white px-2 py-1 rounded-md border border-blue-700 flex items-center gap-1 shadow-sm">
+                                <ShieldCheck className="w-3 h-3" />
+                                NPI Verified
                             </span>
                         )}
                     </div>

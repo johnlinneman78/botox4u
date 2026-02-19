@@ -1,10 +1,11 @@
 import { AlertTriangle } from 'lucide-react'
+import { NICHE } from '@/config/niche'
 
 export function MedicalDisclaimer({ variant = 'default' }: { variant?: 'default' | 'compact' | 'inline' }) {
     if (variant === 'inline') {
         return (
-            <p className="text-xs text-gray-500 italic">
-                *Not medical advice. Educational only. Verify pricing and credentials independently.
+            <p className="text-[10px] text-gray-400 leading-relaxed max-w-4xl mx-auto">
+                {NICHE.copy.footerDisclaimer}
             </p>
         )
     }
@@ -12,45 +13,29 @@ export function MedicalDisclaimer({ variant = 'default' }: { variant?: 'default'
     if (variant === 'compact') {
         return (
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-gray-700">
-                <p className="font-semibold text-amber-900 mb-1">⚠️ Important Disclaimer</p>
-                <p>This information is educational only and not medical advice. Prices are estimates - verify with providers. Always verify credentials independently.</p>
+                <p className="font-semibold text-amber-900 mb-1">⚠️ Independent Research Portal</p>
+                <p>{NICHE.copy.footerDisclaimer}</p>
             </div>
         )
     }
 
     return (
-        <div className="bg-amber-50 border-l-4 border-amber-400 p-6 rounded-r-lg my-8">
-            <div className="flex items-start gap-4">
-                <AlertTriangle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />
-                <div className="space-y-3 text-sm text-gray-700">
-                    <h3 className="font-bold text-amber-900 text-base">Medical Disclaimer</h3>
-
-                    <p>
-                        <strong>Not Medical Advice:</strong> The information on this website is for educational and informational purposes only.
-                        It does not constitute medical advice and should not be relied upon as a substitute for professional medical consultation,
-                        diagnosis, or treatment.
-                    </p>
-
-                    <p>
-                        <strong>Pricing Estimates:</strong> All pricing information is estimated and provided for general reference only.
-                        Actual costs may vary significantly based on provider, location, treatment complexity, and individual patient needs.
-                        We do not guarantee pricing accuracy or treatment outcomes.
-                    </p>
-
-                    <p>
-                        <strong>Provider Information:</strong> While we strive to list qualified providers, we do not endorse, recommend,
-                        or guarantee any specific provider or treatment. Always verify provider credentials, licenses, and certifications
-                        independently through your state medical board or relevant licensing authority.
-                    </p>
-
-                    <p>
-                        <strong>Consult a Professional:</strong> Before undergoing any cosmetic procedure, consult with a board-certified
-                        dermatologist, plastic surgeon, or qualified medical professional to discuss your specific needs, risks, and expected outcomes.
-                    </p>
-
-                    <p className="text-xs text-gray-500 pt-2 border-t border-amber-200">
-                        By using this website, you acknowledge that you have read and understood this disclaimer.
-                    </p>
+        <div className="bg-gray-900 text-white p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] my-12 relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-8 opacity-5">
+                <AlertTriangle className="w-24 h-24" />
+            </div>
+            <div className="relative z-10">
+                <h3 className="text-xl font-display font-bold mb-4 flex items-center gap-2 text-secondary">
+                    <AlertTriangle className="w-5 h-5" />
+                    Medical Research Disclaimer
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed max-w-3xl">
+                    {NICHE.copy.footerDisclaimer}
+                </p>
+                <div className="mt-6 pt-6 border-t border-white/10 flex flex-wrap gap-4 text-[10px] font-black uppercase tracking-widest text-gray-500">
+                    <span>Not Medical Advice</span>
+                    <span>Independent Audit</span>
+                    <span>Consumer Research Only</span>
                 </div>
             </div>
         </div>

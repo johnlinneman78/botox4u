@@ -30,9 +30,9 @@ export function CityStats({ avgCost, providerCount, avgRating, city }: CityStats
             )
         },
         {
-            label: 'Top Brands',
-            value: 'All-Inclusive',
-            description: `${NICHE.calculator.variables.map(v => v.label).join(', ')} options available.`
+            label: 'Ranking Multiplier',
+            value: 'Natural Results',
+            description: 'Providers are prioritized based on conservative sentiment analysis.'
         }
     ]
 

@@ -30,7 +30,7 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId }: ReviewC
                 </h3>
 
                 <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                    Based on <span className="font-bold text-primary">{totalReviews} verified patient reviews</span>. We prioritize {NICHE.providerTypePlural} with consistent high ratings and positive patient outcomes.
+                    Based on <span className="font-bold text-primary">{totalReviews} verified patient reviews</span>. We use sentiment analysis to prioritize injectors known for <span className="text-secondary font-bold italic">natural, conservative results</span>.
                 </p>
 
                 {/* Top Reviews Display */}

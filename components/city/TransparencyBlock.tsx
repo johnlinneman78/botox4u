@@ -4,15 +4,15 @@ import { NICHE } from '@/config/niche'
 
 export function TransparencyBlock({ city }: { city?: string }) {
     return (
-        <section className="bg-white py-12 border-b border-gray-100">
+        <section className="bg-white py-24 border-b border-gray-100">
             <div className="container mx-auto px-4">
-                <div className="bg-gray-50 rounded-3xl p-8 md:p-12 border border-gray-200 shadow-sm overflow-hidden relative">
+                <div className="bg-gray-50 rounded-[3rem] p-8 md:p-16 border border-gray-200 shadow-sm overflow-hidden relative">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 blur-[120px] rounded-full -mr-32 -mt-32"></div>
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 blur-[120px] rounded-full -ml-32 -mb-32"></div>
 
-                    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div>
-                            <div className="flex items-center gap-4 mb-6">
+                            <div className="flex items-center gap-4 mb-8">
                                 <div className="h-10 w-auto">
                                     <Logo variant="shield" className="h-full" />
                                 </div>
@@ -22,34 +22,34 @@ export function TransparencyBlock({ city }: { city?: string }) {
                                     TRANSPARENCY FIRST
                                 </div>
                             </div>
-                            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-6 leading-tight">
-                                Because what&apos;s in the needle matters.
+                            <h2 className="text-3xl md:text-5xl font-display font-bold text-primary mb-8 leading-tight">
+                                Natural Results. <br />Transparent Prices.
                             </h2>
-                            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                                Aesthetic treatments are a big decision and a significant investment. <strong>You deserve a defense.</strong> We show real {NICHE.priceUnit} pricing and verified {NICHE.providerType} credentials so you don&apos;t have to fly blind.
+                            <p className="text-xl text-gray-600 mb-10 leading-relaxed font-light">
+                                40% of Botox patients fear looking &quot;overdone&quot; or &quot;frozen.&quot; We built {NICHE.siteName} to help you find the injectors who prioritize conservative, natural results — while showing you exactly what they charge before you walk in.
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
-                                    <div className="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center text-green-600">
-                                        <Eye className="w-5 h-5" />
+                                <div className="flex items-center gap-3 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                                    <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center text-green-600 shrink-0">
+                                        <Eye className="w-6 h-6" />
                                     </div>
-                                    <span className="font-bold text-sm">Real Pricing Scraped Daily</span>
+                                    <span className="font-bold text-sm text-primary">Real Pricing Scraped Daily</span>
                                 </div>
-                                <div className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
-                                    <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
-                                        <Lock className="w-5 h-5" />
+                                <div className="flex items-center gap-3 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                                    <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
+                                        <Lock className="w-6 h-6" />
                                     </div>
-                                    <span className="font-bold text-sm">Verified Credentials Only</span>
+                                    <span className="font-bold text-sm text-primary">NPI Registry Audited</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-[#1a2332] p-8 md:p-10 rounded-[2.5rem] text-white shadow-2xl shadow-primary/20 relative">
-                            <blockquote className="relative italic text-xl md:text-2xl font-light leading-relaxed mb-8">
-                                &quot;In an industry where patients often pay for the clinic&apos;s massive overhead, we built {NICHE.siteName} to help you find the actual value and safety you deserve.&quot;
+                        <div className="bg-[#1a2332] p-10 md:p-14 rounded-[3rem] text-white shadow-2xl shadow-primary/20 relative">
+                            <blockquote className="relative italic text-xl md:text-2xl font-light leading-relaxed mb-10 opacity-90">
+                                &quot;Patients weren&apos;t just looking for the cheapest injector. They were looking for someone they could trust not to overdo it. So I built this score to reward natural results first.&quot;
                             </blockquote>
-                            <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-secondary shrink-0">
+                            <div className="flex items-center gap-5">
+                                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-secondary shrink-0 shadow-lg">
                                     <img
                                         src="/images/founder.jpg"
                                         alt="John Linneman"
@@ -57,7 +57,7 @@ export function TransparencyBlock({ city }: { city?: string }) {
                                     />
                                 </div>
                                 <div>
-                                    <div className="font-bold">{NICHE.outreach.senderName}</div>
+                                    <div className="font-bold text-lg">{NICHE.outreach.senderName}</div>
                                     <div className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">{NICHE.outreach.senderTitle}</div>
                                 </div>
                             </div>

@@ -36,13 +36,35 @@ export interface EnrichedProvider {
     minTreatmentPrice?: number | null;
     enriched_attrs?: any;
     reviews?: Review[];
+
     score?: {
-        total: number;
-        price_points: number;
-        trust_points: number;
-        transparency_points: number;
-        responsiveness_points: number;
+        grade: string;
+        points: number;
+        total: string; // Legacy support
+        breakdown: {
+            resultsQuality: number;
+            price: number;
+            trust: number;
+            safety: number;
+            transparency: number;
+            responsiveness: number;
+        };
     };
+
+    // NPI Verification fields
+    npi_number?: string | null;
+    npi_verified?: boolean;
+    npi_license_type?: string | null;
+    npi_specialty?: string | null;
+    npi_verified_at?: string | Date | null;
+    allergan_tier?: string; // 'Diamond', 'Platinum', 'Top 500', etc.
+
+    // Warning flags
+    warning_flag?: boolean;
+    warning_reason?: string | null;
+    score_results_quality?: number;
+    positive_keyword_count?: number;
+    negative_keyword_count?: number;
 }
 
 export interface Review {

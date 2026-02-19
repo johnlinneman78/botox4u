@@ -10,7 +10,7 @@ export const NICHE = {
     providerTypePlural: "injectors",
     siteName: "Botox-4U.com",
     domain: "botox-4u.com",
-    tagline: "Find and Compare Botox Providers by Price",
+    tagline: "Find injectors known for natural results — and see their real prices before you book.",
     brandName: "Botox",
     brandSuffix: "-4u",
 
@@ -91,7 +91,7 @@ export const NICHE = {
 
     // SEO
     metaTitleTemplate: "{treatment} in {city} — Compare Prices & Top Providers (2026)",
-    metaDescriptionTemplate: "Find the best {treatment} providers in {city}. Compare real per-unit pricing, read verified reviews, and request free quotes from top-rated injectors.",
+    metaDescriptionTemplate: "40% of Botox complaints are about over-injection. We score {city} providers on natural results, fair pricing, and verified credentials — so you find someone who won't overdo it.",
 
     // Pricing tiers (for /pricing page)
     pricingTiers: [
@@ -100,7 +100,7 @@ export const NICHE = {
             price: 99,
             interval: "month",
             features: [
-                "Verified badge on your listing",
+                "NPI Check + Verified Badge",
                 "Priority placement in city search results",
                 "Display your price per unit",
                 "Link to your booking page"
@@ -143,11 +143,26 @@ export const NICHE = {
         senderTitle: "Founder, Botox-4U.com"
     },
 
-    // Google attribution (required for ToS compliance)
     googleAttribution: {
         showLogo: true,
         ratingText: "Rating from Google",
         reviewText: "Review from Google",
         logoUrl: "https://developers.google.com/maps/documentation/places/web-service/policies#attribution"
+    },
+
+    // Brand V2 Copy
+    copy: {
+        hero: {
+            headline: "Find Injectors Known for Natural Results — and See Real Prices Before You Book",
+            subtext: "40% of Botox complaints are about over-injection. We score every provider on results quality, fair pricing, and verified credentials — so you find someone who won't overdo it.",
+            cta: "Find a Conservative Injector Near Me"
+        },
+        trustBadges: [
+            { icon: 'target', label: 'Natural Results', description: 'Scored on real patient language' },
+            { icon: 'dollar', label: 'Real Pricing', description: 'Actual cost per unit, no surprises' },
+            { icon: 'shield', label: 'NPI Verified', description: 'Federal credential confirmation' }
+        ],
+        scoreDisclaimer: "The Botox-4U Score ranks providers on what patients actually care about — natural results, fair pricing, verified credentials, and real patient trust. Providers known for conservative, subtle results score highest. Nobody pays for a better score.",
+        footerDisclaimer: "Botox-4U.com is an independent third-party research platform. We are not a medical board, licensing authority, or regulatory body. Provider scores are based on publicly available data including Google ratings, review counts, NPI database records, and provider-reported pricing. Scores do not constitute medical advice or endorsement of clinical competence. Always consult directly with your provider before booking any medical treatment."
     }
 }

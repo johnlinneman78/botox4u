@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
-import { Search, ShieldCheck, Star, TrendingUp } from 'lucide-react'
+import { Search, DollarSign, Star, ShieldCheck, Target } from 'lucide-react'
 import Logo from '@/components/layout/Logo'
 import { NICHE } from '@/config/niche'
 
@@ -49,12 +49,11 @@ export default function Hero() {
                         </div>
 
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-[1.1] text-balance">
-                            Your Defense Against <span className="text-[#d4af37]">High Prices</span> & Hidden Risks
+                            {NICHE.copy.hero.headline.split(' — ')[0]} — <span className="text-[#d4af37]">{NICHE.copy.hero.headline.split(' — ')[1]}</span>
                         </h1>
 
                         <p className="text-lg md:text-xl text-gray-300 mb-10 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
-                            It&apos;s your face. Don&apos;t fly blind. We&apos;ve verified credentials and scraped real {NICHE.priceUnit} pricing for thousands of {NICHE.providerTypePlural} so you don&apos;t have to.
-                            <span className="text-[#d4af37] font-medium"> Rankings are based on data, not ad dollars.</span>
+                            {NICHE.copy.hero.subtext}
                         </p>
 
                         <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto lg:mx-0 mb-12 shadow-2xl shadow-black/20 rounded-xl relative z-30">
@@ -74,32 +73,38 @@ export default function Hero() {
                                 type="submit"
                                 className="h-14 px-8 rounded-xl sm:rounded-l-none bg-[#d4af37] hover:bg-[#c0a030] text-[#1a2332] font-bold text-lg transition-all hover:scale-105 relative z-30"
                             >
-                                Find Providers
+                                {NICHE.copy.hero.cta}
                             </Button>
                         </form>
 
                         {/* Trust Indicators */}
-                        <div className="grid grid-cols-3 gap-6 border-t border-white/10 pt-8">
-                            <div>
-                                <div className="flex items-center justify-center lg:justify-start gap-2 mb-1 text-[#d4af37]">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-white/10 pt-8">
+                            <div className="flex items-start gap-4">
+                                <div className="p-3 rounded-2xl bg-[#d4af37]/10 text-[#d4af37] shrink-0">
+                                    <Target className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <div className="text-[#d4af37] font-bold text-sm uppercase tracking-tighter">Natural Results</div>
+                                    <div className="text-xs text-gray-400 font-medium leading-snug">Scored on real patient language</div>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <div className="p-3 rounded-2xl bg-[#d4af37]/10 text-[#d4af37] shrink-0">
+                                    <DollarSign className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <div className="text-[#d4af37] font-bold text-sm uppercase tracking-tighter">Real Pricing</div>
+                                    <div className="text-xs text-gray-400 font-medium leading-snug">Actual cost per unit, no surprises</div>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <div className="p-3 rounded-2xl bg-[#d4af37]/10 text-[#d4af37] shrink-0">
                                     <ShieldCheck className="w-5 h-5" />
-                                    <span className="font-bold text-xl uppercase tracking-tighter">SAFE</span>
                                 </div>
-                                <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Credential Verified</div>
-                            </div>
-                            <div>
-                                <div className="flex items-center justify-center lg:justify-start gap-2 mb-1 text-[#d4af37]">
-                                    <TrendingUp className="w-5 h-5" />
-                                    <span className="font-bold text-xl uppercase tracking-tighter">FAIR</span>
+                                <div>
+                                    <div className="text-[#d4af37] font-bold text-sm uppercase tracking-tighter">NPI Verified</div>
+                                    <div className="text-xs text-gray-400 font-medium leading-snug">Federal credential confirmation</div>
                                 </div>
-                                <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Real Market Pricing</div>
-                            </div>
-                            <div>
-                                <div className="flex items-center justify-center lg:justify-start gap-2 mb-1 text-[#d4af37]">
-                                    <Star className="w-5 h-5" />
-                                    <span className="font-bold text-xl uppercase tracking-tighter">SCORE</span>
-                                </div>
-                                <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Algorithm Ranked</div>
                             </div>
                         </div>
                     </div>

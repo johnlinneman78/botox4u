@@ -39,11 +39,11 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     const stats = await getCityStats(cityName)
 
     return {
-        title: `Best ${NICHE.name} in ${cityName}, ${stateCode} | 2026 Pricing & Reviews`,
-        description: `Find top-rated ${NICHE.name} ${NICHE.providerTypePlural} in ${cityName}. Compare prices from ${stats?.providerCount || 0} verified ${NICHE.providerTypePlural}, see patient reviews, and book consultations.`,
+        title: `Best ${NICHE.name} in ${cityName}, ${stateCode} | Natural Results & Pricing`,
+        description: NICHE.metaDescriptionTemplate.replace('{city}', cityName).replace('{city}', cityName), // Replace twice if needed, though template usually has one
         openGraph: {
-            title: `${NICHE.name} in ${cityName}, ${stateCode}: Top ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)} & Pricing`,
-            description: `A complete directory of verified ${NICHE.name} providers in ${cityName}, ${stateCode}. Compare costs and reviews.`,
+            title: `${NICHE.name} in ${cityName}, ${stateCode}: Top Injectors Known for Natural Results`,
+            description: `A complete directory of NPI-audited ${NICHE.name} providers in ${cityName}, ${stateCode}. Compare results quality and costs.`,
         }
     }
 }
@@ -193,11 +193,9 @@ export default async function CityPage({ params }: CityPageProps) {
                                     <span className="text-2xl">📊</span>
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-primary text-sm mb-1">Ranked by Proprietary Score</h4>
+                                    <h4 className="font-bold text-primary text-sm mb-1">Ranked by Results Quality</h4>
                                     <p className="text-xs text-gray-500 leading-relaxed">
-                                        Unlike other directories, our rankings are 100% data-driven. Providers are scored on
-                                        <b> price transparency</b>, <b>verified patient sentiment</b>, and <b>market competitiveness</b>.
-                                        Nobody can pay for a higher score—rankings are pure data.
+                                        Providers are scored on <b>Results Quality</b> (natural sentiment), <b>Fair Pricing</b> (city average comparison), and <b>Federal NPI Verification</b>. Nobody can pay for a higher score—rankings are 100% data-driven.
                                     </p>
                                 </div>
                             </div>
@@ -254,15 +252,15 @@ export default async function CityPage({ params }: CityPageProps) {
                             <ul className="space-y-4">
                                 <li className="flex gap-3 text-sm text-gray-600">
                                     <span className="text-secondary font-bold">✓</span>
-                                    <span>Only board-certified and licensed medical professionals listed.</span>
+                                    <span>Ranked on real patient review language (Natural vs Overdone).</span>
                                 </li>
                                 <li className="flex gap-3 text-sm text-gray-600">
                                     <span className="text-secondary font-bold">✓</span>
-                                    <span>Verified patient reviews to ensure genuine results.</span>
+                                    <span>Every provider is cross-referenced against the federal NPI database.</span>
                                 </li>
                                 <li className="flex gap-3 text-sm text-gray-600">
                                     <span className="text-secondary font-bold">✓</span>
-                                    <span>Always free for patients to browse and contact clinics.</span>
+                                    <span>Real pricing data compared against city averages.</span>
                                 </li>
                             </ul>
                         </div>

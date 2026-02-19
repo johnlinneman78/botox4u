@@ -108,8 +108,28 @@ export async function getProvidersWithSearch(filters: {
             review_count: p.review_count || 0,
             has_photo: !!(p.hero_image_url || p.image_url),
             has_description: !!p.description,
-            is_verified: p.verified || false
-        })
+            is_verified: p.verified || false,
+            npi_verified: p.npi_verified || false,
+            allergan_tier: p.allergan_tier,
+            results_quality_score: p.score_results_quality,
+            website: p.website,
+            responsiveness_score: p.responsiveness_score
+        }),
+
+        // Warning & Scoring Fields
+        warning_flag: p.warning_flag || false,
+        warning_reason: p.warning_reason,
+        score_results_quality: p.score_results_quality || 0,
+        positive_keyword_count: p.positive_keyword_count || 0,
+        negative_keyword_count: p.negative_keyword_count || 0,
+
+        // NPI Fields
+        npi_number: p.npi_number,
+        npi_verified: p.npi_verified,
+        npi_license_type: p.npi_license_type,
+        npi_specialty: p.npi_specialty,
+        npi_verified_at: p.npi_verified_at,
+        allergan_tier: p.allergan_tier
     }))
 
     // Custom sort: Premium > Score > Proximity
@@ -121,8 +141,8 @@ export async function getProvidersWithSearch(filters: {
 
     return mappedData.sort((a: any, b: any) => {
         // 1. Tier + Score combined weight
-        const scoreA = (tierWeight[a.listingTier as keyof typeof tierWeight] || 0) + a.score.total
-        const scoreB = (tierWeight[b.listingTier as keyof typeof tierWeight] || 0) + b.score.total
+        const scoreA = (tierWeight[a.listingTier as keyof typeof tierWeight] || 0) + a.score.points
+        const scoreB = (tierWeight[b.listingTier as keyof typeof tierWeight] || 0) + b.score.points
 
         if (scoreB !== scoreA) return scoreB - scoreA
 
@@ -308,7 +328,36 @@ export async function getProviderBySlug(slug: string) {
         gallery: data.gallery || [],
         services_offered: data.services_offered || [],
         hero_image_url: data.hero_image_url || data.image_url,
-        reviews: data.top_reviews || []
+        reviews: data.top_reviews || [],
+
+        // NPI Fields
+        npi_number: data.npi_number,
+        npi_verified: data.npi_verified,
+        npi_license_type: data.npi_license_type,
+        npi_specialty: data.npi_specialty,
+        npi_verified_at: data.npi_verified_at,
+        allergan_tier: data.allergan_tier,
+
+        score: calculateProviderScore({
+            price_per_unit: data.price_per_unit || data.botox_price_per_unit || data.enriched_attrs?.price_per_unit_botox,
+            rating: parseFloat(data.rating || data.average_rating || 0),
+            review_count: data.review_count || 0,
+            has_photo: !!(data.hero_image_url || data.image_url),
+            has_description: !!data.description,
+            is_verified: data.verified || false,
+            npi_verified: data.npi_verified || false,
+            allergan_tier: data.allergan_tier,
+            results_quality_score: data.score_results_quality,
+            website: data.website,
+            responsiveness_score: data.responsiveness_score
+        }),
+
+        // Warning & Scoring Fields
+        warning_flag: data.warning_flag || false,
+        warning_reason: data.warning_reason,
+        score_results_quality: data.score_results_quality || 0,
+        positive_keyword_count: data.positive_keyword_count || 0,
+        negative_keyword_count: data.negative_keyword_count || 0,
     }
 }
 

@@ -7,71 +7,106 @@ export interface ScoringFactors {
     has_photo?: boolean
     has_description?: boolean
     is_verified?: boolean
+    npi_verified?: boolean
+    allergan_tier?: string
+    results_quality_score?: number
+    website?: string
+    responsiveness_score?: number
 }
 
 export interface ScoreBreakdown {
-    total: number
-    price_points: number
-    trust_points: number
-    transparency_points: number
-    responsiveness_points: number
+    grade: string
+    points: number
+    total: string // For legacy support/compatibility (grade)
+    breakdown: {
+        resultsQuality: number
+        price: number
+        trust: number
+        safety: number
+        transparency: number
+        responsiveness: number
+    }
 }
 
 /**
- * Calculates the Botox-4U Score based on the Algorithm Roadmap V1
+ * Converts a numeric score (0-100) to a letter grade
+ */
+export function getGrade(score: number): string {
+    if (score >= 95) return 'A+'
+    if (score >= 90) return 'A'
+    if (score >= 85) return 'A-'
+    if (score >= 80) return 'B+'
+    if (score >= 75) return 'B'
+    if (score >= 70) return 'B-'
+    if (score >= 60) return 'C'
+    return 'D'
+}
+
+/**
+ * Calculates the Botox-4U Score based on Version 2 (February 2026)
  */
 export function calculateProviderScore(factors: ScoringFactors, cityAveragePrice: number = NICHE.priceRange.min + 5): ScoreBreakdown {
-    let pricePoints = 0
-    let trustPoints = 0
-    let transparencyPoints = 0
-    let responsivenessPoints = 3 // Baseline responsiveness
+    let resultsQualityScore = factors.results_quality_score || 10 // Baseline neutral
+    let priceScore = 0
+    let trustScore = 0
+    let safetyScore = 0
+    let transparencyScore = 0
+    let responsivenessScore = factors.responsiveness_score || 1 // Baseline
 
-    // 1. Price Competitiveness (Max 30 pts)
+    // 1. Results Quality Score (Max 30 pts)
+    // Passed in from sentiment analysis script or neutralized
+    resultsQualityScore = Math.min(30, Math.max(0, resultsQualityScore))
+
+    // 2. Fair Pricing Score (Max 25 pts)
     if (factors.price_per_unit) {
-        // Points awarded for being below or near average
-        // Full points if at or below city min, scaling down as it approaches city max
-        const priceDiff = cityAveragePrice - factors.price_per_unit
-        if (priceDiff >= 2) {
-            pricePoints = 30 // Significantly cheaper
-        } else if (priceDiff >= 0) {
-            pricePoints = 25 // Slightly cheaper or average
-        } else if (Math.abs(priceDiff) <= 2) {
-            pricePoints = 15 // Competitive/Fair
-        } else {
-            pricePoints = 5 // Premium priced
-        }
+        const ratio = factors.price_per_unit / cityAveragePrice
+        if (ratio <= 0.80) priceScore = 25
+        else if (ratio <= 0.90) priceScore = 20
+        else if (ratio <= 1.00) priceScore = 17
+        else if (ratio <= 1.10) priceScore = 13
+        else if (ratio <= 1.25) priceScore = 8
+        else priceScore = 3
     }
 
-    // 2. Google Trust (Max 50 pts)
-    // Rating (25 pts)
-    if (factors.rating) {
-        if (factors.rating >= 4.8) trustPoints += 25
-        else if (factors.rating >= 4.5) trustPoints += 20
-        else if (factors.rating >= 4.0) trustPoints += 15
-        else trustPoints += 5
-    }
-
-    // Review Count Scale (25 pts)
+    // 3. Trust Score (Max 20 pts)
     if (factors.review_count) {
-        if (factors.review_count >= 500) trustPoints += 25
-        else if (factors.review_count >= 200) trustPoints += 20
-        else if (factors.review_count >= 50) trustPoints += 15
-        else trustPoints += 5
+        if (factors.review_count >= 500) trustScore = 20
+        else if (factors.review_count >= 200) trustScore = 16
+        else if (factors.review_count >= 100) trustScore = 12
+        else if (factors.review_count >= 50) trustScore = 8
+        else if (factors.review_count >= 20) trustScore = 4
+        else trustScore = 2
     }
 
-    // 3. Transparency (Max 15 pts)
-    if (factors.has_photo) transparencyPoints += 5
-    if (factors.has_description) transparencyPoints += 5
-    if (factors.price_per_unit) transparencyPoints += 5
+    // 4. Safety & Credentials Score (Max 15 pts)
+    if (factors.npi_verified) safetyScore += 8
+    if (factors.rating && factors.rating >= 4.7) safetyScore += 4
+    if (factors.review_count && factors.review_count >= 100) safetyScore += 3
+    safetyScore = Math.min(15, safetyScore)
 
-    // 4. Verification Bonus
-    if (factors.is_verified) responsivenessPoints = 5
+    // 5. Transparency Score (Max 7 pts)
+    if (factors.price_per_unit) transparencyScore += 4
+    if (factors.has_photo) transparencyScore += 1
+    if (factors.has_description) transparencyScore += 1
+    if (factors.website) transparencyScore += 1
+    transparencyScore = Math.min(7, transparencyScore)
+
+    // 6. Responsiveness Score (Max 3 pts)
+    responsivenessScore = Math.min(3, responsivenessScore)
+
+    const totalPoints = Math.min(100, resultsQualityScore + priceScore + trustScore + safetyScore + transparencyScore + responsivenessScore)
 
     return {
-        total: Math.min(100, pricePoints + trustPoints + transparencyPoints + responsivenessPoints),
-        price_points: pricePoints,
-        trust_points: trustPoints,
-        transparency_points: transparencyPoints,
-        responsiveness_points: responsivenessPoints
+        grade: getGrade(totalPoints),
+        points: totalPoints,
+        total: getGrade(totalPoints),
+        breakdown: {
+            resultsQuality: resultsQualityScore,
+            price: priceScore,
+            trust: trustScore,
+            safety: safetyScore,
+            transparency: transparencyScore,
+            responsiveness: responsivenessScore
+        }
     }
 }
