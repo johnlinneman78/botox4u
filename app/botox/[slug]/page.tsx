@@ -102,9 +102,17 @@ export default async function CityPage({ params }: CityPageProps) {
         ]
     }
 
-    if (providers.length === 0) {
-        // We could 404, or show a "coming soon" page. 
-        // For programmatic SEO, we'll show what we have.
+    // 3-Provider Verification Rule (Phase 2.2)
+    const verifiedProviders = providers.filter((p: any) =>
+        p.rating !== null &&
+        p.imageUrl && !p.imageUrl.includes('placeholder') &&
+        (p.top_reviews?.length > 0 || p.reviews?.length > 0)
+    )
+    const isCityLive = verifiedProviders.length >= 3;
+
+    if (!isCityLive) {
+        // Log for debugging
+        console.log(`DEBUG: City ${cityName} hidden. Live providers: ${verifiedProviders.length}`);
     }
 
     return (
@@ -178,9 +186,26 @@ export default async function CityPage({ params }: CityPageProps) {
                         </div>
 
                         <div className="space-y-6">
-                            {providers.map((provider: any) => (
-                                <EnhancedProviderCard key={provider.id} provider={provider} />
-                            ))}
+                            {isCityLive ? (
+                                providers.map((provider: any) => (
+                                    <EnhancedProviderCard key={provider.id} provider={provider} />
+                                ))
+                            ) : (
+                                <div className="bg-white p-12 text-center rounded-3xl border border-gray-100 shadow-sm">
+                                    <div className="w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">
+                                        ⏱️
+                                    </div>
+                                    <h3 className="text-2xl font-display font-bold text-primary mb-4">Verifying Providers in {cityName}</h3>
+                                    <p className="text-gray-500 max-w-md mx-auto mb-8 leading-relaxed">
+                                        We're currently verifying pricing and reviews for clinics in {cityName}.
+                                        Our team manually audits every listing to ensure 2026 standards of care.
+                                    </p>
+                                    <div className="inline-flex flex-col items-center gap-2 p-4 bg-secondary/5 rounded-2xl border border-secondary/10">
+                                        <span className="text-xs font-bold text-secondary uppercase tracking-widest">Expected Release</span>
+                                        <span className="text-lg font-black text-primary">February 2026</span>
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         <CostComparisonTable
@@ -194,12 +219,6 @@ export default async function CityPage({ params }: CityPageProps) {
                             ]}
                             footer={`*Pricing estimates in ${cityName} are based on a local average of $${stats?.avgCost || 14}/unit.`}
                         />
-
-                        {providers.length === 0 && (
-                            <div className="bg-white p-12 text-center rounded-2xl border border-gray-100 shadow-sm">
-                                <p className="text-gray-500">We are currently verifying providers in {cityName}. Check back soon!</p>
-                            </div>
-                        )}
                     </div>
 
                     <div className="space-y-8">

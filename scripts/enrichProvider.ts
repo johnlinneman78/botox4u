@@ -119,15 +119,36 @@ async function scrapeWebsiteContent(url: string) {
         if (!res.ok) return null;
         const html = await res.text();
 
-        // Simple regex extraction for meta description and first p tag
-        const metaDescMatch = html.match(/<meta\s+name=["']description["']\s+content=["'](.*?)["']/i);
-        const firstPMatch = html.match(/<p[^>]*>(.*?)<\/p>/i);
-        const ogImageMatch = html.match(/<meta\s+property=["']og:image["']\s+content=["'](.*?)["']/i);
+        // Extraction using specialized regex for better compatibility
+        const getMetaContent = (html: string, attr: string, value: string) => {
+            const regex = new RegExp(`<meta\\s+(?:[^>]*?\\s+)?(?:${attr}=["']${value}["']|property=["']${value}["'])\\s+(?:[^>]*?\\s+)?content=["'](.*?)["']`, 'i');
+            const match = html.match(regex);
+            if (match) return match[1];
+            // Try swapped order: content first
+            const regexReverse = new RegExp(`<meta\\s+(?:[^>]*?\\s+)?content=["'](.*?)["']\\s+(?:[^>]*?\\s+)?(?:${attr}=["']${value}["']|property=["']${value}["'])`, 'i');
+            const matchReverse = html.match(regexReverse);
+            return matchReverse ? matchReverse[1] : '';
+        };
+
+        const ogImage = getMetaContent(html, 'property', 'og:image');
+        const twitterImage = getMetaContent(html, 'name', 'twitter:image');
+        const metaDescription = getMetaContent(html, 'name', 'description');
+        const firstP = html.match(/<p[^>]*>(.*?)<\/p>/i)?.[1]?.replace(/<[^>]+>/g, '') || '';
+
+        // Resolve relative URLs
+        const resolveUrl = (imageUrl: string) => {
+            if (!imageUrl) return '';
+            try {
+                return imageUrl.startsWith('http') ? imageUrl : new URL(imageUrl, url).href;
+            } catch (e) {
+                return imageUrl;
+            }
+        };
 
         return {
-            description: metaDescMatch ? metaDescMatch[1] : '',
-            firstP: firstPMatch ? firstPMatch[1].replace(/<[^>]+>/g, '') : '',
-            ogImage: ogImageMatch ? ogImageMatch[1] : ''
+            description: metaDescription,
+            firstP: firstP,
+            ogImage: resolveUrl(ogImage || twitterImage)
         };
     } catch (e) {
         console.log(`Failed to scrape ${url}:`, e instanceof Error ? e.message : String(e));
@@ -188,6 +209,7 @@ async function enrichProvider(provider: any, options: EnrichmentOptions) {
         google_place_id: googleData?.place_id || null,
         rating: googleData?.rating || null,
         review_count: googleData?.user_ratings_total || null,
+        website: provider.website || googleData?.website || null, // Capture website if missing
         top_reviews: [],
         gallery: [],
         hero_image_url: null,

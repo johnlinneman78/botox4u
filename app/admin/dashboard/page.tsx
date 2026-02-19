@@ -28,14 +28,17 @@ export default async function AdminDashboard() {
                 </div>
 
                 {/* KPI Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                    <Card className="bg-[#12151c]/50 border-white/5 backdrop-blur-2xl shadow-2xl">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    <Card className="bg-[#12151c]/50 border-white/5 backdrop-blur-2xl shadow-2xl relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-3">
+                            <Badge className="bg-green-500/20 text-green-500 border-none text-[10px]">LIVE</Badge>
+                        </div>
                         <CardHeader className="pb-2">
                             <CardTitle className="text-gray-400 text-xs font-bold uppercase tracking-widest">Today&apos;s Leads</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-5xl font-black text-white">{stats.todayLeads}</div>
-                            <p className="text-xs text-secondary mt-2 font-bold">+ {Math.round(stats.todayLeads / stats.totalLeads * 100) || 0}% from total</p>
+                            <div className="text-5xl font-black text-white group-hover:text-secondary transition-colors">{stats.todayLeads}</div>
+                            <p className="text-xs text-secondary mt-2 font-bold">+ {stats.totalLeads > 0 ? Math.round(stats.todayLeads / stats.totalLeads * 100) : 0}% from total</p>
                         </CardContent>
                     </Card>
 
@@ -51,10 +54,20 @@ export default async function AdminDashboard() {
 
                     <Card className="bg-[#12151c]/50 border-white/5 backdrop-blur-2xl shadow-2xl border-l-secondary/30">
                         <CardHeader className="pb-2">
-                            <CardTitle className="text-gray-400 text-xs font-bold uppercase tracking-widest">Quiet Providers</CardTitle>
+                            <CardTitle className="text-gray-400 text-xs font-bold uppercase tracking-widest">Pending Verif.</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-5xl font-black text-white">{stats.quietProviders || 500}+</div>
+                            <div className="text-5xl font-black text-white text-secondary">{stats.pendingVerifications}</div>
+                            <p className="text-xs text-gray-500 mt-2 font-medium">Manual Audit Required</p>
+                        </CardContent>
+                    </Card>
+
+                    <Card className="bg-[#12151c]/50 border-white/5 backdrop-blur-2xl shadow-2xl">
+                        <CardHeader className="pb-2">
+                            <CardTitle className="text-gray-400 text-xs font-bold uppercase tracking-widest">Quiet Prov.</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-5xl font-black text-white">{stats.quietProviders || 490}+</div>
                             <p className="text-xs text-gray-500 mt-2 font-medium">Untapped Opportunities</p>
                         </CardContent>
                     </Card>

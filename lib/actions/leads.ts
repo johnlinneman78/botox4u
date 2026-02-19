@@ -27,6 +27,7 @@ const getLeadEmailHtml = (lead: any, providerName: string) => `
     <p><strong>Treatment:</strong> ${lead.treatment_type}</p>
     <p><strong>Budget:</strong> ${lead.budget_range || 'N/A'}</p>
     <p><strong>Timeframe:</strong> ${lead.timeframe || 'N/A'}</p>
+    <p><strong>Best Time to Call:</strong> ${lead.call_time || 'N/A'}</p>
     <p><strong>Message:</strong> ${lead.message || 'No message provided'}</p>
     <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
     <p style="font-size: 12px; color: #666;">View all leads in your <a href="${process.env.NEXT_PUBLIC_APP_URL}/provider/dashboard">Provider Dashboard</a>.</p>
@@ -59,6 +60,8 @@ const leadSchema = z.object({
             'Message contains invalid content'
         )
         .optional(),
+    call_time: z.string().max(100).optional(),
+    newsletter_opt_in: z.boolean().optional().default(false),
 })
 
 export async function submitLead(formData: FormData) {
@@ -88,6 +91,8 @@ export async function submitLead(formData: FormData) {
         budget_range: formData.get('budget_range'),
         timeframe: formData.get('timeframe'),
         message: formData.get('message'),
+        call_time: formData.get('call_time'),
+        newsletter_opt_in: formData.get('newsletter_opt_in') === 'true',
     }
 
     const validated = leadSchema.safeParse(rawData)
@@ -108,12 +113,18 @@ export async function submitLead(formData: FormData) {
         budget_range: validated.data.budget_range ? sanitizeString(validated.data.budget_range) : undefined,
         timeframe: validated.data.timeframe ? sanitizeString(validated.data.timeframe) : undefined,
         message: validated.data.message ? sanitizeString(validated.data.message) : undefined,
+        call_time: validated.data.call_time ? sanitizeString(validated.data.call_time) : undefined,
     }
 
-    // 1. Save to DB
+    const leadInsertData = {
+        ...sanitizedData,
+    }
+    delete (leadInsertData as any).newsletter_opt_in
+
+    // 1. Save to Leads DB
     const { data: lead, error: dbError } = await supabase
         .from('leads')
-        .insert([sanitizedData])
+        .insert([leadInsertData])
         .select('*, providers(name, email)')
         .single()
 
@@ -151,6 +162,27 @@ export async function submitLead(formData: FormData) {
         console.log(`City lead received for ${lead.city}:`, lead.id)
     }
 
+    // 4. Update/Insert Patient Info
+    try {
+        const patientData = {
+            email: sanitizedData.email,
+            full_name: sanitizedData.full_name,
+            phone: sanitizedData.phone,
+            city: sanitizedData.city,
+            state: sanitizedData.state,
+            newsletter_opt_in: validated.data.newsletter_opt_in,
+            last_lead_at: new Date().toISOString()
+        }
+
+        const { error: patientError } = await supabase
+            .from('patients')
+            .upsert(patientData, { onConflict: 'email' })
+
+        if (patientError) console.error('Patient upsert error:', patientError)
+    } catch (err) {
+        console.error('Failed to sync patient data:', err)
+    }
+
     // 3. Admin Notification (Manual Routing)
     const resend = getResend();
     if (resend && process.env.ADMIN_EMAIL) {
@@ -177,7 +209,8 @@ export async function getLeadStats() {
             todayLeads: 0,
             totalLeads: 0,
             leadsPerCity: [],
-            quietProviders: 0
+            quietProviders: 0,
+            pendingVerifications: 0
         }
     }
     const today = new Date()
@@ -193,6 +226,12 @@ export async function getLeadStats() {
     const { count: totalLeads } = await supabase
         .from('leads')
         .select('*', { count: 'exact', head: true })
+
+    // 3. Pending Verifications (Providers that exist but aren't verified)
+    const { count: pendingVerifications } = await supabase
+        .from('providers')
+        .select('*', { count: 'exact', head: true })
+        .eq('verified', false)
 
     // 3. Leads by City (Aggregated)
     const { data: cityData } = await supabase
@@ -218,7 +257,7 @@ export async function getLeadStats() {
         todayLeads: todayLeads || 0,
         totalLeads: totalLeads || 0,
         leadsPerCity: sortedCities,
-        // Simple heuristic for now
-        quietProviders: 0
+        quietProviders: 0,
+        pendingVerifications: pendingVerifications || 0
     }
 }

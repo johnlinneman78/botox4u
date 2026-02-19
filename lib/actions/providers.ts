@@ -17,6 +17,7 @@ export async function getProvidersWithSearch(filters: {
     let queryBuilder = supabase
         .from('providers')
         .select('*')
+        .eq('display_status', 'live') // Only show live providers
         .order('listing_tier', { ascending: false }) // Premium first
         .order('rating', { ascending: false }) // Changed from average_rating to rating
 
@@ -59,8 +60,8 @@ export async function getProvidersWithSearch(filters: {
         reviewCount: p.review_count || 0,
         listingTier: p.listing_tier || 'free',
         verified: p.verified || false,
-        price_per_unit: p.price_per_unit || p.enriched_attrs?.price_per_unit_botox,
-        pricePerUnit: p.price_per_unit || p.enriched_attrs?.price_per_unit_botox, // Legacy support
+        price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
+        pricePerUnit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox, // Legacy support
         minTreatmentPrice: p.min_treatment_price,
         latitude: p.latitude || 0,
         longitude: p.longitude || 0,
@@ -134,11 +135,12 @@ export async function getCityStats(city: string) {
     const { data, error } = await supabase
         .from('providers')
         .select('price_per_unit, rating, average_rating, google_place_id')
+        .eq('display_status', 'live')
         .ilike('city', city.trim())
 
     if (error || !data || data.length === 0) return null
 
-    const prices = data.map((p: any) => Number(p.price_per_unit)).filter(p => !isNaN(p) && p > 0)
+    const prices = data.map((p: any) => Number(p.price_per_unit || p.botox_price_per_unit)).filter(p => !isNaN(p) && p > 0)
     const ratings = data.map((p: any) => Number(p.rating || p.average_rating)).filter(r => !isNaN(r) && r > 0)
 
     // ANTI-ZERO GUARD: Ensure Scottsdale (and others) never show $0 or 0.0 rating
@@ -270,8 +272,8 @@ export async function getProviderBySlug(slug: string) {
         reviewCount: data.review_count || 0,
         listingTier: data.listing_tier || 'free',
         verified: data.verified || false,
-        price_per_unit: data.price_per_unit,
-        pricePerUnit: data.price_per_unit, // Legacy support
+        price_per_unit: data.price_per_unit || data.botox_price_per_unit,
+        pricePerUnit: data.price_per_unit || data.botox_price_per_unit, // Legacy support
         minTreatmentPrice: data.min_treatment_price,
         imageUrl: (() => {
             const url = data.hero_image_url || data.image_url;

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
@@ -52,7 +53,23 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                             <div className="flex items-center gap-3 text-white/90 text-sm md:text-base font-medium">
                                 <span className="flex items-center gap-1">📍 {provider.city}, {provider.state}</span>
                                 <span className="w-1 h-1 rounded-full bg-white/40"></span>
-                                <span className="flex items-center gap-1">⭐ {provider.averageRating || 'New'} ({provider.reviewCount} reviews)</span>
+                                <div className="flex items-center gap-4 bg-black/20 backdrop-blur-md border border-white/10 p-3 rounded-2xl">
+                                    <div className="text-center">
+                                        <div className="text-2xl font-bold text-white flex items-center justify-center gap-1">
+                                            {provider.averageRating || 'New'} <span className="text-yellow-400 text-xl">★</span>
+                                        </div>
+                                        <div className="text-[10px] text-white/50 font-bold uppercase tracking-tighter">Rating from Google</div>
+                                    </div>
+                                    <div className="w-px h-8 bg-white/20"></div>
+                                    <div className="flex flex-col gap-1.5">
+                                        <div className="text-sm font-semibold text-white/90">{provider.reviewCount} Patient Reviews</div>
+                                        <img
+                                            src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-non-white2.png"
+                                            alt="Powered by Google"
+                                            className="h-3.5 w-fit"
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -101,7 +118,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                 <div className="flex items-center gap-1.5">
                                     <span className="text-secondary text-lg">★</span>
                                     <span className="text-primary font-bold">{provider.averageRating || 'New'}</span>
-                                    <span className="text-sm opacity-60">({provider.reviewCount} reviews)</span>
+                                    <span className="text-sm opacity-60">({provider.reviewCount} reviews from Google)</span>
                                 </div>
                                 <div className="flex items-center gap-1.5">
                                     <span className="text-secondary opacity-60">📍</span>
@@ -271,6 +288,8 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                     <LeadForm
                                         providerId={provider.id}
                                         providerName={provider.name}
+                                        city={provider.city}
+                                        state={provider.state}
                                         isPremium={provider.listingTier === 'premium'}
                                     />
                                 </div>

@@ -18,7 +18,9 @@ const leadFormSchema = z.object({
     treatment_type: z.string().min(1, 'Please select a treatment'),
     budget_range: z.string().min(1, 'Please select your budget'),
     timeframe: z.string().min(1, 'Please select a timeframe'),
+    call_time: z.string().optional(),
     message: z.string().optional(),
+    newsletter_opt_in: z.boolean().optional(),
 })
 
 type LeadFormData = z.infer<typeof leadFormSchema>
@@ -49,6 +51,7 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
             treatment_type: 'botox',
             budget_range: '300-500',
             timeframe: 'asap',
+            call_time: 'morning',
         },
     })
 
@@ -58,7 +61,9 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
 
         const formData = new FormData()
         Object.entries(data).forEach(([key, value]) => {
-            if (value) formData.append(key, value)
+            if (value !== undefined && value !== null) {
+                formData.append(key, value.toString())
+            }
         })
 
         const result = await submitLead(formData)
@@ -187,6 +192,35 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                                     <option value="flexible">Flexible</option>
                                 </select>
                             </div>
+                        </div>
+
+                        {/* Call Time */}
+                        <div className="grid grid-cols-1 gap-1">
+                            <label className="text-[11px] font-semibold text-gray-500 ml-1 uppercase tracking-tight">Best Time to Call</label>
+                            <select
+                                {...register('call_time')}
+                                className="w-full px-4 py-3 rounded-lg border border-gray-100 bg-gray-50 text-sm focus:ring-2 focus:ring-primary/10 outline-none appearance-none"
+                            >
+                                <option value="morning">Morning (8am - 12pm)</option>
+                                <option value="afternoon">Afternoon (12pm - 4pm)</option>
+                                <option value="evening">Evening (4pm - 8pm)</option>
+                                <option value="anytime">Anytime</option>
+                            </select>
+                        </div>
+
+                        {/* Newsletter Opt-in */}
+                        <div className="flex items-start gap-3 px-1 pt-2">
+                            <div className="flex items-center h-5">
+                                <input
+                                    {...register('newsletter_opt_in')}
+                                    type="checkbox"
+                                    className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary/20 accent-primary"
+                                />
+                            </div>
+                            <label className="text-[11px] text-gray-500 leading-tight">
+                                Send me exclusive Botox deals, pricing updates, and clinic specials in my area.
+                                <span className="text-gray-400"> No spam, unsubscribe anytime.</span>
+                            </label>
                         </div>
                     </div>
 

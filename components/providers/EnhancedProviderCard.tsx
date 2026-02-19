@@ -98,9 +98,16 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                                         />
                                     ))}
                                 </div>
-                                <span className="text-xs font-bold text-gray-900">{provider.rating} Rating</span>
+                                <span className="text-xs font-bold text-gray-900">{provider.rating} Rating from Google</span>
                             </div>
                             <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">{provider.review_count} Patient Reviews</span>
+                            <div className="mt-2">
+                                <img
+                                    src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png"
+                                    alt="Powered by Google"
+                                    className="h-4 opacity-70"
+                                />
+                            </div>
                         </div>
                         <Link
                             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(provider.name + ' ' + provider.city)}&query_place_id=${provider.google_place_id}`}

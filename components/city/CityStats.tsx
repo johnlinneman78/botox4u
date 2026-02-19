@@ -17,7 +17,16 @@ export function CityStats({ avgCost, providerCount, avgRating, city }: CityStats
         {
             label: 'Local Choice',
             value: `${avgRating.toFixed(1)} / 5.0`,
-            description: 'Average patient satisfaction rating.'
+            description: (
+                <div className="flex flex-col gap-1">
+                    <span className="text-gray-500">Average rating from Google</span>
+                    <img
+                        src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png"
+                        alt="Powered by Google"
+                        className="h-3 w-fit opacity-70"
+                    />
+                </div>
+            )
         },
         {
             label: 'Top Brands',
@@ -36,9 +45,9 @@ export function CityStats({ avgCost, providerCount, avgRating, city }: CityStats
                     <p className="text-3xl font-display font-bold text-primary mb-2">
                         {stat.value}
                     </p>
-                    <p className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-500">
                         {stat.description}
-                    </p>
+                    </div>
                 </div>
             ))}
         </div>

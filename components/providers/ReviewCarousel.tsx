@@ -44,9 +44,16 @@ export function ReviewCarousel({ totalReviews, googlePlaceId }: ReviewCarouselPr
                     </a>
                 </div>
 
-                <p className="mt-8 text-xs text-gray-400 font-medium uppercase tracking-widest">
-                    Google Places Data Verified • 2026 Standard
-                </p>
+                <div className="mt-8 flex flex-col items-center gap-4">
+                    <img
+                        src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png"
+                        alt="Powered by Google"
+                        className="h-5 opacity-80"
+                    />
+                    <p className="text-xs text-gray-400 font-medium uppercase tracking-widest">
+                        Google Places Data Verified • 2026 Standard
+                    </p>
+                </div>
             </div>
         </div>
     )

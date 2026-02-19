@@ -8,7 +8,9 @@ import { Card, CardContent } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import Link from 'next/link'
 
-export default function ClaimListingPage() {
+import { Suspense } from 'react'
+
+function ClaimListingContent() {
     const searchParams = useSearchParams()
     const prefilledId = searchParams.get('id')
 
@@ -138,5 +140,13 @@ export default function ClaimListingPage() {
                 </div>
             </div>
         </div>
+    )
+}
+
+export default function ClaimListingPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>}>
+            <ClaimListingContent />
+        </Suspense>
     )
 }

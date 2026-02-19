@@ -2,40 +2,36 @@
 const { createClient } = require('@supabase/supabase-js');
 const fs = require('fs');
 const path = require('path');
+const dotenv = require('dotenv');
 
-// Manual env load if dotenv fails
-const envRaw = fs.readFileSync(path.join(process.cwd(), '.env.local'), 'utf8');
-const env = {};
-envRaw.split('\n').forEach(line => {
-    const [key, ...vals] = line.split('=');
-    if (key && vals.length) env[key.trim()] = vals.join('=').trim().replace(/^"(.*)"$/, '$1');
-});
+const loadEnv = (name) => {
+    const p = path.resolve(process.cwd(), name);
+    if (fs.existsSync(p)) {
+        const config = dotenv.parse(fs.readFileSync(p));
+        for (const k in config) {
+            process.env[k] = config[k];
+        }
+    }
+};
+loadEnv('.env.prod');
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
 async function checkSchema() {
-    const url = env.NEXT_PUBLIC_SUPABASE_URL;
-    const key = env.SUPABASE_SERVICE_ROLE_KEY;
-
-    if (!url || !key) {
-        console.error('Missing URL or KEY', { url: !!url, key: !!key });
-        return;
-    }
-
-    const supabase = createClient(url, key);
-    const { data, error } = await supabase.from('providers').select('*').limit(1).single();
+    const { data, error } = await supabase.from('providers').select('*').limit(1);
     if (error) {
         console.error('Error:', error);
+        return;
+    }
+    if (data && data.length > 0) {
+        console.log('Actual Columns:');
+        console.log(Object.keys(data[0]).sort().join(', '));
     } else {
-        console.log('Columns:', Object.keys(data).sort().join(', '));
-        console.log('Enriched Data Keys:', Object.keys(data).filter(k => k.includes('enriched') || k.includes('google') || k.includes('rating') || k.includes('review') || k.includes('badges') || k.includes('gallery') || k.includes('description') || k.includes('image')));
-        console.log('Sample Values:', {
-            google_place_id: data.google_place_id,
-            rating: data.rating,
-            review_count: data.review_count,
-            top_reviews: data.top_reviews ? 'Found' : 'Missing',
-            top_reviews_first: data.top_reviews?.[0]?.author_name,
-            hero_image_url: data.hero_image_url,
-            image_url: data.image_url
-        });
+        console.log('No data found.');
     }
 }
-checkSchema();
+
+checkSchema().catch(console.error);
