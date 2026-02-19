@@ -63,7 +63,11 @@ export async function getProvidersWithSearch(filters: {
         minTreatmentPrice: p.min_treatment_price,
         latitude: p.latitude || 0,
         longitude: p.longitude || 0,
-        imageUrl: p.image_url,
+        imageUrl: (p.hero_image_url && !p.hero_image_url.includes('placeholder'))
+            ? p.hero_image_url
+            : (p.image_url && !p.image_url.includes('placeholder') && p.image_url.length > 5)
+                ? p.image_url
+                : 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
         enriched_attrs: p.enriched_attrs,
         website: p.website,
         phone: p.phone,
@@ -108,8 +112,11 @@ export async function getCityStats(city: string) {
 
     if (error || !data || data.length === 0) return null
 
-    const avgCost = data.reduce((acc: number, curr: any) => acc + (Number(curr.price_per_unit) || 0), 0) / data.length
-    const avgRating = data.reduce((acc: number, curr: any) => acc + (Number(curr.average_rating) || 0), 0) / data.length
+    const prices = data.map((p: any) => Number(p.price_per_unit)).filter(p => !isNaN(p) && p > 0)
+    const ratings = data.map((p: any) => Number(p.average_rating)).filter(r => !isNaN(r) && r > 0)
+
+    const avgCost = prices.length > 0 ? prices.reduce((acc, p) => acc + p, 0) / prices.length : 14
+    const avgRating = ratings.length > 0 ? ratings.reduce((acc, r) => acc + r, 0) / ratings.length : 4.8
 
     return {
         avgCost: Math.round(avgCost),
@@ -239,7 +246,11 @@ export async function getProviderBySlug(slug: string) {
         price_per_unit: data.price_per_unit,
         pricePerUnit: data.price_per_unit, // Legacy support
         minTreatmentPrice: data.min_treatment_price,
-        imageUrl: data.image_url,
+        imageUrl: (data.hero_image_url && !data.hero_image_url.includes('placeholder'))
+            ? data.hero_image_url
+            : (data.image_url && !data.image_url.includes('placeholder') && data.image_url.length > 5)
+                ? data.image_url
+                : 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
         enriched_attrs: data.enriched_attrs,
         website: data.website,
         phone: data.phone,
@@ -254,6 +265,7 @@ export async function getProviderBySlug(slug: string) {
         ai_description: data.ai_description,
         ai_description_confirmed: data.ai_description_confirmed,
         gallery: data.gallery || [],
+        services_offered: data.services_offered || [],
         hero_image_url: data.hero_image_url || data.image_url,
         reviews: data.top_reviews || []
     }

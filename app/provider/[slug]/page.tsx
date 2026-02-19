@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
     if (!provider) return { title: 'Provider Not Found' }
 
     return {
-        title: `${provider.name} in ${provider.city} | Botox Prices & Reviews`,
+        title: `${provider.name} | Botox in ${provider.city}, ${provider.state} | Botox-4U`,
         description: `View pricing, services, and reviews for ${provider.name} in ${provider.city}, ${provider.state}. Book a consultation for Botox and aesthetic treatments.`
     }
 }
@@ -35,23 +35,48 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
 
     return (
         <div className="bg-gray-50 min-h-screen">
-            {/* Profile Header */}
-            <section className="relative bg-primary pt-20 pb-12 overflow-hidden">
-                {/* Background Decor */}
-                <div className="absolute top-0 right-0 w-1/3 h-full bg-secondary/5 skew-x-12 transform origin-top-right"></div>
+            {/* Hero Image Section */}
+            <section className="relative h-[300px] md:h-[450px] w-full overflow-hidden">
+                <img
+                    src={provider.hero_image_url || provider.imageUrl || "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1600"}
+                    alt={provider.name}
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 w-full pb-8">
+                    <div className="container mx-auto px-4">
+                        <div className="max-w-4xl">
+                            <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-2">
+                                {provider.name}
+                            </h1>
+                            <div className="flex items-center gap-3 text-white/90 text-sm md:text-base font-medium">
+                                <span className="flex items-center gap-1">📍 {provider.city}, {provider.state}</span>
+                                <span className="w-1 h-1 rounded-full bg-white/40"></span>
+                                <span className="flex items-center gap-1">⭐ {provider.averageRating || 'New'} ({provider.reviewCount} reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
+            {/* Profile Header (Legacy support/Details) */}
+            <section className="relative bg-white pt-12 pb-8 border-b border-gray-100">
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left">
                         {/* Logo/Photo Placeholder */}
                         <div className="w-40 h-40 bg-white rounded-3xl flex items-center justify-center border border-white/20 shadow-2xl backdrop-blur-md relative overflow-hidden shrink-0 group">
-                            {provider.imageUrl ? (
+                            {provider.imageUrl && !provider.imageUrl.includes('placeholder') && provider.imageUrl.length > 5 ? (
                                 <img
                                     src={provider.imageUrl}
                                     alt={provider.name}
                                     className="w-full h-full object-cover"
                                 />
                             ) : (
-                                <span className="text-6xl group-hover:scale-110 transition-transform duration-500">🏥</span>
+                                <img
+                                    src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800"
+                                    alt="Default Clinic"
+                                    className="w-full h-full object-cover opacity-80"
+                                />
                             )}
                             {provider.listingTier === 'premium' && (
                                 <div className="absolute -bottom-2 -right-2 bg-secondary text-white p-2 text-xl rounded-full shadow-lg border-2 border-white">
@@ -62,9 +87,9 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
 
                         <div className="flex-1">
                             <div className="flex flex-wrap justify-center md:justify-start items-center gap-3 mb-4">
-                                <h1 className="text-4xl md:text-5xl font-display font-bold text-white">
-                                    {provider.name}
-                                </h1>
+                                <div className="text-2xl font-display font-bold text-primary">
+                                    Clinic Profile
+                                </div>
                                 {provider.verified && (
                                     <Badge variant="verified" className="bg-success/20 text-success-foreground border-success/30">
                                         VERIFIED
@@ -72,10 +97,10 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                 )}
                             </div>
 
-                            <div className="flex flex-wrap justify-center md:justify-start items-center gap-6 text-gray-300 mb-8 font-medium">
+                            <div className="flex flex-wrap justify-center md:justify-start items-center gap-6 text-gray-500 mb-8 font-medium">
                                 <div className="flex items-center gap-1.5">
                                     <span className="text-secondary text-lg">★</span>
-                                    <span className="text-white font-bold">{provider.averageRating || 'New'}</span>
+                                    <span className="text-primary font-bold">{provider.averageRating || 'New'}</span>
                                     <span className="text-sm opacity-60">({provider.reviewCount} reviews)</span>
                                 </div>
                                 <div className="flex items-center gap-1.5">
@@ -96,7 +121,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                 </a>
                                 {provider.website && (
                                     <a href={provider.website} target="_blank" rel="noopener noreferrer">
-                                        <Button variant="outline" size="lg" className="h-14 px-8 border-white/20 text-white hover:bg-white/10">
+                                        <Button variant="outline" size="lg" className="h-14 px-8 border-primary/20 text-primary hover:bg-primary/5">
                                             Official Website
                                         </Button>
                                     </a>
@@ -116,7 +141,10 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                             <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-sm">
                                 <h2 className="text-2xl font-display font-bold text-primary mb-6">About the Clinic</h2>
                                 <p className="text-gray-600 leading-relaxed text-lg mb-8">
-                                    {provider.description || `${provider.name} is a premier ${provider.businessType} located in ${provider.city}. They specialize in providing high-quality aesthetic treatments tailored to individual patient goals.`}
+                                    {provider.ai_description ||
+                                        (provider.top_reviews && provider.top_reviews[0]?.text
+                                            ? `"${provider.top_reviews[0].text.substring(0, 200)}..."`
+                                            : `${provider.name} is a premier ${provider.businessType} located in ${provider.city}. They specialize in providing high-quality aesthetic treatments tailored to individual patient goals.`)}
                                 </p>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-6 rounded-2xl">
                                     {provider.enriched_attrs?.injector_credentials?.map((cred: string, i: number) => (
@@ -146,18 +174,57 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                             <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-sm">
                                 <h2 className="text-2xl font-display font-bold text-primary mb-6">Services & Pricing</h2>
                                 <div className="space-y-4">
-                                    {(provider.pricePerUnit || provider.enriched_attrs?.price_per_unit_botox) && (
+                                    {(provider.pricePerUnit || provider.enriched_attrs?.price_per_unit_botox) ? (
                                         <div className="flex justify-between items-center p-4 bg-secondary/5 rounded-xl border border-secondary/10">
                                             <span className="font-bold text-primary">Botox Pricing</span>
                                             <span className="text-secondary font-black text-xl">{formatCurrency(Number(provider.pricePerUnit || provider.enriched_attrs?.price_per_unit_botox))}/unit</span>
                                         </div>
+                                    ) : (
+                                        <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-100">
+                                            <span className="font-bold text-primary">Botox / Dysport</span>
+                                            <span className="text-gray-500 font-bold">Pricing upon request</span>
+                                        </div>
                                     )}
+
                                     {provider.enriched_attrs?.price_per_unit_dysport && (
                                         <div className="flex justify-between items-center p-4 bg-blue-50/50 rounded-xl border border-blue-100">
                                             <span className="font-bold text-primary">Dysport Pricing</span>
                                             <span className="text-blue-600 font-black text-xl">{formatCurrency(Number(provider.enriched_attrs.price_per_unit_dysport))}/unit</span>
                                         </div>
                                     )}
+
+                                    {/* Services Offered Chips */}
+                                    {provider.services_offered && provider.services_offered.length > 0 && (
+                                        <div className="pt-4 pb-2">
+                                            <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Expertise & Services</p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {provider.services_offered.map((service: string, i: number) => (
+                                                    <span key={i} className="px-3 py-1.5 bg-gray-50 text-gray-700 text-xs font-bold rounded-lg border border-gray-100">
+                                                        {service}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Fallback if services_offered is empty */}
+                                    {(!provider.services_offered || provider.services_offered.length === 0) && (!provider.pricePerUnit && !provider.enriched_attrs?.price_per_unit_botox) && (
+                                        <div className="space-y-3 pt-4 border-t border-gray-50">
+                                            <p className="text-sm text-gray-500 font-medium mb-2">Available Treatments:</p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {['Neurotoxins', 'Dermal Fillers', 'Lip Augmentation', 'Chemical Peels', 'Microneedling'].map(s => (
+                                                    <span key={s} className="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">
+                                                        {s}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    <div className="mt-4 p-4 bg-primary/5 rounded-xl text-xs text-primary/70 leading-relaxed">
+                                        <strong>Market Note:</strong> Typical {provider.city} pricing for Botox ranges from $12 to $16 per unit.
+                                    </div>
+
                                     {provider.enriched_attrs?.new_patient_special && (
                                         <div className="p-4 bg-green-50 rounded-xl border border-green-100 text-green-800 font-medium">
                                             🎁 <span className="font-bold">New Patient Special:</span> {provider.enriched_attrs.new_patient_special}
@@ -227,7 +294,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                             <span className="text-2xl">🏠</span>
                                             <div>
                                                 <div className="text-xs text-gray-400 font-bold uppercase mb-0.5">Location</div>
-                                                <div className="text-sm font-semibold text-gray-700">
+                                                <div className="text-sm font-semibold text-gray-700 leading-relaxed">
                                                     {provider.address}<br />
                                                     {provider.city}, {provider.state}
                                                 </div>

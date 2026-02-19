@@ -52,7 +52,7 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                 <div className="container mx-auto px-4 text-xs text-white/60">
                     <Link href="/" className="hover:text-white">Home</Link> /
                     <Link href="/botox" className="hover:text-white mx-1">Botox</Link> /
-                    <Link href={`/ botox / ${stateCode.toLowerCase()} `} className="hover:text-white mx-1">{stateCode}</Link> /
+                    <Link href={`/botox/state/${stateCode.toLowerCase()}`} className="hover:text-white mx-1">{stateCode}</Link> /
                     <span className="text-white ml-1">{cityName} - {treatment.name}</span>
                 </div>
             </div>

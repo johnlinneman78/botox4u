@@ -47,12 +47,9 @@ vercel --prod
 4. Deploy
 
 ### Step 3: Configure Domain (5 min)
-**Option A: Use Vercel subdomain**
-- `fiery-cosmos.vercel.app` (automatic)
-
-**Option B: Custom domain**
-- Add domain in Vercel dashboard
-- Update DNS records
+**Option A: Custom domain (Recommended)**
+- `botox-4u.com` (configured in Vercel)
+- Update DNS records if needed
 - Wait for SSL provisioning (5-10 min)
 
 ### Step 4: Test Live Site (10 min)

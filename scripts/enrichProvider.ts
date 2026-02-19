@@ -80,13 +80,15 @@ async function fetchGooglePlaceData(name: string, city: string, state: string, a
 
         const detailsRes = await fetch(detailsUrl, {
             headers: {
+                'X-Goog-Api-Key': GOOGLE_API_KEY,
+                'X-Goog-FieldMask': fields,
                 'Referer': process.env.NEXT_PUBLIC_APP_URL || 'https://botox-4u.com'
             }
         });
         const detailsData = await detailsRes.json();
 
         // Map New API response back to familiar structure for the script
-        return {
+        const result = {
             place_id: detailsData.id,
             rating: detailsData.rating,
             user_ratings_total: detailsData.userRatingCount,
@@ -103,6 +105,8 @@ async function fetchGooglePlaceData(name: string, city: string, state: string, a
             editorial_summary: detailsData.editorialSummary?.text,
             website: detailsData.websiteUri
         };
+        console.log(`Debug Google Data for ${placeId}:`, JSON.stringify({ hasPhotos: !!result.photos, photoCount: result.photos?.length }, null, 2));
+        return result;
     } catch (e) {
         console.error('Google Places API Error:', e);
         return null;

@@ -10,9 +10,9 @@ export default function Footer() {
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
-                        <div className="h-12 w-auto mb-4 -ml-4">
-                            <Link href="/">
-                                <Logo className="h-full w-auto" variant="precision" />
+                        <div className="h-14 w-auto mb-6 -ml-2">
+                            <Link href="/" className="hover:opacity-90 transition-opacity">
+                                <Logo className="h-full w-auto" variant="shield" />
                             </Link>
                         </div>
                         <p className="text-sm text-gray-600">

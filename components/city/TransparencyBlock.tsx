@@ -1,4 +1,5 @@
 import { ShieldCheck, Eye, Lock } from 'lucide-react'
+import Logo from '@/components/layout/Logo'
 
 export function TransparencyBlock({ city }: { city?: string }) {
     return (
@@ -10,9 +11,15 @@ export function TransparencyBlock({ city }: { city?: string }) {
 
                     <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <div>
-                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-sm font-bold mb-6">
-                                <ShieldCheck className="w-4 h-4" />
-                                TRANSPARENCY FIRST
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="h-10 w-auto">
+                                    <Logo variant="shield" className="h-full" />
+                                </div>
+                                <div className="h-6 w-[1px] bg-gray-200"></div>
+                                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-sm font-bold">
+                                    <ShieldCheck className="w-4 h-4" />
+                                    TRANSPARENCY FIRST
+                                </div>
                             </div>
                             <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-6 leading-tight">
                                 Why us vs. Yelp, Google, or RealSelf?

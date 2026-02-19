@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Search, ShieldCheck, Star, TrendingUp } from 'lucide-react'
+import Logo from '@/components/layout/Logo'
 
 export default function Hero() {
     const [searchQuery, setSearchQuery] = useState('')
@@ -34,9 +35,14 @@ export default function Hero() {
 
                     {/* Left Column: Text & Search */}
                     <div className="flex-1 max-w-2xl text-center lg:text-left">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#d4af37] text-xs font-bold tracking-widest uppercase mb-6 animate-fade-in">
-                            <Star className="w-3 h-3 fill-current" />
-                            2026 Official Pricing Guide
+                        <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
+                            <div className="h-16 w-auto -ml-2 mb-4 sm:mb-0">
+                                <Logo variant="shield" className="h-full" />
+                            </div>
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-secondary text-xs font-bold tracking-widest uppercase animate-fade-in shadow-lg">
+                                <Star className="w-3 h-3 fill-current" />
+                                2026 Official Pricing Guide
+                            </div>
                         </div>
 
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-[1.1] text-balance">

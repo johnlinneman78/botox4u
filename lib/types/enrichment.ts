@@ -20,6 +20,7 @@ export interface EnrichedProvider {
     ai_description: string | null;
     ai_description_confirmed: boolean;
     badges: string[];
+    services_offered?: string[];
     enriched_at: Date | string;
 
     // UI derivation

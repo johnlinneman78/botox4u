@@ -24,8 +24,12 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
         return () => clearInterval(interval)
     }, [provider.top_reviews])
 
-    // Fallback Image handling
-    const heroImage = provider.hero_image_url || '/images/placeholders/clinic-geo-navy.jpg'
+    // Fallback Image handling with robust placeholder detection
+    const heroImage = (provider.imageUrl && !provider.imageUrl.includes('placeholder') && provider.imageUrl.length > 5)
+        ? provider.imageUrl
+        : (provider.hero_image_url && !provider.hero_image_url.includes('placeholder'))
+            ? provider.hero_image_url
+            : 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800'
 
     // Simulating 'verified' status based on existing data or tier
     const isVerified = provider.listing_tier === 'premium' || provider.listing_tier === 'featured';
