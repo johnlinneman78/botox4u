@@ -30,10 +30,13 @@ export default function CityMap({ providers, citySlug }: CityMapProps) {
     }
 
     const markers = providers
-        .filter(p => p.lat && p.lng) // Only show geocoded providers
+        .filter(p => (p.lat || (p as any).latitude) && (p.lng || (p as any).longitude)) // Only show geocoded providers
         .map(provider => ({
             id: provider.id,
-            position: { lat: provider.lat!, lng: provider.lng! },
+            position: {
+                lat: Number(provider.lat || (provider as any).latitude),
+                lng: Number(provider.lng || (provider as any).longitude)
+            },
             title: provider.name
         }))
 

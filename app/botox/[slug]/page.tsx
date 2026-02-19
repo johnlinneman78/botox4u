@@ -166,7 +166,7 @@ export default async function CityPage({ params }: CityPageProps) {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                    <div className="md:col-span-2">
+                    <div className="md:col-span-2" id="listings">
                         <div className="flex justify-between items-center mb-6">
                             <h2 className="text-2xl font-display font-bold text-primary">
                                 Verified Providers in {cityName}
@@ -183,6 +183,7 @@ export default async function CityPage({ params }: CityPageProps) {
                         </div>
 
                         <CostComparisonTable
+                            id="pricing-guide"
                             title={`Typical Botox Costs in ${cityName} by Area`}
                             rows={[
                                 { label: 'Forehead Lines', units: '10-20 Units', costRange: `$${(stats?.avgCost || 14) * 10} - $${(stats?.avgCost || 14) * 20}`, notes: 'Horizontal lines above brows.' },
@@ -201,6 +202,15 @@ export default async function CityPage({ params }: CityPageProps) {
                     </div>
 
                     <div className="space-y-8">
+                        {/* Quote Form */}
+                        <div id="quick-quote">
+                            <LeadForm
+                                city={cityName}
+                                state={stateCode}
+                                providerName={`Providers in ${cityName}`}
+                            />
+                        </div>
+
                         {/* Sidebar Info */}
                         <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
                             <h3 className="text-xl font-display font-bold text-primary mb-4">

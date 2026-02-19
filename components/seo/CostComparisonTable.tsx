@@ -8,14 +8,15 @@ interface TableRow {
 }
 
 interface CostComparisonTableProps {
+    id?: string
     title: string
     rows: TableRow[]
     footer?: string
 }
 
-export function CostComparisonTable({ title, rows, footer }: CostComparisonTableProps) {
+export function CostComparisonTable({ id, title, rows, footer }: CostComparisonTableProps) {
     return (
-        <section className="my-12">
+        <section className="my-12" id={id}>
             <h3 className="text-xl font-display font-bold text-primary mb-6">{title}</h3>
             <Card className="overflow-hidden border-gray-100 shadow-sm">
                 <div className="overflow-x-auto">

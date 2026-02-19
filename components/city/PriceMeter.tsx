@@ -115,7 +115,10 @@ export function PriceMeter({ avgCost, city }: PriceMeterProps) {
                             : `Outstanding value! ${city} prices are ${diff}% lower than the national average, making this an excellent location for full-dose treatments.`
                         }
                     </p>
-                    <button className="md:ml-auto text-xs font-black text-secondary uppercase tracking-widest hover:text-primary transition-colors">
+                    <button
+                        onClick={() => document.getElementById('pricing-guide')?.scrollIntoView({ behavior: 'smooth' })}
+                        className="md:ml-auto text-xs font-black text-secondary uppercase tracking-widest hover:text-primary transition-colors"
+                    >
                         View Pricing Guide
                     </button>
                 </div>

@@ -107,6 +107,7 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
 
                         <section>
                             <CostComparisonTable
+                                id="pricing-guide"
                                 title={`${treatment.name} Pricing Guide: ${cityName} `}
                                 rows={[
                                     { label: 'Average Cost', units: 'Per Session', costRange: `$${(stats?.avgCost || 14) * 20} `, notes: `Based on local ${cityName} averages.` },

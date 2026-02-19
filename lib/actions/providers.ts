@@ -63,11 +63,17 @@ export async function getProvidersWithSearch(filters: {
         minTreatmentPrice: p.min_treatment_price,
         latitude: p.latitude || 0,
         longitude: p.longitude || 0,
-        imageUrl: (p.hero_image_url && !p.hero_image_url.includes('placeholder'))
-            ? p.hero_image_url
-            : (p.image_url && !p.image_url.includes('placeholder') && p.image_url.length > 5)
-                ? p.image_url
-                : 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
+        lat: p.latitude || 0,
+        lng: p.longitude || 0,
+        imageUrl: (() => {
+            const url = p.hero_image_url || p.image_url;
+            if (!url || url.includes('placeholder')) {
+                return 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800';
+            }
+            if (url.startsWith('http')) return url;
+            // Handle Supabase paths
+            return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/provider_images/${url}`;
+        })(),
         enriched_attrs: p.enriched_attrs,
         website: p.website,
         phone: p.phone,
@@ -246,11 +252,14 @@ export async function getProviderBySlug(slug: string) {
         price_per_unit: data.price_per_unit,
         pricePerUnit: data.price_per_unit, // Legacy support
         minTreatmentPrice: data.min_treatment_price,
-        imageUrl: (data.hero_image_url && !data.hero_image_url.includes('placeholder'))
-            ? data.hero_image_url
-            : (data.image_url && !data.image_url.includes('placeholder') && data.image_url.length > 5)
-                ? data.image_url
-                : 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
+        imageUrl: (() => {
+            const url = data.hero_image_url || data.image_url;
+            if (!url || url.includes('placeholder')) {
+                return 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800';
+            }
+            if (url.startsWith('http')) return url;
+            return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/provider_images/${url}`;
+        })(),
         enriched_attrs: data.enriched_attrs,
         website: data.website,
         phone: data.phone,

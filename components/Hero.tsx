@@ -32,11 +32,20 @@ export default function Hero({ city, state }: { city?: string, state?: string })
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-                        <Button size="lg" className="bg-[#d4af37] hover:bg-[#c0a030] text-[#1a2332] text-lg px-8 py-6 h-14 font-bold shadow-xl shadow-[#d4af37]/10 w-full sm:w-auto rounded-xl transition-transform hover:scale-105">
+                        <Button
+                            size="lg"
+                            className="bg-[#d4af37] hover:bg-[#c0a030] text-[#1a2332] text-lg px-8 py-6 h-14 font-bold shadow-xl shadow-[#d4af37]/10 w-full sm:w-auto rounded-xl transition-transform hover:scale-105"
+                            onClick={() => document.getElementById('listings')?.scrollIntoView({ behavior: 'smooth' })}
+                        >
                             <Search className="w-5 h-5 mr-2" />
                             Find Providers
                         </Button>
-                        <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/5 text-lg px-8 py-6 h-14 font-medium w-full sm:w-auto rounded-xl backdrop-blur-sm">
+                        <Button
+                            variant="outline"
+                            size="lg"
+                            className="border-white/20 text-white hover:bg-white/5 text-lg px-8 py-6 h-14 font-medium w-full sm:w-auto rounded-xl backdrop-blur-sm"
+                            onClick={() => document.getElementById('quick-quote')?.scrollIntoView({ behavior: 'smooth' })}
+                        >
                             Get Free Quotes
                         </Button>
                     </div>

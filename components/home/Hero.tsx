@@ -14,6 +14,8 @@ export default function Hero() {
         e.preventDefault()
         if (searchQuery.trim()) {
             router.push(`/find-providers?q=${encodeURIComponent(searchQuery)}`)
+        } else {
+            router.push(`/find-providers`)
         }
     }
 
@@ -36,7 +38,7 @@ export default function Hero() {
                     {/* Left Column: Text & Search */}
                     <div className="flex-1 max-w-2xl text-center lg:text-left">
                         <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
-                            <div className="h-16 w-auto -ml-2 mb-4 sm:mb-0">
+                            <div className="h-16 w-auto -ml-2 mb-4 sm:mb-0 relative z-20">
                                 <Logo variant="shield" className="h-full" theme="dark" />
                             </div>
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-secondary text-xs font-bold tracking-widest uppercase animate-fade-in shadow-lg">
@@ -53,22 +55,22 @@ export default function Hero() {
                             We've verified credentials and scraped real per-unit pricing for <strong>600+ top injectors</strong>. No hidden fees, no pay-to-play rankings.
                         </p>
 
-                        <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto lg:mx-0 mb-12 shadow-2xl shadow-black/20 rounded-xl">
+                        <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto lg:mx-0 mb-12 shadow-2xl shadow-black/20 rounded-xl relative z-30">
                             <div className="relative flex-1">
-                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-40">
                                     <Search className="h-5 w-5 text-gray-400" />
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder="Enter city or zip code..."
+                                    placeholder="City, Zip, or State..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full h-14 pl-12 pr-4 rounded-xl sm:rounded-r-none bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#d4af37] text-base"
+                                    className="w-full h-14 pl-12 pr-4 rounded-xl sm:rounded-r-none bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#d4af37] text-base relative z-30"
                                 />
                             </div>
                             <Button
                                 type="submit"
-                                className="h-14 px-8 rounded-xl sm:rounded-l-none bg-[#d4af37] hover:bg-[#c0a030] text-[#1a2332] font-bold text-lg transition-all hover:scale-105"
+                                className="h-14 px-8 rounded-xl sm:rounded-l-none bg-[#d4af37] hover:bg-[#c0a030] text-[#1a2332] font-bold text-lg transition-all hover:scale-105 relative z-30"
                             >
                                 Find Providers
                             </Button>

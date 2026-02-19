@@ -1,3 +1,4 @@
+'use client'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { MapPin, Star, ShieldCheck } from 'lucide-react'
