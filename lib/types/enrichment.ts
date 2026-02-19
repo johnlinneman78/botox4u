@@ -23,8 +23,19 @@ export interface EnrichedProvider {
     services_offered?: string[];
     enriched_at: Date | string;
 
-    // UI derivation
-    verified?: boolean;
+    // UI derivation & UI-specific fields
+    imageUrl: string;
+    averageRating: number;
+    reviewCount: number;
+    listingTier: string;
+    verified: boolean;
+    website?: string | null;
+    phone?: string | null;
+    description?: string | null;
+    pricePerUnit?: number | null;
+    minTreatmentPrice?: number | null;
+    enriched_attrs?: any;
+    reviews?: Review[];
 }
 
 export interface Review {
