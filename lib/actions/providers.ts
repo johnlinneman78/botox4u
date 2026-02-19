@@ -1,5 +1,7 @@
 import { cookies } from 'next/headers'
 import { getSupabaseServer } from '@/lib/supabase/factory'
+import { NICHE } from '@/config/niche'
+import { calculateProviderScore } from '@/lib/scoring'
 
 export async function getProvidersWithSearch(filters: {
     query?: string,
@@ -99,32 +101,39 @@ export async function getProvidersWithSearch(filters: {
         ai_description_confirmed: p.ai_description_confirmed,
         gallery: p.gallery || [],
         hero_image_url: p.hero_image_url || p.image_url,
-        reviews: p.top_reviews || []
+        reviews: p.top_reviews || [],
+        score: calculateProviderScore({
+            price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
+            rating: parseFloat(p.rating || p.average_rating || 0),
+            review_count: p.review_count || 0,
+            has_photo: !!(p.hero_image_url || p.image_url),
+            has_description: !!p.description,
+            is_verified: p.verified || false
+        })
     }))
 
-    // Custom sort: Premium > Featured > Free
+    // Custom sort: Premium > Score > Proximity
     const tierWeight = {
-        'premium': 3,
-        'featured': 2,
-        'free': 1
+        'premium': 1000,
+        'featured': 500,
+        'free': 0
     }
 
-    // Custom sort: Premium > Proximity (if available) > Rating
     return mappedData.sort((a: any, b: any) => {
-        // 1. Tier Weight
-        const weightA = tierWeight[a.listingTier as keyof typeof tierWeight] || 0
-        const weightB = tierWeight[b.listingTier as keyof typeof tierWeight] || 0
-        if (weightA !== weightB) return weightB - weightA
+        // 1. Tier + Score combined weight
+        const scoreA = (tierWeight[a.listingTier as keyof typeof tierWeight] || 0) + a.score.total
+        const scoreB = (tierWeight[b.listingTier as keyof typeof tierWeight] || 0) + b.score.total
 
-        // 2. Proximity (if user location provided)
+        if (scoreB !== scoreA) return scoreB - scoreA
+
+        // 2. Proximity (if user location provided) fallback
         if (filters.userLat && filters.userLng && a.lat && a.lng && b.lat && b.lng) {
             const distA = Math.sqrt(Math.pow(a.lat - filters.userLat, 2) + Math.pow(a.lng - filters.userLng, 2))
             const distB = Math.sqrt(Math.pow(b.lat - filters.userLat, 2) + Math.pow(b.lng - filters.userLng, 2))
-            if (Math.abs(distA - distB) > 0.01) return distA - distB
+            return distA - distB
         }
 
-        // 3. Rating fallback
-        return (b.averageRating || 0) - (a.averageRating || 0)
+        return 0
     })
 }
 
@@ -144,11 +153,11 @@ export async function getCityStats(city: string) {
     const ratings = data.map((p: any) => Number(p.rating || p.average_rating)).filter(r => !isNaN(r) && r > 0)
 
     // ANTI-ZERO GUARD: Ensure Scottsdale (and others) never show $0 or 0.0 rating
-    const avgCost = prices.length > 0 ? prices.reduce((acc, p) => acc + p, 0) / prices.length : 14
+    const avgCost = prices.length > 0 ? prices.reduce((acc, p) => acc + p, 0) / prices.length : (NICHE.priceRange.min + 4)
     const avgRating = ratings.length > 0 ? ratings.reduce((acc, r) => acc + r, 0) / ratings.length : 4.8
 
     return {
-        avgCost: Math.round(avgCost) || 14,
+        avgCost: Math.round(avgCost) || (NICHE.priceRange.min + 4),
         avgRating: Number((avgRating || 4.8).toFixed(1)),
         providerCount: data.length || 0
     }
@@ -236,7 +245,7 @@ export async function getTreatmentStats(treatment: string, city: string, state: 
 
     if (error || !data || data.length === 0) return null
 
-    const prices = data.map((p: any) => Number(p.price_per_unit || 15))
+    const prices = data.map((p: any) => Number(p.price_per_unit || (NICHE.priceRange.min + 5)))
     const avg = prices.reduce((a: number, b: number) => a + b, 0) / prices.length
 
     return {

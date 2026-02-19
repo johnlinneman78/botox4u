@@ -1,22 +1,24 @@
+import { NICHE } from '@/config/niche'
+
 export default function HowItWorks() {
     const steps = [
         {
             number: '1',
-            title: 'Search Your Area',
-            description: 'Enter your city or zip code to find verified Botox providers near you.',
-            icon: '🔍',
+            title: 'Search Your City',
+            description: `Enter your location to see every verified ${NICHE.name} injector in your immediate area.`,
+            icon: '📍',
         },
         {
             number: '2',
-            title: 'Compare & Review',
-            description: 'Compare prices, read patient reviews, and view provider credentials.',
-            icon: '⭐',
+            title: 'Use the Score Defense',
+            description: `Filter by our proprietary Score. We rank by real pricing and verified data, not ad dollars.`,
+            icon: '🛡️',
         },
         {
             number: '3',
-            title: 'Book Consultation',
-            description: 'Contact providers directly or request a consultation online.',
-            icon: '📅',
+            title: 'Book with Confidence',
+            description: `Now that you know the fair market price and the injector's track record, book with zero doubt.`,
+            icon: '✨',
         },
     ]
 

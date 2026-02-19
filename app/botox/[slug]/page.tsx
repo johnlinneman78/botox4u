@@ -14,6 +14,7 @@ import { Badge } from '@/components/ui/Badge'
 import { Provider } from '@/lib/types'
 import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
 import { LeadForm } from '@/components/providers/LeadForm'
+import { NICHE } from '@/config/niche'
 
 interface CityPageProps {
     params: { slug: string }
@@ -38,11 +39,11 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     const stats = await getCityStats(cityName)
 
     return {
-        title: `Best Botox in ${cityName}, ${stateCode} | 2026 Pricing & Reviews`,
-        description: `Find top-rated Botox injectors in ${cityName}. Compare prices from ${stats?.providerCount || 0} verified clinics, see patient reviews, and book consultations.`,
+        title: `Best ${NICHE.name} in ${cityName}, ${stateCode} | 2026 Pricing & Reviews`,
+        description: `Find top-rated ${NICHE.name} ${NICHE.providerTypePlural} in ${cityName}. Compare prices from ${stats?.providerCount || 0} verified ${NICHE.providerTypePlural}, see patient reviews, and book consultations.`,
         openGraph: {
-            title: `Botox in ${cityName}, ${stateCode}: Top Clinics & Pricing`,
-            description: `A complete directory of verified Botox providers in ${cityName}, ${stateCode}. Compare costs and reviews.`,
+            title: `${NICHE.name} in ${cityName}, ${stateCode}: Top ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)} & Pricing`,
+            description: `A complete directory of verified ${NICHE.name} providers in ${cityName}, ${stateCode}. Compare costs and reviews.`,
         }
     }
 }
@@ -64,8 +65,8 @@ export default async function CityPage({ params }: CityPageProps) {
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        "name": `Botox Providers in ${cityName}`,
-        "description": `Top-rated medical injectors for Botox and aesthetic treatments in ${cityName}, ${stateCode}.`,
+        "name": `${NICHE.name} Providers in ${cityName}`,
+        "description": `Top-rated medical ${NICHE.providerTypePlural} for ${NICHE.name} and aesthetic treatments in ${cityName}, ${stateCode}.`,
         "address": {
             "@type": "PostalAddress",
             "addressLocality": cityName,
@@ -85,15 +86,15 @@ export default async function CityPage({ params }: CityPageProps) {
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": `What is the average cost of Botox in ${cityName}?`,
+                "name": `What is the average cost of ${NICHE.name} in ${cityName}?`,
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": `The average cost of Botox in ${cityName} is approximately $${stats?.avgCost || 14} per unit. Most clinics range between $12 and $18 per unit depending on their expertise and location.`
+                    "text": `The average cost of ${NICHE.name} in ${cityName} is approximately $${stats?.avgCost || 14} ${NICHE.priceUnit}. Most ${NICHE.providerTypePlural} range between $${NICHE.priceRange.min} and $${NICHE.priceRange.max} ${NICHE.priceUnit} depending on their expertise and location.`
                 }
             },
             {
                 "@type": "Question",
-                "name": `Who are the best Botox injectors in ${cityName}?`,
+                "name": `Who are the best ${NICHE.name} ${NICHE.providerTypePlural} in ${cityName}?`,
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": `Some of the top-rated providers in ${cityName} include ${providers.slice(0, 2).map((p: any) => p.name).join(' and ')}, based on patient ratings and verified credentials.`
@@ -130,11 +131,11 @@ export default async function CityPage({ params }: CityPageProps) {
                 <div className="container mx-auto px-4 py-3 flex items-center gap-2 text-xs font-medium text-white/60">
                     <Link href="/" className="hover:text-white transition-colors">Home</Link>
                     <span>/</span>
-                    <Link href="/botox" className="hover:text-white transition-colors">Directory</Link>
+                    <Link href={NICHE.baseSlug.slice(0, -1)} className="hover:text-white transition-colors">Directory</Link>
                     <span>/</span>
                     {stateSlug && (
                         <>
-                            <Link href={`/botox/state/${stateSlug}`} className="hover:text-white transition-colors capitalize">
+                            <Link href={`${NICHE.baseSlug}state/${stateSlug}`} className="hover:text-white transition-colors capitalize">
                                 {stateSlug.replace(/-/g, ' ')}
                             </Link>
                             <span>/</span>
@@ -180,12 +181,26 @@ export default async function CityPage({ params }: CityPageProps) {
                             <h2 className="text-2xl font-display font-bold text-primary">
                                 Verified Providers in {cityName}
                             </h2>
-                            <Badge variant="default">
-                                Sort: Featured First
+                            <Badge variant="default" className="bg-primary hover:bg-primary">
+                                Sort: {NICHE.name}-4U Score
                             </Badge>
                         </div>
 
                         <div className="space-y-6">
+                            {/* Algorithm Callout */}
+                            <div className="bg-primary/5 border border-primary/10 rounded-2xl p-6 mb-8 flex items-start gap-4">
+                                <div className="p-3 bg-white rounded-xl shadow-sm border border-primary/5 shrink-0">
+                                    <span className="text-2xl">📊</span>
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-primary text-sm mb-1">Ranked by Proprietary Score</h4>
+                                    <p className="text-xs text-gray-500 leading-relaxed">
+                                        Unlike other directories, our rankings are 100% data-driven. Providers are scored on
+                                        <b> price transparency</b>, <b>verified patient sentiment</b>, and <b>market competitiveness</b>.
+                                        Nobody can pay for a higher score—rankings are pure data.
+                                    </p>
+                                </div>
+                            </div>
                             {isCityLive ? (
                                 providers.map((provider: any) => (
                                     <EnhancedProviderCard key={provider.id} provider={provider} />
@@ -210,14 +225,14 @@ export default async function CityPage({ params }: CityPageProps) {
 
                         <CostComparisonTable
                             id="pricing-guide"
-                            title={`Typical Botox Costs in ${cityName} by Area`}
-                            rows={[
-                                { label: 'Forehead Lines', units: '10-20 Units', costRange: `$${(stats?.avgCost || 14) * 10} - $${(stats?.avgCost || 14) * 20}`, notes: 'Horizontal lines above brows.' },
-                                { label: 'Frown Lines (11s)', units: '15-25 Units', costRange: `$${(stats?.avgCost || 14) * 15} - $${(stats?.avgCost || 14) * 25}`, notes: 'Vertical lines between brows.' },
-                                { label: 'Crow\'s Feet', units: '12-24 Units', costRange: `$${(stats?.avgCost || 14) * 12} - $${(stats?.avgCost || 14) * 24}`, notes: 'Lines around the eyes.' },
-                                { label: 'Masseter (Slimming)', units: '40-60 Units', costRange: `$${(stats?.avgCost || 14) * 40} - $${(stats?.avgCost || 14) * 60}`, notes: 'Jaw slimming and TNJ relief.' },
-                            ]}
-                            footer={`*Pricing estimates in ${cityName} are based on a local average of $${stats?.avgCost || 14}/unit.`}
+                            title={`Typical ${NICHE.name} Costs in ${cityName} by Area`}
+                            rows={NICHE.calculator.treatmentAreas.map(area => ({
+                                label: area.label,
+                                units: `${area.minUnits || area.defaultUnits}-${area.maxUnits || area.defaultUnits * 1.5} Units`,
+                                costRange: `$${(stats?.avgCost || 14) * (area.minUnits || area.defaultUnits)} - $${(stats?.avgCost || 14) * (area.maxUnits || area.defaultUnits * 1.5)}`,
+                                notes: area.description || ''
+                            }))}
+                            footer={`*Pricing estimates in ${cityName} are based on a local average of $${stats?.avgCost || 14}/${NICHE.priceUnit.split(' ').slice(-1)}.`}
                         />
                     </div>
 
@@ -261,17 +276,17 @@ export default async function CityPage({ params }: CityPageProps) {
                         Treatment Options in {cityName}
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {TREATMENTS.map((treatment) => (
+                        {NICHE.calculator.variables.map((treatment) => (
                             <Link
-                                key={treatment.slug}
-                                href={`/botox/${treatment.slug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}`}
+                                key={treatment.id}
+                                href={`${NICHE.baseSlug}${treatment.id}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}`}
                                 className="group bg-white p-8 rounded-2xl border border-gray-100 hover:border-secondary/30 hover:shadow-xl transition-all"
                             >
                                 <h4 className="font-display font-bold text-xl text-primary group-hover:text-secondary transition-colors mb-2">
-                                    {treatment.name}
+                                    {treatment.label}
                                 </h4>
                                 <p className="text-sm text-gray-500 mb-4 font-light">
-                                    {treatment.description}
+                                    Aesthetic specialists providing high-quality {treatment.label} treatments in {cityName}.
                                 </p>
                                 <div className="text-xs font-bold text-secondary uppercase tracking-widest flex items-center gap-2">
                                     View Prices & Providers <span className="text-lg">→</span>
@@ -289,7 +304,7 @@ export default async function CityPage({ params }: CityPageProps) {
                         {nearbyCities.map((city) => (
                             <Link
                                 key={city.city}
-                                href={`/botox/${city.city.toLowerCase().replace(/ /g, '-')}-${city.state.toLowerCase()}`}
+                                href={`${NICHE.baseSlug}${city.city.toLowerCase().replace(/ /g, '-')}-${city.state.toLowerCase()}`}
                                 className="bg-white p-4 rounded-xl border border-gray-100 hover:border-secondary/30 hover:shadow-md transition-all text-center"
                             >
                                 <div className="font-bold text-primary text-sm mb-1">{city.city}</div>

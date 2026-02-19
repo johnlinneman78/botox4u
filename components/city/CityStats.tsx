@@ -1,4 +1,5 @@
 import { formatCurrency } from '@/lib/utils'
+import { NICHE } from '@/config/niche'
 
 interface CityStatsProps {
     avgCost: number
@@ -11,7 +12,7 @@ export function CityStats({ avgCost, providerCount, avgRating, city }: CityStats
     const stats = [
         {
             label: 'Average Cost',
-            value: `${formatCurrency(avgCost)}/unit`,
+            value: `${formatCurrency(avgCost)}/${NICHE.priceUnit.split(' ').slice(-1)}`,
             description: `Based on ${providerCount} local providers in ${city}.`
         },
         {
@@ -19,7 +20,7 @@ export function CityStats({ avgCost, providerCount, avgRating, city }: CityStats
             value: `${avgRating.toFixed(1)} / 5.0`,
             description: (
                 <div className="flex flex-col gap-1">
-                    <span className="text-gray-500">Average rating from Google</span>
+                    <span className="text-gray-500">{NICHE.googleAttribution.ratingText}</span>
                     <img
                         src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png"
                         alt="Powered by Google"
@@ -31,7 +32,7 @@ export function CityStats({ avgCost, providerCount, avgRating, city }: CityStats
         {
             label: 'Top Brands',
             value: 'All-Inclusive',
-            description: 'Botox, Dysport, and Xeomin options available.'
+            description: `${NICHE.calculator.variables.map(v => v.label).join(', ')} options available.`
         }
     ]
 

@@ -4,6 +4,7 @@ import { ProviderFilters } from '@/components/providers/ProviderFilters'
 import { Button } from '@/components/ui/Button'
 import { getProvidersWithSearch } from '@/lib/actions/providers'
 import { GeolocationSorter } from '@/components/providers/GeolocationSorter'
+import { NICHE } from '@/config/niche'
 
 export default async function FindProvidersPage({
     searchParams,
@@ -33,7 +34,7 @@ export default async function FindProvidersPage({
                 <div className="mb-8">
                     <GeolocationSorter />
                     <h1 className="text-4xl font-display font-bold text-primary mb-2">
-                        Explore Botox Providers
+                        Explore {NICHE.name} Providers
                     </h1>
                     <p className="text-gray-600">
                         Showing <span className="font-semibold text-primary">{providers.length}</span> results for
@@ -46,6 +47,20 @@ export default async function FindProvidersPage({
                 <Suspense fallback={<div className="h-32 bg-gray-50 animate-pulse rounded-2xl mb-8" />}>
                     <ProviderFilters currentCity={city} currentState={state} />
                 </Suspense>
+
+                {/* Algorithm Callout */}
+                <div className="bg-primary/5 border border-primary/10 rounded-2xl p-6 mb-8 flex items-start gap-4 max-w-2xl">
+                    <div className="p-3 bg-white rounded-xl shadow-sm border border-primary/5 shrink-0">
+                        <span className="text-2xl">📊</span>
+                    </div>
+                    <div>
+                        <h4 className="font-bold text-primary text-sm mb-1">Ranked by Proprietary Score</h4>
+                        <p className="text-xs text-gray-500 leading-relaxed">
+                            Our directory uses a 100% data-driven algorithm. Providers are ranked on
+                            <b> price transparency</b>, <b>verified patient sentiment</b>, and <b>market competitiveness</b>.
+                        </p>
+                    </div>
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {providers.map((provider: any) => (

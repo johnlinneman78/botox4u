@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Search, ShieldCheck, Star, TrendingUp } from 'lucide-react'
 import Logo from '@/components/layout/Logo'
+import { NICHE } from '@/config/niche'
 
 export default function Hero() {
     const [searchQuery, setSearchQuery] = useState('')
@@ -48,11 +49,12 @@ export default function Hero() {
                         </div>
 
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-[1.1] text-balance">
-                            Transparent Pricing for <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] to-[#f3e5ab]">Aesthetic Medicine</span>
+                            Your Defense Against <span className="text-[#d4af37]">High Prices</span> & Hidden Risks
                         </h1>
 
                         <p className="text-lg md:text-xl text-gray-300 mb-10 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
-                            We've verified credentials and scraped real per-unit pricing for <strong>600+ top injectors</strong>. No hidden fees, no pay-to-play rankings.
+                            It&apos;s your face. Don&apos;t fly blind. We&apos;ve verified credentials and scraped real {NICHE.priceUnit} pricing for thousands of {NICHE.providerTypePlural} so you don&apos;t have to.
+                            <span className="text-[#d4af37] font-medium"> Rankings are based on data, not ad dollars.</span>
                         </p>
 
                         <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto lg:mx-0 mb-12 shadow-2xl shadow-black/20 rounded-xl relative z-30">
@@ -81,23 +83,23 @@ export default function Hero() {
                             <div>
                                 <div className="flex items-center justify-center lg:justify-start gap-2 mb-1 text-[#d4af37]">
                                     <ShieldCheck className="w-5 h-5" />
-                                    <span className="font-bold text-xl">1,200+</span>
+                                    <span className="font-bold text-xl uppercase tracking-tighter">SAFE</span>
                                 </div>
-                                <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Verified MDs & RNs</div>
+                                <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Credential Verified</div>
                             </div>
                             <div>
                                 <div className="flex items-center justify-center lg:justify-start gap-2 mb-1 text-[#d4af37]">
                                     <TrendingUp className="w-5 h-5" />
-                                    <span className="font-bold text-xl">$12.50</span>
+                                    <span className="font-bold text-xl uppercase tracking-tighter">FAIR</span>
                                 </div>
-                                <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Avg. Unit Price</div>
+                                <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Real Market Pricing</div>
                             </div>
                             <div>
                                 <div className="flex items-center justify-center lg:justify-start gap-2 mb-1 text-[#d4af37]">
                                     <Star className="w-5 h-5" />
-                                    <span className="font-bold text-xl">4.9/5</span>
+                                    <span className="font-bold text-xl uppercase tracking-tighter">SCORE</span>
                                 </div>
-                                <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Patient Satisfaction</div>
+                                <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Algorithm Ranked</div>
                             </div>
                         </div>
                     </div>

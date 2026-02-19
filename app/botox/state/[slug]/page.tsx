@@ -4,6 +4,7 @@ import { CityList } from '@/components/state/CityList'
 import { STATE_MAP, getStateName } from '@/lib/constants'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { NICHE } from '@/config/niche'
 
 interface StatePageProps {
     params: { slug: string }
@@ -19,8 +20,8 @@ export async function generateMetadata({ params }: StatePageProps): Promise<Meta
     const stateName = getStateName(stateCode)
 
     return {
-        title: `Best Botox Providers in ${stateName} | Compare Costs & Reviews`,
-        description: `Find top-rated Botox injectors and medical spas across ${stateName}. View average costs, patient reviews, and verified clinics in every major city.`,
+        title: `Best ${NICHE.name} Providers in ${stateName} | Compare Costs & Reviews`,
+        description: `Find top-rated ${NICHE.name} ${NICHE.providerTypePlural} and medical spas across ${stateName}. View average costs, patient reviews, and verified clinics in every major city.`,
     }
 }
 
@@ -55,19 +56,19 @@ export default async function StatePage({ params }: StatePageProps) {
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto">
                         <h2 className="text-3xl font-display font-bold text-primary mb-8 text-center">
-                            Botox Regulations & Safety in {stateName}
+                            {NICHE.name} Regulations & Safety in {stateName}
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                             <div className="space-y-4">
                                 <h3 className="text-xl font-bold text-primary">Licensing Requirements</h3>
                                 <p className="text-gray-600 leading-relaxed text-sm">
-                                    In {stateName}, Botox injections must typically be performed by a licensed medical professional. This includes Medical Doctors (MDs), Registered Nurses (RNs) under supervision, and Physician Assistants (PAs). Always verify the credentials of your injector before treatment.
+                                    In {stateName}, {NICHE.name} injections must typically be performed by a licensed medical professional. This includes Medical Doctors (MDs), Registered Nurses (RNs) under supervision, and Physician Assistants (PAs). Always verify the credentials of your {NICHE.providerType} before treatment.
                                 </p>
                             </div>
                             <div className="space-y-4">
                                 <h3 className="text-xl font-bold text-primary">Patient Safety Tips</h3>
                                 <p className="text-gray-600 leading-relaxed text-sm">
-                                    When looking for Botox in {stateName}, ensure the facility is medical-grade. Avoid "Botox parties" in non-clinical settings. A reputable provider will always conduct a full consultation and explain the risks and rewards of the treatment.
+                                    When looking for {NICHE.name} in {stateName}, ensure the facility is medical-grade. Avoid "{NICHE.name} parties" in non-clinical settings. A reputable provider will always conduct a full consultation and explain the risks and rewards of the treatment.
                                 </p>
                             </div>
                         </div>

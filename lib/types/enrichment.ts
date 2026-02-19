@@ -36,6 +36,13 @@ export interface EnrichedProvider {
     minTreatmentPrice?: number | null;
     enriched_attrs?: any;
     reviews?: Review[];
+    score?: {
+        total: number;
+        price_points: number;
+        trust_points: number;
+        transparency_points: number;
+        responsiveness_points: number;
+    };
 }
 
 export interface Review {

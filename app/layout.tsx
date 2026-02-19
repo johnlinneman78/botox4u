@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NICHE } from '@/config/niche'
 import { Suspense } from 'react'
 import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
@@ -10,12 +11,12 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 export const metadata: Metadata = {
-  title: 'Botox-4-U.com - Find Top Providers & Compare Costs',
-  description: 'Find the best Botox injectors near you. Compare prices, read reviews, and book consultations with verified providers at Botox-4-U.com.',
-  keywords: 'botox, botox near me, botox cost, botox injector, cosmetic injections, dermal fillers',
+  title: `${NICHE.siteName} - Find Top ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)} & Compare Costs`,
+  description: `Find the best ${NICHE.name} ${NICHE.providerTypePlural} near you. Compare prices, read reviews, and book consultations with verified providers at ${NICHE.siteName}.`,
+  keywords: `${NICHE.name.toLowerCase()}, ${NICHE.name.toLowerCase()} near me, ${NICHE.name.toLowerCase()} cost, ${NICHE.providerType}, cosmetic injections`,
   openGraph: {
-    title: 'Botox-4-U.com - Find Top Providers & Compare Costs',
-    description: 'Find the best Botox injectors near you. Compare prices, read reviews, and book consultations.',
+    title: `${NICHE.siteName} - Find Top ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)} & Compare Costs`,
+    description: `Find the best ${NICHE.name} ${NICHE.providerTypePlural} near you. Compare prices, read reviews, and book consultations.`,
     type: 'website',
   },
 }

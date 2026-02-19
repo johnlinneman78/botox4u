@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/Badge'
 import Link from 'next/link'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { NICHE } from '@/config/niche'
 
 interface TreatmentCityPageProps {
     params: {
@@ -26,8 +27,8 @@ export async function generateMetadata({ params }: TreatmentCityPageProps): Prom
     if (!treatment) return { title: 'Treatment Not Found' }
 
     return {
-        title: `${treatment.name} in ${city}, ${state} | 2024 Cost & Best Injectors`,
-        description: `Compare ${treatment.name} costs, units, and results in ${city}. See average pricing from ${state} clinics and book top-rated specialized medical injectors.`,
+        title: `${treatment.name} in ${city}, ${state} | 2024 Cost & Best ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)}`,
+        description: `Compare ${treatment.name} costs, units, and results in ${city}. See average pricing from ${state} clinics and book top-rated specialized medical ${NICHE.providerTypePlural}.`,
         openGraph: {
             title: `${treatment.name} in ${city}: What to Expect & Local Costs`,
             description: `A complete guide to ${treatment.name} in ${city}, including pricing, unit estimates, and clinic recommendations.`,
@@ -81,10 +82,10 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
             },
             {
                 "@type": "Question",
-                "name": `How many units of Botox are needed for ${treatment.name}?`,
+                "name": `How many units of ${NICHE.name} are needed for ${treatment.name}?`,
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": `For ${treatment.name}, patients usually require between ${treatment.slug.includes('masseter') ? '40 and 60' : '15 and 25'} units for optimal results.`
+                    "text": `For ${treatment.name}, patients usually require between ${treatment.slug.includes('masseter') ? '40 and 60' : '15 and 25'} ${NICHE.priceUnit.split(' ').slice(-1)} for optimal results.`
                 }
             }
         ]
@@ -105,15 +106,15 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                 <div className="container mx-auto px-4 py-3 flex items-center gap-2 text-xs font-medium text-white/60">
                     <Link href="/" className="hover:text-white transition-colors">Home</Link>
                     <span>/</span>
-                    <Link href="/botox" className="hover:text-white transition-colors">Directory</Link>
+                    <Link href={NICHE.baseSlug.slice(0, -1)} className="hover:text-white transition-colors">Directory</Link>
                     <span>/</span>
                     {stateSlug && (
-                        <Link href={`/botox/state/${stateSlug}`} className="hover:text-white transition-colors capitalize">
+                        <Link href={`${NICHE.baseSlug}state/${stateSlug}`} className="hover:text-white transition-colors capitalize">
                             {stateSlug.replace(/-/g, ' ')}
                         </Link>
                     )}
                     <span>/</span>
-                    <Link href={`/botox/${citySlug}-${stateCode.toLowerCase()}`} className="hover:text-white transition-colors">
+                    <Link href={`${NICHE.baseSlug}${citySlug}-${stateCode.toLowerCase()}`} className="hover:text-white transition-colors">
                         {cityName}
                     </Link>
                     <span>/</span>
@@ -140,7 +141,7 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                     title={`${treatment.name} Overview`}
                     summary={`Based on verified data from ${providers.length} clinics in ${cityName}, here is what you can expect for ${treatment.name} pricing and treatment parameters.`}
                     items={[
-                        { label: 'Avg Cost', value: stats?.avgCost || 15, prefix: '$', suffix: '/unit' },
+                        { label: 'Avg Cost', value: stats?.avgCost || 15, prefix: '$', suffix: `/${NICHE.priceUnit.split(' ').slice(-1)}` },
                         { label: 'Total Units', value: treatment.slug.includes('masseter') ? '40-60' : '15-25' },
                         { label: 'Providers', value: providers.length },
                         { label: 'Duration', value: '4-6', suffix: 'months' }
@@ -188,7 +189,7 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                                     notes: 'Required for larger muscle mass or minimal movement.'
                                 }
                             ]}
-                            footer={`*Estimates based on an average cost of $${stats?.avgCost || 15} per unit in ${cityName}. Actual units required vary by individual anatomy.`}
+                            footer={`*Estimates based on an average cost of $${stats?.avgCost || 15} ${NICHE.priceUnit} in ${cityName}. Actual ${NICHE.priceUnit.split(' ').slice(-1)} required vary by individual anatomy.`}
                         />
 
                         {providers.length === 0 && (
@@ -205,11 +206,11 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                             </h3>
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center text-sm">
-                                    <span className="text-gray-500">Typical Units</span>
-                                    <span className="font-bold text-primary">{treatment.slug.includes('masseter') ? '40-60' : '15-25'} Units</span>
+                                    <span className="text-gray-500">Typical {NICHE.priceUnit.split(' ').slice(-1).map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('')}s</span>
+                                    <span className="font-bold text-primary">{treatment.slug.includes('masseter') ? '40-60' : '15-25'}</span>
                                 </div>
                                 <div className="flex justify-between items-center text-sm">
-                                    <span className="text-gray-500">Avg Cost per Unit</span>
+                                    <span className="text-gray-500">Avg Cost {NICHE.priceUnit}</span>
                                     <span className="font-bold text-secondary">${stats?.avgCost || 15}</span>
                                 </div>
                                 <hr className="border-gray-50" />

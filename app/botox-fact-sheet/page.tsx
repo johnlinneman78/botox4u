@@ -1,5 +1,5 @@
-import React from 'react'
 import { Info, HelpCircle, CheckCircle2, Clock, ShieldAlert } from 'lucide-react'
+import { NICHE } from '@/config/niche'
 
 export default function BotoxFactSheet() {
     return (
@@ -10,9 +10,9 @@ export default function BotoxFactSheet() {
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-[#1a2332] text-xs font-black tracking-widest uppercase mb-6 shadow-lg">
                         Medical Disclaimer: For Educational Purposes Only
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-display font-bold text-primary mb-6">The Botox Fact Sheet</h1>
+                    <h1 className="text-4xl md:text-6xl font-display font-bold text-primary mb-6">The {NICHE.name} Fact Sheet</h1>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                        Everything you need to know about neurotoxins, units, and what to expect before your first treatment.
+                        Everything you need to know about {NICHE.namePlural.toLowerCase()}, {NICHE.priceUnit.split(' ').slice(-1)}s, and what to expect before your first treatment.
                     </p>
                 </div>
             </div>
@@ -24,11 +24,11 @@ export default function BotoxFactSheet() {
                         <section>
                             <h2 className="text-3xl font-display font-bold text-primary mb-6 flex items-center gap-3">
                                 <Info className="text-secondary w-8 h-8" />
-                                What is Botox?
+                                What is {NICHE.name}?
                             </h2>
                             <div className="prose prose-lg text-gray-600">
                                 <p>
-                                    Botox (onabotulinumtoxinA) is a purified protein that temporarily relaxes the muscles responsible for creating wrinkles. While "Botox" is the most famous brand, other FDA-approved neurotoxins include <strong>Dysport, Xeomin, Jeuveau, and Daxxify.</strong>
+                                    {NICHE.name} is a professional aesthetic treatment designed to enhance your appearance and boost confidence. While there are several options available, {NICHE.siteName} helps you find the best {NICHE.providerTypePlural} for your needs.
                                 </p>
                                 <p className="mt-4">
                                     When injected into specific muscles, it blocks the nerve signals that cause contraction, resulting in smoother skin and a more youthful appearance.
@@ -63,20 +63,13 @@ export default function BotoxFactSheet() {
                                 Common Treatment Areas
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {[
-                                    { area: 'Forehead Lines', units: '10–30 Units', desc: 'Smoothing horizontal lines across the forehead.' },
-                                    { area: "Crow's Feet", units: '12–24 Units', desc: 'Smoothing lines around the outer corners of eyes.' },
-                                    { area: 'Glabelar (Frown) Lines', units: '20–30 Units', desc: 'The "11" lines between the eyebrows.' },
-                                    { area: 'Masseter (Jaw)', units: '40–60 Units', desc: 'Jaw slimming and TMJ pain relief.' },
-                                    { area: 'Lip Flip', units: '4–8 Units', desc: 'Subtle eversion of the upper lip.' },
-                                    { area: 'Bunny Lines', units: '4–10 Units', desc: 'Lines on the sides of the nose when smiling.' }
-                                ].map((item, idx) => (
+                                {NICHE.calculator.treatmentAreas.map((item, idx) => (
                                     <div key={idx} className="p-6 border border-gray-100 rounded-2xl hover:border-secondary/30 transition-colors">
                                         <div className="flex justify-between items-start mb-2">
-                                            <h3 className="font-bold text-primary">{item.area}</h3>
-                                            <span className="text-xs font-black text-secondary bg-secondary/10 px-2 py-0.5 rounded uppercase">{item.units}</span>
+                                            <h3 className="font-bold text-primary">{item.label}</h3>
+                                            <span className="text-xs font-black text-secondary bg-secondary/10 px-2 py-0.5 rounded uppercase">{item.minUnits || item.defaultUnits}–{item.maxUnits || item.defaultUnits * 1.5} {NICHE.priceUnit.split(' ').slice(-1)}s</span>
                                         </div>
-                                        <p className="text-sm text-gray-500">{item.desc}</p>
+                                        <p className="text-sm text-gray-500">{item.description}</p>
                                     </div>
                                 ))}
                             </div>
@@ -110,9 +103,9 @@ export default function BotoxFactSheet() {
 
                         <div className="p-8 border border-gray-100 rounded-3xl bg-white shadow-sm">
                             <HelpCircle className="w-8 h-8 text-secondary mb-4" />
-                            <h3 className="text-lg font-bold text-primary mb-4">Units vs. Price?</h3>
+                            <h3 className="text-lg font-bold text-primary mb-4">{NICHE.priceUnit.split(' ').slice(-1).map(u => u.charAt(0).toUpperCase() + u.slice(1))}s vs. Price?</h3>
                             <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                                Most ethical providers charge <strong>per unit</strong>. Beware of clinics charging "per area," as this often leads to over-paying for small areas or under-treatment for large ones.
+                                Most ethical {NICHE.providerTypePlural} charge <strong>{NICHE.priceUnit}</strong>. Beware of clinics charging "per area," as this often leads to over-paying for small areas or under-treatment for large ones.
                             </p>
                             <a href="/calculator" className="text-sm font-bold text-secondary hover:underline">
                                 Try our Unit Calculator →

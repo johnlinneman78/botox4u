@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import { Card } from '@/components/ui/Card'
 import { STATE_MAP } from '@/lib/constants'
+import { NICHE } from '@/config/niche'
 
 export const metadata = {
-    title: 'Botox Directory by State | Find Local Injectors',
-    description: 'Browse our comprehensive directory of Botox providers across the United States. Select your state to see top-rated clinics and local pricing.',
+    title: `${NICHE.name} Directory by State | Find Local ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)}`,
+    description: `Browse our comprehensive directory of ${NICHE.name} providers across the United States. Select your state to see top-rated clinics and local pricing.`,
 }
 
 export default function StatesPage() {
@@ -18,7 +19,7 @@ export default function StatesPage() {
                         Provider Directory by <span className="text-secondary">State</span>
                     </h1>
                     <p className="text-lg text-gray-600">
-                        Find verified cosmetic injectors, medical spas, and clinics in all 50 states. Compare local pricing averages and read authentic patient reviews.
+                        Find verified cosmetic ${NICHE.providerTypePlural}, medical spas, and clinics in all 50 states. Compare local pricing averages and read authentic patient reviews.
                     </p>
                 </div>
 
@@ -26,7 +27,7 @@ export default function StatesPage() {
                     {states.map((slug) => {
                         const name = slug.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ')
                         return (
-                            <Link key={slug} href={`/botox/state/${slug}`} className="group">
+                            <Link key={slug} href={`${NICHE.baseSlug}state/${slug}`} className="group">
                                 <Card className="p-4 text-center hover:border-secondary/30 hover:shadow-md transition-all">
                                     <span className="font-bold text-primary group-hover:text-secondary transition-colors uppercase tracking-wide text-sm">
                                         {name}

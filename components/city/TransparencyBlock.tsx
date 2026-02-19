@@ -1,5 +1,6 @@
 import { ShieldCheck, Eye, Lock } from 'lucide-react'
 import Logo from '@/components/layout/Logo'
+import { NICHE } from '@/config/niche'
 
 export function TransparencyBlock({ city }: { city?: string }) {
     return (
@@ -22,10 +23,10 @@ export function TransparencyBlock({ city }: { city?: string }) {
                                 </div>
                             </div>
                             <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-6 leading-tight">
-                                Why us vs. Yelp, Google, or RealSelf?
+                                Because what&apos;s in the needle matters.
                             </h2>
                             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                                We show <strong>real per-unit pricing</strong> and <strong>verified injector qualifications</strong> for Botox and Dysport {city ? `in ${city}` : 'nationwide'}. No pay-to-play rankings; providers can&apos;t hide their pricing or pay to suppress negative data.
+                                Aesthetic treatments are a big decision and a significant investment. <strong>You deserve a defense.</strong> We show real {NICHE.priceUnit} pricing and verified {NICHE.providerType} credentials so you don&apos;t have to fly blind.
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
@@ -43,15 +44,21 @@ export function TransparencyBlock({ city }: { city?: string }) {
                             </div>
                         </div>
 
-                        <div className="bg-primary p-8 md:p-10 rounded-[2.5rem] text-white shadow-2xl shadow-primary/20 relative">
+                        <div className="bg-[#1a2332] p-8 md:p-10 rounded-[2.5rem] text-white shadow-2xl shadow-primary/20 relative">
                             <blockquote className="relative italic text-xl md:text-2xl font-light leading-relaxed mb-8">
-                                &quot;In an industry known for opaque pricing and 'hidden' costs, we built Botox-4u.com to bring actual transparency to aesthetic medicine.&quot;
+                                &quot;In an industry where patients often pay for the clinic&apos;s massive overhead, we built {NICHE.siteName} to help you find the actual value and safety you deserve.&quot;
                             </blockquote>
                             <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center font-black text-white">JL</div>
+                                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-secondary shrink-0">
+                                    <img
+                                        src="/images/founder.jpg"
+                                        alt="John Linneman"
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
                                 <div>
-                                    <div className="font-bold">John Linneman</div>
-                                    <div className="text-xs text-gray-400 uppercase tracking-widest font-bold">Founder, Botox-4u.com</div>
+                                    <div className="font-bold">{NICHE.outreach.senderName}</div>
+                                    <div className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">{NICHE.outreach.senderTitle}</div>
                                 </div>
                             </div>
                         </div>

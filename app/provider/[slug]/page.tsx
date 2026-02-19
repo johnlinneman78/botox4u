@@ -9,6 +9,8 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
 import { ReviewCarousel } from '@/components/providers/ReviewCarousel'
+import { JsonLd, generateMedicalClinicSchema, generateBreadcrumbSchema } from '@/components/seo/JsonLd'
+import { NICHE } from '@/config/niche'
 
 interface ProviderProfileProps {
     params: { slug: string }
@@ -21,8 +23,8 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
     if (!provider) return { title: 'Provider Not Found' }
 
     return {
-        title: `${provider.name} | Botox in ${provider.city}, ${provider.state} | Botox-4U`,
-        description: `View pricing, services, and reviews for ${provider.name} in ${provider.city}, ${provider.state}. Book a consultation for Botox and aesthetic treatments.`
+        title: `${provider.name} | ${NICHE.name} in ${provider.city}, ${provider.state} | ${NICHE.siteName}`,
+        description: `View pricing, services, and reviews for ${provider.name} in ${provider.city}, ${provider.state}. Book a consultation for ${NICHE.name} and aesthetic treatments.`
     }
 }
 
@@ -34,8 +36,17 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
         notFound()
     }
 
+    const schema = generateMedicalClinicSchema(provider);
+    const breadcrumbs = generateBreadcrumbSchema([
+        { name: 'Home', item: '/' },
+        { name: provider.city, item: `${NICHE.baseSlug}/${provider.state.toLowerCase()}/${provider.city.toLowerCase().replace(/ /g, '-')}` },
+        { name: provider.name, item: `/provider/${provider.slug}` }
+    ]);
+
     return (
         <div className="bg-gray-50 min-h-screen">
+            <JsonLd data={schema} />
+            <JsonLd data={breadcrumbs} />
             {/* Hero Image Section */}
             <section className="relative h-[300px] md:h-[450px] w-full overflow-hidden">
                 <img
@@ -193,12 +204,12 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                 <div className="space-y-4">
                                     {(provider.pricePerUnit || provider.enriched_attrs?.price_per_unit_botox) ? (
                                         <div className="flex justify-between items-center p-4 bg-secondary/5 rounded-xl border border-secondary/10">
-                                            <span className="font-bold text-primary">Botox Pricing</span>
-                                            <span className="text-secondary font-black text-xl">{formatCurrency(Number(provider.pricePerUnit || provider.enriched_attrs?.price_per_unit_botox))}/unit</span>
+                                            <span className="font-bold text-primary">{NICHE.name} Pricing</span>
+                                            <span className="text-secondary font-black text-xl">{formatCurrency(Number(provider.pricePerUnit || provider.enriched_attrs?.price_per_unit_botox))}/{NICHE.priceUnit.split(' ').slice(-1)}</span>
                                         </div>
                                     ) : (
                                         <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-100">
-                                            <span className="font-bold text-primary">Botox / Dysport</span>
+                                            <span className="font-bold text-primary">{NICHE.namePlural}</span>
                                             <span className="text-gray-500 font-bold">Pricing upon request</span>
                                         </div>
                                     )}
@@ -239,7 +250,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                     )}
 
                                     <div className="mt-4 p-4 bg-primary/5 rounded-xl text-xs text-primary/70 leading-relaxed">
-                                        <strong>Market Note:</strong> Typical {provider.city} pricing for Botox ranges from $12 to $16 per unit.
+                                        <strong>Market Note:</strong> Typical {provider.city} pricing for {NICHE.name} ranges from $12 to $16 {NICHE.priceUnit}.
                                     </div>
 
                                     {provider.enriched_attrs?.new_patient_special && (

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://botox-4u.com/sitemap.xml
+Sitemap: https://botox-4u.com/server-sitemap.xml

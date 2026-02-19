@@ -5,6 +5,7 @@ import { Resend } from 'resend'
 import { getSupabaseServer } from '@/lib/supabase/factory'
 import { cookies } from 'next/headers'
 import { checkRateLimit, sanitizeString } from '@/lib/validation'
+import { NICHE } from '@/config/niche'
 
 const getResend = () => {
     const apiKey = process.env.SENDGRID_API_KEY || process.env.RESEND_API_KEY;
@@ -13,13 +14,13 @@ const getResend = () => {
 }
 
 const getSenderEmail = () => {
-    return process.env.CONTACT_EMAIL || 'hello@botox-4u.com';
+    return process.env.CONTACT_EMAIL || NICHE.outreach.senderEmail;
 }
 
 const getLeadEmailHtml = (lead: any, providerName: string) => `
   <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
     <h2 style="color: #1a2332;">New Patient Inquiry</h2>
-    <p>You have received a new lead from <strong>Botox-4u.com</strong> for <strong>${providerName}</strong>.</p>
+    <p>You have received a new lead from <strong>${NICHE.siteName}</strong> for <strong>${providerName}</strong>.</p>
     <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
     <p><strong>Patient Name:</strong> ${lead.full_name}</p>
     <p><strong>Email:</strong> ${lead.email}</p>
@@ -147,7 +148,7 @@ export async function submitLead(formData: FormData) {
             if (resend) {
                 try {
                     await resend.emails.send({
-                        from: `Botox-4u.com <${getSenderEmail()}>`,
+                        from: `${NICHE.siteName} <${getSenderEmail()}>`,
                         to: provider.email,
                         subject: `New Patient Lead: ${lead.full_name}`,
                         html: getLeadEmailHtml(lead, provider.name)
@@ -260,4 +261,24 @@ export async function getLeadStats() {
         quietProviders: 0,
         pendingVerifications: pendingVerifications || 0
     }
+}
+
+export async function getRecentActivity() {
+    const supabase = await getSupabaseServer(await cookies())
+    if (!supabase) return { leads: [], claims: [] }
+
+    const { data: leads } = await supabase
+        .from('leads')
+        .select('*, providers(name)')
+        .order('created_at', { ascending: false })
+        .limit(10)
+
+    const { data: claims } = await supabase
+        .from('providers')
+        .select('*')
+        .eq('outreach_status', 'claimed_pending')
+        .order('verified_at', { ascending: false })
+        .limit(10)
+
+    return { leads: leads || [], claims: claims || [] }
 }

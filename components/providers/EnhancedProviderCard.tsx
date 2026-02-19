@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Star, MapPin, CheckCircle, ExternalLink, X } from 'lucide-react'
 import { EnrichedProvider } from '@/lib/types/enrichment'
 import { LeadForm } from './LeadForm'
+import { NICHE } from '@/config/niche'
 
 interface EnhancedProviderCardProps {
     provider: EnrichedProvider
@@ -46,6 +47,23 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                     {provider.badges && provider.badges.length > 1 && (
                         <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-white text-[10px] font-medium">
                             +{provider.badges.length - 1}
+                        </div>
+                    )}
+
+                    {/* Botox-4U Score Badge */}
+                    {provider.score && (
+                        <div className="absolute bottom-3 left-3 bg-primary text-white px-3 py-1.5 rounded-xl shadow-lg border border-white/10 flex items-center gap-2 group/score transition-all">
+                            <div className="flex flex-col">
+                                <span className="text-[10px] font-bold uppercase tracking-tighter opacity-80 leading-none mb-0.5">{NICHE.name}-4U Score</span>
+                                <span className="text-xl font-display font-black leading-none">{provider.score.total}</span>
+                            </div>
+                            <div className="w-[1px] h-6 bg-white/20" />
+                            <div className="flex flex-col">
+                                <span className="text-[8px] font-bold uppercase tracking-widest opacity-70">Grade</span>
+                                <span className="text-xs font-black">
+                                    {provider.score.total >= 90 ? 'A+' : provider.score.total >= 80 ? 'A' : provider.score.total >= 70 ? 'B' : 'C'}
+                                </span>
+                            </div>
                         </div>
                     )}
                 </div>
@@ -98,7 +116,7 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                                         />
                                     ))}
                                 </div>
-                                <span className="text-xs font-bold text-gray-900">{provider.rating} Rating from Google</span>
+                                <span className="text-xs font-bold text-gray-900">{provider.rating} {NICHE.googleAttribution.ratingText}</span>
                             </div>
                             <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">{provider.review_count} Patient Reviews</span>
                             <div className="mt-2">
@@ -123,11 +141,11 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                     <div className="flex flex-wrap gap-2 mb-4 text-xs font-semibold">
                         {provider.price_per_unit ? (
                             <span className="bg-blue-50 text-blue-700 px-2 py-1 rounded-md border border-blue-100/50">
-                                Botox ${provider.price_per_unit}/u
+                                {NICHE.name} {NICHE.priceCurrency}{provider.price_per_unit}/{NICHE.priceUnit.split(' ').slice(-1)}
                             </span>
                         ) : (
                             <span className="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-md border border-emerald-100/50">
-                                Botox $14/u est.
+                                {NICHE.name} {NICHE.priceCurrency}{NICHE.priceRange.min + 4}/{NICHE.priceUnit.split(' ').slice(-1)} est.
                             </span>
                         )}
                     </div>

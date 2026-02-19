@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Star, ChevronRight, ExternalLink } from 'lucide-react'
+import { NICHE } from '@/config/niche'
 
 interface ReviewCarouselProps {
     reviews: any[]
@@ -29,7 +30,7 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId }: ReviewC
                 </h3>
 
                 <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                    Based on <span className="font-bold text-primary">{totalReviews} verified patient reviews</span> on Google. We prioritize clinics with consistent high ratings and positive patient outcomes.
+                    Based on <span className="font-bold text-primary">{totalReviews} verified patient reviews</span>. We prioritize {NICHE.providerTypePlural} with consistent high ratings and positive patient outcomes.
                 </p>
 
                 {/* Top Reviews Display */}
@@ -48,7 +49,7 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId }: ReviewC
                                 <div className="flex justify-between items-center">
                                     <div className="flex flex-col">
                                         <span className="text-xs font-bold text-primary">{review.author_name}</span>
-                                        <span className="text-[10px] text-gray-400 font-medium">Verified Patient • Review from Google</span>
+                                        <span className="text-[10px] text-gray-400 font-medium">Verified {NICHE.providerType === 'injector' ? 'Patient' : 'Customer'} • {NICHE.googleAttribution.reviewText}</span>
                                     </div>
                                     <div className="opacity-40">
                                         <img
@@ -71,7 +72,7 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId }: ReviewC
                         className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#4285F4] text-white rounded-2xl text-md font-bold hover:bg-[#357ae8] transition-all shadow-lg shadow-blue-500/20 group"
                     >
                         <ExternalLink className="w-5 h-5" />
-                        View All Reviews on Google
+                        View All {NICHE.googleAttribution.reviewText}s
                     </a>
                 </div>
 
@@ -82,7 +83,7 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId }: ReviewC
                         className="h-5 opacity-80"
                     />
                     <p className="text-xs text-gray-400 font-medium uppercase tracking-widest">
-                        Google Places Data Verified • 2026 Standard
+                        Data Verified • {new Date().getFullYear()} Standard
                     </p>
                 </div>
             </div>

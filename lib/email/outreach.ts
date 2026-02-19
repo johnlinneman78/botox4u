@@ -1,51 +1,51 @@
 import { Resend } from 'resend';
+import { NICHE } from '@/config/niche';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const SENDER = process.env.CONTACT_EMAIL || 'John from Botox 4U <hello@botox-4u.com>';
+const SENDER = process.env.CONTACT_EMAIL || `${NICHE.outreach.senderName} from ${NICHE.siteName} <${NICHE.outreach.senderEmail}>`;
 
-export type OutreachEmailType = 'notification' | 'followup' | 'value_add';
+export type OutreachEmailType = 'notification' | 'followup' | 'final';
 
 export const OUTREACH_TEMPLATES = {
     notification: (provider: any) => ({
-        subject: `You're already listed on a new Botox directory for ${provider.city}`,
+        subject: `Your ${provider.city} ${NICHE.name} listing is live`,
         html: `
             <div style="font-family: sans-serif; line-height: 1.6; color: #1a2332; max-width: 600px;">
-                <p>Hi,</p>
-                <p>We’ve listed <strong>${provider.name}</strong> in our new Botox directory for <strong>${provider.city}</strong>, with your real per-unit pricing and clinic photos so patients can compare injectors transparently.</p>
-                <p><strong>Your Page:</strong> <a href="https://botox-4u.com/provider/${provider.slug}">https://botox-4u.com/provider/${provider.slug}</a></p>
-                <p>During beta, we’ll send any leads from ${provider.city} to you for free and highlight clinics that are up-front about pricing and credentials.</p>
-                <p>If you’d like to update your info or see how many people are viewing your listing, just reply and I’ll set up access.</p>
-                <p>Best,<br><br><strong>John Linneman</strong><br>Founder, Botox 4U</p>
+                <p>Hi ${provider.name},</p>
+                <p>I just added your clinic to <a href="https://${NICHE.domain}">${NICHE.siteName}</a> — a new directory helping patients in ${provider.city} find and compare ${NICHE.providerTypePlural} by price and credentials.</p>
+                <p><strong>Your listing:</strong> <a href="https://${NICHE.domain}/provider/${provider.slug}">https://${NICHE.domain}/provider/${provider.slug}</a></p>
+                <p>It's showing your ${NICHE.priceUnit} pricing and linking to your reviews. No action needed — I just wanted you to know you're there.</p>
+                <p>If anything looks wrong or you'd like to update it, just reply to this email.</p>
+                <p>${NICHE.outreach.senderName}<br>${NICHE.outreach.senderTitle}</p>
+                <p><strong>PS:</strong> We're sending leads from ${provider.city} to listed providers for free during beta. Happy to make sure yours are coming through.</p>
                 <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
                 <p style="font-size: 11px; color: #999;">
-                    You are receiving this because your clinic is listed on Botox-4U.com. 
-                    To unsubscribe, reply "Unsubscribe" or <a href="https://botox-4u.com/unsubscribe?domain=${encodeURIComponent(provider.website || '')}">click here</a>.
+                    You are receiving this because your clinic is listed on ${NICHE.siteName}. 
+                    To unsubscribe, reply "Unsubscribe" or <a href="https://${NICHE.domain}/unsubscribe?domain=${encodeURIComponent(provider.website || '')}">click here</a>.
                 </p>
             </div>
         `
     }),
     followup: (provider: any) => ({
-        subject: `Quick question about ${provider.name}`,
+        subject: `Is your pricing accurate on ${NICHE.siteName}?`,
         html: `
             <div style="font-family: sans-serif; line-height: 1.6; color: #1a2332; max-width: 600px;">
-                <p>Hi again,</p>
-                <p>I sent over a link to your new listing on Botox 4U a few days ago. Did you have a chance to check it out?</p>
-                <p><a href="https://botox-4u.com/provider/${provider.slug}">View your listing here</a></p>
-                <p>We're seeing a lot of interest in <strong>${provider.city}</strong> lately. I'd love to make sure your pricing and "Black Diamond" status (if applicable) are 100% accurate before we start routing more patient inquiries your way.</p>
-                <p>Any updates needed?</p>
-                <p>Best,<br><br><strong>John Linneman</strong><br>Founder, Botox 4U</p>
+                <p>Hi ${provider.name},</p>
+                <p>Sent you a note a few days ago about your listing in ${provider.city}: <a href="https://${NICHE.domain}/provider/${provider.slug}">https://${NICHE.domain}/provider/${provider.slug}</a></p>
+                <p>One thing patients ask us constantly is whether the pricing they see is current. If your ${NICHE.priceUnit} price has changed or you'd like to add a range, I can update it manually — just reply with the number.</p>
+                <p>Takes 2 minutes and puts you ahead of every clinic in ${provider.city} that hasn't confirmed theirs yet.</p>
+                <p>${NICHE.outreach.senderName}<br>${NICHE.siteName}</p>
             </div>
         `
     }),
-    value_add: (provider: any) => ({
-        subject: `Patient search activity in ${provider.city}`,
+    final: (provider: any) => ({
+        subject: `Last note about your ${provider.city} listing`,
         html: `
             <div style="font-family: sans-serif; line-height: 1.6; color: #1a2332; max-width: 600px;">
-                <p>Hi,</p>
-                <p>Quick update — your listing for <strong>${provider.name}</strong> is performing well. We've had a surge of searches for "Botox in ${provider.city}" this week.</p>
-                <p>I noticed you don't have a "New Patient Special" listed on your profile yet. Clinics with a small first-time offer (like $50 off or $10/unit) are currently getting 3x more clicks in our beta tests.</p>
-                <p>Would you like me to add a special offer to your page? Just let me know what works for you.</p>
-                <p>Best,<br><br><strong>John Linneman</strong><br>Founder, Botox 4U</p>
+                <p>Hi ${provider.name},</p>
+                <p>Last email from me. Your listing has been live for two weeks: <a href="https://${NICHE.domain}/provider/${provider.slug}">https://${NICHE.domain}/provider/${provider.slug}</a></p>
+                <p>If you ever want to update your pricing, add photos, or see how many patients are viewing your profile — I'm at this address.</p>
+                <p>${NICHE.outreach.senderName}<br>${NICHE.siteName}</p>
             </div>
         `
     })

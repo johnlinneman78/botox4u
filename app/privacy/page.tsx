@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { NICHE } from '@/config/niche'
 
 export default function PrivacyPage() {
     return (
@@ -9,7 +10,7 @@ export default function PrivacyPage() {
 
                 <section className="space-y-6 text-gray-700 leading-relaxed">
                     <p>
-                        At Botox-4u.com, we take your privacy seriously. This policy describes how we collect, use, and protect your personal information when you use our services.
+                        At {NICHE.siteName}, we take your privacy seriously. This policy describes how we collect, use, and protect your personal information when you use our services.
                     </p>
 
                     <h2 className="text-xl font-bold text-gray-900 mt-8">1. Information We Collect</h2>
@@ -19,7 +20,7 @@ export default function PrivacyPage() {
 
                     <h2 className="text-xl font-bold text-gray-900 mt-8">2. How We Use Your Information</h2>
                     <p>
-                        We use the information we collect to connect you with local cosmetic providers, send you updates and newsletters (if you opt-in), and improve our website functionality.
+                        We use the information we collect to connect you with local {NICHE.name} providers, send you updates and newsletters (if you opt-in), and improve our website functionality.
                     </p>
 
                     <h2 className="text-xl font-bold text-gray-900 mt-8">3. Information Sharing</h2>

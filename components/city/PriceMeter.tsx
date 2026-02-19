@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { NICHE } from '@/config/niche'
 
 interface PriceMeterProps {
     avgCost: number
@@ -8,13 +9,13 @@ interface PriceMeterProps {
 }
 
 export function PriceMeter({ avgCost, city }: PriceMeterProps) {
-    const nationalAvg = 15
+    const nationalAvg = Math.round((NICHE.priceRange.min + NICHE.priceRange.max) / 2)
     const [percentage, setPercentage] = useState(50)
 
-    // Calculate position: $10 is 0%, $20 is 100%, $15 is 50%
+    // Calculate position based on niche range
     useEffect(() => {
-        const min = 10
-        const max = 20
+        const min = NICHE.priceRange.min
+        const max = NICHE.priceRange.max
         const p = ((avgCost - min) / (max - min)) * 100
         const clampedP = Math.min(Math.max(p, 5), 95)
 
@@ -44,8 +45,8 @@ export function PriceMeter({ avgCost, city }: PriceMeterProps) {
                     </div>
 
                     <div className="bg-gray-50 px-6 py-4 rounded-2xl border border-gray-100 flex items-baseline gap-2">
-                        <span className="text-4xl font-display font-bold text-primary">${avgCost}</span>
-                        <span className="text-gray-400 font-medium text-sm">/ unit avg</span>
+                        <span className="text-4xl font-display font-bold text-primary">{NICHE.priceCurrency}{avgCost}</span>
+                        <span className="text-gray-400 font-medium text-sm">/{NICHE.priceUnit.split(' ').slice(-1)} avg</span>
                     </div>
                 </div>
 
@@ -54,7 +55,7 @@ export function PriceMeter({ avgCost, city }: PriceMeterProps) {
                     {/* Scale Labels */}
                     <div className="flex justify-between text-[10px] font-bold text-gray-300 uppercase tracking-widest mb-4">
                         <span>Great Value</span>
-                        <span className="text-gray-400">National Average ($15)</span>
+                        <span className="text-gray-400">National Average ({NICHE.priceCurrency}{nationalAvg})</span>
                         <span>Premium Market</span>
                     </div>
 
@@ -91,10 +92,10 @@ export function PriceMeter({ avgCost, city }: PriceMeterProps) {
 
                     {/* Tick Marks */}
                     <div className="flex justify-between px-1 mt-4">
-                        {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((val) => (
+                        {Array.from({ length: NICHE.priceRange.max - NICHE.priceRange.min + 1 }, (_, i) => NICHE.priceRange.min + i).map((val) => (
                             <div key={val} className="flex flex-col items-center gap-1">
-                                <div className={`w-0.5 h-2 ${val % 5 === 0 ? 'bg-gray-300 h-3' : 'bg-gray-200'}`} />
-                                <span className={`text-[10px] font-bold ${val === 15 ? 'text-gray-500' : 'text-gray-300'}`}>${val}</span>
+                                <div className={`w-0.5 h-2 ${val === nationalAvg ? 'bg-gray-300 h-3' : 'bg-gray-200'}`} />
+                                <span className={`text-[10px] font-bold ${val === nationalAvg ? 'text-gray-500' : 'text-gray-300'}`}>{NICHE.priceCurrency}{val}</span>
                             </div>
                         ))}
                     </div>

@@ -1,11 +1,11 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-    siteUrl: process.env.NEXT_PUBLIC_APP_URL || 'https://botoxdirectory.com',
+    siteUrl: process.env.NEXT_PUBLIC_APP_URL || 'https://botox-4u.com',
     generateRobotsTxt: true,
     exclude: ['/provider/login', '/provider/dashboard'],
     robotsTxtOptions: {
         additionalSitemaps: [
-            'https://botoxdirectory.com/server-sitemap.xml',
+            'https://botox-4u.com/server-sitemap.xml',
         ],
     },
 }

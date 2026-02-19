@@ -1,4 +1,4 @@
-import { getLeadStats } from '@/lib/actions/leads'
+import { getLeadStats, getRecentActivity } from '@/lib/actions/leads'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import Link from 'next/link'
@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function AdminDashboard() {
     const stats = await getLeadStats()
+    const activity = await getRecentActivity()
 
     return (
         <main className="min-h-screen bg-[#0a0c10] text-gray-100 py-20 px-4">
@@ -69,6 +70,68 @@ export default async function AdminDashboard() {
                         <CardContent>
                             <div className="text-5xl font-black text-white">{stats.quietProviders || 490}+</div>
                             <p className="text-xs text-gray-500 mt-2 font-medium">Untapped Opportunities</p>
+                        </CardContent>
+                    </Card>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    {/* Recent Leads */}
+                    <Card className="bg-[#12151c]/50 border-white/5 backdrop-blur-2xl">
+                        <CardHeader>
+                            <CardTitle className="text-white">Recent Leads</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="space-y-4">
+                                {activity.leads.length > 0 ? (
+                                    activity.leads.map((lead: any) => (
+                                        <div key={lead.id} className="p-4 bg-white/5 rounded-xl border border-white/5 flex flex-col gap-1">
+                                            <div className="flex justify-between items-start">
+                                                <span className="font-bold text-white">{lead.full_name}</span>
+                                                <span className="text-[10px] text-gray-500 uppercase">{new Date(lead.created_at).toLocaleDateString()}</span>
+                                            </div>
+                                            <div className="text-sm text-gray-400">
+                                                Inquiry for <span className="text-secondary">{lead.providers?.name || 'City-Wide'}</span>
+                                            </div>
+                                            <div className="text-xs text-gray-500 flex gap-2 mt-1">
+                                                <span>{lead.treatment_type}</span>
+                                                <span>•</span>
+                                                <span>{lead.city}, {lead.state}</span>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p className="text-center py-8 text-gray-500">No recent leads.</p>
+                                )}
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    {/* Pending Claims */}
+                    <Card className="bg-[#12151c]/50 border-white/5 backdrop-blur-2xl border-l-secondary/20">
+                        <CardHeader>
+                            <CardTitle className="text-white">Pending Claims</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="space-y-4">
+                                {activity.claims.length > 0 ? (
+                                    activity.claims.map((claim: any) => (
+                                        <div key={claim.id} className="p-4 bg-white/5 rounded-xl border border-white/5 flex flex-col gap-1">
+                                            <div className="flex justify-between items-start">
+                                                <span className="font-bold text-white">{claim.name}</span>
+                                                <Badge className="bg-secondary/20 text-secondary text-[10px] border-none uppercase">Claimed</Badge>
+                                            </div>
+                                            <div className="text-sm text-gray-400">
+                                                {claim.city}, {claim.state}
+                                            </div>
+                                            <Link href={`/provider/${claim.slug}`} className="text-xs text-secondary hover:underline mt-1 inline-block">
+                                                Review Listing →
+                                            </Link>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p className="text-center py-8 text-gray-500">No pending claims.</p>
+                                )}
+                            </div>
                         </CardContent>
                     </Card>
                 </div>

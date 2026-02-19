@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { Button } from '@/components/ui/Button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 import { submitLead } from '@/lib/actions/leads'
+import { NICHE } from '@/config/niche'
 
 const leadFormSchema = z.object({
     provider_id: z.string().uuid().optional(),
@@ -48,8 +49,8 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
             provider_id: providerId,
             city: city,
             state: state,
-            treatment_type: 'botox',
-            budget_range: '300-500',
+            treatment_type: NICHE.treatments[0].toLowerCase().replace(/\s+/g, '-'),
+            budget_range: `${NICHE.priceRange.min * 20}-${NICHE.priceRange.max * 20}`, // Approximate estimate logic
             timeframe: 'asap',
             call_time: 'morning',
         },
@@ -157,11 +158,11 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                                 {...register('treatment_type')}
                                 className="w-full px-4 py-3 rounded-lg border border-gray-100 bg-gray-50 text-sm focus:ring-2 focus:ring-primary/10 outline-none appearance-none"
                             >
-                                <option value="botox">Botox / Dysport</option>
-                                <option value="filler">Dermal Fillers</option>
-                                <option value="masseter">Masseter Botox</option>
-                                <option value="lipflip">Lip Flip</option>
-                                <option value="tmj">TMJ Treatment</option>
+                                {NICHE.treatments.map((treatment) => (
+                                    <option key={treatment} value={treatment.toLowerCase().replace(/\s+/g, '-')}>
+                                        {treatment}
+                                    </option>
+                                ))}
                                 <option value="other">Other / Consultation</option>
                             </select>
                         </div>
@@ -174,10 +175,11 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                                     {...register('budget_range')}
                                     className="w-full px-4 py-3 rounded-lg border border-gray-100 bg-gray-50 text-sm focus:ring-2 focus:ring-primary/10 outline-none appearance-none"
                                 >
-                                    <option value="under-300">Under $300</option>
-                                    <option value="300-500">$300 - $500</option>
-                                    <option value="500-1000">$500 - $1,000</option>
-                                    <option value="1000+">$1,000+</option>
+                                    {NICHE.leadForm.budgetRanges.map((range) => (
+                                        <option key={range.value} value={range.value}>
+                                            {range.label}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                             <div className="grid grid-cols-1 gap-1">
@@ -218,7 +220,7 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                                 />
                             </div>
                             <label className="text-[11px] text-gray-500 leading-tight">
-                                Send me exclusive Botox deals, pricing updates, and clinic specials in my area.
+                                Send me exclusive {NICHE.name} deals, pricing updates, and clinic specials in my area.
                                 <span className="text-gray-400"> No spam, unsubscribe anytime.</span>
                             </label>
                         </div>

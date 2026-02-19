@@ -2,6 +2,7 @@
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { MapPin, Star, ShieldCheck } from 'lucide-react'
+import { NICHE } from '@/config/niche'
 
 interface CityHeroProps {
     city: string
@@ -40,7 +41,7 @@ export function CityHero({ city, state, treatmentName, providerCount }: CityHero
                     </h1>
 
                     <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed font-light max-w-2xl mx-auto">
-                        Compare {providerCount} medical professionals, view real per-unit pricing, and check verified credentials.
+                        Compare {providerCount} medical professionals, view real {NICHE.priceUnit} pricing, and check verified credentials.
                         No hidden fees. No pay-to-play.
                     </p>
 
@@ -67,7 +68,7 @@ export function CityHero({ city, state, treatmentName, providerCount }: CityHero
                             <div className="text-[10px] uppercase tracking-wider text-gray-400">Clinics</div>
                         </div>
                         <div className="text-center md:text-left md:border-r border-white/10 px-4">
-                            <div className="text-2xl font-bold text-secondary mb-1">$10-16</div>
+                            <div className="text-2xl font-bold text-secondary mb-1">{NICHE.priceCurrency}{NICHE.priceRange.min}-{NICHE.priceRange.max}</div>
                             <div className="text-[10px] uppercase tracking-wider text-gray-400">Price Range</div>
                         </div>
                         <div className="text-center md:text-left md:border-r border-white/10 px-4">

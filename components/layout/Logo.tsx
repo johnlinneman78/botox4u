@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { NICHE } from '@/config/niche'
 
 interface LogoProps {
     className?: string
@@ -19,8 +20,8 @@ export function LogoPrecision({ className = "", theme = 'light' }: { className?:
                     <stop offset="100%" stopColor="#d4af37" />
                 </linearGradient>
             </defs>
-            <text x="0" y="60" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '48px', fontWeight: '700' }} fill={textColor}>Botox<tspan fill="url(#goldText)">-4u</tspan>.com</text>
-            <text x="2" y="85" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '10px', fontWeight: '800' }} fill="#94a3b8" letterSpacing="0.4em">VERIFIED MEDICAL DIRECTORY</text>
+            <text x="0" y="60" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '48px', fontWeight: '700' }} fill={textColor}>{NICHE.brandName}<tspan fill="url(#goldText)">{NICHE.brandSuffix}</tspan>.com</text>
+            <text x="2" y="85" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '10px', fontWeight: '800' }} fill="#94a3b8" letterSpacing="0.4em">{NICHE.name.toUpperCase()} MEDICAL DIRECTORY</text>
         </svg>
     )
 }
@@ -58,10 +59,10 @@ export function LogoShield({ className = "", theme = 'light' }: { className?: st
 
             {/* Brand Text */}
             <text x="135" y="65" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '56px', fontWeight: '800' }} fill={textColor} letterSpacing="-0.02em">
-                Botox<tspan fill="#d4af37">-4u</tspan>
+                {NICHE.brandName}<tspan fill="#d4af37">{NICHE.brandSuffix}</tspan>
             </text>
             <text x="402" y="55" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '24px', fontWeight: '400' }} fill={subtextColor}>.com</text>
-            <text x="138" y="95" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '11px', fontWeight: '700' }} fill="#d4af37" letterSpacing="0.35em">PREMIUM INJECTOR NETWORK</text>
+            <text x="138" y="95" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '11px', fontWeight: '700' }} fill="#d4af37" letterSpacing="0.35em">PREMIUM {NICHE.providerType.toUpperCase()} NETWORK</text>
         </svg>
     )
 }
@@ -76,7 +77,7 @@ export function LogoWordmark({ className = "", theme = 'light' }: { className?: 
                     <stop offset="100%" stopColor={theme === 'dark' ? '#e2e8f0' : '#334155'} />
                 </linearGradient>
             </defs>
-            <text x="0" y="75" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '72px', fontWeight: '800' }} fill="url(#wordGrad)" letterSpacing="-0.04em">Botox-4u</text>
+            <text x="0" y="75" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '72px', fontWeight: '800' }} fill="url(#wordGrad)" letterSpacing="-0.04em">{NICHE.brandName}{NICHE.brandSuffix}</text>
             <circle cx="340" cy="55" r="6" fill="#d4af37" />
             <path d="M0 95 H360" stroke="#d4af37" strokeWidth="2" opacity="0.3" />
         </svg>

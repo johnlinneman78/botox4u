@@ -61,13 +61,10 @@ export function getStateName(code: string): string {
     return slug.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ')
 }
 
-export const TREATMENTS = [
-    { slug: 'masseter-botox', name: 'Masseter Botox', description: 'Jaw slimming and TMJ relief.' },
-    { slug: 'lip-flip', name: 'Botox Lip Flip', description: 'Subtle lip enhancement.' },
-    { slug: 'crows-feet', name: 'Crow\'s Feet', description: 'Smoothing eye-area wrinkles.' },
-    { slug: 'forehead-botox', name: 'Forehead Botox', description: 'Eliminating horizontal forehead lines.' },
-    { slug: 'tmj-botox', name: 'TMJ Botox', description: 'Pain relief for jaw clenching.' },
-    { slug: 'baby-botox', name: 'Baby Botox', description: 'Micro-dosing for natural movement.' },
-    { slug: 'hyperhidrosis', name: 'Hyperhidrosis', description: 'Botox for excessive sweating.' },
-    { slug: 'gummy-smile', name: 'Gummy Smile', description: 'Correcting excessive gum visibility.' },
-]
+import { NICHE } from '@/config/niche'
+
+export const TREATMENTS = NICHE.calculator.variables.map(v => ({
+    slug: v.id,
+    name: v.label,
+    description: `Professional ${v.label} treatment solutions.`
+}))

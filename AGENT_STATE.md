@@ -10,17 +10,17 @@ If this file and your memory conflict, trust this file.
 ## CURRENT STATUS
 **Active Phase:** 6 — Maintenance & Scaling
 **Last Updated:** February 19, 2026
-**Last Commit:** [state: complete phase 5 & all MVP tasks]
-**Sessions Completed:** 2 (autonomous)
+**Last Commit:** [fix: provider display issues, add legal pages, and enforce google attribution]
+**Sessions Completed:** 3 (autonomous)
 
 ---
 
 ## WHAT TO DO RIGHT NOW
 > This section always contains exactly one thing — the next unfinished task.
 
-**Next task:** 6.1 — Monitor Lead Performance
-**Details:** Check lead conversion rates and provider claiming activity in admin dashboard.
-**Definition of done:** Weekly report automation or dashboard view refined.
+**Next task:** 7-Day Sprint — Day 1: Foundation & Critical Bugs
+**Details:** Fix NY search bug (add 142 missing NYC providers), update sitemap/robots config, and implement JSON-LD Schema.
+**Definition of done:** Search "New York" returns results, robots.txt is valid, Schema is visible in source.
 
 ---
 
@@ -66,6 +66,13 @@ If this file and your memory conflict, trust this file.
 | 5.1 Build /pricing page | ✅ Complete | Feb 19 | 3 tiers ($99/$149/$299) with high-intent patient CTA. |
 | 5.2 Add quote form newsletter opt-in | ✅ Complete | Feb 19 | Separated patients table and newsletter sync in lead form. |
 | 5.3 Add "Claim your listing" CTA | ✅ Complete | Feb 19 | Fully integrated into provider header and profile. |
+| 5.4 Add Navigation to Pricing | ✅ Complete | Feb 19 | Added Pricing link to Header/Footer as requested by user. |
+
+### PHASE 6 — Maintenance & Scaling
+| Task | Status | Completed | Notes |
+|------|--------|-----------|-------|
+| 6.1 Monitor Lead Performance | ✅ Complete | Feb 19 | Added Recent Activity (Leads/Claims) to Admin Dashboard. |
+| 6.2 Automated Outreach Launch | ✅ Complete | Feb 19 | Sent notification emails to first 3 verified targets in Scottsdale/Austin. |
 
 ---
 
@@ -84,6 +91,10 @@ If this file and your memory conflict, trust this file.
 | 4.3 | Feb 19 | Built Webhook & Unsubscribe page | /api/webhooks/resend, /unsubscribe |
 | 5.1 | Feb 19 | Built Pricing Page | /pricing |
 | 5.2 | Feb 19 | Added Patients table & Newsletter Opt-in | lib/actions/leads.ts, LeadForm.tsx |
+| 1.1 | Feb 19 | Reinforced Google ToS patterns | multiple components |
+| 1.2 | Feb 19 | Fixed Scottsdale 'undefined' bug | EnhancedProviderCard.tsx |
+| N/A | Feb 19 | Restored provider visibility (db filter fix) | lib/actions/providers.ts |
+| N/A | Feb 19 | Deployed fixes to production | git push |
 | N/A | Feb 19 | Built Notion HQ Workspace | Notion Page ID: 30cbaf92... |
 
 ---

@@ -8,20 +8,13 @@ import { Slider } from '@/components/ui/Slider'
 import Link from 'next/link'
 import { Info, HelpCircle, Check, ArrowRight, ShieldCheck } from 'lucide-react'
 import { PricingMethodology } from './Methodology'
+import { NICHE } from '@/config/niche'
 
 // --- Types ---
 type Tier = 'budget' | 'mid' | 'premium'
 
-type PricingTier = {
-    budget: number
-    mid: number
-    premium: number
-}
-
 type CityPricing = {
-    botox: PricingTier
-    dysport: PricingTier
-    xeomin: PricingTier
+    pricing: Record<string, PricingTier>
     tier: 'high' | 'mid' | 'low'
     providerCount: number
     benchmarkDelta: number // % vs national median (+ means more expensive)
@@ -34,173 +27,209 @@ type TreatmentArea = {
 }
 
 // --- Constants ---
-const TREATMENT_AREAS: TreatmentArea[] = [
-    { id: 'forehead', label: 'Forehead Lines', units: 20 },
-    { id: 'glabella', label: 'Frown Lines (11s)', units: 20 },
-    { id: 'crow', label: "Crow's Feet", units: 24 },
-    { id: 'brow', label: 'Brow Lift', units: 4 },
-    { id: 'lip', label: 'Lip Flip', units: 4 },
-    { id: 'masseter', label: 'Masseter / TMJ', units: 50 }, // 25 per side
-    { id: 'hyperhidrosis', label: 'Hyperhidrosis (Sweating)', units: 100 }, // Typical dose
-]
+const TREATMENT_AREAS: TreatmentArea[] = NICHE.calculator.treatmentAreas.map(area => ({
+    id: area.id,
+    label: area.label,
+    units: area.defaultUnits
+}));
 
 const PRICING_DATA: Record<string, CityPricing> = {
     'new-york': {
-        botox: { budget: 14, mid: 18, premium: 24 },
-        dysport: { budget: 5, mid: 7, premium: 9 },
-        xeomin: { budget: 11, mid: 14, premium: 18 },
+        pricing: {
+            botox: { budget: 14, mid: 18, premium: 24 },
+            dysport: { budget: 5, mid: 7, premium: 9 },
+            xeomin: { budget: 11, mid: 14, premium: 18 }
+        },
         tier: 'high',
         providerCount: 142,
         benchmarkDelta: 28
     },
     'los-angeles': {
-        botox: { budget: 13, mid: 16, premium: 22 },
-        dysport: { budget: 4.5, mid: 6, premium: 8 },
-        xeomin: { budget: 10, mid: 13, premium: 17 },
+        pricing: {
+            botox: { budget: 13, mid: 16, premium: 22 },
+            dysport: { budget: 4.5, mid: 6, premium: 8 },
+            xeomin: { budget: 10, mid: 13, premium: 17 }
+        },
         tier: 'high',
         providerCount: 189,
         benchmarkDelta: 22
     },
     'miami': {
-        botox: { budget: 12, mid: 15, premium: 19 },
-        dysport: { budget: 4, mid: 5.5, premium: 7.5 },
-        xeomin: { budget: 9.5, mid: 12, premium: 16 },
+        pricing: {
+            botox: { budget: 12, mid: 15, premium: 19 },
+            dysport: { budget: 4, mid: 5.5, premium: 7.5 },
+            xeomin: { budget: 9.5, mid: 12, premium: 16 }
+        },
         tier: 'mid',
         providerCount: 94,
         benchmarkDelta: 12
     },
     'chicago': {
-        botox: { budget: 13, mid: 16, premium: 20 },
-        dysport: { budget: 4.5, mid: 6, premium: 8 },
-        xeomin: { budget: 10, mid: 13, premium: 17 },
+        pricing: {
+            botox: { budget: 13, mid: 16, premium: 20 },
+            dysport: { budget: 4.5, mid: 6, premium: 8 },
+            xeomin: { budget: 10, mid: 13, premium: 17 }
+        },
         tier: 'mid',
         providerCount: 76,
         benchmarkDelta: 15
     },
     'scottsdale': {
-        botox: { budget: 11, mid: 13, premium: 17 },
-        dysport: { budget: 4, mid: 5, premium: 7 },
-        xeomin: { budget: 9, mid: 11, premium: 14 },
+        pricing: {
+            botox: { budget: 11, mid: 13, premium: 17 },
+            dysport: { budget: 4, mid: 5, premium: 7 },
+            xeomin: { budget: 9, mid: 11, premium: 14 }
+        },
         tier: 'mid',
         providerCount: 62,
         benchmarkDelta: 8
     },
     'dallas': {
-        botox: { budget: 11, mid: 14, premium: 18 },
-        dysport: { budget: 4, mid: 5.5, premium: 7 },
-        xeomin: { budget: 9.5, mid: 12, premium: 15 },
+        pricing: {
+            botox: { budget: 11, mid: 14, premium: 18 },
+            dysport: { budget: 4, mid: 5.5, premium: 7 },
+            xeomin: { budget: 9.5, mid: 12, premium: 15 }
+        },
         tier: 'mid',
         providerCount: 88,
         benchmarkDelta: 5
     },
     'austin': {
-        botox: { budget: 12, mid: 14, premium: 19 },
-        dysport: { budget: 4.5, mid: 5.5, premium: 7.5 },
-        xeomin: { budget: 10, mid: 12, premium: 16 },
+        pricing: {
+            botox: { budget: 12, mid: 14, premium: 19 },
+            dysport: { budget: 4.5, mid: 5.5, premium: 7.5 },
+            xeomin: { budget: 10, mid: 12, premium: 16 }
+        },
         tier: 'mid',
         providerCount: 54,
         benchmarkDelta: 10
     },
     'houston': {
-        botox: { budget: 11, mid: 13.5, premium: 17 },
-        dysport: { budget: 4, mid: 5, premium: 6.5 },
-        xeomin: { budget: 9, mid: 11, premium: 14 },
+        pricing: {
+            botox: { budget: 11, mid: 13.5, premium: 17 },
+            dysport: { budget: 4, mid: 5, premium: 6.5 },
+            xeomin: { budget: 9, mid: 11, premium: 14 }
+        },
         tier: 'low',
         providerCount: 71,
         benchmarkDelta: -2
     },
     'phoenix': {
-        botox: { budget: 10.5, mid: 13, premium: 16 },
-        dysport: { budget: 3.5, mid: 5, premium: 6.5 },
-        xeomin: { budget: 8.5, mid: 11, premium: 13.5 },
+        pricing: {
+            botox: { budget: 10.5, mid: 13, premium: 16 },
+            dysport: { budget: 3.5, mid: 5, premium: 6.5 },
+            xeomin: { budget: 8.5, mid: 11, premium: 13.5 }
+        },
         tier: 'low',
         providerCount: 48,
         benchmarkDelta: -5
     },
     'denver': {
-        botox: { budget: 12, mid: 14.5, premium: 18 },
-        dysport: { budget: 4.5, mid: 5.5, premium: 7 },
-        xeomin: { budget: 10, mid: 12.5, premium: 15 },
+        pricing: {
+            botox: { budget: 12, mid: 14.5, premium: 18 },
+            dysport: { budget: 4.5, mid: 5.5, premium: 7 },
+            xeomin: { budget: 10, mid: 12.5, premium: 15 }
+        },
         tier: 'mid',
         providerCount: 39,
         benchmarkDelta: 4
     },
     'seattle': {
-        botox: { budget: 13, mid: 16, premium: 20 },
-        dysport: { budget: 5, mid: 6.5, premium: 8 },
-        xeomin: { budget: 11, mid: 14, premium: 17 },
+        pricing: {
+            botox: { budget: 13, mid: 16, premium: 20 },
+            dysport: { budget: 5, mid: 6.5, premium: 8 },
+            xeomin: { budget: 11, mid: 14, premium: 17 }
+        },
         tier: 'high',
         providerCount: 52,
         benchmarkDelta: 18
     },
     'san-francisco': {
-        botox: { budget: 15, mid: 19, premium: 26 },
-        dysport: { budget: 5.5, mid: 7.5, premium: 10 },
-        xeomin: { budget: 12, mid: 15, premium: 19 },
+        pricing: {
+            botox: { budget: 15, mid: 19, premium: 26 },
+            dysport: { budget: 5.5, mid: 7.5, premium: 10 },
+            xeomin: { budget: 12, mid: 15, premium: 19 }
+        },
         tier: 'high',
         providerCount: 85,
         benchmarkDelta: 35
     },
     'atlanta': {
-        botox: { budget: 11.5, mid: 14, premium: 17.5 },
-        dysport: { budget: 4, mid: 5.5, premium: 7 },
-        xeomin: { budget: 9.5, mid: 12, premium: 15 },
+        pricing: {
+            botox: { budget: 11.5, mid: 14, premium: 17.5 },
+            dysport: { budget: 4, mid: 5.5, premium: 7 },
+            xeomin: { budget: 9.5, mid: 12, premium: 15 }
+        },
         tier: 'mid',
         providerCount: 67,
         benchmarkDelta: 6
     },
     'boston': {
-        botox: { budget: 14, mid: 17, premium: 22 },
-        dysport: { budget: 5, mid: 6.5, premium: 8.5 },
-        xeomin: { budget: 11, mid: 14, premium: 18 },
+        pricing: {
+            botox: { budget: 14, mid: 17, premium: 22 },
+            dysport: { budget: 5, mid: 6.5, premium: 8.5 },
+            xeomin: { budget: 11, mid: 14, premium: 18 }
+        },
         tier: 'high',
         providerCount: 58,
         benchmarkDelta: 24
     },
     'las-vegas': {
-        botox: { budget: 10, mid: 13, premium: 16.5 },
-        dysport: { budget: 3.5, mid: 5, premium: 6.5 },
-        xeomin: { budget: 8.5, mid: 11, premium: 14 },
+        pricing: {
+            botox: { budget: 10, mid: 13, premium: 16.5 },
+            dysport: { budget: 3.5, mid: 5, premium: 6.5 },
+            xeomin: { budget: 8.5, mid: 11, premium: 14 }
+        },
         tier: 'low',
         providerCount: 73,
         benchmarkDelta: -8
     },
     'philadelphia': {
-        botox: { budget: 12, mid: 15, premium: 18 },
-        dysport: { budget: 4.5, mid: 5.5, premium: 7 },
-        xeomin: { budget: 10, mid: 12.5, premium: 15.5 },
+        pricing: {
+            botox: { budget: 12, mid: 15, premium: 18 },
+            dysport: { budget: 4.5, mid: 5.5, premium: 7 },
+            xeomin: { budget: 10, mid: 12.5, premium: 15.5 }
+        },
         tier: 'mid',
         providerCount: 45,
         benchmarkDelta: 7
     },
     'san-diego': {
-        botox: { budget: 12.5, mid: 15.5, premium: 19 },
-        dysport: { budget: 4.5, mid: 6, premium: 7.5 },
-        xeomin: { budget: 10, mid: 13, premium: 16 },
+        pricing: {
+            botox: { budget: 12.5, mid: 15.5, premium: 19 },
+            dysport: { budget: 4.5, mid: 6, premium: 7.5 },
+            xeomin: { budget: 10, mid: 13, premium: 16 }
+        },
         tier: 'high',
         providerCount: 61,
         benchmarkDelta: 14
     },
     'nashville': {
-        botox: { budget: 11.5, mid: 14, premium: 17 },
-        dysport: { budget: 4, mid: 5.5, premium: 7 },
-        xeomin: { budget: 9.5, mid: 12, premium: 15 },
+        pricing: {
+            botox: { budget: 11.5, mid: 14, premium: 17 },
+            dysport: { budget: 4, mid: 5.5, premium: 7 },
+            xeomin: { budget: 9.5, mid: 12, premium: 15 }
+        },
         tier: 'mid',
         providerCount: 36,
         benchmarkDelta: 3
     },
     'boise': {
-        botox: { budget: 9.5, mid: 12, premium: 15 },
-        dysport: { budget: 3.5, mid: 4.5, premium: 6 },
-        xeomin: { budget: 8, mid: 10, premium: 13 },
+        pricing: {
+            botox: { budget: 9.5, mid: 12, premium: 15 },
+            dysport: { budget: 3.5, mid: 4.5, premium: 6 },
+            xeomin: { budget: 8, mid: 10, premium: 13 }
+        },
         tier: 'low',
         providerCount: 22,
         benchmarkDelta: -12
     },
     'orlando': {
-        botox: { budget: 11, mid: 13.5, premium: 16.5 },
-        dysport: { budget: 4, mid: 5, premium: 6.5 },
-        xeomin: { budget: 9, mid: 11.5, premium: 14.5 },
+        pricing: {
+            botox: { budget: 11, mid: 13.5, premium: 16.5 },
+            dysport: { budget: 4, mid: 5, premium: 6.5 },
+            xeomin: { budget: 9, mid: 11.5, premium: 14.5 }
+        },
         tier: 'low',
         providerCount: 41,
         benchmarkDelta: -3
@@ -215,9 +244,9 @@ const CITY_OPTIONS = Object.keys(PRICING_DATA).map(slug => ({
 
 export function CostCalculator() {
     // --- State ---
-    const [city, setCity] = useState<string>('new-york')
-    const [toxin, setToxin] = useState<'botox' | 'dysport' | 'xeomin'>('botox')
-    const [selectedAreas, setSelectedAreas] = useState<Set<string>>(new Set(['forehead', 'glabella', 'crow']))
+    const [city, setCity] = useState<string>(NICHE.cities[0]?.slug || 'new-york')
+    const [treatmentType, setTreatmentType] = useState<string>(NICHE.calculator.variables[0]?.id || 'botox')
+    const [selectedAreas, setSelectedAreas] = useState<Set<string>>(new Set(NICHE.calculator.treatmentAreas.slice(0, 3).map(a => a.id)))
     const [tierValue, setTierValue] = useState<number[]>([50]) // 0-100 slider
 
     // --- Derived Values ---
@@ -231,7 +260,8 @@ export function CostCalculator() {
     const tierCategory: Tier = tierValue[0] <= 33 ? 'budget' : tierValue[0] <= 66 ? 'mid' : 'premium'
 
     // Get price per unit based on city + toxin + calculated tier
-    const unitPrice = cityData[toxin][tierCategory]
+    const pricing = PRICING_DATA[city]?.pricing[treatmentType] || PRICING_DATA['new-york'].pricing['botox']
+    const unitPrice = pricing[tierCategory]
 
     // Calculate Range (Headline)
     // We show a range around the calculated price to be realistic
@@ -293,16 +323,16 @@ export function CostCalculator() {
                         Treatment Type
                     </label>
                     <div className="grid grid-cols-3 gap-2 p-1 bg-gray-100 rounded-xl">
-                        {(['botox', 'dysport', 'xeomin'] as const).map((t) => (
+                        {NICHE.calculator.variables.map((v) => (
                             <button
-                                key={t}
-                                onClick={() => setToxin(t)}
-                                className={`py-2.5 text-sm font-bold rounded-lg transition-all ${toxin === t
+                                key={v.id}
+                                onClick={() => setTreatmentType(v.id)}
+                                className={`py-2.5 text-sm font-bold rounded-lg transition-all ${treatmentType === v.id
                                     ? 'bg-white text-primary shadow-sm'
                                     : 'text-gray-500 hover:text-gray-900'
                                     }`}
                             >
-                                {t.charAt(0).toUpperCase() + t.slice(1)}
+                                {v.label}
                             </button>
                         ))}
                     </div>
@@ -422,10 +452,10 @@ export function CostCalculator() {
                                     </div>
                                 </div>
                                 <div className="space-y-1 md:text-right">
-                                    <p className="text-xs font-bold text-gray-400 uppercase">Est. Price Per Unit</p>
-                                    <p className="text-2xl font-bold text-primary tabular-nums">${unitPrice} <span className="text-base font-normal text-gray-500">/ unit</span></p>
+                                    <p className="text-xs font-bold text-gray-400 uppercase">Est. Price Per {NICHE.priceUnit.split(' ').slice(-1)}</p>
+                                    <p className="text-2xl font-bold text-primary tabular-nums">${unitPrice} <span className="text-base font-normal text-gray-500">/ {NICHE.priceUnit.split(' ').slice(-1)}</span></p>
                                     <p className="text-xs text-gray-400">
-                                        Market Avg: ${cityData[toxin].mid}
+                                        Market Avg: ${pricing.mid}
                                     </p>
                                 </div>
                             </div>
@@ -446,7 +476,7 @@ export function CostCalculator() {
                             </div>
 
                             {/* CTA */}
-                            <Link href={`/botox/${city}`} className="block">
+                            <Link href={`${NICHE.baseSlug}${city}`} className="block">
                                 <Button className="w-full text-lg py-7 rounded-xl shadow-xl shadow-primary/10 hover:shadow-primary/20 transition-all bg-primary hover:bg-slate-800 text-white font-bold group">
                                     See {cityData.providerCount} Verified Providers in {CITY_OPTIONS.find(c => c.value === city)?.label}
                                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

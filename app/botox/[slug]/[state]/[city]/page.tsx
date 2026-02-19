@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation'
 import { TransparencyBlock } from '@/components/city/TransparencyBlock'
 import { LeadForm } from '@/components/providers/LeadForm'
 import { Star } from 'lucide-react'
+import { NICHE } from '@/config/niche'
 
 interface TreatmentCityPageProps {
     params: { slug: string; state: string; city: string }
@@ -51,8 +52,8 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
             <div className="bg-primary py-4">
                 <div className="container mx-auto px-4 text-xs text-white/60">
                     <Link href="/" className="hover:text-white">Home</Link> /
-                    <Link href="/botox" className="hover:text-white mx-1">Botox</Link> /
-                    <Link href={`/botox/state/${stateCode.toLowerCase()}`} className="hover:text-white mx-1">{stateCode}</Link> /
+                    <Link href={NICHE.baseSlug.slice(0, -1)} className="hover:text-white mx-1">{NICHE.name}</Link> /
+                    <Link href={`${NICHE.baseSlug}state/${stateCode.toLowerCase()}`} className="hover:text-white mx-1">{stateCode}</Link> /
                     <span className="text-white ml-1">{cityName} - {treatment.name}</span>
                 </div>
             </div>
@@ -111,8 +112,9 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                                 title={`${treatment.name} Pricing Guide: ${cityName} `}
                                 rows={[
                                     { label: 'Average Cost', units: 'Per Session', costRange: `$${(stats?.avgCost || 14) * 20} `, notes: `Based on local ${cityName} averages.` },
-                                    { label: 'Specialist Rate', units: 'Top Rated', costRange: `$${(stats?.avgCost || 14) * 1.2 * 20} `, notes: 'Clinics with 5+ years experience.' }
+                                    { label: 'Specialist Rate', units: 'Top Rated', costRange: `$${(stats?.avgCost || 14) * 1.2 * 20} `, notes: `Clinics with 5+ years experience.` }
                                 ]}
+                                footer={`*Pricing estimates in ${cityName} are based on a local average of $${stats?.avgCost || 14}/${NICHE.priceUnit.split(' ').slice(-1)}.`}
                             />
                         </section>
                     </div>

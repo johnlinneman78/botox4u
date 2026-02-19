@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
 import Logo from '@/components/layout/Logo'
+import { NICHE } from '@/config/niche'
 
 export default function Footer() {
     const currentYear = new Date().getFullYear()
@@ -16,7 +17,7 @@ export default function Footer() {
                             </Link>
                         </div>
                         <p className="text-sm text-gray-600">
-                            Find the best Botox providers near you. Compare costs, read reviews, and book consultations.
+                            Find the best {NICHE.name} providers near you. Compare costs, read reviews, and book consultations.
                         </p>
                     </div>
 
@@ -50,7 +51,7 @@ export default function Footer() {
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-600">
-                    <p>© {currentYear} Botox-4u.com All rights reserved.</p>
+                    <p>© {currentYear} {NICHE.siteName} All rights reserved.</p>
                     <div className="mt-4">
                         <MedicalDisclaimer variant="inline" />
                     </div>
