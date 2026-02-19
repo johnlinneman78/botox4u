@@ -37,7 +37,7 @@ export default function Hero() {
                     <div className="flex-1 max-w-2xl text-center lg:text-left">
                         <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
                             <div className="h-16 w-auto -ml-2 mb-4 sm:mb-0">
-                                <Logo variant="shield" className="h-full" />
+                                <Logo variant="shield" className="h-full" theme="dark" />
                             </div>
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-secondary text-xs font-bold tracking-widest uppercase animate-fade-in shadow-lg">
                                 <Star className="w-3 h-3 fill-current" />

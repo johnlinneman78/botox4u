@@ -5,9 +5,11 @@ import React from 'react'
 interface LogoProps {
     className?: string
     variant?: 'precision' | 'shield' | 'wordmark'
+    theme?: 'light' | 'dark'
 }
 
-export function LogoPrecision({ className = "" }) {
+export function LogoPrecision({ className = "", theme = 'light' }: { className?: string, theme?: 'light' | 'dark' }) {
+    const textColor = theme === 'dark' ? '#ffffff' : '#1a2332'
     return (
         <svg className={className} viewBox="0 0 450 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -17,13 +19,15 @@ export function LogoPrecision({ className = "" }) {
                     <stop offset="100%" stopColor="#d4af37" />
                 </linearGradient>
             </defs>
-            <text x="0" y="60" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '48px', fontWeight: '700' }} fill="#1a2332">Botox<tspan fill="url(#goldText)">-4u</tspan>.com</text>
+            <text x="0" y="60" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '48px', fontWeight: '700' }} fill={textColor}>Botox<tspan fill="url(#goldText)">-4u</tspan>.com</text>
             <text x="2" y="85" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '10px', fontWeight: '800' }} fill="#94a3b8" letterSpacing="0.4em">VERIFIED MEDICAL DIRECTORY</text>
         </svg>
     )
 }
 
-export function LogoShield({ className = "" }) {
+export function LogoShield({ className = "", theme = 'light' }: { className?: string, theme?: 'light' | 'dark' }) {
+    const textColor = theme === 'dark' ? '#ffffff' : '#1a2332'
+    const subtextColor = theme === 'dark' ? '#cbd5e1' : '#94a3b8'
     return (
         <svg className={className} viewBox="0 0 500 120" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -53,22 +57,23 @@ export function LogoShield({ className = "" }) {
             </g>
 
             {/* Brand Text */}
-            <text x="135" y="65" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '56px', fontWeight: '800' }} fill="#1a2332" letterSpacing="-0.02em">
+            <text x="135" y="65" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '56px', fontWeight: '800' }} fill={textColor} letterSpacing="-0.02em">
                 Botox<tspan fill="#d4af37">-4u</tspan>
             </text>
-            <text x="402" y="55" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '24px', fontWeight: '400' }} fill="#94a3b8">.com</text>
+            <text x="402" y="55" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '24px', fontWeight: '400' }} fill={subtextColor}>.com</text>
             <text x="138" y="95" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '11px', fontWeight: '700' }} fill="#d4af37" letterSpacing="0.35em">PREMIUM INJECTOR NETWORK</text>
         </svg>
     )
 }
 
-export function LogoWordmark({ className = "" }) {
+export function LogoWordmark({ className = "", theme = 'light' }: { className?: string, theme?: 'light' | 'dark' }) {
+    const textColor = theme === 'dark' ? '#ffffff' : '#1a2332'
     return (
         <svg className={className} viewBox="0 0 600 120" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="wordGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#1a2332" />
-                    <stop offset="100%" stopColor="#334155" />
+                    <stop offset="0%" stopColor={textColor} />
+                    <stop offset="100%" stopColor={theme === 'dark' ? '#e2e8f0' : '#334155'} />
                 </linearGradient>
             </defs>
             <text x="0" y="75" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '72px', fontWeight: '800' }} fill="url(#wordGrad)" letterSpacing="-0.04em">Botox-4u</text>
@@ -78,8 +83,8 @@ export function LogoWordmark({ className = "" }) {
     )
 }
 
-export default function Logo({ className, variant = 'precision' }: LogoProps) {
-    if (variant === 'shield') return <LogoShield className={className} />
-    if (variant === 'wordmark') return <LogoWordmark className={className} />
-    return <LogoPrecision className={className} />
+export default function Logo({ className, variant = 'precision', theme = 'light' }: LogoProps) {
+    if (variant === 'shield') return <LogoShield className={className} theme={theme} />
+    if (variant === 'wordmark') return <LogoWordmark className={className} theme={theme} />
+    return <LogoPrecision className={className} theme={theme} />
 }
