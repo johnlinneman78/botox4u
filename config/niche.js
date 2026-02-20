@@ -153,16 +153,16 @@ export const NICHE = {
     // Brand V2 Copy
     copy: {
         hero: {
-            headline: "Search, Compare, and Connect with Top-Ranked Local Injectors",
-            subtext: "We index every clinic in your city so you can see real price-per-unit, verify federal credentials, and connect with the best injectors for the 'Clean Girl' aesthetic—all in one place.",
-            cta: "Browse the Local Directory"
+            headline: "The Independent Price-Verified Directory for Botox",
+            subtext: "We are the Zillow for your skin. We don't offer treatments—we provide the data you need to find the right injector. Search every clinic in your city, compare verified prices, and check federal credentials before you book a single unit.",
+            cta: "Search the Local Directory"
         },
         trustBadges: [
-            { icon: 'target', label: 'Curated Discovery', description: 'Find top-rated injectors in seconds' },
-            { icon: 'dollar', label: 'Price Indexing', description: 'See local price-per-unit before you book' },
-            { icon: 'shield', label: 'Verified Leads', description: 'Direct connection to licensed clinics' }
+            { icon: 'target', label: 'Independent Index', description: 'We don\'t offer Botox; we index the providers who do' },
+            { icon: 'dollar', label: 'Price Transparency', description: 'See real local price-per-unit before you book' },
+            { icon: 'shield', label: 'Credential Search', description: 'NPI-verified license and credential data' }
         ],
-        scoreDisclaimer: "The Botox-4U Index is an independent discovery platform. We are not a medical provider. Our role is to facilitate the connection between patients and high-quality local injectors through transparent data on pricing, credentials, and real patient outcomes.",
-        footerDisclaimer: "Botox-4U is an independent provider directory and traffic platform. We do not provide clinical services. Our mission is to help patients discover and connect with local clinics through data transparency. Always verify medical credentials directly with state boards."
+        scoreDisclaimer: "The Botox-4U Index is an independent data research platform. We are not a medical provider. Our mission is to provide transparency in the cosmetic injectable market by indexing provider data, pricing, and neutral patient feedback. No provider can pay for a higher index position.",
+        footerDisclaimer: "Botox-4U.com is an independent provider directory and data index. We are not a clinic, we do not perform medical procedures, and we do not provide clinical advice. All data is gathered from public records to facilitate independent research. Always verify credentials with state boards."
     }
 }
