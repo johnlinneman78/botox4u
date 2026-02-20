@@ -1,5 +1,5 @@
-# MISSION: The Natural Results Standard
-**Every decision must protect the patient from the "frozen face." We don't sell ads; we rank outcomes.**
+# MISSION: The Independent Provider Index
+**We are a data research platform, not a clinic. Our role is to index, verify, and compare—never to provide medical advice.**
 **This file explains the WHY behind every decision. When you hit an edge case not covered in AGENT_STATE.md or the task list, use this file to reason through it.**
 
 ---
