@@ -5,6 +5,7 @@ import { stripe, STRIPE_PLANS } from '@/lib/stripe';
 import { getSupabaseServer } from '@/lib/supabase/factory';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { NICHE } from '@/config/niche';
 
 export async function createCheckoutSession(providerId: string, planId: 'starter' | 'featured' | 'premium') {
     const supabase = await getSupabaseServer(await cookies());
@@ -28,7 +29,7 @@ export async function createCheckoutSession(providerId: string, planId: 'starter
                 price_data: {
                     currency: 'usd',
                     product_data: {
-                        name: `${plan.name} Listing - Botox-4U.com`,
+                        name: `${plan.name} Listing - ${NICHE.siteName}`,
                         description: `Subscription for ${provider.name}`,
                     },
                     unit_amount: plan.amount * 100,
