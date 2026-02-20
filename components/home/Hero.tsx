@@ -120,7 +120,7 @@ export default function Hero() {
                                             ))}
                                         </div>
                                         <div className="text-sm italic text-gray-300 mb-2 font-light leading-relaxed">
-                                            "I spent weeks worrying about pricing until I found this directory. It's literally the Zillow for my skin."
+                                            "I spent weeks worrying about hidden costs until I found this directory. It made comparing every local injector so simple."
                                         </div>
                                         <div className="text-[9px] font-bold text-[#d4af37] uppercase tracking-widest">Verified User</div>
                                     </div>

@@ -154,7 +154,7 @@ export const NICHE = {
     copy: {
         hero: {
             headline: "The Independent Price-Verified Directory for Botox",
-            subtext: "We are the Zillow for your skin. We don't offer treatments—we provide the data you need to find the right injector. Search every clinic in your city, compare verified prices, and check federal credentials before you book a single unit.",
+            subtext: "Find your perfect injector with 100% independent data. We aren't a clinic—we're a research index. Search every provider in your city, compare verified local pricing, and check federal credentials before you book a single unit.",
             cta: "Search the Local Directory"
         },
         trustBadges: [
