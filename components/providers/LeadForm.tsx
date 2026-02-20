@@ -106,10 +106,10 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
             )}
             <CardHeader className="pb-4">
                 <CardTitle className="text-xl font-display">
-                    {providerName ? `Quote from ${providerName}` : `Get ${city} Quotes`}
+                    {providerName ? `Connect with ${providerName}` : `Find ${city} Specialists`}
                 </CardTitle>
                 <p className="text-xs text-gray-500">
-                    {providerName ? 'Average response time: 2 hours' : 'Recieve 3 direct quotes today'}
+                    {providerName ? 'Independent data: response time typically < 2 hours' : 'Recieve 3 direct responses today'}
                 </p>
             </CardHeader>
             <CardContent>
@@ -151,9 +151,8 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                             </div>
                         </div>
 
-                        {/* Treatment */}
                         <div className="grid grid-cols-1 gap-1">
-                            <label className="text-[11px] font-semibold text-gray-500 ml-1 uppercase tracking-tight">Treatment</label>
+                            <label className="text-[11px] font-semibold text-gray-500 ml-1 uppercase tracking-tight">Interest</label>
                             <select
                                 {...register('treatment_type')}
                                 className="w-full px-4 py-3 rounded-lg border border-gray-100 bg-gray-50 text-sm focus:ring-2 focus:ring-primary/10 outline-none appearance-none"
@@ -163,7 +162,7 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                                         {treatment}
                                     </option>
                                 ))}
-                                <option value="other">Other / Consultation</option>
+                                <option value="other">Other / General Question</option>
                             </select>
                         </div>
 
@@ -233,7 +232,7 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                         disabled={isSubmitting}
                         className="w-full py-7 bg-primary hover:bg-primary/95 text-white shadow-xl shadow-primary/20 text-base font-bold transition-all hover:scale-[1.01] active:scale-[0.99]"
                     >
-                        {isSubmitting ? 'Sending Request...' : 'Send Quote Request'}
+                        {isSubmitting ? 'Sending Request...' : 'Request Info from Clinic'}
                     </Button>
 
                     <p className="text-[10px] text-gray-400 text-center leading-tight mt-4 italic">

@@ -145,7 +145,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                             <div className="flex flex-wrap justify-center md:justify-start gap-4">
                                 <a href="#quote-form">
                                     <Button variant="primary" size="lg" className="px-10 h-14 text-lg bg-secondary hover:bg-secondary/90 shadow-xl shadow-secondary/20">
-                                        Book Consultation
+                                        Consult with Clinic
                                     </Button>
                                 </a>
                                 {provider.website && (
