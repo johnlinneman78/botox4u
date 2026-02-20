@@ -94,7 +94,7 @@ export default function BuyersGuidePage() {
                                     </div>
                                     <h3 className="text-3xl font-display font-bold text-primary mb-6">Free Patient Resource</h3>
                                     <p className="text-gray-600 leading-relaxed mb-8">
-                                        This guide was built by independent advocates, not clinic owners. Our mission is to provide transparency in the cosmetic injectable market so you can make informed, safe decisions.
+                                        This guide was built by independent advocates for aesthetic medicine patients, not clinic owners. Our mission is to provide transparency across the broader aesthetic market, starting with the most common entry point: Botox.
                                     </p>
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 rounded-full bg-gray-200" />
@@ -366,7 +366,7 @@ export default function BuyersGuidePage() {
                                 The Botox-4U Score
                             </h3>
                             <p className="text-xl text-gray-600 mb-20 max-w-2xl mx-auto leading-relaxed">
-                                Most directories rank providers by who paid the most for placement. The Botox-4U Score is a 0–100 merit-based algorithm. Nobody pays for a higher score.
+                                Most directories rank providers by who paid the most for placement. The Botox-4U Score is a 0–100 merit-based algorithm for aesthetic providers. Nobody pays for a higher score.
                             </p>
 
                             <div className="space-y-4 max-w-3xl mx-auto text-left">
