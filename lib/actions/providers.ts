@@ -158,6 +158,46 @@ export async function getProvidersWithSearch(filters: {
     })
 }
 
+export async function getTopScoringProviders(limit: number = 6) {
+    const supabase = await getSupabaseServer(await cookies())
+    if (!supabase) return []
+
+    // Try to order by 'score' which is our index ranking
+    // Using select('*') to ensure all mapping fields are available
+    const { data, error } = await supabase
+        .from('providers')
+        .select('*')
+        .not('score', 'is', null)
+        .order('score', { ascending: false })
+        .limit(limit)
+
+    if (error) {
+        console.error('Error fetching top scoring providers:', error)
+        // Fallback to general search if score column is missing or query fails
+        return getProvidersWithSearch({})
+    }
+
+    return (data || []).map((p: any) => ({
+        id: p.id,
+        name: p.name,
+        slug: p.slug,
+        business_type: p.business_type,
+        city: p.city,
+        state: p.state,
+        rating: p.rating || parseFloat(p.average_rating || 0),
+        review_count: p.review_count || 0,
+        score_total: p.score || 0,
+        points: p.score || 0,
+        price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
+        imageUrl: p.hero_image_url || p.image_url || 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
+        website: p.website,
+        listingTier: p.listing_tier || 'free',
+        npi_verified: p.npi_verified || false,
+        score_results_quality: p.score_results_quality || 0,
+        has_real_photo: !!(p.hero_image_url || p.image_url)
+    }))
+}
+
 export async function getCityStats(city: string) {
     const supabase = await getSupabaseServer(await cookies())
     if (!supabase) return null
