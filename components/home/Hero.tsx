@@ -45,7 +45,7 @@ export default function Hero() {
                         </div>
 
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-[1.1] text-balance">
-                            {NICHE.copy.hero.headline.split(' — ')[0]} — <span className="text-[#d4af37]">{NICHE.copy.hero.headline.split(' — ')[1]}</span>
+                            {NICHE.copy.hero.headline}
                         </h1>
 
                         <p className="text-lg md:text-xl text-gray-300 mb-10 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
@@ -102,14 +102,14 @@ export default function Hero() {
                                 <div className="space-y-4 translate-y-8">
                                     <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gray-800 border border-white/10 shadow-2xl relative group">
                                         <img
-                                            src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=1000"
-                                            alt="Clean Girl Aesthetic"
+                                            src="https://images.unsplash.com/photo-1484417827717-933271470ad5?auto=format&fit=crop&q=80&w=1000"
+                                            alt="Researching Providers"
                                             className="grow object-cover w-full h-full opacity-70 group-hover:scale-105 transition-transform duration-1000"
                                         />
                                         <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/0 transition-colors" />
                                         <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                                            <div className="text-white text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Natural Finish</div>
-                                            <div className="text-[#d4af37] text-lg font-display font-medium">The Baby Botox Glow</div>
+                                            <div className="text-white text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Step 1: Research</div>
+                                            <div className="text-[#d4af37] text-lg font-display font-medium">Compare Local Options</div>
                                         </div>
                                     </div>
 
@@ -120,9 +120,9 @@ export default function Hero() {
                                             ))}
                                         </div>
                                         <div className="text-sm italic text-gray-300 mb-2 font-light leading-relaxed">
-                                            "Found an injector who understood my 'hotgirl sunday' vibe perfectly. Subtle, fresh, and zero frozen look."
+                                            "I spent weeks worrying about pricing until I found this directory. It's literally the Zillow for my skin."
                                         </div>
-                                        <div className="text-[9px] font-bold text-[#d4af37] uppercase tracking-widest">Glow-Up Verified</div>
+                                        <div className="text-[9px] font-bold text-[#d4af37] uppercase tracking-widest">Verified User</div>
                                     </div>
                                 </div>
 
@@ -131,25 +131,25 @@ export default function Hero() {
                                         <div className="absolute top-0 right-0 p-4">
                                             <Target className="w-12 h-12 text-[#1a2332]/10" />
                                         </div>
-                                        <div className="font-bold text-xl mb-4 tracking-tight">Real-Time Pricing</div>
+                                        <div className="font-bold text-xl mb-4 tracking-tight">Independent Index</div>
                                         <div className="h-2 w-full bg-[#1a2332]/10 rounded-full mb-4">
                                             <div className="h-full w-3/4 bg-[#1a2332] rounded-full" />
                                         </div>
                                         <p className="text-sm font-medium leading-normal opacity-90">
-                                            See what your city is actually paying per unit today.
+                                            We index every clinic based on transparency, pricing, and federal credentials.
                                         </p>
                                     </div>
 
                                     <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gray-800 border border-white/10 shadow-2xl relative group">
                                         <img
-                                            src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=1000"
-                                            alt="Premium Spa Glow"
+                                            src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=1000"
+                                            alt="Making a Decision"
                                             className="grow object-cover w-full h-full opacity-70 group-hover:scale-105 transition-transform duration-1000"
                                         />
                                         <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/0 transition-colors" />
                                         <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                                            <div className="text-white text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Clinic Vibe</div>
-                                            <div className="text-[#d4af37] text-lg font-display font-medium">Instagram Ready</div>
+                                            <div className="text-white text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Step 2: Connect</div>
+                                            <div className="text-[#d4af37] text-lg font-display font-medium">Verify Then Book</div>
                                         </div>
                                     </div>
                                 </div>
