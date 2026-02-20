@@ -13,7 +13,7 @@ const supabase = createClient(
     process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder_for_build');
 
 import { NICHE } from '@/config/niche';
 
@@ -58,24 +58,22 @@ export async function POST(req: NextRequest) {
             } else if (provider && (provider.email || (provider.enriched_attrs as any)?.email)) {
                 const targetEmail = provider.email || (provider.enriched_attrs as any)?.email;
                 // Send confirmation email
-                if (resend) {
-                    await resend.emails.send({
-                        from: `John from ${NICHE.siteName} <${NICHE.outreach.senderEmail}>`,
-                        to: targetEmail,
-                        subject: `Welcome to ${NICHE.siteName} Premium`,
-                        html: `
-                            <div style="font-family: sans-serif; line-height: 1.6; color: #1a2332; max-width: 600px; margin: 0 auto; padding: 20px;">
-                                <h2>Listing Upgraded!</h2>
-                                <p>Hi ${provider.name},</p>
-                                <p>Your subscription to the <strong>${planId.toUpperCase()}</strong> plan is now active.</p>
-                                <p>Your listing has been upgraded automatically and will now appear with priority in search results.</p>
-                                <p>View your listing: <a href="https://${NICHE.domain}/provider/${provider.slug}">https://${NICHE.domain}/provider/${provider.slug}</a></p>
-                                <p>I'll be in touch soon with your first performance report.</p>
-                                <p>Best,<br>John Linneman</p>
-                            </div>
-                        `
-                    });
-                }
+                await resend.emails.send({
+                    from: `John from ${NICHE.siteName} <${NICHE.outreach.senderEmail}>`,
+                    to: targetEmail,
+                    subject: `Welcome to ${NICHE.siteName} Premium`,
+                    html: `
+                        <div style="font-family: sans-serif; line-height: 1.6; color: #1a2332; max-width: 600px; margin: 0 auto; padding: 20px;">
+                            <h2>Listing Upgraded!</h2>
+                            <p>Hi ${provider.name},</p>
+                            <p>Your subscription to the <strong>${planId.toUpperCase()}</strong> plan is now active.</p>
+                            <p>Your listing has been upgraded automatically and will now appear with priority in search results.</p>
+                            <p>View your listing: <a href="https://${NICHE.domain}/provider/${provider.slug}">https://${NICHE.domain}/provider/${provider.slug}</a></p>
+                            <p>I'll be in touch soon with your first performance report.</p>
+                            <p>Best,<br>John Linneman</p>
+                        </div>
+                    `
+                });
             }
         }
     }
@@ -84,14 +82,12 @@ export async function POST(req: NextRequest) {
         const invoice = event.data.object as Stripe.Invoice;
         console.log(`❌ Payment failed for customer ${invoice.customer}`);
         // Notify admin
-        if (resend) {
-            await resend.emails.send({
-                from: `system@${NICHE.domain}`,
-                to: process.env.ADMIN_EMAIL || `john@${NICHE.domain}`,
-                subject: '🚨 URGENT: Stripe Payment Failed',
-                html: `<p>Payment failed for customer ${invoice.customer}. Invoice ID: ${invoice.id}</p>`
-            });
-        }
+        await resend.emails.send({
+            from: `system@${NICHE.domain}`,
+            to: process.env.ADMIN_EMAIL || `john@${NICHE.domain}`,
+            subject: '🚨 URGENT: Stripe Payment Failed',
+            html: `<p>Payment failed for customer ${invoice.customer}. Invoice ID: ${invoice.id}</p>`
+        });
     }
 
     return NextResponse.json({ received: true });

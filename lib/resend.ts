@@ -2,14 +2,10 @@ import { Resend } from 'resend';
 
 import { NICHE } from '@/config/niche';
 
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder_for_build');
 
 export async function sendVerificationEmail(email: string, providerName: string, claimUrl: string) {
     try {
-        if (!resend) {
-            console.error('Resend not configured (RESEND_API_KEY missing)');
-            return { success: false, error: 'Resend not configured' };
-        }
         const { data, error } = await resend.emails.send({
             from: `${NICHE.siteName} <hello@${NICHE.domain}>`,
             to: [email],
