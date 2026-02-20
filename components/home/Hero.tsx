@@ -75,33 +75,20 @@ export default function Hero() {
 
                         {/* Trust Indicators */}
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-white/10 pt-8">
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 rounded-2xl bg-[#d4af37]/10 text-[#d4af37] shrink-0">
-                                    <Target className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <div className="text-[#d4af37] font-bold text-sm uppercase tracking-tighter">Natural Results</div>
-                                    <div className="text-xs text-gray-400 font-medium leading-snug">Scored on real patient language</div>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 rounded-2xl bg-[#d4af37]/10 text-[#d4af37] shrink-0">
-                                    <DollarSign className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <div className="text-[#d4af37] font-bold text-sm uppercase tracking-tighter">Real Pricing</div>
-                                    <div className="text-xs text-gray-400 font-medium leading-snug">Actual cost per unit, no surprises</div>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 rounded-2xl bg-[#d4af37]/10 text-[#d4af37] shrink-0">
-                                    <ShieldCheck className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <div className="text-[#d4af37] font-bold text-sm uppercase tracking-tighter">NPI Verified</div>
-                                    <div className="text-xs text-gray-400 font-medium leading-snug">Federal credential confirmation</div>
-                                </div>
-                            </div>
+                            {NICHE.copy.trustBadges.map((badge, idx) => {
+                                const Icon = badge.icon === 'dollar' ? DollarSign : badge.icon === 'shield' ? ShieldCheck : Target;
+                                return (
+                                    <div key={idx} className="flex items-start gap-4">
+                                        <div className="p-3 rounded-2xl bg-[#d4af37]/10 text-[#d4af37] shrink-0">
+                                            <Icon className="w-5 h-5" />
+                                        </div>
+                                        <div>
+                                            <div className="text-[#d4af37] font-bold text-sm uppercase tracking-tighter">{badge.label}</div>
+                                            <div className="text-xs text-gray-400 font-medium leading-snug">{badge.description}</div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
 

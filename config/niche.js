@@ -153,16 +153,16 @@ export const NICHE = {
     // Brand V2 Copy
     copy: {
         hero: {
-            headline: "We Rank Every Injector in Your City on One Standard: Natural Results",
-            subtext: "Unlike generic directories, we don't sell rankings. We use semantic analysis to find the injectors who patients describe as 'subtle' and 'conservative.' Verified prices. Federal credentials. Zero frozen faces.",
-            cta: "View Ranked Injectors"
+            headline: "The First Price-Verified Index for Botox Providers",
+            subtext: "We index every injector in your city so you can compare pricing, verify federal licenses, and see real patient sentiments on one neutral platform. No ads, no bias. Just the data you need to choose your next injector.",
+            cta: "Browse the Local Directory"
         },
         trustBadges: [
-            { icon: 'target', label: 'Semantic Scoring', description: 'We read every review for results quality' },
-            { icon: 'shield', label: 'Zero Pay-to-Play', description: 'Rankings are based on data, not ads' },
-            { icon: 'dollar', label: 'Price Verified', description: 'The only index with real-time pricing' }
+            { icon: 'dollar', label: 'Price Indexing', description: 'See price-per-unit across all local clinics' },
+            { icon: 'shield', label: 'License Search', description: 'Verified NPI and credential data' },
+            { icon: 'target', label: 'Patient Sentiment', description: 'Independent analysis of results quality' }
         ],
-        scoreDisclaimer: "The Botox-4U Score is the first independent standard for cosmetic injectables. We analyze real patient language to prioritize injectors who understand the 'Clean Girl' aesthetic—conservative, subtle, and natural. Nobody can buy a higher rank.",
-        footerDisclaimer: "Botox-4U.com is an independent research platform. We are not affiliated with Alle, RealSelf, or any medical manufacturer. Our mission is to provide transparency in pricing and clinical results quality through independent data analysis. Always consult with a licensed professional before any treatment."
+        scoreDisclaimer: "The Botox-4U Index is an independent data project. We don't perform treatments; we index the providers who do. Our rankings are based on pricing transparency, licensing status, and neutral patient feedback analysis. No provider can pay for a higher index position.",
+        footerDisclaimer: "Botox-4U.com is an independent data directory and research platform. We are not a medical provider or clinic. All clinical data, pricing, and credential information is scraped from public sources or reported by providers. Always verify medical credentials directly with state boards."
     }
 }
