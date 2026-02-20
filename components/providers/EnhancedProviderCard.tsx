@@ -50,28 +50,10 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                         </div>
                     )}
 
-                    {/* Botox-4U Score Badge */}
-                    {provider.score && (
-                        <div
-                            className="absolute bottom-3 left-3 bg-primary text-white px-3 py-1.5 rounded-xl shadow-lg border border-white/10 flex items-center gap-2 group/score transition-all z-10 cursor-help"
-                            title="Scored on natural results, fair pricing, verified credentials, and real patient trust. Nobody pays for a higher score."
-                        >
-                            <div className="flex flex-col">
-                                <span className="text-[10px] font-bold uppercase tracking-tighter opacity-80 leading-none mb-0.5">{NICHE.name}-4U Score</span>
-                                <div className="flex items-center gap-1">
-                                    <span className="text-xl font-display font-black leading-none">{provider.score.points}</span>
-                                    <Clock className="w-2.5 h-2.5 opacity-50" />
-                                </div>
-                            </div>
-                            <div className="w-[1px] h-6 bg-white/20" />
-                            <div className="flex flex-col text-center">
-                                <span className="text-[8px] font-bold uppercase tracking-widest opacity-70">Grade</span>
-                                <span className="text-sm font-black text-secondary leading-none">
-                                    {provider.score.total}
-                                </span>
-                            </div>
-                        </div>
-                    )}
+                    {/* Botox-4U Score Badge hidden for now */}
+                    {/* {provider.score && (
+                        ...
+                    )} */}
                     {/* Warning Flag Overlay */}
                     {provider.warning_flag && (
                         <div className="absolute inset-x-0 top-0 bg-red-600 text-white p-2 z-30 flex items-center justify-center gap-2 shadow-lg">

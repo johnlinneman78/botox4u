@@ -339,65 +339,12 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
 
                         <div className="lg:w-1/3">
                             <div className="sticky top-24 space-y-8">
-                                {/* Transparency Scorecard */}
+                                {/* Audit Scorecard hidden for now as per user request */}
+                                {/* 
                                 <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 relative overflow-hidden group">
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/5 blur-3xl -mr-16 -mt-16 group-hover:bg-secondary/10 transition-colors"></div>
-                                    <div className="relative z-10">
-                                        <div className="flex items-center justify-between mb-8">
-                                            <div>
-                                                <div className="text-[10px] text-secondary font-black uppercase tracking-[0.2em] mb-1">Trust Grade</div>
-                                                <h3 className="text-xl font-display font-bold text-primary">Audit Scorecard</h3>
-                                            </div>
-                                            <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary font-black text-2xl shadow-inner italic border border-secondary/5">
-                                                {provider.score?.total || 'A+'}
-                                            </div>
-                                        </div>
-
-                                        <div className="space-y-6">
-                                            <div className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 transition-colors">
-                                                <div className="flex items-center gap-3">
-                                                    <Target className="w-4 h-4 text-rose-500" />
-                                                    <span className="text-sm font-bold text-primary">Natural Results</span>
-                                                </div>
-                                                {(provider.score_results_quality || 0) > 20 ? <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" /> : <div className="w-4 h-4 rounded-full border-2 border-gray-100"></div>}
-                                            </div>
-                                            <div className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 transition-colors">
-                                                <div className="flex items-center gap-3">
-                                                    <DollarSign className="w-4 h-4 text-emerald-500" />
-                                                    <span className="text-sm font-bold text-primary">Fair Pricing</span>
-                                                </div>
-                                                {provider.price_per_unit ? <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" /> : <div className="w-4 h-4 rounded-full border-2 border-gray-100"></div>}
-                                            </div>
-                                            <div className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 transition-colors">
-                                                <div className="flex items-center gap-3">
-                                                    <ShieldCheck className="w-4 h-4 text-blue-500" />
-                                                    <span className="text-sm font-bold text-primary">Verified Credentials</span>
-                                                </div>
-                                                {provider.npi_verified ? <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" /> : <div className="w-4 h-4 rounded-full border-2 border-gray-100"></div>}
-                                            </div>
-                                            <div className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 transition-colors">
-                                                <div className="flex items-center gap-3">
-                                                    <Gem className="w-4 h-4 text-amber-500" />
-                                                    <span className="text-sm font-bold text-primary">Safety Protocols</span>
-                                                </div>
-                                                {provider.allergan_tier && provider.allergan_tier !== 'None' ? <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" /> : <div className="w-4 h-4 rounded-full border-2 border-gray-100"></div>}
-                                            </div>
-                                            <div className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 transition-colors">
-                                                <div className="flex items-center gap-3">
-                                                    <Clock className="w-4 h-4 text-slate-500" />
-                                                    <span className="text-sm font-bold text-primary">Responsiveness</span>
-                                                </div>
-                                                <Zap className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                                            </div>
-                                        </div>
-
-                                        <div className="mt-8 pt-6 border-t border-gray-50">
-                                            <p className="text-[10px] text-gray-400 leading-relaxed font-medium uppercase tracking-wider">
-                                                {NICHE.copy.scoreDisclaimer}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                                    ...
+                                </div> 
+                                */}
 
                                 {/* Lead Form */}
                                 <div id="quote-form">

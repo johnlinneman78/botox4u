@@ -46,12 +46,12 @@ export function getGrade(score: number): string {
  * Calculates the Botox-4U Score based on Version 2 (February 2026)
  */
 export function calculateProviderScore(factors: ScoringFactors, cityAveragePrice: number = NICHE.priceRange.min + 5): ScoreBreakdown {
-    let resultsQualityScore = factors.results_quality_score || 10 // Baseline neutral
+    let resultsQualityScore = factors.results_quality_score || 0 // Baseline 0
     let priceScore = 0
     let trustScore = 0
     let safetyScore = 0
     let transparencyScore = 0
-    let responsivenessScore = factors.responsiveness_score || 1 // Baseline
+    let responsivenessScore = factors.responsiveness_score || 0 // Baseline 0
 
     // 1. Results Quality Score (Max 30 pts)
     // Passed in from sentiment analysis script or neutralized

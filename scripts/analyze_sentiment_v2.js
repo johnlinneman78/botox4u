@@ -80,14 +80,14 @@ async function analyzeSentiment() {
             });
         }
 
-        // Formula: Baseline(10) + (Pos * 5) - (Neg * 10)
+        // Formula: Baseline(0) + (Pos * 5) - (Neg * 10)
         // Values clamped between 0 and 30
-        let score = 10 + (positiveCount * 5) - (negativeCount * 10);
+        let score = 0 + (positiveCount * 5) - (negativeCount * 10);
         score = Math.min(30, Math.max(0, score));
 
         // If no reviews, keep baseline
         if (!provider.top_reviews || provider.top_reviews.length === 0) {
-            score = 10;
+            score = 0;
         }
 
         console.log(`[${provider.name}] - Pos: ${positiveCount}, Neg: ${negativeCount}, Score: ${score}`);

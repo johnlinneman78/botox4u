@@ -263,7 +263,10 @@ MORE_CITIES = [
     {"city": "Tucson", "state": "AZ"}, {"city": "Fresno", "state": "CA"},
     {"city": "Sacramento", "state": "CA"}, {"city": "Kansas City", "state": "MO"},
     {"city": "Omaha", "state": "NE"}, {"city": "Tulsa", "state": "OK"},
-    {"city": "Wichita", "state": "KS"}, {"city": "New Orleans", "state": "LA"}
+    {"city": "Wichita", "state": "KS"}, {"city": "New Orleans", "state": "LA"},
+    {"city": "Los Angeles", "state": "CA"}, {"city": "Miami", "state": "FL"},
+    {"city": "Chicago", "state": "IL"}, {"city": "Atlanta", "state": "GA"},
+    {"city": "San Diego", "state": "CA"}, {"city": "Boston", "state": "MA"}
 ]
 
 GENERIC_NAMES = [
