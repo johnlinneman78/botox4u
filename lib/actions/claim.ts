@@ -3,7 +3,8 @@
 import { createClient } from '@/lib/supabase/client' // Switch to server-side when actually calling
 import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 import { sendVerificationEmail } from '../resend'
-import { crypto } from 'crypto'
+import crypto from 'crypto'
+import { NICHE } from '@/config/niche'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -32,7 +33,7 @@ export async function initiateClaim(formData: {
     }
 
     // 2. Create or find provider account
-    const verificationToken = require('crypto').randomBytes(32).toString('hex');
+    const verificationToken = crypto.randomBytes(32).toString('hex');
 
     const { data: account, error: accountError } = await supabase
         .from('provider_accounts')
@@ -57,7 +58,7 @@ export async function initiateClaim(formData: {
         .eq('id', formData.providerId);
 
     // 4. Send Verification Email (Step 2)
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://botox-4u.com';
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || `https://${NICHE.domain}`;
     const claimUrl = `${baseUrl}/provider/verify?token=${verificationToken}`;
 
     const emailResult = await sendVerificationEmail(formData.email, provider.name, claimUrl);
