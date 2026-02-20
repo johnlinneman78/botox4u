@@ -153,16 +153,16 @@ export const NICHE = {
     // Brand V2 Copy
     copy: {
         hero: {
-            headline: "Find Injectors Known for Natural Results — and See Real Prices Before You Book",
-            subtext: "40% of Botox complaints are about over-injection. We score every provider on results quality, fair pricing, and verified credentials — so you find someone who won't overdo it.",
-            cta: "Find a Conservative Injector Near Me"
+            headline: "We Rank Every Injector in Your City on One Standard: Natural Results",
+            subtext: "Unlike generic directories, we don't sell rankings. We use semantic analysis to find the injectors who patients describe as 'subtle' and 'conservative.' Verified prices. Federal credentials. Zero frozen faces.",
+            cta: "View Ranked Injectors"
         },
         trustBadges: [
-            { icon: 'target', label: 'Natural Results', description: 'Scored on real patient language' },
-            { icon: 'dollar', label: 'Real Pricing', description: 'Actual cost per unit, no surprises' },
-            { icon: 'shield', label: 'NPI Verified', description: 'Federal credential confirmation' }
+            { icon: 'target', label: 'Semantic Scoring', description: 'We read every review for results quality' },
+            { icon: 'shield', label: 'Zero Pay-to-Play', description: 'Rankings are based on data, not ads' },
+            { icon: 'dollar', label: 'Price Verified', description: 'The only index with real-time pricing' }
         ],
-        scoreDisclaimer: "The Botox-4U Score ranks providers on what patients actually care about — natural results, fair pricing, verified credentials, and real patient trust. Providers known for conservative, subtle results score highest. Nobody pays for a better score.",
-        footerDisclaimer: "Botox-4U.com is an independent third-party research platform. We are not a medical board, licensing authority, or regulatory body. Provider scores are based on publicly available data including Google ratings, review counts, NPI database records, and provider-reported pricing. Scores do not constitute medical advice or endorsement of clinical competence. Always consult directly with your provider before booking any medical treatment."
+        scoreDisclaimer: "The Botox-4U Score is the first independent standard for cosmetic injectables. We analyze real patient language to prioritize injectors who understand the 'Clean Girl' aesthetic—conservative, subtle, and natural. Nobody can buy a higher rank.",
+        footerDisclaimer: "Botox-4U.com is an independent research platform. We are not affiliated with Alle, RealSelf, or any medical manufacturer. Our mission is to provide transparency in pricing and clinical results quality through independent data analysis. Always consult with a licensed professional before any treatment."
     }
 }

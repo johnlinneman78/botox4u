@@ -1,5 +1,5 @@
-# STRATEGIC CONTEXT — Botox-4U.com
-**The agent must read this file before starting any session involving data, outreach, or provider display.**
+# MISSION: The Natural Results Standard
+**Every decision must protect the patient from the "frozen face." We don't sell ads; we rank outcomes.**
 **This file explains the WHY behind every decision. When you hit an edge case not covered in AGENT_STATE.md or the task list, use this file to reason through it.**
 
 ---
@@ -91,5 +91,21 @@ AND display_status = 'live'
 
 ---
 
-## 4. OUTREACH RULES — NON-NEGOTIABLE
+## 5. BRAND DIFFERENTIATORS & COMPETITIVE MOAT
+
+### The "Clean Girl" Mission
+Unlike **Alle** (Brand Rewards) or **RealSelf** (Volume-based directory), we are an **Impact-based Ranking Engine**. 
+- **Mission:** To eliminate aesthetic anxiety through data transparency.
+- **Differentiator 1: Semantic Curation.** We don't just count stars. We scan review text for "conservative," "subtle," and "restored." Providers who "over-inject" (verified by sentiment analysis) are deprioritized or flagged.
+- **Differentiator 2: Zero Pay-to-Play.** You cannot buy a #1 spot. You can only buy "Lead Generation" flow AFTER you've met our quality standard.
+- **Differentiator 3: Price Verification.** Alle tells you about points; we tell you the price-per-unit before you drive to the clinic.
+
+### Competitive Strategy
+- **VS RealSelf:** RealSelf is too big and cluttered with ads. We are the "Curated Boutiques" of Botox.
+- **VS Alle:** Alle is a manufacturer tool. We are a patient advocate tool.
+- **Our Moat:** The **Botox-4U Score (V2)**. It is a proprietary calculation involving NPI data, sentiment analysis, and localized pricing—things a generic directory can't easily replicate at scale without custom scraping logic.
+
+---
+
+## 6. OUTREACH RULES — NON-NEGOTIABLE
 [Rest of content truncated]
