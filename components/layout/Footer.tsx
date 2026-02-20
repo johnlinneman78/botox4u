@@ -17,7 +17,7 @@ export default function Footer() {
                             </Link>
                         </div>
                         <p className="text-sm text-gray-600">
-                            Find the best {NICHE.name} providers near you. Compare costs, read reviews, and book consultations.
+                            The Independent Index for Aesthetic Medicine Providers. Find the best injectors near you, compare verified pricing, and check credentials before you book.
                         </p>
                     </div>
 

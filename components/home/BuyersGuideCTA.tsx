@@ -16,7 +16,7 @@ export function BuyersGuideCTA() {
                         </div>
                         <div>
                             <h3 className="text-2xl font-display font-bold text-primary mb-2">
-                                Not sure how to choose?
+                                Not sure how to choose a provider?
                             </h3>
                             <p className="text-gray-600 max-w-md">
                                 Download the free Botox Buyer&apos;s Guide — 7 questions to ask before you book.
