@@ -1,18 +1,24 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { NICHE } from '@/config/niche';
+
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function sendVerificationEmail(email: string, providerName: string, claimUrl: string) {
     try {
+        if (!resend) {
+            console.error('Resend not configured (RESEND_API_KEY missing)');
+            return { success: false, error: 'Resend not configured' };
+        }
         const { data, error } = await resend.emails.send({
-            from: 'Botox-4U <claims@botox-4u.com>', // Update with actual domain later
+            from: `${NICHE.siteName} <hello@${NICHE.domain}>`,
             to: [email],
             subject: `Verify Ownership: ${providerName}`,
             html: `
                 <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #1a2332;">
                     <h1 style="color: #1a2332; font-size: 24px; font-weight: bold; margin-bottom: 20px;">Verify Your Clinic Ownership</h1>
                     <p style="font-size: 16px; line-height: 1.6; margin-bottom: 24px;">
-                        Hello, thank you for claiming the listing for <strong>${providerName}</strong> on Botox-4U.
+                        Hello, thank you for claiming the listing for <strong>${providerName}</strong> on ${NICHE.siteName}.
                     </p>
                     <p style="font-size: 16px; line-height: 1.6; margin-bottom: 32px;">
                         To complete your claim and unlock features like <strong>Photo Priority Logic</strong> and <strong>Warm Leads Tracking</strong>, please click the button below to verify your email.
