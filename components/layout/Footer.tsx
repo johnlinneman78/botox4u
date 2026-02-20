@@ -51,6 +51,10 @@ export default function Footer() {
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-600">
+                    <p className="mb-4 font-bold text-primary">
+                        {NICHE.siteName} is built for patients, not providers.<br />
+                        Rankings are based on data — nobody pays for a higher score.
+                    </p>
                     <p>© {currentYear} {NICHE.siteName} All rights reserved.</p>
                     <div className="mt-4">
                         <MedicalDisclaimer variant="inline" />

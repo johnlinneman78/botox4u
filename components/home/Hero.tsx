@@ -42,10 +42,6 @@ export default function Hero() {
                             <div className="h-16 w-auto -ml-2 mb-4 sm:mb-0 relative z-20">
                                 <Logo variant="shield" className="h-full" theme="dark" />
                             </div>
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-secondary text-xs font-bold tracking-widest uppercase animate-fade-in shadow-lg">
-                                <Star className="w-3 h-3 fill-current" />
-                                2026 Official Pricing Guide
-                            </div>
                         </div>
 
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-[1.1] text-balance">
@@ -119,13 +115,13 @@ export default function Hero() {
                                 <div className="space-y-4 translate-y-8">
                                     <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-800 border border-white/10 shadow-2xl relative group">
                                         <img
-                                            src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000"
-                                            alt="Professional Treatment Environment"
+                                            src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1000"
+                                            alt="Natural Results"
                                             className="grow object-cover w-full h-full opacity-60 group-hover:scale-110 transition-transform duration-1000"
                                         />
                                         <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/0 transition-colors" />
                                         <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                                            <div className="text-white text-xs font-bold uppercase tracking-widest">Clinical Excellence</div>
+                                            <div className="text-white text-xs font-bold uppercase tracking-widest">Natural Results</div>
                                         </div>
                                     </div>
                                     <div className="p-6 rounded-2xl bg-[#151b26] border border-white/10 shadow-xl">
@@ -143,13 +139,13 @@ export default function Hero() {
                                     </div>
                                     <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-800 border border-white/10 shadow-2xl relative group">
                                         <img
-                                            src="https://images.unsplash.com/photo-1512290923902-8a9f81dc2069?auto=format&fit=crop&q=80&w=1000"
-                                            alt="Natural Treatment Results"
+                                            src="https://images.unsplash.com/photo-1506152983158-b4a74a01c721?auto=format&fit=crop&q=80&w=1000"
+                                            alt="Warm Daylight Skin"
                                             className="grow object-cover w-full h-full opacity-60 group-hover:scale-110 transition-transform duration-1000"
                                         />
                                         <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/0 transition-colors" />
                                         <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                                            <div className="text-white text-xs font-bold uppercase tracking-widest">Natural Results</div>
+                                            <div className="text-white text-xs font-bold uppercase tracking-widest">Soft Daylight</div>
                                         </div>
                                     </div>
                                 </div>

@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import { Check, Star, Shield, Zap, TrendingUp } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
 import { NICHE } from '@/config/niche'
+import { getSupabaseServer } from '@/lib/supabase/factory'
+import { cookies } from 'next/headers'
+import { PricingCta } from '@/components/pricing/PricingCta'
 
 const getIcon = (index: number) => {
     switch (index) {
@@ -12,7 +14,21 @@ const getIcon = (index: number) => {
     }
 }
 
-export default function PricingPage() {
+export default async function PricingPage() {
+    const supabase = await getSupabaseServer(await cookies());
+    const { data: { user } } = await supabase?.auth.getUser() || { data: { user: null } };
+
+    let providerId: string | undefined;
+    if (user) {
+        const { data: provider } = await supabase!
+            .from('providers')
+            .select('id')
+            .eq('user_id', user.id)
+            .limit(1)
+            .single();
+        providerId = provider?.id;
+    }
+
     return (
         <div className="min-h-screen bg-white">
             {/* Hero Section */}
@@ -88,15 +104,15 @@ export default function PricingPage() {
                                 </ul>
                             </div>
 
-                            <Link
-                                href={`/auth/login?plan=${tier.name.toLowerCase()}`}
+                            <PricingCta
+                                planId={tier.name.toLowerCase() as any}
+                                providerId={providerId}
+                                isLoggedIn={!!user}
                                 className={`w-full py-6 rounded-2xl text-sm font-bold tracking-wide uppercase transition-all shadow-lg flex items-center justify-center ${tier.anchor
                                     ? 'bg-primary hover:bg-slate-800 text-white shadow-primary/20'
                                     : 'bg-white border-2 border-gray-900 text-gray-900 hover:bg-gray-50 shadow-gray-200'
                                     }`}
-                            >
-                                Get Started Now
-                            </Link>
+                            />
                         </div>
                     ))}
                 </div>

@@ -32,6 +32,7 @@ export interface ScoreBreakdown {
  * Converts a numeric score (0-100) to a letter grade
  */
 export function getGrade(score: number): string {
+    if (score === 0) return 'Pending'
     if (score >= 95) return 'A+'
     if (score >= 90) return 'A'
     if (score >= 85) return 'A-'
@@ -39,7 +40,7 @@ export function getGrade(score: number): string {
     if (score >= 75) return 'B'
     if (score >= 70) return 'B-'
     if (score >= 60) return 'C'
-    return 'D'
+    return 'Pending' // Change from 'D' to 'Pending' for anything below 60
 }
 
 /**
@@ -54,18 +55,22 @@ export function calculateProviderScore(factors: ScoringFactors, cityAveragePrice
     let responsivenessScore = factors.responsiveness_score || 0 // Baseline 0
 
     // 1. Results Quality Score (Max 30 pts)
-    // Passed in from sentiment analysis script or neutralized
-    resultsQualityScore = Math.min(30, Math.max(0, resultsQualityScore))
+    // Formula: (Raw Sentiment * Multiplier)
+    let sentimentBonus = factors.results_quality_score || 0
+    if (sentimentBonus > 25) {
+        sentimentBonus *= 1.2 // "Patient Love" Multiplier for exceptional results
+    }
+    resultsQualityScore = Math.min(30, Math.max(0, sentimentBonus))
 
     // 2. Fair Pricing Score (Max 25 pts)
     if (factors.price_per_unit) {
         const ratio = factors.price_per_unit / cityAveragePrice
         if (ratio <= 0.80) priceScore = 25
-        else if (ratio <= 0.90) priceScore = 20
-        else if (ratio <= 1.00) priceScore = 17
-        else if (ratio <= 1.10) priceScore = 13
-        else if (ratio <= 1.25) priceScore = 8
-        else priceScore = 3
+        else if (ratio <= 0.90) priceScore = 22 // Boosted from 20
+        else if (ratio <= 1.00) priceScore = 18 // Boosted from 17
+        else if (ratio <= 1.10) priceScore = 14 // Boosted from 13
+        else if (ratio <= 1.25) priceScore = 9  // Boosted from 8
+        else priceScore = 5                    // Boosted from 3
     }
 
     // 3. Trust Score (Max 20 pts)

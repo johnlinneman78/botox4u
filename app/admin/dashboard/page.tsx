@@ -2,6 +2,7 @@ import { getLeadStats, getRecentActivity } from '@/lib/actions/leads'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import Link from 'next/link'
+import { NICHE } from '@/config/niche'
 
 export const dynamic = 'force-dynamic'
 
@@ -19,7 +20,7 @@ export default async function AdminDashboard() {
                             ADMIN COMMAND CENTER
                         </Badge>
                         <h1 className="text-4xl font-display font-bold text-white tracking-tight">
-                            Botox-4-U.com Performance
+                            {NICHE.siteName} Performance
                         </h1>
                     </div>
                     <div className="flex items-center gap-3 bg-white/5 p-2 rounded-2xl border border-white/10 backdrop-blur-xl">

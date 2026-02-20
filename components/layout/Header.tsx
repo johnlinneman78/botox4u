@@ -34,9 +34,9 @@ export default function Header() {
                             {link.label}
                         </Link>
                     ))}
-                    <Link href="/#quick-quote">
+                    <Link href="/find-providers">
                         <Button className="bg-[#1a2332] hover:bg-slate-800 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-lg shadow-navy-900/10">
-                            Get Quote
+                            Find Providers
                         </Button>
                     </Link>
                 </nav>
@@ -65,12 +65,12 @@ export default function Header() {
                         </Link>
                     ))}
                     <Link
-                        href="/#quick-quote"
+                        href="/find-providers"
                         onClick={() => setIsMenuOpen(false)}
                         className="flex items-center gap-3 p-3 rounded-xl bg-[#1a2332] text-white font-bold text-center justify-center transition-all"
                     >
-                        <MessageSquare className="w-5 h-5" />
-                        Get Quote
+                        <Shield className="w-5 h-5" />
+                        Find Providers
                     </Link>
                 </div>
             )}

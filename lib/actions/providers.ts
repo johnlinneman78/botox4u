@@ -129,7 +129,8 @@ export async function getProvidersWithSearch(filters: {
         npi_license_type: p.npi_license_type,
         npi_specialty: p.npi_specialty,
         npi_verified_at: p.npi_verified_at,
-        allergan_tier: p.allergan_tier
+        allergan_tier: p.allergan_tier,
+        has_real_photo: !!(p.hero_image_url || p.image_url)
     }))
 
     // Custom sort: Premium > Score > Proximity

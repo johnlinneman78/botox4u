@@ -64,6 +64,22 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                             </div>
                         </div>
                     )}
+
+                    {/* Claim Profile Overlay (if no real photo) */}
+                    {!provider.has_real_photo && (
+                        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] z-20 flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div className="bg-white/90 backdrop-blur px-4 py-2 rounded-xl shadow-xl flex flex-col items-center gap-1 border border-white/20 scale-90 group-hover:scale-100 transition-transform duration-500">
+                                <Sparkles className="w-5 h-5 text-secondary animate-pulse" />
+                                <span className="text-[10px] font-black text-gray-900 uppercase tracking-widest leading-none">Is this your clinic?</span>
+                                <Link
+                                    href={`/provider/claim?id=${provider.id}`}
+                                    className="mt-2 bg-secondary text-white text-[9px] font-bold px-3 py-1.5 rounded-lg hover:bg-secondary/90 transition-colors shadow-sm"
+                                >
+                                    CLAIM & UPLOAD PHOTOS
+                                </Link>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 {/* Content Section */}

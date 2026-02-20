@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/Button'
 import { Search, MapPin, DollarSign } from 'lucide-react'
+import { NICHE } from '@/config/niche'
 
 export default function Hero({ city, state }: { city?: string, state?: string }) {
     return (
@@ -21,7 +22,7 @@ export default function Hero({ city, state }: { city?: string, state?: string })
                         Transparent Pricing • Verified Providers
                     </div>
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-[1.1]">
-                        Find Botox Providers in {city || 'Your City'}
+                        Find {NICHE.name} Providers in {city || 'Your City'}
                         <span className="block text-[#d4af37] text-4xl md:text-5xl lg:text-6xl mt-2 font-display italic">
                             with Real Pricing
                         </span>
@@ -44,9 +45,9 @@ export default function Hero({ city, state }: { city?: string, state?: string })
                             variant="outline"
                             size="lg"
                             className="border-white/20 text-white hover:bg-white/5 text-lg px-8 py-6 h-14 font-medium w-full sm:w-auto rounded-xl backdrop-blur-sm"
-                            onClick={() => document.getElementById('quick-quote')?.scrollIntoView({ behavior: 'smooth' })}
+                            onClick={() => document.getElementById('listings')?.scrollIntoView({ behavior: 'smooth' })}
                         >
-                            Get Free Quotes
+                            View Pricing
                         </Button>
                     </div>
                 </div>

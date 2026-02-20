@@ -33,10 +33,10 @@ export default async function FeaturedProviders() {
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                     <div>
                         <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-4">
-                            Featured Specialists
+                            Top-Scoring Providers
                         </h2>
                         <p className="text-gray-600 max-w-2xl text-lg">
-                            We've partnered with the nation's top-rated aesthetic clinics to ensure you receive the highest quality care and transparent pricing.
+                            Top-Scoring Providers in Your Area
                         </p>
                     </div>
                     <Link href="/find-providers">

@@ -20,8 +20,7 @@ export function LogoPrecision({ className = "", theme = 'light' }: { className?:
                     <stop offset="100%" stopColor="#d4af37" />
                 </linearGradient>
             </defs>
-            <text x="0" y="60" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '48px', fontWeight: '700' }} fill={textColor}>{NICHE.brandName}<tspan fill="url(#goldText)">{NICHE.brandSuffix}</tspan>.com</text>
-            <text x="2" y="85" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '10px', fontWeight: '800' }} fill="#94a3b8" letterSpacing="0.4em">{NICHE.name.toUpperCase()} MEDICAL DIRECTORY</text>
+            <text x="0" y="65" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '56px', fontWeight: '700' }} fill={textColor}>{NICHE.brandName}<tspan fill="url(#goldText)">{NICHE.brandSuffix}</tspan>.com</text>
         </svg>
     )
 }
@@ -58,11 +57,10 @@ export function LogoShield({ className = "", theme = 'light' }: { className?: st
             </g>
 
             {/* Brand Text */}
-            <text x="135" y="65" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '56px', fontWeight: '800' }} fill={textColor} letterSpacing="-0.02em">
+            <text x="135" y="75" style={{ fontFamily: "var(--font-playfair), serif", fontSize: '64px', fontWeight: '800' }} fill={textColor} letterSpacing="-0.02em">
                 {NICHE.brandName}<tspan fill="#d4af37">{NICHE.brandSuffix}</tspan>
             </text>
-            <text x="402" y="55" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '24px', fontWeight: '400' }} fill={subtextColor}>.com</text>
-            <text x="138" y="95" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '11px', fontWeight: '700' }} fill="#d4af37" letterSpacing="0.35em">PREMIUM {NICHE.providerType.toUpperCase()} NETWORK</text>
+            <text x="445" y="65" style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: '24px', fontWeight: '400' }} fill={subtextColor}>.com</text>
         </svg>
     )
 }

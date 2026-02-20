@@ -65,6 +65,7 @@ export interface EnrichedProvider {
     score_results_quality?: number;
     positive_keyword_count?: number;
     negative_keyword_count?: number;
+    has_real_photo?: boolean;
 }
 
 export interface Review {

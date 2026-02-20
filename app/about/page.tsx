@@ -30,7 +30,7 @@ export default function AboutPage() {
 
                         <div className="text-center">
                             <h3 className="text-2xl font-display font-bold text-primary mb-1">John Linneman</h3>
-                            <p className="text-gray-400 font-medium uppercase tracking-widest text-xs">Founder, Botox-4U.com</p>
+                            <p className="text-gray-400 font-medium uppercase tracking-widest text-xs">Founder, {NICHE.siteName}</p>
                         </div>
                     </div>
 

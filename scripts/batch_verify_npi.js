@@ -30,6 +30,14 @@ if (!supabaseUrl || !supabaseServiceKey) {
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
+function cleanName(name) {
+    if (!name) return '';
+    return name
+        .replace(/ (Med Spa|MedSpa|Aesthetics|Medical Spa|Plastic Surgery|Skin Clinic|Laser|Center|and|&|Institute|Group|Health|Wellness|Clinic|Beauty|Studio|Skin).*$/i, '')
+        .replace(/^Dr\. /i, '')
+        .trim();
+}
+
 async function lookupNPI(name, state, isOrganization = false) {
     try {
         const params = new URLSearchParams({
@@ -94,9 +102,26 @@ async function batchVerify() {
         // 1. Try organization
         let match = await lookupNPI(provider.name, provider.state, true);
 
-        // 2. Try individual
+        // 2. Try cleaned organization
+        if (!match) {
+            const cleaned = cleanName(provider.name);
+            if (cleaned !== provider.name) {
+                console.log(`   Trying cleaned: ${cleaned}...`);
+                match = await lookupNPI(cleaned, provider.state, true);
+            }
+        }
+
+        // 3. Try individual (original)
         if (!match) {
             match = await lookupNPI(provider.name, provider.state, false);
+        }
+
+        // 4. Try cleaned individual
+        if (!match) {
+            const cleaned = cleanName(provider.name);
+            if (cleaned !== provider.name) {
+                match = await lookupNPI(cleaned, provider.state, false);
+            }
         }
 
         if (match) {
