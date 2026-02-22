@@ -27,7 +27,7 @@ export default function StatesPage() {
                     {states.map((slug) => {
                         const name = slug.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ')
                         return (
-                            <Link key={slug} href={`${NICHE.baseSlug}state/${slug}`} className="group">
+                            <Link key={slug} href={`/${NICHE.baseSlug}/state/${slug}`} className="group">
                                 <Card className="p-4 text-center hover:border-secondary/30 hover:shadow-md transition-all">
                                     <span className="font-bold text-primary group-hover:text-secondary transition-colors uppercase tracking-wide text-sm">
                                         {name}

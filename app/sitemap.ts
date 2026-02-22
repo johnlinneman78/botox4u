@@ -54,7 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const cityRoutes = (uniqueLocations as string[]).map(loc => {
         const [city, state] = loc.split(':')
         return {
-            url: `${baseUrl}/botox/${city}-${state}`,
+            url: `${baseUrl}/botox/${state}/${city}`,
             lastModified: new Date(),
             changeFrequency: 'weekly' as const,
             priority: 0.7,

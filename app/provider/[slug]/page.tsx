@@ -40,7 +40,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
     const schema = generateMedicalClinicSchema(provider);
     const breadcrumbs = generateBreadcrumbSchema([
         { name: 'Home', item: '/' },
-        { name: provider.city, item: `${NICHE.baseSlug}/${provider.state.toLowerCase()}/${provider.city.toLowerCase().replace(/ /g, '-')}` },
+        { name: provider.city, item: `/${NICHE.baseSlug}/${provider.state.toLowerCase()}/${provider.city.toLowerCase().replace(/ /g, '-')}` },
         { name: provider.name, item: `/provider/${provider.slug}` }
     ]);
 
