@@ -7,7 +7,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { NICHE } from '@/config/niche';
 
-export async function createCheckoutSession(providerId: string, planId: 'starter' | 'featured' | 'premium') {
+export async function createCheckoutSession(providerId: string, planId: 'verified' | 'featured') {
     const supabase = await getSupabaseServer(await cookies());
     if (!supabase) throw new Error('Not authenticated');
 

@@ -5,12 +5,12 @@
 export const NICHE = {
     // Business identity
     name: "Botox",                          // "Botox", "IV Therapy", "Dental Implants"
-    namePlural: "Botox Treatments",
-    providerType: "injector",               // "injector", "clinic", "provider", "dentist"
-    providerTypePlural: "injectors",
+    namePlural: "Aesthetic Medicine Providers",
+    providerType: "provider",               // "injector", "clinic", "provider", "dentist"
+    providerTypePlural: "providers",
     siteName: "Botox-4U.com",
     domain: "botox-4u.com",
-    tagline: "Find injectors known for natural results — and see their real prices before you book.",
+    tagline: "The independent index for Botox & aesthetic treatments — compare verified pricing and credentials before you book.",
     brandName: "Botox",
     brandSuffix: "-4u",
 
@@ -96,43 +96,43 @@ export const NICHE = {
     // Pricing tiers (for /pricing page)
     pricingTiers: [
         {
-            name: "Starter",
-            price: 99,
+            name: "Free",
+            price: 0,
             interval: "month",
             features: [
-                "NPI Check + Verified Badge",
-                "Priority placement in city search results",
-                "Display your price per unit",
-                "Link to your booking page"
+                "Basic listing in directory",
+                "Appears in city search results",
+                "Name, location & credential display",
+                "Botox-4U Score visible"
             ],
-            bestFor: "Clinics just starting with digital marketing"
+            bestFor: "Individual providers getting started"
         },
         {
-            name: "Featured",
-            price: 149,
+            name: "Verified",
+            price: 49,
             interval: "month",
             anchor: true,                        // highlighted tier
             features: [
-                "Everything in Starter",
-                "Hero photo displayed prominently",
-                "Featured card placement (top 3 in your city)",
-                "Featured Provider badge",
-                "Monthly performance report"
+                "Verified Badge on profile",
+                "Real pricing listed for patients",
+                "Tracked 'Go to Website' clicks",
+                "Prominent Contact button",
+                "Basic analytics (Views & Clicks)"
             ],
-            bestFor: "Established clinics wanting more new patient visibility"
+            bestFor: "Active med spas wanting more leads"
         },
         {
-            name: "Premium",
-            price: 299,
+            name: "Featured",
+            price: 99,
             interval: "month",
             features: [
-                "Everything in Featured",
-                "Dedicated landing page with full bio and gallery",
-                "Priority placement across ALL treatment pages in your city",
-                "Lead notification emails",
-                "Competitor pricing comparison"
+                "Everything in Verified",
+                "Top placement in city search results",
+                "Featured Provider highlight",
+                "Homepage & City featured slots",
+                "Full analytics dashboard"
             ],
-            bestFor: "High-volume injectors and multi-location clinics"
+            bestFor: "Market leaders wanting maximum visibility"
         }
     ],
 
@@ -153,8 +153,8 @@ export const NICHE = {
     // Brand V2 Copy
     copy: {
         hero: {
-            headline: "The Independent Index for Aesthetic Medicine Providers",
-            subtext: "Find your perfect injector with 100% independent data. We aren't a clinic — we're a verified provider directory, focusing on the transparency of Botox pricing, credentials, and natural results. Search every clinic in your city and check their verified score before you book.",
+            headline: "The Independent Index for Botox & Aesthetic Providers",
+            subtext: "Find your perfect provider with 100% independent data. We aren't a clinic — we're a verified directory for Botox & aesthetic treatments, focusing on the transparency of pricing, credentials, and natural results. Search every clinic in your city and check their verified score before you book.",
             cta: "Search the Local Directory"
         },
         trustBadges: [

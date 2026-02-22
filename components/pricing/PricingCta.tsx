@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { createCheckoutSession } from '@/lib/actions/checkout';
 
 interface PricingCtaProps {
-    planId: 'starter' | 'featured' | 'premium';
+    planId: 'free' | 'verified' | 'featured';
     providerId?: string;
     isLoggedIn: boolean;
     className?: string;
@@ -16,8 +16,14 @@ export function PricingCta({ planId, providerId, isLoggedIn, className }: Pricin
     const [loading, setLoading] = useState(false);
 
     const handleUpgrade = async () => {
+        // Handle Free Plan
+        if (planId === 'free') {
+            window.location.href = isLoggedIn ? '/provider/dashboard' : '/provider/register';
+            return;
+        }
+
         if (!isLoggedIn) {
-            window.location.href = `/auth/login?plan=${planId}&providerId=${providerId || ''}`;
+            window.location.href = `/provider/register?plan=${planId}&providerId=${providerId || ''}`;
             return;
         }
 

@@ -1,11 +1,9 @@
 import { MetadataRoute } from 'next'
-import { getSupabaseServer } from '@/lib/supabase/factory'
-import { cookies } from 'next/headers'
+import { createClient } from '@supabase/supabase-js'
 import { REVERSE_STATE_MAP, TREATMENTS } from '@/lib/constants'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://botox-4u.com'
-    const cookieStore = await cookies()
+    const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || process.env.NEXT_PUBLIC_SITE_URL || 'https://botox-4u.com').replace(/\/$/, '')
 
     // 1. Static Routes
     const staticRoutes = [
@@ -22,11 +20,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: route === '' ? 1 : 0.8,
     }))
 
-    const supabase = await getSupabaseServer(cookieStore)
+    // Use direct client to avoid next/headers (cookies) dependency which fails with bots
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-    if (!supabase) {
+    // Fallback if Supabase is not configured
+    if (!supabaseUrl || !supabaseKey) {
         return [...staticRoutes]
     }
+
+    const supabase = createClient(supabaseUrl, supabaseKey)
 
     // 2. Fetch Providers for sitemap
     const { data: providers } = await supabase

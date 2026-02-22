@@ -20,7 +20,7 @@ export function PromoteClinicCard({ city }: PromoteClinicCardProps) {
                     Want more patients in <span className="text-secondary">{city}</span>?
                 </h3>
                 <p className="text-sm text-primary-foreground/70 mb-8 leading-relaxed">
-                    Join the #1 specialized Botox directory. Premium members get 4x more leads and Top-of-Search placement.
+                    Join the #1 specialized aesthetic medicine provider directory. Premium members get 4x more leads and Top-of-Search placement.
                 </p>
                 <div className="space-y-3">
                     <Button className="w-full bg-secondary hover:bg-secondary/90 text-white border-0 py-6 text-md font-bold shadow-lg shadow-secondary/20">

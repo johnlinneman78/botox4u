@@ -13,7 +13,7 @@ const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfa
 export const metadata: Metadata = {
   title: `${NICHE.siteName} - Find Top ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)} & Compare Costs`,
   description: `Find the best ${NICHE.name} ${NICHE.providerTypePlural} near you. Compare prices, read reviews, and book consultations with verified providers at ${NICHE.siteName}.`,
-  keywords: `${NICHE.name.toLowerCase()}, ${NICHE.name.toLowerCase()} near me, ${NICHE.name.toLowerCase()} cost, ${NICHE.providerType}, cosmetic injections`,
+  keywords: `${NICHE.name.toLowerCase()}, ${NICHE.name.toLowerCase()} near me, ${NICHE.name.toLowerCase()} cost, aesthetics, aesthetic providers, cosmetic injections`,
   openGraph: {
     title: `${NICHE.siteName} - Find Top ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)} & Compare Costs`,
     description: `Find the best ${NICHE.name} ${NICHE.providerTypePlural} near you. Compare prices, read reviews, and book consultations.`,

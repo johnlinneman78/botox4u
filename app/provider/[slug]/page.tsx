@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
 
     return {
         title: `${provider.name} | Natural Results & Pricing in ${provider.city} | ${NICHE.siteName}`,
-        description: `Verified ${NICHE.name} injector ${provider.name} in ${provider.city}. We score them on results quality, pricing, and federal credentials.`
+        description: `Verified ${NICHE.providerType} ${provider.name} in ${provider.city}. The Botox-4U Index scores providers on natural results, independent pricing data, and federal credentials.`
     }
 }
 

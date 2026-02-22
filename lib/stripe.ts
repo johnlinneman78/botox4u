@@ -9,22 +9,16 @@ export const stripe = new Stripe(stripeKey, {
 });
 
 export const STRIPE_PLANS = {
-    starter: {
-        id: 'starter',
-        name: 'Starter',
-        priceId: process.env.STRIPE_STARTER_PRICE_ID || 'price_starter_placeholder',
-        amount: 99
+    verified: {
+        id: 'verified',
+        name: 'Verified',
+        priceId: process.env.STRIPE_VERIFIED_PRICE_ID || 'price_verified_placeholder',
+        amount: 49
     },
     featured: {
         id: 'featured',
         name: 'Featured',
         priceId: process.env.STRIPE_FEATURED_PRICE_ID || 'price_featured_placeholder',
-        amount: 149
-    },
-    premium: {
-        id: 'premium',
-        name: 'Premium',
-        priceId: process.env.STRIPE_PREMIUM_PRICE_ID || 'price_premium_placeholder',
-        amount: 299
+        amount: 99
     }
 };

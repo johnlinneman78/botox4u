@@ -4,8 +4,6 @@ module.exports = {
     generateRobotsTxt: true,
     exclude: ['/provider/login', '/provider/dashboard'],
     robotsTxtOptions: {
-        additionalSitemaps: [
-            'https://botox-4u.com/server-sitemap.xml',
-        ],
+        additionalSitemaps: [],
     },
 }

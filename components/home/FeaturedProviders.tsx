@@ -21,7 +21,7 @@ export default async function FeaturedProviders() {
             <div className="container mx-auto px-4">
                 <div className="flex flex-col mb-16 gap-4 text-center">
                     <h2 className="text-3xl md:text-5xl font-display font-bold text-primary">
-                        Top-Scoring Providers
+                        Top-Scoring Aesthetic Providers
                     </h2>
                     <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-4xl mx-auto">
                         Every provider is ranked by natural results, verified credentials, and real pricing — not by advertising spend.
