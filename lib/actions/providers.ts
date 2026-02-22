@@ -182,32 +182,80 @@ export async function getProvidersWithSearch(filters: {
     })
 }
 
-export async function getTopScoringProviders(limit: number = 6) {
+export async function getTopScoringProviders(limit: number = 6, userLat?: number, userLng?: number, userCity?: string, userState?: string) {
     const supabase = await getSupabaseServer(await cookies())
     if (!supabase) return []
 
-    // Try to order by 'score' which is our index ranking
-    // Using select('*') to ensure all mapping fields are available
-    const { data, error } = await supabase
-        .from('providers')
-        .select('*')
-        .not('score', 'is', null)
-        .order('score', { ascending: false })
-        .limit(limit)
+    let finalProviders: any[] = []
 
-    if (error) {
-        console.error('Error fetching top scoring providers:', error)
-        // Fallback to general search if score column is missing or query fails
-        return getProvidersWithSearch({})
+    // 1. Try Localized First (City Match)
+    if (userCity) {
+        const { data: cityData } = await supabase
+            .from('providers')
+            .select('*')
+            .not('score', 'is', null)
+            .ilike('city', userCity)
+            .order('score', { ascending: false })
+            .limit(limit)
+
+        if (cityData && cityData.length > 0) {
+            finalProviders = cityData
+        }
     }
 
-    return (data || []).map((p: any) => ({
+    // 2. Fallback to Regional (State Match) if we don't have enough city matches
+    if (finalProviders.length < limit && userState) {
+        const remaining = limit - finalProviders.length
+        const existingIds = finalProviders.map(p => p.id)
+
+        const { data: stateData } = await supabase
+            .from('providers')
+            .select('*')
+            .not('score', 'is', null)
+            .eq('state', userState)
+            .not('id', 'in', `(${existingIds.length ? existingIds.join(',') : '0'})`)
+            .order('score', { ascending: false })
+            .limit(remaining)
+
+        if (stateData) {
+            finalProviders = [...finalProviders, ...stateData]
+        }
+    }
+
+    // 3. National Fallback
+    if (finalProviders.length < limit) {
+        const remaining = limit - finalProviders.length
+        const existingIds = finalProviders.map(p => p.id)
+
+        const { data: nationalData } = await supabase
+            .from('providers')
+            .select('*')
+            .not('score', 'is', null)
+            .not('id', 'in', `(${existingIds.length ? existingIds.join(',') : '0'})`)
+            .order('score', { ascending: false })
+            .limit(remaining)
+
+        if (nationalData) {
+            finalProviders = [...finalProviders, ...nationalData]
+        }
+    }
+
+    const tierWeight = {
+        'featured': 1000,
+        'verified': 500,
+        'free': 0,
+        'premium': 1000
+    }
+
+    const mapped = finalProviders.map((p: any) => ({
         id: p.id,
         name: p.name,
         slug: p.slug,
         business_type: p.business_type,
         city: p.city,
         state: p.state,
+        lat: p.latitude || 0,
+        lng: p.longitude || 0,
         rating: p.rating || parseFloat(p.average_rating || 0),
         review_count: p.review_count || 0,
         score_total: p.score || 0,
@@ -218,8 +266,23 @@ export async function getTopScoringProviders(limit: number = 6) {
         listingTier: p.listing_tier || 'free',
         npi_verified: p.npi_verified || false,
         score_results_quality: p.score_results_quality || 0,
-        has_real_photo: !!(p.hero_image_url || p.image_url)
+        has_real_photo: !!(p.hero_image_url || p.image_url),
+        score: { points: p.score || 0 }
     }))
+
+    // Sort the final selection by proximity within its own tier (City -> State -> National)
+    return mapped.sort((a, b) => {
+        if (userLat && userLng && a.lat && a.lng && b.lat && b.lng) {
+            const distA = Math.sqrt(Math.pow(a.lat - userLat, 2) + Math.pow(a.lng - userLng, 2))
+            const distB = Math.sqrt(Math.pow(b.lat - userLat, 2) + Math.pow(b.lng - userLng, 2))
+
+            // Proximity is a tie-breaker for providers in the same tier
+            if (Math.abs(distA - distB) > 0.1) {
+                return distA - distB
+            }
+        }
+        return b.points - a.points
+    })
 }
 
 export async function getCityStats(city: string) {

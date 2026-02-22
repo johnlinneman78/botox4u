@@ -2,12 +2,22 @@ import { getTopScoringProviders } from '@/lib/actions/providers'
 import { TopScoringCard } from '@/components/providers/TopScoringCard'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
+import { headers } from 'next/headers'
 
 export default async function FeaturedProviders() {
     let providers: any[] = []
     try {
-        // Fetch Top 3 Scoring Providers as requested in P2
-        providers = await getTopScoringProviders(3)
+        const headerList = await headers()
+        const latStr = headerList.get('x-vercel-ip-latitude')
+        const lngStr = headerList.get('x-vercel-ip-longitude')
+        const userCity = headerList.get('x-vercel-ip-city')
+        const userState = headerList.get('x-vercel-ip-country-region')
+
+        const userLat = latStr ? parseFloat(latStr) : undefined
+        const userLng = lngStr ? parseFloat(lngStr) : undefined
+
+        // Fetch Top 3 Scoring Providers near the user
+        providers = await getTopScoringProviders(3, userLat, userLng, userCity || undefined, userState || undefined)
     } catch (error) {
         console.error('Error fetching featured providers:', error)
     }

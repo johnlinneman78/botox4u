@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/Card'
 import { formatCurrency } from '@/lib/utils'
+import { headers } from 'next/headers'
 
 const featuredCities = [
     { name: 'New York', state: 'NY', slug: 'new-york-ny', avgCost: 18, providers: 142 },
@@ -14,7 +15,17 @@ const featuredCities = [
     { name: 'Portland', state: 'OR', slug: 'portland-or', avgCost: 14, providers: 90 },
 ]
 
-export default function FeaturedCities() {
+export default async function FeaturedCities() {
+    const headerList = await headers()
+    const userCity = headerList.get('x-vercel-ip-city')
+
+    // Sort cities to put the user's city first if it matches
+    const sortedCities = [...featuredCities].sort((a, b) => {
+        if (a.name === userCity) return -1
+        if (b.name === userCity) return 1
+        return 0
+    })
+
     return (
         <section className="py-16 bg-white">
             <div className="container mx-auto px-4">
@@ -28,7 +39,7 @@ export default function FeaturedCities() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {featuredCities.map((city) => (
+                    {sortedCities.map((city) => (
                         <Link key={city.slug} href={`/botox/${city.slug}`}>
                             <Card className="h-full hover:shadow-lg transition-all duration-200 cursor-pointer">
                                 <CardContent className="p-6">
