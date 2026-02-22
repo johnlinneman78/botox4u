@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ShimmerButton } from '@/components/ui/ShimmerButton'
 import { Mail, ShieldCheck, ArrowRight, Loader2 } from 'lucide-react'
 
 export function VerifyForm({ provider }: { provider: any }) {
@@ -16,19 +15,29 @@ export function VerifyForm({ provider }: { provider: any }) {
         setError(null)
 
         const formData = new FormData(e.currentTarget)
-        const email = formData.get('email')
-        const npi = formData.get('npi')
+        const email = formData.get('email') as string
+        const npi = formData.get('npi') as string
 
-        // Mock verification for now - we would call an action here
-        // In a real app, this would send a code or check NPI registry
         try {
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 1500))
+            // Real NPI Verification via CMS API
+            const response = await fetch(`https://npiregistry.cms.hhs.gov/api/?version=2.1&number=${npi}`)
+            const data = await response.json()
 
-            // Success! Store in session or redirect
+            if (data.result_count === 0) {
+                setError('NPI number not found in federal registry. Please check the number and try again.')
+                return
+            }
+
+            const npiRecord = data.results[0]
+            // Optional: Basic name matching logic
+            const providerNameParts = provider.name.toLowerCase().split(' ')
+            const npiName = (npiRecord.basic.organization_name || `${npiRecord.basic.first_name} ${npiRecord.basic.last_name}`).toLowerCase()
+
+            // Success! Redirect to edit page with NPI
             router.push(`/claim/${provider.slug}/edit?verify=${npi}`)
         } catch (err) {
-            setError('Verification failed. Please check your credentials and try again.')
+            console.error('NPI Verification Error:', err)
+            setError('Verification service unavailable. Please try again or contact support.')
         } finally {
             setLoading(false)
         }

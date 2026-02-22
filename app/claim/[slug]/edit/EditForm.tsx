@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { DollarSign, ShieldCheck, Target, Globe, Phone, MapPin, Building, Loader2, Save } from 'lucide-react'
+import { DollarSign, ShieldCheck, Target, Globe, Phone, Building, Loader2, Save, ArrowRight } from 'lucide-react'
 import { claimProviderProfile } from '@/lib/actions/provider-actions'
 
-export function EditForm({ provider }: { provider: any }) {
+export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?: string }) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
@@ -21,10 +21,10 @@ export function EditForm({ provider }: { provider: any }) {
         setLoading(false)
         if (result.success) {
             setMessage({ type: 'success', text: 'Success! Your profile has been claimed and updated.' })
-            // Wait for 1.5s then redirect to the final step or the profile
+            // Wait for 1s then redirect to the success page
             setTimeout(() => {
-                router.push(`/provider/${provider.slug}`)
-            }, 1500)
+                router.push(`/claim/${provider.slug}/success`)
+            }, 1000)
         } else {
             setMessage({ type: 'error', text: result.error || 'Failed to update profile' })
         }
@@ -40,6 +40,7 @@ export function EditForm({ provider }: { provider: any }) {
             )}
 
             <input type="hidden" name="provider_id" value={provider.id} />
+            <input type="hidden" name="npi_number" value={initialNpi} />
 
             {/* SECTION 1: PUBLIC PRICING (HIGH IMPACT) */}
             <div className="space-y-6">
@@ -110,7 +111,7 @@ export function EditForm({ provider }: { provider: any }) {
                             <option value="Plastic Surgery">Plastic Surgery</option>
                         </select>
                     </div>
-                    <div className="space-y-2 md:col-span-2">
+                    <div className="space-y-2">
                         <label className="text-sm font-bold text-primary uppercase tracking-wider">Website URL</label>
                         <div className="relative">
                             <Globe className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -119,17 +120,100 @@ export function EditForm({ provider }: { provider: any }) {
                                 type="url"
                                 defaultValue={provider.website}
                                 className="w-full pl-14 pr-6 py-4 rounded-2xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-secondary/10 outline-none transition-all"
+                                placeholder="https://example.com"
                             />
+                        </div>
+                    </div>
+                    <div className="space-y-2">
+                        <label className="text-sm font-bold text-primary uppercase tracking-wider">Display Phone</label>
+                        <div className="relative">
+                            <Phone className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                            <input
+                                name="phone"
+                                type="tel"
+                                defaultValue={provider.phone}
+                                className="w-full pl-14 pr-6 py-4 rounded-2xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-secondary/10 outline-none transition-all"
+                                placeholder="(555) 000-0000"
+                            />
+                        </div>
+                    </div>
+                    <div className="space-y-2 md:col-span-2">
+                        <label className="text-sm font-bold text-primary uppercase tracking-wider">Clinic Bio (About)</label>
+                        <textarea
+                            name="description"
+                            rows={4}
+                            defaultValue={provider.description}
+                            className="w-full px-6 py-4 rounded-2xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-secondary/10 outline-none transition-all resize-none"
+                            placeholder="Share what makes your practice unique..."
+                        />
+                    </div>
+                </div>
+            </div>
+
+            {/* SECTION 3: TREATMENT MENU CHECKLIST */}
+            <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                    <div className="p-3 rounded-2xl bg-secondary/10 text-secondary">
+                        <Target className="w-6 h-6" />
+                    </div>
+                    <div>
+                        <h3 className="text-xl font-bold text-primary">Treatment Menu</h3>
+                        <p className="text-sm text-gray-500 font-light">Select all treatments offered at this location.</p>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 rounded-[3rem] bg-gray-50 border border-gray-100">
+                    <div>
+                        <h4 className="text-xs font-black text-secondary uppercase tracking-[0.2em] mb-4">Injectables</h4>
+                        <div className="space-y-3">
+                            {["Botox / Dysport / Xeomin / Daxxify", "Lip filler", "Cheek / midface filler", "Jawline / chin filler", "Under-eye filler", "Kybella", "PRF / PRP"].map(t => (
+                                <label key={t} className="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" name="services" value={t} className="w-5 h-5 rounded border-gray-200 text-secondary focus:ring-secondary/20" defaultChecked={provider.services_offered?.includes(t)} />
+                                    <span className="text-sm text-gray-600 group-hover:text-primary transition-colors">{t}</span>
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+                    <div>
+                        <h4 className="text-xs font-black text-secondary uppercase tracking-[0.2em] mb-4">Skin & Laser</h4>
+                        <div className="space-y-3">
+                            {["Chemical peels", "Microneedling", "Morpheus8 / RF", "HydraFacial", "Laser Resurfacing", "Laser Hair Removal", "IPL / Photofacial"].map(t => (
+                                <label key={t} className="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" name="services" value={t} className="w-5 h-5 rounded border-gray-200 text-secondary focus:ring-secondary/20" defaultChecked={provider.services_offered?.includes(t)} />
+                                    <span className="text-sm text-gray-600 group-hover:text-primary transition-colors">{t}</span>
+                                </label>
+                            ))}
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* SECTION 3: PHILOSOPHY (NATURAL RESULTS) */}
+            {/* SECTION 4: SMS OPT-IN (TCPA COMPLIANT) */}
+            <div className="p-8 rounded-[2rem] bg-secondary/5 border border-secondary/10 space-y-4">
+                <div className="flex items-start gap-4">
+                    <div className="p-2 rounded-xl bg-secondary text-white mt-1">
+                        <ShieldCheck className="w-5 h-5" />
+                    </div>
+                    <div>
+                        <h4 className="text-lg font-bold text-primary">Get notified when patients view your profile</h4>
+                        <p className="text-sm text-gray-500 font-light mb-4">
+                            Receive weekly profile stats and patient activity alerts via text. Message frequency varies. Reply STOP to cancel.
+                        </p>
+                        <label className="flex items-start gap-3 cursor-pointer group">
+                            <input type="checkbox" name="sms_opt_in" value="true" className="mt-1 w-5 h-5 rounded border-gray-200 text-secondary focus:ring-secondary/20" />
+                            <span className="text-xs text-gray-400 font-light leading-relaxed">
+                                I agree to receive SMS updates from Botox-4U.com. I understand my phone number will be stored securely with my opt-in timestamp and IP.
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            {/* SECTION 5: PHILOSOPHY */}
             <div className="space-y-6">
                 <div className="flex items-center gap-4">
                     <div className="p-3 rounded-2xl bg-green-50 text-green-600">
-                        <Target className="w-6 h-6" />
+                        <ArrowRight className="w-6 h-6" />
                     </div>
                     <div>
                         <h3 className="text-xl font-bold text-primary">Patient Outcome Philosophy</h3>

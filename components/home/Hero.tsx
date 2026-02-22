@@ -45,7 +45,11 @@ export default function Hero() {
                         </div>
 
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-[1.1] text-balance">
-                            {NICHE.copy.hero.headline}
+                            {typeof window !== 'undefined' && window.location.search.includes('portland') ? (
+                                <>Portland's Most Transparent <span className="text-[#d4af37]">Botox Index</span></>
+                            ) : (
+                                NICHE.copy.hero.headline
+                            )}
                         </h1>
 
                         <p className="text-lg md:text-xl text-gray-300 mb-10 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">

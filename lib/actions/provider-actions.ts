@@ -53,13 +53,24 @@ export async function claimProviderProfile(formData: FormData) {
         const providerId = formData.get('provider_id') as string
         if (!providerId) throw new Error('Provider ID is missing')
 
+        // Fetch existing data for merging enriched_attrs
+        const { data: existing } = await supabase
+            .from('providers')
+            .select('enriched_attrs')
+            .eq('id', providerId)
+            .single()
+
         const updates: any = {
             name: formData.get('name') as string,
             business_type: formData.get('business_type') as string,
             website: formData.get('website') as string,
+            phone: formData.get('phone') as string,
+            description: formData.get('description') as string,
+            npi_number: formData.get('npi_number') as string,
             verified: true,
             verified_at: new Date().toISOString(),
-            outreach_status: 'claimed'
+            outreach_status: 'claimed',
+            services_offered: formData.getAll('services') as string[]
         }
 
         const pricePerUnit = formData.get('price_per_unit');
@@ -68,12 +79,23 @@ export async function claimProviderProfile(formData: FormData) {
         }
 
         const philosophy = formData.get('philosophy') as string;
+        const smsOptIn = formData.get('sms_opt_in') === 'true';
+
+        // Merge with existing enriched_attrs
+        const enriched_attrs = existing?.enriched_attrs || {}
         if (philosophy) {
-            // Store philosophy in enriched_attrs or a New Column
-            // For now, let's just keep it simple or store in enriched_attrs
-            updates.enriched_attrs = updates.enriched_attrs || {}
-            updates.enriched_attrs.philosophy = philosophy
+            enriched_attrs.philosophy = philosophy
         }
+
+        if (smsOptIn) {
+            enriched_attrs.sms_opt_in = true
+            enriched_attrs.sms_opt_in_at = new Date().toISOString()
+            // In a real environment, we'd get the IP from headers
+            const forwardedFor = (await cookies()).get('x-forwarded-for')?.value
+            enriched_attrs.sms_opt_in_ip = forwardedFor || 'unknown'
+        }
+
+        updates.enriched_attrs = enriched_attrs
 
         const { error } = await supabase
             .from('providers')

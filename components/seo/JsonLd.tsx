@@ -17,7 +17,7 @@ export const JsonLd: React.FC<JsonLdProps> = ({ data }) => {
 export const generateMedicalClinicSchema = (provider: any) => {
     return {
         "@context": "https://schema.org",
-        "@type": "MedicalClinic",
+        "@type": "MedicalBusiness",
         "name": provider.name,
         "description": provider.description || `Botox and aesthetic treatments at ${provider.name} in ${provider.city}, ${provider.state}.`,
         "url": `https://botox-4u.com/provider/${provider.slug}`,
@@ -30,13 +30,13 @@ export const generateMedicalClinicSchema = (provider: any) => {
             "postalCode": provider.zip,
             "addressCountry": "US"
         },
-        "aggregateRating": provider.rating ? {
+        "aggregateRating": (provider.rating || provider.average_rating) ? {
             "@type": "AggregateRating",
-            "ratingValue": provider.rating,
+            "ratingValue": provider.rating || provider.average_rating,
             "reviewCount": provider.review_count || 1
         } : undefined,
         "priceRange": provider.price_per_unit ? `$$` : "$",
-        "image": provider.image_url || "https://botox-4u.com/og-image.jpg"
+        "image": provider.hero_image_url || provider.image_url || "https://botox-4u.com/og-image.jpg"
     };
 };
 
@@ -49,6 +49,20 @@ export const generateBreadcrumbSchema = (items: { name: string; item: string }[]
             "position": index + 1,
             "name": item.name,
             "item": `https://botox-4u.com${item.item}`
+        }))
+    };
+};
+
+export const generateItemListSchema = (providers: any[], city: string) => {
+    return {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": `Top Rated Botox Providers in ${city}`,
+        "itemListElement": providers.map((provider, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "url": `https://botox-4u.com/provider/${provider.slug}`,
+            "name": provider.name
         }))
     };
 };

@@ -41,7 +41,7 @@ export default async function EditPage({ params, searchParams }: { params: { slu
                     </div>
 
                     <div className="p-12 md:p-16 pt-8">
-                        <EditForm provider={provider} />
+                        <EditForm provider={provider} initialNpi={searchParams.verify} />
                     </div>
                 </div>
             </div>

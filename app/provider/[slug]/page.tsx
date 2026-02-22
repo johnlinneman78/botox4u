@@ -48,6 +48,25 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
         <div className="bg-gray-50 min-h-screen">
             <JsonLd data={schema} />
             <JsonLd data={breadcrumbs} />
+            {/* Claim Banner for Unclaimed Profiles */}
+            {!provider.verified && (
+                <div className="bg-secondary/10 border-b border-secondary/20 py-3">
+                    <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div className="flex items-center gap-3 text-secondary">
+                            <Zap className="w-5 h-5 fill-secondary" />
+                            <p className="text-sm md:text-base font-bold">
+                                Is this your practice? <span className="font-medium opacity-80">Claim your free profile to add pricing and unlock your verified badge.</span>
+                            </p>
+                        </div>
+                        <Link href={`/claim/${provider.slug}`}>
+                            <Button size="sm" className="bg-secondary hover:bg-secondary/90 text-white font-bold rounded-full px-6 whitespace-nowrap">
+                                Claim This Profile — It's Free
+                            </Button>
+                        </Link>
+                    </div>
+                </div>
+            )}
+
             {/* Hero Image Section */}
             <section className="relative h-[300px] md:h-[450px] w-full overflow-hidden">
                 <img

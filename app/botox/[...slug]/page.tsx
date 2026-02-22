@@ -17,6 +17,7 @@ import { NICHE } from '@/config/niche'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Star } from 'lucide-react'
+import { JsonLd, generateBreadcrumbSchema, generateItemListSchema } from '@/components/seo/JsonLd'
 
 interface CatchAllPageProps {
     params: { slug: string[] }
@@ -119,9 +120,18 @@ export default async function CatchAllBotoxPage({ params }: CatchAllPageProps) {
     }
 
     const mapCenter = providers.find((p: any) => !!p.lat && !!p.lng) || { lat: 34.0522, lng: -118.2437 }
+    const itemListSchema = generateItemListSchema(providers, cityName)
+    const breadcrumbs = generateBreadcrumbSchema([
+        { name: 'Home', item: '/' },
+        { name: 'Directory', item: `/${NICHE.baseSlug}` },
+        { name: stateSlug || stateCode, item: `/${NICHE.baseSlug}/state/${stateSlug || stateCode.toLowerCase()}` },
+        { name: cityName, item: `/${NICHE.baseSlug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}` }
+    ])
 
     return (
         <main className="bg-gray-50 min-h-screen pb-20">
+            <JsonLd data={itemListSchema} />
+            <JsonLd data={breadcrumbs} />
             {/* Breadcrumbs */}
             <div className="bg-[#1a2332] border-b border-white/10">
                 <div className="container mx-auto px-4 py-3 flex items-center gap-2 text-xs font-medium text-white/60">
