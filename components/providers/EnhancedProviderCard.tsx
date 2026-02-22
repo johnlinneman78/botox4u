@@ -19,7 +19,8 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
     const heroImage = provider.imageUrl || 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800'
 
     // Simulating 'verified' status based on existing data or tier
-    const isVerified = provider.listing_tier === 'premium' || provider.listing_tier === 'featured';
+    const isVerified = provider.verified || provider.listingTier === 'featured' || provider.listingTier === 'verified';
+    const isFeatured = provider.listingTier === 'featured';
 
     return (
         <>
@@ -72,7 +73,7 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                                 <Sparkles className="w-5 h-5 text-secondary animate-pulse" />
                                 <span className="text-[10px] font-black text-gray-900 uppercase tracking-widest leading-none">Is this your clinic?</span>
                                 <Link
-                                    href={`/provider/claim?id=${provider.id}`}
+                                    href={`/claim/${provider.slug}`}
                                     className="mt-2 bg-secondary text-white text-[9px] font-bold px-3 py-1.5 rounded-lg hover:bg-secondary/90 transition-colors shadow-sm"
                                 >
                                     CLAIM & UPLOAD PHOTOS
@@ -90,13 +91,22 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                             <h3 className="text-lg font-bold text-gray-900 leading-tight group-hover:text-primary transition-colors">
                                 {provider.name}
                             </h3>
-                            {provider.npi_verified && (
+                            {isVerified && (
                                 <div
                                     className="mt-1 flex-shrink-0 bg-secondary/10 text-secondary px-2 py-0.5 rounded-md flex items-center gap-1"
                                     title="Credentials verified against the federal NPI database"
                                 >
                                     <ShieldCheck className="w-3 h-3" />
-                                    <span className="text-[9px] font-black uppercase tracking-tight">NPI Verified</span>
+                                    <span className="text-[9px] font-black uppercase tracking-tight">Verified</span>
+                                </div>
+                            )}
+                            {isFeatured && (
+                                <div
+                                    className="mt-1 flex-shrink-0 bg-primary/10 text-primary px-2 py-0.5 rounded-md flex items-center gap-1 border border-primary/20"
+                                    title="Featured Provider"
+                                >
+                                    <Sparkles className="w-3 h-3" />
+                                    <span className="text-[9px] font-black uppercase tracking-tight">Featured</span>
                                 </div>
                             )}
                         </div>
@@ -171,13 +181,13 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
 
                     {/* Pricing Tags */}
                     <div className="flex flex-wrap gap-2 mb-4 text-xs font-semibold">
-                        {provider.price_per_unit ? (
+                        {provider.price_per_unit && (provider.listingTier === 'featured' || provider.listingTier === 'verified') ? (
                             <span className="bg-white text-primary px-2 py-1 rounded-md border border-gray-200">
                                 {NICHE.name} {NICHE.priceCurrency}{provider.price_per_unit}/{NICHE.priceUnit.split(' ').slice(-1)}
                             </span>
                         ) : (
                             <span className="bg-white text-gray-500 px-2 py-1 rounded-md border border-gray-200 italic">
-                                Pricing Pending
+                                Not Listed
                             </span>
                         )}
                         {provider.allergan_tier && provider.allergan_tier !== 'None' && (

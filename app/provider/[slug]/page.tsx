@@ -119,9 +119,13 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                 <div className="text-2xl font-display font-bold text-primary">
                                     Clinic Profile
                                 </div>
-                                {provider.verified && (
+                                {provider.verified || provider.listingTier === 'verified' || provider.listingTier === 'featured' ? (
                                     <Badge variant="verified" className="bg-success/20 text-success-foreground border-success/30">
                                         VERIFIED
+                                    </Badge>
+                                ) : (
+                                    <Badge variant="outline" className="text-gray-400 border-gray-200">
+                                        UNVERIFIED
                                     </Badge>
                                 )}
                             </div>
@@ -247,7 +251,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                             <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-sm">
                                 <h2 className="text-2xl font-display font-bold text-primary mb-6">Services & Pricing</h2>
                                 <div className="space-y-4">
-                                    {(provider.pricePerUnit || provider.enriched_attrs?.price_per_unit_botox) ? (
+                                    {(provider.pricePerUnit || provider.enriched_attrs?.price_per_unit_botox) && (provider.listingTier === 'featured' || provider.listingTier === 'verified') ? (
                                         <div className="flex justify-between items-center p-4 bg-secondary/5 rounded-xl border border-secondary/10">
                                             <span className="font-bold text-primary">{NICHE.name} Pricing</span>
                                             <span className="text-secondary font-black text-xl">{formatCurrency(Number(provider.pricePerUnit || provider.enriched_attrs?.price_per_unit_botox))}/{NICHE.priceUnit.split(' ').slice(-1)}</span>
@@ -255,7 +259,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                     ) : (
                                         <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl border border-gray-100">
                                             <span className="font-bold text-primary">{NICHE.namePlural}</span>
-                                            <span className="text-gray-500 font-bold">Pricing upon request</span>
+                                            <span className="text-gray-500 font-bold italic">Not Listed</span>
                                         </div>
                                     )}
 
@@ -389,13 +393,13 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                 </div>
 
                                 {/* Claim Listing CTA */}
-                                {!provider.verified && (
+                                {!provider.verified && provider.listingTier === 'free' && (
                                     <div className="bg-gradient-to-br from-primary to-primary/90 p-8 rounded-3xl text-white shadow-xl shadow-primary/20">
                                         <h3 className="text-xl font-display font-bold mb-4">Are you the owner?</h3>
                                         <p className="text-sm text-primary-foreground/80 leading-relaxed mb-6">
                                             Claim your profile to update pricing, respond to reviews, and reach more patients in {provider.city}.
                                         </p>
-                                        <Link href={`/provider/claim?id=${provider.id}`} className="block">
+                                        <Link href={`/claim/${provider.slug}`} className="block">
                                             <Button className="w-full bg-secondary hover:bg-secondary/90 text-white border-0 py-6 text-md font-bold shadow-lg">
                                                 Claim This Listing
                                             </Button>

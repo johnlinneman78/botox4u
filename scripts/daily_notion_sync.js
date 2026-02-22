@@ -7,7 +7,7 @@ const NOTION_VERSION = '2022-06-28';
 const LOG_FILE = path.join(__dirname, '../.notion-sync-log.json');
 
 const { Resend } = require('resend');
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env.prod' });
 const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM_EMAIL = process.env.CONTACT_EMAIL || 'hello@botox-4u.com';
 

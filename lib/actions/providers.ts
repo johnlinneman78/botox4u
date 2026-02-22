@@ -133,11 +133,12 @@ export async function getProvidersWithSearch(filters: {
         has_real_photo: !!(p.hero_image_url || p.image_url)
     }))
 
-    // Custom sort: Premium > Score > Proximity
+    // Custom sort: Featured > Verified > Free
     const tierWeight = {
-        'premium': 1000,
-        'featured': 500,
-        'free': 0
+        'featured': 1000,
+        'verified': 500,
+        'free': 0,
+        'premium': 1000 // Legacy support
     }
 
     return mappedData.sort((a: any, b: any) => {
