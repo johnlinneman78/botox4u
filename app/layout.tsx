@@ -11,13 +11,19 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 export const metadata: Metadata = {
-  title: `${NICHE.siteName} - Find Top ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)} & Compare Costs`,
+  title: `${NICHE.siteName} — ${NICHE.tagline}`,
   description: `Find the best ${NICHE.name} ${NICHE.providerTypePlural} near you. Compare prices, read reviews, and book consultations with verified providers at ${NICHE.siteName}.`,
   keywords: `${NICHE.name.toLowerCase()}, ${NICHE.name.toLowerCase()} near me, ${NICHE.name.toLowerCase()} cost, aesthetics, aesthetic providers, cosmetic injections`,
+  metadataBase: new URL('https://injectorindex.com'),
   openGraph: {
-    title: `${NICHE.siteName} - Find Top ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)} & Compare Costs`,
+    title: `${NICHE.siteName} — ${NICHE.tagline}`,
     description: `Find the best ${NICHE.name} ${NICHE.providerTypePlural} near you. Compare prices, read reviews, and book consultations.`,
     type: 'website',
+    url: 'https://injectorindex.com',
+    siteName: NICHE.siteName,
+  },
+  alternates: {
+    canonical: 'https://injectorindex.com',
   },
 }
 

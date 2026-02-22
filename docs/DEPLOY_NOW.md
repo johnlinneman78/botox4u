@@ -1,7 +1,7 @@
 # 🚀 Deploy to Vercel - Step by Step
 
 **Status:** ✅ Code pushed to GitHub  
-**Repository:** `johnlinneman78/botox4u`  
+**Repository:** `johnlinneman78/injectorindex`  
 **Branch:** `main`
 
 ---
@@ -14,7 +14,7 @@
 
 ### Step 2: Import Repository
 1. Click **"Import Git Repository"**
-2. Find `johnlinneman78/botox4u` in the list
+2. Find `johnlinneman78/injectorindex` in the list
 3. Click **"Import"**
 
 ### Step 3: Configure Project
@@ -94,7 +94,7 @@ You'll see:
 
 ### If Successful ✅
 - You'll see: **"Congratulations! Your project is live"**
-- You'll get a URL like: `https://botox4u.vercel.app`
+- You'll get a URL like: `https://injectorindex.vercel.app`
 - Click **"Visit"** to see your live site!
 
 ### If Build Fails ❌
@@ -209,18 +209,18 @@ Visit: `https://your-app.vercel.app/find-providers`
 ## 🎯 Your Live URLs
 
 **Homepage:**
-`https://botox4u.vercel.app/`
+`https://injectorindex.vercel.app/`
 
 **City Pages:**
-- `https://botox4u.vercel.app/botox/new-york-ny`
-- `https://botox4u.vercel.app/botox/los-angeles-ca`
-- `https://botox4u.vercel.app/botox/miami-fl`
+- `https://injectorindex.vercel.app/botox/new-york-ny`
+- `https://injectorindex.vercel.app/botox/los-angeles-ca`
+- `https://injectorindex.vercel.app/botox/miami-fl`
 
 **Find Providers:**
-`https://botox4u.vercel.app/find-providers`
+`https://injectorindex.vercel.app/find-providers`
 
 **Sitemap:**
-`https://botox4u.vercel.app/sitemap.xml`
+`https://injectorindex.vercel.app/sitemap.xml`
 
 ---
 
@@ -245,16 +245,16 @@ After deployment, verify:
 https://vercel.com/dashboard
 
 **Your Project:**
-https://vercel.com/johnlinneman78/botox4u
+https://vercel.com/johnlinneman78/injectorindex
 
 **Deployments:**
-https://vercel.com/johnlinneman78/botox4u/deployments
+https://vercel.com/johnlinneman78/injectorindex/deployments
 
 **Settings:**
-https://vercel.com/johnlinneman78/botox4u/settings
+https://vercel.com/johnlinneman78/injectorindex/settings
 
 **Logs:**
-https://vercel.com/johnlinneman78/botox4u/logs
+https://vercel.com/johnlinneman78/injectorindex/logs
 
 ---
 

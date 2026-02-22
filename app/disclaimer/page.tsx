@@ -9,7 +9,7 @@ export default function DisclaimerPage() {
 
                 <section className="space-y-6 text-gray-700 leading-relaxed bg-amber-50 p-6 rounded-xl border border-amber-100 text-amber-900 italic">
                     <p className="font-bold">
-                        The content provided on Botox-4u.com is for informational purposes only. It is NOT intended to be a substitute for professional medical advice, diagnosis, or treatment.
+                        The content provided on InjectorIndex.com is for informational purposes only. It is NOT intended to be a substitute for professional medical advice, diagnosis, or treatment.
                     </p>
                 </section>
 
@@ -20,12 +20,12 @@ export default function DisclaimerPage() {
 
                     <h2 className="text-xl font-bold text-gray-900 mt-8">No Doctor-Patient Relationship</h2>
                     <p>
-                        Use of this website or communication via this website (including lead forms or contact requests) does not create a doctor-patient relationship between you and Botox-4u.com or any of its staff.
+                        Use of this website or communication via this website (including lead forms or contact requests) does not create a doctor-patient relationship between you and InjectorIndex.com or any of its staff.
                     </p>
 
                     <h2 className="text-xl font-bold text-gray-900 mt-8">Clinic Responsibility</h2>
                     <p>
-                        Individual providers and clinics listed on this site are solely responsible for the medical advice and treatments they provide. Botox-4u.com does not endorse or recommend any specific providers.
+                        Individual providers and clinics listed on this site are solely responsible for the medical advice and treatments they provide. InjectorIndex.com does not endorse or recommend any specific providers.
                     </p>
 
                     <h2 className="text-xl font-bold text-gray-900 mt-8">Emergency Situations</h2>

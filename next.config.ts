@@ -18,6 +18,35 @@ const nextConfig: NextConfig = {
     ],
     formats: ['image/webp', 'image/avif'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/botox/portland-or-pricing-guide',
+        destination: '/blog/how-much-does-botox-cost-2026',
+        permanent: true,
+      },
+      {
+        source: '/blog/botox-pricing-guide-2024',
+        destination: '/blog/how-much-does-botox-cost-2026',
+        permanent: true,
+      },
+      {
+        source: '/blog/portland-botox-pricing-guide',
+        destination: '/blog/how-much-does-botox-cost-2026',
+        permanent: true,
+      },
+      {
+        source: '/blog/natural-results-injector-guide',
+        destination: '/blog/how-to-find-good-botox-injector',
+        permanent: true,
+      },
+      {
+        source: '/blog/most-trusted-scottsdale-medspas',
+        destination: '/blog/how-to-find-good-botox-injector',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 export default nextConfig;

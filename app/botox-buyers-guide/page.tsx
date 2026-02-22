@@ -40,7 +40,7 @@ export default function BuyersGuidePage() {
                             <div className="p-8 bg-white rounded-3xl shadow-xl border border-gray-100 max-w-lg mx-auto mb-16">
                                 <div className="text-6xl font-display font-bold text-secondary mb-2">40%</div>
                                 <div className="text-lg font-bold text-gray-900 mb-1">of Botox complaints are about over-injection.</div>
-                                <div className="text-sm text-gray-500 italic">Data powered by the Botox-4U Index</div>
+                                <div className="text-sm text-gray-500 italic">Data powered by the Injector Index</div>
                             </div>
 
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -73,7 +73,7 @@ export default function BuyersGuidePage() {
                                             "Baby Botox explained (micro-dosing vs standard)",
                                             "Red flags: 6 reasons to walk away",
                                             "Hot Girl Math — why cheap Botox costs more",
-                                            "The Botox-4U Score breakdown",
+                                            "The Injector Index Score breakdown",
                                             "Your consultation script — 5 questions to ask",
                                             "Before & after checklist"
                                         ].map((item, i) => (
@@ -99,7 +99,7 @@ export default function BuyersGuidePage() {
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 rounded-full bg-gray-200" />
                                         <div>
-                                            <div className="text-sm font-bold text-gray-900">Botox-4U Editorial Team</div>
+                                            <div className="text-sm font-bold text-gray-900">Injector Index Editorial Team</div>
                                             <div className="text-xs text-gray-400 font-medium italic">Verified Patient Advocates</div>
                                         </div>
                                     </div>
@@ -363,10 +363,10 @@ export default function BuyersGuidePage() {
                         <div className="max-w-4xl mx-auto text-center">
                             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4">Chapter 05</h2>
                             <h3 className="text-4xl md:text-5xl font-display font-bold text-primary mb-8">
-                                The Botox-4U Score
+                                The Injector Index Score
                             </h3>
                             <p className="text-xl text-gray-600 mb-20 max-w-2xl mx-auto leading-relaxed">
-                                Most directories rank providers by who paid the most for placement. The Botox-4U Score is a 0–100 merit-based algorithm for aesthetic providers. Nobody pays for a higher score.
+                                Most directories rank providers by who paid the most for placement. The Injector Index Score is a 0–100 merit-based algorithm for aesthetic providers. Nobody pays for a higher score.
                             </p>
 
                             <div className="space-y-4 max-w-3xl mx-auto text-left">
@@ -455,7 +455,7 @@ export default function BuyersGuidePage() {
                                             "No alcohol 24 hours before",
                                             "Write your questions down",
                                             "Get a consultation before any injection",
-                                            "Check Botox-4U Score — aim for 70+"
+                                            "Check Injector Index Score — aim for 70+"
                                         ].map((item, i) => (
                                             <div key={i} className="flex items-center gap-4 text-white font-medium">
                                                 <div className="w-5 h-5 border-2 border-white/20 rounded flex-shrink-0" />
@@ -488,7 +488,7 @@ export default function BuyersGuidePage() {
                                 <h4 className="text-3xl font-display font-bold text-primary mb-12 text-center">The Final Checklist — Before You Book</h4>
                                 <div className="max-w-2xl mx-auto space-y-6">
                                     {[
-                                        "Checked their Botox-4U Score (aim for 70+)",
+                                        "Checked their Injector Index Score (aim for 70+)",
                                         "Verified NPI number at the federal database",
                                         "Read reviews specifically for: natural, subtle, conservative",
                                         "Confirmed per-unit pricing is stated upfront",
@@ -517,7 +517,7 @@ export default function BuyersGuidePage() {
                                 Ready to find your match?
                             </h2>
                             <p className="text-xl text-gray-600 mb-12 max-w-lg mx-auto leading-relaxed">
-                                Search free. No sign-up. Filter every injector in your city by their Botox-4U score.
+                                Search free. No sign-up. Filter every injector in your city by their Injector Index score.
                             </p>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16 max-w-2xl mx-auto">

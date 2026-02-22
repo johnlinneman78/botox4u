@@ -1,4 +1,4 @@
-# Project Status — Botox-4U.com
+# Project Status — InjectorIndex.com
 Last Updated: 2026-02-19
 
 ## Phase Status

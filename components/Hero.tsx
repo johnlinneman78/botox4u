@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button'
 import { Search, MapPin, DollarSign } from 'lucide-react'
 import { NICHE } from '@/config/niche'
 
-export default function Hero({ city, state }: { city?: string, state?: string }) {
+export default function Hero({ city, state, userLat, userLng }: { city?: string, state?: string, userLat?: number, userLng?: number }) {
     return (
         <section className="relative bg-[#1a2332] overflow-hidden">
             {/* Background Gradients */}

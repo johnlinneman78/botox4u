@@ -129,7 +129,7 @@ export default async function ClaimLandingPage({ params }: { params: { slug: str
             <footer className="py-20 border-t border-gray-100 bg-gray-50">
                 <div className="max-w-4xl mx-auto px-4 text-center">
                     <p className="text-gray-400 font-light leading-relaxed">
-                        Questions? Contact <Link href="mailto:hello@botox-4u.com" className="text-secondary font-medium">support@botox-4u.com</Link>
+                        Questions? Contact <Link href={`mailto:${NICHE.outreach.senderEmail}`} className="text-secondary font-medium">{NICHE.outreach.senderEmail}</Link>
                     </p>
                 </div>
             </footer>

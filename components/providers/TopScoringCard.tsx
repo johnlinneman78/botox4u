@@ -126,7 +126,7 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
                     {/* Score (Percentile Context) */}
                     <div className="mb-6">
                         <div className="flex items-center justify-between mb-2">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Botox-4U Index Score</span>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Injector Index Score</span>
                             <span className="text-[10px] font-black text-[#d4af37] uppercase">{getPercentile(provider.score_total)}</span>
                         </div>
                         <div className="flex items-center gap-3">

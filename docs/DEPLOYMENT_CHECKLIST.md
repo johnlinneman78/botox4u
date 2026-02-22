@@ -48,7 +48,7 @@ vercel --prod
 
 ### Step 3: Configure Domain (5 min)
 **Option A: Custom domain (Recommended)**
-- `botox-4u.com` (configured in Vercel)
+- `injectorindex.com` (configured in Vercel)
 - Update DNS records if needed
 - Wait for SSL provisioning (5-10 min)
 

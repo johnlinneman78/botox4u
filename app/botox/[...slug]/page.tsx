@@ -54,6 +54,17 @@ export async function generateMetadata({ params }: CatchAllPageProps): Promise<M
 
     if (!cityName || !stateCode) return { title: 'Location Not Found' }
 
+    if (cityName.toLowerCase() === 'portland' && stateCode.toLowerCase() === 'or') {
+        return {
+            title: `Best Botox Injectors in Portland, OR — Scores + Pricing`,
+            description: `Compare Botox costs in Portland. Find verified providers, read real patient reviews, and see the latest per-unit pricing data.`,
+            alternates: {
+                canonical: `/${NICHE.baseSlug}/or/portland`,
+            },
+            robots: { index: true, follow: true }
+        }
+    }
+
     if (treatmentName) {
         return {
             title: `${treatmentName} in ${cityName}, ${stateCode} | Prices & Top Clinicians`,
@@ -178,6 +189,8 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                 <Hero
                     city={cityName}
                     state={stateCode}
+                    userLat={userLat}
+                    userLng={userLng}
                 />
             )}
 
@@ -197,6 +210,8 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                     <CityMap
                         providers={providers}
                         citySlug={`${cityName.toLowerCase().replace(/ /g, '-')}-${stateCode.toLowerCase()}`}
+                        userLat={userLat}
+                        userLng={userLng}
                     />
                 </div>
 

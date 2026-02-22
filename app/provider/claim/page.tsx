@@ -141,7 +141,7 @@ function ClaimListingContent() {
                 <div className="w-full lg:w-1/2 p-8 lg:p-20 bg-primary text-white flex flex-col justify-center">
                     <div className="mb-12">
                         <Link href="/" className="inline-flex items-center gap-2 text-secondary font-bold tracking-tighter text-2xl mb-12">
-                            <Sparkles className="fill-secondary" /> BOTOX-4U <span className="text-white/30 font-light">| CLINIC PORTAL</span>
+                            <Sparkles className="fill-secondary" /> INJECTOR INDEX <span className="text-white/30 font-light">| CLINIC PORTAL</span>
                         </Link>
                         <Badge className="bg-secondary/20 text-secondary border-none mb-4 px-3 py-1 text-xs uppercase font-bold">Claim Your Listing</Badge>
                         <h1 className="text-4xl lg:text-6xl font-display font-bold leading-tight mb-6">

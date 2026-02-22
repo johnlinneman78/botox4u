@@ -1,4 +1,4 @@
-# Tech Stack — Botox-4U.com
+# Tech Stack — InjectorIndex.com
 
 ## Core
 - Framework: Next.js

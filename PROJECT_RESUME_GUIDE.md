@@ -1,4 +1,4 @@
-# Project Status: Botox-4U - February 22, 2026
+# Project Status: Injector Index - February 22, 2026
 
 This document serves as a checkpoint for the current state of development to ensure a smooth resumption after a system reset.
 

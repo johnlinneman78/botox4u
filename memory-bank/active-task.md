@@ -24,4 +24,4 @@ Implemented Memory Bank Protocol.
 
 ## Blocked
 - Email sending: needs human approval of copy in lib/email/outreach.ts
-- Pricing page: needs human review at botox-4u.com/pricing before promoting
+- Pricing page: needs human review at injectorindex.com/pricing before promoting

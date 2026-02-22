@@ -147,7 +147,20 @@ export async function getProvidersWithSearch(filters: {
         has_real_photo: !!(p.hero_image_url || p.image_url)
     }))
 
-    // Custom sort: Featured > Verified > Free
+    // Deduplicate by slug and name+city to prevent showing the same clinic twice
+    const deduplicated: any[] = [];
+    const seenKeys = new Set<string>();
+
+    mappedData.forEach(p => {
+        const nameKey = `${p.name?.toLowerCase().trim()}|${p.city?.toLowerCase().trim()}`;
+        if (!seenKeys.has(p.slug) && !seenKeys.has(nameKey)) {
+            deduplicated.push(p);
+            seenKeys.add(p.slug);
+            seenKeys.add(nameKey);
+        }
+    });
+
+    // Custom sort: Featured > Proximity (if close) > Score
     const tierWeight = {
         'featured': 1000,
         'verified': 500,
@@ -155,7 +168,7 @@ export async function getProvidersWithSearch(filters: {
         'premium': 1000 // Legacy support
     }
 
-    return mappedData.sort((a: any, b: any) => {
+    return deduplicated.sort((a: any, b: any) => {
         const tierWeightA = tierWeight[a.listingTier as keyof typeof tierWeight] || 0
         const tierWeightB = tierWeight[b.listingTier as keyof typeof tierWeight] || 0
 
@@ -165,19 +178,32 @@ export async function getProvidersWithSearch(filters: {
         }
 
         // 2. Proximity (Primary if location is active)
-        if (filters.userLat && filters.userLng && a.lat && a.lng && b.lat && b.lng) {
-            const distA = Math.sqrt(Math.pow(a.lat - filters.userLat, 2) + Math.pow(a.lng - filters.userLng, 2))
-            const distB = Math.sqrt(Math.pow(b.lat - filters.userLat, 2) + Math.pow(b.lng - filters.userLng, 2))
+        if (filters.userLat && filters.userLng) {
+            const hasA = a.lat !== 0 && a.lng !== 0;
+            const hasB = b.lat !== 0 && b.lng !== 0;
 
-            // If one is significantly closer (e.g. within 20 miles / ~0.3 degrees), prioritize it
-            if (Math.abs(distA - distB) > 0.1) {
-                return distA - distB
+            if (hasA && hasB) {
+                const distA = Math.sqrt(Math.pow(a.lat - filters.userLat, 2) + Math.pow(a.lng - filters.userLng, 2))
+                const distB = Math.sqrt(Math.pow(b.lat - filters.userLat, 2) + Math.pow(b.lng - filters.userLng, 2))
+
+                // If one is significantly closer (e.g. ~7 miles diff), prioritize it
+                if (Math.abs(distA - distB) > 0.1) {
+                    return distA - distB
+                }
+            } else if (hasA && !hasB) {
+                // If A is within ~35 miles and B has no coords, prioritize A
+                const distA = Math.sqrt(Math.pow(a.lat - filters.userLat, 2) + Math.pow(a.lng - filters.userLng, 2))
+                if (distA < 0.5) return -1;
+            } else if (!hasA && hasB) {
+                // If B is within ~35 miles and A has no coords, prioritize B
+                const distB = Math.sqrt(Math.pow(b.lat - filters.userLat, 2) + Math.pow(b.lng - filters.userLng, 2))
+                if (distB < 0.5) return 1;
             }
         }
 
         // 3. Fallback to Score
-        const scoreA = a.score.points
-        const scoreB = b.score.points
+        const scoreA = a.score.points || 0
+        const scoreB = b.score.points || 0
         return scoreB - scoreA
     })
 }
@@ -240,35 +266,39 @@ export async function getTopScoringProviders(limit: number = 6, userLat?: number
         }
     }
 
-    const tierWeight = {
-        'featured': 1000,
-        'verified': 500,
-        'free': 0,
-        'premium': 1000
-    }
+    // Deduplicate and map
+    const mapped = [];
+    const seenTopKeys = new Set<string>();
 
-    const mapped = finalProviders.map((p: any) => ({
-        id: p.id,
-        name: p.name,
-        slug: p.slug,
-        business_type: p.business_type,
-        city: p.city,
-        state: p.state,
-        lat: p.latitude || 0,
-        lng: p.longitude || 0,
-        rating: p.rating || parseFloat(p.average_rating || 0),
-        review_count: p.review_count || 0,
-        score_total: p.score || 0,
-        points: p.score || 0,
-        price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
-        imageUrl: p.hero_image_url || p.image_url || 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
-        website: p.website,
-        listingTier: p.listing_tier || 'free',
-        npi_verified: p.npi_verified || false,
-        score_results_quality: p.score_results_quality || 0,
-        has_real_photo: !!(p.hero_image_url || p.image_url),
-        score: { points: p.score || 0 }
-    }))
+    for (const p of finalProviders) {
+        const nameKey = `${p.name?.toLowerCase().trim()}|${p.city?.toLowerCase().trim()}`;
+        if (!seenTopKeys.has(p.slug) && !seenTopKeys.has(nameKey)) {
+            mapped.push({
+                id: p.id,
+                name: p.name,
+                slug: p.slug,
+                business_type: p.business_type,
+                city: p.city,
+                state: p.state,
+                lat: p.latitude || p.lat || 0,
+                lng: p.longitude || p.lng || 0,
+                rating: p.rating || parseFloat(p.average_rating || 0),
+                review_count: p.review_count || 0,
+                score_total: p.score || 0,
+                points: p.score || 0,
+                price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
+                imageUrl: p.hero_image_url || p.image_url || 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
+                website: p.website,
+                listingTier: p.listing_tier || 'free',
+                npi_verified: p.npi_verified || false,
+                score_results_quality: p.score_results_quality || 0,
+                has_real_photo: !!(p.hero_image_url || p.image_url),
+                score: { points: p.score || 0 }
+            });
+            seenTopKeys.add(p.slug);
+            seenTopKeys.add(nameKey);
+        }
+    }
 
     // Sort the final selection by proximity within its own tier (City -> State -> National)
     return mapped.sort((a, b) => {
@@ -489,10 +519,36 @@ export async function getProviderBySlug(slug: string) {
     }
 }
 
-export async function submitLead(leadData: any) {
-    // Lead submission logic
-    console.log('Lead submitted:', leadData)
-    return { success: true }
+export async function getPlatformStats() {
+    const supabase = await getSupabaseServer(await cookies())
+    if (!supabase) return { providers: 0, cities: 0, reviews: 0 }
+
+    // 1. Providers Count
+    const { count: providersCount } = await supabase
+        .from('providers')
+        .select('*', { count: 'exact', head: true })
+
+    // 2. Cities Count (Unique)
+    // For smaller datasets, selecting all cities is fine. For larger, we'd use an RPC or a view.
+    const { data: cityData } = await supabase
+        .from('providers')
+        .select('city')
+
+    const uniqueCities = new Set(cityData?.map(p => p.city?.trim()).filter(Boolean))
+    const citiesCount = uniqueCities.size
+
+    // 3. Reviews Count (Sum)
+    const { data: reviewData } = await supabase
+        .from('providers')
+        .select('review_count')
+
+    const reviewsCount = reviewData?.reduce((acc, p) => acc + (p.review_count || 0), 0) || 0
+
+    return {
+        providers: providersCount || 0,
+        cities: citiesCount || 0,
+        reviews: reviewsCount || 0
+    }
 }
 
 

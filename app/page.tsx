@@ -31,7 +31,7 @@ export default function HomePage() {
         <FeaturedProviders />
       </Suspense>
 
-      {/* 3. How the Botox-4U Score Works */}
+      {/* 3. How the Injector Index Score Works */}
       <HowItWorks />
 
       {/* 4. City grid */}

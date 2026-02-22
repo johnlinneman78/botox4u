@@ -10,15 +10,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // 1. Static Routes
     const staticRoutes = [
-        { url: 'https://www.botox-4u.com', lastModified: new Date(), changeFrequency: 'daily' as const, priority: 1 },
-        { url: 'https://www.botox-4u.com/about', lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.8 },
-        { url: 'https://www.botox-4u.com/find-providers', lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
+        { url: 'https://injectorindex.com', lastModified: new Date(), changeFrequency: 'daily' as const, priority: 1 },
+        { url: 'https://injectorindex.com/about', lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.8 },
+        { url: 'https://injectorindex.com/find-providers', lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
     ]
 
     // 2. Provider Routes
     const { data: providers } = await supabase.from('providers').select('slug').limit(1000)
     const providerRoutes = (providers || []).map((p) => ({
-        url: `https://www.botox-4u.com/provider/${p.slug}`,
+        url: `https://injectorindex.com/provider/${p.slug}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.7,
@@ -49,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ]
 
     const cityRoutes = p3Cities.map((c) => ({
-        url: `https://www.botox-4u.com/${NICHE.baseSlug}/${c.state.toLowerCase()}/${c.city.toLowerCase().replace(/ /g, '-')}`,
+        url: `https://injectorindex.com/${NICHE.baseSlug}/${c.state.toLowerCase()}/${c.city.toLowerCase().replace(/ /g, '-')}`,
         lastModified: new Date(),
         changeFrequency: 'daily' as const,
         priority: 0.9,

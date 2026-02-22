@@ -11,7 +11,7 @@ I have performed a complete cleanup and hardening of your deployment:
 1.  **Environment Variable Cleanup**:
     *   Removed all corrupted environment variables from the Production environment.
     *   Re-added them with clean values (verified via `vercel env pull`).
-    *   **Verified:** The production `NEXT_PUBLIC_APP_URL` is now correctly set to `https://botox-4u.com`.
+    *   **Verified:** The production `NEXT_PUBLIC_APP_URL` is now correctly set to `https://injectorindex.com`.
 
 2.  **Code Hardening (Prevention)**:
     *   **Defensive Trimming:** Updated `lib/supabase/client.ts` and `lib/supabase/factory.ts` to automatically `.trim()` environment variables. This ensures that even if whitespace creeps in again, the application will fix it at runtime.
@@ -19,7 +19,7 @@ I have performed a complete cleanup and hardening of your deployment:
 
 3.  **Redeployment**:
     *   Triggered a fresh production deployment to bake in the new keys and code changes.
-    *   The site is now live at `https://botox-4u.com`.
+    *   The site is now live at `https://injectorindex.com`.
 
 ## 3. Verification
 *   **Site Status:** The deployment completed successfully.
@@ -28,6 +28,6 @@ I have performed a complete cleanup and hardening of your deployment:
 
 ## 4. Next Steps
 *   **Monitor:** Keep an eye on the site for the next few hours.
-*   **SSL:** The SSL certificate for `botox-4u.com` should be fully propagated and secure.
+*   **SSL:** The SSL certificate for `injectorindex.com` should be fully propagated and secure.
 
 Your deployment is now robust against this class of configuration error!

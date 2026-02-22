@@ -1,11 +1,11 @@
-# 🚀 7-Day Action Plan: Botox-4u.com
+# 🚀 7-Day Action Plan: InjectorIndex.com
 **Period:** Feb 19 - Feb 26, 2026
 **Primary Goal:** SEO Dominance & Lead Monetization Foundation
 
 ## 📅 Day 1: Foundation & Critical Bugs
 - [ ] **Fix New York Search Bug**: Search "New York" returns 0. Root cause: Missing data for NYC. 
     - [ ] Import 50+ providers for "New York", "Brooklyn", "Manhattan".
-- [ ] **SEO Hygiene**: Update `next-sitemap.config.js` with correct domain (`botox-4u.com`).
+- [ ] **SEO Hygiene**: Update `next-sitemap.config.js` with correct domain (`injectorindex.com`).
 - [ ] **robots.txt**: Ensure `/robots.txt` is accessible and points to sitemap.
 - [ ] **Schema Impl**: Add `MedicalClinic` and `LocalBusiness` JSON-LD.
 

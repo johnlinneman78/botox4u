@@ -82,6 +82,22 @@ export function VerifyForm({ provider }: { provider: any }) {
                     />
                     <p className="text-[10px] text-gray-400 font-light">Your federal Individual or Organizational NPI.</p>
                 </div>
+
+                <div className="pt-4">
+                    <label className="flex gap-4 cursor-pointer group">
+                        <div className="pt-1">
+                            <input
+                                required
+                                type="checkbox"
+                                name="tcpa_consent"
+                                className="w-5 h-5 rounded border-gray-300 text-secondary focus:ring-secondary cursor-pointer"
+                            />
+                        </div>
+                        <span className="text-xs text-gray-500 font-light leading-relaxed group-hover:text-gray-700 transition-colors">
+                            I agree to receive occasional updates about my Injector Index listing, including score changes and patient activity alerts. Message frequency: up to 4/month. Reply STOP to unsubscribe.
+                        </span>
+                    </label>
+                </div>
             </div>
 
             <button

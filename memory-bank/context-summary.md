@@ -1,7 +1,7 @@
 # Project Context Summary — Read This If Starting Cold
 
 ## What This Is
-Botox-4U.com — a national Botox provider directory.
+InjectorIndex.com — a national Botox provider directory.
 Built by AI agent in 72 hours. Live for 1 week.
 One founder, no employees, no investors, $0 budget, $235/month fixed costs.
 

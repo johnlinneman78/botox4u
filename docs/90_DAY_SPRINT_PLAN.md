@@ -1,4 +1,4 @@
-# 🗓️ 90-Day Sprint Plan: Botox-4u.com
+# 🗓️ 90-Day Sprint Plan: InjectorIndex.com
 **Strategy:** Portland-First Rollout → National Scaling → Monetization
 
 ## 🏁 Phase 1: Portland Domination (Days 1–7) - CURRENT
@@ -17,7 +17,7 @@
 - [ ] **Internal Linking Hubs**: Automated cross-linking between State → City → Treatment pages.
 
 ## 🛡️ Phase 3: The Trust Engine (Days 31–60)
-**Objective:** Establish the Botox-4U Index as the gold standard for transparency.
+**Objective:** Establish the Injector Index Index as the gold standard for transparency.
 - [ ] **Credential Verification**: Automated NPI number lookup and license type display (RN vs. MD vs. PA).
 - [ ] **Diamond Status Badges**: Scrape and display Allergan Diamond/Elite status for top 100 clinics.
 - [ ] **Review Sentiment Analysis**: Flag and filter "suspicious" reviews vs. helpful clinical feedback.
@@ -25,7 +25,7 @@
 
 ## 📧 Phase 4: Outreach Preparation (Days 61–89)
 **Objective:** Warm up the database for monetization without launching yet.
-- [ ] **Track B Sequence Finalization**: Automated personalized emails ("You're listed on Botox-4U") ready for Day 90.
+- [ ] **Track B Sequence Finalization**: Automated personalized emails ("You're listed on Injector Index") ready for Day 90.
 - [ ] **Admin Dashboard**: Real-time tracking of impressions/clicks for every unclaimed listing.
 - [ ] **Provider Portal Foundation**: "Claim Your Profile" dashboard built and tested in staging.
 
@@ -36,4 +36,4 @@
 - [ ] **Featured Listings**: Launch "Top of Page" sponsored spots for verified clinics.
 
 ---
-*Created per 'Botox-4U Agent Instructions v2' requirements.*
+*Created per 'Injector Index Agent Instructions v2' requirements.*

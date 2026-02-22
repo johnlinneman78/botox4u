@@ -12,12 +12,12 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
                         <div className="h-14 w-auto mb-6 -ml-2">
-                            <Link href="/" className="hover:opacity-90 transition-opacity">
+                            <Link href="/" className="flex items-center min-w-max flex-shrink-0 hover:opacity-90 transition-opacity">
                                 <Logo className="h-full w-auto" variant="shield" />
                             </Link>
                         </div>
                         <p className="text-sm text-gray-600">
-                            The Independent Index for Aesthetic Medicine Providers. Find the best injectors near you, compare verified pricing, and check credentials before you book.
+                            The Independent Injector Index for Aesthetic Medicine.
                         </p>
                     </div>
 

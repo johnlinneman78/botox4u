@@ -1,4 +1,4 @@
-# Task Plan: Botox-4U Optimization & Claim Flow
+# Task Plan: Injector Index Optimization & Claim Flow
 
 ## Phase 1: Routing & Visibility (COMPLETED)
 - [x] Fix 404 errors on city pages with catch-all routing.

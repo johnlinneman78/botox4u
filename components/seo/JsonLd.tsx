@@ -54,7 +54,7 @@ export const generateReviewSchema = (provider: any) => {
         },
         "author": {
             "@type": "Organization",
-            "name": "Botox-4U.com"
+            "name": "InjectorIndex.com"
         }
     };
 };
@@ -67,7 +67,7 @@ export const generateBreadcrumbSchema = (items: { name: string; item: string }[]
             "@type": "ListItem",
             "position": index + 1,
             "name": item.name,
-            "item": `https://www.botox-4u.com${item.item}`
+            "item": `https://www.injectorindex.com${item.item}`
         }))
     };
 };
@@ -81,7 +81,7 @@ export const generateItemListSchema = (providers: any[], city: string) => {
         "itemListElement": providers.map((provider, index) => ({
             "@type": "ListItem",
             "position": index + 1,
-            "url": `https://www.botox-4u.com/provider/${provider.slug}`,
+            "url": `https://www.injectorindex.com/provider/${provider.slug}`,
             "name": provider.name
         }))
     };
@@ -91,11 +91,11 @@ export const generateWebSiteSchema = () => {
     return {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Botox-4U.com",
-        "url": "https://www.botox-4u.com",
+        "name": "InjectorIndex.com",
+        "url": "https://www.injectorindex.com",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://www.botox-4u.com/find-providers?q={search_term_string}",
+            "target": "https://www.injectorindex.com/find-providers?q={search_term_string}",
             "query-input": "required name=search_term_string"
         }
     };

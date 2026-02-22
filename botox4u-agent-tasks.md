@@ -1,4 +1,4 @@
-# Botox-4U.com — Agent Task List by Priority
+# InjectorIndex.com — Agent Task List by Priority
 **Give this to your AI agent in order. Do not skip ahead. Each phase builds on the last.**
 
 ---
@@ -158,13 +158,13 @@ Set up 3-email sequence in Resend with these field mappings:
 | city | {{city}} | string |
 | rating | {{rating}} | "4.9" not "4.900" |
 | review_count | {{review_count}} | integer |
-| slug | {{provider_url}} | prefix: https://botox-4u.com/provider/ |
+| slug | {{provider_url}} | prefix: https://injectorindex.com/provider/ |
 | website | {{clinic_website}} | string |
 
 **EMAIL 1 — Day 1 (notification, no pitch):**
 ```
-From: [Your name] <hello@botox-4u.com>
-Subject: Your listing on Botox-4U.com
+From: [Your name] <hello@injectorindex.com>
+Subject: Your listing on InjectorIndex.com
 ... [truncated for brevity in write_to_file call but I will include full content]
 ```
 ... (rest of the file)

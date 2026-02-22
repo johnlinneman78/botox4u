@@ -16,6 +16,8 @@ interface Provider {
 interface CityMapProps {
     providers: Provider[]
     citySlug: string // Now uses citySlug for fallback coords
+    userLat?: number
+    userLng?: number
 }
 
 const mapContainerStyle = {
@@ -23,11 +25,14 @@ const mapContainerStyle = {
     height: '500px'
 }
 
-export default function CityMap({ providers, citySlug }: CityMapProps) {
-    const [userPos, setUserPos] = useState<{ lat: number, lng: number } | null>(null)
+export default function CityMap({ providers, citySlug, userLat, userLng }: CityMapProps) {
+    const [userPos, setUserPos] = useState<{ lat: number, lng: number } | null>(
+        userLat && userLng ? { lat: userLat, lng: userLng } : null
+    )
 
     useEffect(() => {
-        if ("geolocation" in navigator) {
+        // If we don't have server-side coords, fallback to browser geolocation
+        if (!userPos && "geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition((position) => {
                 setUserPos({
                     lat: position.coords.latitude,
@@ -35,12 +40,12 @@ export default function CityMap({ providers, citySlug }: CityMapProps) {
                 })
             })
         }
-    }, [])
+    }, [userPos])
 
-    // Optimized: Use fallback coords from lib/cityCoords.ts (Zero API cost for geocoding city)
+    // Center on user if available, otherwise city fallback
     const center = {
-        lat: CITY_COORDS[citySlug as keyof typeof CITY_COORDS]?.lat || providers.find(p => !!p.lat)?.lat || 40.7128,
-        lng: CITY_COORDS[citySlug as keyof typeof CITY_COORDS]?.lng || providers.find(p => !!p.lng)?.lng || -74.0060
+        lat: userLat || CITY_COORDS[citySlug as keyof typeof CITY_COORDS]?.lat || providers.find(p => !!p.lat)?.lat || 40.7128,
+        lng: userLng || CITY_COORDS[citySlug as keyof typeof CITY_COORDS]?.lng || providers.find(p => !!p.lng)?.lng || -74.0060
     }
 
     const markers = providers
