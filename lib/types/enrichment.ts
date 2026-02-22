@@ -7,6 +7,7 @@ export interface EnrichedProvider {
     state: string;
     business_type: string;
     price_per_unit: number | null;
+    score_total?: number; // Added for UI consistency
     min_treatment_price?: number | null;
     listing_tier?: string;
 

@@ -1,0 +1,23 @@
+
+import React from 'react';
+import { Award } from 'lucide-react';
+
+interface ExcellenceBadgeProps {
+    year: number;
+    city: string;
+    rank?: number;
+}
+
+export const ExcellenceBadge: React.FC<ExcellenceBadgeProps> = ({ year, city, rank }) => {
+    return (
+        <div className="inline-flex flex-col items-center justify-center p-4 bg-white border-2 border-[#d4af37] rounded-full w-32 h-32 shadow-xl text-center">
+            <Award className="w-6 h-6 text-[#d4af37] mb-1" />
+            <div className="text-[10px] font-black uppercase tracking-tighter text-gray-400">Botox-4U Choice</div>
+            <div className="text-sm font-black text-gray-900 leading-tight">
+                {rank ? `Top ${rank}` : 'Excellence'}
+            </div>
+            <div className="text-[10px] font-bold text-[#d4af37] uppercase">{city}</div>
+            <div className="text-[10px] font-black text-gray-900 mt-1">{year}</div>
+        </div>
+    );
+};

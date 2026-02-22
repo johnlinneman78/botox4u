@@ -3,6 +3,7 @@
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 import { MapPin } from 'lucide-react'
 import { CITY_COORDS } from '@/lib/cityCoords'
+import { useState, useEffect } from 'react'
 
 interface Provider {
     id: string
@@ -23,6 +24,19 @@ const mapContainerStyle = {
 }
 
 export default function CityMap({ providers, citySlug }: CityMapProps) {
+    const [userPos, setUserPos] = useState<{ lat: number, lng: number } | null>(null)
+
+    useEffect(() => {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                setUserPos({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                })
+            })
+        }
+    }, [])
+
     // Optimized: Use fallback coords from lib/cityCoords.ts (Zero API cost for geocoding city)
     const center = {
         lat: CITY_COORDS[citySlug as keyof typeof CITY_COORDS]?.lat || providers.find(p => !!p.lat)?.lat || 40.7128,
@@ -79,12 +93,22 @@ export default function CityMap({ providers, citySlug }: CityMapProps) {
                             position={position}
                             title={title}
                             icon={{
-                                url: '/pin-gold.svg', // Use the custom SVG gold pin
-                                scaledSize: new google.maps.Size(40, 50),
-                                anchor: new google.maps.Point(20, 50)
+                                url: 'https://maps.google.com/mapfiles/ms/icons/gold-pushpin.png', // Fallback to standard gold pin
+                                scaledSize: new google.maps.Size(40, 40)
                             }}
                         />
                     ))}
+
+                    {userPos && (
+                        <Marker
+                            position={userPos}
+                            title="You are here"
+                            icon={{
+                                url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                                scaledSize: new google.maps.Size(32, 32)
+                            }}
+                        />
+                    )}
                 </GoogleMap>
             </LoadScript>
         </div>

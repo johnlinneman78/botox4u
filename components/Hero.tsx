@@ -23,7 +23,7 @@ export default function Hero({ city, state }: { city?: string, state?: string })
                     </div>
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-[1.1]">
                         {city === 'Portland' ? (
-                            <>Portland's Most Transparent <span className="text-[#d4af37]">Botox Index</span></>
+                            <>Portland's Most Transparent <span className="text-[#d4af37]">{NICHE.name} Index</span></>
                         ) : (
                             <>Find {NICHE.name} Providers in {city || 'Your City'}</>
                         )}

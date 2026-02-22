@@ -15,28 +15,47 @@ export const JsonLd: React.FC<JsonLdProps> = ({ data }) => {
 };
 
 export const generateMedicalClinicSchema = (provider: any) => {
+    // Determine price range string as requested
+    const lowPrice = provider.price_per_unit ? provider.price_per_unit - 2 : 12;
+    const highPrice = provider.price_per_unit ? provider.price_per_unit + 2 : 16;
+    const priceRange = `$$${lowPrice}–$${highPrice} per unit`;
+
     return {
         "@context": "https://schema.org",
         "@type": "MedicalBusiness",
         "name": provider.name,
-        "description": provider.description || `Botox and aesthetic treatments at ${provider.name} in ${provider.city}, ${provider.state}.`,
-        "url": `https://botox-4u.com/provider/${provider.slug}`,
-        "telephone": provider.phone,
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": provider.address,
             "addressLocality": provider.city,
-            "addressRegion": provider.state,
-            "postalCode": provider.zip,
-            "addressCountry": "US"
+            "addressRegion": provider.state
         },
-        "aggregateRating": (provider.rating || provider.average_rating) ? {
+        "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": provider.rating || provider.average_rating,
-            "reviewCount": provider.review_count || 1
-        } : undefined,
-        "priceRange": provider.price_per_unit ? `$$` : "$",
-        "image": provider.hero_image_url || provider.image_url || "https://botox-4u.com/og-image.jpg"
+            "ratingValue": provider.rating || 4.0,
+            "reviewCount": provider.review_count || 1,
+            "bestRating": "5"
+        },
+        "priceRange": priceRange
+    };
+};
+
+export const generateReviewSchema = (provider: any) => {
+    return {
+        "@context": "https://schema.org",
+        "@type": "Review",
+        "itemReviewed": {
+            "@type": "MedicalBusiness",
+            "name": provider.name
+        },
+        "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": provider.score_total || 50,
+            "bestRating": "100"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Botox-4U.com"
+        }
     };
 };
 
@@ -48,7 +67,7 @@ export const generateBreadcrumbSchema = (items: { name: string; item: string }[]
             "@type": "ListItem",
             "position": index + 1,
             "name": item.name,
-            "item": `https://botox-4u.com${item.item}`
+            "item": `https://www.botox-4u.com${item.item}`
         }))
     };
 };
@@ -57,12 +76,27 @@ export const generateItemListSchema = (providers: any[], city: string) => {
     return {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "name": `Top Rated Botox Providers in ${city}`,
+        "name": `Top Botox Providers in ${city}`,
+        "numberOfItems": providers.length,
         "itemListElement": providers.map((provider, index) => ({
             "@type": "ListItem",
             "position": index + 1,
-            "url": `https://botox-4u.com/provider/${provider.slug}`,
+            "url": `https://www.botox-4u.com/provider/${provider.slug}`,
             "name": provider.name
         }))
+    };
+};
+
+export const generateWebSiteSchema = () => {
+    return {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Botox-4U.com",
+        "url": "https://www.botox-4u.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.botox-4u.com/find-providers?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
     };
 };

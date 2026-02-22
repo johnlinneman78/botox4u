@@ -24,7 +24,7 @@ export function PromoteClinicCard({ city }: PromoteClinicCardProps) {
                 </p>
                 <div className="space-y-3">
                     <Button className="w-full bg-secondary hover:bg-secondary/90 text-white border-0 py-6 text-md font-bold shadow-lg shadow-secondary/20">
-                        <Link href="/for-clinics">Promote My Clinic</Link>
+                        <Link href="/claim">Promote My Clinic</Link>
                     </Button>
                     <p className="text-[10px] text-center text-primary-foreground/40">
                         Average clinic sees 15+ new patient inquiries per month.

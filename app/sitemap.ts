@@ -1,94 +1,59 @@
 import { MetadataRoute } from 'next'
 import { createClient } from '@supabase/supabase-js'
-import { REVERSE_STATE_MAP, TREATMENTS } from '@/lib/constants'
+import { NICHE } from '@/config/niche'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || process.env.NEXT_PUBLIC_SITE_URL || 'https://botox-4u.com').replace(/\/$/, '')
+    const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
 
     // 1. Static Routes
     const staticRoutes = [
-        '',
-        '/find-providers',
-        '/calculator',
-        '/botox',
-        '/provider/login',
-        '/provider/register',
-    ].map(route => ({
-        url: `${baseUrl}${route}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: route === '' ? 1 : 0.8,
-    }))
+        { url: 'https://www.botox-4u.com', lastModified: new Date(), changeFrequency: 'daily' as const, priority: 1 },
+        { url: 'https://www.botox-4u.com/about', lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.8 },
+        { url: 'https://www.botox-4u.com/find-providers', lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
+    ]
 
-    // Use direct client to avoid next/headers (cookies) dependency which fails with bots
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-    // Fallback if Supabase is not configured
-    if (!supabaseUrl || !supabaseKey) {
-        return [...staticRoutes]
-    }
-
-    const supabase = createClient(supabaseUrl, supabaseKey)
-
-    // 2. Fetch Providers for sitemap
-    const { data: providers } = await supabase
-        .from('providers')
-        .select('slug, updated_at')
-
-    const providerRoutes = (providers || []).map((p: any) => ({
-        url: `${baseUrl}/provider/${p.slug}`,
-        lastModified: new Date(p.updated_at || new Date()),
-        changeFrequency: 'monthly' as const,
-        priority: 0.6,
-    }))
-
-    // 3. Generate City Data
-    const { data: locations } = await supabase
-        .from('providers')
-        .select('city, state')
-
-    const uniqueLocations = Array.from(new Set((locations || []).map((c: any) => `${c.city.toLowerCase().replace(/ /g, '-')}:${c.state.toLowerCase()}`)))
-
-    // City Routes
-    const cityRoutes = (uniqueLocations as string[]).map(loc => {
-        const [city, state] = loc.split(':')
-        return {
-            url: `${baseUrl}/botox/${state}/${city}`,
-            lastModified: new Date(),
-            changeFrequency: 'weekly' as const,
-            priority: 0.7,
-        }
-    })
-
-    // 4. Generate Treatment-City Routes (Programmatic SEO Powerhouse)
-    const treatmentCityRoutes = []
-    for (const treatment of TREATMENTS) {
-        for (const loc of (uniqueLocations as string[])) {
-            const [city, state] = loc.split(':')
-            treatmentCityRoutes.push({
-                url: `${baseUrl}/botox/${treatment.slug}/${state}/${city}`,
-                lastModified: new Date(),
-                changeFrequency: 'weekly' as const,
-                priority: 0.7,
-            })
-        }
-    }
-
-    // 5. Generate State Routes
-    const uniqueStateCodes = Array.from(new Set((locations || []).map((s: any) => s.state?.toUpperCase()))) as string[]
-    const stateRoutes = uniqueStateCodes.map(code => ({
-        url: `${baseUrl}/botox/state/${(REVERSE_STATE_MAP as Record<string, string>)[code]}`,
+    // 2. Provider Routes
+    const { data: providers } = await supabase.from('providers').select('slug').limit(1000)
+    const providerRoutes = (providers || []).map((p) => ({
+        url: `https://www.botox-4u.com/provider/${p.slug}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.7,
-    })).filter(route => !!route.url.split('/').pop() && route.url.split('/').pop() !== 'undefined')
+    }))
 
-    return [
-        ...staticRoutes,
-        ...providerRoutes,
-        ...cityRoutes,
-        ...treatmentCityRoutes,
-        ...stateRoutes
+    // 3. City Routes (P3 Cities)
+    const p3Cities = [
+        { city: 'New York', state: 'NY' },
+        { city: 'Los Angeles', state: 'CA' },
+        { city: 'Miami', state: 'FL' },
+        { city: 'Chicago', state: 'IL' },
+        { city: 'Dallas', state: 'TX' },
+        { city: 'Houston', state: 'TX' },
+        { city: 'Scottsdale', state: 'AZ' },
+        { city: 'San Francisco', state: 'CA' },
+        { city: 'Portland', state: 'OR' },
+        { city: 'Atlanta', state: 'GA' },
+        { city: 'Denver', state: 'CO' },
+        { city: 'Phoenix', state: 'AZ' },
+        { city: 'San Diego', state: 'CA' },
+        { city: 'Nashville', state: 'TN' },
+        { city: 'Austin', state: 'TX' },
+        { city: 'Las Vegas', state: 'NV' },
+        { city: 'Charlotte', state: 'NC' },
+        { city: 'Seattle', state: 'WA' },
+        { city: 'Boston', state: 'MA' },
+        { city: 'Tampa', state: 'FL' },
     ]
+
+    const cityRoutes = p3Cities.map((c) => ({
+        url: `https://www.botox-4u.com/${NICHE.baseSlug}/${c.state.toLowerCase()}/${c.city.toLowerCase().replace(/ /g, '-')}`,
+        lastModified: new Date(),
+        changeFrequency: 'daily' as const,
+        priority: 0.9,
+    }))
+
+    return [...staticRoutes, ...providerRoutes, ...cityRoutes]
 }

@@ -18,9 +18,11 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Star } from 'lucide-react'
 import { JsonLd, generateBreadcrumbSchema, generateItemListSchema } from '@/components/seo/JsonLd'
+import { GeolocationSorter } from '@/components/providers/GeolocationSorter'
 
 interface CatchAllPageProps {
     params: { slug: string[] }
+    searchParams?: { lat?: string; lng?: string }
 }
 
 export const dynamic = 'force-dynamic'
@@ -55,17 +57,28 @@ export async function generateMetadata({ params }: CatchAllPageProps): Promise<M
     if (treatmentName) {
         return {
             title: `${treatmentName} in ${cityName}, ${stateCode} | Prices & Top Clinicians`,
-            description: `Compare ${treatmentName} costs in ${cityName}. Find verified ${treatmentName} providers, read reviews, and see before / after results.`
+            description: `Compare ${treatmentName} costs in ${cityName}. Find verified ${treatmentName} providers, read reviews, and see before / after results.`,
+            alternates: {
+                canonical: `/${NICHE.baseSlug}/${slug[0]}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}`,
+            },
+            robots: { index: true, follow: true }
         }
     }
 
     return {
         title: `Best ${NICHE.name} in ${cityName}, ${stateCode} | Natural Results & Pricing`,
-        description: NICHE.metaDescriptionTemplate.replace(/{city}/g, cityName)
+        description: NICHE.metaDescriptionTemplate.replace(/{city}/g, cityName),
+        alternates: {
+            canonical: `/${NICHE.baseSlug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}`,
+        },
+        robots: { index: true, follow: true }
     }
 }
 
-export default async function CatchAllBotoxPage({ params }: CatchAllPageProps) {
+export default async function CatchAllBotoxPage({ params, searchParams }: CatchAllPageProps) {
+    const sParams = await searchParams
+    const userLat = sParams?.lat ? parseFloat(sParams.lat) : undefined
+    const userLng = sParams?.lng ? parseFloat(sParams.lng) : undefined
     const resolvedParams = await params
     const slug = resolvedParams.slug
 
@@ -107,7 +120,9 @@ export default async function CatchAllBotoxPage({ params }: CatchAllPageProps) {
     const providers = await getProvidersWithSearch({
         city: cityName,
         state: stateCode,
-        treatment: treatmentSlug || undefined
+        treatment: treatmentSlug || undefined,
+        userLat,
+        userLng
     })
     const stats = await getCityStats(cityName)
     const nearbyCities = await getNearbyCities(cityName, stateCode)
@@ -130,6 +145,7 @@ export default async function CatchAllBotoxPage({ params }: CatchAllPageProps) {
 
     return (
         <main className="bg-gray-50 min-h-screen pb-20">
+            <GeolocationSorter />
             <JsonLd data={itemListSchema} />
             <JsonLd data={breadcrumbs} />
             {/* Breadcrumbs */}

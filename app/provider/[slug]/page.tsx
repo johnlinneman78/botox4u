@@ -10,7 +10,7 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
 import { ReviewCarousel } from '@/components/providers/ReviewCarousel'
-import { JsonLd, generateMedicalClinicSchema, generateBreadcrumbSchema } from '@/components/seo/JsonLd'
+import { JsonLd, generateMedicalClinicSchema, generateBreadcrumbSchema, generateReviewSchema } from '@/components/seo/JsonLd'
 import { NICHE } from '@/config/niche'
 
 interface ProviderProfileProps {
@@ -25,7 +25,14 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
 
     return {
         title: `${provider.name} | Natural Results & Pricing in ${provider.city} | ${NICHE.siteName}`,
-        description: `Verified ${NICHE.providerType} ${provider.name} in ${provider.city}. The Botox-4U Index scores providers on natural results, independent pricing data, and federal credentials.`
+        description: `Verified ${NICHE.providerType} ${provider.name} in ${provider.city}. The Botox-4U Index scores providers on natural results, independent pricing data, and federal credentials.`,
+        alternates: {
+            canonical: `/provider/${provider.slug}`,
+        },
+        robots: {
+            index: true,
+            follow: true,
+        }
     }
 }
 
@@ -38,6 +45,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
     }
 
     const schema = generateMedicalClinicSchema(provider);
+    const reviewSchema = generateReviewSchema(provider);
     const breadcrumbs = generateBreadcrumbSchema([
         { name: 'Home', item: '/' },
         { name: provider.city, item: `/${NICHE.baseSlug}/${provider.state.toLowerCase()}/${provider.city.toLowerCase().replace(/ /g, '-')}` },
@@ -47,6 +55,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
     return (
         <div className="bg-gray-50 min-h-screen">
             <JsonLd data={schema} />
+            <JsonLd data={reviewSchema} />
             <JsonLd data={breadcrumbs} />
             {/* Claim Banner for Unclaimed Profiles */}
             {!provider.verified && (

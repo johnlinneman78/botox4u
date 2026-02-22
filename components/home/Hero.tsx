@@ -1,27 +1,61 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
-import { Search, DollarSign, Star, ShieldCheck, Target } from 'lucide-react'
+import { Search, CheckCircle2 } from 'lucide-react'
 import Logo from '@/components/layout/Logo'
-import { NICHE } from '@/config/niche'
+import Link from 'next/link'
 
 export default function Hero() {
     const [searchQuery, setSearchQuery] = useState('')
     const router = useRouter()
+    const [userCoords, setUserCoords] = useState<{ lat: number, lng: number } | null>(null)
+    const [isLocal, setIsLocal] = useState(false)
+
+    useEffect(() => {
+        if (typeof window !== 'undefined' && "geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const { latitude, longitude } = position.coords
+                setUserCoords({ lat: latitude, lng: longitude })
+
+                // Portland Check (Rough bbox)
+                if (latitude > 45.4 && latitude < 45.6 && longitude > -122.8 && longitude < -122.5) {
+                    setIsLocal(true)
+                }
+            }, (err) => console.log('Geolocation disabled'), { timeout: 10000 })
+        }
+    }, [])
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault()
+        let url = `/find-providers`
+        const params = new URLSearchParams()
+
         if (searchQuery.trim()) {
-            router.push(`/find-providers?q=${encodeURIComponent(searchQuery)}`)
-        } else {
-            router.push(`/find-providers`)
+            params.set('q', searchQuery)
         }
+
+        if (userCoords) {
+            params.set('lat', userCoords.lat.toString())
+            params.set('lng', userCoords.lng.toString())
+        }
+
+        if (params.toString()) {
+            url += `?${params.toString()}`
+        }
+
+        router.push(url)
     }
 
+    const bullets = [
+        "Avoid over-injection with our Natural Results filter",
+        "See real per-unit pricing before you book",
+        "Every provider NPI-verified against federal records"
+    ]
+
     return (
-        <section className="relative bg-[#1a2332] text-white py-24 md:py-32 overflow-hidden">
+        <section className="relative bg-[#1a2332] text-white py-24 md:py-32 overflow-hidden min-h-[70vh] flex items-center">
             {/* Premium Background Effects */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1a2332] via-[#151b26] to-[#0f141c]" />
@@ -30,135 +64,76 @@ export default function Hero() {
                     backgroundSize: '32px 32px'
                 }} />
                 {/* Gold Glow Effect */}
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#d4af37] opacity-[0.05] blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#d4af37] opacity-[0.05] blur-[160px] rounded-full pointer-events-none" />
             </div>
 
             <div className="container mx-auto px-4 relative z-10">
-                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-
-                    {/* Left Column: Text & Search */}
-                    <div className="flex-1 max-w-2xl text-center lg:text-left">
-                        <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
-                            <div className="h-16 w-auto -ml-2 mb-4 sm:mb-0 relative z-20">
-                                <Logo variant="shield" className="h-full" theme="dark" />
-                            </div>
+                <div className="max-w-4xl mx-auto text-center">
+                    {/* Badge/Logo */}
+                    <div className="flex justify-center mb-10">
+                        <div className="h-16 w-auto">
+                            <Logo variant="shield" className="h-full" theme="dark" />
                         </div>
+                    </div>
 
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-[1.1] text-balance">
-                            {typeof window !== 'undefined' && window.location.search.includes('portland') ? (
-                                <>Portland's Most Transparent <span className="text-[#d4af37]">Botox Index</span></>
-                            ) : (
-                                NICHE.copy.hero.headline
-                            )}
-                        </h1>
+                    <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 leading-[1.1] text-balance">
+                        {isLocal ? (
+                            <>Portland's Most Transparent <span className="text-[#d4af37]">Botox Index</span></>
+                        ) : (
+                            <>Find Your Perfect Injector. <span className="text-[#d4af37]">Without the Guesswork.</span></>
+                        )}
+                    </h1>
 
-                        <p className="text-lg md:text-xl text-gray-300 mb-10 font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
-                            {NICHE.copy.hero.subtext}
-                        </p>
+                    <p className="text-xl md:text-2xl text-gray-300 mb-10 font-light leading-relaxed max-w-2xl mx-auto">
+                        We score every provider on natural results, real pricing, and verified credentials — so you can compare in minutes.
+                    </p>
 
-                        <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto lg:mx-0 mb-12 shadow-2xl shadow-black/20 rounded-xl relative z-30">
-                            <div className="relative flex-1">
-                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-40">
+                    {/* Bullets */}
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-12">
+                        {bullets.map((bullet, idx) => (
+                            <div key={idx} className="flex items-center gap-2 text-sm md:text-base font-medium text-white/90">
+                                <CheckCircle2 className="w-5 h-5 text-[#d4af37] shrink-0" />
+                                <span>{bullet}</span>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Search bar is the visual anchor */}
+                    <div className="max-w-2xl mx-auto mb-8">
+                        <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-0 shadow-2xl shadow-black/40 rounded-2xl overflow-hidden border border-white/10">
+                            <div className="relative flex-1 bg-white">
+                                <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
                                     <Search className="h-5 w-5 text-gray-400" />
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder="City, Zip, or State..."
+                                    placeholder="Enter City or Zip Code..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full h-14 pl-12 pr-4 rounded-xl sm:rounded-r-none bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#d4af37] text-base relative z-30"
+                                    className="w-full h-16 pl-14 pr-6 bg-transparent text-gray-900 placeholder:text-gray-400 focus:outline-none text-lg"
                                 />
                             </div>
                             <Button
                                 type="submit"
-                                className="h-14 px-8 rounded-xl sm:rounded-l-none bg-[#d4af37] hover:bg-[#c0a030] text-[#1a2332] font-bold text-lg transition-all hover:scale-105 relative z-30"
+                                className="h-16 px-10 bg-[#d4af37] hover:bg-[#c0a030] text-[#1a2332] font-bold text-lg transition-all rounded-none"
                             >
-                                {NICHE.copy.hero.cta}
+                                Compare Botox Prices Near Me
                             </Button>
                         </form>
-
-                        {/* Trust Indicators */}
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-white/10 pt-8">
-                            {NICHE.copy.trustBadges.map((badge, idx) => {
-                                const Icon = badge.icon === 'dollar' ? DollarSign : badge.icon === 'shield' ? ShieldCheck : Target;
-                                return (
-                                    <div key={idx} className="flex items-start gap-4">
-                                        <div className="p-3 rounded-2xl bg-[#d4af37]/10 text-[#d4af37] shrink-0">
-                                            <Icon className="w-5 h-5" />
-                                        </div>
-                                        <div>
-                                            <div className="text-[#d4af37] font-bold text-sm uppercase tracking-tighter">{badge.label}</div>
-                                            <div className="text-xs text-gray-400 font-medium leading-snug">{badge.description}</div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
                     </div>
 
-                    {/* Right Column: Visual */}
-                    <div className="flex-1 w-full max-w-lg lg:max-w-none hidden lg:block">
-                        <div className="relative">
-                            {/* Decorative background blob */}
-                            <div className="absolute -inset-4 bg-gradient-to-tr from-[#d4af37]/20 to-transparent blur-3xl rounded-full" />
+                    {/* Secondary CTA */}
+                    <div className="mb-12">
+                        <Link href="/find-providers" className="text-gray-400 hover:text-[#d4af37] font-medium transition-colors inline-flex items-center gap-2">
+                            Or browse top-scoring providers <span className="text-xl">→</span>
+                        </Link>
+                    </div>
 
-                            <div className="relative grid grid-cols-2 gap-4">
-                                <div className="space-y-4 translate-y-8">
-                                    <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gray-800 border border-white/10 shadow-2xl relative group">
-                                        <img
-                                            src="https://images.unsplash.com/photo-1484417827717-933271470ad5?auto=format&fit=crop&q=80&w=1000"
-                                            alt="Researching Providers"
-                                            className="grow object-cover w-full h-full opacity-70 group-hover:scale-105 transition-transform duration-1000"
-                                        />
-                                        <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/0 transition-colors" />
-                                        <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                                            <div className="text-white text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Step 1: Research</div>
-                                            <div className="text-[#d4af37] text-lg font-display font-medium">Compare Local Options</div>
-                                        </div>
-                                    </div>
-
-                                    <div className="p-8 rounded-3xl bg-[#151b26] border border-white/10 shadow-xl relative overflow-hidden group">
-                                        <div className="flex items-center gap-1 mb-3">
-                                            {[1, 2, 3, 4, 5].map((s) => (
-                                                <Star key={s} className="w-3 h-3 fill-[#d4af37] text-[#d4af37]" />
-                                            ))}
-                                        </div>
-                                        <div className="text-sm italic text-gray-300 mb-2 font-light leading-relaxed">
-                                            "I spent weeks worrying about hidden costs until I found this directory. It made comparing every local injector so simple."
-                                        </div>
-                                        <div className="text-[9px] font-bold text-[#d4af37] uppercase tracking-widest">Verified User</div>
-                                    </div>
-                                </div>
-
-                                <div className="space-y-4">
-                                    <div className="p-8 rounded-3xl bg-[#d4af37] text-[#1a2332] shadow-xl relative overflow-hidden">
-                                        <div className="absolute top-0 right-0 p-4">
-                                            <Target className="w-12 h-12 text-[#1a2332]/10" />
-                                        </div>
-                                        <div className="font-bold text-xl mb-4 tracking-tight">Independent Index</div>
-                                        <div className="h-2 w-full bg-[#1a2332]/10 rounded-full mb-4">
-                                            <div className="h-full w-3/4 bg-[#1a2332] rounded-full" />
-                                        </div>
-                                        <p className="text-sm font-medium leading-normal opacity-90">
-                                            We index every clinic based on transparency, pricing, and federal credentials.
-                                        </p>
-                                    </div>
-
-                                    <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gray-800 border border-white/10 shadow-2xl relative group">
-                                        <img
-                                            src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=1000"
-                                            alt="Making a Decision"
-                                            className="grow object-cover w-full h-full opacity-70 group-hover:scale-105 transition-transform duration-1000"
-                                        />
-                                        <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/0 transition-colors" />
-                                        <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                                            <div className="text-white text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Step 2: Connect</div>
-                                            <div className="text-[#d4af37] text-lg font-display font-medium">Verify Then Book</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    {/* Trust Strip */}
+                    <div className="pt-8 border-t border-white/10 inline-block">
+                        <p className="text-xs md:text-sm text-gray-500 font-medium tracking-wide uppercase">
+                            100% independent. Nobody pays for a higher score. Backed by 15,000+ provider reviews analyzed.
+                        </p>
                     </div>
                 </div>
             </div>

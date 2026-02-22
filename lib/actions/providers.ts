@@ -24,7 +24,8 @@ export async function getProvidersWithSearch(filters: {
         .order('rating', { ascending: false }) // Changed from average_rating to rating
 
     if (filters.query) {
-        queryBuilder = queryBuilder.ilike('name', `%${filters.query}%`)
+        // Search across name, city, and state for better discoverability
+        queryBuilder = queryBuilder.or(`name.ilike.%${filters.query}%,city.ilike.%${filters.query}%,state.ilike.%${filters.query}%`)
     }
     if (filters.city) {
         queryBuilder = queryBuilder.ilike('city', filters.city.trim())
@@ -115,6 +116,19 @@ export async function getProvidersWithSearch(filters: {
             website: p.website,
             responsiveness_score: p.responsiveness_score
         }),
+        score_total: calculateProviderScore({
+            price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
+            rating: parseFloat(p.rating || p.average_rating || 0),
+            review_count: p.review_count || 0,
+            has_photo: !!(p.hero_image_url || p.image_url),
+            has_description: !!p.description,
+            is_verified: p.verified || false,
+            npi_verified: p.npi_verified || false,
+            allergan_tier: p.allergan_tier,
+            results_quality_score: p.score_results_quality,
+            website: p.website,
+            responsiveness_score: p.responsiveness_score
+        }).points,
 
         // Warning & Scoring Fields
         warning_flag: p.warning_flag || false,
@@ -142,20 +156,29 @@ export async function getProvidersWithSearch(filters: {
     }
 
     return mappedData.sort((a: any, b: any) => {
-        // 1. Tier + Score combined weight
-        const scoreA = (tierWeight[a.listingTier as keyof typeof tierWeight] || 0) + a.score.points
-        const scoreB = (tierWeight[b.listingTier as keyof typeof tierWeight] || 0) + b.score.points
+        const tierWeightA = tierWeight[a.listingTier as keyof typeof tierWeight] || 0
+        const tierWeightB = tierWeight[b.listingTier as keyof typeof tierWeight] || 0
 
-        if (scoreB !== scoreA) return scoreB - scoreA
+        // 1. Featured always stays at top
+        if (tierWeightB !== tierWeightA) {
+            return tierWeightB - tierWeightA
+        }
 
-        // 2. Proximity (if user location provided) fallback
+        // 2. Proximity (Primary if location is active)
         if (filters.userLat && filters.userLng && a.lat && a.lng && b.lat && b.lng) {
             const distA = Math.sqrt(Math.pow(a.lat - filters.userLat, 2) + Math.pow(a.lng - filters.userLng, 2))
             const distB = Math.sqrt(Math.pow(b.lat - filters.userLat, 2) + Math.pow(b.lng - filters.userLng, 2))
-            return distA - distB
+
+            // If one is significantly closer (e.g. within 20 miles / ~0.3 degrees), prioritize it
+            if (Math.abs(distA - distB) > 0.1) {
+                return distA - distB
+            }
         }
 
-        return 0
+        // 3. Fallback to Score
+        const scoreA = a.score.points
+        const scoreB = b.score.points
+        return scoreB - scoreA
     })
 }
 

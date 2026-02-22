@@ -11,7 +11,7 @@ const featuredCities = [
     { name: 'Scottsdale', state: 'AZ', slug: 'scottsdale-az', avgCost: 13, providers: 64 },
     { name: 'Houston', state: 'TX', slug: 'houston-tx', avgCost: 11, providers: 89 },
     { name: 'San Francisco', state: 'CA', slug: 'san-francisco-ca', avgCost: 19, providers: 54 },
-    { name: 'Portland', state: 'OR', slug: 'portland-or', avgCost: 14, providers: 42 },
+    { name: 'Portland', state: 'OR', slug: 'portland-or', avgCost: 14, providers: 90 },
 ]
 
 export default function FeaturedCities() {
@@ -55,6 +55,9 @@ export default function FeaturedCities() {
                 </div>
 
                 <div className="text-center mt-12">
+                    <Link href="/claim" className="text-secondary hover:text-secondary/80 font-medium block mb-4">
+                        Promote My Clinic →
+                    </Link>
                     <Link href="/botox" className="text-secondary hover:text-secondary/80 font-medium">
                         View All States & Cities →
                     </Link>
