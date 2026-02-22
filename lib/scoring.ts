@@ -44,62 +44,73 @@ export function getGrade(score: number): string {
 }
 
 /**
- * Calculates the Botox-4U Score based on Version 2 (February 2026)
+ * Calculates the Botox-4U Score based on Version 2.2 (February 2026)
+ * Follows the 5-Signal weighted approach + Warning Flags
  */
 export function calculateProviderScore(factors: ScoringFactors, cityAveragePrice: number = NICHE.priceRange.min + 5): ScoreBreakdown {
-    let resultsQualityScore = factors.results_quality_score || 0 // Baseline 0
+    // 1. Natural Results Language (30 pts)
+    // Derived from sentiment analysis of patient reviews
+    let resultsQualityScore = factors.results_quality_score || 0
+    resultsQualityScore = Math.min(30, Math.max(0, resultsQualityScore))
+
+    // 2. Fair Pricing Score (25 pts)
     let priceScore = 0
-    let trustScore = 0
-    let safetyScore = 0
-    let transparencyScore = 0
-    let responsivenessScore = factors.responsiveness_score || 0 // Baseline 0
-
-    // 1. Results Quality Score (Max 30 pts)
-    // Formula: (Raw Sentiment * Multiplier)
-    let sentimentBonus = factors.results_quality_score || 0
-    if (sentimentBonus > 25) {
-        sentimentBonus *= 1.2 // "Patient Love" Multiplier for exceptional results
-    }
-    resultsQualityScore = Math.min(30, Math.max(0, sentimentBonus))
-
-    // 2. Fair Pricing Score (Max 25 pts)
     if (factors.price_per_unit) {
         const ratio = factors.price_per_unit / cityAveragePrice
         if (ratio <= 0.80) priceScore = 25
-        else if (ratio <= 0.90) priceScore = 22 // Boosted from 20
-        else if (ratio <= 1.00) priceScore = 18 // Boosted from 17
-        else if (ratio <= 1.10) priceScore = 14 // Boosted from 13
-        else if (ratio <= 1.25) priceScore = 9  // Boosted from 8
-        else priceScore = 5                    // Boosted from 3
+        else if (ratio <= 0.95) priceScore = 22
+        else if (ratio <= 1.05) priceScore = 18
+        else if (ratio <= 1.20) priceScore = 12
+        else if (ratio <= 1.50) priceScore = 5
+        else priceScore = 0
     }
 
-    // 3. Trust Score (Max 20 pts)
+    // 3. Credential Integrity (20 pts)
+    let safetyScore = factors.npi_verified ? 20 : 0
+
+    // 4. Patient Trust & Sentiment (15 pts)
+    // Combination of review volume and star rating
+    let trustScore = 0
     if (factors.review_count) {
-        if (factors.review_count >= 500) trustScore = 20
-        else if (factors.review_count >= 200) trustScore = 16
-        else if (factors.review_count >= 100) trustScore = 12
-        else if (factors.review_count >= 50) trustScore = 8
-        else if (factors.review_count >= 20) trustScore = 4
-        else trustScore = 2
+        let volumeScore = 0
+        if (factors.review_count >= 500) volumeScore = 10
+        else if (factors.review_count >= 200) volumeScore = 8
+        else if (factors.review_count >= 100) volumeScore = 6
+        else if (factors.review_count >= 50) volumeScore = 4
+        else volumeScore = 2
+
+        let ratingScore = 0
+        if (factors.rating && factors.rating >= 4.8) ratingScore = 5
+        else if (factors.rating && factors.rating >= 4.5) ratingScore = 4
+        else if (factors.rating && factors.rating >= 4.0) ratingScore = 2
+
+        trustScore = volumeScore + ratingScore
     }
 
-    // 4. Safety & Credentials Score (Max 15 pts)
-    if (factors.npi_verified) safetyScore += 8
-    if (factors.rating && factors.rating >= 4.7) safetyScore += 4
-    if (factors.review_count && factors.review_count >= 100) safetyScore += 3
-    safetyScore = Math.min(15, safetyScore)
+    // 5. Transparency (10 pts)
+    let transparencyScore = factors.price_per_unit ? 10 : 0
 
-    // 5. Transparency Score (Max 7 pts)
-    if (factors.price_per_unit) transparencyScore += 4
-    if (factors.has_photo) transparencyScore += 1
-    if (factors.has_description) transparencyScore += 1
-    if (factors.website) transparencyScore += 1
-    transparencyScore = Math.min(7, transparencyScore)
-
-    // 6. Responsiveness Score (Max 3 pts)
-    responsivenessScore = Math.min(3, responsivenessScore)
+    // 6. Responsiveness (Optional/Bonus or part of Trust)
+    let responsivenessScore = factors.responsiveness_score || 0
+    responsivenessScore = Math.min(5, responsivenessScore)
 
     const totalPoints = Math.min(100, resultsQualityScore + priceScore + trustScore + safetyScore + transparencyScore + responsivenessScore)
+
+    // Warning Flag Logic
+    let warning_flag = false
+    let warning_reason = null
+
+    if (factors.rating && factors.rating < 4.0) {
+        warning_flag = true
+        warning_reason = 'Average rating below 4.0'
+    } else if (factors.price_per_unit && factors.price_per_unit > (cityAveragePrice * 2)) {
+        warning_flag = true
+        warning_reason = 'Pricing significantly above city average'
+    } else if (factors.npi_verified === false) {
+        // Only flag if explicitly checked and failed, not just pending
+        // warning_flag = true
+        // warning_reason = 'Unverified medical credentials'
+    }
 
     return {
         grade: getGrade(totalPoints),

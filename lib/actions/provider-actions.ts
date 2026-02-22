@@ -44,3 +44,47 @@ export async function updateProviderProfile(formData: FormData) {
         return { success: false, error: error.message || 'Failed to update profile' }
     }
 }
+
+export async function claimProviderProfile(formData: FormData) {
+    try {
+        const supabase = await getSupabaseServer(await cookies())
+        if (!supabase) throw new Error('Supabase not initialized')
+
+        const providerId = formData.get('provider_id') as string
+        if (!providerId) throw new Error('Provider ID is missing')
+
+        const updates: any = {
+            name: formData.get('name') as string,
+            business_type: formData.get('business_type') as string,
+            website: formData.get('website') as string,
+            verified: true,
+            verified_at: new Date().toISOString(),
+            outreach_status: 'claimed'
+        }
+
+        const pricePerUnit = formData.get('price_per_unit');
+        if (pricePerUnit) {
+            updates.price_per_unit = parseFloat(pricePerUnit as string);
+        }
+
+        const philosophy = formData.get('philosophy') as string;
+        if (philosophy) {
+            // Store philosophy in enriched_attrs or a New Column
+            // For now, let's just keep it simple or store in enriched_attrs
+            updates.enriched_attrs = updates.enriched_attrs || {}
+            updates.enriched_attrs.philosophy = philosophy
+        }
+
+        const { error } = await supabase
+            .from('providers')
+            .update(updates)
+            .eq('id', providerId)
+
+        if (error) throw error
+
+        return { success: true }
+    } catch (error: any) {
+        console.error('Error claiming provider profile:', error)
+        return { success: false, error: error.message || 'Failed to claim profile' }
+    }
+}

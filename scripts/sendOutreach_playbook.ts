@@ -21,6 +21,7 @@ interface Provider {
     review_count: number;
     slug: string;
     website: string;
+    price_per_unit?: number;
     top_badge?: string;
     top_reviews: any[];
     email_primary?: string;
@@ -39,75 +40,33 @@ function getCityTier(city: string): number {
     return 3;
 }
 
-function getTopKeyword(reviews: any[]): string | null {
-    if (!reviews || reviews.length === 0) return null;
-    const keywords = ['natural', 'subtle', 'conservative', 'gentle', 'honest', 'painless', 'recommend'];
-    const text = reviews.map(r => (r.text || '').toLowerCase()).join(' ');
-
-    for (const keyword of keywords) {
-        const count = (text.match(new RegExp(keyword, 'g')) || []).length;
-        if (count >= 3) return keyword;
-    }
-    return null;
+function getSubjectLine(provider: Provider): string {
+    return `Patients in ${provider.city} are looking for you on ${NICHE.siteName}`;
 }
 
-function getSubjectLine(provider: Provider, tier: number): string {
-    const keyword = getTopKeyword(provider.top_reviews);
-    if (keyword) return `Your patients keep saying '${keyword}' — we noticed`;
-
-    if (provider.top_badge) {
-        if (tier === 1) return `${provider.top_badge} in ${provider.city} — your patients agree`;
-        if (tier === 2) return `${provider.top_badge} status in ${provider.city} — your listing is live`;
-        if (tier === 3) return `${provider.top_badge} + ${provider.review_count} reviews — your listing is live`;
-    }
-
-    if (tier === 1) {
-        if (provider.review_count > 500) return `The most-reviewed injectors in ${provider.city} — you're on the list`;
-        if (provider.review_count > 200) return `Your ${provider.review_count} reviews in ${provider.city} — we noticed`;
-        return `Top-rated in ${provider.city}: ${provider.rating}★ from ${provider.review_count} patients`;
-    }
-
-    if (tier === 2) {
-        if (provider.review_count > 300) return `One of ${provider.city}'s most trusted injectors — according to your patients`;
-        if (provider.rating >= 4.8) return `${provider.review_count} reviews and a ${provider.rating}★ in ${provider.city} — that's earned`;
-        return `Your ${provider.rating}★ from ${provider.review_count} patients in ${provider.city} — impressive`;
-    }
-
-    // Tier 3
-    if (provider.rating >= 4.9 && provider.review_count > 200) return `4.9★ from ${provider.review_count} patients — we built something for providers like you`;
-    if (provider.review_count > 400) return `Most injectors plateau at 50 reviews. You have ${provider.review_count}.`;
-    if (provider.rating >= 4.8) return `A ${provider.rating}★ rating from ${provider.review_count} patients — that's not easy`;
-    return `${provider.review_count} reviews and a ${provider.rating}★ — you're in rare company`;
-}
-
-function getEmailTemplate(provider: Provider, subject: string) {
+function getEmailTemplate(provider: Provider) {
     return `
-        <div style="font-family: sans-serif; line-height: 1.6; color: #1a2332; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <div style="text-align: center; margin-bottom: 30px;">
-                <div style="font-family: serif; font-size: 28px; font-weight: 800; color: #1a2332;">
-                    ${NICHE.brandName}<span style="color: #d4af37;">${NICHE.brandSuffix}</span>
-                </div>
-            </div>
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1a2332; max-width: 600px; font-size: 16px;">
+            <p>Hi ${provider.name},</p>
             
-            <p>Hi ${provider.name.split(' ')[0]},</p>
+            <p>Patients in <strong>${provider.city}</strong> are already finding your practice on <strong>${NICHE.siteName}</strong> — the independent index for aesthetic medicine providers ranked by verified credentials, transparent pricing, and natural results.</p>
             
-            <p>I was looking through providers in ${provider.city} and your profile stood out.</p>
+            <p>Your listing is live right now, but your pricing shows as <strong>"Not Listed"</strong> and patients filter past that.</p>
             
-            <p>With <strong>${provider.review_count} reviews</strong> and a <strong>${provider.rating}★ rating</strong>, you've clearly built a massive reputation. Most clinics never reach that level of patient trust.</p>
+            <p>Claiming your profile is free and takes 2 minutes. No credit card, no commitment — just your practice represented accurately.</p>
             
-            <p>We built <a href="https://${NICHE.domain}" style="color: #d4af37; font-weight: bold;">${NICHE.siteName}</a> specifically to highlight high-performing injectors like you. Your listing is already live and ranking based on your clinical excellence.</p>
+            <p style="margin: 30px 0;">
+                <a href="https://${NICHE.domain}/claim/${provider.slug}" style="background-color: #1a2332; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; display: inline-block;">Claim Your Free Profile →</a>
+            </p>
             
-            <p><strong>Review your listing here:</strong><br>
-            <a href="https://${NICHE.domain}/provider/${provider.slug}">https://${NICHE.domain}/provider/${provider.slug}</a></p>
+            <p>Best,</p>
             
-            <p>Nothing is needed from your end — we just wanted to make sure you saw where your reputation is being showcased.</p>
-            
-            <p>Best,<br>
-            ${NICHE.outreach.senderName}<br>
-            Founder, ${NICHE.siteName}</p>
+            <p><strong>${NICHE.outreach.senderName}</strong><br>
+            Founder, ${NICHE.siteName}<br>
+            <span style="color: #64748b; font-size: 14px;">Built for patients. Trusted by providers.</span></p>
             
             <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-            <p style="font-size: 11px; color: #999; text-align: center;">
+            <p style="font-size: 11px; color: #999;">
                 You are receiving this because your clinic is listed on ${NICHE.siteName}.<br>
                 To unsubscribe, reply "Unsubscribe" or <a href="https://${NICHE.domain}/unsubscribe?id=${provider.id}" style="color: #999;">click here</a>.
             </p>
@@ -115,16 +74,15 @@ function getEmailTemplate(provider: Provider, subject: string) {
     `;
 }
 
-async function runOutreach(limit = 10) {
-    console.log('--- STARTING PLAYBOOK OUTREACH ---');
+async function runOutreach(targetCount = 10) {
+    console.log(`--- STARTING PLAYBOOK OUTREACH (Target: ${targetCount}) ---`);
 
-    // Fetch providers with scraped emails (either in columns or enriched_attrs)
+    // Fetch all providers that haven't been contacted yet
     const { data: providers, error } = await supabase
         .from('providers')
         .select('*')
-        .eq('outreach_status', 'pending')
-        .order('review_count', { ascending: false })
-        .limit(limit);
+        .in('outreach_status', ['not_sent', 'no_email', 'notified'])
+        .not('enriched_attrs', 'is', null);
 
     if (error || !providers) {
         console.error('Error fetching providers:', error);
@@ -134,31 +92,36 @@ async function runOutreach(limit = 10) {
     let sent = 0;
 
     for (const provider of providers) {
+        if (sent >= targetCount) break;
+
         // Find email address
-        let email = provider.email_primary;
-        if (!email && provider.enriched_attrs?.email_playbook?.primary) {
-            email = provider.enriched_attrs.email_playbook.primary;
+        let email = (provider as any).email;
+        if (!email && provider.enriched_attrs?.email) {
+            email = provider.enriched_attrs.email;
         }
 
         if (!email) {
-            console.log(`Skipping ${provider.name}: No email found.`);
-            continue;
+            continue; // SILENTLY SKIP
         }
 
-        const tier = getCityTier(provider.city);
-        const subject = getSubjectLine(provider, tier);
-        const html = getEmailTemplate(provider, subject);
+        const subject = getSubjectLine(provider);
+        const html = getEmailTemplate(provider);
 
-        console.log(`Sending to: ${provider.name} (${email})`);
-        console.log(`  Tier: ${tier} | Subject: ${subject}`);
+        console.log(`[${sent + 1}/${targetCount}] Sending to: ${provider.name} (${email})`);
+        console.log(`  Subject: ${subject}`);
 
         try {
-            await resend.emails.send({
+            const { error: sendError } = await resend.emails.send({
                 from: `${NICHE.outreach.senderName} <${NICHE.outreach.senderEmail}>`,
                 to: email,
                 subject: subject,
                 html: html
             });
+
+            if (sendError) {
+                console.error(`  Failed to send to ${provider.name}:`, sendError);
+                continue;
+            }
 
             await supabase
                 .from('providers')
@@ -170,13 +133,13 @@ async function runOutreach(limit = 10) {
 
             sent++;
             // Small delay to avoid Resend rate limits
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise(resolve => setTimeout(resolve, 800));
         } catch (e) {
-            console.error(`  Failed to send to ${provider.name}:`, e);
+            console.error(`  Exception sending to ${provider.name}:`, e);
         }
     }
 
     console.log(`\nOutreach batch complete. Total sent: ${sent}`);
 }
 
-runOutreach(10);
+runOutreach(50);

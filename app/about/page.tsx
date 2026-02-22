@@ -64,21 +64,23 @@ export default function AboutPage() {
                         </div>
                     </div>
 
-                    {/* 3. HOW THE SCORE WORKS (V2) */}
+                    {/* 3. THE METHODOLOGY OVERVIEW */}
                     <div className="mb-24 relative">
                         <div className="absolute -inset-4 bg-primary/5 rounded-[4rem] -rotate-1" />
                         <div className="bg-white p-10 md:p-16 rounded-[4rem] border border-primary/10 shadow-xl relative z-10 overflow-hidden">
                             <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-[100px]" />
 
-                            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-12 tracking-tight text-center">Built for Patients. Not Clinics.</h2>
+                            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-8 tracking-tight text-center">Built for Patients. Not Clinics.</h2>
+                            <p className="text-gray-500 font-light text-center max-w-2xl mx-auto mb-12">
+                                We built our ranking system around what patients actually care about. Our model ignores advertising spend and focuses on four key signals.
+                            </p>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                                 {[
-                                    { icon: Target, label: 'Natural Results', points: '30 pts', desc: 'Patients saying "subtle" and "not overdone" rank highest.' },
-                                    { icon: DollarSign, label: 'Fair Pricing', points: '25 pts', desc: 'Real per-unit pricing compared to your city average.' },
-                                    { icon: Users, label: 'Patient Trust', points: '20 pts', desc: 'Verified public review volume and sentiment signal.' },
-                                    { icon: ShieldCheck, label: 'Verified Registry', points: '15 pts', desc: 'Cross-referenced against federal NPI licensing.' },
-                                    { icon: Eye, label: 'Transparency', points: '10 pts', desc: 'Rewards clinics that show pricing and real photos upfront.' }
+                                    { icon: Target, label: 'Natural Results', sub: 'Signal 1', desc: 'Semantic analysis of review language to find conservative injectors who won\'t overdo it.' },
+                                    { icon: DollarSign, label: 'Fair Pricing', sub: 'Signal 2', desc: 'Real per-unit pricing compared to verified local market averages.' },
+                                    { icon: ShieldCheck, label: 'Credential Integrity', sub: 'Signal 3', desc: 'Every injector is cross-referenced against the federal NPI licensing database.' },
+                                    { icon: Users, label: 'Pattern Recognition', sub: 'Signal 4', desc: 'Analyzing review consistency and sentiment patterns over multiple years.' }
                                 ].map((item) => (
                                     <div key={item.label} className="flex gap-4 items-start p-6 rounded-3xl bg-gray-50 border border-gray-100 group hover:bg-white hover:shadow-lg transition-all">
                                         <div className="p-3 rounded-2xl bg-white shadow-sm text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
@@ -86,8 +88,8 @@ export default function AboutPage() {
                                         </div>
                                         <div>
                                             <div className="flex items-center gap-2 mb-1">
-                                                <div className="font-bold text-primary">{item.label}</div>
-                                                <span className="text-[10px] font-black text-secondary uppercase bg-secondary/10 px-1.5 py-0.5 rounded">+{item.points}</span>
+                                                <div className="font-bold text-primary text-lg">{item.label}</div>
+                                                <span className="text-[10px] font-black text-secondary uppercase bg-secondary/10 px-1.5 py-0.5 rounded">{item.sub}</span>
                                             </div>
                                             <div className="text-sm text-gray-500 font-light leading-snug">{item.desc}</div>
                                         </div>
@@ -96,8 +98,14 @@ export default function AboutPage() {
                             </div>
 
                             <div className="text-center">
-                                <p className="text-xl font-bold text-primary mb-4 p-6 bg-secondary/10 rounded-2xl inline-block">
-                                    Nobody pays for a higher score. That&apos;s the whole point.
+                                <Link
+                                    href="/methodology"
+                                    className="inline-block px-10 py-5 bg-primary text-white rounded-2xl font-bold hover:bg-secondary transition-colors"
+                                >
+                                    Read Detailed Methodology →
+                                </Link>
+                                <p className="mt-8 text-sm font-bold text-primary uppercase tracking-widest opacity-40">
+                                    Nobody pays for a better score.
                                 </p>
                             </div>
                         </div>

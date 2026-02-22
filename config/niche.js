@@ -153,14 +153,14 @@ export const NICHE = {
     // Brand V2 Copy
     copy: {
         hero: {
-            headline: "The Independent Index for Botox & Aesthetic Providers",
-            subtext: "Find your perfect provider with 100% independent data. We aren't a clinic — we're a verified directory for Botox & aesthetic treatments, focusing on the transparency of pricing, credentials, and natural results. Search every clinic in your city and check their verified score before you book.",
-            cta: "Search the Local Directory"
+            headline: "Find injectors known for natural results — and see their real prices before you book.",
+            subtext: "40% of Botox complaints are about over-injection. We score every provider in our directory on results quality, fair pricing, and verified credentials — so you can find a conservative injector who won't overdo it.",
+            cta: "Find a Conservative Injector Near Me"
         },
         trustBadges: [
-            { icon: 'target', label: 'Independent Index', description: 'We don\'t offer treatments; we index the providers who do' },
-            { icon: 'dollar', label: 'Price Transparency', description: 'See real local provider pricing before you book' },
-            { icon: 'shield', label: 'Credential Search', description: 'NPI-verified provider license and data' }
+            { icon: 'target', label: 'Natural Results', description: 'Scored on real patient language and conservative outcomes' },
+            { icon: 'dollar', label: 'Real Pricing', description: 'Actual cost per unit revealed before you book' },
+            { icon: 'shield', label: 'NPI Verified', description: 'Federal medical credential and license confirmation' }
         ],
         scoreDisclaimer: "The Botox-4U Index is an independent data research platform for aesthetic providers. We are not a medical provider. Our mission is to provide transparency in the aesthetic market by indexing provider data, pricing, and neutral patient feedback. No provider can pay for a higher index position.",
         footerDisclaimer: "Botox-4U.com is an independent provider directory and research index for aesthetic medicine. We are not a clinic, we do not perform medical procedures, and we do not provide clinical advice. All data is gathered from public records to facilitate independent research of aesthetic providers."

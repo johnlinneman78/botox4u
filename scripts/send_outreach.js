@@ -1,14 +1,14 @@
 
 const { createClient } = require('@supabase/supabase-js');
 const { Resend } = require('resend');
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env.prod' });
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const resendApiKey = process.env.RESEND_API_KEY;
 
 if (!supabaseUrl || !supabaseKey || !resendApiKey) {
-    console.error('❌ Missing credentials. Check .env.local');
+    console.error('❌ Missing credentials. Check .env.prod');
     process.exit(1);
 }
 
@@ -16,7 +16,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const resend = new Resend(resendApiKey);
 
 // Config
-const BATCH_SIZE = 50;
+const BATCH_SIZE = 10;
 const FROM_EMAIL = process.env.CONTACT_EMAIL || 'hello@botox-4u.com';
 const YOUR_NAME = 'John Linneman';
 
@@ -56,24 +56,35 @@ async function sendOutreach() {
         const providerPageUrl = `${process.env.NEXT_PUBLIC_APP_URL}/provider/${provider.slug}`;
 
         try {
+            const firstName = provider.name.split(' ')[0];
+            const priceStr = provider.price_per_unit ? `$${provider.price_per_unit}` : '$12';
+
             const { data, error: emailError } = await resend.emails.send({
                 from: FROM_EMAIL,
                 to: provider.email,
-                subject: `Your ${provider.name} is featured in ${provider.city} Botox directory`,
+                subject: `question about the ${provider.city} price listing for ${provider.name}`,
                 html: `
-                    <div style="font-family: sans-serif; color: #333;">
-                        <p>Hi,</p>
-                        <p>We've listed <strong>${provider.name}</strong> in our Botox directory for <strong>${provider.city}</strong> with your real pricing and clinic photos.</p>
-                        <p><a href="${providerPageUrl}" style="color: #2563eb; font-weight: bold;">View Your Page Here</a></p>
-                        <p>During our beta launch:</p>
-                        <ul>
-                            <li>Free featured visibility in ${provider.city}</li>
-                            <li>Direct patient leads routing to your inbox</li>
-                        </ul>
-                        <p>Reply "yes" if you'd like to claim this listing or update any details.</p>
-                        <br>
+                    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1a2332; max-width: 600px; font-size: 16px;">
+                        <p>Hi ${firstName},</p>
+                        
+                        <p>I'm the founder of <strong>Botox-4U.com</strong>. I've just published our 2026 local guide for clinicians in <strong>${provider.city}</strong> and I've featured your clinic here:</p>
+                        
+                        <p><a href="${providerPageUrl}" style="color: #2563eb; text-decoration: underline;">${providerPageUrl}</a></p>
+                        
+                        <p>We currently show your average price as <strong>${priceStr} / unit</strong> — can you confirm if that is still accurate?</p>
+                        
+                        <p>I want to make sure the patients we're sending from the directory are getting the right information before they book.</p>
+                        
                         <p>Best,</p>
-                        <p><strong>${YOUR_NAME}</strong><br>Botox-4u.com Directory</p>
+                        
+                        <p><strong>${YOUR_NAME}</strong><br>
+                        Founder, Botox-4U.com</p>
+                        
+                        <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+                        <p style="font-size: 11px; color: #999;">
+                            You are receiving this because your clinic is listed on Botox-4U.com.<br>
+                            To unsubscribe, reply "Unsubscribe".
+                        </p>
                     </div>
                 `
             });

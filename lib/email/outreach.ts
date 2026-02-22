@@ -7,33 +7,40 @@ const SENDER = process.env.CONTACT_EMAIL || `${NICHE.outreach.senderName} from $
 export type OutreachEmailType = 'notification' | 'followup' | 'final';
 
 export const OUTREACH_TEMPLATES = {
-    notification: (provider: any) => ({
-        subject: `Your ${provider.city} ${NICHE.name} listing is live`,
-        html: `
-            <div style="font-family: sans-serif; line-height: 1.6; color: #1a2332; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 800; color: #1a2332;">
-                        ${NICHE.brandName}<span style="color: #d4af37;">${NICHE.brandSuffix}</span><span style="font-weight: 400; font-size: 16px; color: #94a3b8;">.com</span>
-                    </div>
-                    <div style="font-family: sans-serif; font-size: 9px; font-weight: 700; color: #d4af37; letter-spacing: 0.2em; margin-top: 4px; text-transform: uppercase;">
-                        PREMIUM ${NICHE.providerType.toUpperCase()} NETWORK
-                    </div>
+    notification: (provider: any) => {
+        const subject = `Patients in ${provider.city} are looking for you on ${NICHE.siteName}`;
+
+        return {
+            subject: subject,
+            html: `
+                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1a2332; max-width: 600px; font-size: 16px;">
+                    <p>Hi ${provider.name},</p>
+                    
+                    <p>Patients in <strong>${provider.city}</strong> are already finding your practice on <strong>${NICHE.siteName}</strong> — the independent index for aesthetic medicine providers ranked by verified credentials, transparent pricing, and natural results.</p>
+                    
+                    <p>Your listing is live right now, but your pricing shows as <strong>"Not Listed"</strong> and patients filter past that.</p>
+                    
+                    <p>Claiming your profile is free and takes 2 minutes. No credit card, no commitment — just your practice represented accurately.</p>
+                    
+                    <p style="margin: 30px 0;">
+                        <a href="https://${NICHE.domain}/claim/${provider.slug}" style="background-color: #1a2332; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; display: inline-block;">Claim Your Free Profile →</a>
+                    </p>
+                    
+                    <p>Best,</p>
+                    
+                    <p><strong>${NICHE.outreach.senderName}</strong><br>
+                    Founder, ${NICHE.siteName}<br>
+                    <span style="color: #64748b; font-size: 14px;">Built for patients. Trusted by providers.</span></p>
+                    
+                    <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+                    <p style="font-size: 11px; color: #999;">
+                        You are receiving this because your clinic is listed on ${NICHE.siteName}.<br>
+                        To unsubscribe, reply "Unsubscribe" or <a href="https://${NICHE.domain}/unsubscribe?id=${provider.id}" style="color: #999;">click here</a>.
+                    </p>
                 </div>
-                <p>Hi ${provider.name},</p>
-                <p>I just added your clinic to <a href="https://${NICHE.domain}" style="color: #d4af37; font-weight: bold; text-decoration: none;">${NICHE.siteName}</a> — a new directory helping patients in ${provider.city} find and compare ${NICHE.providerTypePlural} by price and credentials.</p>
-                <p><strong>Your listing:</strong> <a href="https://${NICHE.domain}/provider/${provider.slug}" style="color: #1a2332; text-decoration: underline;">https://${NICHE.domain}/provider/${provider.slug}</a></p>
-                <p>It's showing your ${NICHE.priceUnit} pricing and linking to your reviews. No action needed — I just wanted you to know you're there.</p>
-                <p>If anything looks wrong or you'd like to update it, just reply to this email.</p>
-                <p>${NICHE.outreach.senderName}<br>${NICHE.outreach.senderTitle}</p>
-                <p><strong>PS:</strong> We're sending leads from ${provider.city} to listed providers for free during beta. Happy to make sure yours are coming through.</p>
-                <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-                <p style="font-size: 11px; color: #999; text-align: center;">
-                    You are receiving this because your clinic is listed on ${NICHE.siteName}.<br>
-                    To unsubscribe, reply "Unsubscribe" or <a href="https://${NICHE.domain}/unsubscribe?domain=${encodeURIComponent(provider.website || '')}" style="color: #999;">click here</a>.
-                </p>
-            </div>
-        `
-    }),
+            `
+        };
+    },
     followup: (provider: any) => ({
         subject: `Is your pricing accurate on ${NICHE.siteName}?`,
         html: `
