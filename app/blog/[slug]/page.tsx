@@ -8,12 +8,20 @@ import { NICHE } from '@/config/niche'
 import { ArrowLeft, Clock, Mail, BarChart3 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 
+
 interface BlogPostPageProps {
-    params: { slug: string }
+    params: Promise<{ slug: string }>
+}
+
+export async function generateStaticParams() {
+    return BLOG_POSTS.map((post) => ({
+        slug: post.slug,
+    }))
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-    const post = BLOG_POSTS.find(p => p.slug === params.slug)
+    const { slug } = await params
+    const post = BLOG_POSTS.find(p => p.slug === slug)
     if (!post) return { title: 'Post Not Found' }
 
     return {
@@ -35,7 +43,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-    const post = BLOG_POSTS.find(p => p.slug === params.slug)
+    const { slug } = await params
+    const post = BLOG_POSTS.find(p => p.slug === slug)
     if (!post) notFound()
 
     // Article Schema

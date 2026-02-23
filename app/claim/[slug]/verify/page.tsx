@@ -2,12 +2,13 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import { VerifyForm } from './VerifyForm'
 
-export default async function VerifyPage({ params }: { params: { slug: string } }) {
+export default async function VerifyPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params
     const supabase = await createClient()
     const { data: provider } = await supabase
         .from('providers')
         .select('*')
-        .eq('slug', params.slug)
+        .eq('slug', slug)
         .single()
 
     if (!provider) {

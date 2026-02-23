@@ -14,7 +14,7 @@ import { JsonLd, generateMedicalClinicSchema, generateBreadcrumbSchema, generate
 import { NICHE } from '@/config/niche'
 
 interface ProviderProfileProps {
-    params: { slug: string }
+    params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: ProviderProfileProps): Promise<Metadata> {

@@ -2,17 +2,20 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound, redirect } from 'next/navigation'
 import { EditForm } from './EditForm'
 
-export default async function EditPage({ params, searchParams }: { params: { slug: string }, searchParams: { verify?: string } }) {
+export default async function EditPage({ params, searchParams }: { params: Promise<{ slug: string }>, searchParams: Promise<{ verify?: string }> }) {
+    const { slug } = await params
+    const sParams = await searchParams
+
     // Basic verification check: if no verify param, redirect back
-    if (!searchParams.verify) {
-        redirect(`/claim/${params.slug}/verify`)
+    if (!sParams.verify) {
+        redirect(`/claim/${slug}/verify`)
     }
 
     const supabase = await createClient()
     const { data: provider } = await supabase
         .from('providers')
         .select('*')
-        .eq('slug', params.slug)
+        .eq('slug', slug)
         .single()
 
     if (!provider) {
@@ -41,7 +44,7 @@ export default async function EditPage({ params, searchParams }: { params: { slu
                     </div>
 
                     <div className="p-12 md:p-16 pt-8">
-                        <EditForm provider={provider} initialNpi={searchParams.verify} />
+                        <EditForm provider={provider} initialNpi={sParams.verify} />
                     </div>
                 </div>
             </div>
