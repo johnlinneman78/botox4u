@@ -17,7 +17,7 @@ const resend = new Resend(resendApiKey);
 
 // Config
 const BATCH_SIZE = 10;
-const FROM_EMAIL = process.env.CONTACT_EMAIL || 'hello@botox-4u.com';
+const FROM_EMAIL = process.env.CONTACT_EMAIL || 'hello@injectorindex.com';
 const YOUR_NAME = 'John Linneman';
 
 async function sendOutreach() {
@@ -67,7 +67,7 @@ async function sendOutreach() {
                     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1a2332; max-width: 600px; font-size: 16px;">
                         <p>Hi ${firstName},</p>
                         
-                        <p>I'm the founder of <strong>Botox-4U.com</strong>. I've just published our 2026 local guide for clinicians in <strong>${provider.city}</strong> and I've featured your clinic here:</p>
+                        <p>I'm the founder of <strong>InjectorIndex.com</strong>. I've just published our 2026 local guide for clinicians in <strong>${provider.city}</strong> and I've featured your clinic here:</p>
                         
                         <p><a href="${providerPageUrl}" style="color: #2563eb; text-decoration: underline;">${providerPageUrl}</a></p>
                         
@@ -78,11 +78,11 @@ async function sendOutreach() {
                         <p>Best,</p>
                         
                         <p><strong>${YOUR_NAME}</strong><br>
-                        Founder, Botox-4U.com</p>
+                        Founder, InjectorIndex.com</p>
                         
                         <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
                         <p style="font-size: 11px; color: #999;">
-                            You are receiving this because your clinic is listed on Botox-4U.com.<br>
+                            You are receiving this because your clinic is listed on InjectorIndex.com.<br>
                             To unsubscribe, reply "Unsubscribe".
                         </p>
                     </div>

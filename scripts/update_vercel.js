@@ -4,7 +4,7 @@ const envs = [
     { name: 'NEXT_PUBLIC_SUPABASE_URL', value: 'https://tgqgsmaqmyeguapcogel.supabase.co', targets: ['production', 'preview', 'development'] },
     { name: 'NEXT_PUBLIC_SUPABASE_ANON_KEY', value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRncWdzbWFxbXllZ3VhcGNvZ2VsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExOTQ4MjQsImV4cCI6MjA4Njc3MDgyNH0.JmZw3Z9MU-l5FDfhWpfgjNuyTF09UxbELs9M5BjDeo0', targets: ['production', 'preview', 'development'] },
     { name: 'SUPABASE_SERVICE_ROLE_KEY', value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRncWdzbWFxbXllZ3VhcGNvZ2VsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTE5NDgyNCwiZXhwIjoyMDg2NzcwODI0fQ.zVpz7CjppFXXThUnCTIBo2XfLscdhSNJ0t2EddGcFHc', targets: ['production', 'preview', 'development'] },
-    { name: 'NEXT_PUBLIC_APP_URL', value: 'https://botox-4u.com', targets: ['production', 'preview', 'development'] }
+    { name: 'NEXT_PUBLIC_APP_URL', value: 'https://injectorindex.com', targets: ['production', 'preview', 'development'] }
 ];
 
 async function runVercel(args, input) {

@@ -15,8 +15,8 @@ async function checkDomains() {
         }
 
         if (!data || !data.data || data.data.length === 0) {
-            console.log('ℹ️ No domains found in Resend. I will attempt to add botox-4u.com.');
-            await addDomain('botox-4u.com');
+            console.log('ℹ️ No domains found in Resend. I will attempt to add injectorindex.com.');
+            await addDomain('injectorindex.com');
             return;
         }
 
