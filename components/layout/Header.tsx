@@ -12,7 +12,6 @@ export default function Header() {
     const navLinks = [
         { href: '/find-providers', label: 'Find Providers', icon: Shield },
         { href: '/calculator', label: 'Cost Calculator', icon: Calculator },
-        { href: '/audit', label: 'Free Clinic Audit', icon: UserCheck },
         { href: '/blog', label: 'Intelligence', icon: TrendingUp },
         { href: '/pricing', label: 'For Providers', icon: Info },
     ]
@@ -25,7 +24,7 @@ export default function Header() {
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-8">
+                <nav className="hidden md:flex items-center gap-6">
                     {navLinks.map((link) => (
                         <Link
                             key={link.href}
@@ -35,6 +34,12 @@ export default function Header() {
                             {link.label}
                         </Link>
                     ))}
+                    <div className="h-6 w-px bg-white/10 mx-2" />
+                    <Link href="/audit">
+                        <Button variant="outline" className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10 font-black py-2.5 px-6 rounded-xl transition-all text-sm">
+                            Free Clinic Audit
+                        </Button>
+                    </Link>
                     <Link href="/find-providers">
                         <Button className="bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black py-2.5 px-6 rounded-xl transition-all shadow-lg shadow-[#d4af37]/10 text-sm">
                             Find Injectors
@@ -67,9 +72,17 @@ export default function Header() {
                         </Link>
                     ))}
                     <Link
+                        href="/audit"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="flex items-center gap-3 p-3 rounded-xl bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] font-black text-center justify-center transition-all mt-2"
+                    >
+                        <UserCheck className="w-5 h-5" />
+                        Free Clinic Audit
+                    </Link>
+                    <Link
                         href="/find-providers"
                         onClick={() => setIsMenuOpen(false)}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-[#d4af37] text-[#0d1420] font-black text-center justify-center transition-all mt-2"
+                        className="flex items-center gap-3 p-3 rounded-xl bg-[#d4af37] text-[#0d1420] font-black text-center justify-center transition-all"
                     >
                         <Shield className="w-5 h-5" />
                         Find Injectors

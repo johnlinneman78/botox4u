@@ -10,8 +10,8 @@ export const StickyBar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            // Show bar after scrolling down 400px
-            if (window.scrollY > 400) {
+            // Show bar after scrolling down 200px
+            if (window.scrollY > 200) {
                 setIsVisible(true)
             } else {
                 setIsVisible(false)
@@ -29,7 +29,7 @@ export const StickyBar = () => {
             <div className="bg-[#101827]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-[#d4af37]/20 flex items-center justify-center text-[#d4af37] shrink-0">
-                        <Activity className="w-6 h-6" />
+                        <CheckCircle className="w-6 h-6" />
                     </div>
                     <div>
                         <div className="text-[10px] font-black text-[#d4af37] uppercase tracking-widest leading-none mb-1">Free Clinic Audit</div>
