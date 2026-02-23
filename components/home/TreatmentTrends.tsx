@@ -218,7 +218,7 @@ export default function TreatmentTrends() {
                                         </p>
                                     </div>
                                     <div className="text-right">
-                                        <div className="text-xs font-bold text-gray-600 uppercase mb-1">Target Market Price</div>
+                                        <div className="text-xs font-bold text-gray-600 uppercase mb-1">Target {location} Market Price</div>
                                         <div className={`text-5xl font-display font-bold ${activeTreatment.accent} tabular-nums`}>
                                             ${sliderValue[0].toLocaleString()}
                                         </div>

@@ -60,6 +60,15 @@ export default function HowItWorks() {
                     <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
                         The Only Score That Rewards <span className="text-[#d4af37]">Regeneration</span>
                     </h2>
+                    <div className="flex justify-center mb-8">
+                        <Link
+                            href="/methodology"
+                            className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-[#d4af37] hover:border-[#d4af37]/30 transition-all text-xs font-black uppercase tracking-widest group"
+                        >
+                            <ShieldCheck className="w-4 h-4 text-[#d4af37] group-hover:scale-110 transition-transform" />
+                            Full II-Score™ Methodology →
+                        </Link>
+                    </div>
                     <p className="text-xl text-gray-400 leading-relaxed font-light">
                         Legacy directories rank by reviews bought and stars paid for. The II-Score™ is the first algorithm built around <span className="text-white font-semibold">2026 biological standards</span> — not marketing budgets.
                     </p>
@@ -108,13 +117,9 @@ export default function HowItWorks() {
                         <p className="text-lg font-bold text-white">Nobody buys a higher II-Score™. Rankings are pure data.</p>
                         <p className="text-sm text-gray-500 mt-1">Providers may buy featured placement (disclosed clearly). Their II-Score remains immutable.</p>
                     </div>
-                    <Link
-                        href="/methodology"
-                        className="shrink-0 inline-flex items-center gap-3 px-8 py-4 bg-[#d4af37] text-[#0d1420] font-black rounded-2xl hover:bg-[#c0a030] shadow-xl shadow-[#d4af37]/10 transition-all text-sm uppercase tracking-widest group"
-                    >
-                        <ShieldCheck className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                        II-Score™ Methodology — Read How We Score
-                    </Link>
+                    <div className="shrink-0 text-[#d4af37]/40">
+                        <ShieldCheck className="w-12 h-12" />
+                    </div>
                 </div>
             </div>
         </section>
