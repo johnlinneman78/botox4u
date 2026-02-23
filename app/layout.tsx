@@ -5,13 +5,14 @@ import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import { StickyBar } from '@/components/navigation/StickyBar'
 import GoogleAnalytics from '@/components/seo/GoogleAnalytics'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 export const metadata: Metadata = {
-  title: `${NICHE.siteName} — Defining the Neo-Romantic Era of Medical Aesthetics`,
+  title: `InjectorIndex — Regen-First Injector Intelligence | PNs, Daxxify & More`,
   description: `Injector Index: Defining the Neo-Romantic era of medical aesthetics through data-driven clinic audits and regenerative intelligence. Compare Polynucleotides, Daxxify, and bio-stimulator providers ranked by Regen-Ratio™. Real pricing. Verified credentials. Zero pay-to-rank.`,
   keywords: `neo-romantic aesthetics, regenerative medicine, polynucleotides, daxxify, bio-stimulators, facial harmony, undetectable results, aesthetic intelligence, nurse injectors near me, II-Score, Regen-Ratio, clinical data`,
   metadataBase: new URL(`https://${NICHE.domain}`),
@@ -40,6 +41,7 @@ export default function RootLayout({
         </Suspense>
         <Header />
         <main className="min-h-screen">{children}</main>
+        <StickyBar />
         <Footer />
       </body>
     </html>

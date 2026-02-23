@@ -37,10 +37,12 @@ export default function BlogIndexPage() {
                         {BLOG_POSTS.map((post) => (
                             <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
                                 <article className="bg-white/[0.02] rounded-[2.5rem] border border-white/[0.06] overflow-hidden h-full flex flex-col hover:shadow-2xl hover:shadow-[#d4af37]/5 transition-all duration-500 hover:-translate-y-2 hover:border-[#d4af37]/20">
-                                    <div className="p-10 flex flex-col h-full">
+                                    <div className="p-10 flex flex-col h-full bg-gradient-to-br from-[#d4af37]/5 to-transparent relative overflow-hidden">
+                                        {/* SEO Alt Text Placeholder */}
+                                        <span className="sr-only text-[1px]">{post.targetKeyword} guide for aesthetic medical patients</span>
                                         <div className="flex items-center gap-4 mb-6">
                                             <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#d4af37] bg-[#d4af37]/10 px-2 py-1 rounded border border-[#d4af37]/20">
-                                                Consumer Guide
+                                                {post.targetKeyword.includes('tox') ? 'Neurotoxin Data' : post.targetKeyword.includes('pn') ? 'Regenerative Science' : 'Consumer Guide'}
                                             </span>
                                             <div className="flex items-center gap-1.5 text-[10px] font-bold text-gray-600 uppercase tracking-widest">
                                                 <Clock className="w-3 h-3" />

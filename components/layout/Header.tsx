@@ -12,6 +12,7 @@ export default function Header() {
     const navLinks = [
         { href: '/find-providers', label: 'Find Providers', icon: Shield },
         { href: '/calculator', label: 'Cost Calculator', icon: Calculator },
+        { href: '/audit', label: 'Free Clinic Audit', icon: UserCheck },
         { href: '/blog', label: 'Intelligence', icon: TrendingUp },
         { href: '/pricing', label: 'For Providers', icon: Info },
     ]

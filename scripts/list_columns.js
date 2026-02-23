@@ -1,23 +1,37 @@
 
 const { createClient } = require('@supabase/supabase-js');
-const fs = require('fs');
-const path = require('path');
-
-// Manual env load from .env.prod
-const envRaw = fs.readFileSync(path.join(process.cwd(), '.env.prod'), 'utf8');
-const env = {};
-envRaw.split('\n').forEach(line => {
-    const [key, ...vals] = line.split('=');
-    if (key && vals.length) env[key.trim()] = vals.join('=').trim().replace(/^"(.*)"$/, '$1');
-});
+require('dotenv').config({ path: '.env.local' });
 
 async function listColumns() {
-    const supabase = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY);
-    const { data, error } = await supabase.from('providers').select('*').limit(1);
+    const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.SUPABASE_SERVICE_ROLE_KEY
+    );
+
+    const { data, error } = await supabase
+        .from('providers')
+        .select('*')
+        .limit(1)
+        .single();
+
     if (error) {
-        console.error(error);
-    } else if (data && data[0]) {
-        console.log('Columns:', Object.keys(data[0]).sort().join(', '));
+        console.error('Error:', error);
+        return;
     }
+
+    console.log('Columns:', Object.keys(data).join(', '));
+    console.log('Sample Row Text Fields:', {
+        name: data.name,
+        city: data.city,
+        state: data.state,
+        business_type: data.business_type,
+        google_place_id: data.google_place_id,
+        bio: data.bio,
+        description: data.description,
+        ai_description: data.ai_description,
+        services_offered: data.services_offered,
+        treatment_slugs: data.treatment_slugs
+    });
 }
-listColumns();
+
+listColumns().catch(console.error);

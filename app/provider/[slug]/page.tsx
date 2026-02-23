@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
         title: `${provider.name} | Regen-Ratio™ & Pricing in ${provider.city} | ${NICHE.siteName}`,
         description: `II-Score™ profile for ${provider.name} in ${provider.city}. Verified credentials, Regen-Ratio™, real pricing, and natural result integrity — ranked by independent data.`,
         alternates: {
-            canonical: `/provider/${provider.slug}`,
+            canonical: `https://www.injectorindex.com/provider/${provider.slug}`,
         },
         robots: {
             index: true,
@@ -51,9 +51,6 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
         { name: provider.city, item: `/${NICHE.baseSlug}/${provider.state.toLowerCase()}/${provider.city.toLowerCase().replace(/ /g, '-')}` },
         { name: provider.name, item: `/provider/${provider.slug}` }
     ]);
-
-    // Simulated Regen-Ratio based on score
-    const regenRatio = Math.min(95, Math.max(15, (provider.score_total || 50) + Math.round(provider.name.length * 1.3) % 30))
 
     return (
         <div className="bg-[#0d1420] min-h-screen">
@@ -381,7 +378,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
 
                                         {/* Ratio Visual */}
                                         <div className="flex items-end gap-3 mb-4">
-                                            <div className="text-5xl font-black font-display text-emerald-400">{regenRatio}%</div>
+                                            <div className="text-5xl font-black font-display text-emerald-400">{provider.regen_ratio}%</div>
                                             <div className="text-xs text-emerald-400/60 font-bold pb-2">Regenerative Menu</div>
                                         </div>
 
@@ -389,7 +386,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                         <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden mb-4">
                                             <div
                                                 className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all"
-                                                style={{ width: `${regenRatio}%` }}
+                                                style={{ width: `${provider.regen_ratio}%` }}
                                             ></div>
                                         </div>
 
@@ -401,9 +398,9 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                         <div className="mt-6 pt-4 border-t border-emerald-800/20 space-y-3">
                                             {[
                                                 { label: 'II-Score™', value: `${provider.score_total || '--'}/100`, icon: '🏆' },
-                                                { label: 'Natural Integrity', value: `${Math.min(25, Math.round((provider.score_results_quality || 15) * 0.8))}/25`, icon: '🎯' },
-                                                { label: 'Innovation', value: `${Math.min(25, Math.round(regenRatio * 0.26))}/25`, icon: '⚡' },
-                                                { label: 'Pedigree', value: `${provider.npi_verified ? '15' : '8'}/15`, icon: '🛡️' },
+                                                { label: 'Natural Integrity', value: `${provider.score?.breakdown?.naturalIntegrity || 0}/35`, icon: '🎯' },
+                                                { label: 'Innovation', value: `${provider.score?.breakdown?.regenRatio || 0}/15`, icon: '⚡' },
+                                                { label: 'Safety Integrity', value: `${provider.score?.breakdown?.safety || 0}/15`, icon: '🛡️' },
                                             ].map(item => (
                                                 <div key={item.label} className="flex items-center justify-between text-sm">
                                                     <span className="text-gray-500 flex items-center gap-2">

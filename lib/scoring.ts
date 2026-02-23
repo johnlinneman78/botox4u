@@ -12,19 +12,23 @@ export interface ScoringFactors {
     results_quality_score?: number
     website?: string
     responsiveness_score?: number
+    // 2026 Factors
+    regen_treatments_count?: number // Count of Ps, Exosomes, Sculptra
+    offers_long_acting_tox?: boolean // Daxxify
+    uses_ai_diagnostics?: boolean
 }
 
 export interface ScoreBreakdown {
     grade: string
     points: number
-    total: string // For legacy support/compatibility (grade)
+    total: string
     breakdown: {
-        resultsQuality: number
+        naturalIntegrity: number
+        regenRatio: number
         price: number
         trust: number
         safety: number
         transparency: number
-        responsiveness: number
     }
 }
 
@@ -40,89 +44,86 @@ export function getGrade(score: number): string {
     if (score >= 75) return 'B'
     if (score >= 70) return 'B-'
     if (score >= 60) return 'C'
-    return 'Pending' // Change from 'D' to 'Pending' for anything below 60
+    return 'Pending'
 }
 
 /**
- * Calculates the II-Score based on Version 2.2 (February 2026)
- * Follows the 5-Signal weighted approach + Warning Flags
+ * Calculates the II-Score based on Version 3.0 (February 2026 Strategic Pivot)
+ * Prioritizes Regenerative Medicine and Natural Result Integrity
  */
 export function calculateProviderScore(factors: ScoringFactors, cityAveragePrice: number = NICHE.priceRange.min + 5): ScoreBreakdown {
-    // 1. Natural Results Language (30 pts)
-    // Derived from sentiment analysis of patient reviews
-    let resultsQualityScore = factors.results_quality_score || 0
-    resultsQualityScore = Math.min(30, Math.max(0, resultsQualityScore))
+    // 1. Natural Results Integrity (35 pts) - UP from 30
+    // Based on "Neo-Romantic" results (subtle, natural, conservative)
+    let naturalIntegrityScore = factors.results_quality_score || 0
+    naturalIntegrityScore = Math.min(35, Math.max(0, naturalIntegrityScore))
 
-    // 2. Fair Pricing Score (25 pts)
+    // 2. Regen-Ratio™ & Advancement (15 pts) - NEW for 2026
+    // Rewards Polynucleotides, Exosomes, and Biostimulators
+    let regenScore = 0
+    if (factors.regen_treatments_count) {
+        if (factors.regen_treatments_count >= 3) regenScore = 10
+        else if (factors.regen_treatments_count >= 1) regenScore = 5
+    }
+    // Advancement Bonus (Daxxify, AI)
+    if (factors.offers_long_acting_tox) regenScore += 3
+    if (factors.uses_ai_diagnostics) regenScore += 2
+    regenScore = Math.min(15, regenScore)
+
+    // 3. Fair Pricing Score (15 pts) - DOWN from 25
     let priceScore = 0
     if (factors.price_per_unit) {
         const ratio = factors.price_per_unit / cityAveragePrice
-        if (ratio <= 0.80) priceScore = 25
-        else if (ratio <= 0.95) priceScore = 22
-        else if (ratio <= 1.05) priceScore = 18
-        else if (ratio <= 1.20) priceScore = 12
-        else if (ratio <= 1.50) priceScore = 5
+        if (ratio <= 0.85) priceScore = 15
+        else if (ratio <= 1.05) priceScore = 12
+        else if (ratio <= 1.25) priceScore = 8
         else priceScore = 0
     }
 
-    // 3. Credential Integrity (20 pts)
-    let safetyScore = factors.npi_verified ? 20 : 0
+    // 4. Credential Integrity (15 pts) - DOWN from 20
+    let safetyScore = factors.npi_verified ? 15 : 0
 
-    // 4. Patient Trust & Sentiment (15 pts)
-    // Combination of review volume and star rating
+    // 5. Patient Trust & Sentiment (10 pts) - DOWN from 15
     let trustScore = 0
     if (factors.review_count) {
         let volumeScore = 0
-        if (factors.review_count >= 500) volumeScore = 10
-        else if (factors.review_count >= 200) volumeScore = 8
-        else if (factors.review_count >= 100) volumeScore = 6
+        if (factors.review_count >= 200) volumeScore = 7
         else if (factors.review_count >= 50) volumeScore = 4
         else volumeScore = 2
 
         let ratingScore = 0
-        if (factors.rating && factors.rating >= 4.8) ratingScore = 5
-        else if (factors.rating && factors.rating >= 4.5) ratingScore = 4
-        else if (factors.rating && factors.rating >= 4.0) ratingScore = 2
+        if (factors.rating && factors.rating >= 4.7) ratingScore = 3
+        else if (factors.rating && factors.rating >= 4.4) ratingScore = 2
 
         trustScore = volumeScore + ratingScore
     }
 
-    // 5. Transparency (10 pts)
-    let transparencyScore = factors.price_per_unit ? 10 : 0
+    // 6. Transparency & Presence (10 pts)
+    let transparencyScore = 0
+    if (factors.price_per_unit) transparencyScore += 4
+    if (factors.has_photo) transparencyScore += 3
+    if (factors.website) transparencyScore += 3
+    transparencyScore = Math.min(10, transparencyScore)
 
-    // 6. Responsiveness (Optional/Bonus or part of Trust)
-    let responsivenessScore = factors.responsiveness_score || 0
-    responsivenessScore = Math.min(5, responsivenessScore)
-
-    const totalPoints = Math.min(100, resultsQualityScore + priceScore + trustScore + safetyScore + transparencyScore + responsivenessScore)
-
-    // Warning Flag Logic
-    let warning_flag = false
-    let warning_reason = null
-
-    if (factors.rating && factors.rating < 4.0) {
-        warning_flag = true
-        warning_reason = 'Average rating below 4.0'
-    } else if (factors.price_per_unit && factors.price_per_unit > (cityAveragePrice * 2)) {
-        warning_flag = true
-        warning_reason = 'Pricing significantly above city average'
-    } else if (factors.npi_verified === false) {
-        // Only flag if explicitly checked and failed, not just pending
-        // warning_flag = true
-        // warning_reason = 'Unverified medical credentials'
-    }
+    const totalPoints = Math.min(100, 
+        naturalIntegrityScore + 
+        regenScore + 
+        priceScore + 
+        trustScore + 
+        safetyScore + 
+        transparencyScore
+    )
 
     return {
         grade: getGrade(totalPoints),
         points: totalPoints,
         total: getGrade(totalPoints),
         breakdown: {
-            resultsQuality: resultsQualityScore,
+            naturalIntegrity: naturalIntegrityScore,
+            regenRatio: regenScore,
             price: priceScore,
             trust: trustScore,
             safety: safetyScore,
-            transparency: transparencyScore,
-            responsiveness: responsivenessScore
+            transparency: transparencyScore
         }
     }
 }

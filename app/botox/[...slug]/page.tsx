@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: CatchAllPageProps): Promise<M
             title: `Best Botox Injectors in Portland, OR — Scores + Pricing`,
             description: `Compare Botox costs in Portland. Find verified providers, read real patient reviews, and see the latest per-unit pricing data.`,
             alternates: {
-                canonical: `/${NICHE.baseSlug}/or/portland`,
+                canonical: `https://www.injectorindex.com/${NICHE.baseSlug}/or/portland`,
             },
             robots: { index: true, follow: true }
         }
@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: CatchAllPageProps): Promise<M
             title: `${treatmentName} in ${cityName}, ${stateCode} | Prices & Top Clinicians`,
             description: `Compare ${treatmentName} costs in ${cityName}. Find verified ${treatmentName} providers, read reviews, and see before / after results.`,
             alternates: {
-                canonical: `/${NICHE.baseSlug}/${slug[0]}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}`,
+                canonical: `https://www.injectorindex.com/${NICHE.baseSlug}/${slug[0]}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}`,
             },
             robots: { index: true, follow: true }
         }
@@ -80,7 +80,7 @@ export async function generateMetadata({ params }: CatchAllPageProps): Promise<M
         title: `Best ${NICHE.name} in ${cityName}, ${stateCode} | Natural Results & Pricing`,
         description: NICHE.metaDescriptionTemplate.replace(/{city}/g, cityName),
         alternates: {
-            canonical: `/${NICHE.baseSlug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}`,
+            canonical: `https://www.injectorindex.com/${NICHE.baseSlug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}`,
         },
         robots: { index: true, follow: true }
     }
@@ -336,6 +336,28 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                 </div>
 
                 <CityFAQ city={cityName} avgCost={stats?.avgCost || 14} />
+
+                {/* Complete Provider Directory for 100% Indexation */}
+                <div className="mt-20 pt-12 border-t border-white/[0.05]">
+                    <h3 className="text-xl font-display font-bold text-white mb-6">Complete Provider Directory: {cityName}</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {providers.map((p: any) => (
+                            <Link
+                                key={`dir-${p.id}`}
+                                href={`/provider/${p.slug}`}
+                                className="text-sm text-gray-500 hover:text-[#d4af37] transition-colors truncate"
+                            >
+                                {p.name}
+                            </Link>
+                        ))}
+                    </div>
+                    {providers.length === 0 && (
+                        <p className="text-sm text-gray-600 italic">No additional providers found in {cityName} at this time.</p>
+                    )}
+                    <p className="mt-8 text-[10px] text-gray-700 max-w-2xl">
+                        This directory includes all observed and elite injectors in the {cityName} area. We continuously audit and add new clinics based on clinical excellence and pricing transparency.
+                    </p>
+                </div>
 
                 <div className="mt-12">
                     <MedicalDisclaimer />

@@ -9,6 +9,7 @@ const REGEN_TREATMENTS = [
     'Daxxify / Long-Acting Tox',
     'Plant-Derived Exosomes',
     'Biostimulators (Sculptra)',
+    'Lacrifill / Ocular Surface',
     'PRF / PRP',
     'NAD+ IV Therapy',
     'Microneedling',
@@ -18,6 +19,9 @@ const REGEN_TREATMENTS = [
     'IPL / Photofacial',
     'LED Light Therapy'
 ]
+
+const ADVANCED_TOXINS = ['Daxxify', 'RelabotulinumtoxinA', 'Daxxify / Long-Acting Tox']
+const AI_DIAGNOSTICS = ['AI Skin Analysis', 'Visia Skin Analysis', '3D Facial Imaging']
 
 const FILLER_TREATMENTS = [
     'Lip filler',
@@ -137,6 +141,11 @@ export async function getProvidersWithSearch(filters: {
     }
 
     const mappedData = (data || []).map((p: any) => {
+        const servicesOffered = p.services_offered || []
+        const regenCount = (servicesOffered || []).filter((s: string) => REGEN_TREATMENTS.includes(s)).length
+        const hasAdvancedTox = (servicesOffered || []).some((s: string) => ADVANCED_TOXINS.includes(s) || (p.services_offered_raw || []).includes(s))
+        const hasAI = (servicesOffered || []).some((s: string) => AI_DIAGNOSTICS.includes(s))
+
         const scoreBreakdown = calculateProviderScore({
             price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
             rating: parseFloat(p.rating || p.average_rating || 0),
@@ -146,16 +155,17 @@ export async function getProvidersWithSearch(filters: {
             is_verified: p.verified || false,
             npi_verified: p.npi_verified || false,
             allergan_tier: p.allergan_tier,
-            results_quality_score: p.score_results_quality,
+            results_quality_score: p.score_results_quality || p.enriched_attrs?.score_results_quality || 15,
             website: p.website,
-            responsiveness_score: p.responsiveness_score
+            responsiveness_score: p.responsiveness_score,
+            regen_treatments_count: regenCount,
+            offers_long_acting_tox: hasAdvancedTox || p.offers_long_acting_tox || p.enriched_attrs?.offers_long_acting_tox,
+            uses_ai_diagnostics: hasAI || p.uses_ai_diagnostics || p.enriched_attrs?.uses_ai_diagnostics
         })
 
         const iiScore = scoreBreakdown.points
-        const servicesOffered = p.services_offered || []
         const regen_ratio = calculateRegenRatio(servicesOffered)
         const fillerCount = servicesOffered.filter((s: string) => FILLER_TREATMENTS.includes(s)).length
-        const regenCount = servicesOffered.filter((s: string) => REGEN_TREATMENTS.includes(s)).length
 
         // Granularity Weighting (25%) -> Highlight specialized talent (Artisans) 
         const granularityBonus = ARTISANS.includes(p.business_type) ? 25 : 0
@@ -571,9 +581,12 @@ export async function getProviderBySlug(slug: string) {
             is_verified: data.verified || false,
             npi_verified: data.npi_verified || false,
             allergan_tier: data.allergan_tier,
-            results_quality_score: data.score_results_quality,
+            results_quality_score: data.score_results_quality || data.enriched_attrs?.score_results_quality || 15,
             website: data.website,
-            responsiveness_score: data.responsiveness_score
+            responsiveness_score: data.responsiveness_score,
+            regen_treatments_count: (data.services_offered || []).filter((s: string) => REGEN_TREATMENTS.includes(s)).length,
+            offers_long_acting_tox: (data.services_offered || []).some((s: string) => ADVANCED_TOXINS.includes(s)) || data.offers_long_acting_tox || data.enriched_attrs?.offers_long_acting_tox,
+            uses_ai_diagnostics: (data.services_offered || []).some((s: string) => AI_DIAGNOSTICS.includes(s)) || data.uses_ai_diagnostics || data.enriched_attrs?.uses_ai_diagnostics
         }),
         score_total: calculateProviderScore({
             price_per_unit: data.price_per_unit || data.botox_price_per_unit || data.enriched_attrs?.price_per_unit_botox,
@@ -584,10 +597,29 @@ export async function getProviderBySlug(slug: string) {
             is_verified: data.verified || false,
             npi_verified: data.npi_verified || false,
             allergan_tier: data.allergan_tier,
-            results_quality_score: data.score_results_quality,
+            results_quality_score: data.score_results_quality || data.enriched_attrs?.score_results_quality || 15,
             website: data.website,
-            responsiveness_score: data.responsiveness_score
+            responsiveness_score: data.responsiveness_score,
+            regen_treatments_count: (data.services_offered || []).filter((s: string) => REGEN_TREATMENTS.includes(s)).length,
+            offers_long_acting_tox: (data.services_offered || []).some((s: string) => ADVANCED_TOXINS.includes(s)) || data.offers_long_acting_tox || data.enriched_attrs?.offers_long_acting_tox,
+            uses_ai_diagnostics: (data.services_offered || []).some((s: string) => AI_DIAGNOSTICS.includes(s)) || data.uses_ai_diagnostics || data.enriched_attrs?.uses_ai_diagnostics
         }).points,
+        regen_ratio: calculateProviderScore({
+            price_per_unit: data.price_per_unit || data.botox_price_per_unit || data.enriched_attrs?.price_per_unit_botox,
+            rating: parseFloat(data.rating || data.average_rating || 0),
+            review_count: data.review_count || 0,
+            has_photo: !!(data.hero_image_url || data.image_url),
+            has_description: !!data.description,
+            is_verified: data.verified || false,
+            npi_verified: data.npi_verified || false,
+            allergan_tier: data.allergan_tier,
+            results_quality_score: data.score_results_quality || data.enriched_attrs?.score_results_quality || 15,
+            website: data.website,
+            responsiveness_score: data.responsiveness_score,
+            regen_treatments_count: (data.services_offered || []).filter((s: string) => REGEN_TREATMENTS.includes(s)).length,
+            offers_long_acting_tox: (data.services_offered || []).some((s: string) => ADVANCED_TOXINS.includes(s)) || data.offers_long_acting_tox || data.enriched_attrs?.offers_long_acting_tox,
+            uses_ai_diagnostics: (data.services_offered || []).some((s: string) => AI_DIAGNOSTICS.includes(s)) || data.uses_ai_diagnostics || data.enriched_attrs?.uses_ai_diagnostics
+        }).breakdown.regenRatio,
 
         // Warning & Scoring Fields
         warning_flag: data.warning_flag || false,

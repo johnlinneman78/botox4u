@@ -450,6 +450,21 @@ export function CostCalculator() {
                                 </div>
                             </div>
 
+                            {/* Conversion Hook: Audit */}
+                            <div className="bg-[#d4af37]/10 rounded-2xl p-6 border border-[#d4af37]/20 flex flex-col md:flex-row items-center gap-6">
+                                <div className="flex-1">
+                                    <h4 className="text-white font-bold mb-1">Audit Your Local Clinics</h4>
+                                    <p className="text-gray-400 text-xs leading-relaxed">
+                                        We'll cross-reference your quote against {cityData.providerCount} verified providers in {CITY_OPTIONS.find(c => c.value === city)?.label}.
+                                    </p>
+                                </div>
+                                <Link href="/audit" className="w-full md:w-auto">
+                                    <Button size="sm" className="w-full bg-white text-[#0d1420] hover:bg-white/90 font-black rounded-lg text-[10px] uppercase tracking-wider h-10 px-6">
+                                        Start Audit Free
+                                    </Button>
+                                </Link>
+                            </div>
+
                             {/* Breakdown Grid */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white/[0.02] rounded-2xl p-6 border border-white/[0.06]">
                                 <div className="space-y-1">

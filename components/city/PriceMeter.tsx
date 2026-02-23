@@ -1,7 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { NICHE } from '@/config/niche'
+import { MapPin, ChevronDown } from 'lucide-react'
 
 interface PriceMeterProps {
     avgCost: number
@@ -9,6 +11,7 @@ interface PriceMeterProps {
 }
 
 export function PriceMeter({ avgCost, city }: PriceMeterProps) {
+    const router = useRouter()
     const nationalAvg = Math.round((NICHE.priceRange.min + NICHE.priceRange.max) / 2)
     const [percentage, setPercentage] = useState(50)
 
@@ -20,6 +23,11 @@ export function PriceMeter({ avgCost, city }: PriceMeterProps) {
         const timer = setTimeout(() => setPercentage(clampedP), 100)
         return () => clearTimeout(timer)
     }, [avgCost])
+
+    const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const citySlug = e.target.value
+        router.push(`/${NICHE.baseSlug}/${citySlug}`)
+    }
 
     const isExpensive = avgCost > nationalAvg
     const diff = Math.abs(((avgCost - nationalAvg) / nationalAvg) * 100).toFixed(0)
@@ -41,9 +49,24 @@ export function PriceMeter({ avgCost, city }: PriceMeterProps) {
                         </h2>
                     </div>
 
-                    <div className="bg-white/[0.03] px-6 py-4 rounded-2xl border border-white/[0.06] flex items-baseline gap-2">
-                        <span className="text-4xl font-display font-bold text-white">{NICHE.priceCurrency}{avgCost}</span>
-                        <span className="text-gray-600 font-medium text-sm">/{NICHE.priceUnit.split(' ').slice(-1)} avg</span>
+                    <div className="flex flex-col gap-2">
+                        <div className="relative">
+                            <select
+                                value={NICHE.cities.find(c => c.name === city)?.slug || ''}
+                                onChange={handleCityChange}
+                                className="appearance-none bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2 pr-10 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-[#d4af37]/20 outline-none cursor-pointer"
+                            >
+                                <option value="" disabled>Select a City</option>
+                                {NICHE.cities.map((c: any) => (
+                                    <option key={c.slug} value={c.slug}>{c.name}, {c.state}</option>
+                                ))}
+                            </select>
+                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+                        </div>
+                        <div className="bg-white/[0.03] px-6 py-4 rounded-2xl border border-white/[0.06] flex items-baseline gap-2">
+                            <span className="text-4xl font-display font-bold text-white">{NICHE.priceCurrency}{avgCost}</span>
+                            <span className="text-gray-600 font-medium text-sm">/{NICHE.priceUnit.split(' ').slice(-1)} avg</span>
+                        </div>
                     </div>
                 </div>
 

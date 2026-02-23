@@ -55,7 +55,7 @@ export default function NewListingPage() {
             }
             setLoading(false)
         } else {
-            router.push('/provider/dashboard')
+            router.push('/provider/login?success=new_listing')
         }
     }
 

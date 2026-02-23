@@ -25,9 +25,24 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
     }
 
     const getTopCategory = (p: any) => {
-        const categories = ["Regen-Ratio™", "Natural Integrity", "Clinical Innovation", "Provider Pedigree", "Patient Trust"]
-        const hash = p.name.length + (p.score_total || 0)
-        return categories[hash % categories.length]
+        const breakdown = p.score?.breakdown
+        if (!breakdown) return "Patient Trust"
+
+        const categories = [
+            { id: 'naturalIntegrity', label: 'Natural Results' },
+            { id: 'regenRatio', label: 'Clinical Innovation' },
+            { id: 'price', label: 'Price Fairness' },
+            { id: 'trust', label: 'Patient Trust' },
+            { id: 'safety', label: 'Clinical Safety' }
+        ]
+
+        const top = categories.reduce((prev, current) => {
+            const currentVal = breakdown[current.id] || 0
+            const prevVal = breakdown[prev.id] || 0
+            return currentVal > prevVal ? current : prev
+        }, categories[0])
+
+        return top.label
     }
 
     const renderPlaceholder = () => {
@@ -74,6 +89,8 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
 
     const isVerified = provider.verified || provider.listingTier === 'featured' || provider.listingTier === 'verified' || provider.npi_verified;
     const isFeatured = provider.listingTier === 'featured';
+    const hasNaturalIntegrity = (provider.score?.breakdown?.naturalIntegrity || 0) >= 30;
+    const hasInnovation = (provider.score?.breakdown?.regenRatio || 0) >= 10;
 
     const getScoreColor = (score: number) => {
         if (score >= 90) return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
@@ -94,16 +111,16 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                                 {provider.name}
                             </h3>
                             <div className="flex flex-col gap-1 items-end shrink-0">
-                                {isVerified && (
-                                    <div className="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-md flex items-center gap-1 border border-emerald-500/20">
-                                        <ShieldCheck className="w-3 h-3" />
-                                        <span className="text-[9px] font-black uppercase tracking-tight">NPI Verified</span>
-                                    </div>
-                                )}
-                                {isFeatured && (
+                                {hasNaturalIntegrity && (
                                     <div className="bg-[#d4af37]/10 text-[#d4af37] px-2 py-0.5 rounded-md flex items-center gap-1 border border-[#d4af37]/20">
                                         <Sparkles className="w-3 h-3" />
-                                        <span className="text-[9px] font-black uppercase tracking-tight">Featured</span>
+                                        <span className="text-[9px] font-black uppercase tracking-tight">Natural Integrity</span>
+                                    </div>
+                                )}
+                                {hasInnovation && (
+                                    <div className="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-md flex items-center gap-1 border border-blue-500/20">
+                                        <Dna className="w-3 h-3" />
+                                        <span className="text-[9px] font-black uppercase tracking-tight">Clinical Innovation</span>
                                     </div>
                                 )}
                             </div>
@@ -119,16 +136,16 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                             <div className="flex items-center justify-between mb-2">
                                 <span className="text-[9px] font-black uppercase tracking-widest text-gray-600 flex items-center gap-1.5">
                                     <ShieldCheck className="w-3 h-3 text-[#d4af37]" />
-                                    Elite Audit
+                                    II-Score™
                                 </span>
                                 <div className="group/tooltip relative">
                                     <Info className="w-3 h-3 text-gray-700 hover:text-[#d4af37] cursor-help transition-colors" />
                                     <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-3 bg-[#0d1420] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all z-50 pointer-events-none">
                                         <p className="text-[10px] text-white font-bold mb-1 uppercase tracking-wider">Independent Audit Pillars</p>
                                         <ul className="text-[9px] text-gray-400 space-y-1 font-medium">
-                                            <li>• Verified Credentials (NPI/Licensing)</li>
-                                            <li>• Safety & Results Quality Analysis</li>
-                                            <li>• Neutral Patient Sentiment Audit</li>
+                                            <li>• Natural Integrity (Neo-Romantic)</li>
+                                            <li>• Regenerative Capability (PNs/Bio)</li>
+                                            <li>• Price Fairness & Transparency</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -144,16 +161,16 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                         <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.06]">
                             <div className="flex items-center justify-between mb-2">
                                 <span className="text-[9px] font-black uppercase tracking-widest text-gray-600 flex items-center gap-1.5">
-                                    <Sparkles className="w-3 h-3 text-emerald-400" />
+                                    <Dna className="w-3 h-3 text-emerald-400" />
                                     Regen™
                                 </span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <div className={`px-2 py-1 rounded-lg text-xs font-black tracking-tight border ${provider.regen_ratio >= 70 ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-white/10 text-gray-400 border-white/10'}`}>
+                                <div className={`px-2 py-1 rounded-lg text-xs font-black tracking-tight border ${provider.regen_ratio >= 50 ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-white/10 text-gray-400 border-white/10'}`}>
                                     {Math.round(provider.regen_ratio || 0)}%
                                 </div>
-                                <span className={`text-[9px] font-black uppercase ${provider.regen_ratio >= 70 ? 'text-emerald-400' : 'text-gray-600'}`}>
-                                    {provider.regen_ratio >= 70 ? 'High Focus' : 'Hybrid'}
+                                <span className={`text-[9px] font-black uppercase ${provider.regen_ratio >= 50 ? 'text-emerald-400' : 'text-gray-600'}`}>
+                                    {provider.regen_ratio >= 70 ? 'Regen Elite' : provider.regen_ratio >= 30 ? 'High Focus' : 'Hybrid'}
                                 </span>
                             </div>
                         </div>

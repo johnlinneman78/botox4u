@@ -220,13 +220,13 @@ export default function TreatmentTrends() {
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                 </Link>
 
-                                <button
+                                <Link
+                                    href="/audit"
                                     className="flex items-center justify-center gap-3 py-5 rounded-2xl bg-white/[0.03] border border-white/[0.1] text-white font-black text-sm uppercase tracking-widest hover:bg-white/[0.05] transition-all group"
-                                    onClick={() => alert("Clinic Audit Request Triggered. Our team will contact you within 24 hours.")}
                                 >
                                     <Activity className="w-4 h-4 text-[#d4af37] group-hover:animate-pulse" />
                                     Get Free Clinic Audit
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

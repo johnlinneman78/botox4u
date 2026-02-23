@@ -63,6 +63,9 @@ const leadSchema = z.object({
         .optional(),
     call_time: z.string().max(100).optional(),
     newsletter_opt_in: z.boolean().optional().default(false),
+    current_considerations: z.string().max(500).optional(),
+    is_first_timer: z.boolean().optional().default(true),
+    client_concerns: z.array(z.string()).optional().default([]),
 })
 
 export async function submitLead(formData: FormData) {
@@ -94,6 +97,9 @@ export async function submitLead(formData: FormData) {
         message: formData.get('message'),
         call_time: formData.get('call_time'),
         newsletter_opt_in: formData.get('newsletter_opt_in') === 'true',
+        current_considerations: formData.get('current_considerations'),
+        is_first_timer: formData.get('is_first_timer') === 'true',
+        client_concerns: formData.get('client_concerns') ? JSON.parse(formData.get('client_concerns') as string) : [],
     }
 
     const validated = leadSchema.safeParse(rawData)
@@ -115,6 +121,7 @@ export async function submitLead(formData: FormData) {
         timeframe: validated.data.timeframe ? sanitizeString(validated.data.timeframe) : undefined,
         message: validated.data.message ? sanitizeString(validated.data.message) : undefined,
         call_time: validated.data.call_time ? sanitizeString(validated.data.call_time) : undefined,
+        current_considerations: validated.data.current_considerations ? sanitizeString(validated.data.current_considerations) : undefined,
     }
 
     const leadInsertData = {
@@ -186,11 +193,12 @@ export async function submitLead(formData: FormData) {
 
     // 3. Admin Notification (Manual Routing)
     const resend = getResend();
-    if (resend && process.env.ADMIN_EMAIL) {
+    const adminEmail = process.env.ADMIN_EMAIL || getSenderEmail();
+    if (resend && adminEmail) {
         try {
             await resend.emails.send({
                 from: `System <${getSenderEmail()}>`,
-                to: process.env.ADMIN_EMAIL,
+                to: adminEmail,
                 subject: `🚨 LEAD ALERT: ${lead.city || 'Direct'} - ${lead.full_name}`,
                 html: getLeadEmailHtml(lead, lead.providers?.name || 'City-Wide Request')
             })

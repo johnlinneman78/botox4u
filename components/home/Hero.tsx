@@ -1,9 +1,11 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
-import { Search, Dna, Clock, Sparkles, ChevronRight, TrendingUp } from 'lucide-react'
+import { Search, Dna, Clock, Sparkles, ChevronRight, TrendingUp, MapPin, ChevronDown } from 'lucide-react'
 import { NICHE } from '@/config/niche'
 import Link from 'next/link'
+import React, { useState } from 'react'
 
 const TREND_TREATMENTS = [
     { label: 'Polynucleotides', tag: '#1 2026', hot: true },
@@ -13,7 +15,16 @@ const TREND_TREATMENTS = [
     { label: 'Baby Botox', tag: 'Gen Z Fav', hot: true },
 ]
 
-export default function Hero({ city, state }: { city?: string; state?: string; userLat?: number; userLng?: number }) {
+export default function Hero({ city: initialCity, state }: { city?: string; state?: string; userLat?: number; userLng?: number }) {
+    const router = useRouter()
+    const [selectedCity, setSelectedCity] = useState(initialCity || '')
+
+    const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const citySlug = e.target.value
+        if (citySlug) {
+            router.push(`/${NICHE.baseSlug}/${citySlug}`)
+        }
+    }
     return (
         <section className="relative bg-[#0d1420] overflow-hidden min-h-[92vh] flex flex-col justify-center">
             {/* Background: subtle grid + gradient */}
@@ -70,23 +81,43 @@ export default function Hero({ city, state }: { city?: string; state?: string; u
                     </p>
 
                     {/* CTA Row */}
-                    <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                        <Button
-                            size="lg"
-                            className="bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] text-base px-8 py-5 h-14 font-black shadow-2xl shadow-[#d4af37]/15 rounded-xl transition-all hover:scale-[1.02]"
-                            onClick={() => document.getElementById('listings')?.scrollIntoView({ behavior: 'smooth' })}
-                        >
-                            <Search className="w-4 h-4 mr-2" />
-                            Find Your Regen Injector
-                        </Button>
-                        <Link href="/calculator">
+                    <div className="flex flex-col lg:flex-row items-stretch gap-4 mb-12">
+                        {/* City Selector */}
+                        <div className="relative flex-1 group">
+                            <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#d4af37] z-20 group-hover:scale-110 transition-transform" />
+                            <select
+                                value={selectedCity}
+                                onChange={handleCityChange}
+                                className="w-full h-14 pl-12 pr-10 bg-white/[0.04] border border-white/10 rounded-xl text-white font-bold text-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#d4af37]/30 hover:bg-white/[0.06] transition-all"
+                            >
+                                <option value="" disabled className="bg-[#0d1420]">Select your city...</option>
+                                {NICHE.cities.map((c: any) => (
+                                    <option key={c.slug} value={c.slug} className="bg-[#0d1420]">{c.name}, {c.state}</option>
+                                ))}
+                            </select>
+                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" />
+                        </div>
+
+                        {/* Audit CTA */}
+                        <Link href="/audit" className="flex-1">
+                            <Button
+                                size="lg"
+                                className="w-full bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] text-lg px-8 py-5 h-14 font-black shadow-2xl shadow-[#d4af37]/15 rounded-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
+                            >
+                                <Sparkles className="w-5 h-5" />
+                                Get Free Clinic Audit
+                            </Button>
+                        </Link>
+
+                        {/* Global Search */}
+                        <Link href="/find-providers" className="flex-1">
                             <Button
                                 variant="outline"
                                 size="lg"
-                                className="border-white/15 text-white hover:bg-white/5 text-base px-8 py-5 h-14 font-semibold rounded-xl backdrop-blur-sm w-full sm:w-auto"
+                                className="w-full border-white/15 text-white hover:bg-white/5 text-lg px-8 py-5 h-14 font-semibold rounded-xl backdrop-blur-sm"
                             >
-                                <Sparkles className="w-4 h-4 mr-2 text-[#d4af37]" />
-                                Get My Free Clinic Audit
+                                <Search className="w-4 h-4 mr-2" />
+                                Browse All Cities
                             </Button>
                         </Link>
                     </div>

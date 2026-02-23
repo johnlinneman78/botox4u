@@ -3,6 +3,15 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
+    const url = request.nextUrl.clone()
+    const host = request.headers.get('host')
+
+    // Redirect non-www to www (SEO Standard)
+    if (host && host === 'injectorindex.com') {
+        url.host = 'www.injectorindex.com'
+        return NextResponse.redirect(url, 301)
+    }
+
     let response = NextResponse.next({
         request: {
             headers: request.headers,

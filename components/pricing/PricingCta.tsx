@@ -18,12 +18,12 @@ export function PricingCta({ planId, providerId, isLoggedIn, className }: Pricin
     const handleUpgrade = async () => {
         // Handle Free Plan
         if (planId === 'free') {
-            window.location.href = isLoggedIn ? '/provider/dashboard' : '/provider/register';
+            window.location.href = isLoggedIn ? '/provider/login' : '/claim';
             return;
         }
 
         if (!isLoggedIn) {
-            window.location.href = `/provider/register?plan=${planId}&providerId=${providerId || ''}`;
+            window.location.href = `/claim?plan=${planId}&providerId=${providerId || ''}`;
             return;
         }
 
