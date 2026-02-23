@@ -66,8 +66,8 @@ export default function Hero({ city: initialCity, state }: { city?: string; stat
 
                     {/* Headline */}
                     <h1 className="text-5xl md:text-6xl lg:text-[72px] font-display font-bold text-white mb-6 leading-[1.05] tracking-tight">
-                        {city ? (
-                            <>Find {city}'s Top<span className="text-[#d4af37]"> Regenerative</span><br />Nurse Injectors</>
+                        {initialCity ? (
+                            <>Find {initialCity}'s Top<span className="text-[#d4af37]"> Regenerative</span><br />Nurse Injectors</>
                         ) : (
                             <>{NICHE.copy.hero.headline.split(' — ')[0]}<br />
                                 <span className="text-[#d4af37]">Natural Results</span><br />

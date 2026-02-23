@@ -129,7 +129,7 @@ export default function NewsletterAudit() {
 
                                 <div className="mt-12 pt-10 border-t border-white/[0.06]">
                                     <p className="text-[11px] text-gray-600 font-medium">
-                                        ESTIMATED ADVICE DELIVERY: <span className="text-emerald-500 underline underline-offset-4 tracking-widest">< 2 MINUTES</span>
+                                        ESTIMATED ADVICE DELIVERY: <span className="text-emerald-500 underline underline-offset-4 tracking-widest">&lt; 2 MINUTES</span>
                                     </p>
                                 </div>
                             </div>

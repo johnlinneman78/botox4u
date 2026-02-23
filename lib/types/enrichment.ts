@@ -53,6 +53,8 @@ export interface EnrichedProvider {
             safety: number;
             transparency: number;
             responsiveness: number;
+            naturalIntegrity?: number;
+            regenRatio?: number;
         };
     };
 
