@@ -2,7 +2,6 @@ import Hero from '@/components/home/Hero'
 import FeaturedCities from '@/components/home/FeaturedCities'
 import FeaturedProviders from '@/components/home/FeaturedProviders'
 import HowItWorks from '@/components/home/HowItWorks'
-import FounderQuote from '@/components/home/FounderQuote'
 import AestheticsNews from '@/components/home/AestheticsNews'
 import { Suspense } from 'react'
 import { Metadata } from 'next'
@@ -40,8 +39,6 @@ export default function HomePage() {
       {/* 5. Aesthetics News & Guides */}
       <AestheticsNews />
 
-      {/* 6. Founder quote section */}
-      <FounderQuote />
     </>
   )
 }
