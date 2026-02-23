@@ -14,16 +14,16 @@ export const metadata: Metadata = {
   title: `${NICHE.siteName} — ${NICHE.tagline}`,
   description: `Find the best ${NICHE.name} ${NICHE.providerTypePlural} near you. Compare prices, read reviews, and book consultations with verified providers at ${NICHE.siteName}.`,
   keywords: `${NICHE.name.toLowerCase()}, ${NICHE.name.toLowerCase()} near me, ${NICHE.name.toLowerCase()} cost, aesthetics, aesthetic providers, cosmetic injections`,
-  metadataBase: new URL('https://injectorindex.com'),
+  metadataBase: new URL(`https://${NICHE.domain}`),
   openGraph: {
     title: `${NICHE.siteName} — ${NICHE.tagline}`,
     description: `Find the best ${NICHE.name} ${NICHE.providerTypePlural} near you. Compare prices, read reviews, and book consultations.`,
     type: 'website',
-    url: 'https://injectorindex.com',
+    url: `https://${NICHE.domain}`,
     siteName: NICHE.siteName,
   },
   alternates: {
-    canonical: 'https://injectorindex.com',
+    canonical: `https://${NICHE.domain}`,
   },
 }
 

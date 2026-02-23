@@ -22,8 +22,8 @@ function BrandText({ theme, size = '1.5rem' }: { theme: 'light' | 'dark', size?:
             letterSpacing: '-0.02em',
             whiteSpace: 'nowrap',
         }}>
-            InjectorIndex
-            <span style={{ color: '#d4af37', fontWeight: 700 }}>.com</span>
+            {NICHE.siteName.split('.')[0]}
+            <span style={{ color: '#d4af37', fontWeight: 700 }}>.{NICHE.siteName.split('.').slice(1).join('.')}</span>
         </span>
     )
 }

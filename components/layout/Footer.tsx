@@ -16,15 +16,15 @@ export default function Footer() {
                                 <Logo className="h-full w-auto" variant="shield" />
                             </Link>
                         </div>
-                        <p className="text-sm text-gray-600 mb-6">
-                            The Independent Injector Index for Aesthetic Medicine.
+                        <p className="text-sm text-gray-600 mb-6 font-medium">
+                            {NICHE.tagline}
                         </p>
                         <div className="flex items-center gap-4">
-                            <a href="https://www.linkedin.com/company/[injector-index-slug]" target="_blank" rel="noopener" className="text-gray-400 hover:text-primary transition-colors">
+                            <a href={`https://www.linkedin.com/company/${NICHE.brandName.toLowerCase().replace(/ /g, '-')}`} target="_blank" rel="noopener" className="text-gray-400 hover:text-primary transition-colors">
                                 <span className="sr-only">LinkedIn</span>
                                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
                             </a>
-                            <a href="https://twitter.com/[InjectorIndex]" target="_blank" rel="noopener" className="text-gray-400 hover:text-primary transition-colors">
+                            <a href={`https://twitter.com/${NICHE.brandName.replace(/ /g, '')}`} target="_blank" rel="noopener" className="text-gray-400 hover:text-primary transition-colors">
                                 <span className="sr-only">X (Twitter)</span>
                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" /></svg>
                             </a>
