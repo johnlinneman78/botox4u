@@ -11,7 +11,7 @@ interface LogoProps {
 
 // Renders "InjectorIndex" + ".com" in gold
 function BrandText({ theme, size = '1.5rem' }: { theme: 'light' | 'dark', size?: string }) {
-    const textColor = theme === 'dark' ? '#ffffff' : '#1a2332'
+    const textColor = theme === 'dark' ? '#ffffff' : '#94a3b8' // Brightened light theme text just in case
     return (
         <span style={{
             fontFamily: 'var(--font-playfair), Georgia, serif',
@@ -21,6 +21,7 @@ function BrandText({ theme, size = '1.5rem' }: { theme: 'light' | 'dark', size?:
             lineHeight: 1,
             letterSpacing: '-0.02em',
             whiteSpace: 'nowrap',
+            textShadow: theme === 'dark' ? '0 0 20px rgba(212, 175, 55, 0.2)' : 'none' // Added a subtle glow
         }}>
             {NICHE.siteName.split('.')[0]}
             <span style={{ color: '#d4af37', fontWeight: 700 }}>.{NICHE.siteName.split('.').slice(1).join('.')}</span>
@@ -28,7 +29,7 @@ function BrandText({ theme, size = '1.5rem' }: { theme: 'light' | 'dark', size?:
     )
 }
 
-export function LogoPrecision({ className = "", theme = 'light' }: { className?: string, theme?: 'light' | 'dark' }) {
+export function LogoPrecision({ className = "", theme = 'dark' }: { className?: string, theme?: 'light' | 'dark' }) {
     return (
         <div className={`flex items-center whitespace-nowrap flex-shrink-0 ${className}`}>
             <BrandText theme={theme} size="1.4rem" />
@@ -36,7 +37,7 @@ export function LogoPrecision({ className = "", theme = 'light' }: { className?:
     )
 }
 
-export function LogoShield({ className = "", theme = 'light' }: { className?: string, theme?: 'light' | 'dark' }) {
+export function LogoShield({ className = "", theme = 'dark' }: { className?: string, theme?: 'light' | 'dark' }) {
     return (
         <div className={`flex items-center gap-3 whitespace-nowrap flex-shrink-0 ${className}`}>
             {/* Shield Icon */}
@@ -65,7 +66,7 @@ export function LogoShield({ className = "", theme = 'light' }: { className?: st
     )
 }
 
-export function LogoWordmark({ className = "", theme = 'light' }: { className?: string, theme?: 'light' | 'dark' }) {
+export function LogoWordmark({ className = "", theme = 'dark' }: { className?: string, theme?: 'light' | 'dark' }) {
     return (
         <div className={`flex flex-col whitespace-nowrap flex-shrink-0 ${className}`}>
             <BrandText theme={theme} size="2rem" />
@@ -74,7 +75,7 @@ export function LogoWordmark({ className = "", theme = 'light' }: { className?: 
     )
 }
 
-export default function Logo({ className, variant = 'precision', theme = 'light' }: LogoProps) {
+export default function Logo({ className, variant = 'precision', theme = 'dark' }: LogoProps) {
     if (variant === 'shield') return <LogoShield className={className} theme={theme} />
     if (variant === 'wordmark') return <LogoWordmark className={className} theme={theme} />
     return <LogoPrecision className={className} theme={theme} />

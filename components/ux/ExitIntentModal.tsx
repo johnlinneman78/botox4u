@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { X, Send, Gift } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 
@@ -10,6 +10,17 @@ export default function ExitIntentModal() {
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [city, setCity] = useState('your area')
 
+    const canShowRef = useRef(false)
+
+    useEffect(() => {
+        // Delay activation for 60 seconds
+        const activationTimer = setTimeout(() => {
+            canShowRef.current = true
+        }, 60000)
+
+        return () => clearTimeout(activationTimer)
+    }, [])
+
     useEffect(() => {
         // Only show once per session
         const hasSeen = sessionStorage.getItem('exit-intent-seen')
@@ -18,6 +29,7 @@ export default function ExitIntentModal() {
         let idleTimer: NodeJS.Timeout
 
         const showModal = () => {
+            if (!canShowRef.current) return
             setIsVisible(true)
             sessionStorage.setItem('exit-intent-seen', 'true')
         }
@@ -30,7 +42,7 @@ export default function ExitIntentModal() {
 
         const resetIdleTimer = () => {
             clearTimeout(idleTimer)
-            idleTimer = setTimeout(showModal, 60000) // 60 seconds
+            idleTimer = setTimeout(showModal, 60000) // 60 seconds of inactivity
         }
 
         document.addEventListener('mouseleave', handleMouseOut)
