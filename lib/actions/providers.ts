@@ -64,8 +64,8 @@ export async function getProvidersWithSearch(filters: {
         .order('rating', { ascending: false }) // Changed from average_rating to rating
 
     if (filters.query) {
-        // Expanded search across name, city, state, business type, treatments (text search), and description
-        queryBuilder = queryBuilder.or(`name.ilike.%${filters.query}%,city.ilike.%${filters.query}%,state.ilike.%${filters.query}%,business_type.ilike.%${filters.query}%,treatment_slugs::text.ilike.%${filters.query}%,description.ilike.%${filters.query}%`)
+        // Search across name, city, state, business type, and description for comprehensive discovery
+        queryBuilder = queryBuilder.or(`name.ilike.%${filters.query}%,city.ilike.%${filters.query}%,state.ilike.%${filters.query}%,business_type.ilike.%${filters.query}%,description.ilike.%${filters.query}%`)
     }
     if (filters.city) {
         queryBuilder = queryBuilder.ilike('city', filters.city.trim())
