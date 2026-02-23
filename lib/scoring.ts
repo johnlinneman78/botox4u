@@ -44,7 +44,7 @@ export function getGrade(score: number): string {
 }
 
 /**
- * Calculates the Injector Index Score based on Version 2.2 (February 2026)
+ * Calculates the II-Score based on Version 2.2 (February 2026)
  * Follows the 5-Signal weighted approach + Warning Flags
  */
 export function calculateProviderScore(factors: ScoringFactors, cityAveragePrice: number = NICHE.priceRange.min + 5): ScoreBreakdown {

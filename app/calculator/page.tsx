@@ -8,6 +8,8 @@ export const metadata: Metadata = {
 }
 
 export default function CalculatorPage() {
+    const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+
     return (
         <main className="bg-gray-50 min-h-screen py-20">
             <div className="container mx-auto px-4">
@@ -15,9 +17,20 @@ export default function CalculatorPage() {
                     <h1 className="text-4xl md:text-5xl font-display font-bold text-primary mb-6">
                         Treatment Cost <span className="text-secondary">Estimator</span>
                     </h1>
-                    <p className="text-lg text-gray-600 leading-relaxed">
+                    <p className="text-lg text-gray-600 leading-relaxed mb-4">
                         Planning your next treatment? Our interactive calculator helps you estimate the number of {NICHE.name} {NICHE.priceUnit.split(' ').slice(-1)}s you might need and the total cost based on your specific goals.
                     </p>
+                    <div className="flex items-center justify-center gap-2 flex-wrap">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-secondary/10 text-secondary rounded-full text-[10px] font-black uppercase tracking-widest">
+                            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Pricing Data Updated: {lastUpdated}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 text-gray-500 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                            20 Major US Cities
+                        </span>
+                    </div>
                 </div>
 
                 <CostCalculator />

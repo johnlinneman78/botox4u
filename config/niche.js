@@ -103,7 +103,7 @@ export const NICHE = {
                 "Basic listing in directory",
                 "Appears in city search results",
                 "Name, location & credential display",
-                "Injector Index Score visible"
+                "II-Score visible"
             ],
             bestFor: "Individual providers getting started"
         },

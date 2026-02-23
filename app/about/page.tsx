@@ -21,7 +21,8 @@ export default async function AboutPage() {
         "description": "Independent research platform that scores aesthetic medicine providers on natural results, fair pricing, and verified credentials.",
         "founder": {
             "@type": "Person",
-            "name": "John Linneman"
+            "name": "John Linneman",
+            "sameAs": "https://www.linkedin.com/in/[john-linkedin-slug]"
         },
         "foundingDate": "2026",
         "foundingLocation": {
@@ -32,7 +33,12 @@ export default async function AboutPage() {
                 "addressRegion": "OR",
                 "addressCountry": "US"
             }
-        }
+        },
+        "sameAs": [
+            "https://www.linkedin.com/company/[injector-index-slug]",
+            "https://twitter.com/[InjectorIndex]",
+            "https://www.crunchbase.com/organization/[injector-index-slug]"
+        ]
     }
 
     return (

@@ -25,7 +25,7 @@ Here's what the data actually shows in 2026.
 
 ## The National Numbers
 
-Botox is priced per unit. One unit is a tiny amount of botulinum toxin. Most treatments require 20–60 units depending on the area being treated.
+Botox typically costs between **$10 and $20 per unit** nationally in 2026, with most patients paying **$12–$16 per unit** in major metropolitan areas. Most treatments require 20–60 units depending on the area being treated.
 
 The national average in 2026 falls between **$10 and $20 per unit**, with most patients paying **$12–$16 per unit** in major metropolitan areas.
 
@@ -75,7 +75,7 @@ At Injector Index, we index per-unit pricing wherever possible specifically beca
 
 ## What Drives the Price Up
 
-Several legitimate factors can push prices above average:
+Provider credentials, clinic location, and the specific brand of neurotoxin being used are the primary factors that drive Botox prices above the market average.
 
 **Provider credentials.** Board-certified dermatologists and plastic surgeons typically charge more than nurse injectors at medspas. You're paying for additional training and surgical backup if something goes wrong. Whether the premium is worth it depends on the complexity of your treatment and your comfort level.
 
@@ -87,7 +87,7 @@ Several legitimate factors can push prices above average:
 
 ## When Cheap Botox Is a Red Flag
 
-The floor matters. If someone is offering Botox at $6–$8 per unit, ask yourself how they're making money.
+Botox offered at extreme discounts (under $8 per unit) is a significant red flag for counterfeit product, diluted units, or unlicensed practitioners.
 
 Extremely low pricing can indicate counterfeit product (a real problem — the CDC reported multiple botulism cases in 2024 and 2025 linked to unlicensed botulinum toxin from overseas vendors), diluted product (adding more saline to stretch fewer units), unlicensed or under-trained injectors, or bait-and-switch tactics where the low price only applies to a tiny area.
 
@@ -206,6 +206,8 @@ In 2026, preventative treatments are the single biggest trend in aesthetic medic
 But does it actually work? And is it worth spending $1,000–$2,500 a year in your 20s or 30s on a treatment you might not visibly need yet?
 
 ## What "Preventative" Actually Means
+
+Preventative Botox works by relaxing the underlying muscles before "static" wrinkles (lines visible when the face is at rest) have a chance to permanently etch into the skin.
 
 Traditional Botox treats existing wrinkles — the lines on your forehead that are visible even when your face is at rest. These are called static lines, and they form after years of repeated muscle movement.
 

@@ -48,45 +48,90 @@ async function sendOutreach() {
         // Skip if no email
         if (!provider.email) {
             console.log(`Skipping ${provider.name} (no email)`);
-            // Optionally mark as skipped/failed
             await supabase.from('providers').update({ outreach_status: 'failed_no_email' }).eq('id', provider.id);
             continue;
         }
 
-        const providerPageUrl = `${process.env.NEXT_PUBLIC_APP_URL}/provider/${provider.slug}`;
+        const providerPageUrl = `https://injectorindex.com/provider/${provider.slug}`;
+        const claimUrl = `https://injectorindex.com/claim/${provider.slug}`;
+        const badgeUrl = `https://injectorindex.com/badge`;
 
         try {
             const firstName = provider.name.split(' ')[0];
-            const priceStr = provider.price_per_unit ? `$${provider.price_per_unit}` : '$12';
+            const priceStr = provider.price_per_unit ? `$${provider.price_per_unit}` : '$14';
+
+            // Get city context for ranking
+            const { count: cityTotal } = await supabase
+                .from('providers')
+                .select('*', { count: 'exact', head: true })
+                .eq('city', provider.city);
+
+            const isTopProvider = (provider.score >= 80); // Top tier
+
+            let subject = '';
+            let html = '';
+
+            if (isTopProvider) {
+                // Email 1: Top Providers Honor
+                subject = `question about the ${provider.city} Botox index for ${provider.name}`;
+                html = `
+                    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #1a2332; max-width: 600px; font-size: 16px;">
+                        <p>Hi ${firstName},</p>
+                        
+                        <p>I'm the founder of <strong>InjectorIndex.com</strong>. I'm writing because your clinic, <strong>${provider.name}</strong>, has been identified as a top-scoring provider in our 2026 <strong>${provider.city}</strong> index based on our independent research into patient results and pricing transparency.</p>
+                        
+                        <p>Specifically, your <strong>II-Score</strong> (Injector Index Score) is currently <strong>${Math.round(provider.score || 0)}/100</strong>, reflecting a high degree of patient trust and verified credentials compared to the ${cityTotal || 'other'} checked clinics in ${provider.city}.</p>
+                        
+                        <p>Because of this ranking, you're eligible to display the <strong>"Verified by Injector Index"</strong> badge on your site. You can access the badge assets and your scoreboard breakdown here:</p>
+                        
+                        <p><a href="${badgeUrl}" style="color: #d4af37; font-weight: bold; text-decoration: underline;">${badgeUrl}</a></p>
+                        
+                        <p>Can you confirm if your current average unit price of <strong>${priceStr}</strong> is still the best point of contact for patients we refer from the index?</p>
+                        
+                        <p>Best,</p>
+                        <p><strong>${YOUR_NAME}</strong><br>Founder, InjectorIndex.com</p>
+                        
+                        <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+                        <p style="font-size: 11px; color: #999;">
+                            You are receiving this because your clinic ranks in the top tier of our independent clinical index.<br>
+                            To unsubscribe, reply "Unsubscribe".
+                        </p>
+                    </div>
+                `;
+            } else {
+                // Email 2: Follow-up / Claim Profile
+                subject = `your pricing listing on Injector Index`;
+                html = `
+                    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #1a2332; max-width: 600px; font-size: 16px;">
+                        <p>Hi ${firstName},</p>
+                        
+                        <p>I'm the founder of <strong>InjectorIndex.com</strong>. I'm following up on the 2026 ${provider.city} index we just published. We've had several patients reach out asking about the <strong>${priceStr}/unit</strong> listing for your clinic here:</p>
+                        
+                        <p><a href="${providerPageUrl}" style="color: #2563eb; text-decoration: underline;">${providerPageUrl}</a></p>
+                        
+                        <p>To ensure your data is 100% accurate and to unlock the full breakdown of your <strong>II-Score</strong> (which covers Natural Results and Credential signals), you can claim your free profile here:</p>
+                        
+                        <p><a href="${claimUrl}" style="color: #2563eb; font-weight: bold; text-decoration: underline;">Claim Your Profile — It's Free</a></p>
+                        
+                        <p>Nobody pays for a higher score on the Index, but claiming your profile allows you to add photos and product details that patients in ${provider.city} are looking for.</p>
+                        
+                        <p>Best,</p>
+                        <p><strong>${YOUR_NAME}</strong><br>Founder, InjectorIndex.com</p>
+                        
+                        <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+                        <p style="font-size: 11px; color: #999;">
+                            Independent research for aesthetic medicine since 2026.<br>
+                            To unsubscribe, reply "Unsubscribe".
+                        </p>
+                    </div>
+                `;
+            }
 
             const { data, error: emailError } = await resend.emails.send({
                 from: FROM_EMAIL,
                 to: provider.email,
-                subject: `question about the ${provider.city} price listing for ${provider.name}`,
-                html: `
-                    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #1a2332; max-width: 600px; font-size: 16px;">
-                        <p>Hi ${firstName},</p>
-                        
-                        <p>I'm the founder of <strong>InjectorIndex.com</strong>. I've just published our 2026 local guide for clinicians in <strong>${provider.city}</strong> and I've featured your clinic here:</p>
-                        
-                        <p><a href="${providerPageUrl}" style="color: #2563eb; text-decoration: underline;">${providerPageUrl}</a></p>
-                        
-                        <p>We currently show your average price as <strong>${priceStr} / unit</strong> — can you confirm if that is still accurate?</p>
-                        
-                        <p>I want to make sure the patients we're sending from the directory are getting the right information before they book.</p>
-                        
-                        <p>Best,</p>
-                        
-                        <p><strong>${YOUR_NAME}</strong><br>
-                        Founder, InjectorIndex.com</p>
-                        
-                        <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-                        <p style="font-size: 11px; color: #999;">
-                            You are receiving this because your clinic is listed on InjectorIndex.com.<br>
-                            To unsubscribe, reply "Unsubscribe".
-                        </p>
-                    </div>
-                `
+                subject: subject,
+                html: html
             });
 
             if (emailError) {
@@ -94,7 +139,7 @@ async function sendOutreach() {
                 continue;
             }
 
-            console.log(`✅ Sent to: ${provider.email} (${provider.name})`);
+            console.log(`✅ Sent ${isTopProvider ? '(Top)' : '(Follow)'} to: ${provider.email} (${provider.name})`);
 
             // 3. Mark as sent
             await supabase
@@ -106,9 +151,7 @@ async function sendOutreach() {
                 .eq('id', provider.id);
 
             sentCount++;
-
-            // Tiny delay to be nice to API limits if needed
-            await new Promise(r => setTimeout(r, 200));
+            await new Promise(r => setTimeout(r, 300));
 
         } catch (err) {
             console.error(`Unexpected error for ${provider.name}:`, err);

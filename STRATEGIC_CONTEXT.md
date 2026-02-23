@@ -103,7 +103,7 @@ Unlike **Alle** (Brand Rewards) or **RealSelf** (Volume-based directory), we are
 ### Competitive Strategy
 - **VS RealSelf:** RealSelf is too big and cluttered with ads. We are the "Curated Boutiques" of Botox.
 - **VS Alle:** Alle is a manufacturer tool. We are a patient advocate tool.
-- **Our Moat:** The **Injector Index Score (V2)**. It is a proprietary calculation involving NPI data, sentiment analysis, and localized pricing—things a generic directory can't easily replicate at scale without custom scraping logic.
+- **Our Moat:** The **II-Score (V2)**. It is a proprietary calculation involving NPI data, sentiment analysis, and localized pricing—things a generic directory can't easily replicate at scale without custom scraping logic.
 
 ---
 

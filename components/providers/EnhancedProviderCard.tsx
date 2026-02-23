@@ -117,7 +117,7 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                     {/* Score (Percentile Context) */}
                     <div className="mb-6 p-4 rounded-2xl bg-gray-50 border border-gray-100">
                         <div className="flex items-center justify-between mb-2">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Injector Index Score</span>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">II-Score</span>
                             <span className="text-[10px] font-black text-[#d4af37] uppercase">{getPercentile(provider.score_total || 50)}</span>
                         </div>
                         <div className="flex items-center gap-3">

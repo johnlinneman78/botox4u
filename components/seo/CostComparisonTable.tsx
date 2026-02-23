@@ -12,12 +12,32 @@ interface CostComparisonTableProps {
     title: string
     rows: TableRow[]
     footer?: string
+    /** Optional override — defaults to current month/year */
+    updatedDate?: string
 }
 
-export function CostComparisonTable({ id, title, rows, footer }: CostComparisonTableProps) {
+export function CostComparisonTable({ id, title, rows, footer, updatedDate }: CostComparisonTableProps) {
+    const lastUpdated = updatedDate ?? new Date().toLocaleDateString('en-US', {
+        month: 'long',
+        year: 'numeric',
+    })
+
     return (
         <section className="my-12" id={id}>
-            <h3 className="text-xl font-display font-bold text-primary mb-6">{title}</h3>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-4">
+                <h3 className="text-xl font-display font-bold text-primary">{title}</h3>
+                <div className="flex items-center gap-2 shrink-0">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-secondary/10 text-secondary rounded-full text-[10px] font-black uppercase tracking-widest">
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Last Updated: {lastUpdated}
+                    </span>
+                    <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 text-gray-400 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                        InjectorIndex.com Data
+                    </span>
+                </div>
+            </div>
             <Card className="overflow-hidden border-gray-100 shadow-sm">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
