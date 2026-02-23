@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers'
 import { getSupabaseServer } from '@/lib/supabase/factory'
+import { createClient } from '@/lib/supabase/client'
 import { NICHE } from '@/config/niche'
 import { calculateProviderScore } from '@/lib/scoring'
 
