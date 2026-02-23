@@ -67,7 +67,7 @@ export async function getProvidersWithSearch(filters: {
         const q = filters.query.trim()
         const qLower = q.toLowerCase()
 
-        // Base search conditions for text columns
+        // Base search conditions for text columns - optimized for GIN index with pg_trgm
         let orConditions = [
             `name.ilike.%${q}%`,
             `city.ilike.%${q}%`,
@@ -90,6 +90,22 @@ export async function getProvidersWithSearch(filters: {
         }
 
         queryBuilder = queryBuilder.or(orConditions.join(','))
+
+        // Background Logging: Log search query for analytics and data gap identifying
+        // This is non-blocking to keep search fast
+        const logSearch = async () => {
+            try {
+                const { data: countData } = await (await createClient()).from('providers').select('id', { count: 'exact', head: true }).or(orConditions.join(','))
+                await (await createClient()).from('search_logs').insert({
+                    query: q,
+                    result_count: countData?.length || 0,
+                    metadata: { filters: JSON.stringify(filters) }
+                })
+            } catch (e) {
+                console.warn('Search logging failed:', e)
+            }
+        }
+        logSearch().catch(console.error)
     }
     if (filters.city) {
         queryBuilder = queryBuilder.ilike('city', filters.city.trim())

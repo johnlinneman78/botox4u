@@ -115,16 +115,27 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
 
                     {/* Score & Regen Ratio */}
                     <div className="mb-6 grid grid-cols-2 gap-3">
-                        <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.06]">
+                        <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.06] group/score relative">
                             <div className="flex items-center justify-between mb-2">
                                 <span className="text-[9px] font-black uppercase tracking-widest text-gray-600 flex items-center gap-1.5">
-                                    <Dna className="w-3 h-3 text-[#d4af37]" />
-                                    II-Score™
+                                    <ShieldCheck className="w-3 h-3 text-[#d4af37]" />
+                                    Elite Audit
                                 </span>
+                                <div className="group/tooltip relative">
+                                    <Info className="w-3 h-3 text-gray-700 hover:text-[#d4af37] cursor-help transition-colors" />
+                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-3 bg-[#0d1420] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all z-50 pointer-events-none">
+                                        <p className="text-[10px] text-white font-bold mb-1 uppercase tracking-wider">Independent Audit Pillars</p>
+                                        <ul className="text-[9px] text-gray-400 space-y-1 font-medium">
+                                            <li>• Verified Credentials (NPI/Licensing)</li>
+                                            <li>• Safety & Results Quality Analysis</li>
+                                            <li>• Neutral Patient Sentiment Audit</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className={`px-2 py-1 rounded-lg text-xs font-black tracking-tight border ${getScoreColor(provider.score_total || 50)}`}>
-                                    {provider.score_total >= 60 ? `${provider.score_total}/100` : 'Pending'}
+                                    {provider.score_total >= 60 ? 'PASS' : 'PENDING'}
                                 </div>
                                 <span className="text-[9px] font-black text-[#d4af37] uppercase">{getPercentile(provider.score_total || 50)}</span>
                             </div>
