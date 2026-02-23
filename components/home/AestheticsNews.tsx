@@ -48,9 +48,15 @@ export default function AestheticsNews() {
                             Independent analysis on the Neo-Romantic aesthetic movement in regenerative medicine, and what it means for your skin.
                         </p>
                     </div>
-                    <Link href="/blog" className="text-[#d4af37] font-bold flex items-center gap-2 hover:gap-3 transition-all text-sm shrink-0">
-                        View All Guides <ArrowRight className="w-4 h-4" />
-                    </Link>
+                    <div className="flex items-center gap-6">
+                        <Link href="/blog/neo-romantic-manifesto-2026-aesthetic-shift" className="hidden md:flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] text-xs font-black tracking-widest uppercase hover:bg-[#d4af37]/20 transition-all">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37] animate-pulse" />
+                            Core Manifesto
+                        </Link>
+                        <Link href="/blog" className="text-gray-500 font-bold flex items-center gap-2 hover:text-[#d4af37] transition-all text-sm shrink-0">
+                            View All Guides <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

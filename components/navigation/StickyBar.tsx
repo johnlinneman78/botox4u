@@ -32,8 +32,8 @@ export const StickyBar = () => {
                         <CheckCircle className="w-6 h-6" />
                     </div>
                     <div>
-                        <div className="text-[10px] font-black text-[#d4af37] uppercase tracking-widest leading-none mb-1">Free Clinic Audit</div>
-                        <div className="text-xs font-bold text-white leading-tight">Get Your Free Clinic Audit</div>
+                        <div className="text-[10px] font-black text-[#d4af37] uppercase tracking-widest leading-none mb-1">Clinic Intelligence</div>
+                        <div className="text-xs font-bold text-white leading-tight">Get Your Free Clinic Audit →</div>
                     </div>
                 </div>
                 <Link href="/audit" className="shrink-0" onClick={(e) => {

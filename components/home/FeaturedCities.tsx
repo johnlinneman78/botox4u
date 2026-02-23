@@ -3,14 +3,14 @@ import { headers } from 'next/headers'
 import { MapPin, ChevronRight } from 'lucide-react'
 
 const FEATURED_CITIES = [
-    { name: 'Portland', state: 'OR', slug: 'or/portland', avgCost: 14, providers: 90, regen: true, tag: '🌿 Regen Leader' },
-    { name: 'Seattle', state: 'WA', slug: 'wa/seattle', avgCost: 16, providers: 72, regen: true, tag: '🔬 PN Emerging' },
-    { name: 'San Francisco', state: 'CA', slug: 'ca/san-francisco', avgCost: 19, providers: 54, regen: true, tag: '💎 Bio-Hacking Hub' },
-    { name: 'Los Angeles', state: 'CA', slug: 'ca/los-angeles', avgCost: 14, providers: 128, regen: false, tag: '🌊 Skin Tightening HQ' },
-    { name: 'New York', state: 'NY', slug: 'ny/new-york', avgCost: 18, providers: 142, regen: false, tag: '🏙 High-Volume Elite' },
-    { name: 'Miami', state: 'FL', slug: 'fl/miami', avgCost: 16, providers: 95, regen: false, tag: '☀️ Longevity Sun Prep' },
-    { name: 'Chicago', state: 'IL', slug: 'il/chicago', avgCost: 12, providers: 82, regen: false, tag: '❄️ Cold-Climate Hydration' },
-    { name: 'Scottsdale', state: 'AZ', slug: 'az/scottsdale', avgCost: 13, providers: 64, regen: false, tag: '🌵 Desert Skin Auth' },
+    { name: 'Portland', state: 'OR', slug: 'or/portland', avgCost: 14, providers: 90, regen: true, tag: '🌿 Regen Leader', avgII: 88, regenRatio: 72 },
+    { name: 'Seattle', state: 'WA', slug: 'wa/seattle', avgCost: 16, providers: 72, regen: true, tag: '🔬 PN Emerging', avgII: 84, regenRatio: 65 },
+    { name: 'San Francisco', state: 'CA', slug: 'ca/san-francisco', avgCost: 19, providers: 54, regen: true, tag: '💎 Bio-Hacking Hub', avgII: 92, regenRatio: 78 },
+    { name: 'Los Angeles', state: 'CA', slug: 'ca/los-angeles', avgCost: 14, providers: 128, regen: false, tag: '🌟 Celebrity Standard', avgII: 79, regenRatio: 54 },
+    { name: 'New York', state: 'NY', slug: 'ny/new-york', avgCost: 18, providers: 142, regen: false, tag: '🔬 Clinical Precision', avgII: 81, regenRatio: 58 },
+    { name: 'Miami', state: 'FL', slug: 'fl/miami', avgCost: 16, providers: 95, regen: false, tag: '☀️ Luxury Market', avgII: 76, regenRatio: 48 },
+    { name: 'Chicago', state: 'IL', slug: 'il/chicago', avgCost: 12, providers: 82, regen: false, tag: '💼 Value Leader', avgII: 78, regenRatio: 52 },
+    { name: 'Scottsdale', state: 'AZ', slug: 'az/scottsdale', avgCost: 13, providers: 64, regen: false, tag: '🌵 Med-Spa Capital', avgII: 82, regenRatio: 61 },
 ]
 
 export default async function FeaturedCities() {
@@ -69,6 +69,10 @@ export default async function FeaturedCities() {
                                     <div className="flex justify-between text-gray-600">
                                         <span>Avg. per unit</span>
                                         <span className="font-bold text-[#d4af37]">${city.avgCost}</span>
+                                    </div>
+                                    <div className="flex justify-between text-gray-600">
+                                        <span>Avg. II-Score™</span>
+                                        <span className="font-bold text-emerald-400">{city.avgII}</span>
                                     </div>
                                     <div className="flex justify-between text-gray-600">
                                         <span>Providers indexed</span>

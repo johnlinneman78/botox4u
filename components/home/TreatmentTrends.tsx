@@ -91,7 +91,7 @@ const TIERS = [
 export default function TreatmentTrends() {
     const [selectedId, setSelectedId] = useState<string | null>(TREATMENTS[0].id)
     const [sliderValue, setSliderValue] = useState<number[]>([TREATMENTS[0].priceConfig.min])
-    const [location, setLocation] = useState('Portland')
+    const [location, setLocation] = useState('Target Market')
     const [isLocating, setIsLocating] = useState(false)
 
     useEffect(() => {
@@ -169,39 +169,44 @@ export default function TreatmentTrends() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     {/* Left: Treatment Selection - Horizontal Scroll on Mobile, Vertical on Desktop */}
-                    <div className="lg:col-span-4 flex lg:flex-col gap-4 overflow-x-auto pb-4 lg:pb-0 lg:overflow-visible scrollbar-none snap-x h-fit">
-                        {TREATMENTS.map((t) => (
-                            <button
-                                key={t.id}
-                                onClick={() => setSelectedId(t.id)}
-                                className={`group relative shrink-0 w-[280px] lg:w-full snap-center bg-gradient-to-br ${t.color} border transition-all duration-300 rounded-3xl p-6 text-left ${selectedId === t.id
-                                    ? `ring-2 ring-[#d4af37] scale-[1.02] shadow-2xl shadow-[#d4af37]/10 ${t.border}`
-                                    : `border-white/5 opacity-40 hover:opacity-100 hover:border-white/20`
-                                    }`}
-                            >
-                                <div className="flex items-start justify-between mb-4">
-                                    <div className={`p-3 rounded-2xl bg-white/5 ${t.accent} group-hover:scale-110 transition-transform`}>
-                                        {t.icon}
-                                    </div>
-                                    <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-lg border ${t.badge_color} group-hover:border-[#d4af37]/30 transition-colors`}>
-                                        {t.badge}
-                                    </span>
-                                </div>
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <h3 className="text-lg font-bold text-white mb-1">{t.name}</h3>
-                                        <p className={`text-[10px] font-black uppercase tracking-widest ${t.accent}`}>{t.tagline}</p>
-                                    </div>
-                                    {selectedId === t.id ? (
-                                        <div className="h-1 w-8 bg-[#d4af37] rounded-full mt-2" />
-                                    ) : (
-                                        <span className="text-[9px] font-black text-[#d4af37]/60 uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
-                                            See pricing →
+                    <div className="lg:col-span-4 relative group/scroll">
+                        {/* Mobile Scroll Indicators */}
+                        <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-[#101827] to-transparent z-10 lg:hidden pointer-events-none" />
+
+                        <div className="flex lg:flex-col gap-4 overflow-x-auto pb-4 lg:pb-0 lg:overflow-visible scrollbar-none snap-x h-fit">
+                            {TREATMENTS.map((t) => (
+                                <button
+                                    key={t.id}
+                                    onClick={() => setSelectedId(t.id)}
+                                    className={`group relative shrink-0 w-[280px] lg:w-full snap-center bg-gradient-to-br ${t.color} border transition-all duration-300 rounded-3xl p-6 text-left ${selectedId === t.id
+                                        ? `ring-2 ring-[#d4af37] scale-[1.02] shadow-2xl shadow-[#d4af37]/10 ${t.border}`
+                                        : `border-white/5 opacity-40 hover:opacity-100 hover:border-white/20`
+                                        }`}
+                                >
+                                    <div className="flex items-start justify-between mb-4">
+                                        <div className={`p-3 rounded-2xl bg-white/5 ${t.accent} group-hover:scale-110 transition-transform`}>
+                                            {t.icon}
+                                        </div>
+                                        <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-lg border ${t.badge_color} group-hover:border-[#d4af37]/30 transition-colors`}>
+                                            {t.badge}
                                         </span>
-                                    )}
-                                </div>
-                            </button>
-                        ))}
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <h3 className="text-lg font-bold text-white mb-1">{t.name}</h3>
+                                            <p className={`text-[10px] font-black uppercase tracking-widest ${t.accent}`}>{t.tagline}</p>
+                                        </div>
+                                        {selectedId === t.id ? (
+                                            <div className="h-1 w-8 bg-[#d4af37] rounded-full mt-2" />
+                                        ) : (
+                                            <span className="text-[9px] font-black text-[#d4af37]/60 uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
+                                                See pricing →
+                                            </span>
+                                        )}
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
                     {/* Right: Dynamic Intelligence Panel */}
@@ -210,8 +215,12 @@ export default function TreatmentTrends() {
                             <div className="space-y-10">
                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                                     <div>
-                                        <div className={`text-sm font-black uppercase tracking-[0.2em] ${activeTreatment.accent} mb-2`}>
-                                            {activeTreatment.name} Intelligence
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                            <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Currently Viewing:</span>
+                                            <div className={`text-xs font-black uppercase tracking-[0.2em] ${activeTreatment.accent}`}>
+                                                {activeTreatment.name}
+                                            </div>
                                         </div>
                                         <p className="text-gray-500 text-sm leading-relaxed max-w-md">
                                             {activeTreatment.desc}

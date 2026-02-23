@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 export const metadata: Metadata = {
-  title: `InjectorIndex — Regen-First Injector Intelligence | PNs, Daxxify & More`,
+  title: `InjectorIndex — Find Natural Results Injectors | Botox, PNs & Daxxify Near You`,
   description: `Injector Index: Defining the Neo-Romantic era of medical aesthetics through data-driven clinic audits and regenerative intelligence. Compare Polynucleotides, Daxxify, and bio-stimulator providers ranked by Regen-Ratio™. Real pricing. Verified credentials. Zero pay-to-rank.`,
   keywords: `neo-romantic aesthetics, regenerative medicine, polynucleotides, daxxify, bio-stimulators, facial harmony, undetectable results, aesthetic intelligence, nurse injectors near me, II-Score, Regen-Ratio, clinical data`,
   metadataBase: new URL(`https://${NICHE.domain}`),

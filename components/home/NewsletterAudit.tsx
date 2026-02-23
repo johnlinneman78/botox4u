@@ -103,7 +103,7 @@ export default function NewsletterAudit() {
                                     <Dna className="w-3 h-3" /> Patient Intelligence Portal
                                 </div>
                                 <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6 leading-tight">
-                                    Get Your <span className="text-[#d4af37]">Elite Audit™</span> Before Booking
+                                    Is Your Injector <span className="text-[#d4af37]">2026-Ready?</span>
                                 </h2>
                                 <p className="text-gray-400 leading-relaxed mb-10 font-light text-lg">
                                     Don't rely on unverified reviews. Provide your history and the clinics you're researching, and we'll cross-reference them with our 2026 Independent Audit pillars.
@@ -237,7 +237,7 @@ export default function NewsletterAudit() {
                                                                 type="button"
                                                                 key={p}
                                                                 onClick={() => toggleProcedure(p)}
-                                                                className={`text-[10px] font-black px-4 py-2.5 rounded-xl border transition-all uppercase tracking-widest ${selectedProcedures.includes(p)
+                                                                className={`text-[10px] font-black px-4 py-3.5 rounded-xl border transition-all uppercase tracking-widest ${selectedProcedures.includes(p)
                                                                     ? 'bg-[#d4af37]/20 border-[#d4af37]/50 text-[#d4af37]'
                                                                     : 'bg-white/5 border-white/10 text-gray-500 hover:border-white/20'
                                                                     }`}
@@ -315,7 +315,7 @@ export default function NewsletterAudit() {
                                                                 type="button"
                                                                 key={i}
                                                                 onClick={() => toggleConcern(c)}
-                                                                className={`text-[10px] font-black px-4 py-3 rounded-xl border transition-all text-left uppercase tracking-tighter ${selectedConcerns.includes(c)
+                                                                className={`text-[10px] font-black px-4 py-3.5 rounded-xl border transition-all text-left uppercase tracking-tighter ${selectedConcerns.includes(c)
                                                                     ? 'bg-[#d4af37]/20 border-[#d4af37]/50 text-[#d4af37]'
                                                                     : 'bg-white/5 border-white/10 text-gray-500 hover:border-white/20'
                                                                     }`}
