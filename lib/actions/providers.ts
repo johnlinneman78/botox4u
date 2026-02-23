@@ -64,10 +64,32 @@ export async function getProvidersWithSearch(filters: {
         .order('rating', { ascending: false }) // Changed from average_rating to rating
 
     if (filters.query) {
-        const q = filters.query.trim().toLowerCase()
-        // Search across confirmed columns: name, city, state, business_type, description, credentials
-        // Also include array contains for treatment_slugs, services_offered, and badges
-        queryBuilder = queryBuilder.or(`name.ilike.%${filters.query}%,city.ilike.%${filters.query}%,state.ilike.%${filters.query}%,business_type.ilike.%${filters.query}%,description.ilike.%${filters.query}%,credentials.ilike.%${filters.query}%,treatment_slugs.cs.{"${q}"},services_offered.cs.{"${filters.query}"},badges.cs.{"${filters.query}"}`)
+        const q = filters.query.trim()
+        const qLower = q.toLowerCase()
+
+        // Base search conditions for text columns
+        let orConditions = [
+            `name.ilike.%${q}%`,
+            `city.ilike.%${q}%`,
+            `state.ilike.%${q}%`,
+            `business_type.ilike.%${q}%`,
+            `description.ilike.%${q}%`,
+            `credentials.ilike.%${q}%`
+        ]
+
+        // Add array contains conditions
+        orConditions.push(`treatment_slugs.cs.{"${qLower}"}`)
+        orConditions.push(`badges.cs.{"${q}"}`)
+        orConditions.push(`services_offered.cs.{"${q}"}`)
+
+        // Smart Acronym Fallback: If query is short (2-4 chars), try matching word initials
+        // e.g., "HS7" matches "Houston Studios 77"
+        if (q.length >= 2 && q.length <= 4) {
+            const initialsQuery = q.split('').join('%') + '%'
+            orConditions.push(`name.ilike.${initialsQuery}`)
+        }
+
+        queryBuilder = queryBuilder.or(orConditions.join(','))
     }
     if (filters.city) {
         queryBuilder = queryBuilder.ilike('city', filters.city.trim())
