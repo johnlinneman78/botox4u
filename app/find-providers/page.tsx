@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button'
 import { getProvidersWithSearch } from '@/lib/actions/providers'
 import { GeolocationSorter } from '@/components/providers/GeolocationSorter'
 import { NICHE } from '@/config/niche'
-import { Dna } from 'lucide-react'
+import { Dna, ShieldCheck } from 'lucide-react'
 
 export default async function FindProvidersPage({
     searchParams,
