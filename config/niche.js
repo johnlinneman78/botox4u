@@ -1,4 +1,4 @@
-// config/niche.js
+// config/niche.js - [DEPLOY_TRIGGER: 2026-02-23]
 // THIS IS THE ONLY FILE THAT CHANGES BETWEEN WHITE LABEL DEPLOYMENTS
 // Everything else in the codebase reads from this file
 
