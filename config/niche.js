@@ -8,11 +8,11 @@ export const NICHE = {
     namePlural: "Aesthetic Medicine Providers",
     providerType: "provider",               // "injector", "clinic", "provider", "dentist"
     providerTypePlural: "providers",
-    siteName: "InjectorIndex.com",
+    siteName: "InjectorIndex — Regen-First Injector Intelligence",
     domain: "injectorindex.com",
-    tagline: "The Independent Injector Index",
-    brandName: "InjectorIndex.com",
-    brandSuffix: "",
+    tagline: "Regen-First Injector Intelligence",
+    brandName: "InjectorIndex",
+    brandSuffix: "™",
 
     // Calculator Configuration
     calculator: {
@@ -154,13 +154,13 @@ export const NICHE = {
     copy: {
         hero: {
             headline: "Find injectors known for natural results — and see their real prices before you book.",
-            subtext: "40% of Botox complaints are about over-injection. We score every provider in our directory on results quality, fair pricing, and verified credentials — so you can find a conservative injector who won't overdo it.",
+            subtext: "In 2026, the gold standard is biological repair — not volume. We score every provider on Regen-Ratio™, natural result integrity, and 2026 treatment innovation. See real pricing before you book.",
             cta: "Find a Conservative Injector Near Me"
         },
         trustBadges: [
-            { icon: 'target', label: 'Natural Results', description: 'Scored on real patient language and conservative outcomes' },
-            { icon: 'dollar', label: 'Real Pricing', description: 'Actual cost per unit revealed before you book' },
-            { icon: 'shield', label: 'NPI Verified', description: 'Federal medical credential and license confirmation' }
+            { icon: 'target', label: 'Natural Results', description: 'Scored on patient-reported outcomes & facial harmony' },
+            { icon: 'dollar', label: 'Regen-Ratio™', description: 'Verified percentage of regenerative vs. traditional menu' },
+            { icon: 'shield', label: 'II-Score™ Audit', description: 'Independent data verification of clinical results quality' }
         ],
         scoreDisclaimer: "The Injector Index is an independent data research platform for aesthetic providers. We are not a medical provider. Our mission is to provide transparency in the aesthetic market by indexing provider data, pricing, and neutral patient feedback. No provider can pay for a higher index position.",
         footerDisclaimer: "InjectorIndex.com is an independent provider directory and research index for aesthetic medicine. We are not a clinic, we do not perform medical procedures, and we do not provide clinical advice. All data is gathered from public records to facilitate independent research of aesthetic providers."

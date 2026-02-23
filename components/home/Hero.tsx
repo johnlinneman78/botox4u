@@ -69,7 +69,8 @@ export default function Hero({ city: initialCity, state }: { city?: string; stat
                         {city ? (
                             <>Find {city}'s Top<span className="text-[#d4af37]"> Regenerative</span><br />Nurse Injectors</>
                         ) : (
-                            <>Find Injectors Known<br />for <span className="text-[#d4af37]">Natural Results</span><br />
+                            <>{NICHE.copy.hero.headline.split(' — ')[0]}<br />
+                                <span className="text-[#d4af37]">Natural Results</span><br />
                                 <span className="text-white/60 text-4xl md:text-5xl lg:text-6xl font-light italic">— not the overfilled look.</span>
                             </>
                         )}
@@ -77,7 +78,7 @@ export default function Hero({ city: initialCity, state }: { city?: string; stat
 
                     {/* Sub */}
                     <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed font-light">
-                        In 2026, the gold standard is <span className="text-white font-semibold">biological repair</span> — not volume. We score every provider on Regen-Ratio™, natural result integrity, and 2026 treatment innovation. See real pricing before you book.
+                        {NICHE.copy.hero.subtext}
                     </p>
 
                     {/* CTA Row */}

@@ -11,8 +11,8 @@ import { NICHE } from '@/config/niche'
 import { JsonLd, generateWebSiteSchema } from '@/components/seo/JsonLd'
 
 export const metadata: Metadata = {
-  title: `Find Regenerative Injectors Near You | ${NICHE.siteName}`,
-  description: "The first directory ranked by Regen-Ratio™ — track Polynucleotides, Daxxify, and natural results. Real pricing. Verified credentials. Zero pay-to-rank.",
+  title: `InjectorIndex — Regen-First Injector Intelligence | PNs, Daxxify & More`,
+  description: `Find injectors ranked by Regen-Ratio™ — track Polynucleotides, Daxxify, and natural results. The independent index for aesthetic medicine.`,
   alternates: {
     canonical: '/',
   }
