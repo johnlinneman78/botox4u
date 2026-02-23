@@ -169,7 +169,7 @@ async function main() {
     const args = process.argv.slice(2);
     const command = args[0];
 
-    console.log('🔧 Notion Update Tool - Botox-4-U.com\n');
+    console.log('🔧 Notion Update Tool - InjectorIndex.com\n');
 
     try {
         const databases = await findDatabases();

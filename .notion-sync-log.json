@@ -1,5 +1,5 @@
 {
-  "lastSync": "2026-02-23T02:23:36.985Z",
+  "lastSync": "2026-02-23T02:29:37.262Z",
   "metrics": {
     "taskStats": {
       "total": 18,
@@ -8,8 +8,8 @@
       "backlog": 10
     },
     "contentStats": {
-      "total": 15,
-      "published": 1,
+      "total": 16,
+      "published": 2,
       "inProgress": 0,
       "planned": 14
     },

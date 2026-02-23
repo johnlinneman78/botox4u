@@ -42,12 +42,12 @@ export default async function AboutPage() {
     }
 
     return (
-        <div className="bg-white min-h-screen pb-24">
+        <div className="bg-[#0d1420] min-h-screen pb-24">
             <JsonLd data={organizationSchema} />
 
             {/* 1. HERO SECTION */}
-            <section className="relative overflow-hidden bg-[#1a2332] py-24 md:py-32">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#1a2332] via-[#151b26] to-[#0f141c]" />
+            <section className="relative overflow-hidden bg-[#0d1420] py-24 md:py-32">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0d1420] via-[#111a28] to-[#0f141c]" />
                 <div className="absolute inset-0 opacity-[0.03]" style={{
                     backgroundImage: 'radial-gradient(#d4af37 1px, transparent 1px)',
                     backgroundSize: '32px 32px'
@@ -63,10 +63,10 @@ export default async function AboutPage() {
                         An Independent Index for <br />
                         <span className="text-[#d4af37] italic">Aesthetic Medicine</span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed mb-8">
+                    <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-light leading-relaxed mb-8">
                         Injector Index is a research platform that scores and ranks aesthetic injectors using public data — patient review language, verified pricing, and federal credential databases. We built it because patients deserve better information before making a healthcare decision.
                     </p>
-                    <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
+                    <p className="text-xl text-gray-500 max-w-2xl mx-auto font-light leading-relaxed">
                         We are not a clinic. We don&apos;t perform procedures. We don&apos;t accept advertising from providers. And nobody pays for a higher score.
                     </p>
                 </div>
@@ -75,27 +75,27 @@ export default async function AboutPage() {
             {/* 2. THE NUMBERS (Horizontal Stat Bar) */}
             <section className="relative z-20 -mt-10 mb-20 px-4">
                 <div className="container mx-auto max-w-5xl">
-                    <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-primary/5 border border-gray-100 p-10 md:p-14 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+                    <div className="bg-[#101827] rounded-[2.5rem] shadow-2xl border border-white/[0.06] p-10 md:p-14 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-white/[0.06]">
                         <div className="flex flex-col items-center justify-center pt-8 md:pt-0">
-                            <div className="text-4xl md:text-5xl font-bold font-display text-primary mb-2">
+                            <div className="text-4xl md:text-5xl font-bold font-display text-white mb-2">
                                 {stats.providers.toLocaleString()}
                             </div>
                             <div className="text-[10px] font-black uppercase tracking-widest text-[#d4af37]">Providers Indexed</div>
                         </div>
                         <div className="flex flex-col items-center justify-center pt-8 md:pt-0 pl-0 md:pl-4">
-                            <div className="text-4xl md:text-5xl font-bold font-display text-primary mb-2">
+                            <div className="text-4xl md:text-5xl font-bold font-display text-white mb-2">
                                 {stats.cities.toLocaleString()}
                             </div>
                             <div className="text-[10px] font-black uppercase tracking-widest text-[#d4af37]">Cities Covered</div>
                         </div>
                         <div className="flex flex-col items-center justify-center pt-8 md:pt-0 pl-0 md:pl-4">
-                            <div className="text-4xl md:text-5xl font-bold font-display text-primary mb-2">
+                            <div className="text-4xl md:text-5xl font-bold font-display text-white mb-2">
                                 {stats.reviews.toLocaleString()}+
                             </div>
                             <div className="text-[10px] font-black uppercase tracking-widest text-[#d4af37]">Patient Reviews</div>
                         </div>
                         <div className="flex flex-col items-center justify-center pt-8 md:pt-0 pl-0 md:pl-4">
-                            <div className="text-4xl md:text-5xl font-bold font-display text-primary mb-2">
+                            <div className="text-4xl md:text-5xl font-bold font-display text-white mb-2">
                                 4.2
                             </div>
                             <div className="text-[10px] font-black uppercase tracking-widest text-[#d4af37]">Avg. Score Signals</div>
@@ -105,10 +105,10 @@ export default async function AboutPage() {
             </section>
 
             {/* 3. WHAT WE DO (Methodology) */}
-            <section className="py-20 px-4 bg-white">
+            <section className="py-20 px-4">
                 <div className="container mx-auto max-w-6xl">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-display font-bold text-primary mb-6 tracking-tight">What We Do</h2>
+                        <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6 tracking-tight">What We Do</h2>
                         <p className="text-gray-500 text-lg font-light max-w-2xl mx-auto leading-relaxed">
                             We index aesthetic medicine providers across the United States and score them on four data-driven signals.
                         </p>
@@ -137,11 +137,11 @@ export default async function AboutPage() {
                                 desc: 'We analyze review consistency and sentiment patterns over time, flagging providers with sudden rating shifts, review clustering, or language patterns associated with incentivized reviews.'
                             }
                         ].map((item) => (
-                            <div key={item.label} className="group p-10 rounded-[2.5rem] bg-gray-50 border border-gray-100 hover:bg-white hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
-                                <div className="p-4 rounded-2xl bg-white shadow-sm text-secondary w-fit mb-8 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                            <div key={item.label} className="group p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.04] hover:border-[#d4af37]/20 hover:shadow-2xl hover:shadow-[#d4af37]/5 hover:scale-[1.02] transition-all duration-300">
+                                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.06] text-[#d4af37] w-fit mb-8 group-hover:bg-[#d4af37]/10 transition-colors duration-300">
                                     <item.icon className="w-8 h-8" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-primary mb-4 leading-tight">{item.label}</h3>
+                                <h3 className="text-2xl font-bold text-white mb-4 leading-tight">{item.label}</h3>
                                 <p className="text-gray-500 font-light leading-relaxed">{item.desc}</p>
                             </div>
                         ))}
@@ -150,7 +150,7 @@ export default async function AboutPage() {
                     <div className="text-center">
                         <Link
                             href="/methodology"
-                            className="inline-flex items-center gap-2 text-secondary font-bold text-lg hover:underline group"
+                            className="inline-flex items-center gap-2 text-[#d4af37] font-bold text-lg hover:underline group"
                         >
                             Read the full scoring methodology
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -162,19 +162,19 @@ export default async function AboutPage() {
             {/* 4. EDITORIAL INDEPENDENCE (Visually Distinct Block) */}
             <section className="py-24 px-4">
                 <div className="container mx-auto max-w-5xl">
-                    <div className="bg-[#fbfff0] border border-[#e6f0c8] p-12 md:p-20 rounded-[4rem] relative overflow-hidden">
-                        <div className="absolute top-0 right-0 p-12 opacity-[0.03] text-primary">
+                    <div className="bg-[#101827] border border-white/[0.06] p-12 md:p-20 rounded-[4rem] relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-12 opacity-[0.03] text-white">
                             <Scale className="w-64 h-64" />
                         </div>
                         <div className="relative z-10">
-                            <div className="inline-flex items-center gap-2 text-primary font-black uppercase tracking-widest text-[10px] mb-8 bg-black/5 px-4 py-1.5 rounded-full">
+                            <div className="inline-flex items-center gap-2 text-[#d4af37] font-black uppercase tracking-widest text-[10px] mb-8 bg-[#d4af37]/10 px-4 py-1.5 rounded-full border border-[#d4af37]/20">
                                 <Scale className="w-3 h-3" />
                                 Platform Policy
                             </div>
-                            <h2 className="text-4xl font-display font-bold text-primary mb-10 leading-tight">Editorial Independence</h2>
+                            <h2 className="text-4xl font-display font-bold text-white mb-10 leading-tight">Editorial Independence</h2>
 
-                            <div className="space-y-8 text-xl text-primary/80 font-light leading-relaxed">
-                                <p className="text-2xl font-bold text-primary italic border-l-4 border-[#d4af37] pl-8 py-2">
+                            <div className="space-y-8 text-xl text-gray-400 font-light leading-relaxed">
+                                <p className="text-2xl font-bold text-white italic border-l-4 border-[#d4af37] pl-8 py-2">
                                     &quot;No provider pays for placement, ranking, or score improvement. Ever.&quot;
                                 </p>
                                 <p>
@@ -183,7 +183,7 @@ export default async function AboutPage() {
                                 <p>
                                     We publish this policy because the aesthetic industry is full of directories that sell top placement to the highest bidder and call it &quot;recommended.&quot; We think that&apos;s a problem. Patients searching for a medical provider deserve rankings based on data, not ad spend.
                                 </p>
-                                <p className="font-medium text-primary">
+                                <p className="font-medium text-white">
                                     If we ever change this policy, we&apos;ll say so publicly. But we won&apos;t.
                                 </p>
                             </div>
@@ -193,21 +193,21 @@ export default async function AboutPage() {
             </section>
 
             {/* 5. BUILT BY */}
-            <section className="py-24 px-4 border-t border-gray-100">
+            <section className="py-24 px-4 border-t border-white/[0.06]">
                 <div className="container mx-auto max-w-4xl text-center">
-                    <div className="w-20 h-20 bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center mx-auto mb-10 shadow-sm">
-                        <Fingerprint className="w-10 h-10 text-secondary" />
+                    <div className="w-20 h-20 bg-white/[0.03] rounded-2xl border border-white/[0.06] flex items-center justify-center mx-auto mb-10">
+                        <Fingerprint className="w-10 h-10 text-[#d4af37]" />
                     </div>
-                    <h2 className="text-3xl font-display font-bold text-primary mb-8 tracking-tight">Built By</h2>
+                    <h2 className="text-3xl font-display font-bold text-white mb-8 tracking-tight">Built By</h2>
                     <div className="space-y-6 text-lg text-gray-500 font-light leading-relaxed max-w-2xl mx-auto text-left">
                         <p>
-                            Injector Index was founded in 2026 by <strong>John Linneman</strong> in <strong>Portland, Oregon</strong>. The platform grew out of research into how patients actually evaluate aesthetic providers — and the finding that most existing tools (review sites, directory listings, medspa marketing) don&apos;t give patients what they need to make informed decisions.
+                            Injector Index was founded in 2026 by <strong className="text-white">John Linneman</strong> in <strong className="text-white">Portland, Oregon</strong>. The platform grew out of research into how patients actually evaluate aesthetic providers — and the finding that most existing tools (review sites, directory listings, medspa marketing) don&apos;t give patients what they need to make informed decisions.
                         </p>
                         <p>
                             The scoring algorithm was developed through analysis of tens of thousands of patient reviews, identifying the specific language patterns that correlate with patient satisfaction, natural results, and provider trustworthiness. The platform is independently operated and has no financial relationships with product manufacturers, medical associations, or provider networks.
                         </p>
                         <div className="pt-8 text-center">
-                            <Link href="/contact" className="text-secondary font-bold hover:underline">
+                            <Link href="/contact" className="text-[#d4af37] font-bold hover:underline">
                                 Questions about the platform, methodology, or data: Contact support →
                             </Link>
                         </div>
@@ -216,8 +216,8 @@ export default async function AboutPage() {
             </section>
 
             {/* 6. DISCLAIMERS */}
-            <footer className="container mx-auto max-w-5xl px-4 py-16 border-t border-gray-100">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-[11px] text-gray-400 font-light leading-relaxed">
+            <footer className="container mx-auto max-w-5xl px-4 py-16 border-t border-white/[0.06]">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-[11px] text-gray-600 font-light leading-relaxed">
                     <div className="space-y-4">
                         <div className="font-bold uppercase tracking-widest text-[#d4af37]">Medical Information</div>
                         <p>
@@ -237,7 +237,7 @@ export default async function AboutPage() {
                         </p>
                     </div>
                 </div>
-                <div className="mt-16 text-center text-gray-300 text-[10px] uppercase font-bold tracking-[0.3em]">
+                <div className="mt-16 text-center text-gray-700 text-[10px] uppercase font-bold tracking-[0.3em]">
                     Portland • OR • 2026
                 </div>
             </footer>

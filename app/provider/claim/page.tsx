@@ -121,9 +121,9 @@ function ClaimListingContent() {
                             <Zap className="w-4 h-4" /> What&apos;s Next?
                         </h3>
                         <ul className="text-sm text-blue-800 space-y-2">
-                            <li>• Upload patient results for <strong>Photo Priority Logic</strong>.</li>
+                            <li>• Upload patient results for <strong>Proprietary Photo Priority Logic</strong>.</li>
                             <li>• Review and respond to your <strong>Warm Leads</strong>.</li>
-                            <li>• Complete your profile for a <strong>Score Grade Boost</strong>.</li>
+                            <li>• Complete your profile for <strong>Index Signal Optimization</strong>.</li>
                         </ul>
                     </div>
                     <p className="text-sm text-gray-400">
@@ -158,7 +158,7 @@ function ClaimListingContent() {
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-lg">Photo Priority Logic</h4>
-                                    <p className="text-white/60">Verified patient results boost your ranking by up to 40% over generic listings.</p>
+                                    <p className="text-white/60">Verified patient results trigger our proprietary priority logic, increasing your visibility over generic listings.</p>
                                 </div>
                             </div>
                             <div className="flex gap-4">

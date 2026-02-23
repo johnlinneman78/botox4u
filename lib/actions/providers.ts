@@ -3,12 +3,52 @@ import { getSupabaseServer } from '@/lib/supabase/factory'
 import { NICHE } from '@/config/niche'
 import { calculateProviderScore } from '@/lib/scoring'
 
+const REGEN_TREATMENTS = [
+    'Polynucleotides (PNs)',
+    'Daxxify / Long-Acting Tox',
+    'Plant-Derived Exosomes',
+    'Biostimulators (Sculptra)',
+    'PRF / PRP',
+    'NAD+ IV Therapy',
+    'Microneedling',
+    'Morpheus8 / RF Microneedling',
+    'Laser Resurfacing',
+    'Chemical Peels',
+    'IPL / Photofacial',
+    'LED Light Therapy'
+]
+
+const FILLER_TREATMENTS = [
+    'Lip filler',
+    'Cheek / midface filler',
+    'Jawline / chin filler',
+    'Under-eye filler'
+]
+
+const ARTISANS = ['Regenerative Medicine', 'Nurse-Led Injection Studio']
+const INSTITUTIONS = ['Medspa', 'Clinic', 'Dermatology', 'Plastic Surgery']
+
+function calculateRegenRatio(services: string[]): number {
+    const regenCount = (services || []).filter(s => REGEN_TREATMENTS.includes(s)).length
+    const fillerCount = (services || []).filter(s => FILLER_TREATMENTS.includes(s)).length
+
+    // Base: 0-100
+    let score = (regenCount / REGEN_TREATMENTS.length) * 100
+
+    // Boost: Significant regen focus AND 0 filler -> +10 points (visibility)
+    if (regenCount >= 6 && fillerCount === 0) score += 10
+
+    return Math.min(100, score)
+}
+
 export async function getProvidersWithSearch(filters: {
     query?: string,
     city?: string,
     state?: string,
     tier?: string,
     treatment?: string,
+    type?: string, // institutional | artisan
+    view?: string, // specialist | general
     userLat?: number,
     userLng?: number
 } = {}) {
@@ -24,8 +64,8 @@ export async function getProvidersWithSearch(filters: {
         .order('rating', { ascending: false }) // Changed from average_rating to rating
 
     if (filters.query) {
-        // Search across name, city, and state for better discoverability
-        queryBuilder = queryBuilder.or(`name.ilike.%${filters.query}%,city.ilike.%${filters.query}%,state.ilike.%${filters.query}%`)
+        // Expanded search across name, city, state, business type, treatments (text search), and description
+        queryBuilder = queryBuilder.or(`name.ilike.%${filters.query}%,city.ilike.%${filters.query}%,state.ilike.%${filters.query}%,business_type.ilike.%${filters.query}%,treatment_slugs::text.ilike.%${filters.query}%,description.ilike.%${filters.query}%`)
     }
     if (filters.city) {
         queryBuilder = queryBuilder.ilike('city', filters.city.trim())
@@ -40,6 +80,11 @@ export async function getProvidersWithSearch(filters: {
         // treatment_slugs is a text[] column in Supabase
         queryBuilder = queryBuilder.contains('treatment_slugs', [filters.treatment])
     }
+    if (filters.type === 'artisan') {
+        queryBuilder = queryBuilder.in('business_type', ARTISANS)
+    } else if (filters.type === 'institutional') {
+        queryBuilder = queryBuilder.in('business_type', INSTITUTIONS)
+    }
 
     console.log('DEBUG: queryBuilder configured, executing query...')
     const { data, error } = await queryBuilder
@@ -50,60 +95,8 @@ export async function getProvidersWithSearch(filters: {
         return []
     }
 
-    const mappedData = (data || []).map((p: any) => ({
-        id: p.id,
-        name: p.name,
-        slug: p.slug,
-        business_type: p.business_type,
-        businessType: p.business_type, // Legacy support
-        address: p.address,
-        city: p.city,
-        state: p.state,
-        averageRating: parseFloat(p.rating || p.average_rating || 0),
-        reviewCount: p.review_count || 0,
-        listingTier: p.listing_tier || 'free',
-        verified: p.verified || false,
-        price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
-        pricePerUnit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox, // Legacy support
-        minTreatmentPrice: p.min_treatment_price,
-        latitude: p.latitude || 0,
-        longitude: p.longitude || 0,
-        lat: p.latitude || 0,
-        lng: p.longitude || 0,
-        imageUrl: (() => {
-            const url = p.hero_image_url || p.image_url;
-            if (!url || url.includes('placeholder')) {
-                // Return a consistent but varied fallback based on ID length
-                const fallbacks = [
-                    'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800', // Blue/clean
-                    'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800', // Modern/white
-                    'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=800', // Professional
-                    'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80&w=800'  // Modern spa
-                ];
-                const index = p.id ? p.id.length % fallbacks.length : 0;
-                return fallbacks[index];
-            }
-            if (url.startsWith('http')) return url;
-            // Handle Supabase paths
-            return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/provider_images/${url}`;
-        })(),
-        enriched_attrs: p.enriched_attrs,
-        website: p.website,
-        phone: p.phone,
-        description: p.description,
-
-        // Enriched Fields
-        google_place_id: p.google_place_id,
-        rating: p.rating || parseFloat(p.average_rating || 0), // Use manual rating as fallback
-        review_count: p.review_count || 0,
-        top_reviews: p.top_reviews || [],
-        badges: p.badges || [],
-        ai_description: p.ai_description,
-        ai_description_confirmed: p.ai_description_confirmed,
-        gallery: p.gallery || [],
-        hero_image_url: p.hero_image_url || p.image_url,
-        reviews: p.top_reviews || [],
-        score: calculateProviderScore({
+    const mappedData = (data || []).map((p: any) => {
+        const scoreBreakdown = calculateProviderScore({
             price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
             rating: parseFloat(p.rating || p.average_rating || 0),
             review_count: p.review_count || 0,
@@ -115,37 +108,70 @@ export async function getProvidersWithSearch(filters: {
             results_quality_score: p.score_results_quality,
             website: p.website,
             responsiveness_score: p.responsiveness_score
-        }),
-        score_total: calculateProviderScore({
+        })
+
+        const iiScore = scoreBreakdown.points
+        const servicesOffered = p.services_offered || []
+        const regen_ratio = calculateRegenRatio(servicesOffered)
+        const fillerCount = servicesOffered.filter((s: string) => FILLER_TREATMENTS.includes(s)).length
+        const regenCount = servicesOffered.filter((s: string) => REGEN_TREATMENTS.includes(s)).length
+
+        // Granularity Weighting (25%) -> Highlight specialized talent (Artisans) 
+        const granularityBonus = ARTISANS.includes(p.business_type) ? 25 : 0
+
+        // Final Priority Score calculation (40% Score / 35% Regen / 25% Granularity)
+        let priority_score = (iiScore * 0.40) + (regen_ratio * 0.35) + (granularityBonus * 0.25)
+
+        // 10+ Regen Boost (+10% visibility boost if 10+ regen treatments and 0 filler)
+        if (regenCount >= 10 && fillerCount === 0) priority_score += 10
+
+        return {
+            ...p,
+            id: p.id,
+            name: p.name,
+            slug: p.slug,
+            business_type: p.business_type,
+            businessType: p.business_type,
+            address: p.address,
+            city: p.city,
+            state: p.state,
+            averageRating: parseFloat(p.rating || p.average_rating || 0),
+            reviewCount: p.review_count || 0,
+            listingTier: p.listing_tier || 'free',
+            verified: p.verified || false,
             price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
-            rating: parseFloat(p.rating || p.average_rating || 0),
-            review_count: p.review_count || 0,
-            has_photo: !!(p.hero_image_url || p.image_url),
-            has_description: !!p.description,
-            is_verified: p.verified || false,
-            npi_verified: p.npi_verified || false,
-            allergan_tier: p.allergan_tier,
-            results_quality_score: p.score_results_quality,
-            website: p.website,
-            responsiveness_score: p.responsiveness_score
-        }).points,
-
-        // Warning & Scoring Fields
-        warning_flag: p.warning_flag || false,
-        warning_reason: p.warning_reason,
-        score_results_quality: p.score_results_quality || 0,
-        positive_keyword_count: p.positive_keyword_count || 0,
-        negative_keyword_count: p.negative_keyword_count || 0,
-
-        // NPI Fields
-        npi_number: p.npi_number,
-        npi_verified: p.npi_verified,
-        npi_license_type: p.npi_license_type,
-        npi_specialty: p.npi_specialty,
-        npi_verified_at: p.npi_verified_at,
-        allergan_tier: p.allergan_tier,
-        has_real_photo: !!(p.hero_image_url || p.image_url)
-    }))
+            pricePerUnit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
+            minTreatmentPrice: p.min_treatment_price,
+            latitude: p.latitude || 0,
+            longitude: p.longitude || 0,
+            lat: p.latitude || 0,
+            lng: p.longitude || 0,
+            imageUrl: (() => {
+                const url = p.hero_image_url || p.image_url;
+                if (!url || url.includes('placeholder')) {
+                    const fallbacks = [
+                        'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
+                        'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800',
+                        'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=800',
+                        'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80&w=800'
+                    ];
+                    const index = p.id ? p.id.length % fallbacks.length : 0;
+                    return fallbacks[index];
+                }
+                if (url.startsWith('http')) return url;
+                return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/provider_images/${url}`;
+            })(),
+            score: scoreBreakdown,
+            score_total: iiScore,
+            regen_ratio,
+            priority_score,
+            is_specialist: iiScore >= 60,
+            relegated: iiScore < 60,
+            warning_flag: p.warning_flag || false,
+            has_real_photo: !!(p.hero_image_url || p.image_url),
+            services_offered: servicesOffered
+        }
+    })
 
     // Deduplicate by slug and name+city to prevent showing the same clinic twice
     const deduplicated: any[] = [];
@@ -160,51 +186,50 @@ export async function getProvidersWithSearch(filters: {
         }
     });
 
-    // Custom sort: Featured > Proximity (if close) > Score
-    const tierWeight = {
-        'featured': 1000,
-        'verified': 500,
-        'free': 0,
-        'premium': 1000 // Legacy support
+    // Safety Floor Gatekeeper
+    // Default to 'specialist' results (>= 60) if no explicit view is set
+    const currentView = filters.view || 'specialist'
+    let finalProviders = deduplicated
+    if (currentView === 'specialist') {
+        finalProviders = deduplicated.filter(p => p.is_specialist)
+    } else if (currentView === 'general') {
+        finalProviders = deduplicated.filter(p => p.relegated)
     }
 
-    return deduplicated.sort((a: any, b: any) => {
-        const tierWeightA = tierWeight[a.listingTier as keyof typeof tierWeight] || 0
-        const tierWeightB = tierWeight[b.listingTier as keyof typeof tierWeight] || 0
+    const tierWeight = {
+        'featured': 1000,
+        'premium': 1000,
+        'verified': 500,
+        'free': 0
+    }
 
-        // 1. Featured always stays at top
-        if (tierWeightB !== tierWeightA) {
-            return tierWeightB - tierWeightA
+    return finalProviders.sort((a: any, b: any) => {
+        // 1. Pinned Elite Featured (85+)
+        const isPinnedA = a.listingTier === 'featured' && a.score_total >= 85
+        const isPinnedB = b.listingTier === 'featured' && b.score_total >= 85
+        if (isPinnedA && !isPinnedB) return -1
+        if (!isPinnedA && isPinnedB) return 1
+
+        // 2. Section: Featured first
+        const weightA = tierWeight[a.listingTier as keyof typeof tierWeight] || 0
+        const weightB = tierWeight[b.listingTier as keyof typeof tierWeight] || 0
+        if (weightB !== weightA) return weightB - weightA
+
+        // 3. II-Priority Score Sort (40/35/25)
+        if (Math.abs(b.priority_score - a.priority_score) > 0.1) {
+            return b.priority_score - a.priority_score
         }
 
-        // 2. Proximity (Primary if location is active)
-        if (filters.userLat && filters.userLng) {
-            const hasA = a.lat !== 0 && a.lng !== 0;
-            const hasB = b.lat !== 0 && b.lng !== 0;
-
-            if (hasA && hasB) {
-                const distA = Math.sqrt(Math.pow(a.lat - filters.userLat, 2) + Math.pow(a.lng - filters.userLng, 2))
-                const distB = Math.sqrt(Math.pow(b.lat - filters.userLat, 2) + Math.pow(b.lng - filters.userLng, 2))
-
-                // If one is significantly closer (e.g. ~7 miles diff), prioritize it
-                if (Math.abs(distA - distB) > 0.1) {
-                    return distA - distB
-                }
-            } else if (hasA && !hasB) {
-                // If A is within ~35 miles and B has no coords, prioritize A
-                const distA = Math.sqrt(Math.pow(a.lat - filters.userLat, 2) + Math.pow(a.lng - filters.userLng, 2))
-                if (distA < 0.5) return -1;
-            } else if (!hasA && hasB) {
-                // If B is within ~35 miles and A has no coords, prioritize B
-                const distB = Math.sqrt(Math.pow(b.lat - filters.userLat, 2) + Math.pow(b.lng - filters.userLng, 2))
-                if (distB < 0.5) return 1;
+        // 4. Proximity as tie-breaker (if within range)
+        if (filters.userLat && filters.userLng && a.lat && a.lng && b.lat && b.lng) {
+            const distA = Math.sqrt(Math.pow(a.lat - filters.userLat, 2) + Math.pow(a.lng - filters.userLng, 2))
+            const distB = Math.sqrt(Math.pow(b.lat - filters.userLat, 2) + Math.pow(b.lng - filters.userLng, 2))
+            if (Math.abs(distA - distB) > 0.05) {
+                return distA - distB
             }
         }
 
-        // 3. Fallback to Score
-        const scoreA = a.score.points || 0
-        const scoreB = b.score.points || 0
-        return scoreB - scoreA
+        return b.score_total - a.score_total
     })
 }
 
@@ -509,6 +534,19 @@ export async function getProviderBySlug(slug: string) {
             website: data.website,
             responsiveness_score: data.responsiveness_score
         }),
+        score_total: calculateProviderScore({
+            price_per_unit: data.price_per_unit || data.botox_price_per_unit || data.enriched_attrs?.price_per_unit_botox,
+            rating: parseFloat(data.rating || data.average_rating || 0),
+            review_count: data.review_count || 0,
+            has_photo: !!(data.hero_image_url || data.image_url),
+            has_description: !!data.description,
+            is_verified: data.verified || false,
+            npi_verified: data.npi_verified || false,
+            allergan_tier: data.allergan_tier,
+            results_quality_score: data.score_results_quality,
+            website: data.website,
+            responsiveness_score: data.responsiveness_score
+        }).points,
 
         // Warning & Scoring Fields
         warning_flag: data.warning_flag || false,

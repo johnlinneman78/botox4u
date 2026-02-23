@@ -46,15 +46,15 @@ export function VerifyForm({ provider }: { provider: any }) {
     return (
         <form onSubmit={handleSubmit} className="space-y-8">
             {error && (
-                <div className="p-4 bg-red-50 border border-red-100 text-red-600 rounded-2xl text-sm font-medium">
+                <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-2xl text-sm font-medium">
                     {error}
                 </div>
             )}
 
             <div className="space-y-6">
                 <div className="space-y-2">
-                    <label className="text-sm font-bold text-primary uppercase tracking-wider flex items-center gap-2">
-                        <Mail className="w-4 h-4" />
+                    <label className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                        <Mail className="w-4 h-4 text-[#d4af37]" />
                         Practice Email
                     </label>
                     <input
@@ -62,14 +62,14 @@ export function VerifyForm({ provider }: { provider: any }) {
                         type="email"
                         name="email"
                         placeholder="dr.smith@example.com"
-                        className="w-full px-6 py-4 rounded-2xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-secondary/10 outline-none transition-all text-lg"
+                        className="w-full px-6 py-4 rounded-2xl border border-white/[0.08] bg-white/[0.03] focus:bg-white/[0.05] focus:ring-4 focus:ring-[#d4af37]/10 outline-none transition-all text-lg text-white placeholder-gray-600"
                     />
-                    <p className="text-[10px] text-gray-400 font-light">Enter the primary email address listed for your clinic.</p>
+                    <p className="text-[10px] text-gray-600 font-light">Enter the primary email address listed for your clinic.</p>
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-sm font-bold text-primary uppercase tracking-wider flex items-center gap-2">
-                        <ShieldCheck className="w-4 h-4" />
+                    <label className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                        <ShieldCheck className="w-4 h-4 text-[#d4af37]" />
                         NPI Number (10 Digits)
                     </label>
                     <input
@@ -78,9 +78,9 @@ export function VerifyForm({ provider }: { provider: any }) {
                         name="npi"
                         placeholder="1234567890"
                         pattern="[0-9]{10}"
-                        className="w-full px-6 py-4 rounded-2xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-4 focus:ring-secondary/10 outline-none transition-all text-lg tracking-[0.2em]"
+                        className="w-full px-6 py-4 rounded-2xl border border-white/[0.08] bg-white/[0.03] focus:bg-white/[0.05] focus:ring-4 focus:ring-[#d4af37]/10 outline-none transition-all text-lg tracking-[0.2em] text-white placeholder-gray-600"
                     />
-                    <p className="text-[10px] text-gray-400 font-light">Your federal Individual or Organizational NPI.</p>
+                    <p className="text-[10px] text-gray-600 font-light">Your federal Individual or Organizational NPI.</p>
                 </div>
 
                 <div className="pt-4">
@@ -90,10 +90,10 @@ export function VerifyForm({ provider }: { provider: any }) {
                                 required
                                 type="checkbox"
                                 name="tcpa_consent"
-                                className="w-5 h-5 rounded border-gray-300 text-secondary focus:ring-secondary cursor-pointer"
+                                className="w-5 h-5 rounded border-white/10 bg-white/[0.03] text-[#d4af37] focus:ring-[#d4af37]/20 cursor-pointer"
                             />
                         </div>
-                        <span className="text-xs text-gray-500 font-light leading-relaxed group-hover:text-gray-700 transition-colors">
+                        <span className="text-xs text-gray-600 font-light leading-relaxed group-hover:text-gray-400 transition-colors">
                             I agree to receive occasional updates about my Injector Index listing, including score changes and patient activity alerts. Message frequency: up to 4/month. Reply STOP to unsubscribe.
                         </span>
                     </label>
@@ -103,7 +103,7 @@ export function VerifyForm({ provider }: { provider: any }) {
             <button
                 disabled={loading}
                 type="submit"
-                className="w-full bg-primary text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl hover:scale-[1.02] transition-all disabled:opacity-50 disabled:scale-100 flex items-center justify-center gap-3 group"
+                className="w-full bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] py-5 rounded-2xl font-bold text-lg hover:shadow-2xl hover:shadow-[#d4af37]/20 hover:scale-[1.02] transition-all disabled:opacity-50 disabled:scale-100 flex items-center justify-center gap-3 group"
             >
                 {loading ? (
                     <Loader2 className="w-6 h-6 animate-spin" />

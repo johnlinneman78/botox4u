@@ -25,14 +25,14 @@ export default async function FeaturedProviders() {
     const displayProviders = providers
 
     return (
-        <section className="py-24 bg-white border-b border-gray-50">
+        <section className="py-24 bg-[#0d1420] border-b border-white/[0.05]">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col mb-16 gap-4 text-center">
-                    <h2 className="text-3xl md:text-5xl font-display font-bold text-primary">
+                    <h2 className="text-3xl md:text-5xl font-display font-bold text-white">
                         Top-Scoring Providers
                     </h2>
                     <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-                        Ranked by natural results, verified credentials, and real pricing. 100% independent data.
+                        Ranked by Regen-Ratio™, natural result integrity, and 2026 clinical innovation. 100% independent data.
                     </p>
                 </div>
 
@@ -44,7 +44,7 @@ export default async function FeaturedProviders() {
 
                 <div className="flex justify-center">
                     <Link href="/find-providers">
-                        <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-white px-12 py-7 text-lg font-bold rounded-2xl shadow-sm transition-all hover:scale-[1.02]">
+                        <Button variant="outline" className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10 px-12 py-7 text-lg font-bold rounded-2xl shadow-sm transition-all hover:scale-[1.02]">
                             Browse All Providers →
                         </Button>
                     </Link>

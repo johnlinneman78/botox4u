@@ -1,14 +1,14 @@
-# 🗓️ 90-Day Sprint Plan: Botox-4U.com
+# 🗓️ 90-Day Sprint Plan: InjectorIndex.com
 **Strategy:** Local Market Domination → National Scaling → Monetization
 
 ## 🏁 Phase 1: Market Foundation & Launch (Days 1–7) - CURRENT
 **Objective:** Zero credibility issues in the primary target market.
-- [x] **Redesign & Whitelabel**: Full migration to Botox4U branding and botox-4u.com domain. (DONE)
+- [x] **Redesign & Optimization**: Full migration to Injector Index branding and injectorindex.com domain. (DONE)
 - [x] **Audit Tier 1 Cities**: Verify all providers in top cities have unique descriptions and $14/unit pricing. (DONE)
 - [x] **JSON-LD Implementation**: MedicalBusiness, Breadcrumb, and ItemList schema live on all provider/city pages. (DONE)
-- [x] **Geo-Targeted Hero**: Custom hero message for local visitors ("Most Transparent Botox Directory"). (DONE)
-- [x] **Deployment**: Successful production launch on Vercel at botox-4u.com. (DONE)
-- [ ] **Sitemap Indexing**: Verify GSC indexing for the new domain sitemaps.
+- [x] **Geo-Targeted Hero**: Custom hero message for local visitors ("Most Transparent Injector Directory"). (DONE)
+- [x] **Deployment**: Successful production launch on Vercel at injectorindex.com. (DONE)
+- [ ] **Sitemap Indexing**: Verify GSC indexing for the domain sitemaps.
 
 ## 📈 Phase 2: National Footprint & SEO Moat (Days 8–30)
 **Objective:** Scale data to 2,000+ providers across major metros.
@@ -18,7 +18,7 @@
 - [ ] **Internal Linking Hubs**: Automated cross-linking between State → City → Treatment pages.
 
 ## 🛡️ Phase 3: The Trust Engine (Days 31–60)
-**Objective:** Establish Botox4U as the gold standard for transparency.
+**Objective:** Establish Injector Index as the gold standard for transparency.
 - [ ] **Credential Verification**: Automated NPI number lookup and license type display (RN vs. MD vs. PA).
 - [ ] **Diamond Status Badges**: Scrape and display Allergan Diamond/Elite status for top 100 clinics.
 - [ ] **Review Sentiment Analysis**: Flag and filter "suspicious" reviews vs. helpful clinical feedback.
@@ -26,7 +26,7 @@
 
 ## 📧 Phase 4: Outreach Preparation (Days 61–89)
 **Objective:** Warm up the database for monetization without launching yet.
-- [ ] **Track B Sequence Finalization**: Automated personalized emails ("You're listed on Botox4U") ready for Day 90.
+- [ ] **Track B Sequence Finalization**: Automated personalized emails ("You're listed on Injector Index") ready for Day 90.
 - [ ] **Admin Dashboard**: Real-time tracking of impressions/clicks for every unclaimed listing.
 - [ ] **Provider Portal Foundation**: "Claim Your Profile" dashboard built and tested in staging.
 
@@ -37,4 +37,4 @@
 - [ ] **Featured Listings**: Launch "Top of Page" sponsored spots for verified clinics.
 
 ---
-*Updated for the Botox4U National Rollout.*
+*Updated for the Injector Index National Rollout.*

@@ -11,13 +11,13 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 export const metadata: Metadata = {
-  title: `${NICHE.siteName} — ${NICHE.tagline}`,
-  description: `Find the best ${NICHE.name} ${NICHE.providerTypePlural} near you. Compare prices, read reviews, and book consultations with verified providers at ${NICHE.siteName}.`,
-  keywords: `${NICHE.name.toLowerCase()}, ${NICHE.name.toLowerCase()} near me, ${NICHE.name.toLowerCase()} cost, aesthetics, aesthetic providers, cosmetic injections`,
+  title: `${NICHE.siteName} — Defining the Neo-Romantic Era of Medical Aesthetics`,
+  description: `Injector Index: Defining the Neo-Romantic era of medical aesthetics through data-driven clinic audits and regenerative intelligence. Compare Polynucleotides, Daxxify, and bio-stimulator providers ranked by Regen-Ratio™. Real pricing. Verified credentials. Zero pay-to-rank.`,
+  keywords: `neo-romantic aesthetics, regenerative medicine, polynucleotides, daxxify, bio-stimulators, facial harmony, undetectable results, aesthetic intelligence, nurse injectors near me, II-Score, Regen-Ratio, clinical data`,
   metadataBase: new URL(`https://${NICHE.domain}`),
   openGraph: {
-    title: `${NICHE.siteName} — ${NICHE.tagline}`,
-    description: `Find the best ${NICHE.name} ${NICHE.providerTypePlural} near you. Compare prices, read reviews, and book consultations.`,
+    title: `${NICHE.siteName} — Leading the Neo-Romantic Aesthetic Movement in Regenerative Medicine`,
+    description: `The first aesthetic directory powered by regenerative intelligence. Ranked by Regen-Ratio™, natural integrity, and 2026 clinical innovation. Polynucleotides, Daxxify, bio-stimulators — the future of facial harmony.`,
     type: 'website',
     url: `https://${NICHE.domain}`,
     siteName: NICHE.siteName,
@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="font-sans antialiased bg-white text-gray-900">
+      <body className="font-sans antialiased bg-[#0d1420] text-gray-100">
         <Suspense fallback={null}>
           <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_ID || ''} />
         </Suspense>

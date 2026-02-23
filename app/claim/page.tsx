@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 export default function ClaimDirectoryPage() {
     return (
-        <div className="bg-white min-h-screen">
+        <div className="bg-[#0d1420] min-h-screen">
             {/* HER SECTION */}
             <div className="bg-[#1a2332] text-white py-24 px-4 overflow-hidden relative">
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-[#d4af37]/10 -skew-x-12 translate-x-1/3" />
@@ -32,7 +32,7 @@ export default function ClaimDirectoryPage() {
                                         name="q"
                                         type="text"
                                         placeholder="Search for your clinic name..."
-                                        className="w-full h-14 pl-12 pr-4 bg-white text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#d4af37]"
+                                        className="w-full h-14 pl-12 pr-4 bg-white/[0.03] border border-white/[0.06] text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-[#d4af37] placeholder:text-gray-600"
                                     />
                                 </div>
                                 <Button type="submit" className="bg-[#d4af37] hover:bg-[#c0a030] text-[#1a2332] font-bold h-14 px-8 rounded-xl">
@@ -55,8 +55,8 @@ export default function ClaimDirectoryPage() {
                             <div className="h-12 w-12 bg-gold/10 rounded-xl flex items-center justify-center text-[#d4af37] mb-6">
                                 <ShieldCheck className="w-6 h-6" />
                             </div>
-                            <h3 className="text-2xl font-bold mb-4">NPI Verification</h3>
-                            <p className="text-gray-600 leading-relaxed font-light">
+                            <h3 className="text-2xl font-bold text-white mb-4">NPI Verification</h3>
+                            <p className="text-gray-500 leading-relaxed font-light">
                                 Authenticate your medical credentials with our direct NPI database integration. Earn the verification badge that 80% of patients look for.
                             </p>
                         </div>
@@ -64,8 +64,8 @@ export default function ClaimDirectoryPage() {
                             <div className="h-12 w-12 bg-gold/10 rounded-xl flex items-center justify-center text-[#d4af37] mb-6">
                                 <ArrowRight className="w-6 h-6" />
                             </div>
-                            <h3 className="text-2xl font-bold mb-4">Lead Generation</h3>
-                            <p className="text-gray-600 leading-relaxed font-light">
+                            <h3 className="text-2xl font-bold text-white mb-4">Lead Generation</h3>
+                            <p className="text-gray-500 leading-relaxed font-light">
                                 Our users are high-intent patients ready to book. Verified profiles see a 4x increase in profile clicks and consultation requests.
                             </p>
                         </div>
@@ -73,7 +73,7 @@ export default function ClaimDirectoryPage() {
                             <div className="h-12 w-12 bg-gold/10 rounded-xl flex items-center justify-center text-[#d4af37] mb-6">
                                 <Search className="w-6 h-6" />
                             </div>
-                            <h3 className="text-2xl font-bold mb-4">Pricing Control</h3>
+                            <h3 className="text-2xl font-bold text-white mb-4">Pricing Control</h3>
                             <p className="text-gray-500 leading-relaxed font-light">
                                 Stop being compared on price without context. List your per-unit rates and specialized treatment packages to attract the right patients.
                             </p>

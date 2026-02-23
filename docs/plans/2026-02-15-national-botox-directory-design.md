@@ -1,8 +1,8 @@
-# Botox4U (Botox-4U.com) - Strategic Design Document
+# Injector Index (InjectorIndex.com) - Strategic Design Document
 
 **Date:** February 15, 2026 (Updated Feb 23, 2026)  
-**Project:** Botox4U National Directory  
-**Status:** Phase 1 Complete - Domain Live (Botox-4U.com)
+**Project:** Injector Index National Directory  
+**Status:** Phase 1 Complete - Domain Live (InjectorIndex.com)
 
 ---
 
@@ -78,7 +78,7 @@ Building a production-ready, national directory website for Botox and cosmetic i
 ### Deployment & Infrastructure
 - **Hosting:** Vercel
 - **CDN:** Vercel Edge Network
-- **Domain:** Botox-4u.com (Live - Successfully Migrated from Injector Index)
+- **Domain:** InjectorIndex.com (Live - Primary Brand)
 - **SSL:** Automatic via Vercel
 
 ### SEO & Performance

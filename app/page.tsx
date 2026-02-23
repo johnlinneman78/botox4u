@@ -3,14 +3,16 @@ import FeaturedCities from '@/components/home/FeaturedCities'
 import FeaturedProviders from '@/components/home/FeaturedProviders'
 import HowItWorks from '@/components/home/HowItWorks'
 import AestheticsNews from '@/components/home/AestheticsNews'
+import TreatmentTrends from '@/components/home/TreatmentTrends'
+import NewsletterAudit from '@/components/home/NewsletterAudit'
 import { Suspense } from 'react'
 import { Metadata } from 'next'
 import { NICHE } from '@/config/niche'
 import { JsonLd, generateWebSiteSchema } from '@/components/seo/JsonLd'
 
 export const metadata: Metadata = {
-  title: `Find Your Perfect Injector | ${NICHE.siteName}`,
-  description: "We score every provider on natural results, real pricing, and verified credentials — so you can compare in minutes.",
+  title: `Find Regenerative Injectors Near You | ${NICHE.siteName}`,
+  description: "The first directory ranked by Regen-Ratio™ — track Polynucleotides, Daxxify, and natural results. Real pricing. Verified credentials. Zero pay-to-rank.",
   alternates: {
     canonical: '/',
   }
@@ -22,23 +24,33 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={generateWebSiteSchema()} />
-      {/* 1. Hero */}
+
+      {/* 1. Hero — Neo-Romantic, Regen-First */}
       <Hero />
 
-      {/* 2. Condensed score preview (3 top providers) */}
-      <Suspense fallback={<div className="py-24 flex items-center justify-center bg-gray-50">Loading Top Providers...</div>}>
+      {/* 2. Top Scoring Providers (geo-personalized) */}
+      <Suspense fallback={
+        <div className="py-24 flex items-center justify-center bg-[#0d1420] text-gray-600">
+          Loading top providers…
+        </div>
+      }>
         <FeaturedProviders />
       </Suspense>
 
-      {/* 3. How the II-Score Works */}
+      {/* 3. 2026 Treatment Hierarchy (PNs, Daxxify, Exosomes, Sculptra) */}
+      <TreatmentTrends />
+
+      {/* 4. II-Score™ Methodology */}
       <HowItWorks />
 
-      {/* 4. City grid */}
+      {/* 5. Free Clinic Audit + Newsletter Signup */}
+      <NewsletterAudit />
+
+      {/* 6. City Grid */}
       <FeaturedCities />
 
-      {/* 5. Aesthetics News & Guides */}
+      {/* 7. Intelligence & Guides */}
       <AestheticsNews />
-
     </>
   )
 }

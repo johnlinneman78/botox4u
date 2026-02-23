@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function BadgePage() {
     return (
-        <div className="bg-gray-50 min-h-screen pb-24">
+        <div className="bg-[#0d1420] min-h-screen pb-24">
             {/* Hero Section */}
             <section className="bg-primary pt-24 pb-32 text-white relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-[#1a2332]" />
@@ -38,9 +38,9 @@ export default function BadgePage() {
                     <div className="lg:col-span-8 space-y-12">
 
                         {/* 1. The Badge Preview */}
-                        <Card className="rounded-[2.5rem] border-none shadow-2xl overflow-hidden bg-white">
-                            <CardHeader className="bg-gray-50/50 border-b border-gray-100 p-8">
-                                <CardTitle className="text-2xl font-display font-bold text-primary flex items-center gap-3">
+                        <Card className="rounded-[2.5rem] border border-white/[0.06] shadow-2xl overflow-hidden bg-[#101827]">
+                            <CardHeader className="bg-white/[0.02] border-b border-white/[0.06] p-8">
+                                <CardTitle className="text-2xl font-display font-bold text-white flex items-center gap-3">
                                     <ShieldCheck className="w-7 h-7 text-secondary" />
                                     Official Badge Assets
                                 </CardTitle>
@@ -49,21 +49,21 @@ export default function BadgePage() {
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center justify-items-center mb-16">
                                     {/* Large */}
                                     <div className="text-center group">
-                                        <div className="w-48 h-48 mb-6 flex items-center justify-center bg-white rounded-3xl border border-gray-100 shadow-xl group-hover:scale-105 transition-transform duration-500">
+                                        <div className="w-48 h-48 mb-6 flex items-center justify-center bg-[#0d1420] rounded-3xl border border-white/[0.06] shadow-xl group-hover:scale-105 transition-transform duration-500">
                                             <BadgeLogo size={160} />
                                         </div>
                                         <div className="text-[10px] font-black uppercase tracking-widest text-[#d4af37]">Large (200px)</div>
                                     </div>
                                     {/* Medium */}
                                     <div className="text-center group">
-                                        <div className="w-32 h-32 mb-6 flex items-center justify-center bg-white rounded-2xl border border-gray-100 shadow-lg group-hover:scale-105 transition-transform duration-500">
+                                        <div className="w-32 h-32 mb-6 flex items-center justify-center bg-[#0d1420] rounded-2xl border border-white/[0.06] shadow-lg group-hover:scale-105 transition-transform duration-500">
                                             <BadgeLogo size={100} />
                                         </div>
                                         <div className="text-[10px] font-black uppercase tracking-widest text-[#d4af37]">Medium (120px)</div>
                                     </div>
                                     {/* Small */}
                                     <div className="text-center group">
-                                        <div className="w-24 h-24 mb-6 flex items-center justify-center bg-white rounded-xl border border-gray-100 shadow-md group-hover:scale-105 transition-transform duration-500">
+                                        <div className="w-24 h-24 mb-6 flex items-center justify-center bg-[#0d1420] rounded-xl border border-white/[0.06] shadow-md group-hover:scale-105 transition-transform duration-500">
                                             <BadgeLogo size={60} />
                                         </div>
                                         <div className="text-[10px] font-black uppercase tracking-widest text-[#d4af37]">Small (80px)</div>
@@ -93,8 +93,8 @@ export default function BadgePage() {
                         </Card>
 
                         {/* 2. Eligibility Section */}
-                        <div className="bg-white rounded-[2.5rem] border border-gray-100 p-10 md:p-14 shadow-sm">
-                            <h2 className="text-3xl font-display font-bold text-primary mb-8 tracking-tight">Eligibility Criteria</h2>
+                        <div className="bg-[#101827] rounded-[2.5rem] border border-white/[0.06] p-10 md:p-14">
+                            <h2 className="text-3xl font-display font-bold text-white mb-8 tracking-tight">Eligibility Criteria</h2>
                             <div className="space-y-8">
                                 {[
                                     {
@@ -114,11 +114,11 @@ export default function BadgePage() {
                                     }
                                 ].map((item) => (
                                     <div key={item.title} className="flex gap-6">
-                                        <div className="p-3 bg-gray-50 rounded-2xl text-secondary h-fit">
+                                        <div className="p-3 bg-white/[0.03] border border-white/[0.06] rounded-2xl text-secondary h-fit">
                                             <item.icon className="w-6 h-6" />
                                         </div>
                                         <div>
-                                            <h3 className="text-xl font-bold text-primary mb-2">{item.title}</h3>
+                                            <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
                                             <p className="text-gray-500 font-light leading-relaxed">{item.desc}</p>
                                         </div>
                                     </div>
@@ -130,9 +130,9 @@ export default function BadgePage() {
                     {/* Sidebar: Check Eligibility */}
                     <div className="lg:col-span-4 space-y-8">
                         <div className="sticky top-24">
-                            <Card className="rounded-[2.5rem] border-none shadow-xl overflow-hidden bg-white">
-                                <CardHeader className="bg-[#fbfff0] border-b border-[#e6f0c8] p-8">
-                                    <CardTitle className="text-xl font-display font-bold text-primary">Check Your Status</CardTitle>
+                            <Card className="rounded-[2.5rem] border border-white/[0.06] shadow-xl overflow-hidden bg-[#101827]">
+                                <CardHeader className="bg-white/[0.02] border-b border-white/[0.06] p-8">
+                                    <CardTitle className="text-xl font-display font-bold text-white">Check Your Status</CardTitle>
                                 </CardHeader>
                                 <CardContent className="p-8">
                                     <p className="text-sm text-gray-500 font-light leading-relaxed mb-8">
@@ -144,7 +144,7 @@ export default function BadgePage() {
                                             <input
                                                 type="text"
                                                 placeholder="Search practice name..."
-                                                className="w-full bg-gray-50 border-gray-200 rounded-2xl py-4 pl-12 pr-4 text-sm focus:ring-2 focus:ring-secondary focus:border-transparent transition-all"
+                                                className="w-full bg-white/[0.03] border border-white/[0.06] rounded-2xl py-4 pl-12 pr-4 text-sm text-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all placeholder:text-gray-600"
                                             />
                                         </div>
                                         <Button className="w-full bg-primary hover:bg-[#1a2332] text-white font-bold py-6 rounded-2xl shadow-lg transition-transform hover:-translate-y-1">
@@ -154,8 +154,8 @@ export default function BadgePage() {
                                 </CardContent>
                             </Card>
 
-                            <div className="mt-8 p-8 rounded-[2rem] bg-gray-50 border border-gray-100">
-                                <div className="flex items-center gap-3 text-primary font-bold mb-4">
+                            <div className="mt-8 p-8 rounded-[2rem] bg-white/[0.02] border border-white/[0.06]">
+                                <div className="flex items-center gap-3 text-white font-bold mb-4">
                                     <Info className="w-5 h-5" />
                                     Independence Notice
                                 </div>

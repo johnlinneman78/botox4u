@@ -74,7 +74,7 @@ export default async function ClaimLandingPage({ params }: { params: Promise<{ s
                             </div>
                             <h3 className="text-xl font-bold text-primary mb-4">Verify Your Credentials</h3>
                             <p className="text-gray-500 font-light leading-relaxed">
-                                Link your profile to your NPI license to earn the "NPI Verified" badge and Signal 3 trust points.
+                                Link your profile to your NPI license to earn the "NPI Verified" badge and activate your Trust Signal within our proprietary index.
                             </p>
                         </div>
 

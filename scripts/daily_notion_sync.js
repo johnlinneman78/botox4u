@@ -210,7 +210,7 @@ function loadSyncLog() {
 }
 
 async function main() {
-    console.log('🔄 Daily Notion Sync - Botox-4u.com');
+    console.log('🔄 Daily Notion Sync - InjectorIndex.com');
     console.log(`⏰ ${new Date().toLocaleString()}\n`);
 
     try {

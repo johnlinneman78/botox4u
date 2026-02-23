@@ -1,76 +1,94 @@
 import Link from 'next/link'
-import { Card, CardContent } from '@/components/ui/Card'
-import { formatCurrency } from '@/lib/utils'
 import { headers } from 'next/headers'
+import { MapPin, ChevronRight } from 'lucide-react'
 
-const featuredCities = [
-    { name: 'New York', state: 'NY', slug: 'new-york-ny', avgCost: 18, providers: 142 },
-    { name: 'Los Angeles', state: 'CA', slug: 'los-angeles-ca', avgCost: 14, providers: 128 },
-    { name: 'Miami', state: 'FL', slug: 'miami-fl', avgCost: 16, providers: 95 },
-    { name: 'Chicago', state: 'IL', slug: 'chicago-il', avgCost: 12, providers: 82 },
-    { name: 'Dallas', state: 'TX', slug: 'dallas-tx', avgCost: 11, providers: 76 },
-    { name: 'Scottsdale', state: 'AZ', slug: 'scottsdale-az', avgCost: 13, providers: 64 },
-    { name: 'Houston', state: 'TX', slug: 'houston-tx', avgCost: 11, providers: 89 },
-    { name: 'San Francisco', state: 'CA', slug: 'san-francisco-ca', avgCost: 19, providers: 54 },
-    { name: 'Portland', state: 'OR', slug: 'portland-or', avgCost: 14, providers: 90 },
+const FEATURED_CITIES = [
+    { name: 'Portland', state: 'OR', slug: 'or/portland', avgCost: 14, providers: 90, regen: true, tag: '🌿 Regen Leader' },
+    { name: 'Seattle', state: 'WA', slug: 'wa/seattle', avgCost: 16, providers: 72, regen: true, tag: '🔬 PN Emerging' },
+    { name: 'San Francisco', state: 'CA', slug: 'ca/san-francisco', avgCost: 19, providers: 54, regen: true, tag: '💎 Bio-Hacking Hub' },
+    { name: 'Los Angeles', state: 'CA', slug: 'ca/los-angeles', avgCost: 14, providers: 128, regen: false, tag: '' },
+    { name: 'New York', state: 'NY', slug: 'ny/new-york', avgCost: 18, providers: 142, regen: false, tag: '' },
+    { name: 'Miami', state: 'FL', slug: 'fl/miami', avgCost: 16, providers: 95, regen: false, tag: '' },
+    { name: 'Chicago', state: 'IL', slug: 'il/chicago', avgCost: 12, providers: 82, regen: false, tag: '' },
+    { name: 'Scottsdale', state: 'AZ', slug: 'az/scottsdale', avgCost: 13, providers: 64, regen: false, tag: '' },
 ]
 
 export default async function FeaturedCities() {
     const headerList = await headers()
-    const userCity = headerList.get('x-vercel-ip-city')
+    const userCity = headerList.get('x-vercel-ip-city') || ''
 
-    // Sort cities to put the user's city first if it matches
-    const sortedCities = [...featuredCities].sort((a, b) => {
+    const sorted = [...FEATURED_CITIES].sort((a, b) => {
         if (a.name === userCity) return -1
         if (b.name === userCity) return 1
         return 0
     })
 
     return (
-        <section className="py-16 bg-white">
+        <section className="py-20 bg-[#101827] border-t border-white/[0.05]">
             <div className="container mx-auto px-4">
-                <div className="text-center mb-12">
-                    <h2 className="text-4xl font-display font-bold text-primary mb-4">
-                        Popular Cities
-                    </h2>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Explore Botox providers in major metropolitan areas across the United States
-                    </p>
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                    <div>
+                        <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-3">
+                            Explore by City
+                        </h2>
+                        <p className="text-gray-500">
+                            Real pricing, verified credentials, and Regen-Ratio™ rankings — every city.
+                        </p>
+                    </div>
+                    <Link href="/botox" className="text-[#d4af37] font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all shrink-0">
+                        All States & Cities <ChevronRight className="w-4 h-4" />
+                    </Link>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {sortedCities.map((city) => (
-                        <Link key={city.slug} href={`/botox/${city.slug}`}>
-                            <Card className="h-full hover:shadow-lg transition-all duration-200 cursor-pointer">
-                                <CardContent className="p-6">
-                                    <h3 className="text-xl font-display font-semibold text-primary mb-2">
-                                        {city.name}, {city.state}
-                                    </h3>
-                                    <div className="space-y-2 text-sm text-gray-600">
-                                        <div className="flex justify-between">
-                                            <span>Average Cost:</span>
-                                            <span className="font-semibold text-secondary">{formatCurrency(city.avgCost)}</span>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <span>Providers:</span>
-                                            <span className="font-semibold">{city.providers}</span>
-                                        </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {sorted.map((city) => (
+                        <Link key={city.slug} href={`/botox/${city.slug}`} className="group">
+                            <div className={`bg-white/[0.02] border rounded-2xl p-6 hover:bg-white/[0.05] hover:border-[#d4af37]/20 transition-all h-full ${city.name === userCity
+                                    ? 'border-[#d4af37]/30 bg-[#d4af37]/5'
+                                    : 'border-white/[0.06]'
+                                }`}>
+                                <div className="flex items-center justify-between mb-3">
+                                    <div className="flex items-center gap-2">
+                                        <MapPin className="w-3.5 h-3.5 text-[#d4af37]" />
+                                        <h3 className="font-bold text-white text-sm">
+                                            {city.name}, {city.state}
+                                        </h3>
                                     </div>
-                                    <div className="mt-4 text-sm text-secondary font-medium">
-                                        View Providers →
+                                    {city.name === userCity && (
+                                        <span className="text-[9px] text-[#d4af37] font-black uppercase tracking-widest bg-[#d4af37]/10 px-2 py-0.5 rounded-full border border-[#d4af37]/20">
+                                            Near You
+                                        </span>
+                                    )}
+                                </div>
+
+                                {city.tag && (
+                                    <p className="text-xs text-gray-500 mb-3">{city.tag}</p>
+                                )}
+
+                                <div className="space-y-1.5 text-xs">
+                                    <div className="flex justify-between text-gray-600">
+                                        <span>Avg. per unit</span>
+                                        <span className="font-bold text-[#d4af37]">${city.avgCost}</span>
                                     </div>
-                                </CardContent>
-                            </Card>
+                                    <div className="flex justify-between text-gray-600">
+                                        <span>Providers indexed</span>
+                                        <span className="font-bold text-white">{city.providers}</span>
+                                    </div>
+                                </div>
+                                <div className="mt-4 text-xs font-bold text-gray-700 group-hover:text-[#d4af37] transition-colors">
+                                    View Rankings →
+                                </div>
+                            </div>
                         </Link>
                     ))}
                 </div>
 
-                <div className="text-center mt-12">
-                    <Link href="/claim" className="text-secondary hover:text-secondary/80 font-medium block mb-4">
-                        Promote My Clinic →
-                    </Link>
-                    <Link href="/botox" className="text-secondary hover:text-secondary/80 font-medium">
-                        View All States & Cities →
+                <div className="mt-8 text-center">
+                    <Link
+                        href="/claim"
+                        className="text-sm text-gray-600 hover:text-[#d4af37] font-semibold transition-colors"
+                    >
+                        Is your clinic missing? Claim your free listing →
                     </Link>
                 </div>
             </div>

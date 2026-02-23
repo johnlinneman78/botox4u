@@ -1,82 +1,119 @@
-import { NICHE } from '@/config/niche'
-import { Target, DollarSign, Users, ShieldCheck, Eye } from 'lucide-react'
+import { Dna, ShieldCheck, Cpu, Award, AlertTriangle, TrendingUp } from 'lucide-react'
+import Link from 'next/link'
+
+const FACTORS = [
+    {
+        title: 'Regen-Ratio™',
+        label: 'Primary Signal',
+        description: 'What percentage of this provider\'s menu is regenerative medicine (Polynucleotides, Sculptra, PRF, Exosomes) vs. traditional HA filler? Higher biological innovation = higher score.',
+        icon: <Dna className="w-7 h-7" />,
+        color: 'bg-emerald-950/50 text-emerald-400 border-emerald-800/40',
+        glow: 'shadow-emerald-500/10',
+    },
+    {
+        title: 'Natural Integrity',
+        label: 'Clinical Signal',
+        description: 'AI-assisted sentiment analysis of patient reviews. We flag "frozen," "overdone," and "migration" as red flags. We reward "natural," "subtle," and "undetectable" — consistently.',
+        icon: <ShieldCheck className="w-7 h-7" />,
+        color: 'bg-blue-950/50 text-blue-400 border-blue-800/40',
+        glow: 'shadow-blue-500/10',
+    },
+    {
+        title: 'Innovation Score',
+        label: 'Growth Signal',
+        description: 'Are they offering Daxxify (6–9 month longevity)? Ultrasound-guided injections? AI skin mapping? 2026 providers who adopt cutting-edge tech score higher.',
+        icon: <Cpu className="w-7 h-7" />,
+        color: 'bg-violet-950/50 text-violet-400 border-violet-800/40',
+        glow: 'shadow-violet-500/10',
+    },
+    {
+        title: 'Provider Pedigree',
+        label: 'Trust Signal',
+        description: 'Verified NPI federal credentials, advanced training in PN protocols, board certifications, and peer-recognized case study contributions.',
+        icon: <Award className="w-7 h-7" />,
+        color: 'bg-amber-950/50 text-amber-400 border-amber-800/40',
+        glow: 'shadow-amber-500/10',
+    },
+]
+
+const PENALTIES = [
+    {
+        label: '"Pillow-Face" Penalty',
+        desc: 'Reviews mentioning swollen, unnatural, or migrated results trigger an automated Signal deduction.',
+        icon: <AlertTriangle className="w-4 h-4" />
+    },
+    {
+        label: 'Prejuvenation Bonus',
+        desc: 'Gen Z-focused, conservative micro-dose Daxxify/PN protocols earn a regenerative intelligence premium.',
+        icon: <TrendingUp className="w-4 h-4" />
+    },
+]
 
 export default function HowItWorks() {
-    const factors = [
-        {
-            title: 'Natural Results',
-            points: '30 pts',
-            description: 'We read the actual review language. Providers whose patients say "natural," "subtle," and "conservative" score highest. Providers whose patients mention "frozen" or "overdone" get flagged automatically.',
-            icon: <Target className="w-8 h-8" />,
-            color: 'bg-rose-50 text-rose-600'
-        },
-        {
-            title: 'Fair Pricing',
-            points: '25 pts',
-            description: 'We show real per-unit pricing and compare every provider to the city average. No "call for a consultation." No surprises when you get there.',
-            icon: <DollarSign className="w-8 h-8" />,
-            color: 'bg-emerald-50 text-emerald-600'
-        },
-        {
-            title: 'Patient Trust',
-            points: '20 pts',
-            description: 'How many real patients have reviewed this provider and what did they say? More verified reviews means more confidence in the score.',
-            icon: <Users className="w-8 h-8" />,
-            color: 'bg-blue-50 text-blue-600'
-        },
-        {
-            title: 'Verified Credentials',
-            points: '15 pts',
-            description: 'Every provider is cross-referenced against the federal NPI database to confirm their medical license and credential type.',
-            icon: <ShieldCheck className="w-8 h-8" />,
-            color: 'bg-indigo-50 text-indigo-600'
-        },
-        {
-            title: 'Transparency',
-            points: '10 pts',
-            description: 'Do they show their pricing? Do they have real photos? Do they respond to patient inquiries? Transparency is rewarded.',
-            icon: <Eye className="w-8 h-8" />,
-            color: 'bg-amber-50 text-amber-600'
-        }
-    ]
-
     return (
-        <section className="py-24 bg-white border-t border-gray-100">
+        <section className="py-24 bg-[#0d1420] border-t border-white/[0.05]">
             <div className="container mx-auto px-4">
-                <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-display font-bold text-primary mb-6">
-                        How the {NICHE.name}-4U Score Works
+                <div className="text-center mb-16 max-w-3xl mx-auto">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-black tracking-widest uppercase mb-6">
+                        <Dna className="w-3.5 h-3.5" /> II-Score™ 2026 Algorithm
+                    </div>
+                    <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
+                        The Only Score That Rewards <span className="text-[#d4af37]">Regeneration</span>
                     </h2>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        We analyzed thousands of real patient reviews to find out what actually goes wrong.
-                        Then we built a score that <span className="text-secondary font-bold">rewards providers who get it right.</span>
+                    <p className="text-xl text-gray-400 leading-relaxed font-light">
+                        Legacy directories rank by reviews bought and stars paid for. The II-Score™ is the first algorithm built around <span className="text-white font-semibold">2026 biological standards</span> — not marketing budgets.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                    {factors.map((factor) => (
-                        <div key={factor.title} className="bg-gray-50 rounded-3xl p-8 border border-gray-100 transition-all hover:shadow-xl hover:-translate-y-1 group">
-                            <div className={`w-16 h-16 rounded-2xl ${factor.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                {/* 4 Pillars */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                    {FACTORS.map((factor) => (
+                        <div
+                            key={factor.title}
+                            className={`bg-white/[0.02] border border-white/[0.06] rounded-3xl p-7 hover:bg-white/[0.05] transition-all hover:-translate-y-1 hover:shadow-xl ${factor.glow} group`}
+                        >
+                            <div className={`w-14 h-14 rounded-2xl ${factor.color} border flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
                                 {factor.icon}
                             </div>
                             <div className="flex items-center justify-between mb-2">
-                                <h3 className="text-lg font-bold text-primary">{factor.title}</h3>
-                                <span className="text-xs font-black text-secondary bg-white px-2 py-1 rounded-lg shadow-sm border border-gray-100">
-                                    {factor.points}
+                                <h3 className="text-base font-bold text-white">{factor.title}</h3>
+                                <span className="text-[10px] font-black text-[#d4af37] bg-[#d4af37]/10 border border-[#d4af37]/20 px-2 py-0.5 rounded-lg uppercase tracking-widest">
+                                    {factor.label}
                                 </span>
                             </div>
-                            <p className="text-sm text-gray-600 leading-relaxed">
+                            <p className="text-sm text-gray-500 leading-relaxed">
                                 {factor.description}
                             </p>
                         </div>
                     ))}
                 </div>
 
-                <div className="mt-16 p-8 bg-[#1a2332] rounded-[3rem] text-center text-white relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 blur-[100px] rounded-full -mr-32 -mt-32"></div>
-                    <p className="text-xl font-medium relative z-10">
-                        Nobody pays for a higher score. Rankings are pure data.
-                    </p>
+                {/* Bonus / Penalty bar */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+                    {PENALTIES.map((p) => (
+                        <div key={p.label} className="flex items-start gap-4 bg-white/[0.02] border border-white/[0.05] rounded-2xl px-6 py-4">
+                            <div className="text-[#d4af37] mt-0.5 shrink-0">{p.icon}</div>
+                            <div>
+                                <div className="text-sm font-bold text-white mb-0.5">{p.label}</div>
+                                <div className="text-xs text-gray-500">{p.desc}</div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Bottom bar */}
+                <div className="p-8 bg-gradient-to-r from-[#d4af37]/10 to-transparent rounded-[2rem] border border-[#d4af37]/15 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div>
+                        <div className="text-[#d4af37] font-black text-xs uppercase tracking-widest mb-2">No Pay-to-Rank Policy</div>
+                        <p className="text-lg font-bold text-white">Nobody buys a higher II-Score™. Rankings are pure data.</p>
+                        <p className="text-sm text-gray-500 mt-1">Providers may buy featured placement (disclosed clearly). Their II-Score remains immutable.</p>
+                    </div>
+                    <Link
+                        href="/methodology"
+                        className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] font-bold rounded-full hover:bg-[#d4af37]/20 transition-colors text-sm"
+                    >
+                        Full Methodology →
+                    </Link>
                 </div>
             </div>
         </section>

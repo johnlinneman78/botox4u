@@ -1,68 +1,75 @@
-import { ShieldCheck, Target, DollarSign, Activity } from 'lucide-react'
-import { NICHE } from '@/config/niche'
+import { ShieldCheck, Dna, DollarSign, Activity, Cpu } from 'lucide-react'
 
 export default function VerificationStandard() {
     const standards = [
         {
-            title: 'Natural Results Filter',
-            desc: 'We use sentiment analysis on thousands of patient reviews to identify injectors known for conservative, "not overdone" results.',
-            icon: Target,
+            title: 'Regen-Ratio™ Audit',
+            desc: 'We assess every provider\'s treatment menu: what percentage is regenerative (PNs, Sculptra, PRF) vs. traditional HA filler? Higher biological innovation = higher trust.',
+            icon: Dna,
+            accent: 'text-emerald-400',
+            bg: 'bg-emerald-950/30 border-emerald-800/30',
         },
         {
-            title: 'NPI Database Audit',
-            desc: `Every provider's credentials are cross-referenced against the federal registry to confirm their professional licensing and status.`,
+            title: 'NPI Federal Registry',
+            desc: 'Every provider\'s credentials are cross-referenced against the federal NPI database. We verify license type, specialty, and active status in real-time.',
             icon: Activity,
+            accent: 'text-blue-400',
+            bg: 'bg-blue-950/30 border-blue-800/30',
         },
         {
             title: 'Real Pricing Scraper',
-            desc: `We aggregate self-reported and public pricing data to show you the actual per-unit cost before you walk in the door.`,
+            desc: 'We aggregate self-reported and public pricing data — per-unit, per-session, and per-area — so you see exact costs before you book.',
             icon: DollarSign,
+            accent: 'text-amber-400',
+            bg: 'bg-amber-950/30 border-amber-800/30',
         },
         {
-            title: 'Data-Driven Trust',
-            desc: 'Providers earn their rank through consistent patient satisfaction and clinical transparency, not by paying for placement.',
-            icon: ShieldCheck,
+            title: '2026 Innovation Check',
+            desc: 'Is this provider offering Daxxify, ultrasound-guided technique, or exosome add-ons? Clinics that adopt 2026 standards get rewarded.',
+            icon: Cpu,
+            accent: 'text-violet-400',
+            bg: 'bg-violet-950/30 border-violet-800/30',
         }
     ]
 
     return (
-        <section className="py-24 bg-gray-50/50">
+        <section className="py-24 bg-[#101827] border-y border-white/[0.05]">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-16">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-sm font-bold mb-6">
-                            🛡️ INDEPENDENT AUDIT
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-black tracking-widest uppercase mb-6">
+                            🛡️ Independent Audit Protocol
                         </div>
-                        <h2 className="text-3xl md:text-5xl font-display font-bold text-primary mb-6">
-                            Our Transparency <span className="text-secondary tracking-tighter">Standard</span>
+                        <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+                            Our Transparency <span className="text-[#d4af37]">Standard</span>
                         </h2>
-                        <p className="text-xl text-gray-600 font-light max-w-2xl mx-auto leading-relaxed">
-                            40% of patients fear over-injection. We built a data protocol to help you find the injectors who value <span className="text-primary font-bold">natural results</span> as much as you do.
+                        <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto leading-relaxed">
+                            40% of patients fear over-injection. We built a data protocol to find injectors who value <span className="text-white font-semibold">biological repair</span> — not volume.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {standards.map((s) => (
-                            <div key={s.title} className="flex gap-6 items-start group">
-                                <div className="p-4 rounded-3xl bg-white text-secondary shrink-0 group-hover:bg-secondary group-hover:text-white transition-all duration-500 shadow-sm border border-gray-100">
-                                    <s.icon className="w-8 h-8" />
+                            <div key={s.title} className="flex gap-5 items-start group">
+                                <div className={`p-4 rounded-2xl ${s.bg} border shrink-0 group-hover:scale-110 transition-transform`}>
+                                    <s.icon className={`w-7 h-7 ${s.accent}`} />
                                 </div>
                                 <div className="space-y-2">
-                                    <h3 className="text-xl font-bold text-primary tracking-tight">{s.title}</h3>
-                                    <p className="text-gray-500 leading-relaxed font-light">{s.desc}</p>
+                                    <h3 className="text-lg font-bold text-white">{s.title}</h3>
+                                    <p className="text-gray-500 leading-relaxed text-sm">{s.desc}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    <div className="mt-20 p-8 rounded-[2.5rem] bg-[#1a2332] text-white flex flex-col md:flex-row items-center justify-between gap-8 border border-white/5 shadow-2xl">
+                    <div className="mt-16 p-8 rounded-[2.5rem] bg-gradient-to-r from-[#d4af37]/10 to-transparent border border-[#d4af37]/15 flex flex-col md:flex-row items-center justify-between gap-8">
                         <div>
-                            <div className="text-secondary font-black text-xs uppercase tracking-widest mb-2">Patient Protection</div>
-                            <h4 className="text-2xl font-bold mb-2">Nobody pays for a better score.</h4>
-                            <p className="text-gray-300 font-light">Clinics can buy featured placement, but they cannot buy points in the results quality or trust categories.</p>
+                            <div className="text-[#d4af37] font-black text-xs uppercase tracking-widest mb-2">Patient Protection</div>
+                            <h4 className="text-2xl font-bold text-white mb-2">Nobody pays for a better score.</h4>
+                            <p className="text-gray-500 font-light text-sm">Clinics can buy featured placement, but they cannot influence their proprietary clinical signals or trust categories with payment.</p>
                         </div>
                         <div className="shrink-0">
-                            <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-full text-secondary font-bold shadow-sm">
+                            <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-full text-[#d4af37] font-bold shadow-sm text-sm">
                                 <ShieldCheck className="w-5 h-5" />
                                 100% Data Driven
                             </div>

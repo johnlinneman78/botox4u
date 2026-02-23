@@ -155,12 +155,12 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
     ])
 
     return (
-        <main className="bg-gray-50 min-h-screen pb-20">
+        <main className="bg-[#0d1420] min-h-screen pb-20">
             <GeolocationSorter />
             <JsonLd data={itemListSchema} />
             <JsonLd data={breadcrumbs} />
             {/* Breadcrumbs */}
-            <div className="bg-[#1a2332] border-b border-white/10">
+            <div className="bg-[#101827] border-b border-white/[0.06]">
                 <div className="container mx-auto px-4 py-3 flex items-center gap-2 text-xs font-medium text-white/60">
                     <Link href="/" className="hover:text-white transition-colors">Home</Link>
                     <span>/</span>
@@ -227,7 +227,7 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                     <div className="md:col-span-2" id="listings">
                         <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-2xl font-display font-bold text-primary">
+                            <h2 className="text-2xl font-display font-bold text-white">
                                 {treatmentName ? `Best ${treatmentName} Providers in ${cityName}` : `Verified Providers in ${cityName}`}
                             </h2>
                         </div>
@@ -235,9 +235,9 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                         <div className="space-y-6">
                             {/* Top Rated Section for Treatments */}
                             {treatmentName && providers.filter((p: any) => p.averageRating >= 4.8).length > 0 && (
-                                <div className="mb-12 bg-secondary/5 p-6 rounded-3xl border border-secondary/10">
-                                    <div className="flex items-center gap-2 mb-6 text-secondary font-bold text-sm uppercase tracking-widest">
-                                        <Star className="w-4 h-4 fill-secondary" />
+                                <div className="mb-12 bg-[#d4af37]/5 p-6 rounded-3xl border border-[#d4af37]/15">
+                                    <div className="flex items-center gap-2 mb-6 text-[#d4af37] font-bold text-sm uppercase tracking-widest">
+                                        <Star className="w-4 h-4 fill-[#d4af37]" />
                                         Excellence Awards: Top Rated in {cityName}
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -257,8 +257,8 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                                         <EnhancedProviderCard key={provider.id} provider={provider} />
                                     ))
                                 ) : (
-                                    <div className="bg-white p-12 text-center rounded-3xl border border-gray-100 shadow-sm col-span-full">
-                                        <h3 className="text-2xl font-display font-bold text-primary mb-4">Verifying Providers in {cityName}</h3>
+                                    <div className="bg-white/[0.02] p-12 text-center rounded-3xl border border-white/[0.06] col-span-full">
+                                        <h3 className="text-2xl font-display font-bold text-white mb-4">Verifying Providers in {cityName}</h3>
                                         <p className="text-gray-500 max-w-md mx-auto mb-8 leading-relaxed">
                                             We're currently verifying pricing and reviews for clinics in {cityName}.
                                         </p>
@@ -295,7 +295,7 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
 
                 {!treatmentName && (
                     <div className="mt-20">
-                        <h3 className="text-2xl font-display font-bold text-primary mb-8 text-center">
+                        <h3 className="text-2xl font-display font-bold text-white mb-8 text-center">
                             Treatment Options in {cityName}
                         </h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -303,12 +303,12 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                                 <Link
                                     key={treatment.slug}
                                     href={`/${NICHE.baseSlug}/${treatment.slug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}`}
-                                    className="group bg-white p-8 rounded-2xl border border-gray-100 hover:border-secondary/30 hover:shadow-xl transition-all"
+                                    className="group bg-white/[0.02] p-8 rounded-2xl border border-white/[0.06] hover:border-[#d4af37]/20 hover:shadow-xl hover:shadow-[#d4af37]/5 transition-all"
                                 >
-                                    <h4 className="font-display font-bold text-xl text-primary group-hover:text-secondary transition-colors mb-2">
+                                    <h4 className="font-display font-bold text-xl text-white group-hover:text-[#d4af37] transition-colors mb-2">
                                         {treatment.name}
                                     </h4>
-                                    <div className="text-xs font-bold text-secondary uppercase tracking-widest flex items-center gap-2">
+                                    <div className="text-xs font-bold text-[#d4af37] uppercase tracking-widest flex items-center gap-2">
                                         View Prices & Providers <span className="text-lg">→</span>
                                     </div>
                                 </Link>
@@ -318,7 +318,7 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                 )}
 
                 <div className="mt-20 mb-12">
-                    <h3 className="text-2xl font-display font-bold text-primary mb-8">
+                    <h3 className="text-2xl font-display font-bold text-white mb-8">
                         Explore Nearby Cities
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
@@ -326,10 +326,10 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                             <Link
                                 key={city.city}
                                 href={`/${NICHE.baseSlug}/${city.state.toLowerCase()}/${city.city.toLowerCase().replace(/ /g, '-')}`}
-                                className="bg-white p-4 rounded-xl border border-gray-100 hover:border-secondary/30 hover:shadow-md transition-all text-center"
+                                className="bg-white/[0.02] p-4 rounded-xl border border-white/[0.06] hover:border-[#d4af37]/20 hover:shadow-md hover:shadow-[#d4af37]/5 transition-all text-center"
                             >
-                                <div className="font-bold text-primary text-sm mb-1">{city.city}</div>
-                                <div className="text-xs text-gray-400">{city.count} {city.count === 1 ? 'Clinic' : 'Clinics'}</div>
+                                <div className="font-bold text-white text-sm mb-1">{city.city}</div>
+                                <div className="text-xs text-gray-600">{city.count} {city.count === 1 ? 'Clinic' : 'Clinics'}</div>
                             </Link>
                         ))}
                     </div>
