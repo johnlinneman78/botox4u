@@ -104,6 +104,8 @@ Here's a quick framework for comparing Botox pricing without getting burned:
 **Compare to your city average.** If you're in Portland and someone quotes you $22/unit, you're paying 57% above average. That doesn't mean it's wrong — but you should understand what you're paying a premium for.
 
 **Check the provider's score.** On Injector Index, every indexed provider has a score based on natural results, fair pricing, patient trust, verified credentials, and transparency. Nobody pays for a higher score. It's just data.
+
+[Find Best Botox Providers in Portland →](https://www.injectorindex.com/find-providers?q=Botox&location=Portland)
     `,
         faqs: [
             {
@@ -547,6 +549,8 @@ How many PN sessions have they performed? PNs require different injection techni
 Do they combine PNs with other treatments? Providers who layer PNs with exosomes, PRF, or biostimulators tend to see faster and more dramatic results. This is where Portland's most innovative providers differentiate themselves.
 
 What's their Regen-Ratio? At Injector Index, we score every provider on what percentage of their practice is regenerative. A higher Regen-Ratio means the provider is more committed to biological repair over volume-based correction.
+
+[Find Best Polynucleotides (PNs) Providers in Portland →](https://www.injectorindex.com/find-providers?q=Polynucleotides&location=Portland)
 `,
         faqs: [
             {
@@ -609,6 +613,8 @@ Daxxify is NOT ideal for first-time neurotoxin patients (start with standard Bot
 In 2026, Gen Z represents roughly 10% of Portland's injectable market. Many of them are choosing Daxxify for preventative ("prejuvenation") protocols because twice-yearly micro-dose sessions are easier to maintain than quarterly Botox appointments.
 
 Portland providers report that typical Gen Z Daxxify patients use 15–25 units (forehead and glabella only) at a cost of $195–$450 per session, twice per year. Annual preventative cost: $390–$900 — less than most skin care subscriptions.
+
+[Find Best Daxxify Providers in Portland →](https://www.injectorindex.com/find-providers?q=Daxxify&location=Portland)
 `,
         faqs: [
             {

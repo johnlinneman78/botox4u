@@ -114,9 +114,9 @@ export default function TreatmentTrends() {
                         </div>
                         <Link
                             href="/botox-buyers-guide"
-                            className="shrink-0 inline-flex items-center gap-2 text-gray-500 hover:text-white font-bold transition-all text-sm"
+                            className="shrink-0 inline-flex items-center gap-2 text-gray-500 hover:text-[#d4af37] font-bold transition-all text-sm group"
                         >
-                            Full 2026 Buyers Guide <ChevronRight className="w-4 h-4" />
+                            Download the Free 2026 Regen Aesthetic Buyers Guide <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>
                 </div>
@@ -134,15 +134,24 @@ export default function TreatmentTrends() {
                                     }`}
                             >
                                 <div className="flex items-start justify-between mb-4">
-                                    <div className={`p-3 rounded-2xl bg-white/5 ${t.accent}`}>
+                                    <div className={`p-3 rounded-2xl bg-white/5 ${t.accent} group-hover:scale-110 transition-transform`}>
                                         {t.icon}
                                     </div>
-                                    <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-lg border ${t.badge_color}`}>
+                                    <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-lg border ${t.badge_color} group-hover:border-[#d4af37]/30 transition-colors`}>
                                         {t.badge}
                                     </span>
                                 </div>
-                                <h3 className="text-lg font-bold text-white mb-1">{t.name}</h3>
-                                <p className={`text-[10px] font-black uppercase tracking-widest ${t.accent}`}>{t.tagline}</p>
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <h3 className="text-lg font-bold text-white mb-1">{t.name}</h3>
+                                        <p className={`text-[10px] font-black uppercase tracking-widest ${t.accent}`}>{t.tagline}</p>
+                                    </div>
+                                    {selectedId !== t.id && (
+                                        <span className="text-[9px] font-black text-[#d4af37]/40 uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
+                                            Select treatment →
+                                        </span>
+                                    )}
+                                </div>
                             </button>
                         ))}
                     </div>
@@ -213,10 +222,10 @@ export default function TreatmentTrends() {
                             {/* CTAs */}
                             <div className="mt-12 pt-12 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <Link
-                                    href={`/find-providers?q=${activeTreatment.searchQuery}&tier=premium`}
+                                    href={`/find-providers?q=${activeTreatment.searchQuery}&location=${location}`}
                                     className={`flex items-center justify-center gap-3 py-5 rounded-2xl bg-[#d4af37] text-[#0d1420] font-black text-sm uppercase tracking-widest hover:scale-[1.02] hover:shadow-2xl hover:shadow-[#d4af37]/20 transition-all group`}
                                 >
-                                    Find {activeTreatment.searchQuery} Specialists
+                                    Find {activeTreatment.searchQuery} Providers in {location}
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                 </Link>
 
@@ -225,7 +234,7 @@ export default function TreatmentTrends() {
                                     className="flex items-center justify-center gap-3 py-5 rounded-2xl bg-white/[0.03] border border-white/[0.1] text-white font-black text-sm uppercase tracking-widest hover:bg-white/[0.05] transition-all group"
                                 >
                                     <Activity className="w-4 h-4 text-[#d4af37] group-hover:animate-pulse" />
-                                    Get Free Clinic Audit
+                                    Get Your Free Clinic Audit
                                 </Link>
                             </div>
                         </div>
