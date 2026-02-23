@@ -57,10 +57,10 @@ export default async function FindProvidersPage({
                 <div className="flex flex-col md:flex-row gap-8 mb-8">
                     <div className="bg-[#d4af37]/5 border border-[#d4af37]/10 rounded-2xl p-6 flex items-start gap-4 max-w-2xl flex-1">
                         <div className="p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] shrink-0">
-                            <Dna className="w-6 h-6 text-[#d4af37]" />
+                            <ShieldCheck className="w-6 h-6 text-[#d4af37]" />
                         </div>
                         <div>
-                            <h4 className="font-bold text-white text-sm mb-1">Ranked by II-Score™ Algorithm</h4>
+                            <h4 className="font-bold text-white text-sm mb-1">Elite Audit Evaluation</h4>
                             <p className="text-xs text-gray-500 leading-relaxed">
                                 Our directory uses a 100% data-driven algorithm. Providers are ranked on
                                 <b className="text-gray-400"> Regen-Ratio™</b>, <b className="text-gray-400">verified patient sentiment</b>, and <b className="text-gray-400">market competitiveness</b>.
@@ -72,7 +72,7 @@ export default async function FindProvidersPage({
                         <div className="bg-red-950/20 border border-red-900/30 rounded-2xl p-6 flex-1">
                             <h4 className="font-bold text-red-400 text-sm mb-1 uppercase tracking-wider">General Directory Caution</h4>
                             <p className="text-xs text-gray-500 leading-relaxed">
-                                These providers either have an <span className="text-red-400/80 font-bold">II-Score™ below 60</span> or insufficient clinical data for a specialist audit. Proceed with manual verification.
+                                These providers either have an <span className="text-red-400/80 font-bold">Elite Audit Status: PENDING</span> or insufficient clinical data for a specialist audit. Proceed with manual verification.
                             </p>
                         </div>
                     )}
