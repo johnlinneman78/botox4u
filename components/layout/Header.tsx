@@ -43,7 +43,7 @@ export default function Header() {
                     </Link>
                     <Link href="/find-providers">
                         <Button className="bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black py-2.5 px-6 rounded-xl transition-all shadow-lg shadow-[#d4af37]/10 text-sm">
-                            Find Injectors
+                            See Who Scores Highest
                         </Button>
                     </Link>
                 </nav>
@@ -86,7 +86,7 @@ export default function Header() {
                         className="flex items-center gap-3 p-3 rounded-xl bg-[#d4af37] text-[#0d1420] font-black text-center justify-center transition-all"
                     >
                         <Shield className="w-5 h-5" />
-                        Find Injectors
+                        See Who Scores Highest
                     </Link>
                 </div>
             )}

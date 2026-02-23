@@ -66,7 +66,7 @@ export default function HowItWorks() {
                 </div>
 
                 {/* 4 Pillars */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
                     {FACTORS.map((factor) => (
                         <div
                             key={factor.title}
@@ -110,9 +110,10 @@ export default function HowItWorks() {
                     </div>
                     <Link
                         href="/methodology"
-                        className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] font-bold rounded-full hover:bg-[#d4af37]/20 transition-colors text-sm"
+                        className="shrink-0 inline-flex items-center gap-3 px-8 py-4 bg-[#d4af37] text-[#0d1420] font-black rounded-2xl hover:bg-[#c0a030] shadow-xl shadow-[#d4af37]/10 transition-all text-sm uppercase tracking-widest group"
                     >
-                        Full Methodology →
+                        <ShieldCheck className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                        II-Score™ Methodology — Read How We Score
                     </Link>
                 </div>
             </div>

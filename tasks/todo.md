@@ -3,7 +3,7 @@
 ## 1. Plan
 - [x] Investigate why 'Free Clinic Audit' changes are not appearing on the live site.
 - [x] Verify that the previous commits have successfully triggered a build. (Commit history checks out).
-- [ ] Force a re-deployment via a trivial change to `config/niche.js`.
+- [x] Force a re-deployment via a trivial change to `config/niche.js`.
 - [ ] Re-verify the live site with an aggressive cache-busting subagent.
 
 ## 2. Implementation

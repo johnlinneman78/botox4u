@@ -6,11 +6,11 @@ const FEATURED_CITIES = [
     { name: 'Portland', state: 'OR', slug: 'or/portland', avgCost: 14, providers: 90, regen: true, tag: '🌿 Regen Leader' },
     { name: 'Seattle', state: 'WA', slug: 'wa/seattle', avgCost: 16, providers: 72, regen: true, tag: '🔬 PN Emerging' },
     { name: 'San Francisco', state: 'CA', slug: 'ca/san-francisco', avgCost: 19, providers: 54, regen: true, tag: '💎 Bio-Hacking Hub' },
-    { name: 'Los Angeles', state: 'CA', slug: 'ca/los-angeles', avgCost: 14, providers: 128, regen: false, tag: '' },
-    { name: 'New York', state: 'NY', slug: 'ny/new-york', avgCost: 18, providers: 142, regen: false, tag: '' },
-    { name: 'Miami', state: 'FL', slug: 'fl/miami', avgCost: 16, providers: 95, regen: false, tag: '' },
-    { name: 'Chicago', state: 'IL', slug: 'il/chicago', avgCost: 12, providers: 82, regen: false, tag: '' },
-    { name: 'Scottsdale', state: 'AZ', slug: 'az/scottsdale', avgCost: 13, providers: 64, regen: false, tag: '' },
+    { name: 'Los Angeles', state: 'CA', slug: 'ca/los-angeles', avgCost: 14, providers: 128, regen: false, tag: '🌊 Skin Tightening HQ' },
+    { name: 'New York', state: 'NY', slug: 'ny/new-york', avgCost: 18, providers: 142, regen: false, tag: '🏙 High-Volume Elite' },
+    { name: 'Miami', state: 'FL', slug: 'fl/miami', avgCost: 16, providers: 95, regen: false, tag: '☀️ Longevity Sun Prep' },
+    { name: 'Chicago', state: 'IL', slug: 'il/chicago', avgCost: 12, providers: 82, regen: false, tag: '❄️ Cold-Climate Hydration' },
+    { name: 'Scottsdale', state: 'AZ', slug: 'az/scottsdale', avgCost: 13, providers: 64, regen: false, tag: '🌵 Desert Skin Auth' },
 ]
 
 export default async function FeaturedCities() {
@@ -35,8 +35,8 @@ export default async function FeaturedCities() {
                             Real pricing, verified credentials, and Regen-Ratio™ rankings — every city.
                         </p>
                     </div>
-                    <Link href="/botox" className="text-[#d4af37] font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all shrink-0">
-                        All States & Cities <ChevronRight className="w-4 h-4" />
+                    <Link href="/botox" className="bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] px-6 py-2.5 rounded-xl font-black text-sm flex items-center gap-2 hover:bg-[#d4af37]/20 transition-all shrink-0">
+                        Browse All 22 Cities <ChevronRight className="w-4 h-4" />
                     </Link>
                 </div>
 
@@ -44,8 +44,8 @@ export default async function FeaturedCities() {
                     {sorted.map((city) => (
                         <Link key={city.slug} href={`/botox/${city.slug}`} className="group">
                             <div className={`bg-white/[0.02] border rounded-2xl p-6 hover:bg-white/[0.05] hover:border-[#d4af37]/20 transition-all h-full ${city.name === userCity
-                                    ? 'border-[#d4af37]/30 bg-[#d4af37]/5'
-                                    : 'border-white/[0.06]'
+                                ? 'border-[#d4af37]/30 bg-[#d4af37]/5'
+                                : 'border-white/[0.06]'
                                 }`}>
                                 <div className="flex items-center justify-between mb-3">
                                     <div className="flex items-center gap-2">

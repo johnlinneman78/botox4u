@@ -36,9 +36,14 @@ export const StickyBar = () => {
                         <div className="text-xs font-bold text-white leading-tight">Get Your Free Clinic Audit</div>
                     </div>
                 </div>
-                <Link href="/audit" className="shrink-0">
+                <Link href="/audit" className="shrink-0" onClick={(e) => {
+                    if (window.location.pathname === '/' || window.location.pathname === '/audit') {
+                        e.preventDefault();
+                        document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }}>
                     <Button size="sm" className="bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black rounded-xl px-4 h-10 flex items-center gap-2 text-[10px] uppercase tracking-wider">
-                        START <ArrowRight className="w-3.5 h-3.5" />
+                        GET FREE AUDIT <ArrowRight className="w-3.5 h-3.5" />
                     </Button>
                 </Link>
             </div>

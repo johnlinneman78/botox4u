@@ -8,6 +8,8 @@ const ARTICLES = [
         slug: "neo-romantic-manifesto-2026-aesthetic-shift",
         tag: "Core Manifesto",
         trending: true,
+        author: "John Linneman",
+        readTime: "8 min"
     },
     {
         title: "The Neo-Romantic Aesthetic Movement in Regenerative Medicine: Leading the Shift",
@@ -15,6 +17,8 @@ const ARTICLES = [
         slug: "neo-romantic-aesthetics-portland-seattle-sf-2026",
         tag: "Industry Analysis",
         trending: true,
+        author: "John Linneman",
+        readTime: "6 min"
     },
     {
         title: "Seattle's Best Regenerative Injectors: A 2026 Neighborhood Guide",
@@ -22,6 +26,8 @@ const ARTICLES = [
         slug: "seattle-regenerative-injectors-guide-2026",
         tag: "Seattle Regen",
         trending: true,
+        author: "John Linneman",
+        readTime: "7 min"
     },
 ]
 
@@ -59,8 +65,8 @@ export default function AestheticsNews() {
                                         {article.trending && <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#d4af37] mr-1.5 animate-pulse align-middle" />}
                                         {article.tag}
                                     </span>
-                                    <div className="flex items-center gap-1 text-[10px] text-gray-700 font-bold">
-                                        <Clock className="w-3 h-3" /> 5 Min
+                                    <div className="flex items-center gap-1 text-[10px] text-gray-700 font-bold uppercase tracking-widest">
+                                        <Clock className="w-3 h-3" /> {article.readTime}
                                     </div>
                                 </div>
                                 <h3 className="text-lg font-bold text-white mb-3 leading-snug group-hover:text-[#d4af37] transition-colors">
@@ -69,11 +75,11 @@ export default function AestheticsNews() {
                                 <p className="text-gray-500 text-sm flex-grow leading-relaxed font-light">
                                     {article.excerpt}
                                 </p>
-                                <div className="pt-6 mt-4 border-t border-white/5 flex items-center justify-between text-xs font-bold">
+                                <div className="pt-6 mt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-black uppercase tracking-widest">
                                     <span className="text-[#d4af37] group-hover:gap-2 transition-all flex items-center gap-1">
                                         Read Guide <ArrowRight className="w-3 h-3" />
                                     </span>
-                                    <span className="text-gray-700">InjectorIndex.com</span>
+                                    <span className="text-gray-700">By {article.author}</span>
                                 </div>
                             </div>
                         </Link>

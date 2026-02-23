@@ -1,12 +1,23 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Dna, Clock, Leaf, Zap, ChevronRight, MapPin, ShieldCheck, Target, ArrowRight, Activity } from 'lucide-react'
+import { Dna, Clock, Leaf, Zap, ChevronRight, MapPin, ShieldCheck, Target, ArrowRight, Activity, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import { Slider } from '@/components/ui/Slider'
-import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { NICHE } from '@/config/niche'
+import { CITY_COORDS } from '@/lib/cityCoords'
+
+function getDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
+    const R = 6371; // km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
 
 const TREATMENTS = [
     {
@@ -81,9 +92,34 @@ export default function TreatmentTrends() {
     const [selectedId, setSelectedId] = useState<string | null>(TREATMENTS[0].id)
     const [sliderValue, setSliderValue] = useState<number[]>([TREATMENTS[0].priceConfig.min])
     const [location, setLocation] = useState('Portland')
+    const [isLocating, setIsLocating] = useState(false)
 
     useEffect(() => {
-        // Reset slider when treatment changes
+        // Detect location on mount
+        const detectLocation = async () => {
+            if (!navigator.geolocation) return;
+            setIsLocating(true);
+            navigator.geolocation.getCurrentPosition((position) => {
+                const { latitude, longitude } = position.coords;
+                let nearestName = 'Portland';
+                let minDist = Infinity;
+
+                Object.entries(CITY_COORDS).forEach(([slug, coords]) => {
+                    const dist = getDistance(latitude, longitude, coords.lat, coords.lng);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        const cityMatch = NICHE.cities.find((c: any) => c.slug === slug || c.slug.startsWith(slug));
+                        nearestName = cityMatch ? cityMatch.name : (slug.charAt(0).toUpperCase() + slug.slice(1).replace('-', ' '));
+                    }
+                });
+                setLocation(nearestName);
+                setIsLocating(false);
+            }, () => setIsLocating(false));
+        };
+        detectLocation();
+    }, []);
+
+    useEffect(() => {
         const current = TREATMENTS.find(t => t.id === selectedId)
         if (current) {
             setSliderValue([current.priceConfig.min])
@@ -108,9 +144,19 @@ export default function TreatmentTrends() {
                         </p>
                     </div>
                     <div className="flex flex-col items-end gap-3 text-right">
-                        <div className="flex items-center gap-2 text-[#d4af37] text-sm font-bold bg-[#d4af37]/5 px-4 py-2 rounded-xl border border-[#d4af37]/10">
-                            <MapPin className="w-4 h-4" />
-                            Pricing reflects {location} metro averages
+                        <div className="relative inline-flex items-center gap-2 text-[#d4af37] text-sm font-bold bg-[#d4af37]/5 px-4 py-2 rounded-xl border border-[#d4af37]/10">
+                            <MapPin className={`w-4 h-4 ${isLocating ? 'animate-bounce' : ''}`} />
+                            <span className="sr-only">Location:</span>
+                            <select
+                                value={location}
+                                onChange={(e) => setLocation(e.target.value)}
+                                className="bg-transparent border-none text-[#d4af37] font-bold focus:ring-0 cursor-pointer appearance-none pr-6 outline-none"
+                            >
+                                {NICHE.cities.map((c: any) => (
+                                    <option key={c.slug} value={c.name} className="bg-[#0d1420]">{c.name}</option>
+                                ))}
+                            </select>
+                            <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-[#d4af37] pointer-events-none" />
                         </div>
                         <Link
                             href="/botox-buyers-guide"
@@ -122,13 +168,13 @@ export default function TreatmentTrends() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    {/* Left: Treatment Selection */}
-                    <div className="lg:col-span-4 grid grid-cols-1 gap-4">
+                    {/* Left: Treatment Selection - Horizontal Scroll on Mobile, Vertical on Desktop */}
+                    <div className="lg:col-span-4 flex lg:flex-col gap-4 overflow-x-auto pb-4 lg:pb-0 lg:overflow-visible scrollbar-none snap-x h-fit">
                         {TREATMENTS.map((t) => (
                             <button
                                 key={t.id}
                                 onClick={() => setSelectedId(t.id)}
-                                className={`group relative bg-gradient-to-br ${t.color} border transition-all duration-300 rounded-3xl p-6 text-left ${selectedId === t.id
+                                className={`group relative shrink-0 w-[280px] lg:w-full snap-center bg-gradient-to-br ${t.color} border transition-all duration-300 rounded-3xl p-6 text-left ${selectedId === t.id
                                     ? `ring-2 ring-[#d4af37] scale-[1.02] shadow-2xl shadow-[#d4af37]/10 ${t.border}`
                                     : `border-white/5 opacity-40 hover:opacity-100 hover:border-white/20`
                                     }`}
@@ -146,9 +192,11 @@ export default function TreatmentTrends() {
                                         <h3 className="text-lg font-bold text-white mb-1">{t.name}</h3>
                                         <p className={`text-[10px] font-black uppercase tracking-widest ${t.accent}`}>{t.tagline}</p>
                                     </div>
-                                    {selectedId !== t.id && (
-                                        <span className="text-[9px] font-black text-[#d4af37]/40 uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
-                                            Select treatment →
+                                    {selectedId === t.id ? (
+                                        <div className="h-1 w-8 bg-[#d4af37] rounded-full mt-2" />
+                                    ) : (
+                                        <span className="text-[9px] font-black text-[#d4af37]/60 uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
+                                            See pricing →
                                         </span>
                                     )}
                                 </div>
@@ -160,7 +208,6 @@ export default function TreatmentTrends() {
                     <div className="lg:col-span-8">
                         <div className="bg-white/[0.02] border border-white/[0.1] rounded-[3rem] p-8 md:p-12 h-full flex flex-col justify-between">
                             <div className="space-y-10">
-                                {/* Header Info */}
                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                                     <div>
                                         <div className={`text-sm font-black uppercase tracking-[0.2em] ${activeTreatment.accent} mb-2`}>
@@ -181,7 +228,6 @@ export default function TreatmentTrends() {
                                     </div>
                                 </div>
 
-                                {/* Slider Component */}
                                 <div className="space-y-6 pt-6 border-t border-white/5">
                                     <div className="flex justify-between items-center text-xs font-bold text-gray-600 uppercase">
                                         <span>Market Floor (${activeTreatment.priceConfig.min})</span>
@@ -203,10 +249,9 @@ export default function TreatmentTrends() {
                                     </div>
                                 </div>
 
-                                {/* Provider Tiers */}
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     {TIERS.map(tier => (
-                                        <div key={tier.id} className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-white/20 transition-all hover:-translate-y-1">
+                                        <div key={tier.id} className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-white/20 transition-all hover:-translate-y-1 relative overflow-hidden group/tier">
                                             <div className="flex items-center gap-2 mb-2">
                                                 <Target className="w-4 h-4 text-[#d4af37]" />
                                                 <h4 className="font-bold text-white text-sm">{tier.label}</h4>
@@ -214,12 +259,18 @@ export default function TreatmentTrends() {
                                             <p className="text-[10px] text-gray-500 leading-relaxed">
                                                 {tier.desc}
                                             </p>
+                                            {tier.id === 'boutique' && (
+                                                <div className="mt-3 pt-3 border-t border-white/5">
+                                                    <span className="text-[9px] font-black text-[#d4af37] uppercase tracking-tighter bg-[#d4af37]/10 px-2 py-0.5 rounded">
+                                                        Most common for first-timers
+                                                    </span>
+                                                </div>
+                                            )}
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
-                            {/* CTAs */}
                             <div className="mt-12 pt-12 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <Link
                                     href={`/find-providers?q=${activeTreatment.searchQuery}&location=${location}`}
@@ -241,7 +292,6 @@ export default function TreatmentTrends() {
                     </div>
                 </div>
 
-                {/* Algorithmic Note */}
                 <div className="mt-16 text-center">
                     <p className="text-xs text-gray-700 max-w-2xl mx-auto leading-relaxed">
                         Data powered by <span className="text-gray-500 font-bold">Injector Index Intelligence™</span>. Every provider returned includes an <span className="text-[#d4af37]">II-Score™</span> audit to verify clinical results quality. Rankings are pure data, zero pay-to-rank.

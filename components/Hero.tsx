@@ -43,7 +43,7 @@ export default function Hero({ city, state, userLat, userLng }: { city?: string,
                             onClick={() => document.getElementById('listings')?.scrollIntoView({ behavior: 'smooth' })}
                         >
                             <Search className="w-5 h-5 mr-2" />
-                            Find Providers
+                            See Who Scores Highest Near Me
                         </Button>
                         <Button
                             variant="outline"
