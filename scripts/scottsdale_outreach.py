@@ -33,7 +33,7 @@ def get_scottsdale_list():
         status = attrs.get('top_account_status', 'Regular')
         
         print(f"- {p['name']} | Tier: {tier} | Price: ${price} | Status: {status} | Special: {special}")
-        print(f"  URL: https://botox-4u.com/provider/{p['slug']}")
+        print(f"  URL: https://injectorindex.com/provider/{p['slug']}")
 
 if __name__ == "__main__":
     get_scottsdale_list()

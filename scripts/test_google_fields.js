@@ -19,10 +19,10 @@ async function testGoogleDetails() {
         headers: {
             'X-Goog-Api-Key': GOOGLE_API_KEY,
             'X-Goog-FieldMask': '*',
-            'Referer': 'https://botox-4u.com'
+            'Referer': 'https://injectorindex.com'
         }
     });
     const data = await res.json();
     console.log(JSON.stringify(data, null, 2))
 
-testGoogleDetails();
+    testGoogleDetails();

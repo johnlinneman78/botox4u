@@ -1,7 +1,7 @@
 $anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRncWdzbWFxbXllZ3VhcGNvZ2VsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExOTQ4MjQsImV4cCI6MjA4Njc3MDgyNH0.JmZw3Z9MU-l5FDfhWpfgjNuyTF09UxbELs9M5BjDeo0"
 $serviceKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRncWdzbWFxbXllZ3VhcGNvZ2VsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTE5NDgyNCwiZXhwIjoyMDg2NzcwODI0fQ.zVpz7CjppFXXThUnCTIBo2XfLscdhSNJ0t2EddGcFHc"
 $url = "https://tgqgsmaqmyeguapcogel.supabase.co"
-$appUrl = "https://botox-4u.com"
+$appUrl = "https://injectorindex.com"
 
 Write-Host "Updating Environment Variables on Vercel..."
 
