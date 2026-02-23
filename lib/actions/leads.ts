@@ -18,20 +18,57 @@ const getSenderEmail = () => {
 }
 
 const getLeadEmailHtml = (lead: any, providerName: string) => `
-  <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-    <h2 style="color: #1a2332;">New Patient Inquiry</h2>
-    <p>You have received a new lead from <strong>${NICHE.siteName}</strong> for <strong>${providerName}</strong>.</p>
-    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-    <p><strong>Patient Name:</strong> ${lead.full_name}</p>
-    <p><strong>Email:</strong> ${lead.email}</p>
-    <p><strong>Phone:</strong> ${lead.phone || 'N/A'}</p>
-    <p><strong>Treatment:</strong> ${lead.treatment_type}</p>
-    <p><strong>Budget:</strong> ${lead.budget_range || 'N/A'}</p>
-    <p><strong>Timeframe:</strong> ${lead.timeframe || 'N/A'}</p>
-    <p><strong>Best Time to Call:</strong> ${lead.call_time || 'N/A'}</p>
-    <p><strong>Message:</strong> ${lead.message || 'No message provided'}</p>
+  <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px; max-width: 600px; margin: 0 auto;">
+    <h2 style="color: #1a2332; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">New Patient Inquiry</h2>
+    <p>You have received a new lead from <strong>${NICHE.siteName}</strong>.</p>
+    <div style="background: #f9f9f9; padding: 20px; rounded: 10px; border-radius: 10px;">
+        <p><strong>Patient Name:</strong> ${lead.full_name}</p>
+        <p><strong>Email:</strong> ${lead.email}</p>
+        <p><strong>Phone:</strong> ${lead.phone || 'N/A'}</p>
+        <p><strong>Intended Treatment:</strong> ${lead.treatment_type}</p>
+        <p><strong>Considerations:</strong> ${lead.current_considerations || 'N/A'}</p>
+        <p><strong>Message:</strong> ${lead.message || 'No message provided'}</p>
+    </div>
     <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
     <p style="font-size: 12px; color: #666;">View all leads in your <a href="${process.env.NEXT_PUBLIC_APP_URL}/provider/dashboard">Provider Dashboard</a>.</p>
+  </div>
+`;
+
+const getPatientAuditEmailHtml = (lead: any) => `
+  <div style="font-family: sans-serif; padding: 40px; background-color: #0d1420; color: #ffffff; border-radius: 20px; max-width: 600px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="color: #d4af37; margin-bottom: 5px; font-size: 24px;">Elite Audit™ Report Generated</h1>
+        <p style="color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">InjectorIndex Intelligence</p>
+    </div>
+    
+    <p>Hello ${lead.full_name.split(' ')[0]},</p>
+    <p>Thank you for using the <strong>InjectorIndex independent Audit Portal</strong>. We are currently processing your request for the following clinic(s):</p>
+    
+    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); padding: 20px; border-radius: 15px; margin: 20px 0;">
+        <h3 style="color: #d4af37; margin-top: 0;">Audit Target: ${lead.current_considerations}</h3>
+        <p style="font-size: 14px; color: #ccc;"><strong>Status:</strong> Processing Independent Verification...</p>
+        <p style="font-size: 14px; color: #ccc;"><strong>Focus:</strong> ${lead.treatment_type}</p>
+    </div>
+
+    <div style="margin: 30px 0;">
+        <h4 style="color: #d4af37; font-size: 14px; text-transform: uppercase;">What happens next?</h4>
+        <ul style="color: #ccc; font-size: 14px; line-height: 1.6; padding-left: 20px;">
+            <li><strong>NPI Verification:</strong> We are cross-referencing these injectors against official registers.</li>
+            <li><strong>Risk Sentiment Analysis:</strong> Our AI is scanning patient reviews for "over-filled" or "unnatural" mentions.</li>
+            <li><strong>Price Integrity Check:</strong> We are comparing their rates against our neighborhood benchmarks.</li>
+        </ul>
+    </div>
+
+    <p style="font-size: 14px; line-height: 1.6; color: #ccc;">
+        You will receive a <strong>Detailed Breakdown</strong> shortly if any red flags are identified. In the meantime, feel free to browse our 
+        <a href="${process.env.NEXT_PUBLIC_APP_URL}/botox-buyers-guide" style="color: #d4af37; text-decoration: none; font-weight: bold;">2026 Regen Aesthetic Buyers Guide</a>.
+    </p>
+
+    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
+        <p style="font-size: 10px; color: #666;">
+            © 2026 InjectorIndex. Independent clinical data for the regenerative era.
+        </p>
+    </div>
   </div>
 `;
 
@@ -191,19 +228,34 @@ export async function submitLead(formData: FormData) {
         console.error('Failed to sync patient data:', err)
     }
 
-    // 3. Admin Notification (Manual Routing)
+    // 3. Admin Notification (Manual Routing) + Patient Confirmation
     const resend = getResend();
-    const adminEmail = process.env.ADMIN_EMAIL || getSenderEmail();
-    if (resend && adminEmail) {
+    if (resend) {
+        // Send to Patient
         try {
             await resend.emails.send({
-                from: `System <${getSenderEmail()}>`,
-                to: adminEmail,
-                subject: `🚨 LEAD ALERT: ${lead.city || 'Direct'} - ${lead.full_name}`,
-                html: getLeadEmailHtml(lead, lead.providers?.name || 'City-Wide Request')
+                from: `${NICHE.siteName} <${getSenderEmail()}>`,
+                to: lead.email,
+                subject: `Elite Audit™ Generated: ${lead.current_considerations || 'Your Request'}`,
+                html: getPatientAuditEmailHtml(lead)
             })
-        } catch (adminEmailError) {
-            console.error('Error sending admin notification:', adminEmailError)
+        } catch (patientEmailError) {
+            console.error('Error sending patient confirmation:', patientEmailError)
+        }
+
+        // Send to Admin
+        const adminEmail = process.env.ADMIN_EMAIL || getSenderEmail();
+        if (adminEmail) {
+            try {
+                await resend.emails.send({
+                    from: `System <${getSenderEmail()}>`,
+                    to: adminEmail,
+                    subject: `🚨 LEAD ALERT: ${lead.city || 'Direct'} - ${lead.full_name}`,
+                    html: getLeadEmailHtml(lead, lead.providers?.name || 'City-Wide Request')
+                })
+            } catch (adminEmailError) {
+                console.error('Error sending admin notification:', adminEmailError)
+            }
         }
     }
 

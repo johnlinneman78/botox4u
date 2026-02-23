@@ -59,7 +59,14 @@ export default function NewsletterAudit() {
             formData.append('newsletter_opt_in', 'true')
 
             // Submit the lead
-            await submitLead(formData)
+            const result = await submitLead(formData)
+
+            if (result.error) {
+                console.error('Audit submission error:', result.error)
+                alert('We encountered an error processing your audit. Please try again or contact support.')
+                setLoading(false)
+                return
+            }
 
             // Real-Time Audit Lookup
             // We'll try to find the provider in our database to show a real score
@@ -86,6 +93,7 @@ export default function NewsletterAudit() {
             setStep('success')
         } catch (err) {
             console.error('Audit submission failed:', err)
+            alert('A network error occurred. Please check your connection.')
         } finally {
             setLoading(false)
         }
