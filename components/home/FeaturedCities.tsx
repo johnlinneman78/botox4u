@@ -35,8 +35,10 @@ export default async function FeaturedCities() {
                             Real pricing, verified credentials, and Regen-Ratio™ rankings — every city.
                         </p>
                     </div>
-                    <Link href="/botox" className="bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] px-6 py-2.5 rounded-xl font-black text-sm flex items-center gap-2 hover:bg-[#d4af37]/20 transition-all shrink-0">
-                        Browse All 22 Cities <ChevronRight className="w-4 h-4" />
+                    <Link href="/botox" className="group flex items-center gap-3 bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] px-6 py-2.5 rounded-xl font-black text-sm hover:bg-[#d4af37]/20 transition-all shrink-0">
+                        Browse All Cities
+                        <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#d4af37] text-[#0d1420] text-[10px]">22</span>
+                        <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
 
@@ -62,10 +64,10 @@ export default async function FeaturedCities() {
                                 </div>
 
                                 {city.tag && (
-                                    <p className="text-xs text-gray-500 mb-3">{city.tag}</p>
+                                    <p className="text-xs text-gray-400 font-bold mb-3">{city.tag}</p>
                                 )}
 
-                                <div className="space-y-1.5 text-xs">
+                                <div className="space-y-1.5 text-[11px]">
                                     <div className="flex justify-between text-gray-600">
                                         <span>Avg. per unit</span>
                                         <span className="font-bold text-[#d4af37]">${city.avgCost}</span>
@@ -75,12 +77,16 @@ export default async function FeaturedCities() {
                                         <span className="font-bold text-emerald-400">{city.avgII}</span>
                                     </div>
                                     <div className="flex justify-between text-gray-600">
+                                        <span>Regen-Ratio™</span>
+                                        <span className="font-bold text-violet-400">{city.regenRatio}%</span>
+                                    </div>
+                                    <div className="flex justify-between text-gray-600">
                                         <span>Providers indexed</span>
                                         <span className="font-bold text-white">{city.providers}</span>
                                     </div>
                                 </div>
-                                <div className="mt-4 text-xs font-bold text-gray-700 group-hover:text-[#d4af37] transition-colors">
-                                    View Rankings →
+                                <div className="mt-4 text-[10px] font-black uppercase tracking-widest text-[#d4af37]/50 group-hover:text-[#d4af37] transition-colors flex items-center gap-1">
+                                    View Rankings <ChevronRight className="w-3 h-3" />
                                 </div>
                             </div>
                         </Link>

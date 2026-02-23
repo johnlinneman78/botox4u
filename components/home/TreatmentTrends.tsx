@@ -167,18 +167,33 @@ export default function TreatmentTrends() {
                     </div>
                 </div>
 
+                {/* Desktop/Mobile treatment selection */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    {/* Left: Treatment Selection - Horizontal Scroll on Mobile, Vertical on Desktop */}
-                    <div className="lg:col-span-4 relative group/scroll">
-                        {/* Mobile Scroll Indicators */}
-                        <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-[#101827] to-transparent z-10 lg:hidden pointer-events-none" />
-
-                        <div className="flex lg:flex-col gap-4 overflow-x-auto pb-4 lg:pb-0 lg:overflow-visible scrollbar-none snap-x h-fit">
+                    {/* Left: Treatment Selection */}
+                    <div className="lg:col-span-4">
+                        {/* Mobile: Horizontal Tab Bar */}
+                        <div className="lg:hidden flex overflow-x-auto gap-2 pb-6 scrollbar-none snap-x relative">
                             {TREATMENTS.map((t) => (
                                 <button
                                     key={t.id}
                                     onClick={() => setSelectedId(t.id)}
-                                    className={`group relative shrink-0 w-[280px] lg:w-full snap-center bg-gradient-to-br ${t.color} border transition-all duration-300 rounded-3xl p-6 text-left ${selectedId === t.id
+                                    className={`shrink-0 px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all border snap-center ${selectedId === t.id
+                                        ? 'bg-[#d4af37] border-[#d4af37] text-[#0d1420] shadow-lg shadow-[#d4af37]/20 scale-105'
+                                        : 'bg-white/5 border-white/10 text-gray-500 hover:border-white/20'
+                                        }`}
+                                >
+                                    {t.name}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Desktop: Vertical Card Selection */}
+                        <div className="hidden lg:flex flex-col gap-4">
+                            {TREATMENTS.map((t) => (
+                                <button
+                                    key={t.id}
+                                    onClick={() => setSelectedId(t.id)}
+                                    className={`group relative shrink-0 w-full bg-gradient-to-br ${t.color} border transition-all duration-300 rounded-[2rem] p-6 text-left ${selectedId === t.id
                                         ? `ring-2 ring-[#d4af37] scale-[1.02] shadow-2xl shadow-[#d4af37]/10 ${t.border}`
                                         : `border-white/5 opacity-40 hover:opacity-100 hover:border-white/20`
                                         }`}
@@ -196,12 +211,8 @@ export default function TreatmentTrends() {
                                             <h3 className="text-lg font-bold text-white mb-1">{t.name}</h3>
                                             <p className={`text-[10px] font-black uppercase tracking-widest ${t.accent}`}>{t.tagline}</p>
                                         </div>
-                                        {selectedId === t.id ? (
+                                        {selectedId === t.id && (
                                             <div className="h-1 w-8 bg-[#d4af37] rounded-full mt-2" />
-                                        ) : (
-                                            <span className="text-[9px] font-black text-[#d4af37]/60 uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
-                                                See pricing →
-                                            </span>
                                         )}
                                     </div>
                                 </button>

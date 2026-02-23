@@ -8,7 +8,7 @@ const ARTICLES = [
         slug: "neo-romantic-manifesto-2026-aesthetic-shift",
         tag: "Core Manifesto",
         trending: true,
-        author: "John Linneman",
+        author: "InjectorIndex Editorial",
         readTime: "8 min"
     },
     {
@@ -17,7 +17,7 @@ const ARTICLES = [
         slug: "neo-romantic-aesthetics-portland-seattle-sf-2026",
         tag: "Industry Analysis",
         trending: true,
-        author: "John Linneman",
+        author: "InjectorIndex Editorial",
         readTime: "6 min"
     },
     {
@@ -26,7 +26,7 @@ const ARTICLES = [
         slug: "seattle-regenerative-injectors-guide-2026",
         tag: "Seattle Regen",
         trending: true,
-        author: "John Linneman",
+        author: "InjectorIndex Editorial",
         readTime: "7 min"
     },
 ]
