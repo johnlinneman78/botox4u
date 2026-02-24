@@ -143,7 +143,7 @@ export default function Hero({ city: initialCity, state }: { city?: string; stat
                     {[
                         { value: '500+', label: 'Providers Indexed', note: 'Across 22+ Cities' },
                         { value: '$9–25', label: 'Per Unit Pricing', note: 'Real Market Rates' },
-                        { value: '9.4', label: 'Top II-Score™', note: 'Pearl District, PDX' },
+                        { value: '9.4', label: 'Top II-Score™', note: initialCity ? `${initialCity} Market` : 'Top Neighborhoods' },
                         { value: '2026', label: 'PNs Now Trending', note: '#1 Regen Treatment' },
                     ].map((stat, i) => (
                         <div key={i} className="bg-white/[0.02] px-6 py-5 text-center hover:bg-white/[0.05] transition-colors">

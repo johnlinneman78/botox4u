@@ -27,12 +27,7 @@ export default async function AboutPage() {
         "foundingDate": "2026",
         "foundingLocation": {
             "@type": "Place",
-            "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Portland",
-                "addressRegion": "OR",
-                "addressCountry": "US"
-            }
+            "name": "United States"
         },
         "sameAs": [
             "https://www.linkedin.com/company/[injector-index-slug]",
@@ -200,9 +195,7 @@ export default async function AboutPage() {
                     </div>
                     <h2 className="text-3xl font-display font-bold text-white mb-8 tracking-tight">Built By</h2>
                     <div className="space-y-6 text-lg text-gray-500 font-light leading-relaxed max-w-2xl mx-auto text-left">
-                        <p>
-                            Injector Index was founded in 2026 by <strong className="text-white">John Linneman</strong> in <strong className="text-white">Portland, Oregon</strong>. The platform grew out of research into how patients actually evaluate aesthetic providers — and the finding that most existing tools (review sites, directory listings, medspa marketing) don&apos;t give patients what they need to make informed decisions.
-                        </p>
+                        Injector Index was founded in 2026 as a research project to solve the "Review Gap" in aesthetic medicine. Within months, it grew from a regional experiment into a <strong className="text-white">national platform</strong> indexing providers across 22+ cities.
                         <p>
                             The scoring algorithm was developed through analysis of tens of thousands of patient reviews, identifying the specific language patterns that correlate with patient satisfaction, natural results, and provider trustworthiness. The platform is independently operated and has no financial relationships with product manufacturers, medical associations, or provider networks.
                         </p>
@@ -237,9 +230,7 @@ export default async function AboutPage() {
                         </p>
                     </div>
                 </div>
-                <div className="mt-16 text-center text-gray-700 text-[10px] uppercase font-bold tracking-[0.3em]">
-                    Portland • OR • 2026
-                </div>
+                Direct Independent Research • 22 Cities • 2026
             </footer>
         </div>
     )

@@ -45,6 +45,16 @@ const nextConfig: NextConfig = {
         destination: '/blog/how-to-find-good-botox-injector',
         permanent: true,
       },
+      {
+        source: '/blog/polynucleotides-portland-neighborhood-guide-2026',
+        destination: '/blog/polynucleotides-regenerative-injector-city-guide-2026',
+        permanent: true,
+      },
+      {
+        source: '/blog/daxxify-portland-long-acting-tox-guide',
+        destination: '/blog/daxxify-long-acting-tox-city-reports-2026',
+        permanent: true,
+      },
     ]
   },
 };

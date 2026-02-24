@@ -53,8 +53,7 @@ export default function ExitIntentModal() {
         resetIdleTimer()
 
         // Try to get city name from a common place (optional)
-        // Hardcoded to "Portland" for now as per user request example
-        setCity('Portland')
+        setCity('your area')
 
         return () => {
             document.removeEventListener('mouseleave', handleMouseOut)

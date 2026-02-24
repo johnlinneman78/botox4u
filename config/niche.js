@@ -153,7 +153,7 @@ export const NICHE = {
     // Brand V2 Copy
     copy: {
         hero: {
-            headline: "Find injectors known for natural results — and see their real prices before you book.",
+            headline: "Find injectors known for — and see their real prices before you book.",
             subtext: "In 2026, the gold standard is biological repair — not volume. We score every provider on Regen-Ratio™, natural result integrity, and 2026 treatment innovation. See real pricing before you book.",
             cta: "Find a Conservative Injector Near Me"
         },

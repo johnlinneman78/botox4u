@@ -22,11 +22,7 @@ export default function Hero({ city, state, userLat, userLng }: { city?: string,
                         Transparent Pricing • Verified Providers
                     </div>
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-[1.1]">
-                        {city === 'Portland' ? (
-                            <>Portland's Most Transparent <span className="text-[#d4af37]">{NICHE.name} Index</span></>
-                        ) : (
-                            <>Find {NICHE.name} Providers in {city || 'Your City'}</>
-                        )}
+                        {city ? `${city}'s` : "America's"} Most Transparent <span className="text-[#d4af37]">{NICHE.name} Index</span>
                         <span className="block text-[#d4af37] text-4xl md:text-5xl lg:text-6xl mt-2 font-display italic">
                             with Real Pricing
                         </span>

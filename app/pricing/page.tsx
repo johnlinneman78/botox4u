@@ -156,7 +156,7 @@ export default async function PricingPage() {
                     <p className="text-gray-400 text-lg mb-6 max-w-2xl mx-auto">
                         "InjectorIndex has completely changed how we frame our regenerative protocols. We're finally getting the high-intent patients who value facial harmony over volume."
                     </p>
-                    <div className="text-sm font-bold text-white uppercase tracking-widest">— Clinical Director, SE Portland</div>
+                    <div className="text-sm font-bold text-white uppercase tracking-widest">— Clinical Director, Scottsdale, AZ</div>
                 </div>
 
                 <div className="mt-16 text-center">

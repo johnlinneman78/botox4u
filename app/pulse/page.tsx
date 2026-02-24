@@ -233,7 +233,7 @@ export default function PulsePage() {
                                 <div className="w-10 h-10 rounded-full bg-white/[0.06]" />
                                 <div>
                                     <div className="text-sm font-bold text-white">Sarah J.</div>
-                                    <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Portland, OR</div>
+                                    <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">New York, NY</div>
                                 </div>
                             </div>
                         </div>

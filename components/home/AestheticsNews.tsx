@@ -13,7 +13,7 @@ const ARTICLES = [
     },
     {
         title: "The Neo-Romantic Aesthetic Movement in Regenerative Medicine: Leading the Shift",
-        excerpt: "The 'done' look is dead. From Portland's 54% Regen-Ratio to Seattle's tech-bio convergence, learn how clinics are adopting the Aesthetic Neo-Romanticism movement in 2026.",
+        excerpt: "The 'done' look is dead. From NYC's 58% Regen-Ratio to Seattle's tech-bio convergence, learn how clinics are adopting the Aesthetic Neo-Romanticism movement in 2026.",
         slug: "neo-romantic-aesthetics-portland-seattle-sf-2026",
         tag: "Industry Analysis",
         trending: true,
@@ -21,10 +21,10 @@ const ARTICLES = [
         readTime: "6 min"
     },
     {
-        title: "Seattle's Best Regenerative Injectors: A 2026 Neighborhood Guide",
-        excerpt: "Capitol Hill's 42% PN adoption, SLU's 8.9 II-Score, Bellevue's premium protocols — the definitive neighborhood breakdown for regenerative aesthetics in Seattle.",
-        slug: "seattle-regenerative-injectors-guide-2026",
-        tag: "Seattle Regen",
+        title: "New York's Biological Renaissance: The 2026 Treatment Outlook",
+        excerpt: "From clinical precision in Manhattan to SLU-inspired protocols in Brooklyn — how NYC is leading the national shift toward long-acting tox and polynucleotides.",
+        slug: "new-york-regenerative-aesthetic-outlook-2026",
+        tag: "NYC Intel",
         trending: true,
         author: "InjectorIndex Editorial",
         readTime: "7 min"

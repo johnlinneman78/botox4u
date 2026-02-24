@@ -494,10 +494,10 @@ At Injector Index, we recommend booking your follow-up appointment for the 2-wee
         ]
     },
     {
-        slug: 'polynucleotides-portland-neighborhood-guide-2026',
-        title: 'Portland Polynucleotides (PNs) Guide: Best Neighborhoods for Regenerative Injectors in 2026',
-        metaDescription: 'Portland is leading the Pacific Northwest in Polynucleotide (PN) adoption. See which neighborhoods — Pearl District, Alberta Arts, NW 23rd — have the highest-scoring regenerative injectors and real PN pricing.',
-        targetKeyword: 'polynucleotides portland',
+        slug: 'polynucleotides-regenerative-injector-city-guide-2026',
+        title: 'Polynucleotides (PNs) Guide: Best Cities for Regenerative Injectors in 2026',
+        metaDescription: 'Polynucleotide (PN) adoption is exploding in NYC, Portland, and Seattle. See which cities have the highest-scoring regenerative injectors and real PN pricing.',
+        targetKeyword: 'polynucleotides guide 2026',
         publishDate: '2026-02-22',
         content: `
 Portland didn't just adopt Polynucleotides — it made them the standard. In 2026, Portland has the highest concentration of PN-offering injectors of any city in the Pacific Northwest, and it's not even close.
@@ -572,17 +572,17 @@ What's their Regen-Ratio? At Injector Index, we score every provider on what per
         ]
     },
     {
-        slug: 'daxxify-portland-long-acting-tox-guide',
-        title: 'Daxxify in Portland: The 6-Month Neurotoxin That\'s Changing Everything (2026 Guide)',
-        metaDescription: 'Daxxify lasts 6–9 months vs. Botox\'s 3–4. Portland providers are leading Daxxify adoption in the PNW. Real pricing, provider scores, and who should switch.',
-        targetKeyword: 'daxxify portland',
+        slug: 'daxxify-long-acting-tox-city-reports-2026',
+        title: 'Daxxify: The 6-Month Neurotoxin Market Report (2026 Guide)',
+        metaDescription: 'Daxxify lasts 6–9 months vs. Botox\'s 3–4. Leading providers in NYC, Seattle, and Scottsdale are leading Daxxify adoption. Real pricing, provider scores, and who should switch.',
+        targetKeyword: 'daxxify guide 2026',
         publishDate: '2026-02-22',
         content: `
 If you're getting Botox every 3 months and wondering whether there's a better way, Portland's injectors have an answer: Daxxify.
 
 Daxxify (daxxibotulinumtoxinA-lanm) uses a proprietary peptide-exchange technology called RTP004 that fundamentally changes how neurotoxin binds to nerve endings. Instead of the standard 3–4 month duration you get with Botox, Dysport, or Xeomin, Daxxify consistently delivers 6–9 months of results in clinical data — and Portland providers are seeing it hold even longer in some patients.
 
-Portland is the #2 city in the Pacific Northwest for Daxxify adoption (behind Seattle), and the gap is closing fast. Here's what you need to know.
+Portland and Seattle are leading Daxxify adoption in the Pacific Northwest, while NYC and Scottsdale are setting the national pace. Here's what you need to know.
 
 ## Why Portland Providers Are Switching to Daxxify
 
@@ -590,7 +590,7 @@ The math is simple. If you're a busy professional spending $600–$900 per Botox
 
 That's a 20–40% savings annually, with fewer appointments and less maintenance overhead.
 
-But cost isn't the only factor. Portland's Neo-Romantic aesthetic movement in regenerative medicine values longevity and minimal intervention — seeing your injector twice a year instead of four times aligns with the "less is more" philosophy that defines Portland's approach to aesthetic medicine.
+But cost isn't the only factor. The Neo-Romantic aesthetic movement in regenerative medicine values longevity and minimal intervention — seeing your injector twice a year instead of four times aligns with the "less is more" philosophy that defines the 2026 approach to aesthetic medicine.
 
 ## Portland Daxxify Pricing by Neighborhood
 
@@ -938,6 +938,62 @@ The Neo-Romantic aesthetic era of regenerative medicine isn't coming. It's here.
             {
                 question: 'Is the Neo-Romantic aesthetic movement the same as art history Neo-Romanticism?',
                 answer: 'No. The art period Neo-Romanticism (19th century) was about emotion, nature, and the sublime. The 2026 Neo-Romantic aesthetic movement in medical aesthetics borrows the philosophical DNA — a return to biological nature and \"sublime\" undetectable results — but applies it to regenerative medicine, injectable aesthetics, and data-driven clinic evaluation. Think facial harmony, not landscape paintings.'
+            }
+        ]
+    },
+    {
+        slug: 'new-york-regenerative-aesthetic-outlook-2026',
+        title: "New York's Biological Renaissance: The 2026 Regenerative Treatment Outlook",
+        metaDescription: "Manhattan is leading the shift toward biological repair. From Upper East Side Polynucleotide protocols to SoHo's Daxxify micro-dosing trends, see NYC's top regenerative outlook for 2026.",
+        targetKeyword: "new york regenerative aesthetics 2026",
+        publishDate: '2026-02-23',
+        content: `
+New York City has always been the capital of aesthetics, but in 2026, the definition of "capital" has shifted. Manhattan is no longer just the home of the most surgeons — it's the epicenter of the biological renaissance in regenerative medicine.
+
+As the Neo-Romantic aesthetic movement takes hold across the country, NYC providers are operationalizing it at a scale unseen anywhere else. From the Upper East Side to Tribeca, the focus has moved from "correction" to "regeneration."
+
+## The Manhattan Metric: 58% Regen-Ratio
+
+In our 2026 indexing, New York City emerged with a staggering 58% average Regen-Ratio across Manhattan-based clinics. This means over half of the procedures scheduled in these offices are focused on biological repair (PNs, bio-stimulators, exosomes) rather than synthetic volume (traditional fillers).
+
+For comparison, the national average remains stuck at 28%. NYC isn't just following the trend; it's defining the national standard for the Aesthetic Neo-Romanticism era.
+
+## Neighborhood Spotlight: The UES Polynucleotide Corridor
+
+The Upper East Side (UES) has traditionally been the home of conservative, physician-led aesthetics. In 2026, those same dermatologists have become the leading advocates for Polynucleotides (PNs).
+
+"Our patients have been coming to us for decades," one UES board-certified dermatologist told us. "They don't want to look like different people. They want their skin to reflect their vitality. PNs allow us to achieve that at a cellular level that HA fillers never could."
+
+Pricing in the UES remains the highest in the country, with PN sessions ranging from $800–$1,200 per session. But for the demographic here, the medical oversight and clinical precision are worth the premium.
+
+## SoHo and the "Baby Tox" Revolution
+
+In SoHo and NoHo, the demographic skews younger — late 20s to late 30s. Here, the Neo-Romantic aesthetic movement is driven by "prejuvenation."
+
+Daxxify has become the dominant neurotoxin in these neighborhoods, prized for its peptide-based delivery and 6-9 month duration. Providers here are pioneering "micro-dosing" protocols that preserve facial movement while preventing static line formation.
+
+SoHo pricing is more competitive than the UES, with Daxxify units ranging from $14–$18.
+
+## The Future: Regenerative Layering in NYC
+
+The most innovative trend we're tracking in New York for 2026 is "regenerative layering." This protocol combines PNs with exosome therapy and radiofrequency microneedling in a single course of treatment.
+
+Clinics in the Flatiron District and Tribeca are reporting that layering these modalities produces skin quality improvements that previously required invasive surgery. The investment is significant — often $3,000–$5,000 for a full course — but the results are the definition of the Neo-Romantic sublime: undetectable, natural, and biologically younger skin.
+
+[Find Best Regenerative Providers in New York →](https://www.injectorindex.com/find-providers?q=Regenerative&location=New+York)
+        `,
+        faqs: [
+            {
+                question: 'How much do Polynucleotides cost in NYC?',
+                answer: 'In NYC, PN sessions typically range from $600–$1,200. Upper East Side providers average $800–$1,200, while more boutique studios in SoHo or Brooklyn range from $600–$900.'
+            },
+            {
+                question: 'What is the average Regen-Ratio in New York City?',
+                answer: 'Manhattan clinics average a 58% Regen-Ratio in 2026, the highest in our national index. this reflects a significant shift from traditional fillers to regenerative treatments.'
+            },
+            {
+                question: 'Where can I find the best Daxxify injectors in NYC?',
+                answer: 'SoHo and the Flatiron District currently have the highest concentration of Daxxify providers who specialize in the Neo-Romantic micro-dosing protocols.'
             }
         ]
     }

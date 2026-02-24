@@ -101,7 +101,7 @@ export default function TreatmentTrends() {
             setIsLocating(true);
             navigator.geolocation.getCurrentPosition((position) => {
                 const { latitude, longitude } = position.coords;
-                let nearestName = 'Portland';
+                let nearestName = 'New York';
                 let minDist = Infinity;
 
                 Object.entries(CITY_COORDS).forEach(([slug, coords]) => {
