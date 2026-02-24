@@ -2,14 +2,12 @@
 
 import { cookies } from 'next/headers'
 import { getSupabaseServer } from '@/lib/supabase/factory'
-import { getCityStats, getProvidersWithSearch } from './providers'
-import { calculateClinicAudit, AuditPatientInput, AuditResult } from '@/lib/audit-scoring'
+import { getCityStats } from './providers'
+import { calculateClinicAudit, AuditPatientInput } from '@/lib/audit-scoring'
 import { Resend } from 'resend'
 import { NICHE } from '@/config/niche'
-// Dynamic import or check for jspdf to avoid crash if not installed yet during dev
-// In a real env, this would be a standard import
-// import { jsPDF } from 'jspdf'
-// import 'jspdf-autotable'
+import { jsPDF } from 'jspdf'
+import 'jspdf-autotable'
 
 const getResend = () => {
     const apiKey = process.env.SENDGRID_API_KEY || process.env.RESEND_API_KEY;
@@ -32,7 +30,6 @@ export async function submitAuditRequest(data: AuditPatientInput) {
         const { data: p } = await supabase.from('providers').select('*').eq('id', data.providerId).single()
         clinicData = p
     } else {
-        // Search by name and city
         const { data: results } = await supabase
             .from('providers')
             .select('*')
@@ -43,10 +40,8 @@ export async function submitAuditRequest(data: AuditPatientInput) {
         clinicData = results?.[0]
     }
 
-    // 2. Fetch City Stats
     const cityStats = await getCityStats(data.city)
 
-    // 3. Find Alternatives (Providers in same city with higher priority_score)
     let alternatives: any[] = []
     try {
         const { data: altData } = await supabase
@@ -62,7 +57,6 @@ export async function submitAuditRequest(data: AuditPatientInput) {
         console.warn('Failed to fetch alternatives:', e)
     }
 
-    // 4. Calculate Audit
     const auditResult = calculateClinicAudit(data, clinicData, cityStats)
     auditResult.alternatives = alternatives.map(a => ({
         name: a.name,
@@ -72,7 +66,6 @@ export async function submitAuditRequest(data: AuditPatientInput) {
         price_per_unit: a.price_per_unit || a.botox_price_per_unit || 15
     }))
 
-    // 5. Save to Database
     const { data: audit, error: dbError } = await supabase
         .from('clinic_audits')
         .insert([{
@@ -99,118 +92,97 @@ export async function submitAuditRequest(data: AuditPatientInput) {
         return { error: 'Failed to record audit' }
     }
 
-    // 6. Generate PDF and Send Email (Asynchronous)
-    // We return success to UI and process the rest
     const sendProcess = async () => {
         try {
-            // Check if we can generate PDF (jspdf must be installed)
-            // Using a dynamic require to avoid build break if not installed yet
-            let pdfBuffer: Buffer | null = null
-            try {
-                const { jsPDF } = require('jspdf')
-                require('jspdf-autotable')
+            const doc = new jsPDF()
+            const margin = 20
+            let y = 30
 
-                const doc = new jsPDF()
-                const margin = 20
-                let y = 30
+            doc.setFontSize(22)
+            doc.setTextColor(26, 35, 50)
+            doc.text('2026 CLINIC SAFETY AUDIT', 105, y, { align: 'center' })
+            y += 10
+            doc.setDrawColor(212, 175, 55)
+            doc.setLineWidth(1)
+            doc.line(margin, y, 190, y)
+            y += 20
 
-                // Header
-                doc.setFontSize(22)
-                doc.setTextColor(26, 35, 50)
-                doc.text('2026 CLINIC SAFETY AUDIT', 105, y, { align: 'center' })
-                y += 10
-                doc.setDrawColor(212, 175, 55)
-                doc.setLineWidth(1)
-                doc.line(margin, y, 190, y)
-                y += 20
+            doc.setFontSize(12)
+            doc.setTextColor(100, 100, 100)
+            doc.text(`Clinic: ${data.providerName}`, margin, y)
+            y += 8
+            doc.text(`Location: ${data.city}, ${data.state}`, margin, y)
+            y += 8
+            doc.text(`Audit Date: ${new Date().toLocaleDateString()}`, margin, y)
+            y += 8
+            doc.text(`Requested By: ${data.email}`, margin, y)
+            y += 20
 
-                // Basic Info
-                doc.setFontSize(12)
-                doc.setTextColor(100, 100, 100)
-                doc.text(`Clinic: ${data.providerName}`, margin, y)
-                y += 8
-                doc.text(`Location: ${data.city}, ${data.state}`, margin, y)
-                y += 8
-                doc.text(`Audit Date: ${new Date().toLocaleDateString()}`, margin, y)
-                y += 8
-                doc.text(`Requested By: ${data.email}`, margin, y)
-                y += 20
+            doc.setFontSize(16)
+            doc.setTextColor(26, 35, 50)
+            doc.text('OVERALL ASSESSMENT', margin, y)
+            y += 10
 
-                // Assessment
-                doc.setFontSize(16)
-                doc.setTextColor(26, 35, 50)
-                doc.text('OVERALL ASSESSMENT', margin, y)
-                y += 10
+            doc.setFontSize(14)
+            doc.text(`II-Score™: ${auditResult.iiScore}/10`, margin + 10, y)
+            y += 8
+            doc.text(`Market Position: ${auditResult.marketPosition}`, margin + 10, y)
+            y += 8
+            doc.text(`Regen-Ratio™: ${auditResult.regenRatio}% — ${auditResult.regenStatus}`, margin + 10, y)
+            y += 8
+            doc.text(`Price Positioning: ${auditResult.priceBenchmark.label}`, margin + 10, y)
+            y += 8
+            doc.text(`Natural Results Alignment: ${auditResult.naturalAlignment}`, margin + 10, y)
+            y += 20
 
-                doc.setFontSize(14)
-                doc.text(`II-Score™: ${auditResult.iiScore}/10`, margin + 10, y)
-                y += 8
-                doc.text(`Market Position: ${auditResult.marketPosition}`, margin + 10, y)
-                y += 8
-                doc.text(`Regen-Ratio™: ${auditResult.regenRatio}% — ${auditResult.regenStatus}`, margin + 10, y)
-                y += 8
-                doc.text(`Price Positioning: ${auditResult.priceBenchmark.label}`, margin + 10, y)
-                y += 8
-                doc.text(`Natural Results Alignment: ${auditResult.naturalAlignment}`, margin + 10, y)
-                y += 20
+            doc.addPage()
+            y = 30
+            doc.setFontSize(16)
+            doc.text('DETAILED BREAKDOWN', margin, y)
+            y += 15
 
-                // Detailed Breakdown
-                doc.addPage()
-                y = 30
-                doc.setFontSize(16)
-                doc.text('DETAILED BREAKDOWN', margin, y)
-                y += 15
+            doc.setFontSize(14)
+            doc.text('━━━ REGEN-RATIO™ ANALYSIS ━━━', margin, y)
+            y += 10
+            doc.setFontSize(12)
+            doc.text(`${data.providerName} offers ${auditResult.regenRatio}% regenerative treatments`, margin + 5, y)
+            y += 8
+            doc.text(`vs. ${100 - auditResult.regenRatio}% traditional HA filler`, margin + 5, y)
+            y += 15
 
-                // Regen-Ratio Analysis
-                doc.setFontSize(14)
-                doc.text('━━━ REGEN-RATIO™ ANALYSIS ━━━', margin, y)
-                y += 10
-                doc.setFontSize(12)
-                doc.text(`${data.providerName} offers ${auditResult.regenRatio}% regenerative treatments`, margin + 5, y)
+            doc.setFontSize(14)
+            doc.text('━━━ NATURAL INTEGRITY RATING ━━━', margin, y)
+            y += 10
+            doc.setFontSize(12)
+            doc.text(`Patient Review Sentiment: ${clinicData?.score?.breakdown?.naturalIntegrity || 'Unknown'}/10`, margin + 5, y)
+            y += 8
+            doc.text(`Your Goal: ${data.primaryGoal}`, margin + 5, y)
+            y += 8
+            doc.text(`Alignment: ${auditResult.naturalAlignment}`, margin + 5, y)
+            y += 15
+
+            doc.setFontSize(14)
+            doc.text('━━━ PRICING ANALYSIS ━━━', margin, y)
+            y += 10
+            doc.setFontSize(12)
+            if (auditResult.priceBenchmark.quoted) {
+                doc.text(`Your Quoted Price: $${auditResult.priceBenchmark.quoted}`, margin + 5, y)
                 y += 8
-                doc.text(`vs. ${100 - auditResult.regenRatio}% traditional HA filler`, margin + 5, y)
-                y += 15
-
-                // Natural Integrity
-                doc.setFontSize(14)
-                doc.text('━━━ NATURAL INTEGRITY RATING ━━━', margin, y)
-                y += 10
-                doc.setFontSize(12)
-                doc.text(`Patient Review Sentiment: ${clinicData?.score?.breakdown?.naturalIntegrity || 'Unknown'}/10`, margin + 5, y)
-                y += 8
-                doc.text(`Your Goal: ${data.primaryGoal}`, margin + 5, y)
-                y += 8
-                doc.text(`Alignment: ${auditResult.naturalAlignment}`, margin + 5, y)
-                y += 15
-
-                // Pricing
-                doc.setFontSize(14)
-                doc.text('━━━ PRICING ANALYSIS ━━━', margin, y)
-                y += 10
-                doc.setFontSize(12)
-                if (auditResult.priceBenchmark.quoted) {
-                    doc.text(`Your Quoted Price: $${auditResult.priceBenchmark.quoted}`, margin + 5, y)
-                    y += 8
-                }
-                doc.text(`${data.city} Market Average: $${auditResult.priceBenchmark.average}/unit`, margin + 5, y)
-                y += 8
-                doc.text(`Assessment: ${auditResult.priceBenchmark.label}`, margin + 5, y)
-                y += 20
-
-                // Recommendation
-                doc.setFontSize(16)
-                doc.text('YOUR PERSONALIZED RECOMMENDATIONS', margin, y)
-                y += 10
-                doc.setFontSize(11)
-                const splitRec = doc.splitTextToSize(auditResult.recommendations, 170)
-                doc.text(splitRec, margin, y)
-
-                pdfBuffer = Buffer.from(doc.output('arraybuffer'))
-            } catch (pdfErr) {
-                console.error('PDF generation failed:', pdfErr)
             }
+            doc.text(`${data.city} Market Average: $${auditResult.priceBenchmark.average}/unit`, margin + 5, y)
+            y += 8
+            doc.text(`Assessment: ${auditResult.priceBenchmark.label}`, margin + 5, y)
+            y += 20
 
-            // Send Email via Resend
+            doc.setFontSize(16)
+            doc.text('YOUR PERSONALIZED RECOMMENDATIONS', margin, y)
+            y += 10
+            doc.setFontSize(11)
+            const splitRec = doc.splitTextToSize(auditResult.recommendations, 170)
+            doc.text(splitRec, margin, y)
+
+            const pdfBuffer = Buffer.from(doc.output('arraybuffer'))
+
             const resend = getResend()
             if (resend) {
                 const htmlBody = `
@@ -260,20 +232,18 @@ export async function submitAuditRequest(data: AuditPatientInput) {
                     from: `InjectorIndex Team <${getSenderEmail()}>`,
                     to: data.email,
                     subject: `Your Free 2026 Clinic Audit — ${data.providerName} Results`,
-                    attachments: pdfBuffer ? [
+                    attachments: [
                         {
                             filename: `Clinic_Audit_${data.providerName.replace(/\s/g, '_')}.pdf`,
                             content: pdfBuffer
                         }
-                    ] : [],
+                    ],
                     html: htmlBody
                 })
             }
 
-            // Mark as sent
             await supabase.from('clinic_audits').update({ status: 'sent' }).eq('id', audit.id)
 
-            // 7. Update/Insert Patient Info for CRM consistency
             try {
                 const patientData = {
                     email: data.email,
@@ -291,7 +261,6 @@ export async function submitAuditRequest(data: AuditPatientInput) {
                 console.error('Failed to sync patient data:', err)
             }
 
-            // 8. Also sync to general leads table for CRM tracking
             await supabase.from('leads').insert([{
                 email: data.email,
                 full_name: 'Patient (Audit)',
@@ -310,7 +279,6 @@ export async function submitAuditRequest(data: AuditPatientInput) {
         }
     }
 
-    // Run as background task
     sendProcess().catch(console.error)
 
     return { success: true, auditId: audit.id }
