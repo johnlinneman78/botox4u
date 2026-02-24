@@ -164,7 +164,15 @@ export async function submitLead(formData: FormData) {
         current_considerations: validated.data.current_considerations ? sanitizeString(validated.data.current_considerations) : null,
     }
 
-    // Map sanitized data and handle optional fields as null for Supabase compatibility
+    // Move extra fields into a consolidated message if the columns don't exist in the DB yet
+    const extraInfo = {
+        current_considerations: sanitizedData.current_considerations,
+        is_first_timer: validated.data.is_first_timer,
+        client_concerns: validated.data.client_concerns,
+        call_time: validated.data.call_time,
+        submitted_at: new Date().toISOString()
+    }
+
     const leadInsertData: any = {
         full_name: sanitizedData.full_name,
         email: sanitizedData.email,
@@ -174,16 +182,8 @@ export async function submitLead(formData: FormData) {
         treatment_type: sanitizedData.treatment_type,
         budget_range: sanitizedData.budget_range,
         timeframe: sanitizedData.timeframe,
-        message: sanitizedData.message,
         provider_id: validated.data.provider_id || null,
-        current_considerations: sanitizedData.current_considerations,
-        is_first_timer: validated.data.is_first_timer ?? true,
-        client_concerns: validated.data.client_concerns || [],
-        additional_metadata: {
-            ...((validated.data as any).additional_metadata || {}),
-            call_time: validated.data.call_time || null,
-            submitted_at: new Date().toISOString()
-        }
+        message: sanitizedData.message || JSON.stringify(extraInfo)
     }
 
     // 1. Save to Leads DB

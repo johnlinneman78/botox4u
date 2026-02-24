@@ -63,7 +63,7 @@ export default function NewsletterAudit() {
 
             if (result.error) {
                 console.error('Audit submission error:', result.error)
-                alert('We encountered an error processing your audit. Please try again or contact support.')
+                alert(`Audit Error: ${result.error || 'Unknown error'}`)
                 setLoading(false)
                 return
             }

@@ -80,8 +80,8 @@ export default function ClinicAuditForm() {
             } else {
                 setError(result.error || 'Something went wrong')
             }
-        } catch (err) {
-            setError('Failed to submit. Please try again.')
+        } catch (err: any) {
+            setError(err?.message || 'Failed to submit. Please try again.')
         } finally {
             setIsSubmitting(false)
         }
@@ -197,8 +197,8 @@ export default function ClinicAuditForm() {
                                 <label
                                     key={t}
                                     className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all ${selectedTreatments.includes(t)
-                                            ? 'border-[#d4af37] bg-[#d4af37]/10 text-white'
-                                            : 'border-white/10 text-gray-400 hover:border-white/20'
+                                        ? 'border-[#d4af37] bg-[#d4af37]/10 text-white'
+                                        : 'border-white/10 text-gray-400 hover:border-white/20'
                                         }`}
                                 >
                                     <input
