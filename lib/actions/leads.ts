@@ -45,7 +45,7 @@ const getPatientAuditEmailHtml = (lead: any) => `
     <p>Thank you for using the <strong>InjectorIndex independent Audit Portal</strong>. We are currently processing your request for the following clinic(s):</p>
     
     <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); padding: 20px; border-radius: 15px; margin: 20px 0;">
-        <h3 style="color: #d4af37; margin-top: 0;">Audit Target: ${lead.current_considerations}</h3>
+        <h3 style="color: #d4af37; margin-top: 0;">Audit Target: ${lead.current_considerations || 'Regional Audit'}</h3>
         <p style="font-size: 14px; color: #ccc;"><strong>Status:</strong> Processing Independent Verification...</p>
         <p style="font-size: 14px; color: #ccc;"><strong>Focus:</strong> ${lead.treatment_type}</p>
     </div>

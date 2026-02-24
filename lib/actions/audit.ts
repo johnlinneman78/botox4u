@@ -24,12 +24,12 @@ export async function submitAuditRequest(data: AuditPatientInput) {
     const supabase = await getSupabaseServer(await cookies())
     if (!supabase) return { error: 'Database connection failed' }
 
-    // 1. Fetch Clinic Data
+    // 1. Fetch Clinic Data (Skip if name is blank)
     let clinicData = null
     if (data.providerId) {
         const { data: p } = await supabase.from('providers').select('*').eq('id', data.providerId).single()
         clinicData = p
-    } else {
+    } else if (data.providerName && data.providerName.trim().length > 0) {
         const { data: results } = await supabase
             .from('providers')
             .select('*')
@@ -71,7 +71,7 @@ export async function submitAuditRequest(data: AuditPatientInput) {
         .insert([{
             patient_email: data.email,
             provider_id: clinicData?.id,
-            provider_name: data.providerName || (clinicData?.name),
+            provider_name: data.providerName || (clinicData?.name) || 'Regional Audit',
             city: data.city,
             state: data.state,
             treatment_types: data.treatmentTypes,
@@ -138,7 +138,7 @@ export async function submitAuditRequest(data: AuditPatientInput) {
             doc.setFont('times', 'bold')
             doc.setFontSize(30)
             doc.setTextColor(26, 26, 26)
-            doc.text(data.providerName || clinicData?.name || 'Clinic Name', margin, y)
+            doc.text(data.providerName || clinicData?.name || 'Regional Clinical Analysis', margin, y)
             y += 8
 
             doc.setFont('helvetica', 'normal')
@@ -464,10 +464,10 @@ export async function submitAuditRequest(data: AuditPatientInput) {
                 await resend.emails.send({
                     from: `InjectorIndex Team <${getSenderEmail()}>`,
                     to: data.email,
-                    subject: `Your Free 2026 Clinic Audit — ${data.providerName} Results`,
+                    subject: `Your Free 2026 Clinic Audit — ${data.providerName || 'Regional'} Results`,
                     attachments: [
                         {
-                            filename: `Clinic_Audit_${data.providerName.replace(/\s/g, '_')}.pdf`,
+                            filename: `Clinic_Audit_${(data.providerName || 'Regional').replace(/\s/g, '_')}.pdf`,
                             content: pdfBuffer
                         }
                     ],

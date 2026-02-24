@@ -36,6 +36,7 @@ export default function NewsletterAudit() {
     const [fullName, setFullName] = useState('')
     const [clinic, setClinic] = useState('')
     const [isFirstTimer, setIsFirstTimer] = useState(true)
+    const [error, setError] = useState<string | null>(null)
     const [auditResult, setAuditResult] = useState<any>(null)
 
     const toggleProcedure = (p: string) =>
@@ -63,7 +64,7 @@ export default function NewsletterAudit() {
 
             if (result.error) {
                 console.error('Audit submission error:', result.error)
-                alert(`Audit Error: ${result.error || 'Unknown error'}`)
+                setError(result.error || 'Unknown error')
                 setLoading(false)
                 return
             }
@@ -83,7 +84,7 @@ export default function NewsletterAudit() {
                 })
             } else {
                 setAuditResult({
-                    clinicName: clinic || 'Selected Clinics',
+                    clinicName: clinic || 'Regional Analysis',
                     status: 'PENDING',
                     score: 45, // Manual audit required indicator
                     isReal: false
@@ -91,9 +92,11 @@ export default function NewsletterAudit() {
             }
 
             setStep('success')
+            // Scroll to top of section for visibility
+            document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
         } catch (err) {
             console.error('Audit submission failed:', err)
-            alert('A network error occurred. Please check your connection.')
+            setError('A network error occurred. Please check your connection.')
         } finally {
             setLoading(false)
         }
@@ -191,7 +194,17 @@ export default function NewsletterAudit() {
                                         </p>
 
                                         <Button
-                                            onClick={() => setStep('identify')}
+                                            onClick={() => {
+                                                setStep('identify')
+                                                setEmail('')
+                                                setFullName('')
+                                                setClinic('')
+                                                setIsFirstTimer(true)
+                                                setSelectedProcedures([])
+                                                setSelectedConcerns([])
+                                                setAuditResult(null)
+                                                setError(null)
+                                            }}
                                             className="mt-8 bg-white/5 hover:bg-white/10 text-gray-400 font-bold py-3 rounded-xl border border-white/10"
                                         >
                                             Run Another Audit
@@ -333,6 +346,12 @@ export default function NewsletterAudit() {
                                                         ))}
                                                     </div>
                                                 </div>
+
+                                                {error && (
+                                                    <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-red-500 text-xs text-center mb-4">
+                                                        {error}
+                                                    </div>
+                                                )}
 
                                                 <div className="flex gap-4">
                                                     <Button variant="outline" onClick={() => setStep('considerations')} className="flex-1 border-white/10 text-gray-600 h-14 rounded-2xl">Back</Button>

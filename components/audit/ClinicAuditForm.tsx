@@ -9,7 +9,7 @@ import { submitAuditRequest } from '@/lib/actions/audit'
 
 const auditSchema = z.object({
     email: z.string().email('Invalid email address'),
-    providerName: z.string().min(2, 'Clinic name is required'),
+    providerName: z.string().max(200).nullable().optional().or(z.literal('')),
     providerId: z.string().optional(),
     city: z.string().min(2, 'City is required'),
     state: z.string().min(2, 'State is required'),
@@ -56,6 +56,7 @@ export default function ClinicAuditForm() {
         handleSubmit,
         setValue,
         watch,
+        reset,
         formState: { errors }
     } = useForm<AuditFormData>({
         resolver: zodResolver(auditSchema),
@@ -95,11 +96,16 @@ export default function ClinicAuditForm() {
                 </div>
                 <h2 className="text-2xl font-bold text-white mb-2">Audit Report Generated</h2>
                 <p className="text-gray-400 mb-6">
-                    Your personalized clinic audit for <strong>{providerName}</strong> has been sent to <strong>{email}</strong>.
+                    Your personalized {providerName ? <strong>{providerName}</strong> : 'Regional'} Clinical Audit has been sent to <strong>{email}</strong>.
                     Check your inbox (and spam folder) for the PDF report.
                 </p>
                 <button
-                    onClick={() => window.location.reload()}
+                    onClick={() => {
+                        reset()
+                        setStep(1)
+                        setIsSuccess(false)
+                        setError(null)
+                    }}
                     className="bg-[#d4af37] text-[#0d1420] px-8 py-3 rounded-full font-bold hover:bg-[#c4a130] transition-colors"
                 >
                     New Audit Request
