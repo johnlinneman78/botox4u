@@ -10,6 +10,7 @@ export interface AuditPatientInput {
     treatmentTypes: string[]
     primaryGoal: string
     priceQuoted?: string
+    foundThrough?: string
 }
 
 export interface AuditResult {
