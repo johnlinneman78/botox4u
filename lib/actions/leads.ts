@@ -74,12 +74,12 @@ const getPatientAuditEmailHtml = (lead: any) => `
 
 // Enhanced schema with security validation
 const leadSchema = z.object({
-    provider_id: z.string().uuid().optional(),
-    city: z.string().max(100).optional(),
-    state: z.string().max(100).optional(),
+    provider_id: z.string().uuid().nullable().optional(),
+    city: z.string().max(100).nullable().optional(),
+    state: z.string().max(100).nullable().optional(),
     full_name: z.string()
-        .max(100, 'Name too long')
-        .regex(/^[a-zA-Z\s'-]*$/, 'Name contains invalid characters')
+        .max(200, 'Name too long')
+        .nullable()
         .optional()
         .or(z.literal('')),
     email: z.string()
@@ -87,23 +87,25 @@ const leadSchema = z.object({
         .max(254, 'Email too long'),
     phone: z.string()
         .regex(/^\d{10,11}$/, 'Invalid phone number')
+        .nullable()
         .optional()
         .or(z.literal('')),
-    treatment_type: z.string().max(100).optional(),
-    budget_range: z.string().max(100).optional(),
-    timeframe: z.string().max(100).optional(),
+    treatment_type: z.string().max(100).nullable().optional(),
+    budget_range: z.string().max(100).nullable().optional(),
+    timeframe: z.string().max(100).nullable().optional(),
     message: z.string()
         .max(1000, 'Message too long (max 1000 characters)')
         .refine(
             (val) => !/<script|javascript:|onerror=/i.test(val || ''),
             'Message contains invalid content'
         )
+        .nullable()
         .optional(),
-    call_time: z.string().max(100).optional(),
+    call_time: z.string().max(100).nullable().optional(),
     newsletter_opt_in: z.boolean().optional().default(false),
-    current_considerations: z.string().max(500).optional(),
+    current_considerations: z.string().max(500).nullable().optional(),
     is_first_timer: z.boolean().optional().default(true),
-    client_concerns: z.array(z.string()).optional().default([]),
+    client_concerns: z.array(z.string()).nullable().optional().default([]),
 })
 
 export async function submitLead(formData: FormData) {
@@ -137,7 +139,9 @@ export async function submitLead(formData: FormData) {
         newsletter_opt_in: formData.get('newsletter_opt_in') === 'true',
         current_considerations: formData.get('current_considerations'),
         is_first_timer: formData.get('is_first_timer') === 'true',
-        client_concerns: formData.get('client_concerns') ? JSON.parse(formData.get('client_concerns') as string) : [],
+        client_concerns: (formData.get('client_concerns') && formData.get('client_concerns') !== 'undefined')
+            ? JSON.parse(formData.get('client_concerns') as string)
+            : [],
     }
 
     const validated = leadSchema.safeParse(rawData)
@@ -148,24 +152,39 @@ export async function submitLead(formData: FormData) {
 
     // Sanitize all text inputs to prevent XSS
     const sanitizedData = {
-        ...validated.data,
         full_name: sanitizeString(validated.data.full_name || 'Patient'),
         email: sanitizeString(validated.data.email),
-        city: validated.data.city ? sanitizeString(validated.data.city) : undefined,
-        state: validated.data.state ? sanitizeString(validated.data.state) : undefined,
-        phone: validated.data.phone ? sanitizeString(validated.data.phone) : undefined,
-        treatment_type: validated.data.treatment_type ? sanitizeString(validated.data.treatment_type) : undefined,
-        budget_range: validated.data.budget_range ? sanitizeString(validated.data.budget_range) : undefined,
-        timeframe: validated.data.timeframe ? sanitizeString(validated.data.timeframe) : undefined,
-        message: validated.data.message ? sanitizeString(validated.data.message) : undefined,
-        call_time: validated.data.call_time ? sanitizeString(validated.data.call_time) : undefined,
-        current_considerations: validated.data.current_considerations ? sanitizeString(validated.data.current_considerations) : undefined,
+        city: validated.data.city ? sanitizeString(validated.data.city) : null,
+        state: validated.data.state ? sanitizeString(validated.data.state) : null,
+        phone: validated.data.phone ? sanitizeString(validated.data.phone) : null,
+        treatment_type: validated.data.treatment_type ? sanitizeString(validated.data.treatment_type) : null,
+        budget_range: validated.data.budget_range ? sanitizeString(validated.data.budget_range) : null,
+        timeframe: validated.data.timeframe ? sanitizeString(validated.data.timeframe) : null,
+        message: validated.data.message ? sanitizeString(validated.data.message) : null,
+        current_considerations: validated.data.current_considerations ? sanitizeString(validated.data.current_considerations) : null,
     }
 
-    const leadInsertData = {
-        ...sanitizedData,
+    // Map sanitized data and handle optional fields as null for Supabase compatibility
+    const leadInsertData: any = {
+        full_name: sanitizedData.full_name,
+        email: sanitizedData.email,
+        city: sanitizedData.city,
+        state: sanitizedData.state,
+        phone: sanitizedData.phone,
+        treatment_type: sanitizedData.treatment_type,
+        budget_range: sanitizedData.budget_range,
+        timeframe: sanitizedData.timeframe,
+        message: sanitizedData.message,
+        provider_id: validated.data.provider_id || null,
+        current_considerations: sanitizedData.current_considerations,
+        is_first_timer: validated.data.is_first_timer ?? true,
+        client_concerns: validated.data.client_concerns || [],
+        additional_metadata: {
+            ...((validated.data as any).additional_metadata || {}),
+            call_time: validated.data.call_time || null,
+            submitted_at: new Date().toISOString()
+        }
     }
-    delete (leadInsertData as any).newsletter_opt_in
 
     // 1. Save to Leads DB
     const { data: lead, error: dbError } = await supabase
@@ -175,8 +194,14 @@ export async function submitLead(formData: FormData) {
         .single()
 
     if (dbError) {
-        console.error('Error submitting lead:', dbError)
-        return { error: 'Failed to submit lead. Please try again.' }
+        console.error('CRITICAL: Database Error in submitLead:', {
+            code: dbError.code,
+            message: dbError.message,
+            hint: dbError.hint,
+            details: dbError.details,
+            inserting: leadInsertData
+        })
+        return { error: `Failed to submit lead: ${dbError.message}` }
     }
 
     // 2. Fetch Provider Email
@@ -212,7 +237,8 @@ export async function submitLead(formData: FormData) {
     try {
         const patientData = {
             email: sanitizedData.email,
-            full_name: sanitizedData.full_name || 'Patient',
+            first_name: sanitizedData.full_name?.split(' ')[0] || 'Patient',
+            last_name: sanitizedData.full_name?.split(' ').slice(1).join(' ') || '',
             phone: sanitizedData.phone,
             city: sanitizedData.city,
             state: sanitizedData.state,
