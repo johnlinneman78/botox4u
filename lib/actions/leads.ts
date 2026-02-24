@@ -78,9 +78,10 @@ const leadSchema = z.object({
     city: z.string().max(100).optional(),
     state: z.string().max(100).optional(),
     full_name: z.string()
-        .min(2, 'Name is required')
         .max(100, 'Name too long')
-        .regex(/^[a-zA-Z\s'-]+$/, 'Name contains invalid characters'),
+        .regex(/^[a-zA-Z\s'-]*$/, 'Name contains invalid characters')
+        .optional()
+        .or(z.literal('')),
     email: z.string()
         .email('Invalid email')
         .max(254, 'Email too long'),
@@ -148,7 +149,7 @@ export async function submitLead(formData: FormData) {
     // Sanitize all text inputs to prevent XSS
     const sanitizedData = {
         ...validated.data,
-        full_name: sanitizeString(validated.data.full_name),
+        full_name: sanitizeString(validated.data.full_name || 'Patient'),
         email: sanitizeString(validated.data.email),
         city: validated.data.city ? sanitizeString(validated.data.city) : undefined,
         state: validated.data.state ? sanitizeString(validated.data.state) : undefined,
@@ -211,7 +212,7 @@ export async function submitLead(formData: FormData) {
     try {
         const patientData = {
             email: sanitizedData.email,
-            full_name: sanitizedData.full_name,
+            full_name: sanitizedData.full_name || 'Patient',
             phone: sanitizedData.phone,
             city: sanitizedData.city,
             state: sanitizedData.state,
