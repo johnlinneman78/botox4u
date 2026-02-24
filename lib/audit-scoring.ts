@@ -31,6 +31,21 @@ export interface AuditResult {
     offerings: { name: string; checked: boolean }[]
     recommendations: string
     alternatives: any[]
+    stats: {
+        rating: number
+        reviewCount: number
+        lastReviewDays: string
+        treatmentCount: number
+        regenRatio: string
+    }
+    breakdown: {
+        satisfaction: number
+        regenRatio: number
+        transparency: number
+        recency: number
+        pricing: number
+        digital: number
+    }
 }
 
 const REGEN_TREATMENTS = [
@@ -55,19 +70,19 @@ export function calculateClinicAudit(
     cityStats: any
 ): AuditResult {
     // 1. II-Score & Market Position
-    const iiScore = clinicData?.score?.points || 0
+    const rawPoints = clinicData?.score?.points || 0
+    const iiScore = Number((rawPoints / 10).toFixed(1))
     let marketPosition = 'Below market average'
-    if (iiScore >= 85) marketPosition = 'Top 15%'
-    else if (iiScore >= 70) marketPosition = 'Above market average'
+    if (iiScore >= 8.5) marketPosition = 'Top 15%'
+    else if (iiScore >= 7.0) marketPosition = 'Above market average'
 
     // 2. Regen-Ratio™
-    // If clinicData has services_offered, calculate. Otherwise use 0 or default.
     const services = clinicData?.services_offered || []
     const regenCount = services.filter((s: string) =>
         REGEN_TREATMENTS.some(rt => s.toLowerCase().includes(rt.toLowerCase().split('/')[0].toLowerCase()))
     ).length
-    const totalInjectableCount = (services.length || 1) // Avoid div by zero
-    const regenRatioPercent = Math.round((regenCount / Math.max(1, totalInjectableCount)) * 100)
+    const totalInjectableCount = Math.max(1, services.length)
+    const regenRatioPercent = Math.round((regenCount / totalInjectableCount) * 100)
 
     let regenStatus: AuditResult['regenStatus'] = 'Filler-Heavy 🔴'
     if (regenRatioPercent > 40) regenStatus = 'Regen-Forward ✅'
@@ -104,29 +119,44 @@ export function calculateClinicAudit(
     }
 
     // 4. Natural Results Alignment
-    const naturalIntegrity = clinicData?.score?.breakdown?.naturalIntegrity || 0 // 0-35 scale
+    const naturalIntegrity = clinicData?.score?.breakdown?.naturalIntegrity || 0
     let alignment: AuditResult['naturalAlignment'] = 'Moderate Match ⚠️'
 
     if (patientInput.primaryGoal === 'Natural, subtle enhancement') {
         if (naturalIntegrity >= 28) alignment = 'Strong Match ✅'
         else if (naturalIntegrity < 20) alignment = 'Misaligned ⚠️'
     } else {
-        // For visible transformation, lower natural integrity might actually be "strong match" in their eyes but we still grade by safety
         alignment = 'Moderate Match ⚠️'
     }
 
-    // 5. Innovation Score & Offerings
-    const innovationScore = (clinicData?.score?.breakdown?.regenRatio || 0) / 1.5 // Rough mapping
-    const offerings = INNOVATION_ITEMS.map(item => {
-        let checked = false
-        if (item.key === 'offers_long_acting_tox') checked = !!clinicData?.offers_long_acting_tox
-        if (item.key === 'uses_ai_diagnostics') checked = !!clinicData?.uses_ai_diagnostics
-        // Check services for others
-        if (services.some((s: string) => s.toLowerCase().includes(item.label.toLowerCase().split(' ')[0]))) checked = true
-        return { name: item.label, checked }
-    })
+    // 5. Stats
+    const lastReviewAt = clinicData?.last_review_at || clinicData?.updated_at
+    let lastReviewDays = 'Recently'
+    if (lastReviewAt) {
+        const days = Math.floor((new Date().getTime() - new Date(lastReviewAt).getTime()) / (1000 * 60 * 60 * 24))
+        lastReviewDays = days < 30 ? `${days}d` : '30d+'
+    }
 
-    // 6. Recommendations
+    const stats = {
+        rating: clinicData?.rating || 4.5,
+        reviewCount: clinicData?.review_count || 0,
+        lastReviewDays,
+        treatmentCount: services.length,
+        regenRatio: (regenRatioPercent / 10).toFixed(1)
+    }
+
+    // 6. Breakdown (Target 100 points total for the UI report)
+    // Map our existing scores to the 6 report categories
+    const breakdown = {
+        satisfaction: Math.round(((clinicData?.score?.breakdown?.trust || 8) / 10) * 20),
+        regenRatio: Math.round((regenRatioPercent / 100) * 20),
+        transparency: Math.round(((clinicData?.score?.breakdown?.safety || 10) / 15) * 20),
+        recency: lastReviewDays.includes('d') && parseInt(lastReviewDays) < 15 ? 18 : 12,
+        pricing: patientInput.priceQuoted ? 8 : 4,
+        digital: clinicData?.website ? 8 : 4
+    }
+
+    // 7. Recommendations
     let recommendations = "This clinic meets 2026 biological standards with strong Natural Integrity and fair market pricing. Proceed with confidence."
     if (regenRatioPercent < 20 && patientInput.primaryGoal === 'Natural, subtle enhancement') {
         recommendations = `⚠️ This clinic's menu is ${100 - regenRatioPercent}% traditional HA filler. For your goal of natural, subtle results, consider providers with Regen-Ratios above 35% in ${patientInput.city}.`
@@ -137,16 +167,21 @@ export function calculateClinicAudit(
     }
 
     return {
-        iiScore: Number((iiScore / 10).toFixed(1)),
+        iiScore,
         marketPosition,
         regenRatio: regenRatioPercent,
         regenRatioPercent,
         regenStatus,
         priceBenchmark: priceResult,
         naturalAlignment: alignment,
-        innovationScore: Math.min(10, Math.round(innovationScore)),
-        offerings,
+        innovationScore: Math.min(10, Math.round((clinicData?.score?.breakdown?.regenRatio || 0) / 1.5)),
+        offerings: INNOVATION_ITEMS.map(item => ({
+            name: item.label,
+            checked: !!(clinicData?.[item.key] || services.some((s: string) => s.toLowerCase().includes(item.label.toLowerCase().split(' ')[0])))
+        })),
         recommendations,
-        alternatives: [] // To be populated by caller using search
+        alternatives: [],
+        stats,
+        breakdown
     }
 }
