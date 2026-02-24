@@ -1,6 +1,6 @@
 'use server'
 
-import { createServerClient } from '@supabase/auth-helpers-nextjs'
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 
 /**
  * Robust Supabase client factory for Server Actions and Server Components.
@@ -18,25 +18,8 @@ export async function getSupabaseServer(cookieList: any) {
     }
 
     try {
-        const client = createServerClient(
-            url,
-            key,
-            {
-                cookies: {
-                    getAll() {
-                        return cookieList.getAll()
-                    },
-                    setAll(cookiesToSet) {
-                        try {
-                            cookiesToSet.forEach(({ name, value, options }) =>
-                                cookieList.set(name, value, options)
-                            )
-                        } catch {
-                            // Safe to ignore in Server Components
-                        }
-                    },
-                },
-            }
+        const client = createRouteHandlerClient(
+            { cookies: () => cookieList }
         )
         return client
     } catch (err) {
