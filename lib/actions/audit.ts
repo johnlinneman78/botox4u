@@ -6,7 +6,7 @@ import { getCityStats } from './providers'
 import { calculateClinicAudit, AuditPatientInput } from '@/lib/audit-scoring'
 import { Resend } from 'resend'
 import { NICHE } from '@/config/niche'
-import { jsPDF } from 'jspdf'
+import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
 const getResend = () => {
