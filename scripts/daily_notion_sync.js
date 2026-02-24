@@ -246,7 +246,7 @@ async function main() {
                     subject: `Daily Briefing: ${new Date().toLocaleDateString()}`,
                     html: `
                         <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee;">
-                            <h2 style="color: #1a2332;">Botox-4u.com Daily Briefing</h2>
+                            <h2 style="color: #1a2332;">InjectorIndex.com Daily Briefing</h2>
                             <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
                             
                             <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">

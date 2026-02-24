@@ -55,6 +55,46 @@ const nextConfig: NextConfig = {
         destination: '/blog/daxxify-long-acting-tox-city-reports-2026',
         permanent: true,
       },
+      // Old brand page removals to avoid ghost views
+      {
+        source: '/find-top-providers',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/natural-results',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/find-top-injectors',
+        destination: '/',
+        permanent: true,
+      },
+      // Domain-level catch-all redirect (to be used when botox-4u.com points to this deployment)
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.botox-4u.com',
+          },
+        ],
+        destination: 'https://www.injectorindex.com/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'botox-4u.com',
+          },
+        ],
+        destination: 'https://injectorindex.com/:path*',
+        permanent: true,
+      },
+
     ]
   },
 };

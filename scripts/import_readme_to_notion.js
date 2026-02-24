@@ -160,7 +160,7 @@ async function main() {
                     title: [
                         {
                             text: {
-                                content: 'Botox-4-U.com Launch Guide'
+                                content: 'InjectorIndex.com Launch Guide'
                             }
                         }
                     ]

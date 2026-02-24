@@ -19,13 +19,13 @@ async function testEmail() {
 
     try {
         const data = await resend.emails.send({
-            from: `Botox-4u System <${FROM_EMAIL}>`,
+            from: `InjectorIndex System <${FROM_EMAIL}>`,
             to: TO_EMAIL,
             subject: '🔔 Test Notification: Admin Alert',
             html: `
                 <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
                     <h2 style="color: #2563eb;">It Works! 🎉</h2>
-                    <p>This is a test notification from your <strong>Botox-4u.com</strong> system.</p>
+                    <p>This is a test notification from your <strong>InjectorIndex.com</strong> system.</p>
                     <p>If you are seeing this, your <strong>ADMIN_EMAIL</strong> is correctly configured to receive:</p>
                     <ul>
                         <li>New Patient Leads</li>

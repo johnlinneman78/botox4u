@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const searchTerms = ['botox-4u', 'Botox-4U', 'Botox-4u', 'botox4u', 'Botox4U', 'Find Top Providers & Compare Costs'];
+const searchTerms = ['botox-4u', 'Botox-4U', 'Botox-4u', 'botox4u', 'Botox4U', 'Botox-4-U', 'botox-4-u', 'Find Top Providers & Compare Costs'];
 const searchDirs = ['app', 'components', 'config', 'lib', 'public', 'content', 'data', 'emails', 'email', 'templates'];
 const searchExts = ['.tsx', '.ts', '.js', '.jsx', '.json', '.md', '.html', '.css', '.txt', '.env', '.local', '.production'];
 const ignoreDirs = ['node_modules', '.next', '.git', '.venv', 'scripts'];

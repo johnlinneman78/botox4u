@@ -1,7 +1,7 @@
-# Botox-4-U.com Launch & CRM Guide
+# InjectorIndex.com Launch & CRM Guide
 
 ## 🚀 Project Overview
-We have successfully transitioned the branding to **Botox-4-U.com** and implemented a comprehensive CRM and outreach system. This document outlines the workflows, access points, and maintenance procedures.
+We have successfully transitioned the branding to **InjectorIndex.com** and implemented a comprehensive CRM and outreach system. This document outlines the workflows, access points, and maintenance procedures.
 
 ## 📊 CRM & Admin Dashboard
 **Access URL:** `/admin/leads` (requires authentication)
@@ -54,7 +54,7 @@ We have successfully transitioned the branding to **Botox-4-U.com** and implemen
     Ensure `.env.local` has:
     *   `RESEND_API_KEY`: For sending emails.
     *   `ADMIN_EMAIL`: Where you receive lead notifications.
-    *   `CONTACT_EMAIL`: The 'From' address (e.g., hello@botox-4-u.com).
+    *   `CONTACT_EMAIL`: The 'From' address (e.g., hello@injectorindex.com).
     *   `NOTION_API_KEY`: For Notion syncing.
 
 3.  **Deploy:**
