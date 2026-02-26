@@ -144,7 +144,7 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                                         <ul className="text-[9px] text-gray-400 space-y-1 font-medium">
                                             <li>• Injection Quality (AI-Audit)</li>
                                             <li>• Provider Credentials (NPI)</li>
-                                            <li>• Innovation (Regen Adoption)</li>
+                                            <li>• Clinical Quality Data</li>
                                             <li>• Treatment Range (Breadth)</li>
                                         </ul>
                                     </div>

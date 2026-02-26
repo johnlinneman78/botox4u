@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import { Metadata } from 'next'
 import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCard'
 import { ProviderFilters } from '@/components/providers/ProviderFilters'
 import { Button } from '@/components/ui/Button'
@@ -6,6 +7,14 @@ import { getProvidersWithSearch } from '@/lib/actions/providers'
 import { GeolocationSorter } from '@/components/providers/GeolocationSorter'
 import { NICHE } from '@/config/niche'
 import { Dna, ShieldCheck } from 'lucide-react'
+
+export const metadata: Metadata = {
+    title: `Find & Compare Aesthetic Providers | ${NICHE.siteName}`,
+    description: `Compare ${NICHE.siteName} providers by TrueScore™, pricing, and credentials. Find the best injectors for natural results near you.`,
+    alternates: {
+        canonical: '/find-providers',
+    }
+}
 
 export default async function FindProvidersPage({
     searchParams,

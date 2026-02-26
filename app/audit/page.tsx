@@ -7,7 +7,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: 'Free 2026 Clinic Safety Audit | InjectorIndex',
-    description: 'Score your clinic against II-Score™ benchmarks. Get a personalized PDF report on Regen-Ratio™, Natural Integrity, and Pricing.'
+    description: 'Score your clinic against TrueScore™ benchmarks. Get a personalized PDF report on Clinical Quality, Natural Integrity, and Pricing.'
 }
 
 export default function AuditPage() {
@@ -25,7 +25,7 @@ export default function AuditPage() {
 
                         <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
                             Is Your Clinic <br />
-                            <span className="text-[#d4af37]">Regen-Ready?</span>
+                            <span className="text-[#d4af37]">Clinical-Ready?</span>
                         </h1>
 
                         <p className="text-xl text-gray-400 max-w-lg">
@@ -34,7 +34,7 @@ export default function AuditPage() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {[
-                                { icon: ShieldCheck, title: 'II-Score™ V2.0', desc: 'Score clinics against safety and innovation benchmarks.' },
+                                { icon: ShieldCheck, title: 'TrueScore™ V2.0', desc: 'Score clinics against safety and innovation benchmarks.' },
                                 { icon: BarChart3, title: 'Price Integrity', desc: 'Compare your quote against zip-code market averages.' },
                                 { icon: Mail, title: 'Email Delivery', desc: 'Detailed report delivered immediately to your inbox.' },
                                 { icon: Download, title: 'PDF Analysis', desc: 'Full-breakdown PDF for your next consultation.' }

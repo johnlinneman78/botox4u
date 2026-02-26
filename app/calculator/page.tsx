@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: `${NICHE.name} Cost Calculator | Estimate Your Treatment Units & Price`,
     description: `Use our interactive ${NICHE.name} cost estimator to calculate units and prices for ${NICHE.calculator.treatmentAreas.slice(0, 3).map(a => a.label.toLowerCase()).join(', ')} and more based on local averages.`,
     alternates: {
-        canonical: 'https://www.injectorindex.com/calculator',
+        canonical: '/calculator',
     }
 }
 

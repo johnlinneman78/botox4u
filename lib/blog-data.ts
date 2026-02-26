@@ -514,7 +514,7 @@ What makes Pearl District special for PNs: providers here were among the first i
 
 Pearl District PN pricing ranges from $550–$850 per session, with most protocols requiring 3 sessions spaced 3–4 weeks apart. Total investment: $1,650–$2,550 for a full course. That's competitive with a single syringe of premium HA filler that needs replacing every 9–12 months.
 
-Average II-Score for Pearl District PN providers: 8.7 out of 10. Regen-Ratio: 62% (meaning 62% of their menu is regenerative vs. traditional).
+Average TrueScore™ for Pearl District PN providers: 8.7 out of 10. Clinical Quality Ratio: 62% (meaning 62% of their menu is regenerative vs. traditional).
 
 ## Alberta Arts District: The Neo-Romantic Aesthetic Medicine Hub
 
@@ -530,7 +530,7 @@ NW 23rd (Nob Hill) represents Portland's most established aesthetics corridor. P
 
 Pricing on NW 23rd is the highest in Portland for PNs: $700–$900 per session. The premium reflects physician-level oversight and typically more conservative dosing protocols. If you want the most medically rigorous PN experience in Portland, NW 23rd is where to look.
 
-Regen-Ratio on NW 23rd averages 48% — lower than Pearl District because these practices still maintain robust traditional filler menus alongside their regenerative offerings. Not a negative, just different.
+Clinical Quality Ratio on NW 23rd averages 48% — lower than Pearl District because these practices still maintain robust traditional filler menus alongside their regenerative offerings. Not a negative, just different.
 
 ## Division / Clinton: The Emerging Market
 
@@ -546,9 +546,9 @@ Which PN brand are they using? The two dominant brands in Portland are Nucleadyn
 
 How many PN sessions have they performed? PNs require different injection technique than HA fillers. Ask specifically about PN experience, not general injectable experience.
 
-Do they combine PNs with other treatments? Providers who layer PNs with exosomes, PRF, or biostimulators tend to see faster and more dramatic results. This is where Portland's most innovative providers differentiate themselves.
+Do they combine PNs with other treatments? Providers who layer PNs with exosomes, PRF, or advanced volumizing treatments tend to see faster and more dramatic results. This is where Portland's most innovative providers differentiate themselves.
 
-What's their Regen-Ratio? At Injector Index, we score every provider on what percentage of their practice is regenerative. A higher Regen-Ratio means the provider is more committed to biological repair over volume-based correction.
+What's their Clinical Quality Ratio? At Injector Index, we score every provider on what percentage of their practice is regenerative. A higher Clinical Quality Ratio means the provider is more committed to biological repair over volume-based correction.
 
 [Find Best Polynucleotides (PNs) Providers in Portland →](https://www.injectorindex.com/find-providers?q=Polynucleotides&location=Portland)
 `,
@@ -559,7 +559,7 @@ What's their Regen-Ratio? At Injector Index, we score every provider on what per
             },
             {
                 question: 'Which Portland neighborhood has the best PN injectors?',
-                answer: 'Pearl District has the highest average II-Score (8.7) and Regen-Ratio (62%) for PN providers. Alberta Arts is close behind with more experimental protocols and lower pricing. NW 23rd offers the most medically conservative approach with physician oversight.'
+                answer: 'Pearl District has the highest average TrueScore™ (8.7) and Clinical Quality Ratio (62%) for PN providers. Alberta Arts is close behind with more experimental protocols and lower pricing. NW 23rd offers the most medically conservative approach with physician oversight.'
             },
             {
                 question: 'Are Polynucleotides better than under-eye filler?',
@@ -608,11 +608,11 @@ Daxxify is ideal for patients who are already happy with their neurotoxin result
 
 Daxxify is NOT ideal for first-time neurotoxin patients (start with standard Botox to understand how your body responds), patients who want maximum dose control (the longer duration means less ability to "dial down" results mid-cycle), or patients primarily seeking micro-dose "Baby Botox" effects — Daxxify's peptide technology is optimized for standard to higher doses.
 
-## The Gen Z Angle: Prejuvenation with Daxxify
+    ## The Preventative Care Approach: Prejuvenation with Daxxify
 
-In 2026, Gen Z represents roughly 10% of Portland's injectable market. Many of them are choosing Daxxify for preventative ("prejuvenation") protocols because twice-yearly micro-dose sessions are easier to maintain than quarterly Botox appointments.
+    In 2026, preventative treatments represent a growing segment of the injectable market. Many patients are choosing Daxxify for "prejuvenation" protocols because twice-yearly micro-dose sessions are easier to maintain than quarterly Botox appointments.
 
-Portland providers report that typical Gen Z Daxxify patients use 15–25 units (forehead and glabella only) at a cost of $195–$450 per session, twice per year. Annual preventative cost: $390–$900 — less than most skin care subscriptions.
+    Clinical reports show that preventative Daxxify patients typically focus on early intervention (forehead and glabella) with sessions twice per year. This long-acting approach makes treatment schedules more manageable while providing consistent, natural-looking results.
 
 [Find Best Daxxify Providers in Portland →](https://www.injectorindex.com/find-providers?q=Daxxify&location=Portland)
 `,
@@ -652,7 +652,7 @@ If you live in Portland, Seattle, or San Francisco, you're at the epicenter of t
 
 The Neo-Romantic aesthetic movement in injectable medicine draws from the broader cultural backlash against hyper-perfection — in fashion, in social media filters, and now in clinical aesthetics. Neo-Romantic aesthetic patients don't want to look 25 forever. They want to look like the best version of themselves at whatever age they are — what providers call "facial harmony."
 
-In clinical practice, this means Polynucleotides (PNs) replacing HA fillers for under-eye and skin quality, Daxxify micro-doses for prevention instead of Botox freeze for correction, bio-stimulators (Sculptra, Radiesse) for structural health instead of filler for volume, and exosome therapy for cellular recovery instead of aggressive laser treatments.
+In clinical practice, this means Polynucleotides (PNs) replacing HA fillers for under-eye and skin quality, Daxxify micro-doses for prevention instead of Botox freeze for correction, advanced structural repair for structural health instead of filler for volume, and exosome therapy for cellular recovery instead of aggressive laser treatments.
 
 The common thread: regenerative treatments that work WITH your biology instead of overriding it.
 
@@ -660,9 +660,9 @@ The common thread: regenerative treatments that work WITH your biology instead o
 
 Portland didn't invent the Neo-Romantic aesthetic movement, but it arguably operationalized it in clinical practice first. Portland's medical aesthetics culture has always leaned conservative — "undetectable results" has been the dominant patient request in Portland for over a decade. What changed in 2025–2026 is that regenerative medicine finally caught up with the philosophy.
 
-Portland's average Regen-Ratio (the percentage of a provider's menu that's regenerative vs. traditional) is 54% — the highest of any U.S. city we index. For comparison, Los Angeles is at 31% and Miami is at 22%.
+Portland's average Clinical Quality Ratio (the percentage of a provider's menu that's regenerative vs. traditional) is 54% — the highest of any U.S. city we index. For comparison, Los Angeles is at 31% and Miami is at 22%.
 
-Key Portland metrics: 90+ providers indexed, average per-unit neurotoxin cost $14, PN adoption rate 38% of providers, top II-Score 9.4 (Pearl District).
+Key Portland metrics: 90+ providers indexed, average per-unit neurotoxin cost $14, PN adoption rate 38% of providers, top TrueScore™ 9.4 (Pearl District).
 
 ## Seattle: The Tech-Bio Convergence in Aesthetic Medicine
 
@@ -672,17 +672,17 @@ Seattle PN adoption is accelerating faster than Portland's, from 12% of provider
 
 Seattle's Daxxify adoption is the highest in the Pacific Northwest — 34% of indexed providers now offer it, compared to 28% in Portland and 41% in San Francisco.
 
-Key Seattle metrics: 72+ providers indexed, average per-unit cost $16, PN adoption rate 29% and rising, top II-Score 9.1.
+Key Seattle metrics: 72+ providers indexed, average per-unit cost $16, PN adoption rate 29% and rising, top TrueScore™ 9.1.
 
 ## San Francisco: The Regenerative Medicine Frontier
 
 San Francisco takes the Neo-Romantic aesthetic philosophy and pushes it further than any other city. The biohacking culture here treats injectable aesthetics as part of a broader longevity optimization strategy.
 
-SF providers are pioneering combination protocols: PNs + exosomes + microneedling in a single session ("regenerative layering"), Daxxify paired with LED light therapy to extend duration, bio-stimulator cocktails for Ozempic-face repair, and NAD+ IV drips alongside injectable treatments.
+SF providers are pioneering combination protocols: PNs + exosomes + microneedling in a single session ("regenerative layering"), Daxxify paired with LED light therapy to extend duration, custom structural repair cocktails for Ozempic-face repair, and NAD+ IV drips alongside injectable treatments.
 
 SF also has the highest average per-unit pricing in our network at $19, but patients here view the cost through a "total longevity investment" lens rather than a "per-treatment" lens.
 
-Key SF metrics: 54+ providers indexed, average per-unit cost $19, PN adoption rate 33%, Exosome adoption rate 28% (highest in the country), top II-Score 9.2.
+Key SF metrics: 54+ providers indexed, average per-unit cost $19, PN adoption rate 33%, Exosome adoption rate 28% (highest in the country), top TrueScore™ 9.2.
 
 ## What This Means for Your Next Aesthetic Appointment
 
@@ -699,7 +699,7 @@ The providers who score highest on Injector Index in 2026 are consistently the o
             },
             {
                 question: 'Which city is leading the Neo-Romantic aesthetic movement in regenerative medicine?',
-                answer: 'Portland, OR has the highest Regen-Ratio (54%) of any indexed city, making it the de facto leader in the Neo-Romantic aesthetic movement. San Francisco is pushing the boundaries furthest with combination regenerative medicine protocols. Seattle is the fastest-growing market for regenerative adoption.'
+                answer: 'Portland, OR has the highest Clinical Quality Ratio (54%) of any indexed city, making it the de facto leader in the Neo-Romantic aesthetic movement. San Francisco is pushing the boundaries furthest with combination regenerative medicine protocols. Seattle is the fastest-growing market for regenerative adoption.'
             },
             {
                 question: 'Is the Neo-Romantic aesthetic approach more expensive than traditional injectables?',
@@ -707,7 +707,7 @@ The providers who score highest on Injector Index in 2026 are consistently the o
             },
             {
                 question: 'How do I find a Neo-Romantic aesthetic provider near me?',
-                answer: 'On Injector Index, look for providers with a high Regen-Ratio score. This measures what percentage of their treatment menu is regenerative (Polynucleotides, bio-stimulators, exosomes, Daxxify) vs. traditional (HA fillers, standard Botox). The higher the Regen-Ratio, the more aligned they are with the Neo-Romantic aesthetic philosophy in regenerative medicine.'
+                answer: 'On Injector Index, look for providers with a high Clinical Quality Ratio score. This measures what percentage of their treatment menu is regenerative (Polynucleotides, bio-stimulators, exosomes, Daxxify) vs. traditional (HA fillers, standard Botox). The higher the Clinical Quality Ratio, the more aligned they are with the Neo-Romantic aesthetic philosophy in regenerative medicine.'
             }
         ]
     },
@@ -800,15 +800,15 @@ SLU's patient base — largely Amazon, Meta, and biotech employees — approache
 
 SLU providers tend to be physician-led practices with deep expertise in regenerative medicine. Pricing reflects this: PNs run $650–$900, Daxxify $14–$18/unit, and combination protocols $1,000–$1,500 per session.
 
-Average II-Score in SLU: 8.9. Highest in Seattle. The tech demographic demands quality and transparency, and providers who deliver get rewarded with exceptional patient reviews.
+Average TrueScore™ in SLU: 8.9. Highest in Seattle. The tech demographic demands quality and transparency, and providers who deliver get rewarded with exceptional patient reviews.
 
 ## Bellevue: Premium Suburban Regen
 
 Bellevue represents the premium end of Seattle's regenerative market. The providers here serve an affluent suburban clientele who want best-in-class results and don't mind paying for them.
 
-Bellevue PN pricing: $700–$950 per session — the highest in the greater Seattle area. But the providers here typically offer the most comprehensive regenerative protocols, including PN + exosome + biostimulator combination treatments that can run $1,500–$2,200 per session.
+Bellevue PN pricing: $700–$950 per session — the highest in the greater Seattle area. But the providers here typically offer the most comprehensive regenerative protocols, including PN + exosome + advanced volumizing combination treatments that can run $1,500–$2,200 per session.
 
-Bellevue's Regen-Ratio averages 51%, second only to Portland's Pearl District in our Pacific Northwest data.
+Bellevue's Clinical Quality Ratio averages 51%, second only to Portland's Pearl District in our Pacific Northwest data.
 
 ## Wallingford / Fremont: The Wellness-First Approach
 
@@ -818,7 +818,7 @@ Pricing in Wallingford/Fremont is moderate: PNs $500–$700, Daxxify $11–$14/u
 
 ## How Seattle Compares to Portland
 
-Portland leads in overall Regen-Ratio (54% vs. Seattle's 41%) and has a longer track record with PNs. But Seattle is catching up fast, and in some areas — particularly Daxxify adoption and exosome innovation — Seattle is already ahead.
+Portland leads in overall Clinical Quality Ratio (54% vs. Seattle's 41%) and has a longer track record with PNs. But Seattle is catching up fast, and in some areas — particularly Daxxify adoption and exosome innovation — Seattle is already ahead.
 
 Seattle's average per-unit neurotoxin pricing ($16) is 14% higher than Portland's ($14), reflecting higher cost of living and higher average provider credentials. But when you factor in Daxxify's longer duration, the annual cost difference narrows significantly.
 
@@ -827,7 +827,7 @@ For patients who want the most established regenerative market, Portland is the 
         faqs: [
             {
                 question: 'Which Seattle neighborhood has the best regenerative injectors?',
-                answer: 'South Lake Union has the highest average II-Score (8.9) with physician-led, data-driven practices. Capitol Hill has the highest PN adoption rate (42%) and most progressive approach. Bellevue offers the most premium regenerative protocols.'
+                answer: 'South Lake Union has the highest average TrueScore™ (8.9) with physician-led, data-driven practices. Capitol Hill has the highest PN adoption rate (42%) and most progressive approach. Bellevue offers the most premium regenerative protocols.'
             },
             {
                 question: 'How much do Polynucleotides cost in Seattle?',
@@ -835,11 +835,11 @@ For patients who want the most established regenerative market, Portland is the 
             },
             {
                 question: 'Is Seattle or Portland better for regenerative aesthetics?',
-                answer: 'Portland has a higher overall Regen-Ratio (54% vs. 41%) and longer PN track record. Seattle has faster growth in Daxxify adoption and more innovative combination protocols, particularly in SLU. Both cities are national leaders in the Neo-Romantic aesthetic movement in regenerative medicine.'
+                answer: 'Portland has a higher overall Clinical Quality Ratio (54% vs. 41%) and longer PN track record. Seattle has faster growth in Daxxify adoption and more innovative combination protocols, particularly in SLU. Both cities are national leaders in the Neo-Romantic aesthetic movement in regenerative medicine.'
             },
             {
                 question: 'How do I find a regenerative injector in Seattle?',
-                answer: 'On Injector Index, filter Seattle providers by Regen-Ratio to find those most committed to regenerative medicine. Providers with Regen-Ratio above 50% offer predominantly regenerative treatments like PNs, Daxxify, biostimulators, and exosomes.'
+                answer: 'On Injector Index, filter Seattle providers by Clinical Quality Ratio to find those most committed to regenerative medicine. Providers with Clinical Quality Ratio above 50% offer predominantly regenerative treatments like PNs, Daxxify, advanced volumizers, and exosomes.'
             }
         ]
     },
@@ -896,11 +896,11 @@ The Neo-Romantic aesthetic philosophy rejects the premise that aging is a proble
 
 **Exosome Therapy:** Plant-derived or lab-synthesized signaling molecules that accelerate cellular repair after microneedling, laser, or injectable treatments. Still emerging in clinical literature but increasingly adopted by providers with regenerative medicine backgrounds.
 
-## The Regen-Ratio: How We Measure It
+## The Clinical Quality Ratio: How We Measure It
 
-Injector Index created the Regen-Ratio™ to quantify how aligned a provider is with the Neo-Romantic aesthetic philosophy in regenerative medicine. It measures the percentage of a provider's treatment menu that uses regenerative modalities (PNs, bio-stimulators, exosomes, Daxxify) vs. traditional modalities (HA fillers, standard Botox, Dysport).
+Injector Index created the Clinical Quality Ratio™ to quantify how aligned a provider is with the Neo-Romantic aesthetic philosophy in regenerative medicine. It measures the percentage of a provider's treatment menu that uses regenerative modalities (PNs, bio-stimulators, exosomes, Daxxify) vs. traditional modalities (HA fillers, standard Botox, Dysport).
 
-A Regen-Ratio of 60% means 60% of that provider's offered treatments are regenerative. The national average is 28%. Portland leads at 54%. The top individual providers — the ones we consider fully Neo-Romantic aesthetic practices — score above 70%.
+A Clinical Quality Ratio of 60% means 60% of that provider's offered treatments are regenerative. The national average is 28%. Portland leads at 54%. The top individual providers — the ones we consider fully Neo-Romantic aesthetic practices — score above 70%.
 
 ## Why This Isn't a Trend
 
@@ -908,11 +908,11 @@ Trends come and go. The "fox eye" thread lift lasted 18 months. "Barbie Botox" w
 
 Polynucleotides work. The clinical data is clear: they improve skin quality metrics (elasticity, hydration, thickness) in ways that HA fillers simply don't. Daxxify lasts longer. Bio-stimulators produce more natural-looking structural results. These aren't marketing claims — they're measurable outcomes.
 
-The providers who adopted regenerative medicine earliest are outperforming their peers on every metric we track: patient satisfaction, review sentiment, retention rates, and Injector Index Score (II-Score).
+The providers who adopted regenerative medicine earliest are outperforming their peers on every metric we track: patient satisfaction, review sentiment, retention rates, and Injector Index Score (TrueScore™).
 
 ## What This Means for You
 
-If you're a patient: seek out providers who can explain their treatment philosophy. Ask about their Regen-Ratio. Ask if they offer Polynucleotides. Ask if they prioritize facial harmony and undetectable results. The best providers in 2026 are the ones who see your face as a biological system, not a canvas to be painted.
+If you're a patient: seek out providers who can explain their treatment philosophy. Ask about their Clinical Quality Ratio. Ask if they offer Polynucleotides. Ask if they prioritize facial harmony and undetectable results. The best providers in 2026 are the ones who see your face as a biological system, not a canvas to be painted.
 
 If you're a provider: the data is clear. The aesthetics market is moving toward regenerative medicine, and the providers who move with it are building more sustainable, more ethical, and more profitable practices. Claim your profile on Injector Index and let patients find you based on your clinical philosophy, not your advertising budget.
 
@@ -932,8 +932,8 @@ The Neo-Romantic aesthetic era of regenerative medicine isn't coming. It's here.
                 answer: 'Neo-Romantic aesthetic skincare refers to clinical treatments that prioritize skin biology and cellular repair — Polynucleotides for tissue regeneration, exosome therapy for cellular recovery, bio-stimulators for collagen induction, and Daxxify micro-doses for preventive neurotoxin therapy. It\'s a medical aesthetics approach, not a topical skincare routine.'
             },
             {
-                question: 'What is the Regen-Ratio and how does it relate to Neo-Romantic aesthetics?',
-                answer: 'The Regen-Ratio™ is Injector Index\'s proprietary metric measuring what percentage of a provider\'s treatment menu uses regenerative modalities (Polynucleotides, bio-stimulators, exosomes, Daxxify) vs. traditional modalities (HA fillers, standard Botox). A higher Regen-Ratio indicates stronger alignment with the Neo-Romantic aesthetic philosophy in regenerative medicine. The national average is 28%; Portland leads at 54%.'
+                question: 'What is the Clinical Quality Ratio and how does it relate to Neo-Romantic aesthetics?',
+                answer: 'The Clinical Quality Ratio™ is Injector Index\'s proprietary metric measuring what percentage of a provider\'s treatment menu uses regenerative modalities (Polynucleotides, bio-stimulators, exosomes, Daxxify) vs. traditional modalities (HA fillers, standard Botox). A higher Clinical Quality Ratio indicates stronger alignment with the Neo-Romantic aesthetic philosophy in regenerative medicine. The national average is 28%; Portland leads at 54%.'
             },
             {
                 question: 'Is the Neo-Romantic aesthetic movement the same as art history Neo-Romanticism?',
@@ -952,9 +952,9 @@ New York City has always been the capital of aesthetics, but in 2026, the defini
 
 As the Neo-Romantic aesthetic movement takes hold across the country, NYC providers are operationalizing it at a scale unseen anywhere else. From the Upper East Side to Tribeca, the focus has moved from "correction" to "regeneration."
 
-## The Manhattan Metric: 58% Regen-Ratio
+## The Manhattan Metric: 58% Clinical Quality Ratio
 
-In our 2026 indexing, New York City emerged with a staggering 58% average Regen-Ratio across Manhattan-based clinics. This means over half of the procedures scheduled in these offices are focused on biological repair (PNs, bio-stimulators, exosomes) rather than synthetic volume (traditional fillers).
+In our 2026 indexing, New York City emerged with a staggering 58% average Clinical Quality Ratio across Manhattan-based clinics. This means over half of the procedures scheduled in these offices are focused on biological repair (PNs, bio-stimulators, exosomes) rather than synthetic volume (traditional fillers).
 
 For comparison, the national average remains stuck at 28%. NYC isn't just following the trend; it's defining the national standard for the Aesthetic Neo-Romanticism era.
 
@@ -988,8 +988,8 @@ Clinics in the Flatiron District and Tribeca are reporting that layering these m
                 answer: 'In NYC, PN sessions typically range from $600–$1,200. Upper East Side providers average $800–$1,200, while more boutique studios in SoHo or Brooklyn range from $600–$900.'
             },
             {
-                question: 'What is the average Regen-Ratio in New York City?',
-                answer: 'Manhattan clinics average a 58% Regen-Ratio in 2026, the highest in our national index. this reflects a significant shift from traditional fillers to regenerative treatments.'
+                question: 'What is the average Clinical Quality Ratio in New York City?',
+                answer: 'Manhattan clinics average a 58% Clinical Quality Ratio in 2026, the highest in our national index. this reflects a significant shift from traditional fillers to regenerative treatments.'
             },
             {
                 question: 'Where can I find the best Daxxify injectors in NYC?',
@@ -1209,11 +1209,11 @@ Before the brand comparisons, it helps to understand the three variables that ac
             },
             {
                 question: 'Can these products be combined?',
-                answer: 'Yes — some providers layer different PN products across treatment sessions or combine PN treatment with other modalities like RF microneedling, biostimulators, or neurotoxins.'
+                answer: 'Yes — some providers layer different PN products across treatment sessions or combine PN treatment with other modalities like RF microneedling, structural volumizers, or neurotoxins.'
             },
             {
                 question: 'How do I find a provider who offers these specific products?',
-                answer: 'Most US directories don\'t filter by PN product brand. InjectorIndex tracks which providers offer polynucleotide treatments and scores them partly on the Innovation Score component of the II-Score™.'
+                answer: 'Most US directories don\'t filter by PN product brand. InjectorIndex tracks which providers offer polynucleotide treatments and scores them partly on the Innovation Score component of the TrueScore™.'
             },
             {
                 question: 'Is there a significant price difference between the three?',
@@ -1249,7 +1249,7 @@ The core patient misconception about hyaluronic acid filler is that it "dissolve
 3. **Hyaluronidase is complex**: Dissolving isn't a simple reset button; it can also break down naturally occurring HA and cause hollowing.
 
 ## What 2026 Aesthetic Philosophy Looks Like Instead
-- **Less volume, more quality**: Prioritizing skin density and collagen via PNs and biostimulators.
+- **Less volume, more quality**: Prioritizing skin density and collagen via PNs and advanced structural restoration.
 - **Regenerative first, volume second**: Treat skin quality first, then assess if volume is actually needed.
 - **Conservative volume in younger patients**: Subtle structural support, not visible transformation.
 - **Prejuvenation**: "Baby Botox" and PN skin quality treatments have largely replaced the filler-first approach.
@@ -1262,7 +1262,7 @@ The core patient misconception about hyaluronic acid filler is that it "dissolve
 
 [Find providers whose philosophy matches 2026 biological standards — not 2015 volume culture: Search InjectorIndex →](https://www.injectorindex.com/find-providers)
 
-[Want to know your shortlisted provider's Regen-Ratio? Get your free 2026 clinic safety audit →](https://www.injectorindex.com/audit)
+[Want to know your shortlisted provider's Clinical Quality Ratio? Get your free 2026 clinic safety audit →](https://www.injectorindex.com/audit)
         `,
         faqs: [
             {

@@ -6,6 +6,9 @@ import { NICHE } from '@/config/niche'
 export const metadata = {
     title: `${NICHE.name} Directory by State | Find Local ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)}`,
     description: `Browse our comprehensive directory of ${NICHE.name} providers across the United States. Select your state to see top-rated clinics and local pricing.`,
+    alternates: {
+        canonical: `/${NICHE.baseSlug}`,
+    },
 }
 
 export default function StatesPage() {
@@ -26,8 +29,9 @@ export default function StatesPage() {
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                     {states.map((slug) => {
                         const name = slug.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ')
+                        const stateCode = STATE_MAP[slug]
                         return (
-                            <Link key={slug} href={`/${NICHE.baseSlug}/state/${slug}`} className="group">
+                            <Link key={slug} href={`/find-providers?state=${stateCode}`} className="group">
                                 <Card className="p-4 text-center bg-white/[0.02] border border-white/[0.06] hover:border-[#d4af37]/30 hover:shadow-md transition-all">
                                     <span className="font-bold text-white group-hover:text-[#d4af37] transition-colors uppercase tracking-wide text-sm">
                                         {name}

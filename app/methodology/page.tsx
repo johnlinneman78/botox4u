@@ -14,7 +14,7 @@ export default function MethodologyPage() {
                         <span>The 2026 Ranking Methodology</span>
                     </div>
                     <h1 className="text-5xl md:text-8xl font-display font-bold text-white mb-8 tracking-tight leading-[1.1]">
-                        The II-Score Isn&apos;t <span className="text-[#d4af37]">Assigned.</span> <br />It&apos;s Learned.
+                        The TrueScore™ Isn&apos;t <span className="text-[#d4af37]">Assigned.</span> <br />It&apos;s Learned.
                     </h1>
                     <p className="text-2xl text-gray-400 font-light leading-relaxed max-w-2xl mx-auto">
                         We built a semantic analysis engine that reads what patients actually say — because stars aren't enough to tell the full story.
@@ -38,7 +38,7 @@ export default function MethodologyPage() {
                                 We do the same thing for Botox providers.
                             </p>
                             <p className="text-lg">
-                                The {NICHE.siteName} Index is a proprietary data-driven ranking engine that learns from patient language and regenerative clinical patterns. The more data our engine analyzes, the stronger the &quot;Signal&quot; becomes. We don&apos;t award points based on a static rubric; we measure clinical and aesthetic relevance through proprietary regenerative intelligence.
+                                The {NICHE.siteName} Index is a proprietary data-driven ranking engine that learns from patient language and clinical quality patterns. The more data our engine analyzes, the stronger the &quot;Signal&quot; becomes. We don&apos;t award points based on a static rubric; we measure clinical and aesthetic relevance through proprietary clinical quality data.
                             </p>
                         </div>
                     </div>
@@ -140,7 +140,7 @@ export default function MethodologyPage() {
                     {/* 5. DYNAMIC SCORING MESSAGE */}
                     <div className="mb-32 p-16 rounded-[4rem] bg-[#101827] text-white text-center relative overflow-hidden border border-white/[0.06]">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-[#d4af37] opacity-10 -translate-y-1/2 translate-x-1/2 rounded-full blur-[80px]" />
-                        <h2 className="text-4xl font-display font-bold mb-8">The II-Score is Dynamic.</h2>
+                        <h2 className="text-4xl font-display font-bold mb-8">The TrueScore™ is Dynamic.</h2>
                         <p className="text-xl text-gray-400 font-light leading-relaxed max-w-2xl mx-auto mb-12">
                             A provider&apos;s score can change daily based on new data. We don&apos;t believe in permanent rankings. You have to earn your place in the index every single month.
                         </p>

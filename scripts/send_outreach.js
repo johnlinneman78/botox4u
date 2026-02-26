@@ -80,7 +80,7 @@ async function sendOutreach() {
                         
                         <p>I'm the founder of <strong>InjectorIndex.com</strong>. I'm writing because your clinic, <strong>${provider.name}</strong>, has been identified as a top-scoring provider in our 2026 <strong>${provider.city}</strong> index based on our independent research into patient results and pricing transparency.</p>
                         
-                        <p>Specifically, your <strong>II-Score</strong> (Injector Index Score) is currently <strong>${Math.round(provider.score || 0)}/100</strong>, reflecting a high degree of patient trust and verified credentials compared to the ${cityTotal || 'other'} checked clinics in ${provider.city}.</p>
+                        <p>Specifically, your <strong>TrueScore™</strong> (Injector Index Score) is currently <strong>${Math.round(provider.score || 0)}/100</strong>, reflecting a high degree of patient trust and verified credentials compared to the ${cityTotal || 'other'} checked clinics in ${provider.city}.</p>
                         
                         <p>Because of this ranking, you're eligible to display the <strong>"Verified by Injector Index"</strong> badge on your site. You can access the badge assets and your scoreboard breakdown here:</p>
                         
@@ -109,7 +109,7 @@ async function sendOutreach() {
                         
                         <p><a href="${providerPageUrl}" style="color: #2563eb; text-decoration: underline;">${providerPageUrl}</a></p>
                         
-                        <p>To ensure your data is 100% accurate and to unlock the full breakdown of your <strong>II-Score</strong> (which covers Natural Results and Credential signals), you can claim your free profile here:</p>
+                        <p>To ensure your data is 100% accurate and to unlock the full breakdown of your <strong>TrueScore™</strong> (which covers Natural Results and Credential signals), you can claim your free profile here:</p>
                         
                         <p><a href="${claimUrl}" style="color: #2563eb; font-weight: bold; text-decoration: underline;">Claim Your Profile — It's Free</a></p>
                         

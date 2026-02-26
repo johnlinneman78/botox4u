@@ -90,8 +90,8 @@ export default function TreatmentGuides() {
                                 link: '/find-providers?q=Daxxify'
                             },
                             {
-                                title: 'Biostimulators',
-                                desc: 'Sculptra & collagen builders for longevity.',
+                                title: 'Collagen Builders',
+                                desc: 'Advanced structural repair for long-term health.',
                                 icon: Sparkles,
                                 link: '/find-providers?q=Sculptra'
                             }

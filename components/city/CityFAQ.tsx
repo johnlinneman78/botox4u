@@ -33,7 +33,7 @@ export function CityFAQ({ city, avgCost }: CityFAQProps) {
         },
         {
             q: `What is the significance of "Innovation Adoption" in ${city}?`,
-            a: `Innovation Adoption is a key TrueScore™ pillar that measures a provider's commitment to next-gen aesthetic medicine—such as Daxxify, Exosomes, and Polynucleotides. High-innovation clinics in ${city} are recognized for staying ahead of legacy protocols, representing the modern standard in aesthetics.`
+            a: `Innovation Adoption is a key TrueScore™ pillar that measures a provider's commitment to modern aesthetic medicine and the latest clinical protocols. High-innovation clinics in ${city} are recognized for staying ahead of legacy standards, representing the current benchmark for quality results.`
         },
         {
             q: `Is there a difference in Botox brands available in ${city}?`,

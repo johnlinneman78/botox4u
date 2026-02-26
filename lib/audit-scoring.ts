@@ -18,7 +18,7 @@ export interface AuditResult {
     marketPosition: string
     regenRatio: number
     regenRatioPercent: number
-    regenStatus: 'Regen-Forward ✅' | 'Mixed Protocol ⚠️' | 'Filler-Heavy 🔴'
+    regenStatus: 'Innovation-Forward ✅' | 'Mixed Protocol ⚠️' | 'Traditional-Heavy 🔴'
     priceBenchmark: {
         quoted?: number
         average: number
@@ -69,14 +69,14 @@ export function calculateClinicAudit(
     clinicData: any,
     cityStats: any
 ): AuditResult {
-    // 1. II-Score & Market Position
+    // 1. TrueScore™ & Market Position
     const rawPoints = clinicData?.score?.points || 0
     const iiScore = Number((rawPoints / 10).toFixed(1))
     let marketPosition = 'Below market average'
     if (iiScore >= 8.5) marketPosition = 'Top 15%'
     else if (iiScore >= 7.0) marketPosition = 'Above market average'
 
-    // 2. Regen-Ratio™
+    // 2. Clinical Quality Ratio™
     const services = clinicData?.services_offered || []
     const regenCount = services.filter((s: string) =>
         REGEN_TREATMENTS.some(rt => s.toLowerCase().includes(rt.toLowerCase().split('/')[0].toLowerCase()))
@@ -84,8 +84,8 @@ export function calculateClinicAudit(
     const totalInjectableCount = Math.max(1, services.length)
     const regenRatioPercent = Math.round((regenCount / totalInjectableCount) * 100)
 
-    let regenStatus: AuditResult['regenStatus'] = 'Filler-Heavy 🔴'
-    if (regenRatioPercent > 40) regenStatus = 'Regen-Forward ✅'
+    let regenStatus: AuditResult['regenStatus'] = 'Traditional-Heavy 🔴'
+    if (regenRatioPercent > 40) regenStatus = 'Innovation-Forward ✅'
     else if (regenRatioPercent >= 20) regenStatus = 'Mixed Protocol ⚠️'
 
     // 3. Price Benchmark
@@ -159,7 +159,7 @@ export function calculateClinicAudit(
     // 7. Recommendations
     let recommendations = "This clinic meets 2026 biological standards with strong Natural Integrity and fair market pricing. Proceed with confidence."
     if (regenRatioPercent < 20 && patientInput.primaryGoal === 'Natural, subtle enhancement') {
-        recommendations = `⚠️ This clinic's menu is ${100 - regenRatioPercent}% traditional HA filler. For your goal of natural, subtle results, consider providers with Regen-Ratios above 35% in ${patientInput.city}.`
+        recommendations = `⚠️ This clinic's menu is ${100 - regenRatioPercent}% traditional HA filler. For your goal of natural, subtle results, consider providers with Clinical Quality scores above 35% in ${patientInput.city}.`
     } else if (priceResult.status === 'premium' && regenRatioPercent > 40) {
         recommendations = `⚠️ This clinic offers cutting-edge regenerative treatments but prices ${priceResult.percentageDiff}% above market average. Consider requesting an itemized quote.`
     } else if (naturalIntegrity < 15) {

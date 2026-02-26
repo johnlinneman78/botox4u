@@ -89,7 +89,7 @@ export function ProviderLookup() {
                                             <div className="text-xs text-gray-500">{p.city}, {p.state}</div>
                                         </div>
                                         <div className="text-right">
-                                            <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest mb-1">Current II-Score</div>
+                                            <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest mb-1">TrueScore™</div>
                                             <div className="text-lg font-black text-[#d4af37]">{Math.round(p.score_total)}</div>
                                         </div>
                                     </div>

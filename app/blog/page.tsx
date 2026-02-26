@@ -8,6 +8,9 @@ import { NICHE } from '@/config/niche'
 export const metadata: Metadata = {
     title: 'Injector Index Blog | Independent Aesthetic Intelligence',
     description: 'Consumer protection guides, pricing analysis, and safety reports for Botox and other aesthetic treatments.',
+    alternates: {
+        canonical: '/blog',
+    }
 }
 
 export default function BlogIndexPage() {

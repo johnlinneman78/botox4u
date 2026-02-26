@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /provider/login
+Disallow: /provider/dashboard
+Disallow: /claim/*/verify
 
-Sitemap: https://injectorindex.com/sitemap.xml
+Sitemap: https://www.injectorindex.com/sitemap.xml
+Sitemap: https://www.injectorindex.com/sitemap-pages.xml

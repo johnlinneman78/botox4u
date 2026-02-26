@@ -12,6 +12,9 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
     title: `The No-Filter Guide to Baby Botox | ${NICHE.siteName}`,
     description: "How to stay subtle, stay safe, and find the right injector. 40% of Botox complaints are about over-injection. Read our independent guide before you book.",
+    alternates: {
+        canonical: '/botox-buyers-guide',
+    }
 }
 
 export default function BuyersGuidePage() {
@@ -73,7 +76,7 @@ export default function BuyersGuidePage() {
                                             "Baby Botox explained (micro-dosing vs standard)",
                                             "Red flags: 6 reasons to walk away",
                                             "Hot Girl Math — why cheap Botox costs more",
-                                            "The II-Score breakdown",
+                                            "The TrueScore™ breakdown",
                                             "Your consultation script — 5 questions to ask",
                                             "Before & after checklist"
                                         ].map((item, i) => (
@@ -363,10 +366,10 @@ export default function BuyersGuidePage() {
                         <div className="max-w-4xl mx-auto text-center">
                             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4">Chapter 05</h2>
                             <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-8">
-                                The II-Score
+                                The TrueScore™
                             </h3>
                             <p className="text-xl text-gray-500 mb-20 max-w-2xl mx-auto leading-relaxed">
-                                Most directories rank providers by who paid the most for placement. The II-Score is a 0–100 merit-based algorithm for aesthetic providers. Nobody pays for a higher score.
+                                Most directories rank providers by who paid the most for placement. The TrueScore™ is a 0–100 merit-based algorithm for aesthetic providers. Nobody pays for a higher score.
                             </p>
 
                             <div className="space-y-4 max-w-3xl mx-auto text-left">
@@ -455,7 +458,7 @@ export default function BuyersGuidePage() {
                                             "No alcohol 24 hours before",
                                             "Write your questions down",
                                             "Get a consultation before any injection",
-                                            "Check II-Score — aim for 70+"
+                                            "Check TrueScore™ — aim for 70+"
                                         ].map((item, i) => (
                                             <div key={i} className="flex items-center gap-4 text-white font-medium">
                                                 <div className="w-5 h-5 border-2 border-white/20 rounded flex-shrink-0" />
@@ -488,7 +491,7 @@ export default function BuyersGuidePage() {
                                 <h4 className="text-3xl font-display font-bold text-white mb-12 text-center">The Final Checklist — Before You Book</h4>
                                 <div className="max-w-2xl mx-auto space-y-6">
                                     {[
-                                        "Checked their II-Score (aim for 70+)",
+                                        "Checked their TrueScore™ (aim for 70+)",
                                         "Verified NPI number at the federal database",
                                         "Read reviews specifically for: natural, subtle, conservative",
                                         "Confirmed per-unit pricing is stated upfront",
@@ -517,7 +520,7 @@ export default function BuyersGuidePage() {
                                 Ready to find your match?
                             </h2>
                             <p className="text-xl text-gray-500 mb-12 max-w-lg mx-auto leading-relaxed">
-                                Search free. No sign-up. Filter every injector in your city by their II-Score.
+                                Search free. No sign-up. Filter every injector in your city by their TrueScore™.
                             </p>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16 max-w-2xl mx-auto">

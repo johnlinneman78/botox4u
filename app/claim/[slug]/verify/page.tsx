@@ -1,6 +1,14 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import { VerifyForm } from './VerifyForm'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    robots: {
+        index: false,
+        follow: false,
+    },
+}
 
 export default async function VerifyPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params

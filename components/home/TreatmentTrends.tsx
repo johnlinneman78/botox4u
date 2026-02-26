@@ -68,10 +68,10 @@ const TREATMENTS = [
     {
         id: 'biostimulators',
         rank: '04',
-        name: 'Sculptra & Radiesse',
+        name: 'Structural Restoration',
         badge: '💎 Longevity',
         tagline: 'Collagen Stimulating',
-        desc: 'Biostimulators trigger your body\'s own structural repair. Results last 18–24 months. Ideal for facial volume and skin quality.',
+        desc: 'Advanced structural repair treatments trigger your body\'s own recovery. Results last 18–24 months. Ideal for facial volume and skin density.',
         priceConfig: { min: 850, max: 1200, step: 50, label: 'per vial' },
         icon: <Activity className="w-6 h-6" />,
         color: 'from-amber-950/60 to-amber-950/20',

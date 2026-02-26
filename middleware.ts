@@ -6,12 +6,6 @@ export async function middleware(request: NextRequest) {
     const url = request.nextUrl.clone()
     const host = request.headers.get('host')
 
-    // Redirect non-www to www (SEO Standard)
-    if (host && host === 'injectorindex.com') {
-        url.host = 'www.injectorindex.com'
-        return NextResponse.redirect(url, 301)
-    }
-
     const response = NextResponse.next()
     const supabase = createMiddlewareClient({ req: request, res: response })
 

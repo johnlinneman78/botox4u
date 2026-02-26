@@ -1,5 +1,13 @@
 import Link from 'next/link'
 import Logo from '@/components/layout/Logo'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    robots: {
+        index: false,
+        follow: false,
+    },
+}
 
 export default function ProviderLoginPage() {
     return (

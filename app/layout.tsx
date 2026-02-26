@@ -15,16 +15,16 @@ export const metadata: Metadata = {
   title: `InjectorIndex — Find & Compare the Best Botox Injectors Near You`,
   description: `Compare 500+ injectors across 22 cities. See TrueScores, real pricing, and verified credentials. Find natural results, ranked by data, not ads.`,
   keywords: `botox near me, best fillers, medspa rankings, injector scores, natural botox, lip filler, daxxify, polynucleotides, aesthetic directory`,
-  metadataBase: new URL(`https://${NICHE.domain}`),
+  metadataBase: new URL('https://www.injectorindex.com'),
   openGraph: {
     title: `InjectorIndex — Find & Compare the Best Botox Injectors Near You`,
     description: `Compare 500+ injectors across 22 cities. See TrueScores, real pricing, and verified credentials. Find natural results, ranked by data.`,
     type: 'website',
-    url: `https://${NICHE.domain}`,
+    url: 'https://www.injectorindex.com',
     siteName: NICHE.siteName,
   },
   alternates: {
-    canonical: `https://${NICHE.domain}`,
+    canonical: '/',
   },
 }
 

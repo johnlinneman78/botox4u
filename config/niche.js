@@ -46,7 +46,7 @@ export const NICHE = {
         "Cheek & Jaw Filler",
         "Polynucleotides (Regen)",
         "Daxxify",
-        "Biostimulators (Sculptra)",
+        "Collagen Builders (Sculptra)",
         "Masseter / Jaw Slimming",
         "Gummy Smile",
         "Natural Results Audit"

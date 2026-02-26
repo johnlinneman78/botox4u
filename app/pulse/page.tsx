@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/Button'
 export const metadata: Metadata = {
     title: 'The Botox Pulse | Live Pricing & Results Survey',
     description: 'Contribute to the largest independent Botox pricing index. Share your per-unit cost and patient experience to help others find fair, high-quality care.',
+    alternates: {
+        canonical: '/pulse',
+    }
 }
 
 export default function PulsePage() {
@@ -182,7 +185,7 @@ export default function PulsePage() {
                 <div className="container mx-auto px-4 max-w-5xl">
                     <div className="text-center mb-16">
                         <h3 className="text-[10px] font-black text-[#d4af37] uppercase tracking-[0.4em] mb-4">The Secret Sauce</h3>
-                        <h2 className="text-4xl font-display font-bold text-white mb-6">Audited by II-Priority™</h2>
+                        <h2 className="text-4xl font-display font-bold text-white mb-6">Audited by TruePriority™</h2>
                         <p className="text-gray-500 max-w-2xl mx-auto leading-relaxed italic">
                             Unlike other directories, we don't sell top spots. Rankings are hardcoded by a three-pillar audit focused on patient outcomes over marketing spend.
                         </p>
@@ -197,7 +200,7 @@ export default function PulsePage() {
                         </div>
 
                         <div className="p-8 rounded-[2.5rem] bg-[#101827] border border-white/[0.06] relative overflow-hidden group">
-                            <h4 className="text-sm font-bold text-white uppercase tracking-widest mb-4">The Regen-Ratio™</h4>
+                            <h4 className="text-sm font-bold text-white uppercase tracking-widest mb-4">Clinical Quality</h4>
                             <p className="text-xs text-gray-500 leading-relaxed">
                                 We mathematically prioritize "Artisan" clinics focused on skin health and biostimulation over high-volume, generic filler-only practices.
                             </p>

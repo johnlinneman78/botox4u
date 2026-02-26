@@ -8,11 +8,11 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 
 const TREND_TREATMENTS = [
-    { label: 'Polynucleotides', tag: '#1 2026', hot: true },
+    { label: 'Advanced Tox', tag: '#1 2026', hot: true },
     { label: 'Daxxify 6-Mo', tag: 'Longevity', hot: true },
-    { label: 'Biostimulators', tag: 'Volume Repair', hot: false },
+    { label: 'Natural Fillers', tag: 'Volume Repair', hot: false },
     { label: 'Exosome Therapy', tag: 'Emerging', hot: false },
-    { label: 'Baby Botox', tag: 'Gen Z Fav', hot: true },
+    { label: 'Baby Botox', tag: 'Preventative', hot: true },
 ]
 
 export default function Hero({ city: initialCity, state }: { city?: string; state?: string; userLat?: number; userLng?: number }) {
@@ -117,7 +117,7 @@ export default function Hero({ city: initialCity, state }: { city?: string; stat
                     {/* Quick filter pills */}
                     <div className="flex flex-wrap gap-2 items-center mb-16">
                         <span className="text-gray-600 text-xs font-bold uppercase tracking-wider mr-1">Top Searches:</span>
-                        {['Botox', 'Lip Filler', 'Daxxify', 'Polynucleotides', 'Jawline Contouring'].map(tag => (
+                        {['Botox', 'Lip Filler', 'Daxxify', 'Xeomin', 'Jawline Contouring'].map(tag => (
                             <Link
                                 key={tag}
                                 href={`/find-providers?q=${encodeURIComponent(tag)}`}

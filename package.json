@@ -12,7 +12,8 @@
     "notion:update": "node scripts/notion_update.js",
     "notion:import-keywords": "node scripts/keyword_import.js",
     "notion:link-pages": "node scripts/auto_link_pages.js",
-    "notion:setup-advanced": "node scripts/create_advanced_databases.js"
+    "notion:setup-advanced": "node scripts/create_advanced_databases.js",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

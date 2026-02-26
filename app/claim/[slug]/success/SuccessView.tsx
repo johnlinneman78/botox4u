@@ -91,8 +91,8 @@ export function SuccessView({ provider }: { provider: any }) {
                             'Full directory visibility',
                             'Patient lead notifications via SMS/email',
                             'Weekly profile analytics report',
-                            'II-Score™ updates as data refreshes',
-                            'Regen-Ratio™ badge on your profile',
+                            'TrueScore™ updates as data refreshes',
+                            'Clinical Quality badge on your profile',
                             'Click-to-call tracking',
                         ].map(f => (
                             <div key={f} className="flex items-center gap-3 p-3 rounded-xl">

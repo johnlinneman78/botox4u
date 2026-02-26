@@ -21,7 +21,7 @@ const FACTORS = [
     {
         title: 'Innovation Adoption',
         label: 'Growth Weight (20%)',
-        description: 'Adoption of next-gen tech: Daxxify (longevity), Exosomes, and Ultrasound-guided injections. Moving beyond legacy 1990s protocols.',
+        description: 'Measures clinical modernization, focusing on long-acting treatments and advanced cellular recovery protocols that represent the current standard.',
         icon: <Cpu className="w-7 h-7" />,
         color: 'bg-violet-950/50 text-violet-400 border-violet-800/40',
         glow: 'shadow-violet-500/10',
@@ -29,7 +29,7 @@ const FACTORS = [
     {
         title: 'Treatment Range',
         label: 'Breadth Weight (15%)',
-        description: 'Evaluating the clinician\'s full scope. From masseter Botox (TMJ) to advanced full-face liquid lifts and biostimulators.',
+        description: 'Evaluating the clinician\'s full scope, from specialized therapeutic applications to comprehensive, multi-modality facial rejuvenation.',
         icon: <TrendingUp className="w-7 h-7" />,
         color: 'bg-emerald-950/50 text-emerald-400 border-emerald-800/40',
         glow: 'shadow-emerald-500/10',
@@ -44,7 +44,7 @@ const PENALTIES = [
     },
     {
         label: 'Innovation Premium',
-        desc: 'Current-generation products, evidence-based technique updates, and full treatment range earn an algorithmic boost.',
+        desc: 'Clinics utilizing the latest evidence-based techniques and a comprehensive range of modern protocols earn an algorithmic boost.',
         icon: <TrendingUp className="w-4 h-4" />
     },
 ]

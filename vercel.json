@@ -1,0 +1,155 @@
+{
+    "redirects": [
+        {
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "injectorindex.com"
+                }
+            ],
+            "destination": "https://www.injectorindex.com/:path*",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/new-york",
+            "destination": "/botox/ny/new-york",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/los-angeles",
+            "destination": "/botox/ca/los-angeles",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/miami",
+            "destination": "/botox/fl/miami",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/chicago",
+            "destination": "/botox/il/chicago",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/dallas",
+            "destination": "/botox/tx/dallas",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/houston",
+            "destination": "/botox/tx/houston",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/atlanta",
+            "destination": "/botox/ga/atlanta",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/denver",
+            "destination": "/botox/co/denver",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/san-diego",
+            "destination": "/botox/ca/san-diego",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/nashville",
+            "destination": "/botox/tn/nashville",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/austin",
+            "destination": "/botox/tx/austin",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/charlotte",
+            "destination": "/botox/nc/charlotte",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/las-vegas",
+            "destination": "/botox/nv/las-vegas",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/tampa",
+            "destination": "/botox/fl/tampa",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/portland",
+            "destination": "/botox/or/portland",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/minneapolis",
+            "destination": "/botox/mn/minneapolis",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/philadelphia",
+            "destination": "/botox/pa/philadelphia",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/washington",
+            "destination": "/botox/dc/washington",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/boston",
+            "destination": "/botox/ma/boston",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/seattle",
+            "destination": "/botox/wa/seattle",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/scottsdale",
+            "destination": "/botox/az/scottsdale",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/rochester",
+            "destination": "/botox/ny/rochester",
+            "permanent": true
+        },
+        {
+            "source": "/botox/state/:path*",
+            "destination": "/botox",
+            "permanent": true
+        },
+        {
+            "source": "/botox/xeomin/tx/dallas",
+            "destination": "/botox/tx/dallas",
+            "permanent": true
+        },
+        {
+            "source": "/botox/xeomin/:path*",
+            "destination": "/botox",
+            "permanent": true
+        },
+        {
+            "source": "/botox/dysport/:path*",
+            "destination": "/botox",
+            "permanent": true
+        },
+        {
+            "source": "/botox/daxxify/:path*",
+            "destination": "/botox",
+            "permanent": true
+        },
+        {
+            "source": "/botox/tx/laredo",
+            "destination": "/botox",
+            "permanent": true
+        }
+    ]
+}
