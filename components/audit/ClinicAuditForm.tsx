@@ -75,7 +75,11 @@ export default function ClinicAuditForm() {
         setIsSubmitting(true)
         setError(null)
         try {
-            const result = await submitAuditRequest(data)
+            const formData = {
+                ...data,
+                providerName: data.providerName || ''
+            }
+            const result = await submitAuditRequest(formData)
             if (result.success) {
                 setIsSuccess(true)
             } else {

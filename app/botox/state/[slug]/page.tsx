@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation'
 import { NICHE } from '@/config/niche'
 
 interface StatePageProps {
-    params: { slug: string }
+    params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: StatePageProps): Promise<Metadata> {

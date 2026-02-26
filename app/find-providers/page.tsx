@@ -10,7 +10,7 @@ import { Dna, ShieldCheck } from 'lucide-react'
 export default async function FindProvidersPage({
     searchParams,
 }: {
-    searchParams: { q?: string; city?: string; state?: string; tier?: string; type?: string; view?: string; lat?: string; lng?: string }
+    searchParams: Promise<{ q?: string; city?: string; state?: string; tier?: string; type?: string; view?: string; lat?: string; lng?: string }>
 }) {
     const sParams = await searchParams
     const query = sParams.q || ''

@@ -11,11 +11,11 @@ import { notFound } from 'next/navigation'
 import { NICHE } from '@/config/niche'
 
 interface TreatmentCityPageProps {
-    params: {
+    params: Promise<{
         treatment: string
         state: string
         slug: string
-    }
+    }>
 }
 
 export async function generateMetadata({ params }: TreatmentCityPageProps): Promise<Metadata> {

@@ -21,8 +21,8 @@ import { JsonLd, generateBreadcrumbSchema, generateItemListSchema } from '@/comp
 import { GeolocationSorter } from '@/components/providers/GeolocationSorter'
 
 interface CatchAllPageProps {
-    params: { slug: string[] }
-    searchParams?: { lat?: string; lng?: string }
+    params: Promise<{ slug: string[] }>
+    searchParams?: Promise<{ lat?: string; lng?: string }>
 }
 
 export const dynamic = 'force-dynamic'
