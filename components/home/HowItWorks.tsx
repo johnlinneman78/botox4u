@@ -44,7 +44,7 @@ const PENALTIES = [
     },
     {
         label: 'Innovation Premium',
-        desc: 'Gen Z-focused, conservative micro-dose protocols and bio-stimulator expertise earn an algorithmic boost.',
+        desc: 'Current-generation products, evidence-based technique updates, and full treatment range earn an algorithmic boost.',
         icon: <TrendingUp className="w-4 h-4" />
     },
 ]

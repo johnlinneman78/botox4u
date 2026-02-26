@@ -12,7 +12,7 @@ export default function Header() {
     const navLinks = [
         { href: '/find-providers', label: 'Find Providers', icon: Shield },
         { href: '/calculator', label: 'Cost Calculator', icon: Calculator },
-        { href: '/audit', label: 'Free Clinic Audit', icon: UserCheck },
+        { href: '/#match-quiz', label: 'Injector Match', icon: UserCheck },
         { href: '/blog', label: 'Intelligence', icon: TrendingUp },
         { href: '/pricing', label: 'For Providers', icon: Info },
     ]
@@ -36,9 +36,9 @@ export default function Header() {
                         </Link>
                     ))}
                     <div className="h-6 w-px bg-white/10 mx-2" />
-                    <Link href="/audit">
+                    <Link href="/#match-quiz">
                         <Button variant="outline" className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10 font-black py-2.5 px-6 rounded-xl transition-all text-sm">
-                            Free Clinic Audit
+                            Injector Match
                         </Button>
                     </Link>
                     <Link href="/find-providers">
@@ -73,12 +73,12 @@ export default function Header() {
                         </Link>
                     ))}
                     <Link
-                        href="/audit"
+                        href="/#match-quiz"
                         onClick={() => setIsMenuOpen(false)}
                         className="flex items-center gap-3 p-3 rounded-xl bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] font-black text-center justify-center transition-all mt-2"
                     >
                         <UserCheck className="w-5 h-5" />
-                        Free Clinic Audit
+                        Injector Match
                     </Link>
                     <Link
                         href="/find-providers"

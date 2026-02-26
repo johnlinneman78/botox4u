@@ -18,7 +18,7 @@ export default function Footer() {
                             </Link>
                         </div>
                         <p className="text-sm text-gray-500 mb-5 leading-relaxed">
-                            The first provider directory built around regenerative intelligence — not paid placement.
+                            The first provider directory built around clinical quality data — not paid placement.
                         </p>
                         <div className="flex items-center gap-4">
                             <a href={`https://twitter.com/InjectorIndex`} target="_blank" rel="noopener" className="text-gray-700 hover:text-[#d4af37] transition-colors">
@@ -55,7 +55,7 @@ export default function Footer() {
                             <li><Link href="/provider/claim" className="text-gray-500 hover:text-[#d4af37] transition-colors">Claim Listing</Link></li>
                             <li><Link href="/provider/login" className="text-gray-500 hover:text-[#d4af37] transition-colors">Provider Login</Link></li>
                             <li><Link href="/pricing" className="text-gray-500 hover:text-[#d4af37] transition-colors">Pricing</Link></li>
-                            <li><Link href="/methodology" className="text-gray-500 hover:text-[#d4af37] transition-colors">II-Score™ Methodology</Link></li>
+                            <li><Link href="/methodology" className="text-gray-500 hover:text-[#d4af37] transition-colors">TrueScore™ Methodology</Link></li>
                         </ul>
                     </div>
 
@@ -69,7 +69,7 @@ export default function Footer() {
                         </ul>
                         <div className="mt-8 p-4 rounded-2xl bg-[#d4af37]/5 border border-[#d4af37]/10">
                             <p className="text-[10px] text-gray-600 leading-relaxed">
-                                <span className="text-[#d4af37] font-bold">Rankings are pure data.</span> Nobody pays for a higher II-Score™. Providers may purchase featured placement, disclosed clearly.
+                                <span className="text-[#d4af37] font-bold">Rankings are pure data.</span> Nobody pays for a higher TrueScore™. Providers may purchase featured placement, disclosed clearly.
                             </p>
                         </div>
                     </div>

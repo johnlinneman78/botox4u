@@ -301,11 +301,11 @@ export default function TreatmentTrends() {
                                 </Link>
 
                                 <Link
-                                    href="/audit"
+                                    href="/#match-quiz"
                                     className="flex items-center justify-center gap-3 py-5 rounded-2xl bg-white/[0.03] border border-white/[0.1] text-white font-black text-sm uppercase tracking-widest hover:bg-white/[0.05] transition-all group"
                                 >
                                     <Activity className="w-4 h-4 text-[#d4af37] group-hover:animate-pulse" />
-                                    Get Your Free Clinic Audit
+                                    Take Injector Match Quiz
                                 </Link>
                             </div>
                         </div>
