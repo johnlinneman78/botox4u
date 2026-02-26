@@ -12,13 +12,13 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 export const metadata: Metadata = {
-  title: `InjectorIndex — Find Natural Results Injectors | Botox, PNs & Daxxify Near You`,
-  description: `Injector Index: Defining the Neo-Romantic era of medical aesthetics through data-driven clinic audits and regenerative intelligence. Compare Polynucleotides, Daxxify, and bio-stimulator providers ranked by Regen-Ratio™. Real pricing. Verified credentials. Zero pay-to-rank.`,
-  keywords: `neo-romantic aesthetics, regenerative medicine, polynucleotides, daxxify, bio-stimulators, facial harmony, undetectable results, aesthetic intelligence, nurse injectors near me, II-Score, Regen-Ratio, clinical data`,
+  title: `InjectorIndex — Find & Compare the Best Botox Injectors Near You`,
+  description: `Compare 500+ injectors across 22 cities. See TrueScores, real pricing, and verified credentials. Find natural results, ranked by data, not ads.`,
+  keywords: `botox near me, best fillers, medspa rankings, injector scores, natural botox, lip filler, daxxify, polynucleotides, aesthetic directory`,
   metadataBase: new URL(`https://${NICHE.domain}`),
   openGraph: {
-    title: `${NICHE.siteName} — Leading the Neo-Romantic Aesthetic Movement in Regenerative Medicine`,
-    description: `The first aesthetic directory powered by regenerative intelligence. Ranked by Regen-Ratio™, natural integrity, and 2026 clinical innovation. Polynucleotides, Daxxify, bio-stimulators — the future of facial harmony.`,
+    title: `InjectorIndex — Find & Compare the Best Botox Injectors Near You`,
+    description: `Compare 500+ injectors across 22 cities. See TrueScores, real pricing, and verified credentials. Find natural results, ranked by data.`,
     type: 'website',
     url: `https://${NICHE.domain}`,
     siteName: NICHE.siteName,

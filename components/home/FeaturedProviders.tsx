@@ -32,7 +32,7 @@ export default async function FeaturedProviders() {
                         Top-Scoring Providers
                     </h2>
                     <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-                        Ranked by Regen-Ratio™, natural result integrity, and 2026 clinical innovation. 100% independent data.
+                        Ranked by TrueScore™, natural result integrity, and 2026 clinical innovation. 100% independent data.
                     </p>
                 </div>
 

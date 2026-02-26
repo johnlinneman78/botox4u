@@ -26,19 +26,18 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
 
     const getTopCategory = (p: any) => {
         const breakdown = p.score?.breakdown
-        if (!breakdown) return "Patient Trust"
+        if (!breakdown) return "Consumer Trust"
 
         const categories = [
-            { id: 'naturalIntegrity', label: 'Natural Results' },
-            { id: 'regenRatio', label: 'Clinical Innovation' },
-            { id: 'price', label: 'Price Fairness' },
-            { id: 'trust', label: 'Patient Trust' },
-            { id: 'safety', label: 'Clinical Safety' }
+            { id: 'injectionQuality', label: 'Injection Quality' },
+            { id: 'innovation', label: 'Clinical Innovation' },
+            { id: 'credentials', label: 'Provider Credentials' },
+            { id: 'treatmentRange', label: 'Treatment Range' }
         ]
 
         const top = categories.reduce((prev, current) => {
-            const currentVal = breakdown[current.id] || 0
-            const prevVal = breakdown[prev.id] || 0
+            const currentVal = breakdown[current.id as keyof typeof breakdown] || 0
+            const prevVal = breakdown[prev.id as keyof typeof breakdown] || 0
             return currentVal > prevVal ? current : prev
         }, categories[0])
 
@@ -89,8 +88,8 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
 
     const isVerified = provider.verified || provider.listingTier === 'featured' || provider.listingTier === 'verified' || provider.npi_verified;
     const isFeatured = provider.listingTier === 'featured';
-    const hasNaturalIntegrity = (provider.score?.breakdown?.naturalIntegrity || 0) >= 30;
-    const hasInnovation = (provider.score?.breakdown?.regenRatio || 0) >= 10;
+    const hasHighQuality = (provider.score?.breakdown?.injectionQuality || 0) >= 35;
+    const hasInnovation = (provider.score?.breakdown?.innovation || 0) >= 15;
 
     const getScoreColor = (score: number) => {
         if (score >= 90) return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
@@ -111,16 +110,16 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                                 {provider.name}
                             </h3>
                             <div className="flex flex-col gap-1 items-end shrink-0">
-                                {hasNaturalIntegrity && (
+                                {hasHighQuality && (
                                     <div className="bg-[#d4af37]/10 text-[#d4af37] px-2 py-0.5 rounded-md flex items-center gap-1 border border-[#d4af37]/20">
                                         <Sparkles className="w-3 h-3" />
-                                        <span className="text-[9px] font-black uppercase tracking-tight">Natural Integrity</span>
+                                        <span className="text-[9px] font-black uppercase tracking-tight">Top Quality</span>
                                     </div>
                                 )}
                                 {hasInnovation && (
                                     <div className="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-md flex items-center gap-1 border border-blue-500/20">
                                         <Dna className="w-3 h-3" />
-                                        <span className="text-[9px] font-black uppercase tracking-tight">Clinical Innovation</span>
+                                        <span className="text-[9px] font-black uppercase tracking-tight">Innovator</span>
                                     </div>
                                 )}
                             </div>
@@ -136,24 +135,23 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                             <div className="flex items-center justify-between mb-2">
                                 <span className="text-[9px] font-black uppercase tracking-widest text-gray-600 flex items-center gap-1.5">
                                     <ShieldCheck className="w-3 h-3 text-[#d4af37]" />
-                                    II-Score™
+                                    TrueScore™
                                 </span>
                                 <div className="group/tooltip relative">
                                     <Info className="w-3 h-3 text-gray-700 hover:text-[#d4af37] cursor-help transition-colors" />
                                     <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-3 bg-[#0d1420] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all z-50 pointer-events-none">
-                                        <p className="text-[10px] text-white font-bold mb-1 uppercase tracking-wider">Independent Audit Pillars</p>
+                                        <p className="text-[10px] text-white font-bold mb-1 uppercase tracking-wider">Independent Data Pillars</p>
                                         <ul className="text-[9px] text-gray-400 space-y-1 font-medium">
-                                            <li>• Natural Integrity (Neo-Romantic)</li>
-                                            <li>• Regenerative Capability (PNs/Bio)</li>
-                                            <li>• Price Fairness & Transparency</li>
+                                            <li>• Injection Quality (AI-Audit)</li>
+                                            <li>• Provider Credentials (NPI)</li>
+                                            <li>• Innovation (Regen Adoption)</li>
+                                            <li>• Treatment Range (Breadth)</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
-                                <div className={`px-2 py-1 rounded-lg text-xs font-black tracking-tight border ${getScoreColor(provider.score_total || 50)}`}>
-                                    {provider.score_total >= 60 ? 'PASS' : 'PENDING'}
-                                </div>
+                                <span className="text-xl font-black text-white">{provider.score_total || 50}</span>
                                 <span className="text-[9px] font-black text-[#d4af37] uppercase">{getPercentile(provider.score_total || 50)}</span>
                             </div>
                         </div>
@@ -162,15 +160,15 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                             <div className="flex items-center justify-between mb-2">
                                 <span className="text-[9px] font-black uppercase tracking-widest text-gray-600 flex items-center gap-1.5">
                                     <Dna className="w-3 h-3 text-emerald-400" />
-                                    Regen™
+                                    Range™
                                 </span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <div className={`px-2 py-1 rounded-lg text-xs font-black tracking-tight border ${provider.regen_ratio >= 50 ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-white/10 text-gray-400 border-white/10'}`}>
-                                    {Math.round(provider.regen_ratio || 0)}%
+                                <div className={`px-2 py-1 rounded-lg text-xs font-black tracking-tight border ${(provider.score?.breakdown?.treatmentRange || 0) >= 10 ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-white/10 text-gray-400 border-white/10'}`}>
+                                    {(provider.score?.breakdown?.treatmentRange || 0) >= 12 ? 'FULL' : (provider.score?.breakdown?.treatmentRange || 0) >= 8 ? 'HIGH' : 'STD'}
                                 </div>
-                                <span className={`text-[9px] font-black uppercase ${provider.regen_ratio >= 50 ? 'text-emerald-400' : 'text-gray-600'}`}>
-                                    {provider.regen_ratio >= 70 ? 'Regen Elite' : provider.regen_ratio >= 30 ? 'High Focus' : 'Hybrid'}
+                                <span className={`text-[9px] font-black uppercase ${(provider.score?.breakdown?.treatmentRange || 0) >= 10 ? 'text-emerald-400' : 'text-gray-600'}`}>
+                                    {(provider.score?.breakdown?.treatmentRange || 0) >= 12 ? 'Specialist' : 'Diverse'}
                                 </span>
                             </div>
                         </div>

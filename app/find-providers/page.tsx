@@ -18,7 +18,7 @@ export default async function FindProvidersPage({
     const state = sParams.state || ''
     const tier = sParams.tier || ''
     const type = sParams.type || ''
-    const view = sParams.view || 'specialist'
+    const view = sParams.view
     const userLat = sParams.lat ? parseFloat(sParams.lat) : undefined
     const userLng = sParams.lng ? parseFloat(sParams.lng) : undefined
 
@@ -60,10 +60,10 @@ export default async function FindProvidersPage({
                             <ShieldCheck className="w-6 h-6 text-[#d4af37]" />
                         </div>
                         <div>
-                            <h4 className="font-bold text-white text-sm mb-1">Elite Audit Evaluation</h4>
+                            <h4 className="font-bold text-white text-sm mb-1">TrueScore™ Ranking Algorithm</h4>
                             <p className="text-xs text-gray-500 leading-relaxed">
                                 Our directory uses a 100% data-driven algorithm. Providers are ranked on
-                                <b className="text-gray-400"> Regen-Ratio™</b>, <b className="text-gray-400">verified patient sentiment</b>, and <b className="text-gray-400">market competitiveness</b>.
+                                <b className="text-gray-400"> Injection Quality</b>, <b className="text-gray-400">Verified Credentials</b>, and <b className="text-gray-400">Clinical Innovation</b>.
                             </p>
                         </div>
                     </div>
@@ -72,7 +72,7 @@ export default async function FindProvidersPage({
                         <div className="bg-red-950/20 border border-red-900/30 rounded-2xl p-6 flex-1">
                             <h4 className="font-bold text-red-400 text-sm mb-1 uppercase tracking-wider">General Directory Caution</h4>
                             <p className="text-xs text-gray-500 leading-relaxed">
-                                These providers either have an <span className="text-red-400/80 font-bold">Elite Audit Status: PENDING</span> or insufficient clinical data for a specialist audit. Proceed with manual verification.
+                                These providers either have a <span className="text-red-400/80 font-bold">TrueScore™: PENDING</span> or insufficient clinical data for a specialist audit. Proceed with manual verification.
                             </p>
                         </div>
                     )}

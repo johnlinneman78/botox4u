@@ -3,48 +3,48 @@ import Link from 'next/link'
 
 const FACTORS = [
     {
-        title: 'Regen-Ratio™',
-        label: 'Primary Signal',
-        description: 'What percentage of this provider\'s menu is regenerative medicine (Polynucleotides, Sculptra, PRF, Exosomes) vs. traditional HA filler? Higher biological innovation = higher score.',
-        icon: <Dna className="w-7 h-7" />,
-        color: 'bg-emerald-950/50 text-emerald-400 border-emerald-800/40',
-        glow: 'shadow-emerald-500/10',
+        title: 'Injection Quality',
+        label: 'Primary Weight (40%)',
+        description: 'AI-assisted analysis of patient reviews and result consistency. We prioritize "natural," "subtle," and "refined" results over "frozen" or "migrated" red flags.',
+        icon: <ShieldCheck className="w-7 h-7" />,
+        color: 'bg-[#d4af37]/10 text-[#d4af37] border-[#d4af37]/20',
+        glow: 'shadow-[#d4af37]/10',
     },
     {
-        title: 'Natural Integrity',
-        label: 'Clinical Signal',
-        description: 'AI-assisted sentiment analysis of patient reviews. We flag "frozen," "overdone," and "migration" as red flags. We reward "natural," "subtle," and "undetectable" — consistently.',
-        icon: <ShieldCheck className="w-7 h-7" />,
+        title: 'Provider Credentials',
+        label: 'Trust Weight (25%)',
+        description: 'Verified NPI federal registration, board certifications, and clinical experience. We bridge the gap between "aesthetician" and "medical elite."',
+        icon: <Award className="w-7 h-7" />,
         color: 'bg-blue-950/50 text-blue-400 border-blue-800/40',
         glow: 'shadow-blue-500/10',
     },
     {
-        title: 'Innovation Score',
-        label: 'Growth Signal',
-        description: 'Are they offering Daxxify (6–9 month longevity)? Ultrasound-guided injections? AI skin mapping? 2026 providers who adopt cutting-edge tech score higher.',
+        title: 'Innovation Adoption',
+        label: 'Growth Weight (20%)',
+        description: 'Adoption of next-gen tech: Daxxify (longevity), Exosomes, and Ultrasound-guided injections. Moving beyond legacy 1990s protocols.',
         icon: <Cpu className="w-7 h-7" />,
         color: 'bg-violet-950/50 text-violet-400 border-violet-800/40',
         glow: 'shadow-violet-500/10',
     },
     {
-        title: 'Provider Pedigree',
-        label: 'Trust Signal',
-        description: 'Verified NPI federal credentials, advanced training in PN protocols, board certifications, and peer-recognized case study contributions.',
-        icon: <Award className="w-7 h-7" />,
-        color: 'bg-amber-950/50 text-amber-400 border-amber-800/40',
-        glow: 'shadow-amber-500/10',
+        title: 'Treatment Range',
+        label: 'Breadth Weight (15%)',
+        description: 'Evaluating the clinician\'s full scope. From masseter Botox (TMJ) to advanced full-face liquid lifts and biostimulators.',
+        icon: <TrendingUp className="w-7 h-7" />,
+        color: 'bg-emerald-950/50 text-emerald-400 border-emerald-800/40',
+        glow: 'shadow-emerald-500/10',
     },
 ]
 
 const PENALTIES = [
     {
         label: '"Pillow-Face" Penalty',
-        desc: 'Reviews mentioning swollen, unnatural, or migrated results trigger an automated Signal deduction.',
+        desc: 'Reviews mentioning overfilled, unnatural, or migrated results trigger an automated TrueScore™ deduction.',
         icon: <AlertTriangle className="w-4 h-4" />
     },
     {
-        label: 'Prejuvenation Bonus',
-        desc: 'Gen Z-focused, conservative micro-dose Daxxify/PN protocols earn a regenerative intelligence premium.',
+        label: 'Innovation Premium',
+        desc: 'Gen Z-focused, conservative micro-dose protocols and bio-stimulator expertise earn an algorithmic boost.',
         icon: <TrendingUp className="w-4 h-4" />
     },
 ]
@@ -55,10 +55,10 @@ export default function HowItWorks() {
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16 max-w-3xl mx-auto">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-black tracking-widest uppercase mb-6">
-                        <Dna className="w-3.5 h-3.5" /> II-Score™ 2026 Algorithm
+                        <ShieldCheck className="w-3.5 h-3.5" /> TrueScore™ 2026 Ranking Algorithm
                     </div>
                     <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-                        The Only Score That Rewards <span className="text-[#d4af37]">Regeneration</span>
+                        The First Data-Driven <span className="text-[#d4af37]">Standard</span> for Injectors
                     </h2>
                     <div className="flex justify-center mb-8">
                         <Link
@@ -66,11 +66,11 @@ export default function HowItWorks() {
                             className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-[#d4af37] hover:border-[#d4af37]/30 transition-all text-xs font-black uppercase tracking-widest group"
                         >
                             <ShieldCheck className="w-4 h-4 text-[#d4af37] group-hover:scale-110 transition-transform" />
-                            Full II-Score™ Methodology →
+                            Full TrueScore™ Methodology →
                         </Link>
                     </div>
                     <p className="text-xl text-gray-400 leading-relaxed font-light">
-                        Legacy directories rank by reviews bought and stars paid for. The II-Score™ is the first algorithm built around <span className="text-white font-semibold">2026 biological standards</span> — not marketing budgets.
+                        Legacy directories rank by reviews bought and stars paid for. <span className="text-white font-semibold">TrueScore™</span> is the first independent algorithm built around <span className="text-white font-semibold">clinical quality</span> — not marketing budgets.
                     </p>
                 </div>
 
@@ -113,9 +113,9 @@ export default function HowItWorks() {
                 {/* Bottom bar */}
                 <div className="p-8 bg-gradient-to-r from-[#d4af37]/10 to-transparent rounded-[2rem] border border-[#d4af37]/15 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div>
-                        <div className="text-[#d4af37] font-black text-xs uppercase tracking-widest mb-2">No Pay-to-Rank Policy</div>
-                        <p className="text-lg font-bold text-white">Nobody buys a higher II-Score™. Rankings are pure data.</p>
-                        <p className="text-sm text-gray-500 mt-1">Providers may buy featured placement (disclosed clearly). Their II-Score remains immutable.</p>
+                        <div className="text-[#d4af37] font-black text-xs uppercase tracking-widest mb-2">Independent Accountability</div>
+                        <p className="text-lg font-bold text-white">Nobody buys a higher TrueScore™. Rankings are pure data.</p>
+                        <p className="text-sm text-gray-500 mt-1">Providers may buy featured search placement (clearly disclosed). Their TrueScore remains independent and immutable.</p>
                     </div>
                     <div className="shrink-0 text-[#d4af37]/40">
                         <ShieldCheck className="w-12 h-12" />

@@ -56,6 +56,8 @@ export async function getProvidersWithSearch(filters: {
     treatment?: string,
     type?: string, // institutional | artisan
     view?: string, // specialist | general
+    limit?: number,
+    sort?: 'priority' | 'distance',
     userLat?: number,
     userLng?: number
 } = {}) {
@@ -133,9 +135,9 @@ export async function getProvidersWithSearch(filters: {
         queryBuilder = queryBuilder.in('business_type', INSTITUTIONS)
     }
 
-    console.log('DEBUG: queryBuilder configured, executing query...')
+    console.log('DEBUG: queryBuilder configured, executing query...', { city: filters.city, state: filters.state })
     const { data, error } = await queryBuilder
-    console.log('DEBUG: query result:', { dataLength: data?.length, error })
+    console.log('DEBUG: query result:', { dataLength: data?.length, error, firstItem: data?.[0]?.name })
 
     if (error) {
         console.error('Error fetching providers:', error)
@@ -165,18 +167,19 @@ export async function getProvidersWithSearch(filters: {
             uses_ai_diagnostics: hasAI || p.uses_ai_diagnostics || p.enriched_attrs?.uses_ai_diagnostics
         })
 
-        const iiScore = scoreBreakdown.points
-        const regen_ratio = calculateRegenRatio(servicesOffered)
+        const trueScore = scoreBreakdown.points
+        const innovationBalance = calculateRegenRatio(servicesOffered)
         const fillerCount = servicesOffered.filter((s: string) => FILLER_TREATMENTS.includes(s)).length
 
         // Granularity Weighting (25%) -> Highlight specialized talent (Artisans) 
         const granularityBonus = ARTISANS.includes(p.business_type) ? 25 : 0
 
-        // Final Priority Score calculation (40% Score / 35% Regen / 25% Granularity)
-        let priority_score = (iiScore * 0.40) + (regen_ratio * 0.35) + (granularityBonus * 0.25)
+        // Final Priority Score calculation (60% TrueScore / 15% Innovation / 25% Granularity)
+        // Heavier weight on TrueScore for the Botox-first repositioning
+        let priority_score = (trueScore * 0.60) + (innovationBalance * 0.15) + (granularityBonus * 0.25)
 
-        // 10+ Regen Boost (+10% visibility boost if 10+ regen treatments and 0 filler)
-        if (regenCount >= 10 && fillerCount === 0) priority_score += 10
+        // 10+ Regen Boost (+5% visibility boost if highly specialized in next-gen)
+        if (regenCount >= 10 && fillerCount === 0) priority_score += 5
 
         return {
             ...p,
@@ -215,11 +218,12 @@ export async function getProvidersWithSearch(filters: {
                 return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/provider_images/${url}`;
             })(),
             score: scoreBreakdown,
-            score_total: iiScore,
-            regen_ratio,
+            score_total: trueScore,
+            trueScore: trueScore,
+            innovation_balance: innovationBalance,
             priority_score,
-            is_specialist: iiScore >= 60,
-            relegated: iiScore < 60,
+            is_specialist: trueScore >= 55,
+            relegated: trueScore < 55,
             warning_flag: p.warning_flag || false,
             has_real_photo: !!(p.hero_image_url || p.image_url),
             services_offered: servicesOffered
@@ -240,8 +244,7 @@ export async function getProvidersWithSearch(filters: {
     });
 
     // Safety Floor Gatekeeper
-    // Default to 'specialist' results (>= 60) if no explicit view is set
-    const currentView = filters.view || 'specialist'
+    const currentView = filters.view
     let finalProviders = deduplicated
     if (currentView === 'specialist') {
         finalProviders = deduplicated.filter(p => p.is_specialist)
@@ -256,34 +259,40 @@ export async function getProvidersWithSearch(filters: {
         'free': 0
     }
 
-    return finalProviders.sort((a: any, b: any) => {
-        // 1. Pinned Elite Featured (85+)
-        const isPinnedA = a.listingTier === 'featured' && a.score_total >= 85
-        const isPinnedB = b.listingTier === 'featured' && b.score_total >= 85
-        if (isPinnedA && !isPinnedB) return -1
-        if (!isPinnedA && isPinnedB) return 1
-
-        // 2. Section: Featured first
-        const weightA = tierWeight[a.listingTier as keyof typeof tierWeight] || 0
-        const weightB = tierWeight[b.listingTier as keyof typeof tierWeight] || 0
-        if (weightB !== weightA) return weightB - weightA
-
-        // 3. II-Priority Score Sort (40/35/25)
-        if (Math.abs(b.priority_score - a.priority_score) > 0.1) {
-            return b.priority_score - a.priority_score
+    // 5. Final Sort & Limit
+    const sorted = finalProviders.sort((a: any, b: any) => {
+        // Higher tier first
+        if (a.listing_tier !== b.listing_tier) {
+            const weightA = tierWeight[a.listing_tier as keyof typeof tierWeight] || 0
+            const weightB = tierWeight[b.listing_tier as keyof typeof tierWeight] || 0
+            if (weightB !== weightA) return weightB - weightA
         }
 
-        // 4. Proximity as tie-breaker (if within range)
-        if (filters.userLat && filters.userLng && a.lat && a.lng && b.lat && b.lng) {
+        // Priority Sort requested
+        if (filters.sort === 'priority') {
+            return (b.priority_score || 0) - (a.priority_score || 0)
+        }
+
+        // Distance Sort requested
+        if (filters.sort === 'distance' && filters.userLat && filters.userLng && a.lat && a.lng && b.lat && b.lng) {
             const distA = Math.sqrt(Math.pow(a.lat - filters.userLat, 2) + Math.pow(a.lng - filters.userLng, 2))
             const distB = Math.sqrt(Math.pow(b.lat - filters.userLat, 2) + Math.pow(b.lng - filters.userLng, 2))
-            if (Math.abs(distA - distB) > 0.05) {
-                return distA - distB
-            }
+            return distA - distB
         }
 
-        return b.score_total - a.score_total
+        // Default: Priority Score -> TrueScore -> Reviews
+        if (Math.abs((b.priority_score || 0) - (a.priority_score || 0)) > 0.1) {
+            return (b.priority_score || 0) - (a.priority_score || 0)
+        }
+
+        return (b.trueScore || 0) - (a.trueScore || 0)
     })
+
+    if (filters.limit) {
+        return sorted.slice(0, filters.limit)
+    }
+
+    return sorted
 }
 
 export async function getTopScoringProviders(limit: number = 6, userLat?: number, userLng?: number, userCity?: string, userState?: string) {
@@ -351,6 +360,28 @@ export async function getTopScoringProviders(limit: number = 6, userLat?: number
     for (const p of finalProviders) {
         const nameKey = `${p.name?.toLowerCase().trim()}|${p.city?.toLowerCase().trim()}`;
         if (!seenTopKeys.has(p.slug) && !seenTopKeys.has(nameKey)) {
+            const servicesOffered = p.services_offered || []
+            const regenCount = (servicesOffered || []).filter((s: string) => REGEN_TREATMENTS.includes(s)).length
+            const hasAdvancedTox = (servicesOffered || []).some((s: string) => ADVANCED_TOXINS.includes(s))
+            const hasAI = (servicesOffered || []).some((s: string) => AI_DIAGNOSTICS.includes(s))
+
+            const scoreBreakdown = calculateProviderScore({
+                price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
+                rating: parseFloat(p.rating || p.average_rating || 0),
+                review_count: p.review_count || 0,
+                has_photo: !!(p.hero_image_url || p.image_url),
+                has_description: !!p.description,
+                is_verified: p.verified || false,
+                npi_verified: p.npi_verified || false,
+                allergan_tier: p.allergan_tier,
+                results_quality_score: p.score_results_quality || p.enriched_attrs?.score_results_quality || 15,
+                website: p.website,
+                responsiveness_score: p.responsiveness_score,
+                regen_treatments_count: regenCount,
+                offers_long_acting_tox: hasAdvancedTox || p.offers_long_acting_tox || p.enriched_attrs?.offers_long_acting_tox,
+                uses_ai_diagnostics: hasAI || p.uses_ai_diagnostics || p.enriched_attrs?.uses_ai_diagnostics
+            })
+
             mapped.push({
                 id: p.id,
                 name: p.name,
@@ -362,8 +393,8 @@ export async function getTopScoringProviders(limit: number = 6, userLat?: number
                 lng: p.longitude || p.lng || 0,
                 rating: p.rating || parseFloat(p.average_rating || 0),
                 review_count: p.review_count || 0,
-                score_total: p.score || 0,
-                points: p.score || 0,
+                score_total: scoreBreakdown.points,
+                points: scoreBreakdown.points,
                 price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
                 imageUrl: p.hero_image_url || p.image_url || 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
                 website: p.website,
@@ -371,7 +402,8 @@ export async function getTopScoringProviders(limit: number = 6, userLat?: number
                 npi_verified: p.npi_verified || false,
                 score_results_quality: p.score_results_quality || 0,
                 has_real_photo: !!(p.hero_image_url || p.image_url),
-                score: { points: p.score || 0 }
+                score: scoreBreakdown,
+                trueScore: scoreBreakdown.points
             });
             seenTopKeys.add(p.slug);
             seenTopKeys.add(nameKey);
@@ -524,22 +556,34 @@ export async function getProviderBySlug(slug: string) {
 
     if (!data) return null
 
+    const services = data.services_offered || []
+    const regenCount = services.filter((s: string) => REGEN_TREATMENTS.includes(s)).length
+    const hasAdvancedTox = services.some((s: string) => ADVANCED_TOXINS.includes(s))
+    const hasAI = services.some((s: string) => AI_DIAGNOSTICS.includes(s))
+
+    const score = calculateProviderScore({
+        price_per_unit: data.price_per_unit || data.botox_price_per_unit || data.enriched_attrs?.price_per_unit_botox,
+        rating: parseFloat(data.rating || data.average_rating || 0),
+        review_count: data.review_count || 0,
+        has_photo: !!(data.hero_image_url || data.image_url),
+        has_description: !!data.description,
+        is_verified: data.verified || false,
+        npi_verified: data.npi_verified || false,
+        allergan_tier: data.allergan_tier,
+        results_quality_score: data.score_results_quality || data.enriched_attrs?.score_results_quality || 15,
+        website: data.website,
+        responsiveness_score: data.responsiveness_score,
+        regen_treatments_count: regenCount,
+        offers_long_acting_tox: hasAdvancedTox || data.offers_long_acting_tox || data.enriched_attrs?.offers_long_acting_tox,
+        uses_ai_diagnostics: hasAI || data.uses_ai_diagnostics || data.enriched_attrs?.uses_ai_diagnostics
+    })
+
     return {
-        id: data.id,
-        name: data.name,
-        slug: data.slug,
-        business_type: data.business_type,
-        businessType: data.business_type, // Legacy support
-        address: data.address,
-        city: data.city,
-        state: data.state,
+        ...data,
+        businessType: data.business_type,
         averageRating: parseFloat(data.rating || data.average_rating || 0),
         reviewCount: data.review_count || 0,
         listingTier: data.listing_tier || 'free',
-        verified: data.verified || false,
-        price_per_unit: data.price_per_unit || data.botox_price_per_unit,
-        pricePerUnit: data.price_per_unit || data.botox_price_per_unit, // Legacy support
-        minTreatmentPrice: data.min_treatment_price,
         imageUrl: (() => {
             const url = data.hero_image_url || data.image_url;
             if (!url || url.includes('placeholder')) {
@@ -548,23 +592,6 @@ export async function getProviderBySlug(slug: string) {
             if (url.startsWith('http')) return url;
             return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/provider_images/${url}`;
         })(),
-        enriched_attrs: data.enriched_attrs,
-        website: data.website,
-        phone: data.phone,
-        description: data.description,
-
-        // Enriched Fields
-        google_place_id: data.google_place_id,
-        rating: data.rating || parseFloat(data.average_rating || 0), // Use manual rating as fallback
-        review_count: data.review_count || 0,
-        top_reviews: data.top_reviews || [],
-        badges: data.badges || [],
-        ai_description: data.ai_description,
-        ai_description_confirmed: data.ai_description_confirmed,
-        gallery: data.gallery || [],
-        services_offered: data.services_offered || [],
-        hero_image_url: data.hero_image_url || data.image_url,
-        reviews: data.top_reviews || [],
 
         // NPI Fields
         npi_number: data.npi_number,
@@ -574,54 +601,10 @@ export async function getProviderBySlug(slug: string) {
         npi_verified_at: data.npi_verified_at,
         allergan_tier: data.allergan_tier,
 
-        score: calculateProviderScore({
-            price_per_unit: data.price_per_unit || data.botox_price_per_unit || data.enriched_attrs?.price_per_unit_botox,
-            rating: parseFloat(data.rating || data.average_rating || 0),
-            review_count: data.review_count || 0,
-            has_photo: !!(data.hero_image_url || data.image_url),
-            has_description: !!data.description,
-            is_verified: data.verified || false,
-            npi_verified: data.npi_verified || false,
-            allergan_tier: data.allergan_tier,
-            results_quality_score: data.score_results_quality || data.enriched_attrs?.score_results_quality || 15,
-            website: data.website,
-            responsiveness_score: data.responsiveness_score,
-            regen_treatments_count: (data.services_offered || []).filter((s: string) => REGEN_TREATMENTS.includes(s)).length,
-            offers_long_acting_tox: (data.services_offered || []).some((s: string) => ADVANCED_TOXINS.includes(s)) || data.offers_long_acting_tox || data.enriched_attrs?.offers_long_acting_tox,
-            uses_ai_diagnostics: (data.services_offered || []).some((s: string) => AI_DIAGNOSTICS.includes(s)) || data.uses_ai_diagnostics || data.enriched_attrs?.uses_ai_diagnostics
-        }),
-        score_total: calculateProviderScore({
-            price_per_unit: data.price_per_unit || data.botox_price_per_unit || data.enriched_attrs?.price_per_unit_botox,
-            rating: parseFloat(data.rating || data.average_rating || 0),
-            review_count: data.review_count || 0,
-            has_photo: !!(data.hero_image_url || data.image_url),
-            has_description: !!data.description,
-            is_verified: data.verified || false,
-            npi_verified: data.npi_verified || false,
-            allergan_tier: data.allergan_tier,
-            results_quality_score: data.score_results_quality || data.enriched_attrs?.score_results_quality || 15,
-            website: data.website,
-            responsiveness_score: data.responsiveness_score,
-            regen_treatments_count: (data.services_offered || []).filter((s: string) => REGEN_TREATMENTS.includes(s)).length,
-            offers_long_acting_tox: (data.services_offered || []).some((s: string) => ADVANCED_TOXINS.includes(s)) || data.offers_long_acting_tox || data.enriched_attrs?.offers_long_acting_tox,
-            uses_ai_diagnostics: (data.services_offered || []).some((s: string) => AI_DIAGNOSTICS.includes(s)) || data.uses_ai_diagnostics || data.enriched_attrs?.uses_ai_diagnostics
-        }).points,
-        regen_ratio: calculateProviderScore({
-            price_per_unit: data.price_per_unit || data.botox_price_per_unit || data.enriched_attrs?.price_per_unit_botox,
-            rating: parseFloat(data.rating || data.average_rating || 0),
-            review_count: data.review_count || 0,
-            has_photo: !!(data.hero_image_url || data.image_url),
-            has_description: !!data.description,
-            is_verified: data.verified || false,
-            npi_verified: data.npi_verified || false,
-            allergan_tier: data.allergan_tier,
-            results_quality_score: data.score_results_quality || data.enriched_attrs?.score_results_quality || 15,
-            website: data.website,
-            responsiveness_score: data.responsiveness_score,
-            regen_treatments_count: (data.services_offered || []).filter((s: string) => REGEN_TREATMENTS.includes(s)).length,
-            offers_long_acting_tox: (data.services_offered || []).some((s: string) => ADVANCED_TOXINS.includes(s)) || data.offers_long_acting_tox || data.enriched_attrs?.offers_long_acting_tox,
-            uses_ai_diagnostics: (data.services_offered || []).some((s: string) => AI_DIAGNOSTICS.includes(s)) || data.uses_ai_diagnostics || data.enriched_attrs?.uses_ai_diagnostics
-        }).breakdown.regenRatio,
+        score,
+        score_total: score.points,
+        trueScore: score.points,
+        innovation_score: score.breakdown.innovation,
 
         // Warning & Scoring Fields
         warning_flag: data.warning_flag || false,

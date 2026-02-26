@@ -21,19 +21,19 @@ export function CityFAQ({ city, avgCost }: CityFAQProps) {
         },
         {
             q: `How do I find a reputable Botox injector in ${city}?`,
-            a: `Look for board-certified plastic surgeons, dermatologists, or specialized aesthetic injectors with an II-Score™ above 70. On InjectorIndex.com, our "Specialist" directory automatically filters for providers who pass our Safety Floor audit (60+ Score). Providers with the "Verified" badge have been cross-referenced against the federal NPI database for licensure and credential validity.`
+            a: `Look for board-certified plastic surgeons, dermatologists, or specialized aesthetic injectors with a TrueScore™ above 70. On InjectorIndex.com, our primary directory automatically filters for providers who pass our safety audit (55+ Score). Providers with the "Verified" badge have been cross-referenced against the federal NPI database for licensure and credential validity.`
         },
         {
-            q: `How is the II-Priority™ ranking determined for ${city} clinics?`,
-            a: `Our ranking is the result of a proprietary multi-factor clinical audit. We evaluate clinics based on three foundational pillars: (1) Historical safety data and patient outcomes; (2) The Regen-Ratio™, which prioritizes long-term skin health and biostimulation; and (3) Provider specialization, ensuring that "Artisan" practitioners receive proper visibility for their specialized expertise.`
+            q: `How is the TrueScore™ ranking determined for ${city} clinics?`,
+            a: `Our ranking is the result of a proprietary multi-factor clinical audit. We evaluate clinics based on four foundational pillars: (1) Injection Quality; (2) Provider Credentials; (3) Innovation Adoption; and (4) Treatment Range. This ensures artisan practitioners receive proper visibility for their technical expertise.`
         },
         {
             q: `What is the "Safety Floor" and why do some providers show as "Pending"?`,
             a: `As an independent rating agency, we maintain a strict Safety Floor audit. In ${city}, providers who have not yet met our clinical data requirements or safety benchmarks are relegated to our General Directory. A "Pending" status indicates that a clinic is still undergoing our proprietary specialist audit process, ensuring only vetted talent is recommended in our primary search.`
         },
         {
-            q: `What is a Regen-Ratio™ and why does it matter in ${city}?`,
-            a: `The Regen-Ratio™ is a proprietary metric that measures a provider's commitment to regenerative aesthetic medicine—such as Exosomes and Polynucleotides—over traditional fillers. High Regen-Ratio™ clinics in ${city} are recognized for their focus on natural structural health and conservative results, representing the "Artisan" standard in modern aesthetics.`
+            q: `What is the significance of "Innovation Adoption" in ${city}?`,
+            a: `Innovation Adoption is a key TrueScore™ pillar that measures a provider's commitment to next-gen aesthetic medicine—such as Daxxify, Exosomes, and Polynucleotides. High-innovation clinics in ${city} are recognized for staying ahead of legacy protocols, representing the modern standard in aesthetics.`
         },
         {
             q: `Is there a difference in Botox brands available in ${city}?`,
@@ -41,7 +41,7 @@ export function CityFAQ({ city, avgCost }: CityFAQProps) {
         },
         {
             q: `What should I ask during a Botox consultation in ${city}?`,
-            a: `Before treatment in ${city}, ask: (1) "What is your Regen-Ratio™ approach?" (2) "Can I see photos of your most natural results?" and (3) "What is your NPI number?" Licensed professionals provide this immediately. Hesitation on any safety or credential question is a red flag.`
+            a: `Before treatment in ${city}, ask: (1) "What is your approach to natural results?" (2) "Can I see photos of your conservative work?" and (3) "What is your NPI number?" Licensed professionals provide these immediately. Hesitation on any safety or credential question is a red flag.`
         }
     ]
 

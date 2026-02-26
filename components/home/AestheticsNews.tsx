@@ -3,22 +3,22 @@ import { ArrowRight, Clock, TrendingUp } from 'lucide-react'
 
 const ARTICLES = [
     {
+        title: "Botox vs. Daxxify: The 2026 Guide to Neurotoxin Longevity",
+        excerpt: "Compare the gold standard against the new long-acting rival. We break down the cost-per-day, clinical safety, and real-world results of current toxins.",
+        slug: "botox-vs-daxxify-longevity-guide-2026",
+        tag: "Treatment Guide",
+        trending: true,
+        author: "InjectorIndex Editorial",
+        readTime: "6 min"
+    },
+    {
         title: "The Neo-Romantic Manifesto: Why the 2026 Aesthetic Shift is Moving Away from Filler",
-        excerpt: "The first definitive guide to the Neo-Romantic aesthetic movement in regenerative medicine. Five principles defining the 2026 shift toward biological repair and facial harmony.",
+        excerpt: "The first definitive guide to the Neo-Romantic movement. Five principles defining the 2026 shift toward biological repair and facial harmony.",
         slug: "neo-romantic-manifesto-2026-aesthetic-shift",
         tag: "Core Manifesto",
         trending: true,
         author: "InjectorIndex Editorial",
         readTime: "8 min"
-    },
-    {
-        title: "The Neo-Romantic Aesthetic Movement in Regenerative Medicine: Leading the Shift",
-        excerpt: "The 'done' look is dead. From NYC's 58% Regen-Ratio to Seattle's tech-bio convergence, learn how clinics are adopting the Aesthetic Neo-Romanticism movement in 2026.",
-        slug: "neo-romantic-aesthetics-portland-seattle-sf-2026",
-        tag: "Industry Analysis",
-        trending: true,
-        author: "InjectorIndex Editorial",
-        readTime: "6 min"
     },
     {
         title: "New York's Biological Renaissance: The 2026 Treatment Outlook",
@@ -29,7 +29,7 @@ const ARTICLES = [
         author: "InjectorIndex Editorial",
         readTime: "7 min"
     },
-]
+];
 
 
 export default function AestheticsNews() {

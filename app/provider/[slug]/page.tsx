@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
     if (!provider) return { title: 'Provider Not Found' }
 
     return {
-        title: `${provider.name} | Regen-Ratio™ & Pricing in ${provider.city} | ${NICHE.siteName}`,
-        description: `II-Score™ profile for ${provider.name} in ${provider.city}. Verified credentials, Regen-Ratio™, real pricing, and natural result integrity — ranked by independent data.`,
+        title: `${provider.name} | TrueScore™ & Pricing in ${provider.city} | ${NICHE.siteName}`,
+        description: `Compare ${provider.name} in ${provider.city} using TrueScore™ — independent data on injection quality, credentials, and real pricing. See how they rank vs. the market.`,
         alternates: {
             canonical: `https://www.injectorindex.com/provider/${provider.slug}`,
         },
@@ -367,118 +367,108 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                         {/* Sidebar */}
                         <div className="lg:w-1/3">
                             <div className="sticky top-24 space-y-6">
-                                {/* Regen-Ratio™ Card */}
-                                <div className="bg-gradient-to-br from-emerald-950/40 to-[#0d1420] p-8 rounded-[2rem] border border-emerald-800/20 relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-500/5 blur-[80px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+                                {/* TrueScore™ Card */}
+                                <div className="bg-gradient-to-br from-[#d4af37]/10 to-[#0d1420] p-8 rounded-[2rem] border border-[#d4af37]/20 relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-40 h-40 bg-[#d4af37]/5 blur-[80px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
                                     <div className="relative z-10">
                                         <div className="flex items-center gap-2 mb-4">
-                                            <Dna className="w-5 h-5 text-emerald-400" />
-                                            <span className="text-xs font-black text-emerald-400 uppercase tracking-widest">Regen-Ratio™</span>
+                                            <ShieldCheck className="w-5 h-5 text-[#d4af37]" />
+                                            <span className="text-xs font-black text-[#d4af37] uppercase tracking-widest">TrueScore™</span>
                                         </div>
 
-                                        {/* Ratio Visual */}
+                                        {/* Score Visual */}
                                         <div className="flex items-end gap-3 mb-4">
-                                            <div className="text-5xl font-black font-display text-emerald-400">{provider.regen_ratio}%</div>
-                                            <div className="text-xs text-emerald-400/60 font-bold pb-2">Regenerative Menu</div>
+                                            <div className="text-5xl font-black font-display text-white">{provider.score_total || 50}</div>
+                                            <div className="text-sm text-[#d4af37] font-black pb-2 uppercase tracking-tight">/ 100</div>
                                         </div>
 
                                         {/* Progress bar */}
-                                        <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden mb-4">
+                                        <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden mb-6">
                                             <div
-                                                className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all"
-                                                style={{ width: `${provider.regen_ratio}%` }}
+                                                className="h-full bg-gradient-to-r from-[#d4af37] to-[#f4d06f] rounded-full transition-all"
+                                                style={{ width: `${provider.score_total || 50}%` }}
                                             ></div>
                                         </div>
 
-                                        <p className="text-emerald-400/40 text-[11px] leading-relaxed">
-                                            How much of this clinic's menu is regenerative medicine (PNs, Sculptra, PRF) vs. traditional HA filler.
-                                        </p>
-
-                                        {/* II-Score summary */}
-                                        <div className="mt-6 pt-4 border-t border-emerald-800/20 space-y-3">
-                                            {[
-                                                { label: 'II-Score™', value: `${provider.score_total || '--'}/100`, icon: '🏆' },
-                                                { label: 'Natural Integrity', value: `${provider.score?.breakdown?.naturalIntegrity || 0}/35`, icon: '🎯' },
-                                                { label: 'Innovation', value: `${provider.score?.breakdown?.regenRatio || 0}/15`, icon: '⚡' },
-                                                { label: 'Safety Integrity', value: `${provider.score?.breakdown?.safety || 0}/15`, icon: '🛡️' },
-                                            ].map(item => (
-                                                <div key={item.label} className="flex items-center justify-between text-sm">
-                                                    <span className="text-gray-500 flex items-center gap-2">
-                                                        <span className="text-xs">{item.icon}</span>
-                                                        {item.label}
-                                                    </span>
-                                                    <span className="font-black text-white">{item.value}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Lead Form */}
-                                <div id="quote-form">
-                                    <LeadForm
-                                        providerId={provider.id}
-                                        providerName={provider.name}
-                                        city={provider.city}
-                                        state={provider.state}
-                                        isPremium={provider.listingTier === 'premium'}
-                                    />
-                                </div>
-
-                                {/* Quick Contact */}
-                                <div className="bg-white/[0.02] p-8 rounded-3xl border border-white/[0.06]">
-                                    <h3 className="text-xl font-display font-bold text-white mb-6">Clinic Info</h3>
-                                    <div className="space-y-4">
-                                        {provider.phone && (
-                                            <div className="flex items-start gap-4 p-4 bg-white/[0.03] rounded-2xl border border-white/[0.05]">
-                                                <span className="text-2xl">📱</span>
-                                                <div>
-                                                    <div className="text-xs text-gray-600 font-bold uppercase mb-0.5">Phone</div>
-                                                    <a href={`tel:${provider.phone}`} className="text-lg font-bold text-white hover:text-[#d4af37] transition-colors">
-                                                        {provider.phone}
-                                                    </a>
-                                                </div>
+                                        {/* Internal Pillars */}
+                                        <div className="space-y-4 mb-8">
+                                            <div className="flex justify-between items-center text-[11px] font-bold">
+                                                <span className="text-gray-500 uppercase tracking-widest">Injection Quality</span>
+                                                <span className="text-white">{(provider.score?.breakdown?.injectionQuality || 0)}/40</span>
                                             </div>
-                                        )}
-                                        <div className="flex items-start gap-4 p-4 bg-white/[0.03] rounded-2xl border border-white/[0.05]">
-                                            <span className="text-2xl">🏠</span>
-                                            <div>
-                                                <div className="text-xs text-gray-600 font-bold uppercase mb-0.5">Location</div>
-                                                <div className="text-sm font-semibold text-gray-400 leading-relaxed">
-                                                    {provider.address}<br />
-                                                    {provider.city}, {provider.state}
-                                                </div>
+                                            <div className="flex justify-between items-center text-[11px] font-bold">
+                                                <span className="text-gray-500 uppercase tracking-widest">Provider Credentials</span>
+                                                <span className="text-white">{(provider.score?.breakdown?.credentials || 0)}/25</span>
+                                            </div>
+                                            <div className="flex justify-between items-center text-[11px] font-bold">
+                                                <span className="text-gray-500 uppercase tracking-widest">Innovation Adoption</span>
+                                                <span className="text-white">{(provider.score?.breakdown?.innovation || 0)}/20</span>
+                                            </div>
+                                            <div className="flex justify-between items-center text-[11px] font-bold">
+                                                <span className="text-gray-500 uppercase tracking-widest">Treatment Range</span>
+                                                <span className="text-white">{(provider.score?.breakdown?.treatmentRange || 0)}/15</span>
                                             </div>
                                         </div>
-                                        <Button variant="outline" className="w-full h-12 rounded-xl border-white/10 text-gray-400 hover:bg-white/5">
-                                            Get Directions
-                                        </Button>
+
+                                        <p className="text-gray-500 text-[10px] leading-relaxed italic border-t border-white/5 pt-4">
+                                            TrueScore™ is an independent dataset that scores clinics based on credentialing, price transparency, and menu innovation.
+                                        </p>
                                     </div>
                                 </div>
-
-                                {/* Claim Listing CTA */}
-                                {!provider.verified && provider.listingTier === 'free' && (
-                                    <div className="bg-gradient-to-br from-[#d4af37]/10 to-[#0d1420] p-8 rounded-3xl border border-[#d4af37]/15">
-                                        <h3 className="text-xl font-display font-bold text-white mb-4">Are you the owner?</h3>
-                                        <p className="text-sm text-gray-500 leading-relaxed mb-6">
-                                            Claim your profile to update pricing, respond to reviews, and reach more patients in {provider.city}.
-                                        </p>
-                                        <Link href={`/claim/${provider.slug}`} className="block">
-                                            <Button className="w-full bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] border-0 py-6 text-md font-black shadow-lg shadow-[#d4af37]/10">
-                                                Claim This Listing
-                                            </Button>
-                                        </Link>
-                                    </div>
-                                )}
                             </div>
                         </div>
                     </div>
 
-                    <div className="mt-12 p-6 bg-white/[0.02] rounded-2xl text-[10px] text-gray-700 italic leading-relaxed border border-white/[0.04]">
-                        {NICHE.copy.footerDisclaimer}
+                    {/* Lead Form */}
+                    <div id="quote-form">
+                        <LeadForm
+                            providerId={provider.id}
+                            providerName={provider.name}
+                            city={provider.city}
+                            state={provider.state}
+                            isPremium={provider.listingTier === 'premium'}
+                        />
                     </div>
+
+                    {/* Quick Contact */}
+                    <div className="bg-white/[0.02] p-8 rounded-3xl border border-white/[0.06]">
+                        <h3 className="text-xl font-display font-bold text-white mb-6">Clinic Info</h3>
+                        <div className="space-y-4">
+                            {provider.phone && (
+                                <div className="flex items-start gap-4 p-4 bg-white/[0.03] rounded-2xl border border-white/[0.05]">
+                                    <span className="text-2xl">📱</span>
+                                    <div>
+                                        <div className="text-xs text-gray-600 font-bold uppercase mb-0.5">Phone</div>
+                                        <a href={`tel:${provider.phone}`} className="text-lg font-bold text-white hover:text-[#d4af37] transition-colors">
+                                            {provider.phone}
+                                        </a>
+                                    </div>
+                                </div>
+                            )}
+                            <div className="flex items-start gap-4 p-4 bg-white/[0.03] rounded-2xl border border-white/[0.05]">
+                                <span className="text-2xl">🏠</span>
+                                <div>
+                                    <div className="text-xs text-gray-600 font-bold uppercase mb-0.5">Location</div>
+                                    <div className="text-sm font-semibold text-gray-400 leading-relaxed">
+                                        {provider.address}<br />
+                                        {provider.city}, {provider.state}
+                                    </div>
+                                </div>
+                            </div>
+                            <Button variant="outline" className="w-full h-12 rounded-xl border-white/10 text-gray-400 hover:bg-white/5">
+                                Get Directions
+                            </Button>
+                        </div>
+                    </div>
+
                 </div>
             </section>
+
+            <div className="container mx-auto px-4 pb-12">
+                <div className="mt-12 p-6 bg-white/[0.02] rounded-2xl text-[10px] text-gray-700 italic leading-relaxed border border-white/[0.04]">
+                    {NICHE.copy.footerDisclaimer || "Disclaimer: Information is provided for educational purposes only. Always consult a medical professional."}
+                </div>
+            </div>
         </div>
     )
 }

@@ -4,15 +4,17 @@ import FeaturedProviders from '@/components/home/FeaturedProviders'
 import HowItWorks from '@/components/home/HowItWorks'
 import AestheticsNews from '@/components/home/AestheticsNews'
 import TreatmentTrends from '@/components/home/TreatmentTrends'
-import NewsletterAudit from '@/components/home/NewsletterAudit'
+import InjectorMatchQuiz from '@/components/home/InjectorMatchQuiz'
+import TreatmentGuides from '@/components/home/TreatmentGuides'
+import ProcessThreeStep from '@/components/home/ProcessThreeStep'
 import { Suspense } from 'react'
 import { Metadata } from 'next'
 import { NICHE } from '@/config/niche'
 import { JsonLd, generateWebSiteSchema } from '@/components/seo/JsonLd'
 
 export const metadata: Metadata = {
-  title: `InjectorIndex — Regen-First Injector Intelligence | PNs, Daxxify & More`,
-  description: `Find injectors ranked by Regen-Ratio™ — track Polynucleotides, Daxxify, and natural results. The independent index for aesthetic medicine.`,
+  title: `InjectorIndex — Find & Compare the Best Botox Injectors Near You`,
+  description: `Compare 500+ injectors across 22 cities. See TrueScores, real pricing, and verified credentials. Find natural results, ranked by data.`,
   alternates: {
     canonical: '/',
   }
@@ -25,10 +27,13 @@ export default function HomePage() {
     <>
       <JsonLd data={generateWebSiteSchema()} />
 
-      {/* 1. Hero — Neo-Romantic, Regen-First */}
+      {/* 1. Hero — Strategic Entry */}
       <Hero />
 
-      {/* 2. Top Scoring Providers (geo-personalized) */}
+      {/* 2. How It Works — 3-Step Process */}
+      <ProcessThreeStep />
+
+      {/* 3. Top Scoring Providers (geo-personalized) */}
       <Suspense fallback={
         <div className="py-24 flex items-center justify-center bg-[#0d1420] text-gray-600">
           Loading top providers…
@@ -37,19 +42,19 @@ export default function HomePage() {
         <FeaturedProviders />
       </Suspense>
 
-      {/* 3. 2026 Treatment Hierarchy (PNs, Daxxify, Exosomes, Sculptra) */}
-      <TreatmentTrends />
-
-      {/* 4. II-Score™ Methodology */}
-      <HowItWorks />
-
-      {/* 5. Free Clinic Audit + Newsletter Signup */}
-      <NewsletterAudit />
-
-      {/* 6. City Grid */}
+      {/* 4. Featured Cities Grid */}
       <FeaturedCities />
 
-      {/* 7. Intelligence & Guides */}
+      {/* 5. The TrueScore™ Explained (Detailed Analytics) */}
+      <HowItWorks />
+
+      {/* 6. Injector Match Quiz (Lead Capture) */}
+      <InjectorMatchQuiz />
+
+      {/* 7. Treatment Guides (Volume-First) */}
+      <TreatmentGuides />
+
+      {/* 8. Intelligence & Guides (Blog) */}
       <AestheticsNews />
     </>
   )

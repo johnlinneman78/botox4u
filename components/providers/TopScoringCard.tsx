@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { Star, X, Info, Dna } from 'lucide-react'
+import { Star, X, Info, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { LeadForm } from './LeadForm'
 import { NICHE } from '@/config/niche'
@@ -37,7 +37,7 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
     }
 
     const getTopCategory = (p: any) => {
-        const categories = ["Regen-Ratio™", "Natural Integrity", "Clinical Innovation", "Provider Pedigree", "Patient Trust"]
+        const categories = ["Injection Quality", "Natural Integrity", "Clinical Innovation", "Provider Credentials", "Patient Trust"]
         const hash = p.name.length + (p.score_total || 0)
         return categories[hash % categories.length]
     }
@@ -123,8 +123,8 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
                     <div className="mb-6">
                         <div className="flex items-center justify-between mb-2">
                             <span className="text-[10px] font-black uppercase tracking-widest text-gray-600 flex items-center gap-1.5">
-                                <Dna className="w-3 h-3 text-[#d4af37]" />
-                                II-Score™
+                                <ShieldCheck className="w-3 h-3 text-[#d4af37]" />
+                                TrueScore™
                             </span>
                             <span className="text-[10px] font-black text-[#d4af37] uppercase">{getPercentile(provider.score_total)}</span>
                         </div>

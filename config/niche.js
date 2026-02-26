@@ -8,9 +8,9 @@ export const NICHE = {
     namePlural: "Aesthetic Medicine Providers",
     providerType: "provider",               // "injector", "clinic", "provider", "dentist"
     providerTypePlural: "providers",
-    siteName: "InjectorIndex — Regen-First Injector Intelligence",
+    siteName: "InjectorIndex — Find & Compare the Best Botox Injectors Near You",
     domain: "injectorindex.com",
-    tagline: "Regen-First Injector Intelligence",
+    tagline: "Find the Best Botox & Filler Injectors Near You — Rated by Data, Not Ads",
     brandName: "InjectorIndex",
     brandSuffix: "™",
 
@@ -41,16 +41,15 @@ export const NICHE = {
 
     // Treatments in this niche
     treatments: [
-        "Forehead Lines",
-        "Crow's Feet",
-        "Frown Lines",
+        "Botox & Dysport",
+        "Lip Filler",
+        "Cheek & Jaw Filler",
+        "Polynucleotides (Regen)",
+        "Daxxify",
+        "Biostimulators (Sculptra)",
         "Masseter / Jaw Slimming",
-        "Lip Flip",
-        "Brow Lift",
-        "Neck Bands",
-        "Hyperhidrosis",
         "Gummy Smile",
-        "Bunny Lines"
+        "Natural Results Audit"
     ],
 
     // Cities to target (top 20 metros)
@@ -90,8 +89,8 @@ export const NICHE = {
     },
 
     // SEO
-    metaTitleTemplate: "{treatment} in {city} — Compare Prices & Top Providers (2026)",
-    metaDescriptionTemplate: "40% of Botox complaints are about over-injection. We score {city} providers on natural results, fair pricing, and verified credentials — so you find someone who won't overdo it.",
+    metaTitleTemplate: "Best Botox in {city} — {year} Provider Rankings & Pricing",
+    metaDescriptionTemplate: "Compare top-rated Botox & filler injectors in {city}. See TrueScores, real pricing, and verified credentials. Find natural results, ranked by data.",
 
     // Pricing tiers (for /pricing page)
     pricingTiers: [
@@ -103,7 +102,7 @@ export const NICHE = {
                 "Basic listing in directory",
                 "Appears in city search results",
                 "Name, location & credential display",
-                "II-Score visible"
+                "TrueScore™ visible"
             ],
             bestFor: "Individual providers getting started"
         },
@@ -129,7 +128,7 @@ export const NICHE = {
                 "Everything in Verified",
                 "Top placement in city search results",
                 "Featured Provider highlight",
-                "Homepage & City featured slots",
+                "Priority in Injector Match Quiz",
                 "Full analytics dashboard"
             ],
             bestFor: "Market leaders wanting maximum visibility"
@@ -153,16 +152,16 @@ export const NICHE = {
     // Brand V2 Copy
     copy: {
         hero: {
-            headline: "Find injectors known for — and see their real prices before you book.",
-            subtext: "In 2026, the gold standard is biological repair — not volume. We score every provider on Regen-Ratio™, natural result integrity, and 2026 treatment innovation. See real pricing before you book.",
-            cta: "Find a Conservative Injector Near Me"
+            headline: "Find the Best Injectors Near You — Ranked by Results, Not Reviews",
+            subtext: "InjectorIndex scores 500+ providers across 22 cities on credentials, technique quality, and patient outcomes. See real pricing before you book.",
+            cta: "Compare Top-Rated Injectors"
         },
         trustBadges: [
-            { icon: 'target', label: 'Natural Results', description: 'Scored on patient-reported outcomes & facial harmony' },
-            { icon: 'dollar', label: 'Regen-Ratio™', description: 'Verified percentage of regenerative vs. traditional menu' },
-            { icon: 'shield', label: 'II-Score™ Audit', description: 'Independent data verification of clinical results quality' }
+            { icon: 'target', label: 'Injection Quality', description: 'AI-analyzed outcomes for natural facial harmony' },
+            { icon: 'verify', label: 'TrueScore™', description: 'Proprietary rating of credentials, technique, and innovation' },
+            { icon: 'shield', label: 'No Pay-to-Rank', description: ' rankings are 100% data-driven and independent' }
         ],
-        scoreDisclaimer: "The Injector Index is an independent data research platform for aesthetic providers. We are not a medical provider. Our mission is to provide transparency in the aesthetic market by indexing provider data, pricing, and neutral patient feedback. No provider can pay for a higher index position.",
+        scoreDisclaimer: "The Injector Index is an independent data research platform for aesthetic providers. We are not a medical provider. Our mission is to provide transparency in the aesthetic market by indexing provider data, pricing, and neutral patient feedback. No provider can pay for a higher TrueScore position.",
         footerDisclaimer: "InjectorIndex.com is an independent provider directory and research index for aesthetic medicine. We are not a clinic, we do not perform medical procedures, and we do not provide clinical advice. All data is gathered from public records to facilitate independent research of aesthetic providers."
     }
 }

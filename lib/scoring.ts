@@ -23,12 +23,10 @@ export interface ScoreBreakdown {
     points: number
     total: string
     breakdown: {
-        naturalIntegrity: number
-        regenRatio: number
-        price: number
-        trust: number
-        safety: number
-        transparency: number
+        injectionQuality: number
+        credentials: number
+        innovation: number
+        treatmentRange: number
     }
 }
 
@@ -48,69 +46,59 @@ export function getGrade(score: number): string {
 }
 
 /**
- * Calculates the II-Score based on Version 3.0 (February 2026 Strategic Pivot)
- * Prioritizes Regenerative Medicine and Natural Result Integrity
+ * Calculates the TrueScore™ based on the 2026 Strategic Pivot
+ * 1. Injection Quality (40%)
+ * 2. Provider Credentials (25%)
+ * 3. Innovation Adoption (20%)
+ * 4. Treatment Range (15%)
  */
 export function calculateProviderScore(factors: ScoringFactors, cityAveragePrice: number = NICHE.priceRange.min + 5): ScoreBreakdown {
-    // 1. Natural Results Integrity (35 pts) - UP from 30
-    // Based on "Neo-Romantic" results (subtle, natural, conservative)
-    let naturalIntegrityScore = factors.results_quality_score || 0
-    naturalIntegrityScore = Math.min(35, Math.max(0, naturalIntegrityScore))
+    // 1. Injection Quality (40 pts)
+    // Primary signal: natural, subtle, balanced results
+    let injectionQuality = factors.results_quality_score || 0
+    // If no quality score but high rating, give a baseline
+    if (!injectionQuality && factors.rating && factors.rating >= 4.5) injectionQuality = 25
+    else if (!injectionQuality && factors.rating && factors.rating >= 4.0) injectionQuality = 20
+    injectionQuality = Math.min(40, injectionQuality)
 
-    // 2. Regen-Ratio™ & Advancement (15 pts) - NEW for 2026
-    // Rewards Polynucleotides, Exosomes, and Biostimulators
-    let regenScore = 0
+    // 2. Provider Credentials (25 pts)
+    // Verified NPI, board certifications (trust signals)
+    let credentials = (factors.npi_verified || factors.is_verified) ? 20 : 10
+    if (factors.allergan_tier && ['platinum', 'diamond', 'black_diamond'].includes(factors.allergan_tier.toLowerCase())) {
+        credentials += 5
+    }
+    credentials = Math.min(25, credentials)
+
+    // 3. Innovation Adoption (20 pts)
+    // Rewards newest treatments (PNs, Exosomes, Daxxify, AI)
+    let innovation = 0
     if (factors.regen_treatments_count) {
-        if (factors.regen_treatments_count >= 3) regenScore = 10
-        else if (factors.regen_treatments_count >= 1) regenScore = 5
+        if (factors.regen_treatments_count >= 3) innovation += 12
+        else if (factors.regen_treatments_count >= 1) innovation += 8
     }
-    // Advancement Bonus (Daxxify, AI)
-    if (factors.offers_long_acting_tox) regenScore += 3
-    if (factors.uses_ai_diagnostics) regenScore += 2
-    regenScore = Math.min(15, regenScore)
+    if (factors.offers_long_acting_tox) innovation += 4
+    if (factors.uses_ai_diagnostics) innovation += 4
+    // Baseline for active providers
+    if (innovation === 0 && (factors.regen_treatments_count === 0)) innovation = 5
+    innovation = Math.min(20, innovation)
 
-    // 3. Fair Pricing Score (15 pts) - DOWN from 25
-    let priceScore = 0
-    if (factors.price_per_unit) {
-        const ratio = factors.price_per_unit / cityAveragePrice
-        if (ratio <= 0.85) priceScore = 15
-        else if (ratio <= 1.05) priceScore = 12
-        else if (ratio <= 1.25) priceScore = 8
-        else priceScore = 0
+    // 4. Treatment Range (15 pts)
+    // NEW: Breadth and depth (Traditional + Next-Gen)
+    let treatmentRange = 5 // Baseline for listing
+    if (factors.regen_treatments_count && factors.regen_treatments_count >= 1) {
+        // High range if they offer traditional AND regen
+        treatmentRange += 10
+    } else if (factors.price_per_unit || factors.has_description) {
+        // Moderate range for established traditional practices
+        treatmentRange += 5
     }
+    treatmentRange = Math.min(15, treatmentRange)
 
-    // 4. Credential Integrity (15 pts) - DOWN from 20
-    let safetyScore = factors.npi_verified ? 15 : 0
-
-    // 5. Patient Trust & Sentiment (10 pts) - DOWN from 15
-    let trustScore = 0
-    if (factors.review_count) {
-        let volumeScore = 0
-        if (factors.review_count >= 200) volumeScore = 7
-        else if (factors.review_count >= 50) volumeScore = 4
-        else volumeScore = 2
-
-        let ratingScore = 0
-        if (factors.rating && factors.rating >= 4.7) ratingScore = 3
-        else if (factors.rating && factors.rating >= 4.4) ratingScore = 2
-
-        trustScore = volumeScore + ratingScore
-    }
-
-    // 6. Transparency & Presence (10 pts)
-    let transparencyScore = 0
-    if (factors.price_per_unit) transparencyScore += 4
-    if (factors.has_photo) transparencyScore += 3
-    if (factors.website) transparencyScore += 3
-    transparencyScore = Math.min(10, transparencyScore)
-
-    const totalPoints = Math.min(100, 
-        naturalIntegrityScore + 
-        regenScore + 
-        priceScore + 
-        trustScore + 
-        safetyScore + 
-        transparencyScore
+    const totalPoints = Math.min(100,
+        injectionQuality +
+        credentials +
+        innovation +
+        treatmentRange
     )
 
     return {
@@ -118,12 +106,11 @@ export function calculateProviderScore(factors: ScoringFactors, cityAveragePrice
         points: totalPoints,
         total: getGrade(totalPoints),
         breakdown: {
-            naturalIntegrity: naturalIntegrityScore,
-            regenRatio: regenScore,
-            price: priceScore,
-            trust: trustScore,
-            safety: safetyScore,
-            transparency: transparencyScore
+            injectionQuality,
+            credentials,
+            innovation,
+            treatmentRange
         }
     }
 }
+

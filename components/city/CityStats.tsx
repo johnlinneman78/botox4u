@@ -30,9 +30,9 @@ export function CityStats({ avgCost, providerCount, avgRating, city }: CityStats
             )
         },
         {
-            label: 'Ranking Multiplier',
-            value: 'Regen-Ratio™',
-            description: 'Providers prioritized by regenerative focus and conservative sentiment analysis.'
+            label: 'Independent Ranking',
+            value: 'TrueScore™',
+            description: 'Providers prioritized by clinical credentials, patient outcomes, and price transparency.'
         }
     ]
 

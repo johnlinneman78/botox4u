@@ -187,7 +187,7 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
                     </div>
                     <div>
                         <h3 className="text-xl font-bold text-white">Regenerative Treatments</h3>
-                        <p className="text-sm text-gray-500 font-light">Offering regenerative treatments directly impacts your Regen-Ratio™ and II-Score.</p>
+                        <p className="text-sm text-gray-500 font-light">Offering next-gen treatments directly impacts your Innovation Adoption pillar and overall TrueScore™.</p>
                     </div>
                 </div>
 
@@ -284,7 +284,7 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
                     <p className="text-sm text-gray-500 font-light">Does your practice align with the Neo-Romantic aesthetic movement in regenerative medicine?</p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         {[
-                            { id: 'regenerative', label: 'Regen-First / Neo-Romantic Aesthetic', desc: 'Biological repair, PNs, facial harmony, undetectable results.', recommended: true },
+                            { id: 'regenerative', label: 'TrueScore™ Aesthetic / Regenerative', desc: 'Biological repair, PNs, facial harmony, undetectable results.', recommended: true },
                             { id: 'natural', label: 'Conservative / Natural', desc: 'Subtle refreshment with minimal intervention.' },
                             { id: 'full', label: 'Full Correction', desc: 'Maximum wrinkle elimination & volume restoration.' }
                         ].map((opt) => (
@@ -293,7 +293,7 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
                                 <input type="radio" name="philosophy" value={opt.id} className="sr-only" defaultChecked={opt.id === 'regenerative'} />
                                 {'recommended' in opt && (
                                     <span className="absolute -top-2.5 right-4 text-[9px] font-black uppercase tracking-widest bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                                        Proprietary Regen-Ratio™ Signal
+                                        Proprietary TrueScore™ Signal
                                     </span>
                                 )}
                                 <div className="font-bold text-white group-has-[:checked]:text-[#d4af37] mb-1">{opt.label}</div>

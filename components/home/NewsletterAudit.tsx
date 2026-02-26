@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Mail, Dna, ChevronRight, CheckCircle, Search, User, UserCheck, ShieldAlert, Sparkles, Building2 } from 'lucide-react'
+import { Mail, Dna, ChevronRight, CheckCircle, Search, User, UserCheck, ShieldAlert, Sparkles, Building2, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { submitLead } from '@/lib/actions/leads'
 
@@ -111,20 +111,20 @@ export default function NewsletterAudit() {
                             {/* Left: Copy */}
                             <div className="p-10 md:p-14 border-b lg:border-b-0 lg:border-r border-white/[0.06] bg-white/[0.01]">
                                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-black tracking-widest uppercase mb-6">
-                                    <Dna className="w-3 h-3" /> Patient Intelligence Portal
+                                    <ShieldCheck className="w-3 h-3" /> TrueScore™ Match & Clinic Audit
                                 </div>
                                 <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6 leading-tight">
-                                    Is Your Injector <span className="text-[#d4af37]">2026-Ready?</span>
+                                    Is Your Injector <span className="text-[#d4af37]">TrueScore™ Certified?</span>
                                 </h2>
                                 <p className="text-gray-400 leading-relaxed mb-10 font-light text-lg">
-                                    Don't rely on unverified reviews. Provide your history and the clinics you're researching, and we'll cross-reference them with our 2026 Independent Audit pillars.
+                                    Don't rely on unverified reviews. Tell us which clinics you're researching, and we'll cross-reference them with our independent TrueScore™ dataset for injection quality and pricing.
                                 </p>
 
                                 <div className="space-y-6">
                                     {[
-                                        { icon: ShieldAlert, title: 'Safety Integrity', text: 'NPI & Credential check for your considered clinics.' },
-                                        { icon: UserCheck, title: 'Patient History Alignment', text: 'Custom advice based on whether you are a first-timer or returning.' },
-                                        { icon: Sparkles, title: 'Price/Result Matching', text: 'Compare your target clinic\'s rates against Neighborhood Averages.' }
+                                        { icon: ShieldAlert, title: 'Credential Verification', text: 'Independent NPI & Licensing check for your considered clinicians.' },
+                                        { icon: UserCheck, title: 'Precision Matching', text: 'Custom advice based on your aesthetic goals and treatment history.' },
+                                        { icon: Sparkles, title: 'Price Transparency', text: 'Compare your target clinic\'s rates against local market averages.' }
                                     ].map((item, i) => (
                                         <div key={i} className="flex gap-4 items-start group">
                                             <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#d4af37] group-hover:bg-[#d4af37]/10 transition-colors">
@@ -139,8 +139,8 @@ export default function NewsletterAudit() {
                                 </div>
 
                                 <div className="mt-12 pt-10 border-t border-white/[0.06]">
-                                    <p className="text-[11px] text-gray-600 font-medium">
-                                        ESTIMATED ADVICE DELIVERY: <span className="text-emerald-500 underline underline-offset-4 tracking-widest">&lt; 2 MINUTES</span>
+                                    <p className="text-[11px] text-gray-600 font-medium uppercase tracking-widest">
+                                        ESTIMATED ADVICE DELIVERY: <span className="text-emerald-500 underline underline-offset-4">&lt; 2 MINUTES</span>
                                     </p>
                                 </div>
                             </div>
@@ -175,9 +175,9 @@ export default function NewsletterAudit() {
 
                                             <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.06]">
                                                 <div className="flex justify-between items-center mb-3">
-                                                    <p className="text-[10px] text-gray-600 font-black uppercase tracking-widest">Natural Integrity Status</p>
+                                                    <p className="text-[10px] text-gray-600 font-black uppercase tracking-widest">Injection Quality Status</p>
                                                     <p className={`text-xs font-black ${auditResult?.score > 70 ? 'text-emerald-400' : 'text-[#d4af37]'}`}>
-                                                        {auditResult?.score > 70 ? 'ELITE' : 'OBSERVED'}
+                                                        {auditResult?.score > 70 ? 'ELITE' : 'QUALIFIED'}
                                                     </p>
                                                 </div>
                                                 <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
@@ -362,7 +362,7 @@ export default function NewsletterAudit() {
                                                     >
                                                         {loading ? 'Analyzing Data...' : (
                                                             <span className="flex items-center justify-center gap-2">
-                                                                <ChevronRight className="w-4 h-4" /> Generate My Elite Audit
+                                                                <ChevronRight className="w-4 h-4" /> Run TrueScore™ Audit
                                                             </span>
                                                         )}
                                                     </Button>

@@ -21,12 +21,42 @@ function getDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
 
 const TREATMENTS = [
     {
-        id: 'pns',
+        id: 'botox',
         rank: '01',
+        name: 'Botox & Dysport',
+        badge: '🏆 #1 Most Popular',
+        tagline: 'Precision Neurotoxins',
+        desc: 'The gold standard for wrinkle reduction. Our TrueScore™ audit verifies injector precision, dilution accuracy, and natural results across 22 major cities.',
+        priceConfig: { min: 10, max: 18, step: 0.5, label: 'per unit' },
+        icon: <Zap className="w-6 h-6" />,
+        color: 'from-blue-950/60 to-blue-950/20',
+        border: 'border-blue-800/30',
+        badge_color: 'bg-blue-900/40 text-blue-400 border-blue-700/40',
+        accent: 'text-blue-400',
+        searchQuery: 'Botox',
+    },
+    {
+        id: 'fillers',
+        rank: '02',
+        name: 'Dermal Fillers',
+        badge: '✨ Lips & Contouring',
+        tagline: 'Structural Restoration',
+        desc: 'From lip augmentation to jawline contouring. We index providers specializing in Juvederm, Restylane, and Revance for undetectable, elegant results.',
+        priceConfig: { min: 650, max: 950, step: 25, label: 'per syringe' },
+        icon: <Target className="w-6 h-6" />,
+        color: 'from-violet-950/60 to-violet-950/20',
+        border: 'border-violet-800/30',
+        badge_color: 'bg-violet-900/40 text-violet-400 border-violet-700/40',
+        accent: 'text-violet-400',
+        searchQuery: 'Fillers',
+    },
+    {
+        id: 'pns',
+        rank: '03',
         name: 'Polynucleotides (PNs)',
-        badge: '🔬 #1 2026 Trend',
-        tagline: 'Regeneration over Hydration',
-        desc: 'Derived from DNA fragments, PNs instruct fibroblasts to produce new collagen — repairing under-eyes and crepey skin without the puffy filler risk.',
+        badge: '🔬 Next-Gen Tech',
+        tagline: 'Biological Repair',
+        desc: 'Derived from DNA fragments, PNs repair under-eyes and crepey skin without the puffy filler risk. The future of regenerative aesthetics.',
         priceConfig: { min: 550, max: 900, step: 25, label: 'per session' },
         icon: <Dna className="w-6 h-6" />,
         color: 'from-emerald-950/60 to-emerald-950/20',
@@ -36,44 +66,14 @@ const TREATMENTS = [
         searchQuery: 'Polynucleotides',
     },
     {
-        id: 'daxxify',
-        rank: '02',
-        name: 'Daxxify & Long-Acting Tox',
-        badge: '⏱ 6–9 Month Duration',
-        tagline: 'Prejuvenation & Longevity',
-        desc: 'Daxxify\'s peptide-exchange tech (RTP004) doubles standard toxin duration. Gen Z uses micro-doses preventatively. Busy professionals get theirs just twice a year.',
-        priceConfig: { min: 9, max: 14, step: 0.5, label: 'per unit' },
-        icon: <Clock className="w-6 h-6" />,
-        color: 'from-blue-950/60 to-blue-950/20',
-        border: 'border-blue-800/30',
-        badge_color: 'bg-blue-900/40 text-blue-400 border-blue-700/40',
-        accent: 'text-blue-400',
-        searchQuery: 'Daxxify',
-    },
-    {
-        id: 'exosomes',
-        rank: '03',
-        name: 'Plant-Derived Exosomes',
-        badge: '🌿 Holistic / Clean',
-        tagline: 'Cellular Reset & Recovery',
-        desc: 'Rose Stem Cell Exosomes (RSCE) and "Hybrosomes" cut post-procedure downtime by 50%. Ideal for inflammation, eczema, and post-microneedling recovery.',
-        priceConfig: { min: 350, max: 750, step: 25, label: 'as add-on' },
-        icon: <Leaf className="w-6 h-6" />,
-        color: 'from-violet-950/60 to-violet-950/20',
-        border: 'border-violet-800/30',
-        badge_color: 'bg-violet-900/40 text-violet-400 border-violet-700/40',
-        accent: 'text-violet-400',
-        searchQuery: 'Exosomes',
-    },
-    {
         id: 'biostimulators',
         rank: '04',
-        name: 'Biostimulators (Sculptra)',
-        badge: '💎 Structural Health',
-        tagline: 'Ozempic Face Repair',
-        desc: 'Collagen biostimulators like Sculptra trigger your body\'s own structural repair. Results last 18–24 months. The antidote to "Ozempic Face" volume loss.',
+        name: 'Sculptra & Radiesse',
+        badge: '💎 Longevity',
+        tagline: 'Collagen Stimulating',
+        desc: 'Biostimulators trigger your body\'s own structural repair. Results last 18–24 months. Ideal for facial volume and skin quality.',
         priceConfig: { min: 850, max: 1200, step: 50, label: 'per vial' },
-        icon: <Zap className="w-6 h-6" />,
+        icon: <Activity className="w-6 h-6" />,
         color: 'from-amber-950/60 to-amber-950/20',
         border: 'border-amber-800/30',
         badge_color: 'bg-amber-900/40 text-amber-400 border-amber-700/40',
@@ -134,13 +134,13 @@ export default function TreatmentTrends() {
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                     <div>
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-black tracking-widest uppercase mb-5">
-                            2026 Treatment Hierarchy
+                            Independent Treatment Index
                         </div>
                         <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-                            Regen-First. <span className="text-[#d4af37]">Treatment Intelligence.</span>
+                            Botox & Filler <span className="text-[#d4af37]">Rankings.</span>
                         </h2>
                         <p className="text-xl text-gray-400 max-w-2xl font-light leading-relaxed">
-                            The aesthetic market has shifted from correction to biological repair. Interactive intelligence for the 2026 needle-based shift.
+                            Find the best injectors in your city. Our TrueScore™ audit combines patient reviews, pricing transparency, and clinical excellence into a single, independent metric.
                         </p>
                     </div>
                     <div className="flex flex-col items-end gap-3 text-right">
@@ -314,7 +314,7 @@ export default function TreatmentTrends() {
 
                 <div className="mt-16 text-center">
                     <p className="text-xs text-gray-700 max-w-2xl mx-auto leading-relaxed">
-                        Data powered by <span className="text-gray-500 font-bold">Injector Index Intelligence™</span>. Every provider returned includes an <span className="text-[#d4af37]">II-Score™</span> audit to verify clinical results quality. Rankings are pure data, zero pay-to-rank.
+                        Data powered by <span className="text-gray-500 font-bold">Injector Index Intelligence™</span>. Every provider includes a <span className="text-[#d4af37]">TrueScore™</span> audit to verify clinical quality. Rankings are pure data, zero pay-to-rank.
                     </p>
                 </div>
             </div>

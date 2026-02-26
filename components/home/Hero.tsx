@@ -37,48 +37,39 @@ export default function Hero({ city: initialCity, state }: { city?: string; stat
             <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#d4af37] opacity-[0.04] blur-[180px] rounded-full translate-x-1/3 -translate-y-1/4 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 opacity-[0.03] blur-[180px] rounded-full -translate-x-1/4 translate-y-1/4 pointer-events-none" />
 
-            {/* Top Trend Ticker */}
+            {/* Trust Bar (replacing Pulse Ticker) */}
             <div className="relative z-10 border-b border-white/[0.06] bg-white/[0.02] backdrop-blur-sm">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center gap-4 overflow-hidden">
-                    <span className="flex items-center gap-1.5 text-[#d4af37] text-[10px] font-black uppercase tracking-widest shrink-0">
-                        <TrendingUp className="w-3 h-3" /> 2026 Pulse
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40">
+                    <span className="flex items-center gap-2">
+                        <span className="w-1 h-1 rounded-full bg-[#d4af37]" />
+                        500+ Providers Indexed
                     </span>
-                    <div className="flex items-center gap-6 overflow-x-auto scrollbar-none">
-                        {TREND_TREATMENTS.map((t, i) => (
-                            <span key={i} className="flex items-center gap-2 shrink-0">
-                                {t.hot && <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37] animate-pulse" />}
-                                <span className="text-white/70 text-xs font-semibold">{t.label}</span>
-                                <span className="text-[10px] text-[#d4af37]/70 font-bold px-1.5 py-0.5 rounded bg-[#d4af37]/10 border border-[#d4af37]/20">{t.tag}</span>
-                            </span>
-                        ))}
-                    </div>
+                    <span className="flex items-center gap-2">
+                        <span className="w-1 h-1 rounded-full bg-[#d4af37]" />
+                        22 Cities
+                    </span>
+                    <span className="flex items-center gap-2">
+                        <span className="w-1 h-1 rounded-full bg-[#d4af37]" />
+                        Real Pricing Data
+                    </span>
+                    <span className="flex items-center gap-2">
+                        <span className="w-1 h-1 rounded-full bg-[#d4af37]" />
+                        Zero Pay-to-Rank
+                    </span>
                 </div>
             </div>
 
             {/* Main Hero Content */}
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 flex-1 flex flex-col justify-center">
                 <div className="max-w-4xl">
-                    {/* Era Badge */}
-                    <div className="inline-flex items-center bg-[#d4af37]/10 border border-[#d4af37]/25 text-[#d4af37] px-4 py-2 rounded-full text-xs font-black tracking-widest uppercase mb-8 backdrop-blur-sm gap-2">
-                        <Dna className="w-3.5 h-3.5" />
-                        The Neo-Romantic Era of Aesthetic Medicine
-                    </div>
-
                     {/* Headline */}
                     <h1 className="text-5xl md:text-6xl lg:text-[72px] font-display font-bold text-white mb-6 leading-[1.05] tracking-tight">
-                        {initialCity ? (
-                            <>Find {initialCity}'s Top<span className="text-[#d4af37]"> Regenerative</span><br />Nurse Injectors</>
-                        ) : (
-                            <>{NICHE.copy.hero.headline.split(' — ')[0]}<br />
-                                <span className="text-[#d4af37]">Natural Results</span><br />
-                                <span className="text-white/60 text-4xl md:text-5xl lg:text-6xl font-light italic">— not the overfilled look.</span>
-                            </>
-                        )}
+                        Find the Best Injectors Near You — <span className="text-[#d4af37]">Ranked by Results</span>, Not Reviews
                     </h1>
 
                     {/* Sub */}
                     <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed font-light">
-                        {NICHE.copy.hero.subtext}
+                        InjectorIndex scores 500+ providers across 22 cities on credentials, technique quality, and patient outcomes. See real pricing before you book.
                     </p>
 
                     {/* CTA Row */}
@@ -99,34 +90,34 @@ export default function Hero({ city: initialCity, state }: { city?: string; stat
                             <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" />
                         </div>
 
-                        {/* Audit CTA */}
-                        <Link href="/audit" className="flex-1">
+                        {/* Search CTA */}
+                        <Link href="/find-providers" className="flex-1">
                             <Button
                                 size="lg"
                                 className="w-full bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] text-lg px-8 py-5 h-14 font-black shadow-2xl shadow-[#d4af37]/15 rounded-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
                             >
-                                <Sparkles className="w-5 h-5" />
-                                Get Free Clinic Audit
+                                Compare Top Injectors
+                                <ChevronRight className="w-5 h-5" />
                             </Button>
                         </Link>
 
-                        {/* Global Search */}
+                        {/* Score Check CTA */}
                         <Link href="/find-providers" className="flex-1">
                             <Button
                                 variant="outline"
                                 size="lg"
-                                className="w-full border-white/15 text-white hover:bg-white/5 text-lg px-8 py-5 h-14 font-semibold rounded-xl backdrop-blur-sm"
+                                className="w-full border-white/15 text-white hover:bg-white/5 text-lg px-8 py-5 h-14 font-semibold rounded-xl backdrop-blur-sm flex items-center justify-center gap-2"
                             >
-                                <Search className="w-4 h-4 mr-2" />
-                                Browse All Cities
+                                Check Any Provider's Score
+                                <ChevronRight className="w-4 h-4 opacity-50" />
                             </Button>
                         </Link>
                     </div>
 
                     {/* Quick filter pills */}
                     <div className="flex flex-wrap gap-2 items-center mb-16">
-                        <span className="text-gray-600 text-xs font-bold uppercase tracking-wider mr-1">Trending:</span>
-                        {['Polynucleotides (PNs)', 'Daxxify 6-mo', 'Prejuvenation', 'Neo-Romantic Aesthetic', 'Nurse-Led'].map(tag => (
+                        <span className="text-gray-600 text-xs font-bold uppercase tracking-wider mr-1">Top Searches:</span>
+                        {['Botox', 'Lip Filler', 'Daxxify', 'Polynucleotides', 'Jawline Contouring'].map(tag => (
                             <Link
                                 key={tag}
                                 href={`/find-providers?q=${encodeURIComponent(tag)}`}
@@ -143,8 +134,8 @@ export default function Hero({ city: initialCity, state }: { city?: string; stat
                     {[
                         { value: '500+', label: 'Providers Indexed', note: 'Across 22+ Cities' },
                         { value: '$9–25', label: 'Per Unit Pricing', note: 'Real Market Rates' },
-                        { value: '9.4', label: 'Top II-Score™', note: initialCity ? `${initialCity} Market` : 'Top Neighborhoods' },
-                        { value: '2026', label: 'PNs Now Trending', note: '#1 Regen Treatment' },
+                        { value: '98', label: 'Top TrueScore™', note: initialCity ? `${initialCity} Market` : 'Top Neighborhoods' },
+                        { value: 'AI-Audit', label: 'Results Verification', note: 'Zero Pay-to-Rank' },
                     ].map((stat, i) => (
                         <div key={i} className="bg-white/[0.02] px-6 py-5 text-center hover:bg-white/[0.05] transition-colors">
                             <div className="text-3xl font-black text-[#d4af37] mb-1 font-display">{stat.value}</div>
@@ -162,7 +153,7 @@ export default function Hero({ city: initialCity, state }: { city?: string; stat
                     className="flex flex-col items-center gap-1 text-white/20 hover:text-white/40 transition-colors"
                     aria-label="Scroll down"
                 >
-                    <ChevronRight className="w-5 h-5 rotate-90 animate-bounce" />
+                    <ChevronDown className="w-5 h-5 animate-bounce" />
                 </button>
             </div>
         </section>

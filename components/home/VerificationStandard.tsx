@@ -3,11 +3,11 @@ import { ShieldCheck, Dna, DollarSign, Activity, Cpu } from 'lucide-react'
 export default function VerificationStandard() {
     const standards = [
         {
-            title: 'Regen-Ratio™ Audit',
-            desc: 'We assess every provider\'s treatment menu: what percentage is regenerative (PNs, Sculptra, PRF) vs. traditional HA filler? Higher biological innovation = higher trust.',
-            icon: Dna,
-            accent: 'text-emerald-400',
-            bg: 'bg-emerald-950/30 border-emerald-800/30',
+            title: 'TrueScore™ Methodology',
+            desc: 'We assess every provider\'s treatment menu: what percentage is innovative (PNs, Daxxify, Exosomes) vs. legacy HA filler? Technical progress = higher trust.',
+            icon: ShieldCheck,
+            accent: 'text-[#d4af37]',
+            bg: 'bg-[#d4af37]/10 border-[#d4af37]/20',
         },
         {
             title: 'NPI Federal Registry',

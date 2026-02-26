@@ -47,14 +47,10 @@ export interface EnrichedProvider {
         points: number;
         total: string; // Legacy support
         breakdown: {
-            resultsQuality: number;
-            price: number;
-            trust: number;
-            safety: number;
-            transparency: number;
-            responsiveness: number;
-            naturalIntegrity?: number;
-            regenRatio?: number;
+            injectionQuality: number;
+            credentials: number;
+            innovation: number;
+            treatmentRange: number;
         };
     };
 

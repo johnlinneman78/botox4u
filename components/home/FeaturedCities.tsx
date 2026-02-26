@@ -3,14 +3,14 @@ import { headers } from 'next/headers'
 import { MapPin, ChevronRight } from 'lucide-react'
 
 const FEATURED_CITIES = [
-    { name: 'New York', state: 'NY', slug: 'ny/new-york', avgCost: 18, providers: 142, regen: false, tag: '🔬 Clinical Precision', avgII: 81, regenRatio: 58 },
-    { name: 'Seattle', state: 'WA', slug: 'wa/seattle', avgCost: 16, providers: 72, regen: true, tag: '🔬 PN Emerging', avgII: 84, regenRatio: 65 },
-    { name: 'San Francisco', state: 'CA', slug: 'ca/san-francisco', avgCost: 19, providers: 54, regen: true, tag: '💎 Bio-Hacking Hub', avgII: 92, regenRatio: 78 },
-    { name: 'Los Angeles', state: 'CA', slug: 'ca/los-angeles', avgCost: 14, providers: 128, regen: false, tag: '🌟 Celebrity Standard', avgII: 79, regenRatio: 54 },
-    { name: 'Portland', state: 'OR', slug: 'or/portland', avgCost: 14, providers: 90, regen: true, tag: '🌿 Regen Leader', avgII: 88, regenRatio: 72 },
-    { name: 'Miami', state: 'FL', slug: 'fl/miami', avgCost: 16, providers: 95, regen: false, tag: '☀️ Luxury Market', avgII: 76, regenRatio: 48 },
-    { name: 'Chicago', state: 'IL', slug: 'il/chicago', avgCost: 12, providers: 82, regen: false, tag: '💼 Value Leader', avgII: 78, regenRatio: 52 },
-    { name: 'Scottsdale', state: 'AZ', slug: 'az/scottsdale', avgCost: 13, providers: 64, regen: false, tag: '🌵 Med-Spa Capital', avgII: 82, regenRatio: 61 },
+    { name: 'New York', state: 'NY', slug: 'ny/new-york', avgCost: 18, providers: 142, tag: '🔬 Clinical Precision', avgII: 92, trueScore: 94, topSearch: 'Botox, Lip Filler' },
+    { name: 'Los Angeles', state: 'CA', slug: 'ca/los-angeles', avgCost: 14, providers: 128, tag: '🌟 Celebrity Standard', avgII: 88, trueScore: 91, topSearch: 'Botox, Jawline' },
+    { name: 'Miami', state: 'FL', slug: 'fl/miami', avgCost: 16, providers: 95, tag: '☀️ Luxury Market', avgII: 84, trueScore: 89, topSearch: 'Lip Filler, Sculptra' },
+    { name: 'Chicago', state: 'IL', slug: 'il/chicago', avgCost: 12, providers: 82, tag: '💼 Value Leader', avgII: 82, trueScore: 87, topSearch: 'Botox, Dysport' },
+    { name: 'Dallas', state: 'TX', slug: 'tx/dallas', avgCost: 13, providers: 78, tag: '🤠 Rapid Growth', avgII: 83, trueScore: 85, topSearch: 'Botox, Filler' },
+    { name: 'Houston', state: 'TX', slug: 'tx/houston', avgCost: 12, providers: 85, tag: '🚀 Volume Center', avgII: 81, trueScore: 84, topSearch: 'Botox, Fillers' },
+    { name: 'Seattle', state: 'WA', slug: 'wa/seattle', avgCost: 16, providers: 72, tag: '🔬 PN Emerging', avgII: 86, trueScore: 88, topSearch: 'Botox, PNs' },
+    { name: 'Scottsdale', state: 'AZ', slug: 'az/scottsdale', avgCost: 13, providers: 64, tag: '🌵 Med-Spa Capital', avgII: 85, trueScore: 86, topSearch: 'Botox, Filler' },
 ]
 
 export default async function FeaturedCities() {
@@ -32,7 +32,7 @@ export default async function FeaturedCities() {
                             Explore by City
                         </h2>
                         <p className="text-gray-500">
-                            Real pricing, verified credentials, and Regen-Ratio™ rankings — every city.
+                            Real pricing, verified credentials, and TrueScore™ rankings — every city.
                         </p>
                     </div>
                     <Link href="/botox" className="group flex items-center gap-3 bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] px-6 py-2.5 rounded-xl font-black text-sm hover:bg-[#d4af37]/20 transition-all shrink-0">
@@ -64,7 +64,7 @@ export default async function FeaturedCities() {
                                 </div>
 
                                 {city.tag && (
-                                    <p className="text-xs text-gray-400 font-bold mb-3">{city.tag}</p>
+                                    <p className="text-[10px] text-gray-500 font-bold mb-3">{city.tag}</p>
                                 )}
 
                                 <div className="space-y-1.5 text-[11px]">
@@ -73,17 +73,19 @@ export default async function FeaturedCities() {
                                         <span className="font-bold text-[#d4af37]">${city.avgCost}</span>
                                     </div>
                                     <div className="flex justify-between text-gray-600">
-                                        <span>Avg. II-Score™</span>
-                                        <span className="font-bold text-emerald-400">{city.avgII}</span>
-                                    </div>
-                                    <div className="flex justify-between text-gray-600">
-                                        <span>Regen-Ratio™</span>
-                                        <span className="font-bold text-violet-400">{city.regenRatio}%</span>
+                                        <span>TrueScore™</span>
+                                        <span className="font-bold text-[#d4af37]">{city.trueScore}</span>
                                     </div>
                                     <div className="flex justify-between text-gray-600">
                                         <span>Providers indexed</span>
                                         <span className="font-bold text-white">{city.providers}</span>
                                     </div>
+                                    {city.topSearch && (
+                                        <div className="pt-2 mt-2 border-t border-white/[0.05]">
+                                            <div className="text-[9px] text-gray-700 uppercase font-black mb-0.5">Most searched:</div>
+                                            <div className="text-[10px] text-gray-400 font-medium italic">{city.topSearch}</div>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="mt-4 text-[10px] font-black uppercase tracking-widest text-[#d4af37]/50 group-hover:text-[#d4af37] transition-colors flex items-center gap-1">
                                     View Rankings <ChevronRight className="w-3 h-3" />
