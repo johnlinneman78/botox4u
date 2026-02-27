@@ -8,9 +8,6 @@ export async function GET(request: Request) {
     <loc>${baseUrl}/sitemap-pages.xml</loc>
   </sitemap>
   <sitemap>
-    <loc>${baseUrl}/sitemap-providers.xml</loc>
-  </sitemap>
-  <sitemap>
     <loc>${baseUrl}/sitemap-blog.xml</loc>
   </sitemap>
   <sitemap>
