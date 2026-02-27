@@ -67,7 +67,16 @@ export async function getProvidersWithSearch(filters: {
 
     let queryBuilder = supabase
         .from('providers')
-        .select('*')
+        .select(`
+            id, name, slug, business_type, address, city, state, 
+            listing_tier, verified, price_per_unit, botox_price_per_unit,
+            latitude, longitude, hero_image_url, image_url, 
+            rating, average_rating, review_count, 
+            services_offered, credentials, description,
+            npi_verified, npi_number, allergan_tier,
+            score_results_quality, responsiveness_score,
+            warning_flag, warning_reason, treatment_slugs
+        `)
         // .eq('display_status', 'live') // Disabled until migration is confirmed to be run
         .order('listing_tier', { ascending: false }) // Premium first
         .order('rating', { ascending: false }) // Changed from average_rating to rating

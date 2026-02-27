@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: CatchAllPageProps): Promise<M
             title: `${treatmentName} in ${cityName}, ${stateCode} | Prices & Top Clinicians`,
             description: `Compare ${treatmentName} costs in ${cityName}. Find verified ${treatmentName} providers, read reviews, and see before / after results.`,
             alternates: {
-                canonical: `https://www.injectorindex.com/${NICHE.baseSlug}/${slug[0]}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}`,
+                canonical: `https://www.injectorindex.com/${NICHE.baseSlug}/${slug[0]}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/\s+/g, '-')}`,
             },
             robots: { index: true, follow: true }
         }
@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: CatchAllPageProps): Promise<M
         title: `Best ${NICHE.name} in ${cityName}, ${stateCode} | Natural Results & Pricing`,
         description: NICHE.metaDescriptionTemplate.replace(/{city}/g, cityName),
         alternates: {
-            canonical: `https://www.injectorindex.com/${NICHE.baseSlug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}`,
+            canonical: `https://www.injectorindex.com/${NICHE.baseSlug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/\s+/g, '-')}`,
         },
         robots: { index: true, follow: true }
     }
@@ -172,13 +172,23 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
         if (!REVERSE_STATE_MAP[stateCode]) notFound()
     }
 
-    const mapCenter = providers.find((p: any) => !!p.lat && !!p.lng) || { lat: 34.0522, lng: -118.2437 }
-    const itemListSchema = generateItemListSchema(providers, cityName)
+    const mapProviders = providers.map((p: any) => ({
+        id: p.id,
+        name: p.name,
+        lat: p.lat,
+        lng: p.lng,
+        slug: p.slug,
+        listingTier: p.listingTier,
+        rating: p.averageRating,
+        trueScore: p.trueScore || p.score_total
+    }));
+
+    const itemListSchema = generateItemListSchema(providers.slice(0, 50), cityName)
     const breadcrumbs = generateBreadcrumbSchema([
         { name: 'Home', item: '/' },
         { name: 'Directory', item: `/${NICHE.baseSlug}` },
         { name: stateSlug || stateCode, item: `/${NICHE.baseSlug}/state/${stateSlug || stateCode.toLowerCase()}` },
-        { name: cityName, item: `/${NICHE.baseSlug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}` }
+        { name: cityName, item: `/${NICHE.baseSlug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/\s+/g, '-')}` }
     ])
 
     const avg = stats?.avgCost || 15;
@@ -245,8 +255,8 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
 
                 <div className="mt-8">
                     <CityMap
-                        providers={providers}
-                        citySlug={`${cityName.toLowerCase().replace(/ /g, '-')}-${stateCode.toLowerCase()}`}
+                        providers={mapProviders}
+                        citySlug={`${cityName.toLowerCase().replace(/\s+/g, '-')}-${stateCode.toLowerCase()}`}
                         userLat={userLat}
                         userLng={userLng}
                     />
@@ -290,7 +300,7 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
 
                             <div className={treatmentName ? "grid grid-cols-1 md:grid-cols-2 gap-6" : "space-y-6"}>
                                 {providers.length > 0 ? (
-                                    providers.map((provider: any) => (
+                                    providers.slice(0, 100).map((provider: any) => (
                                         <EnhancedProviderCard key={provider.id} provider={provider} />
                                     ))
                                 ) : (
@@ -298,6 +308,14 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                                         <h3 className="text-2xl font-display font-bold text-white mb-4">Verifying Providers in {cityName}</h3>
                                         <p className="text-gray-500 max-w-md mx-auto mb-8 leading-relaxed">
                                             We're currently verifying pricing and reviews for clinics in {cityName}.
+                                        </p>
+                                    </div>
+                                )}
+
+                                {providers.length > 100 && (
+                                    <div className="bg-white/[0.02] p-8 text-center rounded-2xl border border-white/[0.06] col-span-full mt-8">
+                                        <p className="text-gray-500 text-sm">
+                                            Viewing top 100 of {providers.length} verified providers. Scroll to the directory below for all local listings.
                                         </p>
                                     </div>
                                 )}
@@ -339,7 +357,7 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                             {TREATMENTS.map((treatment) => (
                                 <Link
                                     key={treatment.slug}
-                                    href={`/${NICHE.baseSlug}/${treatment.slug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}`}
+                                    href={`/${NICHE.baseSlug}/${treatment.slug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/\s+/g, '-')}`}
                                     className="group bg-white/[0.02] p-8 rounded-2xl border border-white/[0.06] hover:border-[#d4af37]/20 hover:shadow-xl hover:shadow-[#d4af37]/5 transition-all"
                                 >
                                     <h4 className="font-display font-bold text-xl text-white group-hover:text-[#d4af37] transition-colors mb-2">
@@ -362,7 +380,7 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                         {nearbyCities.map((city) => (
                             <Link
                                 key={city.city}
-                                href={`/${NICHE.baseSlug}/${city.state.toLowerCase()}/${city.city.toLowerCase().replace(/ /g, '-')}`}
+                                href={`/${NICHE.baseSlug}/${city.state.toLowerCase()}/${city.city.toLowerCase().replace(/\s+/g, '-')}`}
                                 className="bg-white/[0.02] p-4 rounded-xl border border-white/[0.06] hover:border-[#d4af37]/20 hover:shadow-md hover:shadow-[#d4af37]/5 transition-all text-center"
                             >
                                 <div className="font-bold text-white text-sm mb-1">{city.city}</div>

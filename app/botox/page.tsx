@@ -31,7 +31,7 @@ export default function StatesPage() {
                         const name = slug.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ')
                         const stateCode = STATE_MAP[slug]
                         return (
-                            <Link key={slug} href={`/find-providers?state=${stateCode}`} className="group">
+                            <Link key={slug} href={`/${NICHE.baseSlug}/${stateCode.toLowerCase()}`} className="group">
                                 <Card className="p-4 text-center bg-white/[0.02] border border-white/[0.06] hover:border-[#d4af37]/30 hover:shadow-md transition-all">
                                     <span className="font-bold text-white group-hover:text-[#d4af37] transition-colors uppercase tracking-wide text-sm">
                                         {name}

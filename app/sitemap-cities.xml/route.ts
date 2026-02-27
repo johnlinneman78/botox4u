@@ -7,7 +7,7 @@ export async function GET(request: Request) {
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${NICHE.cities.map((c) => {
-        const citySlug = c.name.toLowerCase().replace(/ /g, '-');
+        const citySlug = c.name.toLowerCase().replace(/\s+/g, '-');
         const stateCode = c.state.toLowerCase();
         return `
     <url>
