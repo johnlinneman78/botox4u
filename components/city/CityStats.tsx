@@ -24,6 +24,8 @@ export function CityStats({ avgCost, providerCount, avgRating, city }: CityStats
                     <img
                         src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-non-white2.png"
                         alt="Powered by Google"
+                        width="96"
+                        height="12"
                         className="h-3 w-fit opacity-40"
                     />
                 </div>

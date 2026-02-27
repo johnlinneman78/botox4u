@@ -13,24 +13,9 @@ export async function GET() {
         '/privacy',
         '/terms',
         '/disclaimer',
+        '/faq',
         '/botox-buyers-guide',
-        '/botox-fact-sheet',
-        '/botox/ny',
-        '/botox/ca',
-        '/botox/fl',
-        '/botox/tx',
-        '/botox/ga',
-        '/botox/co',
-        '/botox/tn',
-        '/botox/nc',
-        '/botox/nv',
-        '/botox/or',
-        '/botox/mn',
-        '/botox/pa',
-        '/botox/dc',
-        '/botox/ma',
-        '/botox/wa',
-        '/botox/az'
+        '/botox-fact-sheet'
     ]
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

@@ -115,7 +115,7 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
                             <span className="text-xs font-medium text-gray-600">({provider.review_count || 0} reviews)</span>
                         </div>
                         <div className="ml-auto">
-                            <img src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-non-white2.png" alt="Google" className="h-3.5 opacity-30" />
+                            <img src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-non-white2.png" alt="Google" width="112" height="14" className="h-3.5 opacity-30" />
                         </div>
                     </div>
 

@@ -55,7 +55,9 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId }: ReviewC
                                         <img
                                             src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png"
                                             alt="Powered by Google"
-                                            className="h-3 w-fit"
+                                            className="h-3 w-auto"
+                                            width={144}
+                                            height={18}
                                         />
                                     </div>
                                 </div>
@@ -80,7 +82,9 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId }: ReviewC
                     <img
                         src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png"
                         alt="Powered by Google"
-                        className="h-5 opacity-80"
+                        className="h-5 w-auto opacity-80"
+                        width={144}
+                        height={18}
                     />
                     <p className="text-xs text-gray-400 font-medium uppercase tracking-widest">
                         Data Verified • {new Date().getFullYear()} Standard

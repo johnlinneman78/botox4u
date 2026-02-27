@@ -1,6 +1,15 @@
 import { NICHE } from '@/config/niche'
 import { ShieldCheck, Target, DollarSign, Clock, HelpCircle, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: `Common Aesthetic Questions — Patient Data FAQ | ${NICHE.siteName}`,
+    description: `Independent answers about Botox pricing, injector safety, and how our TrueScore™ algorithm works. We prioritize patient transparency.`,
+    alternates: {
+        canonical: '/faq',
+    },
+}
 
 export default function FAQPage() {
     const faqs = [

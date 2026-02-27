@@ -78,6 +78,8 @@ export function CityHero({ city, state, treatmentName, providerCount }: CityHero
                                 <img
                                     src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-non-white2.png"
                                     alt="Powered by Google"
+                                    width="80"
+                                    height="10"
                                     className="h-2.5 opacity-40"
                                 />
                             </div>

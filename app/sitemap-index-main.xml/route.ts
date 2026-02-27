@@ -12,6 +12,9 @@ export async function GET(request: Request) {
   <sitemap>
     <loc>${baseUrl}/sitemap-cities.xml</loc>
   </sitemap>
+  <sitemap>
+    <loc>${baseUrl}/sitemap-providers.xml</loc>
+  </sitemap>
 </sitemapindex>`
 
   return new Response(sitemapIndex, {
