@@ -36,16 +36,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="font-sans antialiased bg-[#0d1420] text-gray-100">
-        <Suspense fallback={null}>
-          <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_ID || ''} />
-        </Suspense>
+      <head>
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="KXz5/TWsizsa5WSiUjnpWA"
           async
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
+      </head>
+      <body className="font-sans antialiased bg-[#0d1420] text-gray-100">
+        <Suspense fallback={null}>
+          <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_ID || ''} />
+        </Suspense>
         <Header />
         <main className="min-h-screen">{children}</main>
         <StickyBar />
