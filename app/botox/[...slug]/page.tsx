@@ -17,7 +17,7 @@ import { NICHE } from '@/config/niche'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Star } from 'lucide-react'
-import { JsonLd, generateBreadcrumbSchema, generateItemListSchema } from '@/components/seo/JsonLd'
+import { JsonLd, generateBreadcrumbSchema, generateItemListSchema, generateFAQPageSchema } from '@/components/seo/JsonLd'
 import { GeolocationSorter } from '@/components/providers/GeolocationSorter'
 
 interface CatchAllPageProps {
@@ -143,11 +143,21 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
         { name: cityName, item: `/${NICHE.baseSlug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/ /g, '-')}` }
     ])
 
+    const avg = stats?.avgCost || 15;
+    const faqSchema = generateFAQPageSchema(
+        cityName,
+        stateCode,
+        Math.floor(avg - 2),
+        Math.ceil(avg + 2),
+        stats?.providerCount || providers.length
+    );
+
     return (
         <main className="bg-[#0d1420] min-h-screen pb-20">
             <GeolocationSorter />
             <JsonLd data={itemListSchema} />
             <JsonLd data={breadcrumbs} />
+            <JsonLd data={faqSchema} />
             {/* Breadcrumbs */}
             <div className="bg-[#101827] border-b border-white/[0.06]">
                 <div className="container mx-auto px-4 py-3 flex items-center gap-2 text-xs font-medium text-white/60">

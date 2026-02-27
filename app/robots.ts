@@ -9,6 +9,9 @@ export default function robots(): MetadataRoute.Robots {
                 '/api/',
                 '/_next/',
                 '/admin/',
+                '/provider/login',
+                '/provider/dashboard',
+                '/claim/*/verify',
                 '/*?price=',
                 '/*?rating=',
                 '/*?sort=',
@@ -16,7 +19,7 @@ export default function robots(): MetadataRoute.Robots {
                 '/*?page='
             ],
         },
-        sitemap: 'https://injectorindex.com/sitemap.xml',
-        host: 'https://injectorindex.com',
+        sitemap: 'https://www.injectorindex.com/sitemap.xml',
+        host: 'https://www.injectorindex.com',
     }
 }

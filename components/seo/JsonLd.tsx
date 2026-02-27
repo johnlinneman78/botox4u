@@ -114,12 +114,38 @@ export const generateWebSiteSchema = () => {
     return {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "InjectorIndex.com",
+        "name": "InjectorIndex",
         "url": "https://www.injectorindex.com",
+        "description": "Find and compare the best Botox injectors near you. Ranked by TrueScore™ — credentials, injection quality, and patient outcomes.",
         "potentialAction": {
             "@type": "SearchAction",
             "target": "https://www.injectorindex.com/find-providers?q={search_term_string}",
             "query-input": "required name=search_term_string"
         }
+    };
+};
+
+export const generateFAQPageSchema = (city: string, state: string, botoxLow: number, botoxHigh: number, providerCount: number) => {
+    return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": `How much does Botox cost in ${city}, ${state}?`,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": `Botox in ${city} typically costs $${botoxLow}-$${botoxHigh} per unit based on ${providerCount} indexed providers on InjectorIndex.`
+                }
+            },
+            {
+                "@type": "Question",
+                "name": `Who are the top-rated Botox providers in ${city}?`,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": `InjectorIndex ranks ${providerCount} Botox providers in ${city} using TrueScore™, a data-driven algorithm based on credentials, injection quality, and patient outcomes.`
+                }
+            }
+        ]
     };
 };
