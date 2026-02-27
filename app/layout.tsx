@@ -7,6 +7,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { StickyBar } from '@/components/navigation/StickyBar'
 import GoogleAnalytics from '@/components/seo/GoogleAnalytics'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
@@ -39,6 +40,12 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_ID || ''} />
         </Suspense>
+        <Script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="KXz5/TWsizsa5WSiUjnpWA"
+          async
+          strategy="afterInteractive"
+        />
         <Header />
         <main className="min-h-screen">{children}</main>
         <StickyBar />
