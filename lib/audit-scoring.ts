@@ -40,11 +40,11 @@ export interface AuditResult {
     }
     breakdown: {
         satisfaction: number
-        regenRatio: number
-        transparency: number
-        recency: number
+        activity: number
+        credentials: number
         pricing: number
-        digital: number
+        innovation: number
+        range: number
     }
 }
 
@@ -146,14 +146,14 @@ export function calculateClinicAudit(
     }
 
     // 6. Breakdown (Target 100 points total for the UI report)
-    // Map our existing scores to the 6 report categories
+    // Map our existing scores to the 6 report categories (v2 names)
     const breakdown = {
         satisfaction: Math.round(((clinicData?.score?.breakdown?.trust || 8) / 10) * 20),
-        regenRatio: Math.round((regenRatioPercent / 100) * 20),
-        transparency: Math.round(((clinicData?.score?.breakdown?.safety || 10) / 15) * 20),
-        recency: lastReviewDays.includes('d') && parseInt(lastReviewDays) < 15 ? 18 : 12,
+        activity: lastReviewDays.includes('d') && parseInt(lastReviewDays) < 15 ? 18 : 12,
+        credentials: Math.round(((clinicData?.score?.breakdown?.safety || 10) / 15) * 20),
         pricing: patientInput.priceQuoted ? 8 : 4,
-        digital: clinicData?.website ? 8 : 4
+        innovation: Math.round((regenRatioPercent / 100) * 20),
+        range: clinicData?.website ? 8 : 4
     }
 
     // 7. Recommendations

@@ -198,25 +198,24 @@ export async function submitAuditRequest(data: AuditPatientInput) {
             doc.text(introText, margin, y)
             y += 20
 
-            // 3. AT A GLANCE
+            // 3. AT A GLANCE (4 Card Layout v2)
             doc.setFontSize(9)
             doc.setTextColor(181, 147, 107)
             doc.text('AT A GLANCE', margin, y)
             y += 10
 
-            const cardWidth = (190 - margin - 12 * 4) / 5
+            const cardWidth = (190 - margin - 3 * 6) / 4
             let cx = margin
             const stats = [
-                { icon: '⭐', val: auditResult.stats.rating, label: 'Patient Rating' },
-                { icon: '💬', val: auditResult.stats.reviewCount, label: 'Verified Reviews' },
-                { icon: '🌱', val: auditResult.stats.regenRatio, label: 'Clinical Quality™' },
-                { icon: '📅', val: auditResult.stats.lastReviewDays, label: 'Last Review' },
-                { icon: '💉', val: auditResult.stats.treatmentCount, label: 'Treatments' }
+                { icon: '⭐', val: auditResult.stats.rating, label: 'Patient Rating', context: 'Top 15% regional' },
+                { icon: '💬', val: auditResult.stats.reviewCount, label: 'Verified Reviews', context: `Last review: ${auditResult.stats.lastReviewDays}` },
+                { icon: '💰', val: auditResult.priceBenchmark.label.split(' ')[0], label: 'Price Range', context: 'Vs. market average' },
+                { icon: '💉', val: auditResult.stats.treatmentCount, label: 'Treatments Offered', context: 'Biological focus' }
             ]
 
             stats.forEach(s => {
                 doc.setDrawColor(236, 232, 226)
-                doc.roundedRect(cx, y, cardWidth, 25, 2, 2, 'D')
+                doc.roundedRect(cx, y, cardWidth, 28, 2, 2, 'D')
                 doc.setFontSize(14)
                 doc.text(s.icon, cx + cardWidth / 2, y + 7, { align: 'center' })
                 doc.setFontSize(16)
@@ -225,9 +224,12 @@ export async function submitAuditRequest(data: AuditPatientInput) {
                 doc.setFontSize(8)
                 doc.setTextColor(153, 153, 153)
                 doc.text(s.label, cx + cardWidth / 2, y + 21, { align: 'center' })
-                cx += cardWidth + 3
+                doc.setFontSize(6)
+                doc.setTextColor(181, 147, 107)
+                doc.text(s.context, cx + cardWidth / 2, y + 25, { align: 'center' })
+                cx += cardWidth + 6
             })
-            y += 40
+            y += 44
 
             // 4. SCORE BREAKDOWN
             doc.setFontSize(9)
@@ -237,11 +239,11 @@ export async function submitAuditRequest(data: AuditPatientInput) {
 
             const items = [
                 { label: 'Patient Satisfaction', score: auditResult.breakdown.satisfaction, max: 20, note: 'Consistently high ratings across a large review base. Low variance.', color: [90, 158, 111] as [number, number, number] },
-                { label: 'Clinical Quality Ratio™', score: auditResult.breakdown.regenRatio, max: 20, note: 'Offers innovative regenerative treatments like PNs or PRF.', color: [181, 147, 107] as [number, number, number] },
-                { label: 'Credential Transparency', score: auditResult.breakdown.transparency, max: 20, note: 'Based on public credential verification and disclosure.', color: [217, 83, 79] as [number, number, number] },
-                { label: 'Review Recency', score: auditResult.breakdown.recency, max: 20, note: 'Reviews are current and frequent. Actively treating.', color: [90, 158, 111] as [number, number, number] },
-                { label: 'Pricing Transparency', score: auditResult.breakdown.pricing, max: 10, note: 'Public pricing or quote accessibility.', color: [217, 83, 79] as [number, number, number] },
-                { label: 'Digital Presence', score: auditResult.breakdown.digital, max: 10, note: 'Active online footprint and brand consistency.', color: [90, 158, 111] as [number, number, number] }
+                { label: 'Review Activity', score: auditResult.breakdown.activity, max: 20, note: 'Reviews are current and frequent. This clinic is actively treating patients.', color: [90, 158, 111] as [number, number, number] },
+                { label: 'Provider Credentials', score: auditResult.breakdown.credentials, max: 20, note: 'Board certifications and verified training data compared to local benchmarks.', color: [217, 83, 79] as [number, number, number] },
+                { label: 'Pricing Transparency', score: auditResult.breakdown.pricing, max: 10, note: 'Public pricing or quote accessibility. Market alignment score.', color: [217, 83, 79] as [number, number, number] },
+                { label: 'Treatment Innovation', score: auditResult.breakdown.innovation, max: 20, note: 'Rewards the adoption of regenerative biologics (PNs, Exosomes, AI).', color: [181, 147, 107] as [number, number, number] },
+                { label: 'Treatment Range', score: auditResult.breakdown.range, max: 10, note: 'Breadth of offerings from traditional neurotoxins to next-gen restoratives.', color: [90, 158, 111] as [number, number, number] }
             ]
 
             let col1y = y

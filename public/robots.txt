@@ -1,8 +1,10 @@
+# *
 User-agent: *
 Allow: /
-Disallow: /provider/login
-Disallow: /provider/dashboard
-Disallow: /claim/*/verify
 
-Sitemap: https://www.injectorindex.com/sitemap.xml
+# Host
+Host: https://injectorindex.com
+
+# Sitemaps
+Sitemap: https://injectorindex.com/sitemap.xml
 Sitemap: https://www.injectorindex.com/sitemap-pages.xml
