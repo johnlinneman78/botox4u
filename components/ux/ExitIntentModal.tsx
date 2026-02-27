@@ -3,11 +3,13 @@
 import { useState, useEffect, useRef } from 'react'
 import { X, Send, Gift } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { submitRegenTop5Request } from '@/lib/actions/match'
 
 export default function ExitIntentModal() {
     const [isVisible, setIsVisible] = useState(false)
     const [email, setEmail] = useState('')
     const [isSubmitted, setIsSubmitted] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const [city, setCity] = useState('your area')
 
     const canShowRef = useRef(false)
@@ -66,6 +68,21 @@ export default function ExitIntentModal() {
 
     if (!isVisible) return null
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!email || !email.includes('@')) return
+
+        setIsSubmitting(true)
+        try {
+            await submitRegenTop5Request({ email, city })
+        } catch (error) {
+            console.error('Failed to submit top 5 request:', error)
+        } finally {
+            setIsSubmitting(false)
+            setIsSubmitted(true)
+        }
+    }
+
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-[#0d1420]/80 backdrop-blur-sm animate-in fade-in duration-300">
             <div className="relative w-full max-w-lg bg-gradient-to-br from-[#1a2332] to-[#0d1420] border border-white/10 rounded-[2.5rem] p-10 shadow-2xl shadow-[#d4af37]/10 overflow-hidden">
@@ -92,7 +109,7 @@ export default function ExitIntentModal() {
                             We've audited 100+ clinicians. Get our private list of the highest-scoring regenerative injectors in your area.
                         </p>
 
-                        <form onSubmit={(e) => { e.preventDefault(); setIsSubmitted(true); }} className="space-y-4">
+                        <form onSubmit={handleSubmit} className="space-y-4">
                             <div className="relative">
                                 <input
                                     type="email"
@@ -100,14 +117,16 @@ export default function ExitIntentModal() {
                                     placeholder="your@email.com"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#d4af37]/50 transition-all"
+                                    disabled={isSubmitting}
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#d4af37]/50 transition-all disabled:opacity-50"
                                 />
                             </div>
                             <Button
                                 type="submit"
-                                className="w-full bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black py-4 rounded-2xl flex items-center justify-center gap-2 uppercase tracking-widest transition-transform hover:scale-[1.02]"
+                                disabled={isSubmitting || !email.includes('@')}
+                                className="w-full bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black py-4 rounded-2xl flex items-center justify-center gap-2 uppercase tracking-widest transition-transform hover:scale-[1.02] disabled:opacity-50"
                             >
-                                Send Me The List <Send className="w-4 h-4" />
+                                {isSubmitting ? 'Sending...' : 'Send Me The List'} <Send className="w-4 h-4" />
                             </Button>
                         </form>
                         <p className="text-[10px] text-gray-700 mt-6 font-bold uppercase tracking-tighter">
