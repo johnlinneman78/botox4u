@@ -35,6 +35,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
             type: 'article',
             url: `https://www.injectorindex.com/blog/${post.slug}`,
         },
+        alternates: {
+            canonical: `/blog/${post.slug}`,
+        },
         twitter: {
             card: 'summary_large_image',
             title: post.title,

@@ -13,8 +13,8 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 export const metadata: Metadata = {
-  title: `InjectorIndex — Find & Compare the Best Botox Injectors Near You`,
-  description: `Compare 500+ injectors across 22 cities. See TrueScores, real pricing, and verified credentials. Find natural results, ranked by data, not ads.`,
+  title: `Best Botox Injectors & MedSpas Near You | InjectorIndex`,
+  description: `Compare local injectors using TrueScore™ — independent data on injection quality, credentials, and real pricing. Find natural results, ranked by data.`,
   keywords: `botox near me, best fillers, medspa rankings, injector scores, natural botox, lip filler, daxxify, polynucleotides, aesthetic directory`,
   metadataBase: new URL('https://www.injectorindex.com'),
   openGraph: {
@@ -23,10 +23,7 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://www.injectorindex.com',
     siteName: NICHE.siteName,
-  },
-  alternates: {
-    canonical: '/',
-  },
+  }
 }
 
 export default function RootLayout({
@@ -36,15 +33,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <head>
+      <body className="font-sans antialiased bg-[#0d1420] text-gray-100">
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="KXz5/TWsizsa5WSiUjnpWA"
           async
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
-      </head>
-      <body className="font-sans antialiased bg-[#0d1420] text-gray-100">
         <Suspense fallback={null}>
           <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_ID || ''} />
         </Suspense>

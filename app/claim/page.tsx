@@ -1,9 +1,17 @@
-
 import { NICHE } from '@/config/niche'
 import { Search, ShieldCheck, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
 import { ProviderLookup } from '@/components/providers/ProviderLookup'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: `Claim Your Free Provider Profile | ${NICHE.siteName}`,
+    description: `Are you an aesthetic injector? Claim your profile, verify your credentials, and start attracting high-intent patients today.`,
+    alternates: {
+        canonical: '/claim',
+    },
+}
 
 export default function ClaimDirectoryPage() {
     return (

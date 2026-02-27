@@ -4,6 +4,15 @@ import { NICHE } from '@/config/niche'
 import { getSupabaseServer } from '@/lib/supabase/factory'
 import { cookies } from 'next/headers'
 import { PricingCta } from '@/components/pricing/PricingCta'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: `Provider Plans & Pricing — Scale Your Clinic | ${NICHE.siteName}`,
+    description: `Choose the visibility tier that fits your clinical goals. Join high-intent patients searching for natural results and regenerative protocols.`,
+    alternates: {
+        canonical: '/pricing',
+    },
+}
 
 const getIcon = (index: number) => {
     switch (index) {

@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Blocked admin and private routes
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /provider/login
+Disallow: /provider/dashboard
+Disallow: /claim/*/verify
+
+# Blocked query parameters
+Disallow: /*?price=
+Disallow: /*?rating=
+Disallow: /*?sort=
+Disallow: /*?filter=
+Disallow: /*?page=
+
+# Sitemaps
+Sitemap: https://www.injectorindex.com/sitemap-index-main.xml
+Host: https://www.injectorindex.com

@@ -1,5 +1,14 @@
 import Link from 'next/link'
 import { NICHE } from '@/config/niche'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: `Privacy Policy | ${NICHE.siteName}`,
+    description: `How we collect, use, and protect your personal information at ${NICHE.siteName}.`,
+    alternates: {
+        canonical: '/privacy',
+    },
+}
 
 export default function PrivacyPage() {
     return (

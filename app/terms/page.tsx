@@ -1,4 +1,14 @@
 import Link from 'next/link'
+import { Metadata } from 'next'
+import { NICHE } from '@/config/niche'
+
+export const metadata: Metadata = {
+    title: `Terms of Service | ${NICHE.siteName}`,
+    description: `The terms and conditions for using the ${NICHE.siteName} platform and services.`,
+    alternates: {
+        canonical: '/terms',
+    },
+}
 
 export default function TermsPage() {
     return (

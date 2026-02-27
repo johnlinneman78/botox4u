@@ -1,6 +1,15 @@
 import { NICHE } from '@/config/niche'
 import Link from 'next/link'
 import { ShieldCheck, Target, DollarSign, Users, Search, Brain, BarChart3, HelpCircle, Zap, ExternalLink, ArrowRight, Shield } from 'lucide-react'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: `Our Methodology — How We Rank Injectors | ${NICHE.siteName}`,
+    description: `Learn how TrueScore™ uses semantic analysis and clinical quality data to rank aesthetic providers. We prioritize natural results and pricing transparency.`,
+    alternates: {
+        canonical: '/methodology',
+    },
+}
 
 export default function MethodologyPage() {
     return (

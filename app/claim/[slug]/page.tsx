@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { getProviderBySlug } from '@/lib/actions/providers'
 import { notFound } from 'next/navigation'
 import { NICHE } from '@/config/niche'
 import { ShieldCheck, Target, DollarSign, Clock, CheckCircle, ArrowRight } from 'lucide-react'
@@ -6,12 +6,7 @@ import Link from 'next/link'
 
 export default async function ClaimLandingPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
-    const supabase = await createClient()
-    const { data: provider } = await supabase
-        .from('providers')
-        .select('*')
-        .eq('slug', slug)
-        .single()
+    const provider = await getProviderBySlug(slug)
 
     if (!provider) {
         notFound()

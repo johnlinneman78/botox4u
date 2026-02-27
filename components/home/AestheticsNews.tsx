@@ -5,7 +5,7 @@ const ARTICLES = [
     {
         title: "Botox vs. Daxxify: The 2026 Guide to Neurotoxin Longevity",
         excerpt: "Compare the gold standard against the new long-acting rival. We break down the cost-per-day, clinical safety, and real-world results of current toxins.",
-        slug: "botox-vs-daxxify-longevity-guide-2026",
+        slug: "daxxify-long-acting-tox-city-reports-2026",
         tag: "Treatment Guide",
         trending: true,
         author: "InjectorIndex Editorial",

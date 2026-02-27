@@ -43,12 +43,12 @@ export async function generateMetadata({ params }: CatchAllPageProps): Promise<M
             stateCode = slug[0].toUpperCase()
             const stateName = getStateName(stateCode)
             return {
-                title: `Best ${NICHE.name} Providers in ${stateName} | Compare Costs & Reviews`,
-                description: `Find top-rated ${NICHE.name} providers and medical spas across ${stateName}. View average costs, patient reviews, and verified clinics in every major city.`,
+                title: `${stateName} ${NICHE.name} Providers | Costs & Reviews`,
+                description: `Find top-rated ${NICHE.name} providers and medical spas across ${stateName}. View average costs, patient reviews, and verified clinics in major cities.`,
                 alternates: {
                     canonical: `https://www.injectorindex.com/botox/${stateCode.toLowerCase()}`
                 },
-                robots: { index: true, follow: true }
+                robots: { index: false, follow: true }
             }
         }
         // Hyphenated city-state pattern: "los-angeles-ca"

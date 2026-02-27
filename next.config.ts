@@ -60,6 +60,11 @@ const nextConfig: NextConfig = {
         destination: '/blog/daxxify-long-acting-tox-city-reports-2026',
         permanent: true,
       },
+      {
+        source: '/blog/botox-vs-daxxify-longevity-guide-2026',
+        destination: '/blog/daxxify-long-acting-tox-city-reports-2026',
+        permanent: true,
+      },
       // Old brand page removals to avoid ghost views
       {
         source: '/find-top-providers',
@@ -74,6 +79,16 @@ const nextConfig: NextConfig = {
       {
         source: '/find-top-injectors',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/botox/botox/:state/:city',
+        destination: '/botox/:state/:city',
+        permanent: true,
+      },
+      {
+        source: '/botox/new-york-ny',
+        destination: '/botox/ny/new-york',
         permanent: true,
       },
       // Domain-level catch-all redirect (to be used when botox-4u.com points to this deployment)

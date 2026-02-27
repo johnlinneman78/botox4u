@@ -49,6 +49,7 @@ export const STATE_MAP: Record<string, string> = {
     'west-virginia': 'WV',
     'wisconsin': 'WI',
     'wyoming': 'WY',
+    'district-of-columbia': 'DC',
 }
 
 export const REVERSE_STATE_MAP = Object.fromEntries(

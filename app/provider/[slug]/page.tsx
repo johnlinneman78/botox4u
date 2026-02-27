@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
     if (!provider) return { title: 'Provider Not Found' }
 
     return {
-        title: `${provider.name} | TrueScore™ & Pricing in ${provider.city} | ${NICHE.siteName}`,
-        description: `Compare ${provider.name} in ${provider.city} using TrueScore™ — independent data on injection quality, credentials, and real pricing. See how they rank vs. the market.`,
+        title: `${provider.name} | ${provider.city} ${NICHE.name} Review`,
+        description: `View TrueScore™ rankings, independent reviews, and pricing for ${provider.name} in ${provider.city}. Compare with other top-rated aesthetic injectors near you.`,
         alternates: {
             canonical: `https://www.injectorindex.com/provider/${provider.slug}`,
         },
@@ -83,6 +83,8 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                     src={provider.hero_image_url || provider.imageUrl || "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1600"}
                     alt={provider.name}
                     className="w-full h-full object-cover"
+                    width={1600}
+                    height={450}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d1420] via-[#0d1420]/40 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 w-full pb-8">
@@ -107,7 +109,9 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                         <img
                                             src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-non-white2.png"
                                             alt="Powered by Google"
-                                            className="h-3.5 w-fit"
+                                            className="h-3.5 w-auto"
+                                            width={144}
+                                            height={18}
                                         />
                                     </div>
                                 </div>
@@ -124,12 +128,14 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                         {/* Logo/Photo */}
                         <div className="w-40 h-40 bg-white/[0.03] rounded-3xl flex items-center justify-center border border-white/[0.08] shadow-2xl relative overflow-hidden shrink-0 group">
                             {provider.imageUrl && !provider.imageUrl.includes('placeholder') && provider.imageUrl.length > 5 ? (
-                                <img src={provider.imageUrl} alt={provider.name} className="w-full h-full object-cover" />
+                                <img src={provider.imageUrl} alt={provider.name} className="w-full h-full object-cover" width={160} height={160} />
                             ) : (
                                 <img
                                     src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800"
                                     alt="Default Clinic"
                                     className="w-full h-full object-cover opacity-40"
+                                    width={160}
+                                    height={160}
                                 />
                             )}
                             {provider.listingTier === 'premium' && (
