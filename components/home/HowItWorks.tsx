@@ -44,7 +44,7 @@ const PENALTIES = [
     },
     {
         label: 'Innovation Premium',
-        desc: 'Clinics utilizing the latest evidence-based techniques and a comprehensive range of modern protocols earn an algorithmic boost.',
+        desc: 'Clinics utilizing current-generation products and the latest evidence-based techniques earn an algorithmic boost.',
         icon: <TrendingUp className="w-4 h-4" />
     },
 ]

@@ -12,9 +12,7 @@ export default function Header() {
     const navLinks = [
         { href: '/find-providers', label: 'Find Providers', icon: Shield },
         { href: '/calculator', label: 'Cost Calculator', icon: Calculator },
-        { href: '/#match-quiz', label: 'Injector Match', icon: UserCheck },
         { href: '/blog', label: 'Intelligence', icon: TrendingUp },
-        { href: '/pricing', label: 'For Providers', icon: Info },
     ]
 
     return (
@@ -36,14 +34,14 @@ export default function Header() {
                         </Link>
                     ))}
                     <div className="h-6 w-px bg-white/10 mx-2" />
-                    <Link href="/#match-quiz">
-                        <Button variant="outline" className="border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10 font-black py-2.5 px-6 rounded-xl transition-all text-sm">
-                            Injector Match
+                    <Link href="/pricing">
+                        <Button variant="outline" className="border-white/20 text-white hover:bg-white/5 font-bold py-2.5 px-6 rounded-xl transition-all text-sm">
+                            For Providers
                         </Button>
                     </Link>
-                    <Link href="/find-providers">
+                    <Link href="/#match-quiz">
                         <Button className="bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black py-2.5 px-6 rounded-xl transition-all shadow-lg shadow-[#d4af37]/10 text-sm">
-                            See Who Scores Highest
+                            Injector Match
                         </Button>
                     </Link>
                 </nav>
@@ -73,20 +71,20 @@ export default function Header() {
                         </Link>
                     ))}
                     <Link
+                        href="/pricing"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="flex items-center gap-3 p-3 rounded-xl border border-white/20 text-white font-bold text-center justify-center hover:bg-white/5 transition-all mt-2"
+                    >
+                        <Info className="w-5 h-5" />
+                        For Providers
+                    </Link>
+                    <Link
                         href="/#match-quiz"
                         onClick={() => setIsMenuOpen(false)}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] font-black text-center justify-center transition-all mt-2"
+                        className="flex items-center gap-3 p-3 rounded-xl bg-[#d4af37] text-[#0d1420] font-black text-center justify-center hover:bg-[#c0a030] transition-all"
                     >
                         <UserCheck className="w-5 h-5" />
                         Injector Match
-                    </Link>
-                    <Link
-                        href="/find-providers"
-                        onClick={() => setIsMenuOpen(false)}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-[#d4af37] text-[#0d1420] font-black text-center justify-center transition-all"
-                    >
-                        <Shield className="w-5 h-5" />
-                        See Who Scores Highest
                     </Link>
                 </div>
             )}

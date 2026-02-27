@@ -9,7 +9,7 @@ const FEATURED_CITIES = [
     { name: 'Chicago', state: 'IL', slug: 'il/chicago', avgCost: 12, providers: 82, tag: '💼 Value Leader', avgII: 82, trueScore: 87, topSearch: 'Botox, Dysport' },
     { name: 'Dallas', state: 'TX', slug: 'tx/dallas', avgCost: 13, providers: 78, tag: '🤠 Rapid Growth', avgII: 83, trueScore: 85, topSearch: 'Botox, Filler' },
     { name: 'Houston', state: 'TX', slug: 'tx/houston', avgCost: 12, providers: 85, tag: '🚀 Volume Center', avgII: 81, trueScore: 84, topSearch: 'Botox, Fillers' },
-    { name: 'Seattle', state: 'WA', slug: 'wa/seattle', avgCost: 16, providers: 72, tag: '🔬 Hub for Data-Backed Injections', avgII: 86, trueScore: 88, topSearch: 'Botox, Fillers' },
+    { name: 'Seattle', state: 'WA', slug: 'wa/seattle', avgCost: 16, providers: 72, tag: '🔬 Innovation Hub', avgII: 86, trueScore: 88, topSearch: 'Botox, Fillers' },
     { name: 'Scottsdale', state: 'AZ', slug: 'az/scottsdale', avgCost: 13, providers: 64, tag: '🌵 Med-Spa Capital', avgII: 85, trueScore: 86, topSearch: 'Botox, Filler' },
 ]
 

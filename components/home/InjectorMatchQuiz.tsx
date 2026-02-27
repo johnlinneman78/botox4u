@@ -128,6 +128,31 @@ export default function InjectorMatchQuiz() {
         }
     }
 
+    const [emailSubmitting, setEmailSubmitting] = useState(false)
+    const [emailSuccess, setEmailSuccess] = useState(false)
+
+    const handleEmailSubmit = async () => {
+        if (!email.includes('@')) return;
+        setEmailSubmitting(true)
+        try {
+            const { submitMatchEmailRequest } = await import('@/lib/actions/match')
+            const cityObj = NICHE.cities.find(c => c.slug === selectedCity)
+            const result = await submitMatchEmailRequest({
+                email,
+                city: cityObj?.name || selectedCity,
+                treatments: selectedTreatments.map(t => STEPS[0].options?.find(o => o.id === t)?.label || t),
+                matches
+            })
+            if (result.success) {
+                setEmailSuccess(true)
+            }
+        } catch (e) {
+            console.error(e)
+        } finally {
+            setEmailSubmitting(false)
+        }
+    }
+
     if (isSubmitted) {
         return (
             <section className="py-24 bg-[#0d1420]" id="match-results">
@@ -193,22 +218,37 @@ export default function InjectorMatchQuiz() {
                                 <p className="text-gray-400 mb-8 font-light">
                                     Get the complete provider breakdown for {NICHE.cities.find(c => c.slug === selectedCity)?.name || 'your city'} including pricing ranges, TrueScore™ details, and matching insights.
                                 </p>
-                                <div className="flex flex-col md:flex-row gap-3">
-                                    <div className="flex-1 relative">
-                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                                        <input
-                                            type="email"
-                                            placeholder="Enter your email address"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            className="w-full h-14 pl-11 pr-6 bg-black/40 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-[#d4af37]/30 transition-all font-light"
-                                        />
+
+                                {emailSuccess ? (
+                                    <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 p-6 rounded-2xl font-bold flex items-center justify-center gap-3">
+                                        <Check className="w-5 h-5" />
+                                        Report sent! Check your inbox.
                                     </div>
-                                    <Button className="h-14 px-8 bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black uppercase tracking-widest shadow-xl shadow-[#d4af37]/10 rounded-2xl transition-all">
-                                        Send My Report
-                                    </Button>
-                                </div>
-                                <p className="text-[10px] text-gray-600 mt-4 uppercase tracking-[0.2em]">We'll never spam you. Unsubscribe anytime.</p>
+                                ) : (
+                                    <>
+                                        <div className="flex flex-col md:flex-row gap-3">
+                                            <div className="flex-1 relative">
+                                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                                                <input
+                                                    type="email"
+                                                    placeholder="Enter your email address"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    className="w-full h-14 pl-11 pr-6 bg-black/40 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-[#d4af37]/30 transition-all font-light"
+                                                    disabled={emailSubmitting}
+                                                />
+                                            </div>
+                                            <Button
+                                                onClick={handleEmailSubmit}
+                                                disabled={emailSubmitting || !email.includes('@')}
+                                                className="h-14 px-8 bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black uppercase tracking-widest shadow-xl shadow-[#d4af37]/10 rounded-2xl transition-all disabled:opacity-50"
+                                            >
+                                                {emailSubmitting ? 'Sending...' : 'Send My Report'}
+                                            </Button>
+                                        </div>
+                                        <p className="text-[10px] text-gray-600 mt-4 uppercase tracking-[0.2em]">We'll never spam you. Unsubscribe anytime.</p>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>

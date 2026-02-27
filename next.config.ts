@@ -21,6 +21,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/audit',
+        destination: '/#match-quiz',
+        permanent: true,
+      },
+      {
         source: '/botox/portland-or-pricing-guide',
         destination: '/blog/how-much-does-botox-cost-2026',
         permanent: true,
