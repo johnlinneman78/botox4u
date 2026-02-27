@@ -167,9 +167,8 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
     const stateSlug = REVERSE_STATE_MAP[stateCode]
 
     if (!providers.length && !stats) {
-        // If we found absolutely nothing, it might be a truly invalid URL
-        // However, we often show empty city pages, so we only 404 if the state is invalid
-        if (!REVERSE_STATE_MAP[stateCode]) notFound()
+        // Strict Soft-404 Prevention: If no providers and no stats exist for this city, it's not a valid landing page
+        notFound()
     }
 
     const mapProviders = providers.map((p: any) => ({
@@ -274,9 +273,9 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                     <div className="md:col-span-2" id="listings">
                         <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-2xl font-display font-bold text-white">
+                            <div className="text-2xl font-display font-bold text-white">
                                 {treatmentName ? `Best ${treatmentName} Providers in ${cityName}` : `Verified Providers in ${cityName}`}
-                            </h2>
+                            </div>
                         </div>
 
                         <div className="space-y-6">
@@ -350,9 +349,9 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
 
                 {!treatmentName && (
                     <div className="mt-20">
-                        <h3 className="text-2xl font-display font-bold text-white mb-8 text-center">
+                        <div className="text-2xl font-display font-bold text-white mb-8 text-center">
                             Treatment Options in {cityName}
-                        </h3>
+                        </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {TREATMENTS.map((treatment) => (
                                 <Link
@@ -360,9 +359,9 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                                     href={`/${NICHE.baseSlug}/${treatment.slug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/\s+/g, '-')}`}
                                     className="group bg-white/[0.02] p-8 rounded-2xl border border-white/[0.06] hover:border-[#d4af37]/20 hover:shadow-xl hover:shadow-[#d4af37]/5 transition-all"
                                 >
-                                    <h4 className="font-display font-bold text-xl text-white group-hover:text-[#d4af37] transition-colors mb-2">
+                                    <h3 className="font-display font-bold text-xl text-white group-hover:text-[#d4af37] transition-colors mb-2">
                                         {treatment.name}
-                                    </h4>
+                                    </h3>
                                     <div className="text-xs font-bold text-[#d4af37] uppercase tracking-widest flex items-center gap-2">
                                         View Prices & Providers <span className="text-lg">→</span>
                                     </div>
@@ -373,9 +372,9 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
                 )}
 
                 <div className="mt-20 mb-12">
-                    <h3 className="text-2xl font-display font-bold text-white mb-8">
+                    <div className="text-2xl font-display font-bold text-white mb-8">
                         Explore Nearby Cities
-                    </h3>
+                    </div>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
                         {nearbyCities.map((city) => (
                             <Link
@@ -394,7 +393,7 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
 
                 {/* Complete Provider Directory for 100% Indexation */}
                 <div className="mt-20 pt-12 border-t border-white/[0.05]">
-                    <h3 className="text-xl font-display font-bold text-white mb-6">Complete Provider Directory: {cityName}</h3>
+                    <div className="text-xl font-display font-bold text-white mb-6">Complete Provider Directory: {cityName}</div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {providers.map((p: any) => (
                             <Link
