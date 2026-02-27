@@ -7,9 +7,11 @@ export const metadata: Metadata = {
     title: `${NICHE.name} Cost Calculator | Estimate Your Treatment Units & Price`,
     description: `Use our interactive ${NICHE.name} cost estimator to calculate units and prices for ${NICHE.calculator.treatmentAreas.slice(0, 3).map(a => a.label.toLowerCase()).join(', ')} and more based on local averages.`,
     alternates: {
-        canonical: '/calculator',
+        canonical: 'https://www.injectorindex.com/calculator',
     }
 }
+
+export const dynamic = 'force-dynamic'
 
 export default function CalculatorPage() {
     const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })

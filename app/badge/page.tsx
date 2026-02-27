@@ -80,9 +80,9 @@ export default function BadgePage() {
                                     </div>
                                     <pre className="bg-black/40 p-6 rounded-2xl text-xs font-mono overflow-x-auto text-gray-300 border border-white/5 whitespace-pre-wrap leading-relaxed">
                                         {`<!-- Injector Index Verified Badge -->
-<a href="https://injectorindex.com" target="_blank" rel="noopener">
+<a href="https://www.injectorindex.com" target="_blank" rel="noopener">
   <img 
-    src="https://injectorindex.com/badges/verified-badge-gold.svg" 
+    src="https://www.injectorindex.com/badges/verified-badge-gold.svg" 
     alt="Verified by Injector Index" 
     style="width: 140px; height: auto;"
   />

@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
-import { getProvidersWithSearch, getCityStats, getNearbyCities } from '@/lib/actions/providers'
+import { getProvidersWithSearch, getCityStats, getNearbyCities, getStateStats, getCitiesInState } from '@/lib/actions/providers'
 import { REVERSE_STATE_MAP, STATE_MAP, TREATMENTS, getStateName } from '@/lib/constants'
+import { StateHero } from '@/components/state/StateHero'
+import { CityList } from '@/components/state/CityList'
 import { CityStats } from '@/components/city/CityStats'
 import { CostComparisonTable } from '@/components/seo/CostComparisonTable'
 import { CityFAQ } from '@/components/city/CityFAQ'
@@ -36,6 +38,19 @@ export async function generateMetadata({ params }: CatchAllPageProps): Promise<M
     let treatmentName = ''
 
     if (slug.length === 1) {
+        // State pattern: "/botox/ny"
+        if (Object.values(STATE_MAP).includes(slug[0].toUpperCase())) {
+            stateCode = slug[0].toUpperCase()
+            const stateName = getStateName(stateCode)
+            return {
+                title: `Best ${NICHE.name} Providers in ${stateName} | Compare Costs & Reviews`,
+                description: `Find top-rated ${NICHE.name} providers and medical spas across ${stateName}. View average costs, patient reviews, and verified clinics in every major city.`,
+                alternates: {
+                    canonical: `https://www.injectorindex.com/botox/${stateCode.toLowerCase()}`
+                },
+                robots: { index: true, follow: true }
+            }
+        }
         // Hyphenated city-state pattern: "los-angeles-ca"
         const parts = slug[0].split('-')
         stateCode = parts[parts.length - 1].toUpperCase()
@@ -89,6 +104,29 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
     let breadcrumbState = ''
 
     if (slug.length === 1) {
+        // State pattern check: /botox/ny
+        const potentialState = slug[0].toUpperCase()
+        if (Object.values(STATE_MAP).includes(potentialState)) {
+            const stateCode = potentialState
+            const stateName = getStateName(stateCode)
+            const stats = await getStateStats(stateCode)
+            const cities = await getCitiesInState(stateCode)
+
+            return (
+                <main className="bg-white min-h-screen">
+                    <StateHero
+                        stateName={stateName}
+                        providerCount={stats?.providerCount || 0}
+                        avgCost={stats?.avgCost || 15}
+                        cityCount={stats?.cityCount || 0}
+                    />
+                    <CityList
+                        cities={cities}
+                        stateName={stateName}
+                    />
+                </main>
+            )
+        }
         // Pattern: /botox/los-angeles-ca
         const parts = slug[0].split('-')
         stateCode = parts[parts.length - 1].toUpperCase()

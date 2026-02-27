@@ -9,6 +9,8 @@ import { ArrowLeft, Clock, Mail, BarChart3 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 
 
+export const dynamic = 'force-dynamic'
+
 interface BlogPostPageProps {
     params: Promise<{ slug: string }>
 }
@@ -31,7 +33,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
             title: post.title,
             description: post.metaDescription,
             type: 'article',
-            url: `https://injectorindex.com/blog/${post.slug}`,
+            url: `https://www.injectorindex.com/blog/${post.slug}`,
         },
         twitter: {
             card: 'summary_large_image',
@@ -54,12 +56,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         "author": {
             "@type": "Organization",
             "name": "Injector Index",
-            "url": "https://injectorindex.com"
+            "url": "https://www.injectorindex.com"
         },
         "publisher": {
             "@type": "Organization",
             "name": "Injector Index",
-            "url": "https://injectorindex.com"
+            "url": "https://www.injectorindex.com"
         },
         "datePublished": post.publishDate,
         "dateModified": post.publishDate
@@ -82,9 +84,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://injectorindex.com" },
-            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://injectorindex.com/blog" },
-            { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://injectorindex.com/blog/${post.slug}` }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.injectorindex.com" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.injectorindex.com/blog" },
+            { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://www.injectorindex.com/blog/${post.slug}` }
         ]
     }
 

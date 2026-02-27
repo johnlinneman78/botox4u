@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: `InjectorIndex — Find & Compare the Best Botox Injectors Near You`,
   description: `Compare 500+ injectors across 22 cities. See TrueScores, real pricing, and verified credentials. Find natural results, ranked by data.`,
   alternates: {
-    canonical: '/',
+    canonical: 'https://www.injectorindex.com/',
   }
 }
 
