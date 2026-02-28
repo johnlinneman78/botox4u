@@ -40,7 +40,7 @@ const TREATMENT_AREAS: TreatmentArea[] = NICHE.calculator.treatmentAreas.map(are
 }));
 
 const PRICING_DATA: Record<string, CityPricing> = {
-    'new-york-ny': {
+    'ny/new-york': {
         pricing: {
             botox: { budget: 14, mid: 18, premium: 24 },
             dysport: { budget: 5, mid: 7, premium: 9 },
@@ -50,7 +50,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 142,
         benchmarkDelta: 28
     },
-    'los-angeles-ca': {
+    'ca/los-angeles': {
         pricing: {
             botox: { budget: 13, mid: 16, premium: 22 },
             dysport: { budget: 4.5, mid: 6, premium: 8 },
@@ -60,7 +60,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 189,
         benchmarkDelta: 22
     },
-    'miami-fl': {
+    'fl/miami': {
         pricing: {
             botox: { budget: 12, mid: 15, premium: 19 },
             dysport: { budget: 4, mid: 5.5, premium: 7.5 },
@@ -70,7 +70,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 94,
         benchmarkDelta: 12
     },
-    'chicago-il': {
+    'il/chicago': {
         pricing: {
             botox: { budget: 13, mid: 16, premium: 20 },
             dysport: { budget: 4.5, mid: 6, premium: 8 },
@@ -80,7 +80,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 76,
         benchmarkDelta: 15
     },
-    'scottsdale-az': {
+    'az/scottsdale': {
         pricing: {
             botox: { budget: 11, mid: 13, premium: 17 },
             dysport: { budget: 4, mid: 5, premium: 7 },
@@ -90,7 +90,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 62,
         benchmarkDelta: 8
     },
-    'dallas-tx': {
+    'tx/dallas': {
         pricing: {
             botox: { budget: 11, mid: 14, premium: 18 },
             dysport: { budget: 4, mid: 5.5, premium: 7 },
@@ -100,7 +100,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 88,
         benchmarkDelta: 5
     },
-    'austin-tx': {
+    'tx/austin': {
         pricing: {
             botox: { budget: 12, mid: 14, premium: 19 },
             dysport: { budget: 4.5, mid: 5.5, premium: 7.5 },
@@ -110,7 +110,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 54,
         benchmarkDelta: 10
     },
-    'houston-tx': {
+    'tx/houston': {
         pricing: {
             botox: { budget: 11, mid: 13.5, premium: 17 },
             dysport: { budget: 4, mid: 5, premium: 6.5 },
@@ -130,7 +130,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 48,
         benchmarkDelta: -5
     },
-    'denver-co': {
+    'co/denver': {
         pricing: {
             botox: { budget: 12, mid: 14.5, premium: 18 },
             dysport: { budget: 4.5, mid: 5.5, premium: 7 },
@@ -140,7 +140,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 39,
         benchmarkDelta: 4
     },
-    'seattle-wa': {
+    'wa/seattle': {
         pricing: {
             botox: { budget: 13, mid: 16, premium: 20 },
             dysport: { budget: 5, mid: 6.5, premium: 8 },
@@ -160,7 +160,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 85,
         benchmarkDelta: 35
     },
-    'atlanta-ga': {
+    'ga/atlanta': {
         pricing: {
             botox: { budget: 11.5, mid: 14, premium: 17.5 },
             dysport: { budget: 4, mid: 5.5, premium: 7 },
@@ -170,7 +170,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 67,
         benchmarkDelta: 6
     },
-    'boston-ma': {
+    'ma/boston': {
         pricing: {
             botox: { budget: 14, mid: 17, premium: 22 },
             dysport: { budget: 5, mid: 6.5, premium: 8.5 },
@@ -180,7 +180,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 58,
         benchmarkDelta: 24
     },
-    'las-vegas-nv': {
+    'nv/las-vegas': {
         pricing: {
             botox: { budget: 10, mid: 13, premium: 16.5 },
             dysport: { budget: 3.5, mid: 5, premium: 6.5 },
@@ -190,7 +190,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 73,
         benchmarkDelta: -8
     },
-    'philadelphia-pa': {
+    'pa/philadelphia': {
         pricing: {
             botox: { budget: 12, mid: 15, premium: 18 },
             dysport: { budget: 4.5, mid: 5.5, premium: 7 },
@@ -200,7 +200,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 45,
         benchmarkDelta: 7
     },
-    'san-diego-ca': {
+    'ca/san-diego': {
         pricing: {
             botox: { budget: 12.5, mid: 15.5, premium: 19 },
             dysport: { budget: 4.5, mid: 6, premium: 7.5 },
@@ -210,7 +210,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 61,
         benchmarkDelta: 14
     },
-    'nashville-tn': {
+    'tn/nashville': {
         pricing: {
             botox: { budget: 11.5, mid: 14, premium: 17 },
             dysport: { budget: 4, mid: 5.5, premium: 7 },
@@ -230,7 +230,7 @@ const PRICING_DATA: Record<string, CityPricing> = {
         providerCount: 22,
         benchmarkDelta: -12
     },
-    'orlando-fl': {
+    'fl/tampa': {
         pricing: {
             botox: { budget: 11, mid: 13.5, premium: 16.5 },
             dysport: { budget: 4, mid: 5, premium: 6.5 },
@@ -257,7 +257,7 @@ export default function CalculatorClient() {
     const [tierValue, setTierValue] = useState<number[]>([50]) // 0-100 slider
 
     // --- Derived Values ---
-    const cityData = PRICING_DATA[city] || PRICING_DATA['new-york']
+    const cityData = PRICING_DATA[city] || PRICING_DATA['ny/new-york']
     const totalUnits = Array.from(selectedAreas).reduce((sum, areaId) => {
         const area = TREATMENT_AREAS.find(a => a.id === areaId)
         return sum + (area?.units || 0)
@@ -267,7 +267,7 @@ export default function CalculatorClient() {
     const tierCategory: Tier = tierValue[0] <= 33 ? 'budget' : tierValue[0] <= 66 ? 'mid' : 'premium'
 
     // Get price per unit based on city + toxin + calculated tier
-    const pricing = PRICING_DATA[city]?.pricing[treatmentType] || PRICING_DATA['new-york'].pricing['botox']
+    const pricing = PRICING_DATA[city]?.pricing[treatmentType] || PRICING_DATA['ny/new-york'].pricing['botox']
     const unitPrice = pricing[tierCategory]
 
     // Calculate Range (Headline)
