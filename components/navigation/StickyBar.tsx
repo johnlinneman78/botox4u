@@ -36,15 +36,13 @@ export const StickyBar = () => {
                         <div className="text-xs font-bold text-white leading-tight">Take the Injector Match Quiz →</div>
                     </div>
                 </div>
-                <Link href="/#match-quiz" className="shrink-0" onClick={(e) => {
+                <Link href="/#match-quiz" className="shrink-0 bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black rounded-xl px-4 h-10 flex items-center justify-center gap-2 text-[10px] uppercase tracking-wider transition-all duration-300 shadow-lg shadow-[#d4af37]/10 active:scale-[0.98]" onClick={(e) => {
                     if (window.location.pathname === '/') {
                         e.preventDefault();
                         document.getElementById('match-quiz')?.scrollIntoView({ behavior: 'smooth' });
                     }
                 }}>
-                    <Button size="sm" className="bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black rounded-xl px-4 h-10 flex items-center gap-2 text-[10px] uppercase tracking-wider">
-                        TAKE QUIZ <ArrowRight className="w-3.5 h-3.5" />
-                    </Button>
+                    TAKE QUIZ <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
             </div>
         </div>

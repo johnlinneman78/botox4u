@@ -136,11 +136,9 @@ export function ProviderLookup() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3">
-                        <Link href={`/provider/claim?id=${selectedProvider.id}`} className="flex-1">
-                            <Button className="w-full bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black py-6 rounded-xl shadow-xl shadow-[#d4af37]/10 transition-all uppercase tracking-widest text-xs group">
-                                Claim & Upgrade Profile
-                                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                            </Button>
+                        <Link href={`/provider/claim?id=${selectedProvider.id}`} className="flex-1 inline-flex items-center justify-center w-full bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black py-6 rounded-xl shadow-xl shadow-[#d4af37]/10 transition-all uppercase tracking-widest text-xs group">
+                            Claim & Upgrade Profile
+                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Link>
                         <Button
                             variant="outline"

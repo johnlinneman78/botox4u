@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCard'
 import { ProviderFilters } from '@/components/providers/ProviderFilters'
 import { Button } from '@/components/ui/Button'
@@ -44,7 +45,8 @@ export default async function FindProvidersPage({
         type,
         view,
         userLat,
-        userLng
+        userLng,
+        sort: (userLat && userLng) ? 'distance' : undefined
     })
 
     return (
@@ -109,7 +111,7 @@ export default async function FindProvidersPage({
                             We&apos;re constantly adding new providers. Try searching for a nearby city or check back soon!
                         </p>
                         <div className="flex justify-center gap-4">
-                            <a href="/find-providers"><Button variant="outline" className="border-white/10 text-gray-400 hover:bg-white/5">Clear Filters</Button></a>
+                            <Link href="/find-providers" className="inline-flex items-center justify-center rounded-xl font-bold transition-all duration-300 border-2 border-white/10 text-gray-400 hover:bg-white/5 bg-transparent px-6 py-2.5 text-base">Clear Filters</Link>
                             <Button className="bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420]">Notify Me of Local Providers</Button>
                         </div>
                     </div>

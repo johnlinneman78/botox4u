@@ -19,7 +19,7 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
     const [type, setType] = useState(searchParams.get('type') || '')
     const [view, setView] = useState(searchParams.get('view') || 'specialist')
 
-    const handleSearch = () => {
+    const handleSearch = (overrideView?: string) => {
         const params = new URLSearchParams(searchParams.toString())
 
         if (city) params.set('city', city)
@@ -34,10 +34,27 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
         if (type) params.set('type', type)
         else params.delete('type')
 
-        if (view) params.set('view', view)
+        const finalView = typeof overrideView === 'string' ? overrideView : view
+        if (finalView) params.set('view', finalView)
         else params.set('view', 'specialist')
 
         if (city || state) params.delete('q')
+
+        router.push(`/find-providers?${params.toString()}`)
+    }
+
+    const handleRemoveFilter = (key: string) => {
+        const params = new URLSearchParams(searchParams.toString())
+        params.delete(key)
+
+        if (key === 'city') setCity('')
+        if (key === 'state') setState('')
+        if (key === 'tier') setTier('')
+        if (key === 'type') setType('')
+        if (key === 'view') {
+            setView('specialist')
+            params.set('view', 'specialist')
+        }
 
         router.push(`/find-providers?${params.toString()}`)
     }
@@ -102,13 +119,13 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
                     </label>
                     <div className="flex bg-white/[0.03] border border-white/[0.06] rounded-xl p-1">
                         <button
-                            onClick={() => setView('specialist')}
+                            onClick={() => { setView('specialist'); handleSearch('specialist'); }}
                             className={`flex-1 py-1.5 px-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === 'specialist' ? 'bg-[#d4af37] text-[#0d1420]' : 'text-gray-500 hover:text-white'}`}
                         >
                             Specialists
                         </button>
                         <button
-                            onClick={() => setView('general')}
+                            onClick={() => { setView('general'); handleSearch('general'); }}
                             className={`flex-1 py-1.5 px-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === 'general' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-white'}`}
                         >
                             General
@@ -120,7 +137,7 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
                     <Button
                         variant="primary"
                         className="flex-1 py-3 font-bold bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] shadow-lg shadow-[#d4af37]/10 transition-all text-sm uppercase tracking-wider"
-                        onClick={handleSearch}
+                        onClick={() => handleSearch()}
                     >
                         Find Providers
                     </Button>
@@ -137,19 +154,19 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
 
             <div className="mt-4 flex flex-wrap gap-2">
                 {searchParams.get('city') && (
-                    <BadgeOnFilter label={`City: ${searchParams.get('city')}`} onRemove={() => { setCity(''); handleSearch(); }} />
+                    <BadgeOnFilter label={`City: ${searchParams.get('city')}`} onRemove={() => handleRemoveFilter('city')} />
                 )}
                 {searchParams.get('state') && (
-                    <BadgeOnFilter label={`State: ${searchParams.get('state')}`} onRemove={() => { setState(''); handleSearch(); }} />
+                    <BadgeOnFilter label={`State: ${searchParams.get('state')}`} onRemove={() => handleRemoveFilter('state')} />
                 )}
                 {searchParams.get('tier') && (
-                    <BadgeOnFilter label={`Tier: ${searchParams.get('tier')}`} onRemove={() => { setTier(''); handleSearch(); }} />
+                    <BadgeOnFilter label={`Tier: ${searchParams.get('tier')}`} onRemove={() => handleRemoveFilter('tier')} />
                 )}
                 {searchParams.get('type') && (
-                    <BadgeOnFilter label={`Type: ${searchParams.get('type')}`} onRemove={() => { setType(''); handleSearch(); }} />
+                    <BadgeOnFilter label={`Type: ${searchParams.get('type')}`} onRemove={() => handleRemoveFilter('type')} />
                 )}
                 {searchParams.get('view') && searchParams.get('view') === 'general' && (
-                    <BadgeOnFilter label={`View: General Directory`} onRemove={() => { setView('specialist'); handleSearch(); }} />
+                    <BadgeOnFilter label={`View: General Directory`} onRemove={() => handleRemoveFilter('view')} />
                 )}
             </div>
         </div>
