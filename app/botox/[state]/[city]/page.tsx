@@ -18,6 +18,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { JsonLd, generateBreadcrumbSchema, generateItemListSchema, generateFAQPageSchema } from '@/components/seo/JsonLd'
 import { GeolocationSorter } from '@/components/providers/GeolocationSorter'
+import { Suspense } from 'react'
 
 interface CityPageProps {
     params: Promise<{ state: string; city: string }>
@@ -43,12 +44,20 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
-    const { city } = await params
+    const { state, city } = await params
     const cityName = city.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+    const title = `Best Botox Injectors in ${cityName} | InjectorIndex`
+    const description = `Find and compare top-rated botox injectors in ${cityName}. Ranked by TrueScore™.`
+    const url = `https://www.injectorindex.com/botox/${state.toLowerCase()}/${city.toLowerCase()}`
 
     return {
-        title: `Best Botox Injectors in ${cityName} | InjectorIndex`,
-        description: `Find and compare top-rated botox injectors in ${cityName}. Ranked by TrueScore™.`
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            url,
+        }
     }
 }
 
@@ -105,7 +114,9 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
 
     return (
         <main className="bg-[#0d1420] min-h-screen pb-20">
-            <GeolocationSorter />
+            <Suspense fallback={null}>
+                <GeolocationSorter />
+            </Suspense>
             <JsonLd data={itemListSchema} />
             <JsonLd data={breadcrumbs} />
             <JsonLd data={faqSchema} />

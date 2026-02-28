@@ -13,6 +13,11 @@ export const metadata: Metadata = {
     description: `Compare local ${NICHE.name} providers by clinical quality and pricing. Find top-rated injectors and medspas near you with our 100% data-driven TrueScore™ ranking.`,
     alternates: {
         canonical: 'https://www.injectorindex.com/find-providers',
+    },
+    openGraph: {
+        title: `Find & Compare Best ${NICHE.name} Providers | TrueScore™ Verified`,
+        description: `Compare local ${NICHE.name} providers by clinical quality and pricing. Find top-rated injectors and medspas near you with our 100% data-driven TrueScore™ ranking.`,
+        url: 'https://www.injectorindex.com/find-providers',
     }
 }
 
@@ -46,7 +51,9 @@ export default async function FindProvidersPage({
         <div className="bg-[#0d1420] min-h-screen py-12">
             <div className="container mx-auto px-4">
                 <div className="mb-8">
-                    <GeolocationSorter />
+                    <Suspense fallback={null}>
+                        <GeolocationSorter />
+                    </Suspense>
                     <h1 className="text-4xl font-display font-bold text-white mb-2">
                         Explore {query ? (query.charAt(0).toUpperCase() + query.slice(1)) : NICHE.name} Providers
                     </h1>

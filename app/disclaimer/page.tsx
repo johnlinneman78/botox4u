@@ -6,8 +6,13 @@ export const metadata: Metadata = {
     title: `Medical Disclaimer | ${NICHE.siteName}`,
     description: `Important medical disclaimer regarding the information provided on the ${NICHE.siteName} platform.`,
     alternates: {
-        canonical: '/disclaimer',
+        canonical: 'https://www.injectorindex.com/disclaimer',
     },
+    openGraph: {
+        title: `Medical Disclaimer | ${NICHE.siteName}`,
+        description: `Important medical disclaimer regarding the information provided on the ${NICHE.siteName} platform.`,
+        url: 'https://www.injectorindex.com/disclaimer',
+    }
 }
 
 export default function DisclaimerPage() {

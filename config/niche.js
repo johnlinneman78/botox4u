@@ -8,7 +8,7 @@ export const NICHE = {
     namePlural: "Aesthetic Medicine Providers",
     providerType: "provider",               // "injector", "clinic", "provider", "dentist"
     providerTypePlural: "providers",
-    siteName: "InjectorIndex — Find & Compare the Best Botox Injectors Near You",
+    siteName: "InjectorIndex",
     domain: "www.injectorindex.com",
     tagline: "Find the Best Botox & Filler Injectors Near You — Rated by Data, Not Ads",
     brandName: "InjectorIndex",

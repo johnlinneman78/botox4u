@@ -10,8 +10,13 @@ export const metadata: Metadata = {
     title: `Provider Plans & Pricing — Scale Your Clinic | ${NICHE.siteName}`,
     description: `Choose the visibility tier that fits your clinical goals. Join high-intent patients searching for natural results and regenerative protocols.`,
     alternates: {
-        canonical: '/pricing',
+        canonical: 'https://www.injectorindex.com/pricing',
     },
+    openGraph: {
+        title: `Provider Plans & Pricing — Scale Your Clinic | ${NICHE.siteName}`,
+        description: `Choose the visibility tier that fits your clinical goals. Join high-intent patients searching for natural results and regenerative protocols.`,
+        url: 'https://www.injectorindex.com/pricing',
+    }
 }
 
 const getIcon = (index: number) => {

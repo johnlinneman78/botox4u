@@ -5,7 +5,15 @@ import { JsonLd, generatePriceSpecificationSchema } from '@/components/seo/JsonL
 
 export const metadata: Metadata = {
     title: "Botox Cost Calculator 2026 | InjectorIndex",
-    description: "Calculate how much botox will cost based on area, units, and city."
+    description: "Calculate how much botox will cost based on area, units, and city.",
+    alternates: {
+        canonical: 'https://www.injectorindex.com/calculator',
+    },
+    openGraph: {
+        title: "Botox Cost Calculator 2026 | InjectorIndex",
+        description: "Calculate how much botox will cost based on area, units, and city.",
+        url: 'https://www.injectorindex.com/calculator',
+    }
 }
 
 // Static page for calculator

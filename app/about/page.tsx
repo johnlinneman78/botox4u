@@ -8,6 +8,11 @@ import { getPlatformStats } from '@/lib/actions/providers'
 export const metadata: Metadata = {
     title: 'About Injector Index — Independent Provider Scoring for Aesthetic Medicine',
     description: 'Injector Index is an independent research platform that scores aesthetic injectors on natural results, fair pricing, and verified credentials. Nobody pays for a higher rank.',
+    openGraph: {
+        title: 'About Injector Index — Independent Provider Scoring for Aesthetic Medicine',
+        description: 'Injector Index is an independent research platform that scores aesthetic injectors on natural results, fair pricing, and verified credentials. Nobody pays for a higher rank.',
+        url: 'https://www.injectorindex.com/about',
+    }
 }
 
 export default async function AboutPage() {

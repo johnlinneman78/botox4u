@@ -6,8 +6,13 @@ export const metadata: Metadata = {
     title: `Privacy Policy | ${NICHE.siteName}`,
     description: `How we collect, use, and protect your personal information at ${NICHE.siteName}.`,
     alternates: {
-        canonical: '/privacy',
+        canonical: 'https://www.injectorindex.com/privacy',
     },
+    openGraph: {
+        title: `Privacy Policy | ${NICHE.siteName}`,
+        description: `How we collect, use, and protect your personal information at ${NICHE.siteName}.`,
+        url: 'https://www.injectorindex.com/privacy',
+    }
 }
 
 export default function PrivacyPage() {

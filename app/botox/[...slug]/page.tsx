@@ -21,6 +21,7 @@ import { notFound } from 'next/navigation'
 import { Star } from 'lucide-react'
 import { JsonLd, generateBreadcrumbSchema, generateItemListSchema, generateFAQPageSchema } from '@/components/seo/JsonLd'
 import { GeolocationSorter } from '@/components/providers/GeolocationSorter'
+import { Suspense } from 'react'
 
 interface CatchAllPageProps {
     params: Promise<{ slug: string[] }>
@@ -59,17 +60,24 @@ export async function generateMetadata({ params }: CatchAllPageProps): Promise<M
     let cityName = ''
     let stateCode = ''
     let treatmentName = ''
+    let canonical = ''
 
     if (slug.length === 1) {
         // State pattern: "/botox/ny"
         if (Object.values(STATE_MAP).includes(slug[0].toUpperCase())) {
             stateCode = slug[0].toUpperCase()
             const stateName = getStateName(stateCode)
+            canonical = `https://www.injectorindex.com/botox/${stateCode.toLowerCase()}`
+            const title = `${stateName} ${NICHE.name} Providers | Costs & Reviews`
+            const description = `Find top-rated ${NICHE.name} providers and medical spas across ${stateName}. View average costs, patient reviews, and verified clinics in major cities.`
             return {
-                title: `${stateName} ${NICHE.name} Providers | Costs & Reviews`,
-                description: `Find top-rated ${NICHE.name} providers and medical spas across ${stateName}. View average costs, patient reviews, and verified clinics in major cities.`,
-                alternates: {
-                    canonical: `https://www.injectorindex.com/botox/${stateCode.toLowerCase()}`
+                title,
+                description,
+                alternates: { canonical },
+                openGraph: {
+                    title,
+                    description,
+                    url: canonical,
                 },
                 robots: { index: false, follow: true }
             }
@@ -93,21 +101,34 @@ export async function generateMetadata({ params }: CatchAllPageProps): Promise<M
     if (!cityName || !stateCode) return { title: 'Location Not Found' }
 
     if (treatmentName) {
+        const title = `${treatmentName} in ${cityName}, ${stateCode} | Prices & Top Clinicians`
+        const description = `Compare ${treatmentName} costs in ${cityName}. Find verified ${treatmentName} providers, read reviews, and see before / after results.`
+        canonical = `https://www.injectorindex.com/${NICHE.baseSlug}/${slug[0]}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/\s+/g, '-')}`
         return {
-            title: `${treatmentName} in ${cityName}, ${stateCode} | Prices & Top Clinicians`,
-            description: `Compare ${treatmentName} costs in ${cityName}. Find verified ${treatmentName} providers, read reviews, and see before / after results.`,
-            alternates: {
-                canonical: `https://www.injectorindex.com/${NICHE.baseSlug}/${slug[0]}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/\s+/g, '-')}`,
+            title,
+            description,
+            alternates: { canonical },
+            openGraph: {
+                title,
+                description,
+                url: canonical,
             },
             robots: { index: true, follow: true }
         }
     }
 
+    const title = `Best ${NICHE.name} in ${cityName}, ${stateCode} | Natural Results & Pricing`
+    const description = NICHE.metaDescriptionTemplate.replace(/{city}/g, cityName)
+    canonical = `https://www.injectorindex.com/${NICHE.baseSlug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/\s+/g, '-')}`
+
     return {
-        title: `Best ${NICHE.name} in ${cityName}, ${stateCode} | Natural Results & Pricing`,
-        description: NICHE.metaDescriptionTemplate.replace(/{city}/g, cityName),
-        alternates: {
-            canonical: `https://www.injectorindex.com/${NICHE.baseSlug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/\s+/g, '-')}`,
+        title,
+        description,
+        alternates: { canonical },
+        openGraph: {
+            title,
+            description,
+            url: canonical,
         },
         robots: { index: true, follow: true }
     }
@@ -224,7 +245,9 @@ export default async function CatchAllBotoxPage({ params, searchParams }: CatchA
 
     return (
         <main className="bg-[#0d1420] min-h-screen pb-20">
-            <GeolocationSorter />
+            <Suspense fallback={null}>
+                <GeolocationSorter />
+            </Suspense>
             <JsonLd data={itemListSchema} />
             <JsonLd data={breadcrumbs} />
             <JsonLd data={faqSchema} />

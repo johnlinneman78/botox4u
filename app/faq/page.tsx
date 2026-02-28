@@ -5,7 +5,12 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: "FAQ | InjectorIndex",
-    description: "Common questions about finding botox injectors"
+    description: "Common questions about finding botox injectors",
+    openGraph: {
+        title: "FAQ | InjectorIndex",
+        description: "Common questions about finding botox injectors",
+        url: "https://www.injectorindex.com/faq",
+    }
 }
 
 export default function FAQPage() {
@@ -28,8 +33,25 @@ export default function FAQPage() {
         }
     ]
 
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(faq => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+            }
+        }))
+    }
+
     return (
         <div className="bg-[#0d1420] min-h-screen pt-24 pb-20">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
             <div className="container mx-auto px-4 max-w-4xl">
                 <div className="text-center mb-16">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-bold uppercase tracking-widest mb-6">

@@ -7,8 +7,13 @@ export const metadata: Metadata = {
     title: `Our Methodology — How We Rank Injectors | ${NICHE.siteName}`,
     description: `Learn how TrueScore™ uses semantic analysis and clinical quality data to rank aesthetic providers. We prioritize natural results and pricing transparency.`,
     alternates: {
-        canonical: '/methodology',
+        canonical: 'https://www.injectorindex.com/methodology',
     },
+    openGraph: {
+        title: `Our Methodology — How We Rank Injectors | ${NICHE.siteName}`,
+        description: `Learn how TrueScore™ uses semantic analysis and clinical quality data to rank aesthetic providers. We prioritize natural results and pricing transparency.`,
+        url: 'https://www.injectorindex.com/methodology',
+    }
 }
 
 export default function MethodologyPage() {

@@ -29,6 +29,19 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
         alternates: {
             canonical: `https://www.injectorindex.com/provider/${provider.slug}`,
         },
+        openGraph: {
+            title: `${provider.name} | ${provider.city} ${NICHE.name} Review`,
+            description: `View TrueScore™ rankings, independent reviews, and pricing for ${provider.name} in ${provider.city}. Compare with other top-rated aesthetic injectors near you.`,
+            url: `https://www.injectorindex.com/provider/${provider.slug}`,
+            images: [
+                {
+                    url: provider.hero_image_url || provider.imageUrl || "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1600",
+                    width: 1200,
+                    height: 630,
+                    alt: provider.name,
+                }
+            ]
+        },
         robots: {
             index: true,
             follow: true,

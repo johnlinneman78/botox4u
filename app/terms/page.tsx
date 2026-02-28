@@ -6,8 +6,13 @@ export const metadata: Metadata = {
     title: `Terms of Service | ${NICHE.siteName}`,
     description: `The terms and conditions for using the ${NICHE.siteName} platform and services.`,
     alternates: {
-        canonical: '/terms',
+        canonical: 'https://www.injectorindex.com/terms',
     },
+    openGraph: {
+        title: `Terms of Service | ${NICHE.siteName}`,
+        description: `The terms and conditions for using the ${NICHE.siteName} platform and services.`,
+        url: 'https://www.injectorindex.com/terms',
+    }
 }
 
 export default function TermsPage() {

@@ -6,11 +6,16 @@ import { ArrowRight, Clock, Search, BookOpen } from 'lucide-react'
 import { NICHE } from '@/config/niche'
 
 export const metadata: Metadata = {
-  title: "Botox Intelligence Blog 2026 | InjectorIndex",
-  description: "Research, guides, and data on botox injectors, costs, and trends.",
-  alternates: {
-    canonical: 'https://www.injectorindex.com/blog',
-  }
+    title: "Botox Intelligence Blog 2026 | InjectorIndex",
+    description: "Research, guides, and data on botox injectors, costs, and trends.",
+    alternates: {
+        canonical: 'https://www.injectorindex.com/blog',
+    },
+    openGraph: {
+        title: "Botox Intelligence Blog 2026 | InjectorIndex",
+        description: "Research, guides, and data on botox injectors, costs, and trends.",
+        url: 'https://www.injectorindex.com/blog',
+    }
 }
 
 // Static index page for better SEO performance
