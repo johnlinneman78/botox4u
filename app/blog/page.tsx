@@ -6,14 +6,14 @@ import { ArrowRight, Clock, Search, BookOpen } from 'lucide-react'
 import { NICHE } from '@/config/niche'
 
 export const metadata: Metadata = {
-    title: 'Injector Index Blog | Independent Aesthetic Intelligence',
-    description: 'Consumer protection guides, pricing analysis, and safety reports for Botox and other aesthetic treatments.',
-    alternates: {
-        canonical: 'https://www.injectorindex.com/blog',
-    }
+  title: "Botox Intelligence Blog 2026 | InjectorIndex",
+  description: "Research, guides, and data on botox injectors, costs, and trends.",
+  alternates: {
+    canonical: 'https://www.injectorindex.com/blog',
+  }
 }
 
-export const dynamic = 'force-dynamic'
+// Static index page for better SEO performance
 
 export default function BlogIndexPage() {
     return (

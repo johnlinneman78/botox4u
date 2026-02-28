@@ -9,16 +9,27 @@ import { ArrowLeft, Clock, Mail, BarChart3 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 
 
-export const dynamic = 'force-dynamic'
+// This will be static by default because of generateStaticParams
 
 interface BlogPostPageProps {
     params: Promise<{ slug: string }>
 }
 
 export async function generateStaticParams() {
-    return BLOG_POSTS.map((post) => ({
-        slug: post.slug,
-    }))
+    return [
+        { slug: 'how-much-does-botox-cost-2026' },
+        { slug: 'botox-safety-botulism-cases-2026' },
+        { slug: 'preventative-botox-20s-30s-worth-it' },
+        { slug: 'botox-vs-dysport-vs-xeomin-vs-letybo-2026' },
+        { slug: 'how-to-find-good-botox-injector' },
+        { slug: 'kourtney-kardashian-third-eye-botox-debate' },
+        { slug: 'botox-aftercare-guide-2026' },
+        { slug: 'polynucleotides-regenerative-injector-city-guide-2026' },
+        { slug: 'daxxify-long-acting-tox-city-reports-2026' },
+        { slug: 'neo-romantic-aesthetics-portland-seattle-sf-2026' },
+        { slug: 'exosome-therapy-portland-seattle-2026' },
+        { slug: 'seattle-regenerative-injectors-guide-2026' },
+    ]
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {

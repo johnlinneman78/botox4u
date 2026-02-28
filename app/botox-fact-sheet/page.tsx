@@ -1,5 +1,14 @@
 import { Info, HelpCircle, CheckCircle2, Clock, ShieldAlert } from 'lucide-react'
 import { NICHE } from '@/config/niche'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: `Common Aesthetic Fact Sheet — Science & Safety | ${NICHE.siteName}`,
+    description: `Everything you need to know about ${NICHE.namePlural.toLowerCase()}, safety protocols, and expected results. Verified patient data for 2026.`,
+    alternates: {
+        canonical: '/botox-fact-sheet',
+    }
+}
 
 export default function BotoxFactSheet() {
     return (

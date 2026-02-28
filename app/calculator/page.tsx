@@ -1,20 +1,16 @@
-import { CostCalculator } from '@/components/tools/CostCalculator'
+import CalculatorClient from './CalculatorClient'
 import { Metadata } from 'next'
 import { NICHE } from '@/config/niche'
 import { JsonLd, generatePriceSpecificationSchema } from '@/components/seo/JsonLd'
 
 export const metadata: Metadata = {
-    title: `${NICHE.name} Cost Calculator | Estimate Your Treatment Units & Price`,
-    description: `Use our interactive ${NICHE.name} cost estimator to calculate units and prices for ${NICHE.calculator.treatmentAreas.slice(0, 3).map(a => a.label.toLowerCase()).join(', ')} and more based on local averages.`,
-    alternates: {
-        canonical: 'https://www.injectorindex.com/calculator',
-    }
+    title: "Botox Cost Calculator 2026 | InjectorIndex",
+    description: "Calculate how much botox will cost based on area, units, and city."
 }
 
-export const dynamic = 'force-dynamic'
-
+// Static page for calculator
 export default function CalculatorPage() {
-    const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+    const lastUpdated = "February 2026" // Statically set for SEO consistency
     const priceSchema = generatePriceSpecificationSchema(NICHE.priceRange.min, NICHE.priceRange.max, NICHE.priceUnit.split(' ').slice(-1)[0])
 
     return (
@@ -41,7 +37,7 @@ export default function CalculatorPage() {
                     </div>
                 </div>
 
-                <CostCalculator />
+                <CalculatorClient />
 
                 <section className="mt-24 max-w-3xl mx-auto space-y-12">
                     <div className="bg-white/[0.02] p-10 rounded-3xl border border-white/[0.06]">

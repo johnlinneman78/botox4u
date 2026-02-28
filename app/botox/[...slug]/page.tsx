@@ -27,7 +27,30 @@ interface CatchAllPageProps {
     searchParams?: Promise<{ lat?: string; lng?: string }>
 }
 
-export const dynamic = 'force-dynamic'
+// Enable static generation for primary city and state pages
+export async function generateStaticParams() {
+    const states = Object.values(STATE_MAP).map(s => s.toLowerCase())
+    const majorCities = [
+        { state: 'or', city: 'portland' },
+        { state: 'wa', city: 'seattle' },
+        { state: 'ny', city: 'new-york' },
+        { state: 'ca', city: 'los-angeles' },
+        { state: 'ca', city: 'san-francisco' },
+        { state: 'fl', city: 'miami' },
+        { state: 'il', city: 'chicago' },
+        { state: 'tx', city: 'dallas' },
+        { state: 'tx', city: 'houston' },
+        { state: 'ma', city: 'boston' },
+        { state: 'az', city: 'scottsdale' },
+        { state: 'ga', city: 'atlanta' },
+        { state: 'co', city: 'denver' }
+    ]
+
+    const statePaths = states.map(s => ({ slug: [s] }))
+    const cityPaths = majorCities.map(c => ({ slug: [c.state, c.city] }))
+
+    return [...statePaths, ...cityPaths]
+}
 
 export async function generateMetadata({ params }: CatchAllPageProps): Promise<Metadata> {
     const resolvedParams = await params

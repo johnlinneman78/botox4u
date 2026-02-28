@@ -4,11 +4,8 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: `Common Aesthetic Questions — Patient Data FAQ | ${NICHE.siteName}`,
-    description: `Independent answers about Botox pricing, injector safety, and how our TrueScore™ algorithm works. We prioritize patient transparency.`,
-    alternates: {
-        canonical: '/faq',
-    },
+    title: "FAQ | InjectorIndex",
+    description: "Common questions about finding botox injectors"
 }
 
 export default function FAQPage() {

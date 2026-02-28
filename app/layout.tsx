@@ -33,6 +33,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "InjectorIndex",
+              "url": "https://www.injectorindex.com",
+              "description": "Find and compare botox injectors ranked by TrueScore™",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Portland",
+                "addressRegion": "OR",
+                "addressCountry": "US"
+              }
+            })
+          }}
+        />
+      </head>
       <body className="font-sans antialiased bg-[#0d1420] text-gray-100">
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
