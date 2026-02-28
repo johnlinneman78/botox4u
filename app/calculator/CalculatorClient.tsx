@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button'
 import { Slider } from '@/components/ui/Slider'
 import Link from 'next/link'
 import { Info, HelpCircle, Check, ArrowRight, ShieldCheck } from 'lucide-react'
-import { PricingMethodology } from './Methodology'
+import { PricingMethodology } from '@/components/tools/Methodology'
 import { NICHE } from '@/config/niche'
 
 // --- Types ---
