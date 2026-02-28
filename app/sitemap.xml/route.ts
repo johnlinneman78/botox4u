@@ -13,6 +13,9 @@ export async function GET(request: Request) {
     <loc>${baseUrl}/sitemap-cities.xml</loc>
   </sitemap>
   <sitemap>
+    <loc>${baseUrl}/sitemap-states.xml</loc>
+  </sitemap>
+  <sitemap>
     <loc>${baseUrl}/sitemap-providers.xml</loc>
   </sitemap>
 </sitemapindex>`

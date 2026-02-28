@@ -19,7 +19,7 @@ export default function robots(): MetadataRoute.Robots {
                 '/*?page='
             ],
         },
-        sitemap: 'https://www.injectorindex.com/sitemap-index-main.xml',
+        sitemap: 'https://www.injectorindex.com/sitemap.xml',
         host: 'https://www.injectorindex.com',
     }
 }
