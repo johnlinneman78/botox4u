@@ -42,10 +42,10 @@ export default function AestheticsNews() {
                             <TrendingUp className="w-3 h-3" /> Intelligence & Guides
                         </div>
                         <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
-                            The <span className="text-[#d4af37]">2026</span> Aesthetic Pulse
+                            The 2026 <span className="text-[#d4af37]">Botox Intelligence Hub</span>
                         </h2>
                         <p className="text-gray-500 text-lg font-light">
-                            Independent analysis on the Neo-Romantic aesthetic movement in regenerative medicine, and what it means for your skin.
+                            Expert guides, cost breakdowns, and injector research — everything you need before booking.
                         </p>
                     </div>
                     <div className="flex items-center gap-6">

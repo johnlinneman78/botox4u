@@ -29,7 +29,7 @@ export default function TreatmentGuides() {
                             icon: Zap,
                             color: 'from-blue-600/20 to-blue-900/10',
                             accent: 'text-blue-400',
-                            link: '/find-providers?q=Botox'
+                            link: '/botox-buyers-guide'
                         },
                         {
                             title: 'Dermal Fillers',
@@ -37,7 +37,7 @@ export default function TreatmentGuides() {
                             icon: Target,
                             color: 'from-violet-600/20 to-violet-900/10',
                             accent: 'text-violet-400',
-                            link: '/find-providers?q=Filler'
+                            link: '/botox-buyers-guide'
                         },
                         {
                             title: 'Medspa Services',
@@ -45,7 +45,7 @@ export default function TreatmentGuides() {
                             icon: Building2,
                             color: 'from-emerald-600/20 to-emerald-900/10',
                             accent: 'text-emerald-400',
-                            link: '/find-providers?type=institutional'
+                            link: '/botox-buyers-guide'
                         }
                     ].map((guide, i) => (
                         <Link

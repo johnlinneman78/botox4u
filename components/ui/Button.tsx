@@ -15,10 +15,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
                     'disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]',
                     {
-                        'bg-[#1a2332] text-white hover:bg-slate-800 focus-visible:ring-[#1a2332] shadow-lg shadow-[#1a2332]/10': variant === 'primary',
-                        'bg-[#d4af37] text-[#1a2332] hover:bg-[#c0a030] focus-visible:ring-[#d4af37] shadow-lg shadow-[#d4af37]/10': variant === 'secondary',
-                        'border-2 border-slate-200 text-[#1a2332] hover:border-[#d4af37] hover:text-[#d4af37] bg-white': variant === 'outline',
-                        'text-slate-500 hover:text-[#1a2332] hover:bg-slate-50': variant === 'ghost',
+                        'bg-white/10 text-white hover:bg-white/20': variant === 'primary',
+                        'bg-[#d4af37] text-black hover:bg-[#c0a030]': variant === 'secondary',
+                        'border border-white/10 text-white hover:bg-white/5 bg-transparent': variant === 'outline',
+                        'text-gray-400 hover:text-white hover:bg-white/5': variant === 'ghost',
                     },
                     {
                         'px-4 py-2 text-sm': size === 'sm',

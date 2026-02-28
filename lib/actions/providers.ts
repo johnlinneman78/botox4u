@@ -69,12 +69,12 @@ export async function getProvidersWithSearch(filters: {
         .from('providers')
         .select(`
             id, name, slug, business_type, address, city, state, 
-            listing_tier, verified, price_per_unit, botox_price_per_unit,
-            latitude, longitude, hero_image_url, image_url, 
+            listing_tier, verified, price_per_unit,
+            lat, lng, hero_image_url,
             rating, average_rating, review_count, 
             services_offered, credentials, description,
             npi_verified, npi_number, allergan_tier,
-            score_results_quality, responsiveness_score,
+            score_results_quality,
             warning_flag, warning_reason, treatment_slugs
         `)
         // .eq('display_status', 'live') // Disabled until migration is confirmed to be run
@@ -170,7 +170,6 @@ export async function getProvidersWithSearch(filters: {
             allergan_tier: p.allergan_tier,
             results_quality_score: p.score_results_quality || p.enriched_attrs?.score_results_quality || 15,
             website: p.website,
-            responsiveness_score: p.responsiveness_score,
             regen_treatments_count: regenCount,
             offers_long_acting_tox: hasAdvancedTox || p.offers_long_acting_tox || p.enriched_attrs?.offers_long_acting_tox,
             uses_ai_diagnostics: hasAI || p.uses_ai_diagnostics || p.enriched_attrs?.uses_ai_diagnostics
@@ -207,10 +206,10 @@ export async function getProvidersWithSearch(filters: {
             price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
             pricePerUnit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
             minTreatmentPrice: p.min_treatment_price,
-            latitude: p.latitude || 0,
-            longitude: p.longitude || 0,
-            lat: p.latitude || 0,
-            lng: p.longitude || 0,
+            latitude: p.lat || 0,
+            longitude: p.lng || 0,
+            lat: p.lat || 0,
+            lng: p.lng || 0,
             imageUrl: (() => {
                 const url = p.hero_image_url || p.image_url;
                 if (!url || url.includes('placeholder')) {
@@ -410,8 +409,8 @@ export async function getTopScoringProviders(limit: number = 6, userLat?: number
                 business_type: p.business_type,
                 city: p.city,
                 state: p.state,
-                lat: p.latitude || p.lat || 0,
-                lng: p.longitude || p.lng || 0,
+                lat: p.lat || 0,
+                lng: p.lng || 0,
                 rating: p.rating || parseFloat(p.average_rating || 0),
                 review_count: p.review_count || 0,
                 score_total: scoreBreakdown.points,
@@ -458,7 +457,7 @@ export async function getCityStats(city: string) {
 
     if (error || !data || data.length === 0) return null
 
-    const prices = data.map((p: any) => Number(p.price_per_unit || p.botox_price_per_unit)).filter(p => !isNaN(p) && p > 0)
+    const prices = data.map((p: any) => Number(p.price_per_unit)).filter(p => !isNaN(p) && p > 0)
     const ratings = data.map((p: any) => Number(p.rating || p.average_rating)).filter(r => !isNaN(r) && r > 0)
 
     // ANTI-ZERO GUARD: Ensure Scottsdale (and others) never show $0 or 0.0 rating

@@ -108,10 +108,12 @@ export default function InjectorMatchQuiz() {
         try {
             const cityObj = NICHE.cities.find(c => c.slug === selectedCity)
             const cityName = cityObj ? cityObj.name : ''
+            const stateCode = cityObj ? cityObj.state : ''
 
             // Fetch real providers from the city
             const providers = await getProvidersWithSearch({
                 city: cityName,
+                state: stateCode,
                 limit: 3,
                 sort: 'priority'
             }) as any[]
@@ -344,7 +346,7 @@ export default function InjectorMatchQuiz() {
                                         <div className="flex items-center gap-4">
                                             <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${selectedTreatments.includes(opt.id) ? 'bg-[#d4af37] text-[#0d1420]' : 'bg-white/5 text-gray-500 group-hover/opt:text-white'
                                                 }`}>
-                                                <opt.icon className="w-5 h-5" />
+                                                {opt.icon && <opt.icon className="w-5 h-5" />}
                                             </div>
                                             <span className={`font-bold transition-colors ${selectedTreatments.includes(opt.id) ? 'text-white' : 'text-gray-400 group-hover/opt:text-white'}`}>
                                                 {opt.label}
@@ -365,7 +367,7 @@ export default function InjectorMatchQuiz() {
                                         <div className="flex items-center gap-4">
                                             <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${selectedPriorities.includes(opt.id) ? 'bg-[#d4af37] text-[#0d1420]' : 'bg-white/5 text-gray-500 group-hover/opt:text-white'
                                                 }`}>
-                                                <opt.icon className="w-5 h-5" />
+                                                {opt.icon && <opt.icon className="w-5 h-5" />}
                                             </div>
                                             <span className={`font-bold transition-colors ${selectedPriorities.includes(opt.id) ? 'text-white' : 'text-gray-400 group-hover/opt:text-white'}`}>
                                                 {opt.label}

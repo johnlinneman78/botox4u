@@ -46,7 +46,7 @@ export default function Footer() {
                     <div>
                         <h4 className="font-bold mb-4 text-white text-xs uppercase tracking-widest">For Providers</h4>
                         <ul className="space-y-2.5 text-sm">
-                            <li><Link href="/provider/claim" rel="nofollow" className="text-gray-500 hover:text-[#d4af37] transition-colors">Claim Listing</Link></li>
+                            <li><Link href="/claim" rel="nofollow" className="text-gray-500 hover:text-[#d4af37] transition-colors">Claim Listing</Link></li>
                             <li><Link href="/provider/login" rel="nofollow" className="text-gray-500 hover:text-[#d4af37] transition-colors">Provider Login</Link></li>
                             <li><Link href="/pricing" className="text-gray-500 hover:text-[#d4af37] transition-colors">Pricing</Link></li>
                             <li><Link href="/methodology" className="text-gray-500 hover:text-[#d4af37] transition-colors">TrueScore™ Methodology</Link></li>

@@ -5,21 +5,21 @@ const STEPS = [
     {
         id: '01',
         title: 'Pick Your City',
-        desc: 'Browse 500+ verified injectors across 22 major metro areas.',
+        desc: 'Select your city from 22 major metros across the US.',
         icon: <MapPin className="w-6 h-6" />,
         color: 'bg-blue-500/10 text-blue-400 border-blue-500/20'
     },
     {
         id: '02',
         title: 'Compare Scores',
-        desc: 'Every provider rated on credentials, injection quality, and innovation.',
+        desc: 'Review TrueScore™ rankings, credentials, pricing, and patient outcomes side by side.',
         icon: <Search className="w-6 h-6" />,
         color: 'bg-[#d4af37]/10 text-[#d4af37] border-[#d4af37]/20'
     },
     {
         id: '03',
         title: 'Book with Confidence',
-        desc: 'See real pricing, verified NPI credentials, and patient outcomes first.',
+        desc: 'Contact your top-ranked injector directly — no middleman, no referral fees.',
         icon: <Calendar className="w-6 h-6" />,
         color: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
     }

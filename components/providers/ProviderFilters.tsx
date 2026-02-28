@@ -2,7 +2,9 @@
 
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { MapPin, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { NICHE } from '@/config/niche'
 
 interface ProviderFiltersProps {
     currentCity?: string
@@ -143,11 +145,28 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
                     </Button>
                     <Button
                         variant="outline"
-                        className="px-4 py-2.5 border-white/10 text-gray-500 hover:bg-white/5"
+                        className="px-4 py-2.5 border-white/10 text-gray-400 hover:text-white hover:bg-white/5"
+                        onClick={() => {
+                            if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition((pos) => {
+                                    const params = new URLSearchParams(searchParams.toString());
+                                    params.set('lat', pos.coords.latitude.toString());
+                                    params.set('lng', pos.coords.longitude.toString());
+                                    router.push(`/find-providers?${params.toString()}`);
+                                });
+                            }
+                        }}
+                        title="Search Near Me"
+                    >
+                        <MapPin className="w-4 h-4" />
+                    </Button>
+                    <Button
+                        variant="secondary"
+                        className="px-4 py-2.5 bg-white/5 border border-white/10 text-gray-500 hover:text-white"
                         onClick={resetFilters}
                         title="Reset Filters"
                     >
-                        ↺
+                        <RotateCcw className="w-4 h-4" />
                     </Button>
                 </div>
             </div>

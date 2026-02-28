@@ -15,7 +15,18 @@ const TREND_TREATMENTS = [
     { label: 'Baby Botox', tag: 'Preventative', hot: true },
 ]
 
-export default function Hero({ city: initialCity, state }: { city?: string; state?: string; userLat?: number; userLng?: number }) {
+export default function Hero({
+    city: initialCity,
+    providersCount = 500,
+    citiesCount = 22,
+    reviewsCount = 10000
+}: {
+    city?: string;
+    state?: string;
+    providersCount?: number;
+    citiesCount?: number;
+    reviewsCount?: number;
+}) {
     const router = useRouter()
     const [selectedCity, setSelectedCity] = useState(initialCity || '')
 
@@ -37,16 +48,16 @@ export default function Hero({ city: initialCity, state }: { city?: string; stat
             <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#d4af37] opacity-[0.04] blur-[180px] rounded-full translate-x-1/3 -translate-y-1/4 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 opacity-[0.03] blur-[180px] rounded-full -translate-x-1/4 translate-y-1/4 pointer-events-none" />
 
-            {/* Trust Bar (replacing Pulse Ticker) */}
+            {/* Trust Bar */}
             <div className="relative z-10 border-b border-white/[0.06] bg-white/[0.02] backdrop-blur-sm">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40">
                     <span className="flex items-center gap-2">
                         <span className="w-1 h-1 rounded-full bg-[#d4af37]" />
-                        500+ Providers Indexed
+                        {providersCount.toLocaleString()}+ Providers Indexed
                     </span>
                     <span className="flex items-center gap-2">
                         <span className="w-1 h-1 rounded-full bg-[#d4af37]" />
-                        22 Cities
+                        {citiesCount} Cities
                     </span>
                     <span className="flex items-center gap-2">
                         <span className="w-1 h-1 rounded-full bg-[#d4af37]" />
@@ -69,7 +80,7 @@ export default function Hero({ city: initialCity, state }: { city?: string; stat
 
                     {/* Sub */}
                     <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed font-light">
-                        InjectorIndex scores 500+ providers across 22 cities on credentials, technique quality, and patient outcomes. See real pricing before you book.
+                        InjectorIndex scores {providersCount.toLocaleString()}+ providers across {citiesCount} cities on credentials, technique quality, and patient outcomes. See real pricing before you book.
                     </p>
 
                     {/* CTA Row */}
@@ -117,13 +128,19 @@ export default function Hero({ city: initialCity, state }: { city?: string; stat
                     {/* Quick filter pills */}
                     <div className="flex flex-wrap gap-2 items-center mb-16">
                         <span className="text-gray-600 text-xs font-bold uppercase tracking-wider mr-1">Top Searches:</span>
-                        {['Botox', 'Lip Filler', 'Daxxify', 'Xeomin', 'Jawline Contouring'].map(tag => (
+                        {[
+                            { label: 'Botox', slug: 'botox' },
+                            { label: 'Lip Filler', slug: 'lip-filler' },
+                            { label: 'Daxxify', slug: 'daxxify' },
+                            { label: 'Xeomin', slug: 'xeomin' },
+                            { label: 'Jawline Contouring', slug: 'jawline' }
+                        ].map(tag => (
                             <Link
-                                key={tag}
-                                href={`/find-providers?q=${encodeURIComponent(tag)}`}
+                                key={tag.label}
+                                href={`/find-providers?treatment=${tag.slug}`}
                                 className="text-xs font-semibold text-white/60 border border-white/10 px-3 py-1.5 rounded-full hover:border-[#d4af37]/40 hover:text-[#d4af37] transition-all"
                             >
-                                {tag}
+                                {tag.label}
                             </Link>
                         ))}
                     </div>
@@ -132,8 +149,8 @@ export default function Hero({ city: initialCity, state }: { city?: string; stat
                 {/* Stats Row */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.05] rounded-2xl overflow-hidden border border-white/[0.06]">
                     {[
-                        { value: '500+', label: 'Providers Indexed', note: 'Across 22+ Cities' },
-                        { value: '$9–25', label: 'Per Unit Pricing', note: 'Real Market Rates' },
+                        { value: `${providersCount.toLocaleString()}+`, label: 'Providers Indexed', note: `Across ${citiesCount} Cities` },
+                        { value: '$12–25', label: 'Per Unit Pricing', note: 'Verified Market Rates' },
                         { value: '98', label: 'Top TrueScore™', note: initialCity ? `${initialCity} Market` : 'Top Neighborhoods' },
                         { value: 'AI-Audit', label: 'Results Verification', note: 'Zero Pay-to-Rank' },
                     ].map((stat, i) => (
