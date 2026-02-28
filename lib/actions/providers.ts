@@ -255,10 +255,22 @@ export async function getProvidersWithSearch(filters: {
     // Safety Floor Gatekeeper
     const currentView = filters.view
     let finalProviders = deduplicated
-    if (currentView === 'specialist') {
-        finalProviders = deduplicated.filter(p => p.is_specialist)
+    if (currentView === 'specialist' || !currentView) {
+        // Try to show only specialists first
+        const specialists = deduplicated.filter(p => p.is_specialist)
+        // FALLBACK: If no specialists found, show ALL providers rather than an empty list
+        finalProviders = specialists.length > 0 ? specialists : deduplicated
     } else if (currentView === 'general') {
         finalProviders = deduplicated.filter(p => p.relegated)
+    }
+
+    // CRITICAL FALLBACK: If still 0 results after city/query filtering, retry with all filters removed
+    // to ensure the user never sees a completely empty page if we have any data at all.
+    // We only do this if any filters were actually applied.
+    if (finalProviders.length === 0 && (filters.query || filters.city || filters.state || filters.treatment || filters.type)) {
+        console.log('DEBUG: No results found with specific filters. Retrying with broad search.')
+        // Avoid infinite recursion by checking if any filters were provided
+        return getProvidersWithSearch({ limit: filters.limit })
     }
 
     const tierWeight = {
