@@ -87,6 +87,21 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/botox/botox/:state/:city*',
+        destination: '/botox/:state/:city',
+        permanent: true,
+      },
+      {
+        source: '/botox/dysport/:state/:city',
+        destination: '/botox/:state/:city',
+        permanent: true,
+      },
+      {
+        source: '/botox/grand-rapids-mi',
+        destination: '/botox/mi/grand-rapids',
+        permanent: true,
+      },
+      {
         source: '/botox/new-york-ny',
         destination: '/botox/ny/new-york',
         permanent: true,
