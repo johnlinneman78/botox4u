@@ -379,6 +379,8 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                     reviews={provider.top_reviews || provider.reviews || []}
                                     totalReviews={provider.reviewCount || 0}
                                     googlePlaceId={provider.google_place_id || ''}
+                                    providerId={provider.id}
+                                    bookingUrl={provider.booking_url}
                                 />
                             </div>
                         </div>

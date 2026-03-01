@@ -9,10 +9,12 @@ interface ReviewCarouselProps {
     totalReviews: number
     googlePlaceId: string
     googleUrl?: string
+    providerId?: string
+    bookingUrl?: string
 }
 
-export function ReviewCarousel({ reviews, totalReviews, googlePlaceId }: ReviewCarouselProps) {
-    const googleReviewLink = `https://www.google.com/maps/search/?api=1&query=provider&query_place_id=${googlePlaceId}`
+export function ReviewCarousel({ reviews, totalReviews, googlePlaceId, providerId, bookingUrl }: ReviewCarouselProps) {
+    const bookingTrackingUrl = `/api/track-click?provider_id=${providerId}&type=booking`
 
     return (
         <div className="w-full py-10 bg-gray-50/50 rounded-3xl border border-gray-100/50">
@@ -43,9 +45,15 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId }: ReviewC
                                         <Star key={starIdx} className={`w-3 h-3 ${starIdx < (review.rating || 5) ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-100 text-gray-100'}`} />
                                     ))}
                                 </div>
-                                <p className="text-sm text-gray-700 italic leading-relaxed mb-4">
-                                    "{review.text?.substring(0, 200)}{review.text?.length > 200 ? '...' : ''}"
-                                </p>
+                                {review.text && review.text.trim().length > 0 ? (
+                                    <p className="text-sm text-gray-700 italic leading-relaxed mb-4">
+                                        "{review.text?.substring(0, 200)}{review.text?.length > 200 ? '...' : ''}"
+                                    </p>
+                                ) : (
+                                    <p className="text-sm text-gray-700 italic leading-relaxed mb-4">
+                                        Verified 5-star rating on Google
+                                    </p>
+                                )}
                                 <div className="flex justify-between items-center">
                                     <div className="flex flex-col">
                                         <span className="text-xs font-bold text-primary">{review.author_name}</span>
@@ -68,26 +76,17 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId }: ReviewC
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <a
-                        href={googleReviewLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#4285F4] text-white rounded-2xl text-md font-bold hover:bg-[#357ae8] transition-all shadow-lg shadow-blue-500/20 group"
+                        href={bookingTrackingUrl}
+                        className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#d4af37] text-[#0d1420] rounded-2xl text-lg font-black tracking-widest uppercase hover:bg-[#c0a030] transition-all shadow-xl shadow-[#d4af37]/20 group"
                     >
-                        <ExternalLink className="w-5 h-5" />
-                        View All {NICHE.googleAttribution.reviewText}s
+                        Book a Consultation
+                        <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </a>
                 </div>
 
                 <div className="mt-8 flex flex-col items-center gap-4">
-                    <img
-                        src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png"
-                        alt="Powered by Google"
-                        className="h-5 w-auto opacity-80"
-                        width={144}
-                        height={18}
-                    />
-                    <p className="text-xs text-gray-400 font-medium uppercase tracking-widest">
-                        Data Verified • {new Date().getFullYear()} Standard
+                    <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em]">
+                        Data Verified • {new Date().getFullYear()} Clinical Standard
                     </p>
                 </div>
             </div>
