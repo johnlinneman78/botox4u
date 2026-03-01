@@ -131,7 +131,7 @@ export default function ApiAccessPage() {
                 </div>
 
                 {/* Example */}
-                <div className="mb-24">
+                <div className="mb-16">
                     <div className="flex items-center gap-3 mb-6 px-4">
                         <Zap className="w-5 h-5 text-[#d4af37]" />
                         <h3 className="text-xl font-bold text-white">Agent-Ready Structure</h3>
@@ -140,6 +140,49 @@ export default function ApiAccessPage() {
                         <pre className="text-gray-400">
                             <code>{codeExample}</code>
                         </pre>
+                    </div>
+                </div>
+
+                {/* Endpoint Reference */}
+                <div className="mb-24">
+                    <div className="flex items-center gap-3 mb-8 px-4">
+                        <Code className="w-5 h-5 text-[#d4af37]" />
+                        <h3 className="text-xl font-bold text-white">Endpoint Reference</h3>
+                    </div>
+                    <div className="space-y-4">
+                        <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6">
+                            <div className="flex items-center gap-3 mb-3">
+                                <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-widest">GET</span>
+                                <code className="text-white font-mono text-sm">/api/v1/providers</code>
+                            </div>
+                            <p className="text-gray-500 text-sm mb-4">Search and filter providers by city, style, price, and TrueScore™.</p>
+                            <div className="text-xs text-gray-600 font-mono space-y-1">
+                                <div><span className="text-gray-400">city</span> <span className="text-gray-700">string, required</span> — City name (e.g., &quot;portland&quot;)</div>
+                                <div><span className="text-gray-400">style</span> <span className="text-gray-700">string</span> — Filter by style tag (e.g., &quot;natural&quot;)</div>
+                                <div><span className="text-gray-400">max_price</span> <span className="text-gray-700">number</span> — Maximum price per unit</div>
+                                <div><span className="text-gray-400">min_truescore</span> <span className="text-gray-700">number</span> — Minimum TrueScore™ (0-100)</div>
+                                <div><span className="text-gray-400">limit</span> <span className="text-gray-700">number</span> — Max results (default: 10, max: 50)</div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6">
+                            <div className="flex items-center gap-3 mb-3">
+                                <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-widest">GET</span>
+                                <code className="text-white font-mono text-sm">/api/v1/providers/{'{'}<span className="text-[#d4af37]">slug</span>{'}'}</code>
+                            </div>
+                            <p className="text-gray-500 text-sm mb-2">Get a single provider&apos;s full profile including TrueScore™, credentials, services, pricing, and semantic data.</p>
+                            <div className="text-xs text-gray-600 font-mono">
+                                <div><span className="text-gray-400">slug</span> <span className="text-gray-700">string, path param</span> — Provider URL slug</div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6">
+                            <div className="flex items-center gap-3 mb-3">
+                                <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-widest">GET</span>
+                                <code className="text-white font-mono text-sm">/api/v1/cities</code>
+                            </div>
+                            <p className="text-gray-500 text-sm mb-2">List all indexed cities with provider counts and directory URLs. No parameters required.</p>
+                        </div>
                     </div>
                 </div>
 

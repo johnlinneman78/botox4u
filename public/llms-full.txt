@@ -48,3 +48,7 @@ Learn more: [injectorindex.com/for-providers](/for-providers)
 Structured JSON access for developers and research agents is available at [injectorindex.com/api-access](/api-access). 
 Key endpoints include:
 - `GET /api/v1/providers`: Search and filter providers by TrueScore, location, and specialties.
+- `GET /api/v1/providers/{slug}`: Get a single provider's full profile, credentials, services, and TrueScore™ breakdown.
+- `GET /api/v1/cities`: List all indexed cities with provider counts and directory URLs.
+
+All endpoints require an API key via the `x-api-key` header. Free tier keys are available at [injectorindex.com/api-access](/api-access).
