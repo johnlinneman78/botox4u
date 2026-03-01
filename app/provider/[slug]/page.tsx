@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
 import { ReviewCarousel } from '@/components/providers/ReviewCarousel'
+import { SemanticInsights } from '@/components/providers/SemanticInsights'
 import { JsonLd, generateMedicalClinicSchema, generateBreadcrumbSchema, generateReviewSchema } from '@/components/seo/JsonLd'
 import { NICHE } from '@/config/niche'
 
@@ -59,6 +60,21 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
 
     const schema = generateMedicalClinicSchema(provider);
     const reviewSchema = generateReviewSchema(provider);
+
+    // Analyze review themes for structured data
+    const reviews = provider.top_reviews || provider.reviews || []
+    const { analyzeReviewThemes } = await import('@/components/providers/SemanticInsights')
+    const themes = analyzeReviewThemes(reviews)
+
+    // Enhance schema with semantic review data
+    if (themes.totalAnalyzed > 0 && themes.strengths.length > 0) {
+        (schema as any).review = themes.strengths.slice(0, 3).map((theme: any) => ({
+            "@type": "Review",
+            "reviewBody": `${theme.label} (mentioned in ${theme.percentage}% of ${themes.totalAnalyzed} analyzed reviews)`,
+            "author": { "@type": "Organization", "name": "InjectorIndex TrueScore™ Semantic Analysis" }
+        }))
+    }
+
     const breadcrumbs = generateBreadcrumbSchema([
         { name: 'Home', item: '/' },
         { name: provider.city, item: `/${NICHE.baseSlug}/${provider.state.toLowerCase()}/${provider.city.toLowerCase().replace(/ /g, '-')}` },
@@ -365,6 +381,13 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                     </div>
                                 </div>
                             )}
+
+                            {/* Semantic Insights — What Patients Say */}
+                            <SemanticInsights
+                                reviews={provider.top_reviews || provider.reviews || []}
+                                trueScore={provider.score_total || 50}
+                                providerName={provider.name}
+                            />
 
                             {/* Reviews */}
                             <div className="bg-white/[0.02] p-8 md:p-10 rounded-3xl border border-white/[0.06]">
