@@ -298,13 +298,13 @@ The newest entrant to the U.S. market, though used extensively internationally f
 
 ## Price Comparison
 
-| Product | Avg. Per Unit | Typical Total Cost |
-|---------|--------------|-------------------|
-| Botox | $12–$18 | $240–$450 |
-| Dysport | $4–$6 | $200–$450 |
-| Xeomin | $10–$16 | $200–$400 |
-| Jeuveau | $8–$14 | $160–$350 |
-| Letybo | $10–$16 | $200–$400 |
+| Product | Avg Price Per Unit | Units for Forehead | Est. Total Cost |
+|---|---|---|---|
+| Botox | $12–$20 | 10–20 units | $120–$400 |
+| Dysport | $4–$8 per unit | 25–50 units | $100–$400 |
+| Xeomin | $10–$18 | 10–20 units | $100–$360 |
+| Jeuveau | $10–$18 | 10–20 units | $100–$360 |
+| Letybo | $10–$16 | 10–20 units | $100–$320 |
     `,
         faqs: [
             {
