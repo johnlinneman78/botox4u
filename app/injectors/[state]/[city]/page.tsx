@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     const cityName = city.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
     const title = `Best Botox Injectors in ${cityName} | InjectorIndex`
     const description = `Find and compare top-rated botox injectors in ${cityName}. Ranked by TrueScore™.`
-    const url = `https://www.injectorindex.com/botox/${state.toLowerCase()}/${city.toLowerCase()}`
+    const url = `https://www.injectorindex.com/${NICHE.baseSlug}/${state.toLowerCase()}/${city.toLowerCase()}`
 
     return {
         title,
@@ -57,6 +57,9 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
             title,
             description,
             url,
+        },
+        alternates: {
+            canonical: url
         }
     }
 }
@@ -99,11 +102,19 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
     const breadcrumbs = generateBreadcrumbSchema([
         { name: 'Home', item: '/' },
         { name: 'Directory', item: `/${NICHE.baseSlug}` },
-        { name: stateSlug || stateCode, item: `/${NICHE.baseSlug}/state/${stateSlug || stateCode.toLowerCase()}` },
+        { name: stateSlug || stateCode, item: `/${NICHE.baseSlug}/${stateCode.toLowerCase()}` },
         { name: cityName, item: `/${NICHE.baseSlug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/\s+/g, '-')}` }
     ])
 
     const avg = stats?.avgCost || 15;
+    const faqSchema = generateFAQPageSchema(
+        cityName,
+        stateCode,
+        stats?.avgCost ? stats.avgCost - 2 : (NICHE.priceRange.min + 2),
+        stats?.avgCost ? stats.avgCost + 2 : (NICHE.priceRange.max - 2),
+        providers.length
+    )
+
     return (
         <main className="bg-[#0d1420] min-h-screen pb-20">
             <Suspense fallback={null}>
@@ -111,6 +122,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
             </Suspense>
             <JsonLd data={itemListSchema} />
             <JsonLd data={breadcrumbs} />
+            <JsonLd data={faqSchema} />
 
             <div className="bg-[#101827] border-b border-white/[0.06]">
                 <div className="container mx-auto px-4 py-3 flex items-center gap-2 text-xs font-medium text-white/60">

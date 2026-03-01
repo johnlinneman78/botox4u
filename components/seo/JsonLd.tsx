@@ -22,7 +22,7 @@ export const generateMedicalClinicSchema = (provider: any) => {
         "description": provider.bio || `Top-rated aesthetic provider specializing in ${NICHE.name} treatments in ${provider.city}.`,
         "image": provider.hero_image_url || provider.imageUrl,
         "telephone": provider.phone,
-        "url": `https://injectorindex.com/injectors/${provider.slug}`,
+        "url": `https://www.injectorindex.com/provider/${provider.slug}`,
         "address": {
             "@type": "PostalAddress",
             "streetAddress": provider.address,

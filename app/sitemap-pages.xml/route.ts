@@ -1,14 +1,21 @@
+import { NICHE } from '@/config/niche'
+
 export async function GET() {
-    const baseUrl = 'https://www.injectorindex.com'
+    const baseUrl = NICHE.baseUrl
     const currentDate = new Date().toISOString()
 
     const pages = [
         '',
+        `/${NICHE.baseSlug}`,
         '/blog',
         '/calculator',
         '/about',
         '/pricing',
         '/find-providers',
+        '/for-providers',
+        '/pulse',
+        '/api-access',
+        '/guides',
         '/methodology',
         '/privacy',
         '/terms',

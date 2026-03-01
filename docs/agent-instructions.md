@@ -1,25 +1,10 @@
-# InjectorIndex — Agent & Project Instructions
-## injectorindex.com / botox-4u.com
-**Owner:** Deepdives | Portland, OR
-**Stack:** Next.js 14, custom design
-**Last Updated:** March 2026
-
----
-
-## Changelog
-- March 2026 — Initial document created. Core strategy defined: LLM
-  indexing, semantic review data moat, AI visibility as primary
-  distribution channel.
-
----
+# Agent Instructions - InjectorIndex
 
 ## 1. What We're Building
 
-InjectorIndex is a niche medical aesthetics directory connecting patients
-with verified Botox and filler injectors across the United States.
+InjectorIndex is a niche medical aesthetics directory connecting patients with verified Botox and filler injectors across the United States.
 
-The long-term moat is being the most machine-readable, AI-cited, and
-semantically rich injector directory on the internet — not the biggest.
+The long-term moat is being the most machine-readable, AI-cited, and semantically rich injector directory on the internet — not the biggest.
 
 ### What we are NOT doing:
 - Trying to out-volume Yelp, Google Maps, or RealSelf
@@ -37,25 +22,19 @@ semantically rich injector directory on the internet — not the biggest.
 ## 2. Current State (Honest Baseline)
 
 - **Traffic:** Near zero — pre-traction phase
-- **Data:** We have real, differentiated data from our semantic
-  Google Review analysis algorithm — this is operational and valuable
+- **Data:** We have real, differentiated data from our semantic Google Review analysis algorithm — this is operational and valuable
 - **Monetization:** Not yet active — building the asset first
-- **Priority:** Infrastructure and data quality before any paid
-  acquisition
+- **Priority:** Infrastructure and data quality before any paid acquisition
 
 ---
 
 ## 3. Our Core Data Asset — The Moat
 
-We have a **semantic review analysis algorithm** that processes Google
-Reviews for med spa and injector providers. This is the single most
-important differentiator in the product and must be treated as a
-first-class feature across the entire codebase and content strategy.
+We have a **semantic review analysis algorithm** that processes Google Reviews for med spa and injector providers. This is the single most important differentiator in the product and must be treated as a first-class feature across the entire codebase and content strategy.
 
 ### What the algorithm does:
 - Ingests raw Google Reviews for any provider
-- Applies semantic analysis to extract sentiment, recurring themes,
-  and quality signals
+- Applies semantic analysis to extract sentiment, recurring themes, and quality signals
 - Outputs structured insight data per provider, for example:
   - "Patients frequently mention natural-looking results"
   - "Consistently noted for gentle technique and low pain"
@@ -63,26 +42,17 @@ first-class feature across the entire codebase and content strategy.
   - "Some reviews mention longer wait times"
 
 ### Why this matters:
-- No other injector directory has this — competitors show raw star
-  ratings, we show *why* a provider is good or bad
+- No other injector directory has this — competitors show raw star ratings, we show *why* a provider is good or bad
 - It makes our profiles worth reading AND worth citing by LLMs
-- It creates unique, non-duplicated page content that Google and
-  AI crawlers value highly
+- It creates unique, non-duplicated page content that Google and AI crawlers value highly
 - It is the foundation of our provider quality scoring system
 
 ### How to implement it across the product:
-- Surface semantic insights as readable on-page content on every
-  profile (not buried in a widget — written as natural prose)
-- Example profile copy: "Patients at this clinic consistently
-  highlight natural-looking results and minimal downtime, with
-  several reviewers specifically praising the provider's technique
-  for lip augmentation."
-- Encode insights into JSON-LD schema under `review` and
-  `aggregateRating` fields so LLMs can extract them
+- Surface semantic insights as readable on-page content on every profile (not buried in a widget — written as natural prose)
+- Example profile copy: "Patients at this clinic consistently highlight natural-looking results and minimal downtime, with several reviewers specifically praising the provider's technique for lip augmentation."
+- Encode insights into JSON-LD schema under `review` and `aggregateRating` fields so LLMs can extract them
 - Use insight themes as unique meta descriptions per profile
-- As the algorithm improves, expand insight categories:
-  specialties the provider excels at, price-value signals,
-  bedside manner, clinic cleanliness, etc.
+- As the algorithm improves, expand insight categories: specialties the provider excels at, price-value signals, bedside manner, clinic cleanliness, etc.
 
 ---
 
@@ -95,24 +65,15 @@ first-class feature across the entire codebase and content strategy.
 - Simple, fast, mobile-optimized search experience
 
 ### For Providers (Med Spa Clinics):
-**CRITICAL INSTRUCTION:** Never use technical language with clinic
-owners. They do not know what an API is, what schema markup is, or
-what LLM indexing means. Translate 100% of technical concepts into
-patient leads, visibility, and revenue.
+**CRITICAL INSTRUCTION:** Never use technical language with clinic owners. They do not know what an API is, what schema markup is, or what LLM indexing means. Translate 100% of technical concepts into patient leads, visibility, and revenue.
 
 **The pitch — use this verbatim or close to it:**
-> "When a patient asks ChatGPT or Google AI for a Botox injector
-> near them, our directory is one of the places those AI tools look.
-> Your profile means your name shows up in those answers — passively,
-> without any extra work from you."
+> "When a patient asks ChatGPT or Google AI for a Botox injector near them, our directory is one of the places those AI tools look. Your profile means your name shows up in those answers — passively, without any extra work from you."
 
 **The three things clinic owners care about:**
-1. **New patient leads** — high-intent searchers actively looking
-   for Botox or fillers right now, not casual browsers
-2. **Credibility signal** — being on a vetted, niche directory
-   signals professionalism vs. being buried on Yelp
-3. **AI search visibility** — the channel that's replacing
-   traditional Google search; own it early
+1. **New patient leads** — high-intent searchers actively looking for Botox or fillers right now, not casual browsers
+2. **Credibility signal** — being on a vetted, niche directory signals professionalism vs. being buried on Yelp
+3. **AI search visibility** — the channel that's replacing traditional Google search; own it early
 
 **Data we show providers in their dashboard:**
 - Profile views
@@ -128,24 +89,17 @@ patient leads, visibility, and revenue.
 Understanding this is critical for all product and content decisions.
 
 ### How LLMs surface local business recommendations:
-1. A user asks ChatGPT, Perplexity, or Gemini:
-   *"Who are the best Botox injectors in Portland?"*
+1. A user asks ChatGPT, Perplexity, or Gemini: *"Who are the best Botox injectors in Portland?"*
 2. The LLM searches the web for authoritative sources
-3. It strongly prefers niche, structured, credible directories
-   over generic sites — in healthcare searches, AI models
-   exclusively source from specialty directories
-4. Our directory appears as a citation, pulling listed providers
-   directly into the AI's answer
+3. It strongly prefers niche, structured, credible directories over generic sites — in healthcare searches, AI models exclusively source from specialty directories
+4. Our directory appears as a citation, pulling listed providers directly into the AI's answer
 5. The user sees our provider recommendation and clicks through
 
 ### The compounding flywheel:
-More structured data → LLMs cite us → Users visit → More reviews
-and content → LLMs cite us more → More providers want to list
+More structured data → LLMs cite us → Users visit → More reviews and content → LLMs cite us more → More providers want to list
 
 ### Why we win against bigger competitors:
-LLMs don't reward the biggest directory — they reward the most
-**machine-readable** and **topically authoritative** one. That is
-our edge over Yelp and Google Maps in this specific niche.
+LLMs don't reward the biggest directory — they reward the most **machine-readable** and **topically authoritative** one. That is our edge over Yelp and Google Maps in this specific niche.
 
 ---
 
@@ -155,8 +109,7 @@ Execute every item in this section. Do not skip steps.
 
 ### 6a. robots.txt — Allow All AI Crawlers
 
-Audit and explicitly ALLOW these user-agents in robots.txt.
-Never use broad Disallow rules that block these bots:
+Audit and explicitly ALLOW these user-agents in robots.txt. Never use broad Disallow rules that block these bots:
 
 User-agent: GPTBot # ChatGPT / OpenAI
 User-agent: Google-Extended # Gemini / Google AI Mode
@@ -172,19 +125,13 @@ Audit robots.txt every time new AI crawlers are announced.
 
 Create two files at the root domain:
 - `injectorindex.com/llms.txt` — Markdown map of key pages
-- `injectorindex.com/llms-full.txt` — Full Markdown content of
-  all key pages (AI agents visit this 2x more than the base file)
+- `injectorindex.com/llms-full.txt` — Full Markdown content of all key pages (AI agents visit this 2x more than the base file)
 
-`llms.txt` acts like a sitemap specifically for AI — it tells
-crawlers what pages matter and why, so they don't waste resources
-on irrelevant pages.
+`llms.txt` acts like a sitemap specifically for AI — it tells crawlers what pages matter and why, so they don't waste resources on irrelevant pages.
 
 **Template:**
 InjectorIndex
-The most semantically rich directory of verified medical aesthetic
-injectors in the United States. Provider profiles include
-AI-analyzed Google Review insights, service specialties,
-credentials, and location data.
+The most semantically rich directory of verified medical aesthetic injectors in the United States. Provider profiles include AI-analyzed Google Review insights, service specialties, credentials, and location data.
 
 Browse Providers by City
 Portland Injectors
@@ -215,14 +162,11 @@ List Your Practice
 
 What Providers Get
 
-Update llms.txt every time a new city, guide, or major page is
-added.
+Update llms.txt every time a new city, guide, or major page is added.
 
 ### 6c. JSON-LD Schema — Every Provider Profile
 
-Generate dynamically from the database using Next.js 14
-`generateMetadata` or inline `<script type="application/ld+json">`.
-Every profile page must have this at render time — not lazy loaded.
+Generate dynamically from the database using Next.js 14 `generateMetadata` or inline `<script type="application/ld+json">`. Every profile page must have this at render time — not lazy loaded.
 
 **Required schema per profile:**
 ```json
@@ -270,122 +214,83 @@ Every profile page must have this at render time — not lazy loaded.
   ]
 }
 ```
+
 Also add on every page:
+- LocalBusiness schema on city/location pages
+- BreadcrumbList schema on all pages
+- FAQPage schema on all guide/FAQ pages
 
-LocalBusiness schema on city/location pages
-
-BreadcrumbList schema on all pages
-
-FAQPage schema on all guide/FAQ pages
-
-6d. Technical Crawlability Rules
+### 6d. Technical Crawlability Rules
 Next.js 14 SSR is a natural advantage — enforce these rules:
+- All provider profile content MUST render in the initial HTML response — never lazy-load core profile data client-side
+- URL structure must be semantic and human-readable:
+  ✅ /injectors/portland/dr-jane-smith
+  ❌ /profile?id=4821
+- Auto-generate and keep current an XML sitemap; reference it in robots.txt
+- Every page (city, specialty, provider) needs unique meta title and meta description — never duplicate
+- Optimize Core Web Vitals — LLM crawlers drop slow pages
+- No JavaScript walls — all content visible without JS execution
 
-All provider profile content MUST render in the initial HTML
-response — never lazy-load core profile data client-side
+---
 
-URL structure must be semantic and human-readable:
-✅ /injectors/portland/dr-jane-smith
-❌ /profile?id=4821
+## 7. Content Strategy for LLM Citation
 
-Auto-generate and keep current an XML sitemap; reference it in
-robots.txt
+LLMs cite niche directories heavily for local service queries. Content must be structured, factual, and answer real patient questions.
 
-Every page (city, specialty, provider) needs unique meta title
-and meta description — never duplicate
+### Guide pages to build (highest priority):
+- "How much does Botox cost in [city]?" → /guides/botox-cost-[city]
+- "What's the difference between Botox and Dysport?" → /guides/botox-vs-dysport
+- "How do I find a certified injector near me?" → /guides/find-certified-injector
+- "What should I look for in a Botox provider?" → /guides/choosing-a-provider
+- "How long does Botox last?" → /guides/how-long-does-botox-last
+- "Is Botox safe?" → /guides/botox-safety
 
-Optimize Core Web Vitals — LLM crawlers drop slow pages
+### Per-provider profile content rules:
+- Minimum 200 words of unique content per profile
+- Lead with semantic insight summary from our algorithm
+- List services with brief descriptions — not just bullet names
+- Include location context (neighborhood, city, nearby landmarks)
+- Never copy-paste from the provider's own website
 
-No JavaScript walls — all content visible without JS execution
+### City page content rules:
+- Unique intro paragraph per city (not templated filler)
+- Local context: average prices in that market, notable neighborhoods, density of providers
+- FAQ section using FAQPage schema
 
-7. Content Strategy for LLM Citation
-LLMs cite niche directories heavily for local service queries.
-Content must be structured, factual, and answer real patient
-questions.
+---
 
-Guide pages to build (highest priority):
-These pages get cited directly when patients ask AI these questions:
+## 8. Agent Task Priorities (Ordered)
 
-"How much does Botox cost in [city]?" → /guides/botox-cost-[city]
+1. Audit and fix robots.txt — allow all AI crawlers
+2. Implement JSON-LD schema on all provider profiles, auto-generated from database
+3. Create llms.txt and llms-full.txt at root domain
+4. Surface semantic review insights as readable on-page prose content on every profile
+5. Enforce semantic URL structure across all pages
+6. Generate and maintain XML sitemap — auto-updated
+7. Build guide/FAQ content targeting patient questions
+8. Ensure full SSR — no core content lazy-loaded client-side
+9. Add BreadcrumbList and FAQPage schemas to all relevant pages
+10. Build provider dashboard (views, clicks, leads) — for monetization readiness
 
-"What's the difference between Botox and Dysport?" → /guides/botox-vs-dysport
+---
 
-"How do I find a certified injector near me?" → /guides/find-certified-injector
+## 9. What to Never Do
 
-"What should I look for in a Botox provider?" → /guides/choosing-a-provider
+- Never explain APIs, schema, or LLM indexing to clinic owners
+- Never build pages with thin content (under 200 words)
+- Never use duplicate meta titles or descriptions across pages
+- Never block AI crawlers in robots.txt
+- Never lazy-load core provider data on profile pages
+- Never use query-string URLs for provider profiles
+- Never pitch clinics on technical features — always translate to patient leads and AI visibility
 
-"How long does Botox last?" → /guides/how-long-does-botox-last
+---
 
-"Is Botox safe?" → /guides/botox-safety
+## 10. Strategic North Star
 
-Per-provider profile content rules:
-Minimum 200 words of unique content per profile
+We are building the directory that AI recommends when someone asks for an injector. Every technical decision, every piece of content, and every product feature should be evaluated against this question:
 
-Lead with semantic insight summary from our algorithm
-
-List services with brief descriptions — not just bullet names
-
-Include location context (neighborhood, city, nearby landmarks)
-
-Never copy-paste from the provider's own website
-
-City page content rules:
-Unique intro paragraph per city (not templated filler)
-
-Local context: average prices in that market, notable
-neighborhoods, density of providers
-
-FAQ section using FAQPage schema
-
-8. Agent Task Priorities (Ordered)
-Execute in this order. Do not skip ahead.
-
-Audit and fix robots.txt — allow all AI crawlers
-
-Implement JSON-LD schema on all provider profiles,
-auto-generated from database
-
-Create llms.txt and llms-full.txt at root domain
-
-Surface semantic review insights as readable on-page
-prose content on every profile
-
-Enforce semantic URL structure across all pages
-
-Generate and maintain XML sitemap — auto-updated
-
-Build guide/FAQ content targeting patient questions
-
-Ensure full SSR — no core content lazy-loaded client-side
-
-Add BreadcrumbList and FAQPage schemas to all relevant pages
-
-Build provider dashboard (views, clicks, leads) — for
-monetization readiness
-
-9. What to Never Do
-Never explain APIs, schema, or LLM indexing to clinic owners
-
-Never build pages with thin content (under 200 words)
-
-Never use duplicate meta titles or descriptions across pages
-
-Never block AI crawlers in robots.txt
-
-Never lazy-load core provider data on profile pages
-
-Never use query-string URLs for provider profiles
-
-Never pitch clinics on technical features — always translate to
-patient leads and AI visibility
-
-10. Strategic North Star
-We are building the directory that AI recommends when someone asks
-for an injector. Every technical decision, every piece of content,
-and every product feature should be evaluated against this question:
-
-"Does this make us more likely to be cited by an LLM answering
-a patient's injector question?"
+"Does this make us more likely to be cited by an LLM answering a patient's injector question?"
 
 If yes, prioritize it.
 If no, deprioritize it until the above is fully built.

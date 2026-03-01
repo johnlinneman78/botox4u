@@ -114,7 +114,7 @@ export default function InjectorMatchQuiz() {
         setLoading(true)
         // GA4: Track start of submission
         if (typeof window.gtag === 'function') {
-            window.gtag('event', 'matcher_submit_start')
+            window.gtag('event', 'matcher_submit_start', {})
         }
 
         try {

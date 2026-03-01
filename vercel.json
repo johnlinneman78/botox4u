@@ -1,6 +1,11 @@
 {
     "redirects": [
         {
+            "source": "/botox/:path*",
+            "destination": "https://www.injectorindex.com/injectors/:path*",
+            "permanent": true
+        },
+        {
             "source": "/:path*",
             "has": [
                 {

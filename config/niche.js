@@ -44,7 +44,7 @@ export const NICHE = {
     priceRange: { min: 10, max: 25 },      // typical price range for this niche
 
     // URL structure
-    baseSlug: "botox",                      // /botox/[city] — change to /iv-therapy/ etc
+    baseSlug: "injectors",                      // /injectors/[city] — change to /iv-therapy/ etc
 
     // Treatments in this niche
     treatments: [

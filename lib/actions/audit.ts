@@ -269,7 +269,7 @@ export function generateAuditEmailHTML(auditResult: AuditResult, patientData: Au
             <div style="padding: 50px 20px; text-align: center; background-color: ${darkBlue}; color: #ffffff;">
                 <h3 style="margin-top: 0; font-size: 24px; color: white;">Ranked by Data. Not Ads.</h3>
                 <p style="color: rgba(255,255,255,0.6); font-size: 15px; margin-bottom: 35px; max-width: 450px; margin-left: auto; margin-right: auto;">Browser all ${city} clinics filtered by Clinical Quality, TrueScore™, and Real-World Pricing.</p>
-                <a href="https://www.injectorindex.com/botox/${state.toLowerCase()}/${city.toLowerCase().replace(/ /g, '-')}" 
+                <a href="https://www.injectorindex.com/injectors/${state.toLowerCase()}/${city.toLowerCase().replace(/ /g, '-')}" 
                    style="background-color: ${brandGold}; color: ${darkBlue}; padding: 20px 45px; border-radius: 50px; text-decoration: none; font-weight: 900; display: inline-block; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;">
                     Explore Top ${city} Clinics
                 </a>

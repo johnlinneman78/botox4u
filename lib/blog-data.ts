@@ -1436,7 +1436,7 @@ This doesn't mean RealSelf is useless — the patient reviews there are valuable
 
 InjectorIndex scores 140+ NYC-area providers on clinical quality data. Compare TrueScores, see real pricing, and verify credentials before you book.
 
-[See NYC's top-rated providers →](/botox/ny/new-york)
+[See NYC's top-rated providers →](/injectors/ny/new-york)
 
 [Estimate your treatment cost →](/calculator)
 
@@ -1462,7 +1462,7 @@ Here's what the data shows about Portland's medspa market in 2026.
 ## Portland's Medspa Market at a Glance
 
 **Number of indexed providers:** 20+
-**Average TrueScore:** Check [Portland city page](/botox/or/portland) for current data
+**Average TrueScore:** Check [Portland city page](/injectors/or/portland) for current data
 **Average Botox price:** $13-$15 per unit
 **Most searched treatments:** Botox, lip filler, Dysport, jawline contouring
 **Fastest-growing treatment interest:** Daxxify, polynucleotides
@@ -1534,7 +1534,7 @@ Any provider who answers these questions directly and without defensiveness is w
 
 InjectorIndex ranks every Portland medspa on clinical quality data — not who pays the most for advertising. Compare TrueScores, see real pricing, and verify credentials before you book.
 
-[See Portland's top-rated providers →](/botox/or/portland)
+[See Portland's top-rated providers →](/injectors/or/portland)
 
 [Estimate your treatment cost →](/calculator)
 
@@ -1653,9 +1653,9 @@ Both cities sit in the mid-range nationally. Chicago offers slightly better valu
 
 ## Find Top-Rated Providers
 
-[See Chicago's highest-rated injectors →](/botox/il/chicago)
+[See Chicago's highest-rated injectors →](/injectors/il/chicago)
 
-[See Seattle's highest-rated injectors →](/botox/wa/seattle)
+[See Seattle's highest-rated injectors →](/injectors/wa/seattle)
 
 [Compare pricing across all 22 cities →](/calculator)
 
@@ -1786,9 +1786,9 @@ What varies is:
 
 ## Find Top-Rated Texas Providers
 
-[See Dallas's highest-rated injectors →](/botox/tx/dallas)
+[See Dallas's highest-rated injectors →](/injectors/tx/dallas)
 
-[See Houston's highest-rated injectors →](/botox/tx/houston)
+[See Houston's highest-rated injectors →](/injectors/tx/houston)
 
 [Compare pricing across all 22 cities →](/calculator)
 
@@ -1890,7 +1890,7 @@ InjectorIndex TrueScores don't factor in celebrity clients. They measure credent
 
 InjectorIndex scores LA-area providers on injection quality, credentials, treatment range, and innovation adoption. TrueScores are calculated from public data — no provider can pay for a higher ranking.
 
-[See LA's highest-rated injectors →](/botox/ca/los-angeles)
+[See LA's highest-rated injectors →](/injectors/ca/los-angeles)
 
 [Compare pricing across all 22 cities →](/calculator)
 
@@ -2000,7 +2000,7 @@ The fix is simple: always ask for per-unit pricing and unit count before treatme
 
 InjectorIndex scores Miami-area providers on injection quality, credentials, treatment range, and innovation adoption. TrueScores are calculated from public data — no provider can pay for a higher ranking.
 
-[See Miami's highest-rated injectors →](/botox/fl/miami)
+[See Miami's highest-rated injectors →](/injectors/fl/miami)
 
 [Compare pricing across all 22 cities →](/calculator)
 
@@ -2102,7 +2102,7 @@ Data from InjectorIndex provider records across all 22 indexed cities.
 
 InjectorIndex scores 140+ NYC-area providers on clinical quality data. Every TrueScore is calculated from public data — no provider can pay for a higher score.
 
-[See NYC's highest-rated injectors →](/botox/ny/new-york)
+[See NYC's highest-rated injectors →](/injectors/ny/new-york)
 
 [Compare pricing across all 22 cities →](/calculator)
 
@@ -2166,7 +2166,7 @@ Portland is a value market relative to the coasts. You're getting comparable qua
 
 InjectorIndex ranks every Portland medspa on clinical quality data — not who pays the most for advertising. Compare TrueScores, see real pricing, and verify credentials before you book.
 
-[See Portland's top-rated providers →](/botox/or/portland)
+[See Portland's top-rated providers →](/injectors/or/portland)
 
 [Estimate your treatment cost →](/calculator)
 

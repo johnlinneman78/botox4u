@@ -2,8 +2,32 @@ import { MetadataRoute } from 'next'
 import { NICHE } from '@/config/niche'
 
 export default function robots(): MetadataRoute.Robots {
-    return {
-        rules: {
+    const rules = [
+        {
+            userAgent: 'GPTBot',
+            allow: '/',
+        },
+        {
+            userAgent: 'Google-Extended',
+            allow: '/',
+        },
+        {
+            userAgent: 'PerplexityBot',
+            allow: '/',
+        },
+        {
+            userAgent: 'CCBot',
+            allow: '/',
+        },
+        {
+            userAgent: 'anthropic-ai',
+            allow: '/',
+        },
+        {
+            userAgent: 'OAI-SearchBot',
+            allow: '/',
+        },
+        {
             userAgent: '*',
             allow: '/',
             disallow: [
@@ -19,7 +43,11 @@ export default function robots(): MetadataRoute.Robots {
                 '/*?filter=',
                 '/*?page='
             ],
-        },
+        }
+    ]
+
+    return {
+        rules: rules,
         sitemap: `${NICHE.baseUrl}/sitemap.xml`,
         host: NICHE.baseUrl,
     }

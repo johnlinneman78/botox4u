@@ -22,7 +22,7 @@ export default function ApiAccessPage() {
 
     const codeExample = `
 // curl -H "x-api-key: YOUR_KEY" \\
-// "https://injectorindex.com/api/v1/providers?city=portland&style=natural"
+// "https://www.injectorindex.com/api/v1/providers?city=portland&style=natural"
 
 {
   "results": [
@@ -32,7 +32,7 @@ export default function ApiAccessPage() {
       "truescore": 92,
       "style_tags": ["natural", "conservative"],
       "avg_price": 320,
-      "profile_url": "https://injectorindex.com/injectors/pdx-injectables"
+      "profile_url": "https://www.injectorindex.com/provider/pdx-injectables"
     }
   ],
   "total": 1,

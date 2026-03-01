@@ -11,8 +11,8 @@ export function AIConcierge() {
     const pathname = usePathname()
     const [isOpen, setIsOpen] = useState(false)
 
-    // Only show on homepage or city pages (/botox/...)
-    const shouldShow = pathname === '/' || pathname.startsWith('/botox/')
+    // Only show on homepage or city pages (/injectors/...)
+    const shouldShow = pathname === '/' || pathname.startsWith('/injectors/')
 
     const [messages, setMessages] = useState<any[]>([
         { role: 'assistant', content: "Hi! I'm your InjectorIndex assistant. Looking for natural results or a specific clinician in your city? I can help you find the perfect match." }

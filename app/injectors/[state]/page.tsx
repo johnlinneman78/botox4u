@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: StatePageProps): Promise<Meta
         title: `${stateName} ${NICHE.name} Providers | Costs & Reviews`,
         description: `Find top-rated ${NICHE.name} providers and medical spas across ${stateName}. View average costs, patient reviews, and verified clinics in major cities.`,
         alternates: {
-            canonical: `https://www.injectorindex.com/botox/${state.toLowerCase()}`
+            canonical: `https://www.injectorindex.com/${NICHE.baseSlug}/${state.toLowerCase()}`
         }
     }
 }
@@ -44,17 +44,19 @@ export default async function StatePage({ params }: StatePageProps) {
     const cities = await getCitiesInState(stateCode)
 
     return (
-        <main className="bg-white min-h-screen">
+        <main className="bg-[#0d1420] min-h-screen pb-20">
             <StateHero
                 stateName={stateName}
                 providerCount={stats?.providerCount || 0}
                 avgCost={stats?.avgCost || 15}
                 cityCount={stats?.cityCount || 0}
             />
-            <CityList
-                cities={cities}
-                stateName={stateName}
-            />
+            <div className="container mx-auto px-4">
+                <CityList
+                    cities={cities}
+                    stateName={stateName}
+                />
+            </div>
         </main>
     )
 }

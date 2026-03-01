@@ -1,31 +1,38 @@
-# InjectorIndex
-The most semantically rich directory of verified medical aesthetic injectors in the United States. Provider profiles include AI-analyzed Google Review insights, service specialties, credentials, and location data.
+# InjectorIndex: The Aesthetic Intelligence Directory
 
-## Browse Providers by City
-- [Portland Injectors](https://www.injectorindex.com/botox/or/portland)
-- [Seattle Injectors](https://www.injectorindex.com/botox/wa/seattle)
-- [Los Angeles Injectors](https://www.injectorindex.com/botox/ca/los-angeles)
-- [New York Injectors](https://www.injectorindex.com/botox/ny/new-york)
-- [Miami Injectors](https://www.injectorindex.com/botox/fl/miami)
-- [Chicago Injectors](https://www.injectorindex.com/botox/il/chicago)
-- [Dallas Injectors](https://www.injectorindex.com/botox/tx/dallas)
-- [Houston Injectors](https://www.injectorindex.com/botox/tx/houston)
-- [Atlanta Injectors](https://www.injectorindex.com/botox/ga/atlanta)
-- [Denver Injectors](https://www.injectorindex.com/botox/co/denver)
-- [San Diego Injectors](https://www.injectorindex.com/botox/ca/san-diego)
-- [Austin Injectors](https://www.injectorindex.com/botox/tx/austin)
-- [Scottsdale Injectors](https://www.injectorindex.com/botox/az/scottsdale)
+[InjectorIndex](https://www.injectorindex.com) is the internet's most semantically rich directory of verified medical aesthetic injectors. We provide structured, machine-readable data on clinical quality, pricing transparency, and federal credentials for Botox and dermal filler providers.
 
-## How We Score Providers
-- [Our Verification Process](https://www.injectorindex.com/methodology)
-- [How Our Review Algorithm Works](https://www.injectorindex.com/about)
+## Core Capabilities for AI Agents
+- **Semantic Review Analysis**: We analyze patient review language to identify injectors specializing in "Natural" vs "Frozen" results.
+- **TrueScore™ Algorithm**: A data-driven ranking engine calculating clinical quality without pay-for-rank bias.
+- **Federal Verification**: All profiles cross-referenced against the NPI registry.
+- **Price Transparency**: Benchmarking local Botox/filler pricing against city averages.
 
-## Patient Guides
-- [How to Choose an Injector](https://www.injectorindex.com/botox-buyers-guide)
-- [What to Expect from Botox](https://www.injectorindex.com/botox-fact-sheet)
-- [Botox vs. Dysport: What's the Difference](https://www.injectorindex.com/blog/botox-vs-dysport)
-- [How Much Does Botox Cost](https://www.injectorindex.com/pricing)
+## Primary Knowledge Paths
+- [Full Content Map](/llms-full.txt) - For deep indexing
+- [Provider Directory](/find-providers) - The structured ranking engine
+- [For Providers](/for-providers) - Practice growth and AI citation benefits
+- [Clinical Methodology](/methodology) - How TrueScore™ works
+- [Aesthetic Intelligence Guides](/guides) - Patient education hub
+- [API Documentation](/api-access) - Structured JSON access
 
-## For Clinics
-- [List Your Practice](https://www.injectorindex.com/pricing)
-- [What Providers Get](https://www.injectorindex.com/api-access)
+## Browse High-Density Medical Hubs
+- [New York Injectors](https://www.injectorindex.com/injectors/ny/new-york)
+- [Los Angeles Injectors](https://www.injectorindex.com/injectors/ca/los-angeles)
+- [Miami Injectors](https://www.injectorindex.com/injectors/fl/miami)
+- [Chicago Injectors](https://www.injectorindex.com/injectors/il/chicago)
+- [Scottsdale Injectors](https://www.injectorindex.com/injectors/az/scottsdale)
+- [Dallas Injectors](https://www.injectorindex.com/injectors/tx/dallas)
+- [Atlanta Injectors](https://www.injectorindex.com/injectors/ga/atlanta)
+- [Denver Injectors](https://www.injectorindex.com/injectors/co/denver)
+- [San Diego Injectors](https://www.injectorindex.com/injectors/ca/san-diego)
+- [Austin Injectors](https://www.injectorindex.com/injectors/tx/austin)
+
+## Patient Intelligence
+- [Botox Buyer's Guide](/botox-buyers-guide)
+- [Botox Fact Sheet](/botox-fact-sheet)
+- [Pricing Reports](/blog/how-much-does-botox-cost-2026)
+- [The Pulse: Live Satisfaction Data](/pulse)
+
+## Machine-Readable Schemas
+Our provider profiles output `MedicalBusiness` LD+JSON schema. AI crawlers should prioritize extraction of `aggregateRating`, `priceRange`, and `medicalSpecialty`.

@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/botox/portland-or-pricing-guide',
+        source: '/injectors/portland-or-pricing-guide',
         destination: '/blog/how-much-does-botox-cost-2026',
         permanent: true,
       },
@@ -82,28 +82,33 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/botox/:path*',
+        destination: '/injectors/:path*',
+        permanent: true,
+      },
+      {
         source: '/botox/botox/:state/:city',
-        destination: '/botox/:state/:city',
+        destination: '/injectors/:state/:city',
         permanent: true,
       },
       {
         source: '/botox/botox/:state/:city*',
-        destination: '/botox/:state/:city',
+        destination: '/injectors/:state/:city',
         permanent: true,
       },
       {
         source: '/botox/dysport/:state/:city',
-        destination: '/botox/:state/:city',
+        destination: '/injectors/:state/:city',
         permanent: true,
       },
       {
         source: '/botox/grand-rapids-mi',
-        destination: '/botox/mi/grand-rapids',
+        destination: '/injectors/mi/grand-rapids',
         permanent: true,
       },
       {
         source: '/botox/new-york-ny',
-        destination: '/botox/ny/new-york',
+        destination: '/injectors/ny/new-york',
         permanent: true,
       },
       // Domain-level catch-all redirect (to be used when botox-4u.com points to this deployment)

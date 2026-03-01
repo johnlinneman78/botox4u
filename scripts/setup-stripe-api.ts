@@ -43,7 +43,7 @@ async function setup() {
 
             console.log(`✅ Success! Product: ${product.id}, Price: ${price.id}`);
             console.log(`ADD TO .env: STRIPE_${p.id.toUpperCase()}_PRICE_ID=${price.id}`);
-        } catch (e) {
+        } catch (e: any) {
             console.error(`❌ Error creating ${p.id}:`, e.message);
         }
     }

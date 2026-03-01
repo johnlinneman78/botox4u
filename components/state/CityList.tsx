@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Card } from '@/components/ui/Card'
+import { NICHE } from '@/config/niche'
 
 interface CityData {
     city: string
@@ -34,7 +35,7 @@ export function CityList({ cities, stateName }: CityListProps) {
                     {cities.map((cityData) => {
                         const slug = `${cityData.city.toLowerCase().replace(/ /g, '-')}-${cityData.state.toLowerCase()}`
                         return (
-                            <Link key={cityData.city} href={`/botox/${cityData.state.toLowerCase()}/${cityData.city.toLowerCase().replace(/ /g, '-')}`} className="group">
+                            <Link key={cityData.city} href={`/${NICHE.baseSlug}/${cityData.state.toLowerCase()}/${cityData.city.toLowerCase().replace(/ /g, '-')}`} className="group">
                                 <Card className="p-6 hover:shadow-xl transition-all border-gray-100 group-hover:border-secondary/30 relative overflow-hidden h-full">
                                     <div className="absolute top-0 right-0 w-16 h-16 bg-secondary/5 -mr-8 -mt-8 rounded-full group-hover:bg-secondary/10 transition-colors" />
 

@@ -8,6 +8,7 @@ import { getProvidersWithSearch } from '@/lib/actions/providers'
 import { GeolocationSorter } from '@/components/providers/GeolocationSorter'
 import { NICHE } from '@/config/niche'
 import { Dna, ShieldCheck } from 'lucide-react'
+import { JsonLd, generateItemListSchema } from '@/components/seo/JsonLd'
 
 export const metadata: Metadata = {
     title: `Find & Compare Best ${NICHE.name} Providers | TrueScore™ Verified`,
@@ -49,8 +50,11 @@ export default async function FindProvidersPage({
         sort: (userLat && userLng) ? 'distance' : undefined
     })
 
+    const itemListSchema = generateItemListSchema(providers.slice(0, 50), city || 'All Locations')
+
     return (
         <div className="bg-[#0d1420] min-h-screen py-12">
+            <JsonLd data={itemListSchema} />
             <div className="container mx-auto px-4">
                 <div className="mb-8">
                     <Suspense fallback={null}>

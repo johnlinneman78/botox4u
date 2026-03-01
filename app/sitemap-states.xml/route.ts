@@ -1,4 +1,5 @@
 import { STATE_MAP } from '@/lib/constants'
+import { NICHE } from '@/config/niche'
 
 export async function GET() {
     const baseUrl = 'https://www.injectorindex.com'
@@ -10,7 +11,7 @@ export async function GET() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${states.map((stateCode) => `
     <url>
-        <loc>${baseUrl}/botox/${stateCode.toLowerCase()}</loc>
+        <loc>${baseUrl}/${NICHE.baseSlug}/${stateCode.toLowerCase()}</loc>
         <lastmod>${lastMod}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { headers } from 'next/headers'
 import { MapPin, ChevronRight } from 'lucide-react'
+import { NICHE } from '@/config/niche'
 
 const FEATURED_CITIES = [
     { name: 'New York', state: 'NY', slug: 'ny/new-york', avgCost: 18, providers: 142, tag: '🔬 Clinical Precision', avgII: 92, trueScore: 94, topSearch: 'Botox, Lip Filler' },
@@ -35,7 +36,7 @@ export default async function FeaturedCities() {
                             Real pricing, verified credentials, and TrueScore™ rankings — every city.
                         </p>
                     </div>
-                    <Link href="/botox" className="group flex items-center gap-3 bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] px-6 py-2.5 rounded-xl font-black text-sm hover:bg-[#d4af37]/20 transition-all shrink-0">
+                    <Link href={`/${NICHE.baseSlug}`} className="group flex items-center gap-3 bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] px-6 py-2.5 rounded-xl font-black text-sm hover:bg-[#d4af37]/20 transition-all shrink-0">
                         Browse All Cities
                         <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#d4af37] text-[#0d1420] text-[10px]">22</span>
                         <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -44,7 +45,7 @@ export default async function FeaturedCities() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {sorted.map((city) => (
-                        <Link key={city.slug} href={`/botox/${city.slug}`} className="group">
+                        <Link key={city.slug} href={`/${NICHE.baseSlug}/${city.slug}`} className="group">
                             <div className={`bg-white/[0.02] border rounded-2xl p-6 hover:bg-white/[0.05] hover:border-[#d4af37]/20 transition-all h-full ${city.name === userCity
                                 ? 'border-[#d4af37]/30 bg-[#d4af37]/5'
                                 : 'border-white/[0.06]'
