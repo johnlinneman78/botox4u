@@ -196,13 +196,6 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                         Consult with Clinic
                                     </Button>
                                 </a>
-                                {provider.website && (
-                                    <a href={provider.website} target="_blank" rel="noopener noreferrer">
-                                        <Button variant="outline" size="lg" className="h-14 px-8 border-white/10 text-gray-400 hover:bg-white/5">
-                                            Official Website
-                                        </Button>
-                                    </a>
-                                )}
                             </div>
                         </div>
                     </div>

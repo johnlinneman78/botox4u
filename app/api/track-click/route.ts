@@ -8,34 +8,44 @@ export async function GET(req: Request) {
     const type = searchParams.get('type')
 
     if (!providerId) {
-        return NextResponse.json({ error: 'Provider ID required' }, { status: 400 })
+        return NextResponse.redirect(new URL('/', req.url))
     }
 
-    const supabase = createRouteHandlerClient({ cookies })
+    try {
+        const supabase = createRouteHandlerClient({ cookies })
 
-    // Log the click event (assuming we want to increment clicks_30d or just log it)
-    // For now, let's increment clicks_30d as per previous Phase 2 logic if applicable,
-    // or just handle the redirect. The user said "After logging the click, redirect".
+        const { data: provider, error: fetchError } = await supabase
+            .from('providers')
+            .select('id, name, booking_url, website, clicks_30d')
+            .eq('id', providerId)
+            .single()
 
-    // Let's increment clicks_30d which we just added in the previous step.
-    await supabase.rpc('increment_provider_clicks', { p_id: providerId })
-    // If RPC doesn't exist, we can do a simple update, but RPC is safer for concurrent clicks.
-    // However, I'll stick to a simple update for now to avoid creating more migrations unless needed.
-    // Actually, let's just do a direct update.
+        if (fetchError || !provider) {
+            console.error('Track click: Provider not found or error', providerId, fetchError)
+            return NextResponse.redirect(new URL('/', req.url))
+        }
 
-    const { data: provider } = await supabase
-        .from('providers')
-        .select('booking_url, website, clicks_30d')
-        .eq('id', providerId)
-        .single()
+        // Silent metric increment
+        try {
+            await supabase
+                .from('providers')
+                .update({ clicks_30d: (provider.clicks_30d || 0) + 1 })
+                .eq('id', providerId)
+        } catch (updateErr) {
+            console.error('Failed to increment clicks_30d', updateErr)
+        }
 
-    const targetUrl = provider?.booking_url || provider?.website || '/'
+        let targetUrl = provider.booking_url || provider.website || '/'
 
-    // Increment clicks_30d
-    await supabase
-        .from('providers')
-        .update({ clicks_30d: (provider as any)?.clicks_30d + 1 || 1 })
-        .eq('id', providerId)
+        // Protocol normalization for external URLs
+        if (targetUrl !== '/' && !targetUrl.startsWith('/') && !targetUrl.startsWith('http')) {
+            targetUrl = `https://${targetUrl}`
+        }
 
-    return NextResponse.redirect(new URL(targetUrl))
+        // Use req.url as base if targetUrl is relative
+        return NextResponse.redirect(new URL(targetUrl, req.url))
+    } catch (err) {
+        console.error('Fatal track click error:', err)
+        return NextResponse.redirect(new URL('/', req.url))
+    }
 }
