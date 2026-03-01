@@ -267,8 +267,8 @@ Preventative Botox uses fewer units than traditional treatment, so per-session c
     },
     {
         slug: 'botox-vs-dysport-vs-xeomin-vs-letybo-2026',
-        title: 'Botox vs. Dysport vs. Xeomin vs. Letybo: The 2026 Guide',
-        metaDescription: 'Botox isn\'t your only option anymore. Here\'s an honest comparison of all FDA-approved neurotoxins in 2026 — pricing, duration, onset speed, and which one works best for what.',
+        title: "Botox vs Dysport vs Xeomin vs Letybo: Which Lasts Longest? (2026)",
+        metaDescription: "Side-by-side comparison of every major neuromodulator in 2026. Duration, cost, onset time, and which injectors actually recommend — by InjectorIndex.",
         targetKeyword: 'botox vs dysport 2026',
         publishDate: '2026-02-26',
         content: `
@@ -351,8 +351,8 @@ A good provider examines your face at rest and during expression, quotes a clear
     },
     {
         slug: 'kourtney-kardashian-third-eye-botox-debate',
-        title: 'The Kourtney Kardashian "Third Eye" Botox Debate',
-        metaDescription: 'Kourtney Kardashian recently quit Botox to "keep her third eye open." While it sounds like celebrity mysticism, there is substantial science behind the "disconnected" feeling some patients report.',
+        title: "Kourtney Kardashian's 'Third Eye Botox' Debate — What Injectors Actually Think",
+        metaDescription: "Kourtney Kardashian refused forehead Botox to protect her 'third eye.' We asked real injectors what they think about this growing trend.",
         targetKeyword: 'kourtney kardashian botox third eye',
         publishDate: '2026-03-01',
         content: `
