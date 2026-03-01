@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { NICHE } from '@/config/niche'
 
 export default function robots(): MetadataRoute.Robots {
     return {
@@ -19,7 +20,7 @@ export default function robots(): MetadataRoute.Robots {
                 '/*?page='
             ],
         },
-        sitemap: 'https://www.injectorindex.com/sitemap.xml',
-        host: 'https://www.injectorindex.com',
+        sitemap: `${NICHE.baseUrl}/sitemap.xml`,
+        host: NICHE.baseUrl,
     }
 }

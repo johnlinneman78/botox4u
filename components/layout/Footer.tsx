@@ -18,10 +18,10 @@ export default function Footer() {
                             </Link>
                         </div>
                         <p className="text-sm text-gray-500 mb-5 leading-relaxed">
-                            The first provider directory built around clinical quality data — not paid placement.
+                            The first provider directory built around clinical quality data — not paid placement. Find the best {NICHE.name.toLowerCase()} injectors on {NICHE.domain}.
                         </p>
                         <div className="flex items-center gap-4">
-                            <a href={`https://twitter.com/InjectorIndex`} target="_blank" rel="noopener" className="text-gray-700 hover:text-[#d4af37] transition-colors">
+                            <a href={`https://twitter.com/${NICHE.links.twitter}`} target="_blank" rel="noopener" className="text-gray-700 hover:text-[#d4af37] transition-colors">
                                 <span className="sr-only">X (Twitter)</span>
                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
