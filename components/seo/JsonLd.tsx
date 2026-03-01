@@ -15,18 +15,14 @@ export const JsonLd: React.FC<JsonLdProps> = ({ data }) => {
 };
 
 export const generateMedicalClinicSchema = (provider: any) => {
-    // Determine price range string as requested
-    const lowPrice = provider.price_per_unit ? provider.price_per_unit - 2 : 12;
-    const highPrice = provider.price_per_unit ? provider.price_per_unit + 2 : 16;
-    const priceRange = `$${lowPrice}-$${highPrice} per unit`;
-
     return {
         "@context": "https://schema.org",
-        "@type": ["MedicalBusiness", "LocalBusiness"],
+        "@type": "MedicalBusiness",
         "name": provider.name,
-        "image": provider.imageUrl || provider.hero_image_url,
+        "description": provider.bio || `Top-rated aesthetic provider specializing in ${NICHE.name} treatments in ${provider.city}.`,
+        "image": provider.hero_image_url || provider.imageUrl,
         "telephone": provider.phone,
-        "url": `https://www.injectorindex.com/provider/${provider.slug}`,
+        "url": `https://injectorindex.com/injectors/${provider.slug}`,
         "address": {
             "@type": "PostalAddress",
             "streetAddress": provider.address,
@@ -34,18 +30,13 @@ export const generateMedicalClinicSchema = (provider: any) => {
             "addressRegion": provider.state,
             "addressCountry": "US"
         },
-        "geo": provider.latitude ? {
-            "@type": "GeoCoordinates",
-            "latitude": provider.latitude,
-            "longitude": provider.longitude
-        } : undefined,
         "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": parseFloat(provider.averageRating || provider.rating || 4.0),
-            "reviewCount": parseInt(provider.reviewCount || provider.review_count || 1),
-            "bestRating": "5"
+            "ratingValue": (provider.score_total / 10).toFixed(1),
+            "bestRating": "10",
+            "ratingCount": provider.review_count || 1
         },
-        "priceRange": priceRange,
+        "priceRange": provider.price_per_unit ? `$${provider.price_per_unit}` : "$$",
         "medicalSpecialty": "CosmeticDermatology"
     };
 };

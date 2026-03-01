@@ -54,6 +54,8 @@ export async function getProvidersWithSearch(filters: {
     state?: string,
     tier?: string,
     treatment?: string,
+    style?: string, // e.g. "natural"
+    maxPrice?: number,
     type?: string, // institutional | artisan
     view?: string, // specialist | general
     limit?: number,
@@ -61,7 +63,7 @@ export async function getProvidersWithSearch(filters: {
     userLat?: number,
     userLng?: number
 } = {}) {
-    console.log('DEBUG: getProvidersWithSearch started')
+    console.log('DEBUG: getProvidersWithSearch started', filters)
     const supabase = await getSupabaseServer(await cookies())
     if (!supabase) return []
 
@@ -75,7 +77,8 @@ export async function getProvidersWithSearch(filters: {
             services_offered, credentials, description,
             npi_verified, npi_number, allergan_tier,
             score_results_quality,
-            warning_flag, warning_reason, treatment_slugs
+            warning_flag, warning_reason, treatment_slugs,
+            style_tags
         `)
         // .eq('display_status', 'live') // Disabled until migration is confirmed to be run
         .order('listing_tier', { ascending: false }) // Premium first
@@ -137,6 +140,13 @@ export async function getProvidersWithSearch(filters: {
     if (filters.treatment) {
         // treatment_slugs is a text[] column in Supabase
         queryBuilder = queryBuilder.contains('treatment_slugs', [filters.treatment])
+    }
+    if (filters.style) {
+        // style_tags is a text[] column in Supabase
+        queryBuilder = queryBuilder.contains('style_tags', [filters.style.toLowerCase()])
+    }
+    if (filters.maxPrice) {
+        queryBuilder = queryBuilder.lte('price_per_unit', filters.maxPrice)
     }
     if (filters.type === 'artisan') {
         queryBuilder = queryBuilder.in('business_type', ARTISANS)
@@ -263,13 +273,23 @@ export async function getProvidersWithSearch(filters: {
         finalProviders = deduplicated.filter(p => p.relegated)
     }
 
-    // CRITICAL FALLBACK: If still 0 results after city/query filtering, retry with all filters removed
-    // to ensure the user never sees a completely empty page if we have any data at all.
-    // We only do this if any filters were actually applied.
-    if (finalProviders.length === 0 && (filters.query || filters.city || filters.state || filters.treatment || filters.type)) {
-        console.log('DEBUG: No results found with specific filters. Retrying with broad search.')
-        // Avoid infinite recursion by checking if any filters were provided
-        return getProvidersWithSearch({ limit: filters.limit })
+    // INTELLIGENT FALLBACK: If 0 results for specific filters, try broadening the search
+    if (finalProviders.length === 0) {
+        // 1. Try city-wide but remove treatment/query filters
+        if (filters.city && (filters.treatment || filters.query)) {
+            console.log('FALLBACK: City search empty with filters. Retrying city-wide.')
+            return getProvidersWithSearch({ city: filters.city, state: filters.state, limit: filters.limit })
+        }
+        // 2. Try state-wide
+        if (filters.state && !filters.city) {
+            console.log('FALLBACK: State search empty. Retrying state-wide broad.')
+            return getProvidersWithSearch({ state: filters.state, limit: filters.limit })
+        }
+        // 3. Absolute broad search (Last resort)
+        if (Object.keys(filters).some(k => (filters as any)[k] && k !== 'limit')) {
+            console.log('FALLBACK: No matching results found. Showing top national providers.')
+            return getProvidersWithSearch({ limit: filters.limit })
+        }
     }
 
     const tierWeight = {

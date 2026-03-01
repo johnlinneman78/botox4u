@@ -1,0 +1,31 @@
+# InjectorIndex
+The most semantically rich directory of verified medical aesthetic injectors in the United States. Provider profiles include AI-analyzed Google Review insights, service specialties, credentials, and location data.
+
+## Browse Providers by City
+- [Portland Injectors](https://www.injectorindex.com/botox/or/portland)
+- [Seattle Injectors](https://www.injectorindex.com/botox/wa/seattle)
+- [Los Angeles Injectors](https://www.injectorindex.com/botox/ca/los-angeles)
+- [New York Injectors](https://www.injectorindex.com/botox/ny/new-york)
+- [Miami Injectors](https://www.injectorindex.com/botox/fl/miami)
+- [Chicago Injectors](https://www.injectorindex.com/botox/il/chicago)
+- [Dallas Injectors](https://www.injectorindex.com/botox/tx/dallas)
+- [Houston Injectors](https://www.injectorindex.com/botox/tx/houston)
+- [Atlanta Injectors](https://www.injectorindex.com/botox/ga/atlanta)
+- [Denver Injectors](https://www.injectorindex.com/botox/co/denver)
+- [San Diego Injectors](https://www.injectorindex.com/botox/ca/san-diego)
+- [Austin Injectors](https://www.injectorindex.com/botox/tx/austin)
+- [Scottsdale Injectors](https://www.injectorindex.com/botox/az/scottsdale)
+
+## How We Score Providers
+- [Our Verification Process](https://www.injectorindex.com/methodology)
+- [How Our Review Algorithm Works](https://www.injectorindex.com/about)
+
+## Patient Guides
+- [How to Choose an Injector](https://www.injectorindex.com/botox-buyers-guide)
+- [What to Expect from Botox](https://www.injectorindex.com/botox-fact-sheet)
+- [Botox vs. Dysport: What's the Difference](https://www.injectorindex.com/blog/botox-vs-dysport)
+- [How Much Does Botox Cost](https://www.injectorindex.com/pricing)
+
+## For Clinics
+- [List Your Practice](https://www.injectorindex.com/pricing)
+- [What Providers Get](https://www.injectorindex.com/api-access)

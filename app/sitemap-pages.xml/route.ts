@@ -15,7 +15,9 @@ export async function GET() {
         '/disclaimer',
         '/faq',
         '/botox-buyers-guide',
-        '/botox-fact-sheet'
+        '/botox-fact-sheet',
+        '/provider/login',
+        '/provider/claim'
     ]
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

@@ -74,21 +74,27 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId, providerI
                     </div>
                 )}
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a
-                        href={bookingTrackingUrl}
-                        className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#d4af37] text-[#0d1420] rounded-2xl text-lg font-black tracking-widest uppercase hover:bg-[#c0a030] transition-all shadow-xl shadow-[#d4af37]/20 group"
-                    >
-                        Book a Consultation
-                        <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </a>
-                </div>
+                <a
+                    href={bookingTrackingUrl}
+                    className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#d4af37] text-[#0d1420] rounded-2xl text-lg font-black tracking-widest uppercase hover:bg-[#c0a030] transition-all shadow-xl shadow-[#d4af37]/20 group"
+                    onClick={() => {
+                        if (typeof window.gtag === 'function') {
+                            window.gtag('event', 'booking_click', {
+                                provider_id: providerId,
+                                source: 'reviews_section'
+                            })
+                        }
+                    }}
+                >
+                    Book a Consultation
+                    <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+            </div>
 
-                <div className="mt-8 flex flex-col items-center gap-4">
-                    <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em]">
-                        Data Verified • {new Date().getFullYear()} Clinical Standard
-                    </p>
-                </div>
+            <div className="mt-8 flex flex-col items-center gap-4">
+                <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em]">
+                    Data Verified • {new Date().getFullYear()} Clinical Standard
+                </p>
             </div>
         </div>
     )

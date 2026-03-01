@@ -7,6 +7,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { StickyBar } from '@/components/navigation/StickyBar'
 import GoogleAnalytics from '@/components/seo/GoogleAnalytics'
+import { AIConcierge } from '@/components/AIConcierge'
 import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
@@ -65,6 +66,7 @@ export default function RootLayout({
         </Suspense>
         <Header />
         <main className="min-h-screen">{children}</main>
+        <AIConcierge />
         <StickyBar />
         <Footer />
       </body>

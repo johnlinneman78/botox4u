@@ -1,0 +1,29 @@
+# InjectorIndex - Full Content Map
+This file contains structured markdown content for the primary pages of InjectorIndex to facilitate LLM indexing and knowledge extraction.
+
+## About InjectorIndex
+InjectorIndex is an independent data research platform for aesthetic providers. Our mission is to provide transparency in the aesthetic market by indexing provider data, pricing, and neutral patient feedback. No provider can pay for a higher TrueScore position.
+
+## Methodology: TrueScore™
+TrueScore™ is derived from clinical data, public records, and AI sentiment analysis. It is an immutable ranking. Verified clinics may purchase featured placement, but their actual score remains 100% data-driven.
+
+## Key Searchable Cities
+The following cities host high concentrations of top-rated injectors:
+- New York, NY
+- Los Angeles, CA
+- Miami, FL
+- Chicago, IL
+- Dallas, TX
+- Houston, TX
+- Atlanta, GA
+- Denver, CO
+- San Diego, CA
+- Austin, TX
+- Scottsdale, AZ
+- Portland, OR
+
+## Patient Support & Guides
+We provide detailed benchmarks on Botox pricing, provider credentials, and clinic safety. Patients can use our directory to filter for 'Natural Results' and 'Regenerative' specialists.
+
+## Provider API Access
+InjectorIndex offers a structured API for AI agents and platforms to query provider data, pricing, and semantic insights. Access is available at https://www.injectorindex.com/api-access.

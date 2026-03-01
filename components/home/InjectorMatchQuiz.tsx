@@ -78,7 +78,15 @@ export default function InjectorMatchQuiz() {
 
     const nextStep = () => {
         if (stepIndex < STEPS.length - 1) {
-            setStepIndex(stepIndex + 1)
+            const nextIdx = stepIndex + 1
+            setStepIndex(nextIdx)
+            // GA4: Track step progress
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'matcher_step', {
+                    step: nextIdx + 1,
+                    step_name: STEPS[nextIdx].id
+                })
+            }
         } else {
             handleFinalSubmit()
         }
@@ -104,7 +112,11 @@ export default function InjectorMatchQuiz() {
 
     const handleFinalSubmit = async () => {
         setLoading(true)
-        // Simulate match finding + fetch real providers if city is selected
+        // GA4: Track start of submission
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'matcher_submit_start')
+        }
+
         try {
             const cityObj = NICHE.cities.find(c => c.slug === selectedCity)
             const cityName = cityObj ? cityObj.name : ''
@@ -120,11 +132,23 @@ export default function InjectorMatchQuiz() {
 
             setMatches(providers.slice(0, 3))
             setIsSubmitted(true)
+
+            // GA4: Track successful completion (Key Event)
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'matcher_complete', {
+                    city: cityName,
+                    matches_count: providers.length
+                })
+            }
         } catch (error) {
             console.error('Match finding failed:', error)
-            // Fallback matches?
             setMatches([])
             setIsSubmitted(true)
+
+            // GA4: Track error
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'matcher_error', { error: 'fetch_failed' })
+            }
         } finally {
             setLoading(false)
         }
@@ -198,7 +222,20 @@ export default function InjectorMatchQuiz() {
                                             </div>
                                         </div>
 
-                                        <Link href={`/provider/${provider.slug}`} className="block">
+                                        <Link
+                                            href={`/provider/${provider.slug}`}
+                                            className="block"
+                                            onClick={() => {
+                                                if (typeof window.gtag === 'function') {
+                                                    window.gtag('event', 'matcher_result_click', {
+                                                        provider_name: provider.name,
+                                                        provider_id: provider.id,
+                                                        city: provider.city,
+                                                        tier: provider.listing_tier || 'free'
+                                                    })
+                                                }
+                                            }}
+                                        >
                                             <Button className="w-full bg-white/5 border border-white/10 hover:bg-[#d4af37] hover:text-[#0d1420] hover:border-[#d4af37] transition-all font-black uppercase tracking-widest text-[10px] py-4 rounded-xl">
                                                 View Profile
                                             </Button>
@@ -206,8 +243,17 @@ export default function InjectorMatchQuiz() {
                                     </div>
                                 ))
                             ) : (
-                                <div className="col-span-3 py-12 text-gray-600">
-                                    No practitioners matching your exact criteria found. Try broadening your search.
+                                <div className="col-span-3 py-16 text-center border border-dashed border-white/10 rounded-[2.5rem] bg-white/[0.01]">
+                                    <div className="text-4xl mb-6">🤷‍♀️</div>
+                                    <h3 className="text-xl font-bold text-white mb-2">No Clinicians Found in "{NICHE.cities.find(c => c.slug === selectedCity)?.name}"</h3>
+                                    <p className="text-gray-500 max-w-md mx-auto mb-8 font-light">
+                                        Try selecting a nearby metro area or broadening your search criteria. You can also view our full directory for all top-rated injectors.
+                                    </p>
+                                    <Link href="/find-providers">
+                                        <Button className="bg-[#d4af37] text-[#0d1420] font-black uppercase tracking-widest px-8">
+                                            Browse All Top Injectors
+                                        </Button>
+                                    </Link>
                                 </div>
                             )}
                         </div>
