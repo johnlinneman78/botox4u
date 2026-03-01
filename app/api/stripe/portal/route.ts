@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import Stripe from 'stripe'
 import { NextResponse } from 'next/server'
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
