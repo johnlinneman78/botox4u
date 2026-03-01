@@ -83,7 +83,7 @@ export function AIConcierge() {
 
             {/* Chat Box */}
             {isOpen && (
-                <div className="fixed bottom-24 right-6 w-[400px] h-[600px] bg-[#0d1420] border border-white/10 rounded-[2.5rem] shadow-2xl z-[100] flex flex-col overflow-hidden animate-in slide-in-from-bottom-5">
+                <div className="fixed bottom-24 right-6 w-[400px] h-[600px] bg-[#0d1420]/80 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] shadow-2xl z-[100] flex flex-col overflow-hidden animate-in slide-in-from-bottom-5">
                     {/* Header */}
                     <div className="p-6 bg-white/[0.02] border-b border-white/10 flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-[#d4af37]/20 flex items-center justify-center">

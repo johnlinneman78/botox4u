@@ -8,10 +8,10 @@ export const NICHE = {
     namePlural: "Aesthetic Medicine Providers",
     providerType: "provider",               // "injector", "clinic", "provider", "dentist"
     providerTypePlural: "providers",
-    siteName: "InjectorIndex",
-    domain: "www.injectorindex.com",
-    tagline: "Find the Best Botox & Filler Injectors Near You — Rated by Data, Not Ads",
-    brandName: "InjectorIndex",
+    siteName: "Botox4U.com",
+    domain: "www.botox4u.com",
+    tagline: "Botox Injectors You Can Trust — Ranked by Clinical Data",
+    brandName: "Botox4U",
     brandSuffix: "™",
 
     // Calculator Configuration
@@ -152,9 +152,9 @@ export const NICHE = {
     // Brand V2 Copy
     copy: {
         hero: {
-            headline: "Find the Best Injectors Near You — Ranked by Results, Not Reviews",
-            subtext: "InjectorIndex scores 500+ providers across 22 cities on credentials, technique quality, and patient outcomes. See real pricing before you book.",
-            cta: "Compare Top-Rated Injectors"
+            headline: "Find the Best Botox Injectors — Ranked by Clinical Results",
+            subtext: "Botox4U indexes 500+ providers across 22 cities. We analyze credentials, technique, and real patient outcomes so you can book with confidence.",
+            cta: "Find Your Perfect Injector"
         },
         trustBadges: [
             { icon: 'target', label: 'Injection Quality', description: 'AI-analyzed outcomes for natural facial harmony' },
