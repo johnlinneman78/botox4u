@@ -13,10 +13,10 @@ import { NICHE } from '@/config/niche'
 import { JsonLd, generateWebSiteSchema } from '@/components/seo/JsonLd'
 
 export const metadata: Metadata = {
-  title: `Botox Injectors & MedSpas | InjectorIndex`,
+  title: `${NICHE.name} Injectors & MedSpas | ${NICHE.siteName}`,
   description: `Compare local injectors using TrueScore™ — independent data on injection quality, credentials, and real pricing. Find natural results, ranked by data.`,
   alternates: {
-    canonical: 'https://www.injectorindex.com/',
+    canonical: `https://${NICHE.domain}/`,
   }
 }
 

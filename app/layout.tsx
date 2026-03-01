@@ -14,15 +14,15 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 export const metadata: Metadata = {
-  title: `Best Botox Injectors & MedSpas Near You | InjectorIndex`,
+  title: `Best ${NICHE.name} Injectors & MedSpas Near You | ${NICHE.siteName}`,
   description: `Compare local injectors using TrueScore™ — independent data on injection quality, credentials, and real pricing. Find natural results, ranked by data.`,
-  keywords: `botox near me, best fillers, medspa rankings, injector scores, natural botox, lip filler, daxxify, polynucleotides, aesthetic directory`,
-  metadataBase: new URL('https://www.injectorindex.com'),
+  keywords: `${NICHE.name.toLowerCase()} near me, best fillers, medspa rankings, injector scores, natural ${NICHE.name.toLowerCase()}, lip filler, daxxify, polynucleotides, aesthetic directory`,
+  metadataBase: new URL(`https://${NICHE.domain}`),
   openGraph: {
-    title: `InjectorIndex — Find & Compare the Best Botox Injectors Near You`,
+    title: `${NICHE.siteName} — Find & Compare the Best ${NICHE.name} Injectors Near You`,
     description: `Compare 500+ injectors across 22 cities. See TrueScores, real pricing, and verified credentials. Find natural results, ranked by data.`,
     type: 'website',
-    url: 'https://www.injectorindex.com',
+    url: `https://${NICHE.domain}`,
     siteName: NICHE.siteName,
   }
 }
@@ -41,9 +41,9 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "name": "InjectorIndex",
-              "url": "https://www.injectorindex.com",
-              "description": "Find and compare botox injectors ranked by TrueScore™",
+              "name": NICHE.siteName,
+              "url": `https://${NICHE.domain}`,
+              "description": `Find and compare ${NICHE.name.toLowerCase()} injectors ranked by TrueScore™`,
               "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Portland",
