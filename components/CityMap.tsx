@@ -30,7 +30,10 @@ export default function CityMap({ providers, citySlug, userLat, userLng }: CityM
         userLat && userLng ? { lat: userLat, lng: userLng } : null
     )
 
+    const [isMounted, setIsMounted] = useState(false)
+
     useEffect(() => {
+        setIsMounted(true)
         // If we don't have server-side coords, fallback to browser geolocation
         if (!userPos && "geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -41,6 +44,14 @@ export default function CityMap({ providers, citySlug, userLat, userLng }: CityM
             })
         }
     }, [userPos])
+
+    if (!isMounted) {
+        return (
+            <div style={mapContainerStyle} className="bg-[#101827] rounded-2xl animate-pulse flex items-center justify-center border border-white/5">
+                <div className="text-gray-600 font-medium italic">Loading Interactive Map...</div>
+            </div>
+        )
+    }
 
     // Center on user if available, otherwise city fallback
     const center = {
