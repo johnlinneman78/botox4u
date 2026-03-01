@@ -104,14 +104,6 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
     ])
 
     const avg = stats?.avgCost || 15;
-    const faqSchema = generateFAQPageSchema(
-        cityName,
-        stateCode,
-        Math.floor(avg - 2),
-        Math.ceil(avg + 2),
-        stats?.providerCount || providers.length
-    );
-
     return (
         <main className="bg-[#0d1420] min-h-screen pb-20">
             <Suspense fallback={null}>
@@ -119,7 +111,6 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
             </Suspense>
             <JsonLd data={itemListSchema} />
             <JsonLd data={breadcrumbs} />
-            <JsonLd data={faqSchema} />
 
             <div className="bg-[#101827] border-b border-white/[0.06]">
                 <div className="container mx-auto px-4 py-3 flex items-center gap-2 text-xs font-medium text-white/60">
