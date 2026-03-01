@@ -74,6 +74,21 @@ export async function POST(req: NextRequest) {
                         </div>
                     `
                 });
+
+                // Notify admin of new premium signup
+                await resend.emails.send({
+                    from: `system@${NICHE.domain}`,
+                    to: 'hello@injectorindex.com',
+                    subject: `New ${planId.toUpperCase()} Signup: ${provider.name}`,
+                    html: `
+                        <p>A new provider has upgraded their listing:</p>
+                        <ul>
+                            <li><strong>Provider:</strong> ${provider.name}</li>
+                            <li><strong>Plan:</strong> ${planId.toUpperCase()}</li>
+                            <li><strong>Provider ID:</strong> ${providerId}</li>
+                        </ul>
+                    `
+                });
             }
         }
     }

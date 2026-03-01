@@ -116,7 +116,7 @@ export const NICHE = {
                 "Real pricing listed for patients",
                 "Tracked 'Go to Website' clicks",
                 "Prominent Contact button",
-                "Basic analytics (Views & Clicks)"
+                "Verified badge visible to all patients searching your city"
             ],
             bestFor: "Active med spas wanting more leads"
         },
@@ -129,7 +129,7 @@ export const NICHE = {
                 "Top placement in city search results",
                 "Featured Provider highlight",
                 "Priority in Injector Match Quiz",
-                "Full analytics dashboard"
+                "Priority placement above all Verified and Free providers in search"
             ],
             bestFor: "Market leaders wanting maximum visibility"
         }

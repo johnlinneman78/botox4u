@@ -1,15 +1,43 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import Logo from '@/components/layout/Logo'
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-    robots: {
-        index: false,
-        follow: false,
-    },
-}
+import { useRouter } from 'next/navigation'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export default function ProviderLoginPage() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState<string | null>(null)
+    const router = useRouter()
+    const supabase = createClientComponentClient()
+
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setLoading(true)
+        setError(null)
+
+        try {
+            const { error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            })
+
+            if (error) {
+                setError(error.message)
+            } else {
+                router.push('/admin/dashboard')
+                router.refresh()
+            }
+        } catch (err: any) {
+            setError('An unexpected error occurred')
+        } finally {
+            setLoading(false)
+        }
+    }
+
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -26,7 +54,7 @@ export default function ProviderLoginPage() {
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 shadow sm:rounded-2xl sm:px-10 border border-gray-100">
-                    <div className="space-y-6">
+                    <form onSubmit={handleLogin} className="space-y-6">
                         <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 flex items-start gap-3">
                             <span className="text-blue-500 mt-0.5">ℹ️</span>
                             <p className="text-xs text-blue-800 leading-relaxed">
@@ -35,23 +63,44 @@ export default function ProviderLoginPage() {
                             </p>
                         </div>
 
+                        {error && (
+                            <div className="bg-red-50 p-3 rounded-lg border border-red-100 text-xs text-red-600">
+                                {error}
+                            </div>
+                        )}
+
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Email Address</label>
                             <input
                                 type="email"
-                                disabled
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm bg-gray-50 text-gray-400 sm:text-sm cursor-not-allowed"
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                                 placeholder="clinic@example.com"
                             />
                         </div>
 
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Password</label>
+                            <input
+                                type="password"
+                                required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
+                                placeholder="••••••••"
+                            />
+                        </div>
+
                         <button
-                            disabled
-                            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-gray-400 cursor-not-allowed"
+                            type="submit"
+                            disabled={loading}
+                            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
                         >
-                            Sign In (Coming Soon)
+                            {loading ? 'Signing In...' : 'Sign In'}
                         </button>
-                    </div>
+                    </form>
 
                     <div className="mt-6 text-center">
                         <Link href="/provider/claim" className="text-sm font-semibold text-primary hover:text-slate-800">
