@@ -4,10 +4,31 @@ import { useState } from 'react'
 import { Shield, Zap, Code, Mail, Check, Gift, Star, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { requestApiKey } from '@/lib/actions/api-keys'
+import { createApiCheckoutSession } from '@/lib/actions/checkout'
 
 export default function ApiAccessPage() {
     const [submitting, setSubmitting] = useState(false)
     const [success, setSuccess] = useState(false)
+    const [email, setEmail] = useState('')
+    const [error, setError] = useState('')
+
+    const handlePaidCheckout = async (plan: 'api_starter' | 'api_pro') => {
+        if (!email || !email.includes('@')) {
+            setError('Please enter a valid email address below first.')
+            // Scroll to form or highlight
+            document.getElementById('email-input')?.focus();
+            return;
+        }
+        setSubmitting(true);
+        try {
+            await createApiCheckoutSession(plan, email);
+        } catch (err) {
+            console.error(err);
+            setError('Payment session failed. Please try again.');
+        } finally {
+            setSubmitting(false);
+        }
+    }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -99,8 +120,12 @@ export default function ApiAccessPage() {
                                 <Check className="w-4 h-4 text-[#d4af37]" /> Priority Support
                             </li>
                         </ul>
-                        <Button className="w-full h-12 bg-white/10 border border-white/20 hover:bg-[#d4af37] hover:text-[#0d1420] text-white font-black uppercase tracking-widest text-[10px] transition-all">
-                            Choose Starter
+                        <Button
+                            onClick={() => handlePaidCheckout('api_starter')}
+                            disabled={submitting}
+                            className="w-full h-12 bg-white/10 border border-white/20 hover:bg-[#d4af37] hover:text-[#0d1420] text-white font-black uppercase tracking-widest text-[10px] transition-all"
+                        >
+                            {submitting ? '...' : 'Choose Starter'}
                         </Button>
                     </div>
 
@@ -124,8 +149,12 @@ export default function ApiAccessPage() {
                                 <Check className="w-4 h-4 text-[#d4af37]" /> Dedicated Account Manager
                             </li>
                         </ul>
-                        <Button className="w-full h-12 bg-[#d4af37] border border-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black uppercase tracking-widest text-[10px] shadow-xl shadow-[#d4af37]/10">
-                            Go Unlimited
+                        <Button
+                            onClick={() => handlePaidCheckout('api_pro')}
+                            disabled={submitting}
+                            className="w-full h-12 bg-[#d4af37] border border-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black uppercase tracking-widest text-[10px] shadow-xl shadow-[#d4af37]/10"
+                        >
+                            {submitting ? '...' : 'Go Unlimited'}
                         </Button>
                     </div>
                 </div>
@@ -190,7 +219,9 @@ export default function ApiAccessPage() {
                 <div className="max-w-2xl mx-auto" id="request">
                     <div className="bg-white/[0.02] border border-white/[0.08] p-10 md:p-14 rounded-[3.5rem] text-center">
                         <h2 className="text-3xl font-display font-bold text-white mb-4">Request Your API Key</h2>
-                        <p className="text-gray-500 mb-10">Keys are manually reviewed to ensure data quality conservation.</p>
+                        <p className="text-gray-500 mb-6">Keys are manually reviewed to ensure data quality conservation.</p>
+
+                        {error && <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-2xl text-xs mb-6 font-bold uppercase tracking-widest">{error}</div>}
 
                         {success ? (
                             <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 p-8 rounded-3xl font-bold">
@@ -209,8 +240,11 @@ export default function ApiAccessPage() {
                                         required
                                     />
                                     <input
+                                        id="email-input"
                                         name="email"
                                         type="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         placeholder="Email Address"
                                         className="h-14 bg-black/40 border border-white/10 rounded-2xl px-6 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#d4af37]/30 transition-all font-light"
                                         required

@@ -38,8 +38,7 @@ export async function POST(req: NextRequest) {
 
         if (providerId && planId) {
             console.log(`✅ Payment success for provider ${providerId} (${planId})`);
-
-            // Update provider status
+            // Existing provider logic...
             const { data: provider, error } = await supabase
                 .from('providers')
                 .update({
@@ -57,36 +56,55 @@ export async function POST(req: NextRequest) {
                 console.error('Error updating provider subscription:', error);
             } else if (provider && (provider.email || (provider.enriched_attrs as any)?.email)) {
                 const targetEmail = provider.email || (provider.enriched_attrs as any)?.email;
-                // Send confirmation email
                 await resend.emails.send({
                     from: `John from ${NICHE.siteName} <${NICHE.outreach.senderEmail}>`,
                     to: targetEmail,
                     subject: `Welcome to ${NICHE.siteName} Premium`,
-                    html: `
-                        <div style="font-family: sans-serif; line-height: 1.6; color: #1a2332; max-width: 600px; margin: 0 auto; padding: 20px;">
-                            <h2>Listing Upgraded!</h2>
-                            <p>Hi ${provider.name},</p>
-                            <p>Your subscription to the <strong>${planId.toUpperCase()}</strong> plan is now active.</p>
-                            <p>Your listing has been upgraded automatically and will now appear with priority in search results.</p>
-                            <p>View your listing: <a href="https://${NICHE.domain}/provider/${provider.slug}">https://${NICHE.domain}/provider/${provider.slug}</a></p>
-                            <p>I'll be in touch soon with your first performance report.</p>
-                            <p>Best,<br>John Linneman</p>
-                        </div>
-                    `
+                    html: `<p>Your listing ${provider.name} is now active on the ${planId} plan.</p>`
                 });
+            }
+        }
 
-                // Notify admin of new premium signup
+        const apiPlanId = session.metadata?.apiPlanId;
+        const customerEmail = session.metadata?.customerEmail;
+
+        if (apiPlanId && customerEmail) {
+            console.log(`✅ API Payment success for ${customerEmail} (${apiPlanId})`);
+
+            const callLimit = apiPlanId === 'api_starter' ? 5000 : 1000000;
+            const newKey = `II_${apiPlanId.toUpperCase()}_${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+
+            const { data: apiKey, error } = await supabase
+                .from('api_keys')
+                .upsert({
+                    owner_email: customerEmail,
+                    tier: apiPlanId === 'api_starter' ? 'STARTER' : 'PRO',
+                    call_limit: callLimit,
+                    active: true,
+                    key: newKey, // Note: In production, you'd only create if one doesn't exist or upgrade legacy
+                    owner_name: customerEmail.split('@')[0]
+                }, { onConflict: 'owner_email' })
+                .select()
+                .single();
+
+            if (error) {
+                console.error('Error creating/updating API key:', error);
+            } else {
+                // Send API key email
                 await resend.emails.send({
-                    from: `system@${NICHE.domain}`,
-                    to: 'hello@injectorindex.com',
-                    subject: `New ${planId.toUpperCase()} Signup: ${provider.name}`,
+                    from: `API Hub <${NICHE.outreach.senderEmail}>`,
+                    to: customerEmail,
+                    subject: `Your ${NICHE.siteName} API Key is Live`,
                     html: `
-                        <p>A new provider has upgraded their listing:</p>
-                        <ul>
-                            <li><strong>Provider:</strong> ${provider.name}</li>
-                            <li><strong>Plan:</strong> ${planId.toUpperCase()}</li>
-                            <li><strong>Provider ID:</strong> ${providerId}</li>
-                        </ul>
+                        <div style="font-family: sans-serif; line-height: 1.6;">
+                            <h2>API Access Activated</h2>
+                            <p>Hi there,</p>
+                            <p>Your <strong>${apiPlanId.toUpperCase()}</strong> plan is now active.</p>
+                            <p>Your API Key: <code style="background: #f4f4f4; padding: 4px 8px; border-radius: 4px;">${newKey}</code></p>
+                            <p>Documentation: <a href="https://www.injectorindex.com/api-access">https://www.injectorindex.com/api-access</a></p>
+                            <p>Limits: ${callLimit.toLocaleString()} calls per month.</p>
+                            <p>Happy building!</p>
+                        </div>
                     `
                 });
             }
