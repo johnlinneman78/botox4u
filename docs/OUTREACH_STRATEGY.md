@@ -20,9 +20,9 @@ Now that we have **643 providers** live, the focus is on activating these listin
 
 Hi [Name],
 
-We’ve listed **[Clinic]** in our new Botox directory for **[City]**, with your real per-unit pricing and clinic photos so patients can compare injectors transparently.
+We’ve listed **[Clinic]** in our new medical aesthetic directory, **InjectorIndex.com**, with your real per-unit pricing and clinic photos so patients can compare injectors transparently.
 
-**Your Page**: [Link to Provider Page]
+**Your Page**: https://www.injectorindex.com/provider/[slug]
 
 During beta, we’ll send any leads from [City] to you for free and highlight clinics that are up-front about pricing and credentials.
 
@@ -31,7 +31,7 @@ If you’d like to update your info or see how many people are viewing your list
 Best,
 
 [John Linneman]
-Founder, Botox 4U
+Founder, InjectorIndex.com
 
 ---
 
@@ -54,7 +54,7 @@ We aren't just another Yelp or RealSelf. Our core value is **Extreme Transparenc
 1.  **Lead Received**: When a lead hits for [City], route it to the **top 3 verified/claimed providers** first.
 2.  **Notification**: Send the text/email notification (set up in the system).
 3.  **The "Hook"**: After a provider receives their first free lead, follow up:
-    > "Hi [Name], you just received a new patient lead for [Treatment] from Botox 4U. How was the experience? Would you like to keep these coming?"
+    > "Hi [Name], you just received a new patient lead for [Treatment] from InjectorIndex. How was the experience? Would you like to keep these coming?"
 4.  **Social Proof**: Ask for a testimonial or a unique 'Clinic Special' to add to their profile.
 
 ---

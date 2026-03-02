@@ -116,6 +116,18 @@ const nextConfig: NextConfig = {
         destination: '/injectors/ny/new-york',
         permanent: true,
       },
+      // Domain-level catch-all redirect (to be used when injectorindex.com points to this deployment)
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'injectorindex.com',
+          },
+        ],
+        destination: 'https://www.injectorindex.com/:path*',
+        permanent: true,
+      },
       // Domain-level catch-all redirect (to be used when botox-4u.com points to this deployment)
       {
         source: '/:path*',

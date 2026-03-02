@@ -8,6 +8,7 @@ import TreatmentTrends from '@/components/home/TreatmentTrends'
 import InjectorMatchQuiz from '@/components/home/InjectorMatchQuiz'
 import TreatmentGuides from '@/components/home/TreatmentGuides'
 import ProcessThreeStep from '@/components/home/ProcessThreeStep'
+import ApiIntelligence from '@/components/home/ApiIntelligence'
 import { Suspense } from 'react'
 import { Metadata } from 'next'
 import { NICHE } from '@/config/niche'
@@ -52,13 +53,16 @@ export default function HomePage() {
       {/* 6. Why Trust Us — Competitive Comparison */}
       <CompetitiveComparison />
 
-      {/* 7. Injector Match Quiz (Lead Capture) */}
+      {/* 7. API & Intelligence (Developer Ecosystem) */}
+      <ApiIntelligence />
+
+      {/* 8. Injector Match Quiz (Lead Capture) */}
       <InjectorMatchQuiz />
 
-      {/* 7. Treatment Guides (Volume-First) */}
+      {/* 9. Treatment Guides (Volume-First) */}
       <TreatmentGuides />
 
-      {/* 8. Intelligence & Guides (Blog) */}
+      {/* 10. Intelligence & Guides (Blog) */}
       <AestheticsNews />
     </>
   )

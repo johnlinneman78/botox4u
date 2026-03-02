@@ -18,7 +18,7 @@ export function StateHero({ stateName, providerCount, avgCost, cityCount }: Stat
                 <div className="max-w-4xl">
                     <div className="flex items-center gap-4 mb-6">
                         <Badge variant="premium" className="px-4 py-1">State Directory</Badge>
-                        <span className="text-white/40 text-sm tracking-widest uppercase font-bold">Botox 4U</span>
+                        <span className="text-white/40 text-sm tracking-widest uppercase font-bold">InjectorIndex</span>
                     </div>
 
                     <h1 className="text-5xl md:text-7xl font-display font-bold text-white mb-8 leading-tight">

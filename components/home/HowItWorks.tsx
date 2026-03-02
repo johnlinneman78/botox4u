@@ -1,38 +1,46 @@
-import { Dna, ShieldCheck, Cpu, Award, AlertTriangle, TrendingUp } from 'lucide-react'
+import { ShieldCheck, Award, BarChart3, Globe, Eye, AlertTriangle, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
 
 const FACTORS = [
     {
-        title: 'Injection Quality',
-        label: 'Primary Weight (40%)',
-        description: 'AI-assisted analysis of patient reviews and result consistency. We prioritize "natural," "subtle," and "refined" results over "frozen" or "migrated" red flags.',
-        icon: <ShieldCheck className="w-7 h-7" />,
-        color: 'bg-[#d4af37]/10 text-[#d4af37] border-[#d4af37]/20',
-        glow: 'shadow-[#d4af37]/10',
-    },
-    {
-        title: 'Provider Credentials',
-        label: 'Trust Weight (25%)',
-        description: 'Verified NPI federal registration, board certifications, and clinical experience. We bridge the gap between "aesthetician" and "medical elite."',
+        title: 'Credentials',
+        label: '25 Points',
+        description: 'Board certification, license verification, years of practice, specialized training in aesthetic medicine.',
         icon: <Award className="w-7 h-7" />,
         color: 'bg-blue-950/50 text-blue-400 border-blue-800/40',
         glow: 'shadow-blue-500/10',
     },
     {
-        title: 'Innovation Adoption',
-        label: 'Growth Weight (20%)',
-        description: 'Measures clinical modernization, focusing on long-acting treatments and advanced cellular recovery protocols that represent the current standard.',
-        icon: <Cpu className="w-7 h-7" />,
+        title: 'Patient Sentiment',
+        label: '30 Points',
+        description: 'Our semantic algorithm reads every Google Review and extracts quality signals — not just "5 stars great!" but specific patterns like "natural results," "minimal bruising," "thorough consultation."',
+        icon: <ShieldCheck className="w-7 h-7" />,
+        color: 'bg-[#d4af37]/10 text-[#d4af37] border-[#d4af37]/20',
+        glow: 'shadow-[#d4af37]/10',
+    },
+    {
+        title: 'Review Quality',
+        label: '20 Points',
+        description: 'Volume matters, but so does consistency. A provider with 200 reviews averaging 4.8 scores higher than one with 20 reviews averaging 4.9.',
+        icon: <BarChart3 className="w-7 h-7" />,
         color: 'bg-violet-950/50 text-violet-400 border-violet-800/40',
         glow: 'shadow-violet-500/10',
     },
     {
-        title: 'Treatment Range',
-        label: 'Breadth Weight (15%)',
-        description: 'Evaluating the clinician\'s full scope, from specialized therapeutic applications to comprehensive, multi-modality facial rejuvenation.',
-        icon: <TrendingUp className="w-7 h-7" />,
+        title: 'Practice Signals',
+        label: '15 Points',
+        description: 'Complete online presence, responsive to reviews, up-to-date hours, professional photos of actual work.',
+        icon: <Globe className="w-7 h-7" />,
         color: 'bg-emerald-950/50 text-emerald-400 border-emerald-800/40',
         glow: 'shadow-emerald-500/10',
+    },
+    {
+        title: 'Transparency',
+        label: '10 Points',
+        description: 'Clear pricing information, published credentials, before/after galleries, listed services.',
+        icon: <Eye className="w-7 h-7" />,
+        color: 'bg-amber-950/50 text-amber-400 border-amber-800/40',
+        glow: 'shadow-amber-500/10',
     },
 ]
 
@@ -58,7 +66,7 @@ export default function HowItWorks() {
                         <ShieldCheck className="w-3.5 h-3.5" /> TrueScore™ 2026 Ranking Algorithm
                     </div>
                     <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-                        The First Data-Driven <span className="text-[#d4af37]">Standard</span> for Injectors
+                        Your Injector&apos;s Score, <span className="text-[#d4af37]">Explained.</span>
                     </h2>
                     <div className="flex justify-center mb-8">
                         <Link
@@ -70,12 +78,12 @@ export default function HowItWorks() {
                         </Link>
                     </div>
                     <p className="text-xl text-gray-400 leading-relaxed font-light">
-                        Legacy directories rank by reviews bought and stars paid for. <span className="text-white font-semibold">TrueScore™</span> is the first independent algorithm built around <span className="text-white font-semibold">clinical quality</span> — not marketing budgets.
+                        TrueScore™ isn&apos;t a star rating. It&apos;s a composite score (0-100) built from multiple data signals that no provider can buy their way to the top of.
                     </p>
                 </div>
 
-                {/* 4 Pillars */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                {/* 5 Pillars */}
+                <div className="grid grid-cols-2 lg:grid-cols-5 gap-5 mb-10">
                     {FACTORS.map((factor) => (
                         <div
                             key={factor.title}
@@ -86,10 +94,10 @@ export default function HowItWorks() {
                             </div>
                             <div className="flex items-center justify-between mb-2">
                                 <h3 className="text-base font-bold text-white">{factor.title}</h3>
-                                <span className="text-[10px] font-black text-[#d4af37] bg-[#d4af37]/10 border border-[#d4af37]/20 px-2 py-0.5 rounded-lg uppercase tracking-widest">
-                                    {factor.label}
-                                </span>
                             </div>
+                            <span className="inline-block text-[10px] font-black text-[#d4af37] bg-[#d4af37]/10 border border-[#d4af37]/20 px-2 py-0.5 rounded-lg uppercase tracking-widest mb-3">
+                                {factor.label}
+                            </span>
                             <p className="text-sm text-gray-500 leading-relaxed">
                                 {factor.description}
                             </p>

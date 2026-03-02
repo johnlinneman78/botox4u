@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
-import { Menu, X, Shield, Calculator, Info, UserCheck, TrendingUp } from 'lucide-react'
+import { Menu, X, Shield, Calculator, Info, UserCheck, TrendingUp, Code } from 'lucide-react'
 import Logo from './Logo'
 
 export default function Header() {
@@ -12,7 +12,8 @@ export default function Header() {
     const navLinks = [
         { href: '/find-providers', label: 'Find Providers', icon: Shield },
         { href: '/calculator', label: 'Cost Calculator', icon: Calculator },
-        { href: '/blog', label: 'Intelligence', icon: TrendingUp },
+        { href: '/blog', label: 'Insights', icon: TrendingUp },
+        { href: '/docs', label: 'Docs & API', icon: Code },
     ]
 
     return (
@@ -34,7 +35,7 @@ export default function Header() {
                         </Link>
                     ))}
                     <div className="h-6 w-px bg-white/10 mx-2" />
-                    <Link href="/pricing">
+                    <Link href="/for-providers">
                         <Button variant="outline" className="border-white/20 text-white hover:bg-white/5 font-bold py-2.5 px-6 rounded-xl transition-all text-sm">
                             For Providers
                         </Button>
@@ -71,7 +72,7 @@ export default function Header() {
                         </Link>
                     ))}
                     <Link
-                        href="/pricing"
+                        href="/for-providers"
                         onClick={() => setIsMenuOpen(false)}
                         className="flex items-center gap-3 p-3 rounded-xl border border-white/20 text-white font-bold text-center justify-center hover:bg-white/5 transition-all mt-2"
                     >

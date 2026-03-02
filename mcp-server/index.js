@@ -4,11 +4,11 @@ const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../.env.local') });
 
 const API_KEY = 'mcp-internal-999';
-const BASE_URL = 'http://localhost:3000/api/v1'; // Local dev default
+const BASE_URL = 'https://www.injectorindex.com/api/v1';
 
 async function handleToolCall(name, args) {
     try {
-        if (name === 'search_providers') {
+        if (name === 'search_injectors') {
             const { city, style, min_truescore } = args;
             const res = await axios.get(`${BASE_URL}/providers`, {
                 params: { city, style, min_truescore },
@@ -19,7 +19,7 @@ async function handleToolCall(name, args) {
             };
         }
 
-        if (name === 'get_provider') {
+        if (name === 'get_injector_profile') {
             const { slug } = args;
             const res = await axios.get(`${BASE_URL}/providers/${slug}`, {
                 headers: { 'x-api-key': API_KEY }
@@ -29,12 +29,18 @@ async function handleToolCall(name, args) {
             };
         }
 
-        if (name === 'list_cities') {
+        if (name === 'get_treatment_costs') {
+            const { city } = args;
             const res = await axios.get(`${BASE_URL}/cities`, {
                 headers: { 'x-api-key': API_KEY }
             });
+            // Filter by city if provided, otherwise return all
+            let data = res.data;
+            if (city) {
+                data = data.filter(c => c.name.toLowerCase() === city.toLowerCase());
+            }
             return {
-                content: [{ type: 'text', text: JSON.stringify(res.data, null, 2) }]
+                content: [{ type: 'text', text: JSON.stringify(data, null, 2) }]
             };
         }
 
@@ -64,8 +70,8 @@ process.stdin.on('data', async (data) => {
                 result: {
                     tools: [
                         {
-                            name: 'search_providers',
-                            description: 'Search for ranked injectors by city and style',
+                            name: 'search_injectors',
+                            description: 'Search for ranked aesthetic injectors by city and style',
                             inputSchema: {
                                 type: 'object',
                                 properties: {
@@ -77,8 +83,8 @@ process.stdin.on('data', async (data) => {
                             }
                         },
                         {
-                            name: 'get_provider',
-                            description: 'Get full professional details for a specific injector',
+                            name: 'get_injector_profile',
+                            description: 'Get full professional and clinical details for a specific injector',
                             inputSchema: {
                                 type: 'object',
                                 properties: {
@@ -88,9 +94,14 @@ process.stdin.on('data', async (data) => {
                             }
                         },
                         {
-                            name: 'list_cities',
-                            description: 'List all indexed cities with provider counts',
-                            inputSchema: { type: 'object', properties: {} }
+                            name: 'get_treatment_costs',
+                            description: 'Get city-level Botox/filler pricing averages and market data',
+                            inputSchema: {
+                                type: 'object',
+                                properties: {
+                                    city: { type: 'string', description: 'Optional city name to filter' }
+                                }
+                            }
                         }
                     ]
                 }

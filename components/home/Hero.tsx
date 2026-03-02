@@ -52,20 +52,13 @@ export default function Hero({
             <div className="relative z-10 border-b border-white/[0.06] bg-white/[0.02] backdrop-blur-sm">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40">
                     <span className="flex items-center gap-2">
-                        <span className="w-1 h-1 rounded-full bg-[#d4af37]" />
-                        {providersCount.toLocaleString()}+ Providers Indexed
+                        <span className="w-1 h-1 rounded-full bg-emerald-400" />✓ {providersCount.toLocaleString()}+ Verified Providers
                     </span>
                     <span className="flex items-center gap-2">
-                        <span className="w-1 h-1 rounded-full bg-[#d4af37]" />
-                        {citiesCount} Cities
+                        <span className="w-1 h-1 rounded-full bg-emerald-400" />✓ {citiesCount} US Cities
                     </span>
                     <span className="flex items-center gap-2">
-                        <span className="w-1 h-1 rounded-full bg-[#d4af37]" />
-                        Real Pricing Data
-                    </span>
-                    <span className="flex items-center gap-2">
-                        <span className="w-1 h-1 rounded-full bg-[#d4af37]" />
-                        Zero Pay-to-Rank
+                        <span className="w-1 h-1 rounded-full bg-emerald-400" />✓ 100% Independent — No Pay-to-Play Rankings
                     </span>
                 </div>
             </div>
@@ -75,12 +68,13 @@ export default function Hero({
                 <div className="max-w-4xl">
                     {/* Headline */}
                     <h1 className="text-5xl md:text-6xl lg:text-[72px] font-display font-bold text-white mb-6 leading-[1.05] tracking-tight">
-                        Find the Best Injectors Near You — <span className="text-[#d4af37]">Ranked by Results</span>, Not Reviews
+                        Find Your Injector.<br />
+                        <span className="text-[#d4af37]">Scored by Data, Not Ads.</span>
                     </h1>
 
                     {/* Sub */}
                     <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed font-light">
-                        InjectorIndex scores {providersCount.toLocaleString()}+ providers across {citiesCount} cities on credentials, technique quality, and patient outcomes. See real pricing before you book.
+                        InjectorIndex is the independent platform that scores medical aesthetics providers using real patient data — not who pays the most. Search {providersCount.toLocaleString()}+ injectors across {citiesCount} cities, ranked by our proprietary TrueScore™ algorithm.
                     </p>
 
                     {/* CTA Row */}
@@ -107,7 +101,7 @@ export default function Hero({
                                 size="lg"
                                 className="w-full bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] text-lg px-8 py-5 h-14 font-black shadow-2xl shadow-[#d4af37]/15 rounded-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
                             >
-                                Compare Top Injectors
+                                Search Injectors Near Me
                                 <ChevronRight className="w-5 h-5" />
                             </Button>
                         </Link>
