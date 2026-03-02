@@ -2,6 +2,7 @@ import Hero from '@/components/home/Hero'
 import FeaturedCities from '@/components/home/FeaturedCities'
 import FeaturedProviders from '@/components/home/FeaturedProviders'
 import HowItWorks from '@/components/home/HowItWorks'
+import CompetitiveComparison from '@/components/home/CompetitiveComparison'
 import AestheticsNews from '@/components/home/AestheticsNews'
 import TreatmentTrends from '@/components/home/TreatmentTrends'
 import InjectorMatchQuiz from '@/components/home/InjectorMatchQuiz'
@@ -48,7 +49,10 @@ export default function HomePage() {
       {/* 5. The TrueScore™ Explained (Detailed Analytics) */}
       <HowItWorks />
 
-      {/* 6. Injector Match Quiz (Lead Capture) */}
+      {/* 6. Why Trust Us — Competitive Comparison */}
+      <CompetitiveComparison />
+
+      {/* 7. Injector Match Quiz (Lead Capture) */}
       <InjectorMatchQuiz />
 
       {/* 7. Treatment Guides (Volume-First) */}
