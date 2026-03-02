@@ -23,13 +23,13 @@ const CONCERN_THEMES = [
 ]
 
 // Pre-computed strength signals used when reviews lack text
-// Derived from the sentiment engine's keyword counts + score_results_quality
+// Derived from the sentiment engine's quality score + rating
 const COMPUTED_STRENGTHS = [
-    { label: 'Natural-looking results', minScore: 20, minPositive: 3 },
-    { label: 'Highly recommended by patients', minScore: 15, minPositive: 2 },
-    { label: 'Skilled injection technique', minScore: 25, minPositive: 4 },
-    { label: 'Warm, welcoming staff', minScore: 10, minPositive: 1 },
-    { label: 'Thorough consultation process', minScore: 18, minPositive: 3 },
+    { label: 'Natural-looking results', minScore: 20 },
+    { label: 'Highly recommended by patients', minScore: 10 },
+    { label: 'Skilled injection technique', minScore: 25 },
+    { label: 'Warm, welcoming staff', minScore: 8 },
+    { label: 'Thorough consultation process', minScore: 15 },
 ]
 
 interface Review {
@@ -117,12 +117,13 @@ function inferStrengths(
     const strengths: ThemeResult[] = []
     const concerns: ThemeResult[] = []
 
-    // Use the pre-computed sentiment scores to infer which themes apply
+    // Use the quality score to infer which themes apply
+    // The sentiment engine assigns quality scores even when positive_keyword_count is 0
     for (const s of COMPUTED_STRENGTHS) {
-        if (scoreResultsQuality >= s.minScore && positiveCount >= s.minPositive) {
-            // Generate a plausible percentage based on strength of signal
+        if (scoreResultsQuality >= s.minScore) {
+            // Generate a percentage based on strength of signal relative to max (30)
             const signalStrength = Math.min(85, Math.round(
-                40 + (scoreResultsQuality / 30) * 20 + (positiveCount / Math.max(reviewCount, 1)) * 25
+                35 + (scoreResultsQuality / 30) * 30 + (rating >= 4.5 ? 15 : rating >= 4.0 ? 8 : 0)
             ))
             strengths.push({
                 label: s.label,
