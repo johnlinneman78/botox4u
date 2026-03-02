@@ -387,6 +387,11 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                 reviews={provider.top_reviews || provider.reviews || []}
                                 trueScore={provider.score_total || 50}
                                 providerName={provider.name}
+                                reviewCount={provider.reviewCount || 0}
+                                rating={provider.averageRating || 0}
+                                scoreResultsQuality={provider.score_results_quality || 0}
+                                positiveKeywordCount={provider.positive_keyword_count || 0}
+                                negativeKeywordCount={provider.negative_keyword_count || 0}
                             />
 
                             {/* Reviews */}
