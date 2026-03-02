@@ -21,13 +21,13 @@ export function AIConcierge() {
     const [loading, setLoading] = useState(false)
     const scrollRef = useRef<HTMLDivElement>(null)
 
-    if (!shouldShow) return null
-
     useEffect(() => {
         if (scrollRef.current) {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight
         }
     }, [messages])
+
+    if (!shouldShow) return null
 
     const handleSend = async () => {
         if (!inputValue.trim() || loading) return

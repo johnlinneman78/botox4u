@@ -4,7 +4,7 @@ import Logo from '@/components/layout/Logo'
 import { NICHE } from '@/config/niche'
 
 export default function Footer() {
-    const currentYear = new Date().getFullYear()
+    const currentYear = 2026
 
     return (
         <footer className="border-t border-white/[0.06] bg-[#080e17]">
