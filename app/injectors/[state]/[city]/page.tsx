@@ -46,8 +46,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
     const { state, city } = await params
     const cityName = city.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
-    const title = `Best Botox Injectors in ${cityName} | InjectorIndex`
-    const description = `Find and compare top-rated botox injectors in ${cityName}. Ranked by TrueScore™.`
+    const stateCode = state.toUpperCase()
+    const stateName = STATE_MAP[stateCode] || stateCode
+    const title = `Best Botox Injectors in ${cityName}, ${stateName} (2026) | Ranked by TrueScore™`
+    const description = `Compare top-rated Botox injectors in ${cityName}, ${stateName}. Ranked by TrueScore™ — an independent clinical algorithm based on injection quality, verified credentials, and real pricing data. No paid rankings.`
     const url = `https://www.injectorindex.com/${NICHE.baseSlug}/${state.toLowerCase()}/${city.toLowerCase()}`
 
     return {
@@ -57,6 +59,8 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
             title,
             description,
             url,
+            siteName: 'InjectorIndex',
+            type: 'website',
         },
         alternates: {
             canonical: url
@@ -242,6 +246,85 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                 </div>
 
                 <CityFAQ city={cityName} avgCost={stats?.avgCost || 14} />
+
+                {/* City Market Intelligence — LLM-indexable narrative content for local SEO */}
+                <section className="mt-16 bg-white/[0.02] rounded-3xl border border-white/[0.06] p-8 md:p-12">
+                    <div className="text-center mb-10">
+                        <p className="text-xs font-black text-[#d4af37] uppercase tracking-[0.3em] mb-3">Market Intelligence</p>
+                        <h2 className="text-3xl font-display font-bold text-white">
+                            Botox in {cityName}: 2026 Market Report
+                        </h2>
+                    </div>
+                    <div className="max-w-3xl mx-auto prose prose-invert prose-sm">
+                        <p className="text-gray-400 leading-relaxed">
+                            {cityName} has <strong className="text-white">{providers.length}+ indexed aesthetic injectors</strong> on InjectorIndex,
+                            with an average Botox price of <strong className="text-white">${stats?.avgCost || 14} per unit</strong> as of March 2026.
+                            {(stats?.avgCost || 14) > 15
+                                ? ` This places ${cityName} above the national average of $14/unit, reflecting the city's premium aesthetic market.`
+                                : (stats?.avgCost || 14) < 13
+                                    ? ` This is below the national average of $14/unit, making ${cityName} one of the more affordable major markets for cosmetic injectables.`
+                                    : ` This is near the national average of $14/unit, offering patients competitive pricing across a range of provider types.`
+                            }
+                        </p>
+                        {providers.length > 0 && (
+                            <div className="mt-6">
+                                <h3 className="text-lg font-bold text-white mb-3">
+                                    Top-Ranked Injectors in {cityName}
+                                </h3>
+                                <p className="text-gray-400 leading-relaxed mb-4">
+                                    Based on TrueScore™ clinical rankings — which evaluate injection quality, verified credentials,
+                                    innovation adoption, and treatment range — the highest-scoring providers in {cityName} include:
+                                </p>
+                                <ul className="space-y-2">
+                                    {providers.slice(0, 3).map((p: any, i: number) => (
+                                        <li key={p.id} className="text-gray-400">
+                                            <Link href={`/provider/${p.slug}`} className="text-[#d4af37] hover:underline font-semibold">
+                                                {p.name}
+                                            </Link>
+                                            {p.trueScore || p.score_total ? (
+                                                <span> — TrueScore™ {Math.round(p.trueScore || p.score_total)}</span>
+                                            ) : null}
+                                            {p.price_per_unit ? (
+                                                <span> · ${p.price_per_unit}/unit</span>
+                                            ) : null}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                        <div className="mt-6">
+                            <h3 className="text-lg font-bold text-white mb-3">
+                                Pricing Context
+                            </h3>
+                            <p className="text-gray-400 leading-relaxed">
+                                A typical full-face Botox treatment in {cityName} (40–60 units) costs between
+                                ${Math.round((stats?.avgCost || 14) * 40)} and ${Math.round((stats?.avgCost || 14) * 60)}.
+                                Prices vary based on provider credentials, clinic location, and the specific brand of neurotoxin used (Botox, Dysport, Xeomin, Jeuveau, or Daxxify).
+                            </p>
+                        </div>
+                        <div className="mt-6 flex flex-wrap gap-3">
+                            <Link
+                                href="/blog/how-much-does-botox-cost-2026"
+                                className="text-sm text-[#d4af37] hover:underline"
+                            >
+                                📊 Full 2026 Pricing Report →
+                            </Link>
+                            <Link
+                                href="/blog/how-to-find-good-botox-injector"
+                                className="text-sm text-[#d4af37] hover:underline"
+                            >
+                                🔍 How to Find a Provider You Can Trust →
+                            </Link>
+                            <Link
+                                href="/methodology"
+                                className="text-sm text-[#d4af37] hover:underline"
+                            >
+                                📐 How TrueScore™ Works →
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+
 
                 <div className="mt-20 pt-12 border-t border-white/[0.05]">
                     <div className="text-xl font-display font-bold text-white mb-6">Complete Provider Directory: {cityName}</div>

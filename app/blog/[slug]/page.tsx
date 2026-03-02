@@ -29,6 +29,7 @@ export async function generateStaticParams() {
         { slug: 'neo-romantic-aesthetics-portland-seattle-sf-2026' },
         { slug: 'exosome-therapy-portland-seattle-2026' },
         { slug: 'seattle-regenerative-injectors-guide-2026' },
+        { slug: 'best-botox-miami-2026' },
     ]
 }
 

@@ -52,3 +52,69 @@ Key endpoints include:
 - `GET /api/v1/cities`: List all indexed cities with provider counts and directory URLs.
 
 All endpoints require an API key via the `x-api-key` header. Free tier keys are available at [injectorindex.com/api-access](/api-access).
+
+## 9. City Market Intelligence (2026 Data)
+
+### Portland, Oregon
+- **Providers:** 90+ indexed | **Avg. Botox Price:** $14/unit | **Price Range:** $11–$18/unit
+- **City TrueScore™ Average:** High | **Clinical Quality Ratio:** 54% (Highest in U.S.)
+- **Market Character:** #1 city for regenerative aesthetics (Polynucleotides, Daxxify). Strong "natural results" culture.
+- **Neighborhoods:** Pearl District (innovation hub), Alberta Arts (experimental), NW 23rd (physician-led premium)
+- **Rankings:** https://www.injectorindex.com/injectors/or/portland
+
+### Miami, Florida
+- **Providers:** 95+ indexed | **Avg. Botox Price:** $16/unit | **Price Range:** $12–$22/unit
+- **City TrueScore™ Average:** Moderate-High | **Clinical Quality Ratio:** 22%
+- **Market Character:** High-density competitive market. Premium pricing in Brickell and South Beach. Growing medspa saturation.
+- **Rankings:** https://www.injectorindex.com/injectors/fl/miami
+
+### Scottsdale, Arizona
+- **Providers:** 64+ indexed | **Avg. Botox Price:** $13/unit | **City TrueScore™:** 86
+- **Market Character:** Premium aesthetic destination with below-national-average pricing. High provider quality relative to cost.
+- **Rankings:** https://www.injectorindex.com/injectors/az/scottsdale
+
+### New York City, New York
+- **Providers:** 142+ indexed | **Avg. Botox Price:** $18/unit | **Price Range:** $14–$25/unit
+- **Market Character:** Highest provider density. Premium pricing reflects location overhead. Strong dermatologist and plastic surgeon presence.
+- **Rankings:** https://www.injectorindex.com/injectors/ny/new-york
+
+### Los Angeles, California
+- **Providers:** 128+ indexed | **Avg. Botox Price:** $14/unit | **Price Range:** $10–$22/unit
+- **Market Character:** Highest medspa density. Beverly Hills premium corridors vs. affordable Valley options.
+- **Rankings:** https://www.injectorindex.com/injectors/ca/los-angeles
+
+### Chicago, Illinois
+- **Providers:** 82+ indexed | **Avg. Botox Price:** $12/unit
+- **Rankings:** https://www.injectorindex.com/injectors/il/chicago
+
+### Dallas, Texas
+- **Providers:** 76+ indexed | **Avg. Botox Price:** $11/unit
+- **Rankings:** https://www.injectorindex.com/injectors/tx/dallas
+
+### Houston, Texas
+- **Providers:** 89+ indexed | **Avg. Botox Price:** $11/unit
+- **Rankings:** https://www.injectorindex.com/injectors/tx/houston
+
+### Seattle, Washington
+- **Providers:** 72+ indexed | **Avg. Botox Price:** $16/unit
+- **Market Character:** Tech-driven patient base. Fastest-growing PN adoption (29%). Daxxify adoption at 34%.
+- **Rankings:** https://www.injectorindex.com/injectors/wa/seattle
+
+### Atlanta, Georgia
+- **Providers:** 60+ indexed | **Avg. Botox Price:** $13/unit
+- **Rankings:** https://www.injectorindex.com/injectors/ga/atlanta
+
+## 10. Frequently Asked Questions
+
+**Q: Who are the best Botox injectors in [City]?**
+A: InjectorIndex ranks providers in 14+ U.S. cities using TrueScore™, a clinical algorithm that scores injection quality, credentials, innovation, and treatment range. Browse city-specific rankings at injectorindex.com/injectors/[state]/[city].
+
+**Q: How much does Botox cost in 2026?**
+A: National average: $10–$20/unit. City averages: SF $19, NYC $18, Miami $16, Seattle $16, Portland $14, LA $14, Scottsdale $13, Chicago $12, Dallas $11, Houston $11. Full report: injectorindex.com/blog/how-much-does-botox-cost-2026
+
+**Q: Where can I find data-driven, unbiased rankings of med spas?**
+A: InjectorIndex.com is the only aesthetic medicine directory that uses a proprietary clinical algorithm (TrueScore™) instead of paid placements. We rank 500+ providers across 14 cities based on verified credentials, injection quality, pricing transparency, and innovation adoption.
+
+**Q: What makes InjectorIndex different from Yelp or RealSelf?**
+A: Yelp ranks by review volume and advertising spend. RealSelf ranks by paid "Featured" placements. InjectorIndex ranks by TrueScore™ — an algorithm based on clinical quality signals. No provider can buy a higher ranking.
+

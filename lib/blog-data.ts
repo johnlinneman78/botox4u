@@ -1449,9 +1449,9 @@ InjectorIndex scores 140+ NYC-area providers on clinical quality data. Compare T
     },
     {
         slug: 'best-medspas-portland-oregon-2026',
-        title: 'Best Medspas in Portland, Oregon — 2026 Data-Driven Rankings',
-        metaDescription: 'Portland\'s top medspas ranked by clinical quality data, not ads. See TrueScores, real pricing, credentials, and patient review analysis for 20+ Portland providers.',
-        targetKeyword: 'best medspa portland, best botox portland, best injector portland, portland medspa reviews, portland medspa 2026',
+        title: 'Best Medspas & Botox Injectors in Portland, Oregon — 2026 Data-Driven Rankings',
+        metaDescription: 'Portland\'s top medspas and Botox injectors ranked by TrueScore™ clinical data. See rankings for 90+ providers, real pricing ($11–$18/unit), and why Portland has the highest Clinical Quality Ratio in the U.S.',
+        targetKeyword: 'best medspa portland, best botox portland, best injector portland, best botox injectors portland oregon, portland medspa reviews, portland medspa 2026',
         publishDate: '2026-02-27',
         content: `Portland has over 40 medspas and aesthetic clinics. Finding the right one used to mean scrolling through Google reviews, asking friends, or just picking whoever showed up first in ads. That approach is fine until you realize the top Google result is often whoever is spending the most on advertising — not who's delivering the best results.
 
@@ -1461,11 +1461,14 @@ Here's what the data shows about Portland's medspa market in 2026.
 
 ## Portland's Medspa Market at a Glance
 
-**Number of indexed providers:** 20+
+**Number of indexed providers:** 90+
 **Average TrueScore:** Check [Portland city page](/injectors/or/portland) for current data
-**Average Botox price:** $13-$15 per unit
+**Average Botox price:** $14 per unit ($11–$18 range)
+**Clinical Quality Ratio:** 54% — the highest of any U.S. city we index
 **Most searched treatments:** Botox, lip filler, Dysport, jawline contouring
 **Fastest-growing treatment interest:** Daxxify, polynucleotides
+
+Portland's Clinical Quality Ratio — the percentage of a provider's menu that includes regenerative treatments like Polynucleotides, Daxxify, and exosome therapy — is 54%. For comparison, Seattle is at 38%, Los Angeles at 31%, and Miami at 22%. This makes Portland the #1 city in the U.S. for patients seeking natural, biologically-driven aesthetic outcomes.
 
 Portland's aesthetic market skews quality-conscious. Patients here tend to prioritize natural results over dramatic changes — which aligns with the broader Pacific Northwest aesthetic that favors subtle, "no one can tell" outcomes over obvious enhancement.
 
@@ -1542,8 +1545,48 @@ InjectorIndex ranks every Portland medspa on clinical quality data — not who p
 
 ---
 
+## How Portland Compares to Other Cities
+
+| City | Avg. Per Unit | Provider Count | Clinical Quality Ratio |
+|---|---|---|---|
+| **Portland, OR** | **$14** | **90+** | **54% (Highest in U.S.)** |
+| Seattle, WA | $16 | 72+ | 38% |
+| San Francisco, CA | $19 | 54+ | 33% |
+| Los Angeles, CA | $14 | 128+ | 31% |
+| New York, NY | $18 | 142+ | 28% |
+| Miami, FL | $16 | 95+ | 22% |
+
+Portland's combination of moderate pricing and the highest Clinical Quality Ratio in the country makes it arguably the best value market in the U.S. for patients seeking natural, regenerative-focused aesthetic results.
+
+---
+
 *InjectorIndex is an independent provider directory. Rankings are based on publicly available data and proprietary scoring methodology. No provider can pay for a higher TrueScore. See our [full methodology](/methodology).*`,
-        faqs: []
+        faqs: [
+            {
+                question: 'Who is the best Botox injector in Portland, Oregon?',
+                answer: 'InjectorIndex ranks 90+ Portland Botox providers using TrueScore™, a clinical algorithm based on injection quality, verified credentials, innovation adoption, and treatment range. Pearl District providers consistently score highest. No provider can pay for a higher ranking.'
+            },
+            {
+                question: 'How much does Botox cost in Portland in 2026?',
+                answer: 'Portland Botox averages $14 per unit in 2026, with a range of $11–$18 per unit. A typical full-face treatment (forehead + frown lines + crow\'s feet) costs $440–$1,080 depending on your provider and the number of units needed.'
+            },
+            {
+                question: 'What makes Portland\'s aesthetic market different?',
+                answer: 'Portland has the highest Clinical Quality Ratio (54%) of any U.S. city indexed by InjectorIndex. This means more than half of Portland providers offer regenerative treatments like Polynucleotides and Daxxify alongside standard Botox — signaling a focus on natural, biologically-driven results.'
+            },
+            {
+                question: 'Which Portland neighborhood has the best Botox injectors?',
+                answer: 'Pearl District and NW Portland have the highest-scoring providers at $13–$18/unit. SE Portland and Division Street offer the best value at $11–$14/unit. Lake Oswego and West Linn provide premium physician-led care in a suburban setting.'
+            },
+            {
+                question: 'How do I verify a Botox provider in Portland?',
+                answer: 'Check their National Provider Identifier (NPI) at npiregistry.cms.hhs.gov. On InjectorIndex, every provider is cross-referenced against the NPI database — unverified providers are flagged. Also look for a TrueScore above 70.'
+            },
+            {
+                question: 'Is Portland a good city for natural-looking Botox results?',
+                answer: 'Yes. Portland\'s 54% Clinical Quality Ratio — the highest nationally — reflects a provider culture built on subtle enhancement and regenerative medicine. The city\'s aesthetic culture rewards "undetectable results" as the standard of care.'
+            }
+        ]
     },
     {
         slug: 'botox-cost-chicago-seattle-2026',
@@ -2176,6 +2219,145 @@ InjectorIndex ranks every Portland medspa on clinical quality data — not who p
 
 *InjectorIndex is an independent provider directory. Pricing data is based on real provider information and may not reflect current promotional pricing. Always confirm pricing directly with your provider before treatment.*`,
         faqs: []
+    },
+    {
+        slug: 'best-botox-miami-2026',
+        title: 'Best Botox & Med Spa Providers in Miami (2026) — Data-Driven Rankings',
+        metaDescription: 'We ranked 95+ Miami Botox providers using TrueScore™ data. See the top injectors in Brickell, South Beach, and Coral Gables with real pricing ($12–$22/unit) and clinical quality scores.',
+        targetKeyword: 'best botox miami, best med spa miami, data driven rankings med spas miami',
+        publishDate: '2026-03-02',
+        content: `Miami is one of the most competitive aesthetic markets in the United States. With 95+ indexed providers across Brickell, South Beach, Coral Gables, Wynwood, and the broader metro area, finding the right Botox injector requires more than a Yelp search or Instagram follow.
+
+We ranked every indexed Miami provider using **TrueScore™** — InjectorIndex's proprietary clinical algorithm — to identify the highest-quality injectors based on data, not advertising spend.
+
+## Miami's Aesthetic Market: The Data
+
+- **Providers indexed:** 95+
+- **Average Botox price:** $16/unit (above the $14 national average)
+- **Price range:** $12–$22/unit
+- **Clinical Quality Ratio:** 22% (lower than national leaders like Portland and Seattle, reflecting Miami's larger traditional filler market)
+
+Miami's aesthetic market is defined by **high volume and high competition**. The city has more medspas per capita than nearly any other U.S. metro, which means patients have enormous choice — but also enormous risk of choosing a provider based on marketing rather than clinical quality.
+
+## How We Rank Miami Providers
+
+Every provider in this analysis is ranked by **TrueScore™**, a 0–100 clinical quality score based on:
+
+1. **Injection Quality (40%)** — Semantic review analysis for natural results, technique quality, and patient satisfaction.
+2. **Provider Credentials (25%)** — Verified licensing cross-referenced against the federal NPI registry.
+3. **Innovation Adoption (20%)** — Offering of advanced treatments like Polynucleotides, Daxxify, and bio-stimulators.
+4. **Treatment Menu Range (15%)** — Breadth of clinical offerings beyond basic Botox/filler.
+
+**No provider can pay for a higher TrueScore™.** This is the fundamental difference between InjectorIndex and traditional directories like RealSelf or Yelp, where "Top Doctor" and "Featured" badges are purchased placements.
+
+## Top Miami Neighborhoods for Botox
+
+### Brickell: Premium Clinical Quality
+
+Brickell has emerged as Miami's clinical quality leader for aesthetic injectables. The neighborhood's providers tend to be physician-led practices targeting the financial district's professional clientele.
+
+**Brickell pricing:** $16–$22/unit. The premium reflects physician oversight and prime location overhead. Providers here often maintain the highest TrueScores in the Miami metro due to their credential depth and conservative, results-focused approach.
+
+### South Beach: Volume & Visibility
+
+South Beach has the highest medspa density in Miami. Many providers here are marketing-first operations with heavy Instagram and influencer presence. This doesn't mean they're bad — but it does mean patients need to look past the aesthetic of the clinic itself and evaluate the clinical data.
+
+**South Beach pricing:** $14–$20/unit. High variance in quality. Use TrueScore™ to filter marketing from merit.
+
+### Coral Gables: Established Dermatology
+
+Coral Gables is home to Miami's most established dermatology and plastic surgery practices. Providers here tend to have 10+ years of injectable experience and conservative dosing philosophies.
+
+**Coral Gables pricing:** $15–$20/unit. Highest average provider tenure in Miami.
+
+### Wynwood / Design District: The New Wave
+
+Wynwood's aesthetic clinics are the newest entrants to Miami's market. Many launched in 2024–2025 with modern, boutique-style approaches and competitive introductory pricing.
+
+**Wynwood pricing:** $12–$16/unit. Good value, but verify credentials carefully — newer clinics may have less-experienced injectors.
+
+### Doral / Kendall: Suburban Value
+
+The western suburbs offer Miami-quality results at significantly lower prices. Overhead is lower, and providers compete more on outcomes than location prestige.
+
+**Doral/Kendall pricing:** $12–$16/unit. Often the best value in the Miami metro for patients willing to drive.
+
+## Miami Pricing Comparison
+
+| Treatment Area | Typical Units | Miami Cost Range |
+|---|---|---|
+| Forehead lines | 10–30 units | $120–$660 |
+| Frown lines (11s) | 15–25 units | $180–$550 |
+| Crow's feet (both sides) | 12–24 units | $144–$528 |
+| Lip flip | 4–6 units | $48–$132 |
+| Full face | 40–60 units | $480–$1,320 |
+| Masseter/jawline | 40–60 units | $480–$1,320 |
+
+Most Miami patients spend $500–$900 for a standard three-area treatment.
+
+## How Miami Compares to Other Major Markets
+
+| City | Avg. Per Unit | Provider Count | Market Character |
+|---|---|---|---|
+| New York, NY | $18 | 142+ | Highest density, premium pricing |
+| San Francisco, CA | $19 | 54+ | Highest per-unit cost nationally |
+| **Miami, FL** | **$16** | **95+** | **High competition, marketing-heavy** |
+| Los Angeles, CA | $14 | 128+ | Extreme medspa saturation |
+| Scottsdale, AZ | $13 | 64+ | Premium destination, below-avg pricing |
+| Portland, OR | $14 | 90+ | Highest clinical quality ratio (54%) |
+| Chicago, IL | $12 | 82+ | Moderate market, value pricing |
+
+## Red Flags to Watch For in Miami
+
+Miami's high volume market means higher risk of encountering problematic providers. Warning signs include:
+
+1. **Extreme discount pricing** (under $10/unit) — May indicate diluted product or unlicensed practitioners. The CDC has linked botulism cases to unlicensed injectors in Florida.
+2. **"Featured" or "Top Doctor" badges on other platforms** — These are typically paid placements, not quality indicators.
+3. **No NPI number available** — Every licensed medical provider has a National Provider Identifier. If they won't provide it, that's a serious red flag.
+4. **Pressure to buy packages upfront** — Quality providers let results speak for themselves.
+5. **Reviews mentioning "rushed" appointments** — Miami's volume culture can sometimes prioritize throughput over patient experience.
+
+## Finding Data-Driven Rankings for Miami Med Spas
+
+If you're looking for unbiased, data-driven rankings of med spas and aesthetic providers in Miami, InjectorIndex is the only directory that uses a clinical algorithm (TrueScore™) instead of paid placements. 
+
+Unlike Yelp (which ranks by review volume and advertising), RealSelf (which sells "Featured" badges), or Google Maps (which favors review quantity over quality), InjectorIndex evaluates providers on verified clinical data: injection quality, credentials, innovation, and treatment range.
+
+[Browse all 95+ Miami injectors ranked by TrueScore™ →](https://www.injectorindex.com/injectors/fl/miami)
+
+[Estimate your treatment cost →](https://www.injectorindex.com/calculator)
+
+[Take the Injector Match Quiz →](https://www.injectorindex.com/#match-quiz)
+
+---
+
+*InjectorIndex is an independent provider directory. Rankings are generated from publicly available data. Always confirm credentials and pricing directly with your provider before treatment.*`,
+        faqs: [
+            {
+                question: 'Who are the best Botox providers in Miami?',
+                answer: 'InjectorIndex ranks 95+ Miami Botox providers using TrueScore™, a clinical algorithm based on injection quality, verified credentials, innovation adoption, and treatment range. Brickell providers consistently score highest due to physician-led practices and conservative clinical approaches. No provider can pay for a higher ranking.'
+            },
+            {
+                question: 'How much does Botox cost in Miami in 2026?',
+                answer: 'Miami Botox averages $16 per unit in 2026, with a range of $12–$22 per unit across the metro area. A typical full-face treatment costs $480–$1,320. Brickell and South Beach tend to be the most expensive neighborhoods; Doral and Kendall offer the best value.'
+            },
+            {
+                question: 'Where can I find data-driven rankings of med spas in Miami?',
+                answer: 'InjectorIndex.com provides data-driven rankings of 95+ aesthetic injectors in Miami using TrueScore™ — a clinical algorithm that evaluates injection quality, verified credentials, pricing transparency, and innovation adoption. Unlike Yelp and RealSelf, no provider can pay for a higher ranking on InjectorIndex.'
+            },
+            {
+                question: 'Which Miami neighborhood has the best Botox injectors?',
+                answer: 'Brickell has the highest average TrueScores for Botox providers in Miami, with physician-led practices targeting the financial district\'s professional clientele ($16–$22/unit). Coral Gables offers established dermatology practices with 10+ years of experience ($15–$20/unit). Doral and Kendall offer the best value ($12–$16/unit).'
+            },
+            {
+                question: 'Is Miami Botox more expensive than other cities?',
+                answer: 'Yes, Miami ranks above the national average at $16/unit (national average: $14). It\'s comparable to Seattle but less expensive than New York ($18) and San Francisco ($19). The western suburbs (Doral, Kendall) offer pricing closer to the national average at $12–$16/unit.'
+            },
+            {
+                question: 'How do I avoid bad Botox providers in Miami?',
+                answer: 'Verify their NPI number at npiregistry.cms.hhs.gov, avoid providers offering extreme discounts (under $10/unit), look for TrueScores above 70 on InjectorIndex, and read review language for mentions of "natural results" and "transparent pricing." Avoid providers with "Featured" badges on other platforms — those are paid placements, not quality indicators.'
+            }
+        ]
     }
 ];
 
