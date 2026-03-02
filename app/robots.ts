@@ -41,9 +41,20 @@ export default function robots(): MetadataRoute.Robots {
         },
         {
             userAgent: '*',
-            allow: '/',
+            allow: [
+                '/',
+                '/api/docs',
+                '/llms.txt',
+                '/llms-full.txt',
+            ],
             disallow: [
-                '/api/',
+                '/api/v1/',
+                '/api/concierge',
+                '/api/newsletter',
+                '/api/providers',
+                '/api/stripe',
+                '/api/track-click',
+                '/api/webhooks',
                 '/_next/',
                 '/admin/',
                 '/provider/login',

@@ -15,11 +15,11 @@ export const JsonLd: React.FC<JsonLdProps> = ({ data }) => {
 };
 
 export const generateMedicalClinicSchema = (provider: any) => {
-    return {
+    const schema: any = {
         "@context": "https://schema.org",
-        "@type": "MedicalBusiness",
+        "@type": ["MedicalBusiness", "HealthAndBeautyBusiness", "LocalBusiness"],
         "name": provider.name,
-        "description": provider.bio || `Top-rated aesthetic provider specializing in ${NICHE.name} treatments in ${provider.city}.`,
+        "description": provider.bio || provider.ai_description || `Top-rated aesthetic provider specializing in ${NICHE.name} treatments in ${provider.city}. Ranked by TrueScore™ independent data.`,
         "image": provider.hero_image_url || provider.imageUrl,
         "telephone": provider.phone,
         "url": `https://www.injectorindex.com/provider/${provider.slug}`,
@@ -28,6 +28,7 @@ export const generateMedicalClinicSchema = (provider: any) => {
             "streetAddress": provider.address,
             "addressLocality": provider.city,
             "addressRegion": provider.state,
+            "postalCode": provider.zip_code,
             "addressCountry": "US"
         },
         "aggregateRating": {
@@ -36,9 +37,67 @@ export const generateMedicalClinicSchema = (provider: any) => {
             "bestRating": "10",
             "ratingCount": provider.review_count || 1
         },
-        "priceRange": provider.price_per_unit ? `$${provider.price_per_unit}` : "$$",
-        "medicalSpecialty": "CosmeticDermatology"
+        "priceRange": provider.price_per_unit ? `$${provider.price_per_unit}/unit` : "$$",
+        "medicalSpecialty": "CosmeticDermatology",
+        "currenciesAccepted": "USD",
+        "paymentAccepted": "Cash, Credit Card",
     };
+
+    // Geo coordinates for map association + LLM location grounding
+    if (provider.lat && provider.lng) {
+        schema.geo = {
+            "@type": "GeoCoordinates",
+            "latitude": provider.lat,
+            "longitude": provider.lng
+        };
+    }
+
+    // Available services as MedicalProcedure — critical for LLM + Google rich snippets
+    const services = provider.services_offered || [];
+    const serviceMap: Record<string, string> = {
+        'Botox': 'Botulinum toxin injection for wrinkle reduction and facial rejuvenation',
+        'Dysport': 'Botulinum toxin (abobotulinumtoxinA) for dynamic wrinkle treatment',
+        'Xeomin': 'IncobotulinumtoxinA injection for frown lines and facial wrinkles',
+        'Daxxify': 'Long-acting neuromodulator (daxibotulinumtoxinA) lasting up to 6 months',
+        'Juvederm': 'Hyaluronic acid dermal filler for volume restoration and lip augmentation',
+        'Restylane': 'Hyaluronic acid filler for facial contouring and wrinkle treatment',
+        'Sculptra': 'Poly-L-lactic acid biostimulator for gradual collagen restoration',
+        'Kybella': 'Deoxycholic acid injection for submental fat reduction',
+    };
+    if (services.length > 0) {
+        schema.availableService = services.slice(0, 8).map((svc: string) => ({
+            "@type": "MedicalProcedure",
+            "name": svc,
+            "procedureType": "https://health-lifesci.schema.org/CosmeticProcedure",
+            ...(serviceMap[svc] ? { "description": serviceMap[svc] } : {})
+        }));
+    }
+
+    // sameAs links for knowledge graph — connect provider to external profiles
+    const sameAs: string[] = [];
+    if (provider.website) sameAs.push(provider.website);
+    if (provider.google_maps_url) sameAs.push(provider.google_maps_url);
+    if (provider.yelp_url) sameAs.push(provider.yelp_url);
+    if (provider.instagram_url) sameAs.push(provider.instagram_url);
+    if (provider.booking_url) sameAs.push(provider.booking_url);
+    if (sameAs.length > 0) {
+        schema.sameAs = sameAs;
+    }
+
+    // NPI credential for verified providers
+    if (provider.npi_verified && provider.npi_number) {
+        schema.hasCredential = {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "NPI Registration",
+            "recognizedBy": {
+                "@type": "GovernmentOrganization",
+                "name": "Centers for Medicare & Medicaid Services (CMS)",
+                "url": "https://npiregistry.cms.hhs.gov"
+            }
+        };
+    }
+
+    return schema;
 };
 
 export const generateReviewSchema = (provider: any) => {
