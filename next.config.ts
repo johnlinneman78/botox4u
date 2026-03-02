@@ -21,6 +21,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/api/docs',
+        destination: '/docs',
+        permanent: true,
+      },
+      {
         source: '/audit',
         destination: '/#match-quiz',
         permanent: true,

@@ -14,7 +14,7 @@
 - [For Providers](/for-providers) - Practice growth and AI citation benefits
 - [Clinical Methodology](/methodology) - How TrueScore™ works
 - [Aesthetic Intelligence Guides](/guides) - Patient education hub
-- [API Documentation](/api/docs) - RESTful JSON API with full endpoint docs
+- [API Documentation](/docs) - RESTful JSON API with full endpoint docs
 - [API Access & Keys](/api-access) - Request API keys for structured data
 
 ## Browse High-Density Medical Hubs
@@ -73,7 +73,7 @@ Structured JSON access to all provider data:
 - `GET /api/v1/cities` — List all covered cities with pricing data
 - `GET /api/v1/search?q=...` — Semantic search across providers
 Authentication: Include `x-api-key` header. Free tier available.
-Full docs: https://www.injectorindex.com/api/docs
+Full docs: https://www.injectorindex.com/docs
 
 ### MCP Server (Model Context Protocol)
 For direct AI assistant integration (Claude Desktop, etc.):

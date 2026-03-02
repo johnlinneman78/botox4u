@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: 'API Documentation | InjectorIndex',
     description: 'RESTful API for structured medical aesthetics provider data. Access TrueScore™ rankings, semantic review analysis, pricing, and provider credentials across 22 US cities.',
     alternates: {
-        canonical: 'https://www.injectorindex.com/api/docs',
+        canonical: 'https://www.injectorindex.com/docs',
     },
 }
 
@@ -399,8 +399,8 @@ Contact: api@injectorindex.com for integration support`}</code></pre>
                             <div
                                 key={i}
                                 className={`p-8 rounded-3xl border ${tier.highlight
-                                        ? 'bg-[#d4af37]/5 border-[#d4af37]/20'
-                                        : 'bg-white/[0.02] border-white/[0.06]'
+                                    ? 'bg-[#d4af37]/5 border-[#d4af37]/20'
+                                    : 'bg-white/[0.02] border-white/[0.06]'
                                     }`}
                             >
                                 <h3 className="text-white font-bold text-xl mb-1">{tier.name}</h3>
@@ -417,8 +417,8 @@ Contact: api@injectorindex.com for integration support`}</code></pre>
                                 <Link
                                     href={tier.href}
                                     className={`block text-center py-3 rounded-xl font-bold text-sm transition-all ${tier.highlight
-                                            ? 'bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420]'
-                                            : 'bg-white/5 hover:bg-white/10 text-white border border-white/10'
+                                        ? 'bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420]'
+                                        : 'bg-white/5 hover:bg-white/10 text-white border border-white/10'
                                         }`}
                                 >
                                     {tier.cta}
