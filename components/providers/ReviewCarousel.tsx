@@ -93,7 +93,7 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId, providerI
 
             <div className="mt-8 flex flex-col items-center gap-4">
                 <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em]">
-                    Data Verified • {new Date().getFullYear()} Clinical Standard
+                    Data Verified • 2026 Clinical Standard
                 </p>
             </div>
         </div>

@@ -10,7 +10,7 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
 import { ReviewCarousel } from '@/components/providers/ReviewCarousel'
-import { SemanticInsights } from '@/components/providers/SemanticInsights'
+import { SemanticInsights, analyzeReviewThemes } from '@/components/providers/SemanticInsights'
 import { JsonLd, generateMedicalClinicSchema, generateBreadcrumbSchema, generateReviewSchema } from '@/components/seo/JsonLd'
 import { NICHE } from '@/config/niche'
 
@@ -63,12 +63,12 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
 
     // Analyze review themes for structured data
     const reviews = provider.top_reviews || provider.reviews || []
-    const { analyzeReviewThemes } = await import('@/components/providers/SemanticInsights')
     const themes = analyzeReviewThemes(reviews)
 
     // Enhance schema with semantic review data
+    const enhancedSchema = { ...schema }
     if (themes.totalAnalyzed > 0 && themes.strengths.length > 0) {
-        (schema as any).review = themes.strengths.slice(0, 3).map((theme: any) => ({
+        (enhancedSchema as any).review = themes.strengths.slice(0, 3).map((theme: any) => ({
             "@type": "Review",
             "reviewBody": `${theme.label} (mentioned in ${theme.percentage}% of ${themes.totalAnalyzed} analyzed reviews)`,
             "author": { "@type": "Organization", "name": "InjectorIndex TrueScore™ Semantic Analysis" }
@@ -83,7 +83,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
 
     return (
         <div className="bg-[#0d1420] min-h-screen">
-            <JsonLd data={schema} />
+            <JsonLd data={enhancedSchema} />
             <JsonLd data={reviewSchema} />
             <JsonLd data={breadcrumbs} />
 
