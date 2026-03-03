@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { Search, ShieldCheck, Zap, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useSearchParams } from 'next/navigation'
@@ -17,7 +17,7 @@ interface ProviderMatch {
     is_verified: boolean
 }
 
-export function ProviderLookup() {
+function ProviderLookupInner() {
     const [query, setQuery] = useState('')
     const [results, setResults] = useState<ProviderMatch[]>([])
     const [isSearching, setIsSearching] = useState(false)
@@ -154,5 +154,13 @@ export function ProviderLookup() {
                 </div>
             )}
         </div>
+    )
+}
+
+export function ProviderLookup() {
+    return (
+        <Suspense fallback={<div className="h-16 w-full animate-pulse bg-[#FAF8F5]/10 rounded-2xl" />}>
+            <ProviderLookupInner />
+        </Suspense>
     )
 }

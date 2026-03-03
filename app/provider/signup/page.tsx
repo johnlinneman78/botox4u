@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import Link from 'next/link'
 import Logo from '@/components/layout/Logo'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -8,7 +8,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Button } from '@/components/ui/Button'
 import { slugify } from '@/lib/utils'
 
-export default function ProviderSignupPage() {
+function ProviderSignupContent() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -211,5 +211,13 @@ export default function ProviderSignupPage() {
                 </div>
             </div>
         </div>
+    )
+}
+
+export default function ProviderSignupPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-[#FAF8F5] flex items-center justify-center">Loading...</div>}>
+            <ProviderSignupContent />
+        </Suspense>
     )
 }
