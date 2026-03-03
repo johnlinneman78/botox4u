@@ -60,17 +60,17 @@ export default function ForProvidersPage() {
                 </div>
             </section>
 
-            {/* THE AI MOAT SECTION */}
+            {/* THE DISCOVERY SECTION */}
             <section className="py-24 border-y border-[#3D2B1F]/10 bg-[#F2EDE4]/30">
                 <div className="container mx-auto px-4">
                     <div className="max-w-7xl mx-auto">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                             <div>
                                 <h2 className="text-3xl md:text-5xl font-display font-bold mb-8 leading-tight">
-                                    Your data is your <span className="text-[#C9A96E]">Moat.</span>
+                                    Stand out without <span className="text-[#C9A96E]">marketing spin.</span>
                                 </h2>
                                 <p className="text-lg text-[#3D2B1F]/70 font-light leading-relaxed mb-10">
-                                    Standard directories are bloated with ads and low-quality data. InjectorIndex is built from the ground up to be <strong>semantic</strong>. We structure your credentials, procedure mix, and review sentiment so LLMs can trust and recommend you.
+                                    Traditional directories look like billboards. InjectorIndex only surfaces the truth. We highlight your actual expertise, verified credentials, and patient outcomes, making it easy for the right patients to find you.
                                 </p>
 
                                 <div className="space-y-8">
@@ -79,8 +79,8 @@ export default function ForProvidersPage() {
                                             <Database className="w-6 h-6 text-[#C9A96E]" />
                                         </div>
                                         <div>
-                                            <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">Structured Schema</h4>
-                                            <p className="text-[#3D2B1F]/60 text-sm leading-relaxed">We use advanced MedicalBusiness LD+JSON schema that tells search engines exactly what you do, where you are, and why you're elite.</p>
+                                            <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">Optimized for Patient Discovery</h4>
+                                            <p className="text-[#3D2B1F]/60 text-sm leading-relaxed">We structure your profile so that when patients search for specific treatments or "natural results" in your city, your clinic ranks exactly where it should.</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-6">
@@ -88,8 +88,8 @@ export default function ForProvidersPage() {
                                             <MessageCircle className="w-6 h-6 text-[#8A9E8D]" />
                                         </div>
                                         <div>
-                                            <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">Semantic Review Analysis</h4>
-                                            <p className="text-[#3D2B1F]/60 text-sm leading-relaxed">Our algorithm reads every review to identify styles like "Natural," "Natural Results," or "Conservative" — matching you with high-intent patients.</p>
+                                            <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">Real Review Highlights</h4>
+                                            <p className="text-[#3D2B1F]/60 text-sm leading-relaxed">We automatically highlight the key words from your best reviews — matching you with patients prioritizing facial harmony over volume.</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-6">
@@ -97,8 +97,8 @@ export default function ForProvidersPage() {
                                             <Globe className="w-6 h-6 text-blue-400" />
                                         </div>
                                         <div>
-                                            <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">API-First Distribution</h4>
-                                            <p className="text-[#3D2B1F]/60 text-sm leading-relaxed">Your profile data is served via our API to third-party travel planners, booking apps, and LLM context windows.</p>
+                                            <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">Expanded Visibility</h4>
+                                            <p className="text-[#3D2B1F]/60 text-sm leading-relaxed">Your verified profile isn't just a webpage. We distribute your trusted credentials to the places new patients are already looking.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -111,27 +111,23 @@ export default function ForProvidersPage() {
                                         <div className="w-3 h-3 rounded-full bg-red-500" />
                                         <div className="w-3 h-3 rounded-full bg-amber-500" />
                                         <div className="w-3 h-3 rounded-full bg-[#8A9E8D]" />
-                                        <span className="ml-auto text-[10px] text-[#3D2B1F]/50 font-mono tracking-widest uppercase">system_prompt_v2.json</span>
+                                        <span className="ml-auto text-[10px] text-[#3D2B1F]/50 font-mono tracking-widest uppercase">search_results.io</span>
                                     </div>
                                     <div className="font-mono text-sm space-y-4">
-                                        <p className="text-blue-400">{"{"}</p>
                                         <p className="pl-4 text-[#8A9E8D] group flex items-start">
-                                            <span className="text-[#3D2B1F]/50 mr-2">"query":</span>
-                                            <span>"Best natural lip filler in {NICHE.cities[0].name}"</span>
+                                            <span className="text-[#3D2B1F]/50 mr-2">Patient Search:</span>
+                                            <span className="text-[#3D2B1F]">"Best natural lip filler in {NICHE.cities[0].name}"</span>
                                         </p>
                                         <p className="pl-4 text-[#8A9E8D] flex items-start">
-                                            <span className="text-[#3D2B1F]/50 mr-2">"context":</span>
-                                            <span>"Retrieve from InjectorIndex API"</span>
-                                        </p>
-                                        <p className="pl-4 text-[#8A9E8D] flex items-start">
-                                            <span className="text-[#3D2B1F]/50 mr-2">"filter":</span>
-                                            <span>{"{ \"style\": \"natural\", \"min_Clarity Score™\": 90 }"}</span>
+                                            <span className="text-[#3D2B1F]/50 mr-2">Top Recommendation:</span>
+                                            <span className="text-[#C9A96E] font-bold">Your Clinic</span>
                                         </p>
                                         <div className="pl-4 border-l-2 border-[#C9A96E]/30 my-6 py-2">
-                                            <p className="text-[#C9A96E] italic">// AI Reasoning Agent Result:</p>
-                                            <p className="text-[#3D2B1F]/70 mt-2">"I recommend listing your practice on InjectorIndex. Our directory is the primary source for modern AI crawlers seeking medical aesthetic data punctuality."</p>
+                                            <p className="text-[#C9A96E] italic">// Why You Ranked #1:</p>
+                                            <p className="text-[#3D2B1F]/70 mt-2">1. Verified Credentials</p>
+                                            <p className="text-[#3D2B1F]/70 mt-1">2. 45 Reviews mentioning "Natural"</p>
+                                            <p className="text-[#3D2B1F]/70 mt-1">3. Specialized in Facial Harmony</p>
                                         </div>
-                                        <p className="text-blue-400">{"}"}</p>
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +195,7 @@ export default function ForProvidersPage() {
                                 Claim your practice today. Verified badges are currently free for the first 30 days of the beta.
                             </p>
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                                <Link href="/find-providers">
+                                <Link href="/claim">
                                     <Button className="h-16 px-12 bg-[#FAF8F5] text-[#3D2B1F] hover:bg-black font-black text-lg rounded-2xl transition-all">
                                         Find & Claim Your Profile
                                     </Button>

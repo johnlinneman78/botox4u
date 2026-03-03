@@ -100,7 +100,7 @@ export default function Navbar() {
                                 transitionTimingFunction: 'var(--ease)',
                             }}
                         >
-                            Find My Match
+                            Find My Injector Match
                         </Link>
                     </nav>
 
@@ -208,7 +208,7 @@ export default function Navbar() {
                                     color: 'var(--color-deep)',
                                 }}
                             >
-                                Find My Match
+                                Find My Injector Match
                             </Link>
                         </div>
 

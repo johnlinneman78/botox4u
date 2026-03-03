@@ -29,7 +29,7 @@ export function PricingCta({ planId, providerId, isLoggedIn, className }: Pricin
 
         if (!providerId) {
             // If logged in but no provider ID, they need to claim it first or we need to find it
-            window.location.href = `/provider/claim?plan=${planId}`;
+            window.location.href = `/provider/signup?plan=${planId}`;
             return;
         }
 

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Search, ShieldCheck, Zap, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { getProvidersWithSearch } from '@/lib/actions/providers'
 
@@ -23,6 +24,8 @@ export function ProviderLookup() {
     const [selectedProvider, setSelectedProvider] = useState<ProviderMatch | null>(null)
     const [showDropdown, setShowDropdown] = useState(false)
     const dropdownRef = useRef<HTMLDivElement>(null)
+    const searchParams = useSearchParams()
+    const plan = searchParams.get('plan') || 'free'
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -99,8 +102,8 @@ export function ProviderLookup() {
                     )}
 
                     {query.length >= 3 && results.length === 0 && !isSearching && (
-                        <div className="absolute top-full left-0 right-0 mt-2 bg-[#1a2332] border border-[#3D2B1F]/10 rounded-2xl p-4 text-center text-[#3D2B1F]/60 text-sm">
-                            No clinic found matching "{query}". <Link href="/provider/new" className="text-[#C9A96E] font-bold hover:underline">Add yours →</Link>
+                        <div className="absolute top-full left-0 right-0 mt-2 bg-[#FAF8F5] border border-[#3D2B1F]/10 rounded-2xl p-4 text-center text-[#3D2B1F]/60 text-sm">
+                            No clinic found matching "{query}". <Link href={`/provider/signup?plan=${plan}`} className="text-[#C9A96E] font-bold hover:underline">Create a Free Account →</Link>
                         </div>
                     )}
                 </div>
@@ -136,8 +139,8 @@ export function ProviderLookup() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3">
-                        <Link href={`/provider/claim?id=${selectedProvider.id}`} className="flex-1 inline-flex items-center justify-center w-full bg-[#C9A96E] hover:bg-[#B5955B] text-white font-black py-6 rounded-xl shadow-xl shadow-[#C9A96E]/10 transition-all uppercase tracking-widest text-xs group">
-                            Claim & Upgrade Profile
+                        <Link href={`/provider/signup?id=${selectedProvider.id}&plan=${plan}`} className="flex-1 inline-flex items-center justify-center w-full bg-[#C9A96E] hover:bg-[#B5955B] text-white font-black py-6 rounded-xl shadow-xl shadow-[#C9A96E]/10 transition-all uppercase tracking-widest text-xs group">
+                            Create Account to Claim
                             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Link>
                         <Button
