@@ -213,7 +213,7 @@ export default function InjectorMatchQuiz() {
 
                                         <div className="space-y-4 mb-8">
                                             <div className="flex justify-between items-center bg-black/20 rounded-xl p-3 border border-white/5">
-                                                <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">TrueScore™</span>
+                                                <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Clarity Score™</span>
                                                 <span className="text-lg font-display font-bold text-[#d4af37]">{provider.score_total || 65}</span>
                                             </div>
                                             <div className="flex justify-between items-center px-3">
@@ -264,7 +264,7 @@ export default function InjectorMatchQuiz() {
                             <div className="max-w-2xl mx-auto">
                                 <h3 className="text-3xl font-display font-bold text-white mb-4">Want the Full Comparison?</h3>
                                 <p className="text-gray-400 mb-8 font-light">
-                                    Get the complete provider breakdown for {NICHE.cities.find(c => c.slug === selectedCity)?.name || 'your city'} including pricing ranges, TrueScore™ details, and matching insights.
+                                    Get the complete provider breakdown for {NICHE.cities.find(c => c.slug === selectedCity)?.name || 'your city'} including pricing ranges, Clarity Score™ details, and matching insights.
                                 </p>
 
                                 {emailSuccess ? (

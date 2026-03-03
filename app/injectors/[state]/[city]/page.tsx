@@ -48,8 +48,8 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     const cityName = city.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
     const stateCode = state.toUpperCase()
     const stateName = STATE_MAP[stateCode] || stateCode
-    const title = `Best Botox Injectors in ${cityName}, ${stateName} (2026) | Ranked by TrueScore™`
-    const description = `Compare top-rated Botox injectors in ${cityName}, ${stateName}. Ranked by TrueScore™ — an independent clinical algorithm based on injection quality, verified credentials, and real pricing data. No paid rankings.`
+    const title = `Best Botox Injectors in ${cityName}, ${stateName} (2026) | Ranked by Clarity Score™`
+    const description = `Compare top-rated Botox injectors in ${cityName}, ${stateName}. Ranked by Clarity Score™ — an independent clinical algorithm based on injection quality, verified credentials, and real pricing data. No paid rankings.`
     const url = `https://www.injectorindex.com/${NICHE.baseSlug}/${state.toLowerCase()}/${city.toLowerCase()}`
 
     return {
@@ -99,7 +99,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
         slug: p.slug,
         listingTier: p.listingTier,
         rating: p.averageRating,
-        trueScore: p.trueScore || p.score_total
+        clarityScore: p.clarityScore || p.score_total
     }));
 
     const itemListSchema = generateItemListSchema(providers.slice(0, 50), cityName)
@@ -120,7 +120,10 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
     )
 
     return (
-        <main className="bg-[#0d1420] min-h-screen pb-20">
+        <main
+            className="min-h-screen pb-24"
+            style={{ background: 'var(--color-bg)' }}
+        >
             <Suspense fallback={null}>
                 <GeolocationSorter />
             </Suspense>
@@ -128,32 +131,35 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
             <JsonLd data={breadcrumbs} />
             <JsonLd data={faqSchema} />
 
-            <div className="bg-[#101827] border-b border-white/[0.06]">
-                <div className="container mx-auto px-4 py-3 flex items-center gap-2 text-xs font-medium text-white/60">
-                    <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <div
+                className="border-b"
+                style={{ background: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
+            >
+                <div className="container mx-auto px-6 py-4 flex items-center gap-2 text-xs font-medium" style={{ color: 'var(--color-stone)' }}>
+                    <Link href="/" className="hover:text-[var(--color-espresso)] transition-colors">Home</Link>
                     <span>/</span>
-                    <Link href={`/${NICHE.baseSlug}`} className="hover:text-white transition-colors">Directory</Link>
+                    <Link href={`/${NICHE.baseSlug}`} className="hover:text-[var(--color-espresso)] transition-colors">Directory</Link>
                     <span>/</span>
                     {stateSlug && (
                         <>
-                            <Link href={`/${NICHE.baseSlug}/${stateCode.toLowerCase()}`} className="hover:text-white transition-colors capitalize">
+                            <Link href={`/${NICHE.baseSlug}/${stateCode.toLowerCase()}`} className="hover:text-[var(--color-espresso)] transition-colors capitalize">
                                 {stateSlug.replace(/-/g, ' ')}
                             </Link>
                             <span>/</span>
                         </>
                     )}
-                    <span className="text-white">{cityName}</span>
+                    <span style={{ color: 'var(--color-espresso)' }}>{cityName}</span>
                 </div>
             </div>
 
-            <Hero
+            <CityHero
                 city={cityName}
                 state={stateCode}
-                userLat={userLat}
-                userLng={userLng}
+                treatmentName={NICHE.name}
+                providerCount={providers.length}
             />
 
-            <div className="container mx-auto px-4 -mt-12 relative z-20">
+            <div className="container-content -mt-16 relative z-20">
                 {stats && (
                     <CityStats
                         city={cityName}
@@ -163,7 +169,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                     />
                 )}
 
-                <div className="mt-8">
+                <div className="mt-10 rounded-3xl overflow-hidden border shadow-sm" style={{ borderColor: 'var(--color-border)' }}>
                     <CityMap
                         providers={mapProviders}
                         citySlug={`${city}-${state.toLowerCase()}`}
@@ -172,52 +178,63 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                     />
                 </div>
 
-                <div className="mb-12">
+                <div className="mt-12 mb-16">
                     <PriceMeter
                         avgCost={stats?.avgCost || 15}
                         city={cityName}
                     />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                    <div className="md:col-span-2" id="listings">
-                        <div className="flex justify-between items-center mb-6">
-                            <div className="text-2xl font-display font-bold text-white">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+                    <div className="lg:col-span-2" id="listings">
+                        <div className="flex justify-between items-center mb-8">
+                            <h2
+                                className="text-3xl font-display font-medium"
+                                style={{ color: 'var(--color-espresso)' }}
+                            >
                                 Verified Providers in {cityName}
-                            </div>
+                            </h2>
                         </div>
 
-                        <div className="space-y-6">
-                            <div className="space-y-6">
-                                {providers.length > 0 ? (
-                                    providers.slice(0, 100).map((provider: any) => (
-                                        <EnhancedProviderCard key={provider.id} provider={provider} />
-                                    ))
-                                ) : (
-                                    <div className="bg-white/[0.02] p-12 text-center rounded-3xl border border-white/[0.06] col-span-full">
-                                        <h3 className="text-2xl font-display font-bold text-white mb-4">Verifying Providers in {cityName}</h3>
-                                        <p className="text-gray-500 max-w-md mx-auto mb-8 leading-relaxed">
-                                            We're currently verifying pricing and reviews for clinics in {cityName}.
-                                        </p>
-                                    </div>
-                                )}
-                            </div>
+                        <div className="space-y-8">
+                            {providers.length > 0 ? (
+                                providers.slice(0, 100).map((provider: any) => (
+                                    <EnhancedProviderCard key={provider.id} provider={provider} />
+                                ))
+                            ) : (
+                                <div
+                                    className="p-16 text-center rounded-3xl border shadow-sm"
+                                    style={{ background: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
+                                >
+                                    <h3
+                                        className="text-2xl font-display font-medium mb-4"
+                                        style={{ color: 'var(--color-espresso)' }}
+                                    >
+                                        Verifying Providers in {cityName}
+                                    </h3>
+                                    <p className="max-w-md mx-auto mb-8 leading-relaxed" style={{ color: 'var(--color-stone)' }}>
+                                        We're currently verifying pricing and clinical credentials for clinics in {cityName}. Check back soon for the full report.
+                                    </p>
+                                </div>
+                            )}
                         </div>
 
-                        <CostComparisonTable
-                            id="pricing-guide"
-                            title={`Typical ${NICHE.name} Costs in ${cityName} by Area`}
-                            rows={NICHE.calculator.treatmentAreas.map(area => ({
-                                label: area.label,
-                                units: `${area.minUnits || area.defaultUnits}-${area.maxUnits || area.defaultUnits * 1.5} Units`,
-                                costRange: `$${(stats?.avgCost || 14) * (area.minUnits || area.defaultUnits)} - $${(stats?.avgCost || 14) * (area.maxUnits || area.defaultUnits * 1.5)}`,
-                                notes: area.description || ''
-                            }))}
-                            footer={`*Pricing estimates in ${cityName} are based on a local average of $${stats?.avgCost || 14}/${NICHE.priceUnit.split(' ').slice(-1)}.`}
-                        />
+                        <div className="mt-20">
+                            <CostComparisonTable
+                                id="pricing-guide"
+                                title={`Typical ${NICHE.name} Costs in ${cityName} by Area`}
+                                rows={NICHE.calculator.treatmentAreas.map(area => ({
+                                    label: area.label,
+                                    units: `${area.minUnits || area.defaultUnits}-${area.maxUnits || area.defaultUnits * 1.5} Units`,
+                                    costRange: `$${(stats?.avgCost || 14) * (area.minUnits || area.defaultUnits)} - $${(stats?.avgCost || 14) * (area.maxUnits || area.defaultUnits * 1.5)}`,
+                                    notes: area.description || ''
+                                }))}
+                                footer={`*Pricing estimates in ${cityName} are based on a local average of $${stats?.avgCost || 14}/${NICHE.priceUnit.split(' ').slice(-1)}.`}
+                            />
+                        </div>
                     </div>
 
-                    <div className="space-y-8">
+                    <div className="space-y-10">
                         <LeadForm
                             city={cityName}
                             state={stateCode}
@@ -227,127 +244,157 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                     </div>
                 </div>
 
-                <div className="mt-20 mb-12">
-                    <div className="text-2xl font-display font-bold text-white mb-8">
+                <div className="mt-24 mb-16">
+                    <h2
+                        className="text-2xl font-display font-medium mb-10"
+                        style={{ color: 'var(--color-espresso)' }}
+                    >
                         Explore Nearby Cities
-                    </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    </h2>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
                         {nearbyCities.map((city) => (
                             <Link
                                 key={city.city}
                                 href={`/${NICHE.baseSlug}/${city.state.toLowerCase()}/${city.city.toLowerCase().replace(/\s+/g, '-')}`}
-                                className="bg-white/[0.02] p-4 rounded-xl border border-white/[0.06] hover:border-[#d4af37]/20 hover:shadow-md hover:shadow-[#d4af37]/5 transition-all text-center"
+                                className="p-6 rounded-2xl border transition-all hover:shadow-md hover:-translate-y-1"
+                                style={{
+                                    background: 'var(--color-surface)',
+                                    borderColor: 'var(--color-border)'
+                                }}
                             >
-                                <div className="font-bold text-white text-sm mb-1">{city.city}</div>
-                                <div className="text-xs text-gray-600">{city.count} {city.count === 1 ? 'Clinic' : 'Clinics'}</div>
+                                <div className="font-bold text-sm mb-1" style={{ color: 'var(--color-espresso)' }}>{city.city}</div>
+                                <div className="text-xs" style={{ color: 'var(--color-stone)' }}>{city.count} {city.count === 1 ? 'Clinic' : 'Clinics'}</div>
                             </Link>
                         ))}
                     </div>
                 </div>
 
-                <CityFAQ city={cityName} avgCost={stats?.avgCost || 14} />
+                <div className="mt-24">
+                    <CityFAQ city={cityName} avgCost={stats?.avgCost || 14} />
+                </div>
 
-                {/* City Market Intelligence — LLM-indexable narrative content for local SEO */}
-                <section className="mt-16 bg-white/[0.02] rounded-3xl border border-white/[0.06] p-8 md:p-12">
-                    <div className="text-center mb-10">
-                        <p className="text-xs font-black text-[#d4af37] uppercase tracking-[0.3em] mb-3">Market Intelligence</p>
-                        <h2 className="text-3xl font-display font-bold text-white">
-                            Botox in {cityName}: 2026 Market Report
+                {/* City Market Intelligence */}
+                <section
+                    className="mt-24 rounded-3xl border p-8 md:p-16 shadow-sm overflow-hidden relative"
+                    style={{ background: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
+                >
+                    <div
+                        className="absolute top-0 right-0 w-[400px] h-[400px] opacity-[0.1] blur-[80px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                        style={{ background: 'var(--color-blush)' }}
+                    />
+
+                    <div className="text-center mb-12 relative z-10">
+                        <p
+                            className="text-[10px] font-bold uppercase tracking-[0.3em] mb-4"
+                            style={{ color: 'var(--color-gold)' }}
+                        >
+                            Market Intelligence
+                        </p>
+                        <h2
+                            className="text-4xl font-display font-medium"
+                            style={{ color: 'var(--color-espresso)' }}
+                        >
+                            {cityName} Aesthetic Market Report: 2026
                         </h2>
                     </div>
-                    <div className="max-w-3xl mx-auto prose prose-invert prose-sm">
-                        <p className="text-gray-400 leading-relaxed">
-                            {cityName} has <strong className="text-white">{providers.length}+ indexed aesthetic injectors</strong> on InjectorIndex,
-                            with an average Botox price of <strong className="text-white">${stats?.avgCost || 14} per unit</strong> as of March 2026.
-                            {(stats?.avgCost || 14) > 15
-                                ? ` This places ${cityName} above the national average of $14/unit, reflecting the city's premium aesthetic market.`
-                                : (stats?.avgCost || 14) < 13
-                                    ? ` This is below the national average of $14/unit, making ${cityName} one of the more affordable major markets for cosmetic injectables.`
-                                    : ` This is near the national average of $14/unit, offering patients competitive pricing across a range of provider types.`
-                            }
-                        </p>
-                        {providers.length > 0 && (
-                            <div className="mt-6">
-                                <h3 className="text-lg font-bold text-white mb-3">
-                                    Top-Ranked Injectors in {cityName}
-                                </h3>
-                                <p className="text-gray-400 leading-relaxed mb-4">
-                                    Based on TrueScore™ clinical rankings — which evaluate injection quality, verified credentials,
-                                    innovation adoption, and treatment range — the highest-scoring providers in {cityName} include:
+
+                    <div className="max-w-4xl mx-auto relative z-10">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                            <div className="space-y-5 text-[15px] leading-relaxed" style={{ color: 'var(--color-stone)' }}>
+                                <p>
+                                    {cityName} has <strong style={{ color: 'var(--color-espresso)' }}>{providers.length}+ verified aesthetic injectors</strong> on InjectorIndex,
+                                    with an average Botox price of <strong style={{ color: 'var(--color-espresso)' }}>${stats?.avgCost || 14} per unit</strong> as of March 2026.
                                 </p>
-                                <ul className="space-y-2">
-                                    {providers.slice(0, 3).map((p: any, i: number) => (
-                                        <li key={p.id} className="text-gray-400">
-                                            <Link href={`/provider/${p.slug}`} className="text-[#d4af37] hover:underline font-semibold">
+                                <p>
+                                    {(stats?.avgCost || 14) > 15
+                                        ? ` This places ${cityName} above the national average, reflecting the city's premium aesthetic market and concentration of board-certified specialists.`
+                                        : (stats?.avgCost || 14) < 13
+                                            ? ` This is below the national average, making ${cityName} one of the more accessible major markets for cosmetic injectables.`
+                                            : ` This is consistent with national pricing trends, ensuring a healthy balance of premium clinical options and competitive rates.`
+                                    }
+                                </p>
+                            </div>
+
+                            <div className="space-y-5 text-[15px] leading-relaxed" style={{ color: 'var(--color-stone)' }}>
+                                <p>
+                                    A typical treatment session for the upper face (30–50 units) in {cityName} currently ranges from
+                                    <strong style={{ color: 'var(--color-espresso)' }}> ${Math.round((stats?.avgCost || 14) * 30)} to ${Math.round((stats?.avgCost || 14) * 50)}</strong>.
+                                </p>
+                                <p>
+                                    Our rankings show a high adoption rate of clinical innovations like Daxxify (for longevity) and biostimulators like Sculptra among {cityName}'s top-tier injectors.
+                                </p>
+                            </div>
+                        </div>
+
+                        {providers.length > 0 && (
+                            <div className="pt-10 border-t" style={{ borderColor: 'var(--color-border)' }}>
+                                <h3
+                                    className="text-xl font-display font-medium mb-6"
+                                    style={{ color: 'var(--color-espresso)' }}
+                                >
+                                    Top Clinical Rankings in {cityName}
+                                </h3>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    {providers.slice(0, 4).map((p: any) => (
+                                        <div
+                                            key={p.id}
+                                            className="flex items-center justify-between p-4 rounded-xl border bg-white"
+                                            style={{ borderColor: 'var(--color-border)' }}
+                                        >
+                                            <Link href={`/provider/${p.slug}`} className="font-semibold text-sm hover:text-[var(--color-gold)] transition-colors">
                                                 {p.name}
                                             </Link>
-                                            {p.trueScore || p.score_total ? (
-                                                <span> — TrueScore™ {Math.round(p.trueScore || p.score_total)}</span>
-                                            ) : null}
-                                            {p.price_per_unit ? (
-                                                <span> · ${p.price_per_unit}/unit</span>
-                                            ) : null}
-                                        </li>
+                                            <div className="text-xs font-bold" style={{ color: 'var(--color-gold)' }}>
+                                                Score: {Math.round(p.clarityScore || p.score_total)}
+                                            </div>
+                                        </div>
                                     ))}
-                                </ul>
+                                </div>
                             </div>
                         )}
-                        <div className="mt-6">
-                            <h3 className="text-lg font-bold text-white mb-3">
-                                Pricing Context
-                            </h3>
-                            <p className="text-gray-400 leading-relaxed">
-                                A typical full-face Botox treatment in {cityName} (40–60 units) costs between
-                                ${Math.round((stats?.avgCost || 14) * 40)} and ${Math.round((stats?.avgCost || 14) * 60)}.
-                                Prices vary based on provider credentials, clinic location, and the specific brand of neurotoxin used (Botox, Dysport, Xeomin, Jeuveau, or Daxxify).
-                            </p>
-                        </div>
-                        <div className="mt-6 flex flex-wrap gap-3">
-                            <Link
-                                href="/blog/how-much-does-botox-cost-2026"
-                                className="text-sm text-[#d4af37] hover:underline"
-                            >
-                                📊 Full 2026 Pricing Report →
+
+                        <div className="mt-12 flex flex-wrap gap-6 justify-center">
+                            <Link href="/blog/pricing-report-2026" className="text-sm font-semibold hover:opacity-80 transition-opacity" style={{ color: 'var(--color-stone)' }}>
+                                📊 Full Pricing Report →
                             </Link>
-                            <Link
-                                href="/blog/how-to-find-good-botox-injector"
-                                className="text-sm text-[#d4af37] hover:underline"
-                            >
-                                🔍 How to Find a Provider You Can Trust →
+                            <Link href="/methodology" className="text-sm font-semibold hover:opacity-80 transition-opacity" style={{ color: 'var(--color-stone)' }}>
+                                📐 Selection Methodology →
                             </Link>
-                            <Link
-                                href="/methodology"
-                                className="text-sm text-[#d4af37] hover:underline"
-                            >
-                                📐 How TrueScore™ Works →
+                            <Link href="/blog/best-injectors-guide" className="text-sm font-semibold hover:opacity-80 transition-opacity" style={{ color: 'var(--color-stone)' }}>
+                                🔍 Patient Safe Guide →
                             </Link>
                         </div>
                     </div>
                 </section>
 
-
-                <div className="mt-20 pt-12 border-t border-white/[0.05]">
-                    <div className="text-xl font-display font-bold text-white mb-6">Complete Provider Directory: {cityName}</div>
+                <div className="mt-24 pt-16 border-t" style={{ borderColor: 'var(--color-border)' }}>
+                    <div
+                        className="text-xl font-display font-medium mb-8"
+                        style={{ color: 'var(--color-espresso)' }}
+                    >
+                        Complete Provider Directory: {cityName}
+                    </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {providers.map((p: any) => (
                             <Link
                                 key={`dir-${p.id}`}
                                 href={`/provider/${p.slug}`}
-                                className="text-sm text-gray-500 hover:text-[#d4af37] transition-colors truncate"
+                                className="text-sm hover:text-[var(--color-gold)] transition-colors truncate font-medium"
+                                style={{ color: 'var(--color-stone)' }}
                             >
                                 {p.name}
                             </Link>
                         ))}
                     </div>
                     {providers.length === 0 && (
-                        <p className="text-sm text-gray-600 italic">No additional providers found in {cityName} at this time.</p>
+                        <p className="text-sm italic" style={{ color: 'var(--color-stone)' }}>No additional providers found in {cityName} at this time.</p>
                     )}
-                    <p className="mt-8 text-[10px] text-gray-700 max-w-2xl">
+                    <p className="mt-12 text-[10px] uppercase tracking-wider leading-relaxed max-w-2xl" style={{ color: 'var(--color-taupe)' }}>
                         This directory includes all observed and elite injectors in the {cityName} area. We continuously audit and add new clinics based on clinical excellence and pricing transparency.
                     </p>
                 </div>
 
-                <div className="mt-12">
+                <div className="mt-16">
                     <MedicalDisclaimer />
                 </div>
             </div>

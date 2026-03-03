@@ -11,44 +11,72 @@ interface CityStatsProps {
 export function CityStats({ avgCost, providerCount, avgRating, city }: CityStatsProps) {
     const stats = [
         {
-            label: 'Average Cost',
-            value: `${formatCurrency(avgCost)}/${NICHE.priceUnit.split(' ').slice(-1)}`,
-            description: `Based on ${providerCount} local providers in ${city}.`
+            label: 'Market Average',
+            value: `${formatCurrency(avgCost)}`,
+            suffix: `/${NICHE.priceUnit.split(' ').slice(-1)}`,
+            description: `Based on an audit of ${providerCount} local clinics in ${city}.`
         },
         {
-            label: 'Local Choice',
-            value: `${avgRating.toFixed(1)} / 5.0`,
+            label: 'Patient Choice',
+            value: `${avgRating.toFixed(1)}`,
+            suffix: '/ 5.0',
             description: (
-                <div className="flex flex-col gap-1">
-                    <span className="text-gray-500">{NICHE.googleAttribution.ratingText}</span>
+                <div className="flex flex-col gap-1 items-center">
+                    <span style={{ color: 'var(--color-stone)' }}>{NICHE.googleAttribution.ratingText}</span>
                     <img
                         src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-non-white2.png"
                         alt="Powered by Google"
-                        width="96"
-                        height="12"
-                        className="h-3 w-fit opacity-40"
+                        width="80"
+                        className="opacity-40 grayscale"
                     />
                 </div>
             )
         },
         {
-            label: 'Independent Ranking',
-            value: 'TrueScore™',
-            description: 'Providers prioritized by clinical credentials, patient outcomes, and price transparency.'
+            label: 'Quality Score',
+            value: 'Audited',
+            suffix: '',
+            description: 'Providers are manually verified for clinical credentials and price transparency.'
         }
     ]
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {stats.map((stat, i) => (
-                <div key={i} className="bg-white/[0.02] p-8 rounded-2xl border border-white/[0.06] text-center backdrop-blur-sm">
-                    <p className="text-xs font-bold text-gray-600 uppercase tracking-widest mb-2">
+                <div
+                    key={i}
+                    className="p-10 rounded-3xl border text-center transition-all hover:shadow-lg"
+                    style={{
+                        background: 'var(--color-surface)',
+                        borderColor: 'var(--color-border)'
+                    }}
+                >
+                    <p
+                        className="font-body text-[10px] font-bold uppercase tracking-[0.2em] mb-4 text-center"
+                        style={{ color: 'var(--color-taupe)' }}
+                    >
                         {stat.label}
                     </p>
-                    <p className="text-3xl font-display font-bold text-white mb-2">
-                        {stat.value}
-                    </p>
-                    <div className="text-sm text-gray-500">
+                    <div className="flex items-baseline justify-center gap-1 mb-3">
+                        <span
+                            className="text-4xl font-display font-light"
+                            style={{ color: 'var(--color-espresso)' }}
+                        >
+                            {stat.value}
+                        </span>
+                        {stat.suffix && (
+                            <span
+                                className="text-sm font-body font-medium"
+                                style={{ color: 'var(--color-stone)' }}
+                            >
+                                {stat.suffix}
+                            </span>
+                        )}
+                    </div>
+                    <div
+                        className="text-sm font-body leading-relaxed max-w-[200px] mx-auto"
+                        style={{ color: 'var(--color-stone)' }}
+                    >
                         {stat.description}
                     </div>
                 </div>

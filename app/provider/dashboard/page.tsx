@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import { ExternalLink, Sparkles, User, LogOut } from 'lucide-react'
 import TierBadge from '../_components/TierBadge'
-import TrueScoreCard from '../_components/TrueScoreCard'
+import ClarityScoreCard from '../_components/TrueScoreCard'
 import StatsCard from '../_components/StatsCard'
 import BillingButton from '../_components/BillingButton'
 import ListingLink from '../_components/ListingLink'
@@ -76,8 +76,8 @@ export default async function ProviderDashboard() {
                     {/* Left Column: Core Data */}
                     <div className="lg:col-span-12 space-y-8">
 
-                        {/* TrueScore Large Card */}
-                        <TrueScoreCard score={provider.score || 0} />
+                        {/* Clarity Score™ Large Card */}
+                        <ClarityScoreCard score={provider.score || 0} />
 
                         {/* Stats Row */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

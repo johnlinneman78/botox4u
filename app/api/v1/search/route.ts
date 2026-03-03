@@ -65,6 +65,6 @@ export async function GET(req: NextRequest) {
         },
         results: results,
         total: results.length,
-        powered_by: 'InjectorIndex TrueScore™'
+        powered_by: 'InjectorIndex Clarity Score™'
     })
 }

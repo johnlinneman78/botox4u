@@ -1,6 +1,6 @@
 import { Shield } from 'lucide-react'
 
-export default function TrueScoreCard({ score }: { score: number }) {
+export default function ClarityScoreCard({ score }: { score: number }) {
     return (
         <div className="rounded-2xl border border-white/[0.08] p-6 bg-white/[0.02] relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -8,7 +8,7 @@ export default function TrueScoreCard({ score }: { score: number }) {
             </div>
             <div className="flex items-center justify-between relative z-10">
                 <div>
-                    <p className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Your TrueScore™</p>
+                    <p className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Your Clarity Score™</p>
                     <div className="flex items-baseline gap-1">
                         <p className="text-4xl font-display font-bold text-white mt-1">{score || 0}</p>
                         <p className="text-lg text-gray-500 font-bold">/100</p>

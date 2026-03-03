@@ -12,7 +12,7 @@ const STEPS = [
     {
         id: '02',
         title: 'Compare Scores',
-        desc: 'Review TrueScore™ rankings, credentials, pricing, and patient outcomes side by side.',
+        desc: 'Review Clarity Score™ rankings, credentials, pricing, and patient outcomes side by side.',
         icon: <Search className="w-6 h-6" />,
         color: 'bg-[#d4af37]/10 text-[#d4af37] border-[#d4af37]/20'
     },

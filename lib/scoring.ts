@@ -46,7 +46,7 @@ export function getGrade(score: number): string {
 }
 
 /**
- * Calculates the TrueScore™ based on the 2026 Strategic Pivot
+ * Calculates the Clarity Score™ based on the 2026 Strategic Pivot
  * 1. Injection Quality (40%)
  * 2. Provider Credentials (25%)
  * 3. Innovation Adoption (20%)

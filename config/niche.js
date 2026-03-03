@@ -97,7 +97,7 @@ export const NICHE = {
 
     // SEO
     metaTitleTemplate: "Best Botox in {city} — {year} Provider Rankings & Pricing",
-    metaDescriptionTemplate: "Compare top-rated Botox & filler injectors in {city}. See TrueScores, real pricing, and verified credentials. Find natural results, ranked by data.",
+    metaDescriptionTemplate: "Compare top-rated Botox & filler injectors in {city}. See Clarity Scores™, real pricing, and verified credentials. Find natural results, ranked by data.",
 
     // Pricing tiers (for /pricing page)
     pricingTiers: [
@@ -109,7 +109,7 @@ export const NICHE = {
                 "Basic listing in directory",
                 "Appears in city search results",
                 "Name, location & credential display",
-                "TrueScore™ visible"
+                "Clarity Score™ visible"
             ],
             bestFor: "Individual providers getting started"
         },
@@ -165,10 +165,10 @@ export const NICHE = {
         },
         trustBadges: [
             { icon: 'target', label: 'Injection Quality', description: 'AI-analyzed outcomes for natural facial harmony' },
-            { icon: 'verify', label: 'TrueScore™', description: 'Proprietary rating of credentials, technique, and innovation' },
+            { icon: 'verify', label: 'Clarity Score™', description: 'Proprietary rating of credentials, technique, and innovation' },
             { icon: 'shield', label: 'No Pay-to-Rank', description: ' rankings are 100% data-driven and independent' }
         ],
-        scoreDisclaimer: "The Injector Index is an independent data research platform for aesthetic providers. We are not a medical provider. Our mission is to provide transparency in the aesthetic market by indexing provider data, pricing, and neutral patient feedback. No provider can pay for a higher TrueScore position.",
+        scoreDisclaimer: "The Injector Index is an independent data research platform for aesthetic providers. We are not a medical provider. Our mission is to provide transparency in the aesthetic market by indexing provider data, pricing, and neutral patient feedback. No provider can pay for a higher Clarity Score™ position.",
         footerDisclaimer: "InjectorIndex.com is an independent provider directory and research index for aesthetic medicine. We are not a clinic, we do not perform medical procedures, and we do not provide clinical advice. All data is gathered from public records to facilitate independent research of aesthetic providers."
     }
 }

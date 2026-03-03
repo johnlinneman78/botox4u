@@ -5,13 +5,13 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: `Our Methodology — How We Rank Injectors | ${NICHE.siteName}`,
-    description: `Learn how TrueScore™ uses semantic analysis and clinical quality data to rank aesthetic providers. We prioritize natural results and pricing transparency.`,
+    description: `Learn how Clarity Score™ uses semantic analysis and clinical quality data to rank aesthetic providers. We prioritize natural results and pricing transparency.`,
     alternates: {
         canonical: 'https://www.injectorindex.com/methodology',
     },
     openGraph: {
         title: `Our Methodology — How We Rank Injectors | ${NICHE.siteName}`,
-        description: `Learn how TrueScore™ uses semantic analysis and clinical quality data to rank aesthetic providers. We prioritize natural results and pricing transparency.`,
+        description: `Learn how Clarity Score™ uses semantic analysis and clinical quality data to rank aesthetic providers. We prioritize natural results and pricing transparency.`,
         url: 'https://www.injectorindex.com/methodology',
     }
 }
@@ -28,7 +28,7 @@ export default function MethodologyPage() {
                         <span>The 2026 Ranking Methodology</span>
                     </div>
                     <h1 className="text-5xl md:text-8xl font-display font-bold text-white mb-8 tracking-tight leading-[1.1]">
-                        The TrueScore™ Isn&apos;t <span className="text-[#d4af37]">Assigned.</span> <br />It&apos;s Learned.
+                        The Clarity Score™ Isn&apos;t <span className="text-[#d4af37]">Assigned.</span> <br />It&apos;s Learned.
                     </h1>
                     <p className="text-2xl text-gray-400 font-light leading-relaxed max-w-2xl mx-auto">
                         We built a semantic analysis engine that reads what patients actually say — because stars aren't enough to tell the full story.
@@ -154,7 +154,7 @@ export default function MethodologyPage() {
                     {/* 5. DYNAMIC SCORING MESSAGE */}
                     <div className="mb-32 p-16 rounded-[4rem] bg-[#101827] text-white text-center relative overflow-hidden border border-white/[0.06]">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-[#d4af37] opacity-10 -translate-y-1/2 translate-x-1/2 rounded-full blur-[80px]" />
-                        <h2 className="text-4xl font-display font-bold mb-8">The TrueScore™ is Dynamic.</h2>
+                        <h2 className="text-4xl font-display font-bold mb-8">The Clarity Score™ is Dynamic.</h2>
                         <p className="text-xl text-gray-400 font-light leading-relaxed max-w-2xl mx-auto mb-12">
                             A provider&apos;s score can change daily based on new data. We don&apos;t believe in permanent rankings. You have to earn your place in the index every single month.
                         </p>

@@ -1,0 +1,102 @@
+﻿Γû▓ Next.js 16.1.6 (Turbopack)
+- Environments: .env.production.local, .env.local, .env.production
+
+node.exe : ΓÜá The "middleware" file convention is deprecated. 
+Please use "proxy" instead. Learn more: 
+https://nextjs.org/docs/messages/middleware-to-proxy
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~
+    + CategoryInfo          : NotSpecified: (ΓÜá The "middle...l 
+   eware-to-proxy:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 47s
+  Running TypeScript ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/127) ...
+  Generating static pages using 7 workers (31/127) 
+  Generating static pages using 7 workers (63/127) 
+  Generating static pages using 7 workers (95/127) 
+Γ£ô Generating static pages using 7 workers (127/127) in 13.3s
+  Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ ╞Æ /about
+Γö£ ╞Æ /admin/dashboard
+Γö£ Γùï /admin/leads
+Γö£ Γùï /api-access
+Γö£ ╞Æ /api/concierge
+Γö£ ╞Æ /api/newsletter
+Γö£ ╞Æ /api/providers
+Γö£ ╞Æ /api/stripe/portal
+Γö£ ╞Æ /api/track-click
+Γö£ ╞Æ /api/v1/cities
+Γö£ ╞Æ /api/v1/providers
+Γö£ ╞Æ /api/v1/providers/[slug]
+Γö£ ╞Æ /api/v1/search
+Γö£ ╞Æ /api/webhooks/resend
+Γö£ ╞Æ /api/webhooks/stripe
+Γö£ ╞Æ /auth/signout
+Γö£ Γùï /badge
+Γö£ Γùï /blog
+Γö£ ΓùÅ /blog/[slug]
+Γöé Γö£ /blog/how-much-does-botox-cost-2026
+Γöé Γö£ /blog/botox-safety-botulism-cases-2026
+Γöé Γö£ /blog/preventative-botox-20s-30s-worth-it
+Γöé Γöö [+10 more paths]
+Γö£ Γùï /botox-buyers-guide
+Γö£ Γùï /botox-fact-sheet
+Γö£ Γùï /calculator
+Γö£ Γùï /claim
+Γö£ ╞Æ /claim/[slug]
+Γö£ ╞Æ /claim/[slug]/edit
+Γö£ ╞Æ /claim/[slug]/success
+Γö£ ╞Æ /claim/[slug]/verify
+Γö£ Γùï /disclaimer
+Γö£ Γùï /docs
+Γö£ Γùï /faq
+Γö£ ╞Æ /find-providers
+Γö£ Γùï /for-providers
+Γö£ Γùï /guide/safety-guide
+Γö£ Γùï /guides
+Γö£ Γùï /icon.svg
+Γö£ Γùï /injectors
+Γö£ ╞Æ /injectors/[state]
+Γö£ ╞Æ /injectors/[state]/[city]
+Γö£ ╞Æ /injectors/state/[slug]
+Γö£ Γùï /methodology
+Γö£ ╞Æ /pricing
+Γö£ Γùï /privacy
+Γö£ ╞Æ /provider/[slug]
+Γö£ ╞Æ /provider/[slug]/intelligence-brief
+Γö£ Γùï /provider/claim
+Γö£ ╞Æ /provider/dashboard
+Γö£ Γùï /provider/login
+Γö£ Γùï /provider/new
+Γö£ Γùï /provider/verify
+Γö£ Γùï /pulse
+Γö£ Γùï /robots.txt
+Γö£ Γùï /search
+Γö£ ╞Æ /sitemap-blog.xml
+Γö£ ╞Æ /sitemap-cities.xml
+Γö£ ╞Æ /sitemap-pages.xml
+Γö£ ╞Æ /sitemap-providers.xml
+Γö£ ╞Æ /sitemap-states.xml
+Γö£ Γùï /sitemap.xml
+Γö£ Γùï /terms
+Γö£ ╞Æ /treatments/[treatment]/[state]/[slug]
+Γöö Γùï /unsubscribe
+
+
+╞Æ Proxy (Middleware)
+
+Γùï  (Static)   prerendered as static content
+ΓùÅ  (SSG)      prerendered as static HTML (uses generateStaticParams)
+╞Æ  (Dynamic)  server-rendered on demand
+

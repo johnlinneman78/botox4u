@@ -26,7 +26,7 @@ const TREATMENTS = [
         name: 'Botox & Dysport',
         badge: '🏆 #1 Most Popular',
         tagline: 'Precision Neurotoxins',
-        desc: 'The gold standard for wrinkle reduction. Our TrueScore™ audit verifies injector precision, dilution accuracy, and natural results across 22 major cities.',
+        desc: 'The gold standard for wrinkle reduction. Our Clarity Score™ audit verifies injector precision, dilution accuracy, and natural results across 22 major cities.',
         priceConfig: { min: 10, max: 18, step: 0.5, label: 'per unit' },
         icon: <Zap className="w-6 h-6" />,
         color: 'from-blue-950/60 to-blue-950/20',
@@ -140,7 +140,7 @@ export default function TreatmentTrends() {
                             Botox & Filler <span className="text-[#d4af37]">Rankings.</span>
                         </h2>
                         <p className="text-xl text-gray-400 max-w-2xl font-light leading-relaxed">
-                            Find the best injectors in your city. Our TrueScore™ audit combines patient reviews, pricing transparency, and clinical excellence into a single, independent metric.
+                            Find the best injectors in your city. Our Clarity Score™ audit combines patient reviews, pricing transparency, and clinical excellence into a single, independent metric.
                         </p>
                     </div>
                     <div className="flex flex-col items-end gap-3 text-right">
@@ -314,7 +314,7 @@ export default function TreatmentTrends() {
 
                 <div className="mt-16 text-center">
                     <p className="text-xs text-gray-700 max-w-2xl mx-auto leading-relaxed">
-                        Data powered by <span className="text-gray-500 font-bold">Injector Index Intelligence™</span>. Every provider includes a <span className="text-[#d4af37]">TrueScore™</span> audit to verify clinical quality. Rankings are pure data, zero pay-to-rank.
+                        Data powered by <span className="text-gray-500 font-bold">Injector Index Intelligence™</span>. Every provider includes a <span className="text-[#d4af37]">Clarity Score™</span> audit to verify clinical quality. Rankings are pure data, zero pay-to-rank.
                     </p>
                 </div>
             </div>

@@ -75,7 +75,7 @@ export async function POST(req: Request) {
                 id: p.id,
                 name: p.name,
                 city: p.city,
-                truescore: p.score_total,
+                clarityScore: p.score_total,
                 image: p.imageUrl || p.hero_image_url,
                 slug: p.slug
             }))

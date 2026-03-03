@@ -50,14 +50,14 @@ export default function ApiAccessPage() {
     {
       "name": "Natural Face PDX",
       "city": "Portland",
-      "truescore": 92,
+      "Clarity Score™": 92,
       "style_tags": ["natural", "conservative"],
       "avg_price": 320,
       "profile_url": "https://www.injectorindex.com/provider/pdx-injectables"
     }
   ],
   "total": 1,
-  "powered_by": "InjectorIndex TrueScore™"
+  "powered_by": "InjectorIndex Clarity Score™"
 }`
 
     return (
@@ -74,7 +74,7 @@ export default function ApiAccessPage() {
                         InjectorIndex API — <span className="text-[#d4af37]">Provider Data</span> for AI
                     </h1>
                     <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto leading-relaxed">
-                        Query ranked aesthetic providers by city, style, price, and TrueScore™. Structured for AI agents, health apps, and booking platforms.
+                        Query ranked aesthetic providers by city, style, price, and Clarity Score™. Structured for AI agents, health apps, and booking platforms.
                     </p>
                 </div>
 
@@ -184,12 +184,12 @@ export default function ApiAccessPage() {
                                 <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-widest">GET</span>
                                 <code className="text-white font-mono text-sm">/api/v1/providers</code>
                             </div>
-                            <p className="text-gray-500 text-sm mb-4">Search and filter providers by city, style, price, and TrueScore™.</p>
+                            <p className="text-gray-500 text-sm mb-4">Search and filter providers by city, style, price, and Clarity Score™.</p>
                             <div className="text-xs text-gray-600 font-mono space-y-1">
                                 <div><span className="text-gray-400">city</span> <span className="text-gray-700">string, required</span> — City name (e.g., &quot;portland&quot;)</div>
                                 <div><span className="text-gray-400">style</span> <span className="text-gray-700">string</span> — Filter by style tag (e.g., &quot;natural&quot;)</div>
                                 <div><span className="text-gray-400">max_price</span> <span className="text-gray-700">number</span> — Maximum price per unit</div>
-                                <div><span className="text-gray-400">min_truescore</span> <span className="text-gray-700">number</span> — Minimum TrueScore™ (0-100)</div>
+                                <div><span className="text-gray-400">min_Clarity Score™</span> <span className="text-gray-700">number</span> — Minimum Clarity Score™ (0-100)</div>
                                 <div><span className="text-gray-400">limit</span> <span className="text-gray-700">number</span> — Max results (default: 10, max: 50)</div>
                             </div>
                         </div>
@@ -199,7 +199,7 @@ export default function ApiAccessPage() {
                                 <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-widest">GET</span>
                                 <code className="text-white font-mono text-sm">/api/v1/providers/{'{'}<span className="text-[#d4af37]">slug</span>{'}'}</code>
                             </div>
-                            <p className="text-gray-500 text-sm mb-2">Get a single provider&apos;s full profile including TrueScore™, credentials, services, pricing, and semantic data.</p>
+                            <p className="text-gray-500 text-sm mb-2">Get a single provider&apos;s full profile including Clarity Score™, credentials, services, pricing, and semantic data.</p>
                             <div className="text-xs text-gray-600 font-mono">
                                 <div><span className="text-gray-400">slug</span> <span className="text-gray-700">string, path param</span> — Provider URL slug</div>
                             </div>

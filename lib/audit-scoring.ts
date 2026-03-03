@@ -69,7 +69,7 @@ export function calculateClinicAudit(
     clinicData: any,
     cityStats: any
 ): AuditResult {
-    // 1. TrueScore™ & Market Position
+    // 1. Clarity Score™ & Market Position
     const rawPoints = clinicData?.score?.points || 0
     const iiScore = Number((rawPoints / 10).toFixed(1))
     let marketPosition = 'Below market average'

@@ -1,12 +1,12 @@
 # InjectorIndex (injectorindex.com) 💉
 
-The premium platform connecting aesthetic patients with top-tier Botox and regenerative medicine providers across the United States. Powered by **TrueScore™** intelligence and **Clinical Quality Ratio™** benchmarks.
+The premium platform connecting aesthetic patients with top-tier Botox and regenerative medicine providers across the United States. Powered by **Clarity Score™** intelligence and **Clinical Quality Ratio™** benchmarks.
 
 ## 🚀 2026 Platform Overhaul
 
 The platform has been fully modernized and optimized for the next generation of aesthetic research:
 
-- **TrueScore™ Intelligence:** A proprietary scoring system (1-10) based on verified safety data, board credentials, price transparency, and verified patient satisfaction.
+- **Clarity Score™ Intelligence:** A proprietary scoring system (1-10) based on verified safety data, board credentials, price transparency, and verified patient satisfaction.
 - **Elite Audit™ Reports:** Rich-HTML clinical audits delivered directly to patient inboxes, eliminating PDF friction and providing instant regional benchmarks.
 - **Advanced pSEO Architecture:** A high-performance hierarchical URL structure (`/botox/[state]/[city]`) optimized for local search authority and zero-duplicate content.
 - **Regenerative Focus:** Tracking the **Clinical Quality Ratio™** (PNs, Exosomes, Biostimulators) to help patients find clinics meeting 2026 biological standards.

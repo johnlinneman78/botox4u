@@ -1,9 +1,9 @@
 const fs = require('fs');
 
 const methodologyContent = `
-# Our Methodology: The TrueScore™ Algorithm
+# Our Methodology: The Clarity Score™ Algorithm
 
-The TrueScore™ isn't assigned. It's learned.
+The Clarity Score™ isn't assigned. It's learned.
 
 ## The Philosophy
 Netflix didn't manually rate every movie. They built a system that learned from what customers actually watched, rated, and abandoned. We do the same thing for Botox providers.

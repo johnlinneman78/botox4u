@@ -47,7 +47,7 @@ const FACTORS = [
 const PENALTIES = [
     {
         label: '"Pillow-Face" Penalty',
-        desc: 'Reviews mentioning overfilled, unnatural, or migrated results trigger an automated TrueScore™ deduction.',
+        desc: 'Reviews mentioning overfilled, unnatural, or migrated results trigger an automated Clarity Score™ deduction.',
         icon: <AlertTriangle className="w-4 h-4" />
     },
     {
@@ -63,7 +63,7 @@ export default function HowItWorks() {
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16 max-w-3xl mx-auto">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-black tracking-widest uppercase mb-6">
-                        <ShieldCheck className="w-3.5 h-3.5" /> TrueScore™ 2026 Ranking Algorithm
+                        <ShieldCheck className="w-3.5 h-3.5" /> Clarity Score™ 2026 Ranking Algorithm
                     </div>
                     <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
                         Your Injector&apos;s Score, <span className="text-[#d4af37]">Explained.</span>
@@ -74,11 +74,11 @@ export default function HowItWorks() {
                             className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-[#d4af37] hover:border-[#d4af37]/30 transition-all text-xs font-black uppercase tracking-widest group"
                         >
                             <ShieldCheck className="w-4 h-4 text-[#d4af37] group-hover:scale-110 transition-transform" />
-                            Full TrueScore™ Methodology →
+                            Full Clarity Score™ Methodology →
                         </Link>
                     </div>
                     <p className="text-xl text-gray-400 leading-relaxed font-light">
-                        TrueScore™ isn&apos;t a star rating. It&apos;s a composite score (0-100) built from multiple data signals that no provider can buy their way to the top of.
+                        Clarity Score™ isn&apos;t a star rating. It&apos;s a composite score (0-100) built from multiple data signals that no provider can buy their way to the top of.
                     </p>
                 </div>
 
@@ -122,8 +122,8 @@ export default function HowItWorks() {
                 <div className="p-8 bg-gradient-to-r from-[#d4af37]/10 to-transparent rounded-[2rem] border border-[#d4af37]/15 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div>
                         <div className="text-[#d4af37] font-black text-xs uppercase tracking-widest mb-2">Independent Accountability</div>
-                        <p className="text-lg font-bold text-white">Nobody buys a higher TrueScore™. Rankings are pure data.</p>
-                        <p className="text-sm text-gray-500 mt-1">Providers may buy featured search placement (clearly disclosed). Their TrueScore remains independent and immutable.</p>
+                        <p className="text-lg font-bold text-white">Nobody buys a higher Clarity Score™. Rankings are pure data.</p>
+                        <p className="text-sm text-gray-500 mt-1">Providers may buy featured search placement (clearly disclosed). Their Clarity Score™ remains independent and immutable.</p>
                     </div>
                     <div className="shrink-0 text-[#d4af37]/40">
                         <ShieldCheck className="w-12 h-12" />

@@ -91,7 +91,7 @@ export function SuccessView({ provider }: { provider: any }) {
                             'Full directory visibility',
                             'Patient lead notifications via SMS/email',
                             'Weekly profile analytics report',
-                            'TrueScore™ updates as data refreshes',
+                            'Clarity Score™ updates as data refreshes',
                             'Clinical Quality badge on your profile',
                             'Click-to-call tracking',
                         ].map(f => (

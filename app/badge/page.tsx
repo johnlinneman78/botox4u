@@ -98,8 +98,8 @@ export default function BadgePage() {
                             <div className="space-y-8">
                                 {[
                                     {
-                                        title: 'Top 20% by TrueScore™',
-                                        desc: 'The badge is reserved for providers who rank in the top 20% of their metropolitan area based on the merit-only TrueScore™ algorithm (V2).',
+                                        title: 'Top 20% by Clarity Score™',
+                                        desc: 'The badge is reserved for providers who rank in the top 20% of their metropolitan area based on the merit-only Clarity Score™ algorithm (V2).',
                                         icon: CheckCircle
                                     },
                                     {
@@ -136,7 +136,7 @@ export default function BadgePage() {
                                 </CardHeader>
                                 <CardContent className="p-8">
                                     <p className="text-sm text-gray-500 font-light leading-relaxed mb-8">
-                                        Enter your practice name or provider handle to verify your current TrueScore™ eligibility for the badge.
+                                        Enter your practice name or provider handle to verify your current Clarity Score™ eligibility for the badge.
                                     </p>
                                     <div className="space-y-6">
                                         <div className="relative">
@@ -160,7 +160,7 @@ export default function BadgePage() {
                                     Independence Notice
                                 </div>
                                 <p className="text-[13px] text-gray-500 leading-relaxed font-light">
-                                    Badge eligibility is determined strictly by data. Nobody can pay to lower the eligibility threshold or purchase a "Verified" status without meeting the TrueScore™ criteria.
+                                    Badge eligibility is determined strictly by data. Nobody can pay to lower the eligibility threshold or purchase a "Verified" status without meeting the Clarity Score™ criteria.
                                 </p>
                             </div>
                         </div>

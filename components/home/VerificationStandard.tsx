@@ -3,7 +3,7 @@ import { ShieldCheck, Dna, DollarSign, Activity, Cpu } from 'lucide-react'
 export default function VerificationStandard() {
     const standards = [
         {
-            title: 'TrueScore™ Methodology',
+            title: 'Clarity Score™ Methodology',
             desc: 'We assess every provider\'s treatment menu: what percentage is innovative (PNs, Daxxify, Exosomes) vs. legacy HA filler? Technical progress = higher trust.',
             icon: ShieldCheck,
             accent: 'text-[#d4af37]',

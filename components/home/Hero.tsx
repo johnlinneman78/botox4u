@@ -74,7 +74,7 @@ export default function Hero({
 
                     {/* Sub */}
                     <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed font-light">
-                        InjectorIndex is the independent platform that scores medical aesthetics providers using real patient data — not who pays the most. Search {providersCount.toLocaleString()}+ injectors across {citiesCount} cities, ranked by our proprietary TrueScore™ algorithm.
+                        InjectorIndex is the independent platform that scores medical aesthetics providers using real patient data — not who pays the most. Search {providersCount.toLocaleString()}+ injectors across {citiesCount} cities, ranked by our proprietary Clarity Score™ algorithm.
                     </p>
 
                     {/* CTA Row */}
@@ -145,7 +145,7 @@ export default function Hero({
                     {[
                         { value: `${providersCount.toLocaleString()}+`, label: 'Providers Indexed', note: `Across ${citiesCount} Cities` },
                         { value: '$12–25', label: 'Per Unit Pricing', note: 'Verified Market Rates' },
-                        { value: '98', label: 'Top TrueScore™', note: initialCity ? `${initialCity} Market` : 'Top Neighborhoods' },
+                        { value: '98', label: 'Top Clarity Score™', note: initialCity ? `${initialCity} Market` : 'Top Neighborhoods' },
                         { value: 'AI-Audit', label: 'Results Verification', note: 'Zero Pay-to-Rank' },
                     ].map((stat, i) => (
                         <div key={i} className="bg-white/[0.02] px-6 py-5 text-center hover:bg-white/[0.05] transition-colors">

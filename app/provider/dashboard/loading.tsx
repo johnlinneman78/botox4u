@@ -16,7 +16,7 @@ export default function Loading() {
                     <div className="h-full bg-[#d4af37]/40 w-1/3 animate-[loading-bar_1.5s_infinite]" />
                 </div>
                 <p className="text-[10px] text-gray-500 font-black uppercase tracking-widest leading-relaxed">
-                    Fetching the latest TrueScore™ and performance analytics.
+                    Fetching the latest Clarity Score™ and performance analytics.
                 </p>
             </div>
 

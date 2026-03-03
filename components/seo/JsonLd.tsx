@@ -19,7 +19,7 @@ export const generateMedicalClinicSchema = (provider: any) => {
         "@context": "https://schema.org",
         "@type": ["MedicalBusiness", "HealthAndBeautyBusiness", "LocalBusiness"],
         "name": provider.name,
-        "description": provider.bio || provider.ai_description || `Top-rated aesthetic provider specializing in ${NICHE.name} treatments in ${provider.city}. Ranked by TrueScore™ independent data.`,
+        "description": provider.bio || provider.ai_description || `Top-rated aesthetic provider specializing in ${NICHE.name} treatments in ${provider.city}. Ranked by Clarity Score™ independent data.`,
         "image": provider.hero_image_url || provider.imageUrl,
         "telephone": provider.phone,
         "url": `https://www.injectorindex.com/provider/${provider.slug}`,
@@ -166,7 +166,7 @@ export const generateWebSiteSchema = () => {
         "@type": "WebSite",
         "name": "InjectorIndex",
         "url": "https://www.injectorindex.com",
-        "description": "Find and compare the best Botox injectors near you. Ranked by TrueScore™ — credentials, injection quality, and patient outcomes.",
+        "description": "Find and compare the best Botox injectors near you. Ranked by Clarity Score™ — credentials, injection quality, and patient outcomes.",
         "potentialAction": {
             "@type": "SearchAction",
             "target": "https://www.injectorindex.com/find-providers?q={search_term_string}",
@@ -193,7 +193,7 @@ export const generateFAQPageSchema = (city: string, state: string, botoxLow: num
                 "name": `Who are the top-rated Botox providers in ${city}?`,
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": `InjectorIndex ranks ${providerCount} Botox providers in ${city} using TrueScore™, a data-driven algorithm based on credentials, injection quality, and patient outcomes.`
+                    "text": `InjectorIndex ranks ${providerCount} Botox providers in ${city} using Clarity Score™, a data-driven algorithm based on credentials, injection quality, and patient outcomes.`
                 }
             }
         ]

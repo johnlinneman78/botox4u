@@ -21,7 +21,7 @@ export async function GET(req: Request) {
     const city = searchParams.get('city')
     const style = searchParams.get('style') // e.g. "natural"
     const maxPrice = searchParams.get('max_price')
-    const minScore = searchParams.get('min_truescore')
+    const minScore = searchParams.get('min_clarity_score')
     const tier = searchParams.get('tier') // FEATURED, VERIFIED, FREE
     const limit = Math.min(parseInt(searchParams.get('limit') || '10'), 50)
 
@@ -67,7 +67,7 @@ export async function GET(req: Request) {
         provider_id: p.id,
         name: p.name,
         city: p.city,
-        truescore: p.score_total,
+        clarityScore: p.score_total,
         tier: (p.listing_tier || 'FREE').toUpperCase(),
         style_tags: p.style_tags || [],
         avg_price: p.price_per_unit,
@@ -79,6 +79,6 @@ export async function GET(req: Request) {
         results,
         total: count || 0,
         city: city,
-        powered_by: "InjectorIndex TrueScore™"
+        powered_by: "InjectorIndex Clarity Score™"
     })
 }

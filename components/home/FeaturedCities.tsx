@@ -4,14 +4,14 @@ import { MapPin, ChevronRight } from 'lucide-react'
 import { NICHE } from '@/config/niche'
 
 const FEATURED_CITIES = [
-    { name: 'New York', state: 'NY', slug: 'ny/new-york', avgCost: 18, providers: 142, tag: '🔬 Clinical Precision', avgII: 92, trueScore: 94, topSearch: 'Botox, Lip Filler' },
-    { name: 'Los Angeles', state: 'CA', slug: 'ca/los-angeles', avgCost: 14, providers: 128, tag: '🌟 Celebrity Standard', avgII: 88, trueScore: 91, topSearch: 'Botox, Jawline' },
-    { name: 'Miami', state: 'FL', slug: 'fl/miami', avgCost: 16, providers: 95, tag: '☀️ Luxury Market', avgII: 84, trueScore: 89, topSearch: 'Lip Filler, Jawline' },
-    { name: 'Chicago', state: 'IL', slug: 'il/chicago', avgCost: 12, providers: 82, tag: '💼 Value Leader', avgII: 82, trueScore: 87, topSearch: 'Botox, Dysport' },
-    { name: 'Dallas', state: 'TX', slug: 'tx/dallas', avgCost: 13, providers: 78, tag: '🤠 Rapid Growth', avgII: 83, trueScore: 85, topSearch: 'Botox, Filler' },
-    { name: 'Houston', state: 'TX', slug: 'tx/houston', avgCost: 12, providers: 85, tag: '🚀 Volume Center', avgII: 81, trueScore: 84, topSearch: 'Botox, Fillers' },
-    { name: 'Seattle', state: 'WA', slug: 'wa/seattle', avgCost: 16, providers: 72, tag: '🔬 Innovation Hub', avgII: 86, trueScore: 88, topSearch: 'Botox, Fillers' },
-    { name: 'Scottsdale', state: 'AZ', slug: 'az/scottsdale', avgCost: 13, providers: 64, tag: '🌵 Med-Spa Capital', avgII: 85, trueScore: 86, topSearch: 'Botox, Filler' },
+    { name: 'New York', state: 'NY', slug: 'ny/new-york', avgCost: 18, providers: 142, tag: '🔬 Clinical Precision', avgII: 92, clarityScore: 94, topSearch: 'Botox, Lip Filler' },
+    { name: 'Los Angeles', state: 'CA', slug: 'ca/los-angeles', avgCost: 14, providers: 128, tag: '🌟 Celebrity Standard', avgII: 88, clarityScore: 91, topSearch: 'Botox, Jawline' },
+    { name: 'Miami', state: 'FL', slug: 'fl/miami', avgCost: 16, providers: 95, tag: '☀️ Luxury Market', avgII: 84, clarityScore: 89, topSearch: 'Lip Filler, Jawline' },
+    { name: 'Chicago', state: 'IL', slug: 'il/chicago', avgCost: 12, providers: 82, tag: '💼 Value Leader', avgII: 82, clarityScore: 87, topSearch: 'Botox, Dysport' },
+    { name: 'Dallas', state: 'TX', slug: 'tx/dallas', avgCost: 13, providers: 78, tag: '🤠 Rapid Growth', avgII: 83, clarityScore: 85, topSearch: 'Botox, Filler' },
+    { name: 'Houston', state: 'TX', slug: 'tx/houston', avgCost: 12, providers: 85, tag: '🚀 Volume Center', avgII: 81, clarityScore: 84, topSearch: 'Botox, Fillers' },
+    { name: 'Seattle', state: 'WA', slug: 'wa/seattle', avgCost: 16, providers: 72, tag: '🔬 Innovation Hub', avgII: 86, clarityScore: 88, topSearch: 'Botox, Fillers' },
+    { name: 'Scottsdale', state: 'AZ', slug: 'az/scottsdale', avgCost: 13, providers: 64, tag: '🌵 Med-Spa Capital', avgII: 85, clarityScore: 86, topSearch: 'Botox, Filler' },
 ]
 
 export default async function FeaturedCities() {
@@ -33,7 +33,7 @@ export default async function FeaturedCities() {
                             Explore by City
                         </h2>
                         <p className="text-gray-500">
-                            Real pricing, verified credentials, and TrueScore™ rankings — every city.
+                            Real pricing, verified credentials, and Clarity Score™ rankings — every city.
                         </p>
                     </div>
                     <Link href={`/${NICHE.baseSlug}`} className="group flex items-center gap-3 bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] px-6 py-2.5 rounded-xl font-black text-sm hover:bg-[#d4af37]/20 transition-all shrink-0">
@@ -74,8 +74,8 @@ export default async function FeaturedCities() {
                                         <span className="font-bold text-[#d4af37]">${city.avgCost}</span>
                                     </div>
                                     <div className="flex justify-between text-gray-600">
-                                        <span>TrueScore™</span>
-                                        <span className="font-bold text-[#d4af37]">{city.trueScore}</span>
+                                        <span>Clarity Score™</span>
+                                        <span className="font-bold text-[#d4af37]">{city.clarityScore}</span>
                                     </div>
                                     <div className="flex justify-between text-gray-600">
                                         <span>Providers indexed</span>

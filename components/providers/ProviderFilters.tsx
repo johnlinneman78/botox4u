@@ -71,10 +71,20 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
     }
 
     return (
-        <div className="bg-white/[0.02] p-6 rounded-2xl border border-white/[0.06] mb-8">
+        <div
+            className="p-6 rounded-2xl border mb-8"
+            style={{
+                background: 'white',
+                borderColor: 'var(--color-border)',
+                boxShadow: 'var(--shadow-sm)'
+            }}
+        >
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                 <div>
-                    <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2">
+                    <label
+                        className="block text-[10px] font-bold uppercase tracking-widest mb-2"
+                        style={{ color: 'var(--color-stone)' }}
+                    >
                         City
                     </label>
                     <input
@@ -82,12 +92,22 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         placeholder="e.g. Los Angeles"
-                        className="w-full px-4 py-2.5 bg-white/[0.03] border border-white/[0.06] rounded-xl focus:ring-2 focus:ring-[#d4af37]/20 focus:border-[#d4af37]/30 outline-none transition-all placeholder:text-gray-700 text-white"
+                        className="w-full px-4 py-2.5 rounded-xl outline-none transition-all placeholder:text-[var(--color-taupe)]"
+                        style={{
+                            background: 'var(--color-bg)',
+                            border: '1px solid var(--color-border)',
+                            color: 'var(--color-espresso)',
+                            fontFamily: 'var(--font-body)',
+                            fontSize: '14px'
+                        }}
                     />
                 </div>
 
                 <div>
-                    <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2">
+                    <label
+                        className="block text-[10px] font-bold uppercase tracking-widest mb-2"
+                        style={{ color: 'var(--color-stone)' }}
+                    >
                         State
                     </label>
                     <input
@@ -96,56 +116,96 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
                         onChange={(e) => setState(e.target.value)}
                         placeholder="e.g. CA"
                         maxLength={2}
-                        className="w-full px-4 py-2.5 bg-white/[0.03] border border-white/[0.06] rounded-xl focus:ring-2 focus:ring-[#d4af37]/20 focus:border-[#d4af37]/30 outline-none transition-all placeholder:text-gray-700 text-white uppercase"
+                        className="w-full px-4 py-2.5 rounded-xl outline-none transition-all placeholder:text-[var(--color-taupe)] uppercase"
+                        style={{
+                            background: 'var(--color-bg)',
+                            border: '1px solid var(--color-border)',
+                            color: 'var(--color-espresso)',
+                            fontFamily: 'var(--font-body)',
+                            fontSize: '14px'
+                        }}
                     />
                 </div>
 
                 <div>
-                    <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2">
+                    <label
+                        className="block text-[10px] font-bold uppercase tracking-widest mb-2"
+                        style={{ color: 'var(--color-stone)' }}
+                    >
                         Provider Type
                     </label>
-                    <select
-                        value={type}
-                        onChange={(e) => setType(e.target.value)}
-                        className="w-full px-4 py-2.5 bg-white/[0.03] border border-white/[0.06] rounded-xl focus:ring-2 focus:ring-[#d4af37]/20 focus:border-[#d4af37]/30 outline-none transition-all text-white appearance-none cursor-pointer"
-                    >
-                        <option value="">All Types</option>
-                        <option value="artisan">Artisan (Independent/Specialist)</option>
-                        <option value="institutional">Institutional (Clinic/Medspa)</option>
-                    </select>
+                    <div className="relative">
+                        <select
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
+                            className="w-full px-4 py-2.5 rounded-xl outline-none transition-all appearance-none cursor-pointer"
+                            style={{
+                                background: 'var(--color-bg)',
+                                border: '1px solid var(--color-border)',
+                                color: 'var(--color-espresso)',
+                                fontFamily: 'var(--font-body)',
+                                fontSize: '14px'
+                            }}
+                        >
+                            <option value="">All Types</option>
+                            <option value="artisan">Artisan (Independent/Specialist)</option>
+                            <option value="institutional">Institutional (Clinic/Medspa)</option>
+                        </select>
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none opacity-40">
+                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="md:col-span-1">
-                    <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2">
+                    <label
+                        className="block text-[10px] font-bold uppercase tracking-widest mb-2"
+                        style={{ color: 'var(--color-stone)' }}
+                    >
                         Filter Integrity
                     </label>
-                    <div className="flex bg-white/[0.03] border border-white/[0.06] rounded-xl p-1">
+                    <div
+                        className="flex rounded-xl p-1"
+                        style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)' }}
+                    >
                         <button
                             onClick={() => { setView('specialist'); handleSearch('specialist'); }}
-                            className={`flex-1 py-1.5 px-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === 'specialist' ? 'bg-[#d4af37] text-[#0d1420]' : 'text-gray-500 hover:text-white'}`}
+                            className={`flex-1 py-1.5 px-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === 'specialist' ? 'shadow-sm' : ''}`}
+                            style={{
+                                background: view === 'specialist' ? 'white' : 'transparent',
+                                color: view === 'specialist' ? 'var(--color-espresso)' : 'var(--color-taupe)'
+                            }}
                         >
                             Specialists
                         </button>
                         <button
                             onClick={() => { setView('general'); handleSearch('general'); }}
-                            className={`flex-1 py-1.5 px-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === 'general' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-white'}`}
+                            className={`flex-1 py-1.5 px-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${view === 'general' ? 'shadow-sm' : ''}`}
+                            style={{
+                                background: view === 'general' ? 'white' : 'transparent',
+                                color: view === 'general' ? 'var(--color-espresso)' : 'var(--color-taupe)'
+                            }}
                         >
                             General
                         </button>
                     </div>
                 </div>
+            </div>
 
-                <div className="flex gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+                <div className="md:col-start-4 flex gap-2">
                     <Button
                         variant="primary"
-                        className="flex-1 py-3 font-bold bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] shadow-lg shadow-[#d4af37]/10 transition-all text-sm uppercase tracking-wider"
+                        className="flex-1 py-3"
                         onClick={() => handleSearch()}
                     >
                         Find Providers
                     </Button>
                     <Button
                         variant="outline"
-                        className="px-4 py-2.5 border-white/10 text-gray-400 hover:text-white hover:bg-white/5"
+                        className="px-4"
                         onClick={() => {
                             if (navigator.geolocation) {
                                 navigator.geolocation.getCurrentPosition((pos) => {
@@ -161,8 +221,8 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
                         <MapPin className="w-4 h-4" />
                     </Button>
                     <Button
-                        variant="secondary"
-                        className="px-4 py-2.5 bg-white/5 border border-white/10 text-gray-500 hover:text-white"
+                        variant="outline"
+                        className="px-4"
                         onClick={resetFilters}
                         title="Reset Filters"
                     >
@@ -171,7 +231,7 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
                 </div>
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
                 {searchParams.get('city') && (
                     <BadgeOnFilter label={`City: ${searchParams.get('city')}`} onRemove={() => handleRemoveFilter('city')} />
                 )}
@@ -194,9 +254,22 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
 
 function BadgeOnFilter({ label, onRemove }: { label: string; onRemove: () => void }) {
     return (
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#d4af37]/10 text-[#d4af37] text-xs font-bold rounded-full border border-[#d4af37]/20">
+        <span
+            className="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-bold rounded-full border"
+            style={{
+                background: 'var(--color-surface)',
+                color: 'var(--color-espresso)',
+                borderColor: 'var(--color-border)'
+            }}
+        >
             {label}
-            <button onClick={onRemove} className="hover:text-white transition-colors">✕</button>
+            <button
+                onClick={onRemove}
+                className="hover:text-[var(--color-sage)] transition-colors ml-1"
+                aria-label={`Remove filter ${label}`}
+            >
+                ✕
+            </button>
         </span>
     )
 }

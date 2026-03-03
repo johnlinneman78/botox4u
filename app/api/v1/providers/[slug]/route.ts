@@ -49,7 +49,7 @@ export async function GET(
         profile_url: `https://www.injectorindex.com/provider/${provider.slug}`,
 
         // Scoring
-        truescore: provider.score_total,
+        clarityScore: provider.score_total,
         rating: parseFloat(provider.rating || provider.average_rating || '0'),
         review_count: provider.review_count || 0,
         tier: (provider.listing_tier || 'FREE').toUpperCase(),
@@ -86,7 +86,7 @@ export async function GET(
         // Metadata
         created_at: provider.created_at,
         updated_at: provider.updated_at,
-        powered_by: "InjectorIndex TrueScore™"
+        powered_by: "InjectorIndex Clarity Score™"
     }
 
     return NextResponse.json(result)

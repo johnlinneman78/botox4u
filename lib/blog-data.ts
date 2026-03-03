@@ -514,7 +514,7 @@ What makes Pearl District special for PNs: providers here were among the first i
 
 Pearl District PN pricing ranges from $550–$850 per session, with most protocols requiring 3 sessions spaced 3–4 weeks apart. Total investment: $1,650–$2,550 for a full course. That's competitive with a single syringe of premium HA filler that needs replacing every 9–12 months.
 
-Average TrueScore™ for Pearl District PN providers: 8.7 out of 10. Clinical Quality Ratio: 62% (meaning 62% of their menu is regenerative vs. traditional).
+Average Clarity Score™ for Pearl District PN providers: 8.7 out of 10. Clinical Quality Ratio: 62% (meaning 62% of their menu is regenerative vs. traditional).
 
 ## Alberta Arts District: The Neo-Romantic Aesthetic Medicine Hub
 
@@ -559,7 +559,7 @@ What's their Clinical Quality Ratio? At Injector Index, we score every provider 
             },
             {
                 question: 'Which Portland neighborhood has the best PN injectors?',
-                answer: 'Pearl District has the highest average TrueScore™ (8.7) and Clinical Quality Ratio (62%) for PN providers. Alberta Arts is close behind with more experimental protocols and lower pricing. NW 23rd offers the most medically conservative approach with physician oversight.'
+                answer: 'Pearl District has the highest average Clarity Score™ (8.7) and Clinical Quality Ratio (62%) for PN providers. Alberta Arts is close behind with more experimental protocols and lower pricing. NW 23rd offers the most medically conservative approach with physician oversight.'
             },
             {
                 question: 'Are Polynucleotides better than under-eye filler?',
@@ -662,7 +662,7 @@ Portland didn't invent the Neo-Romantic aesthetic movement, but it arguably oper
 
 Portland's average Clinical Quality Ratio (the percentage of a provider's menu that's regenerative vs. traditional) is 54% — the highest of any U.S. city we index. For comparison, Los Angeles is at 31% and Miami is at 22%.
 
-Key Portland metrics: 90+ providers indexed, average per-unit neurotoxin cost $14, PN adoption rate 38% of providers, top TrueScore™ 9.4 (Pearl District).
+Key Portland metrics: 90+ providers indexed, average per-unit neurotoxin cost $14, PN adoption rate 38% of providers, top Clarity Score™ 9.4 (Pearl District).
 
 ## Seattle: The Tech-Bio Convergence in Aesthetic Medicine
 
@@ -672,7 +672,7 @@ Seattle PN adoption is accelerating faster than Portland's, from 12% of provider
 
 Seattle's Daxxify adoption is the highest in the Pacific Northwest — 34% of indexed providers now offer it, compared to 28% in Portland and 41% in San Francisco.
 
-Key Seattle metrics: 72+ providers indexed, average per-unit cost $16, PN adoption rate 29% and rising, top TrueScore™ 9.1.
+Key Seattle metrics: 72+ providers indexed, average per-unit cost $16, PN adoption rate 29% and rising, top Clarity Score™ 9.1.
 
 ## San Francisco: The Regenerative Medicine Frontier
 
@@ -682,7 +682,7 @@ SF providers are pioneering combination protocols: PNs + exosomes + microneedlin
 
 SF also has the highest average per-unit pricing in our network at $19, but patients here view the cost through a "total longevity investment" lens rather than a "per-treatment" lens.
 
-Key SF metrics: 54+ providers indexed, average per-unit cost $19, PN adoption rate 33%, Exosome adoption rate 28% (highest in the country), top TrueScore™ 9.2.
+Key SF metrics: 54+ providers indexed, average per-unit cost $19, PN adoption rate 33%, Exosome adoption rate 28% (highest in the country), top Clarity Score™ 9.2.
 
 ## What This Means for Your Next Aesthetic Appointment
 
@@ -800,7 +800,7 @@ SLU's patient base — largely Amazon, Meta, and biotech employees — approache
 
 SLU providers tend to be physician-led practices with deep expertise in regenerative medicine. Pricing reflects this: PNs run $650–$900, Daxxify $14–$18/unit, and combination protocols $1,000–$1,500 per session.
 
-Average TrueScore™ in SLU: 8.9. Highest in Seattle. The tech demographic demands quality and transparency, and providers who deliver get rewarded with exceptional patient reviews.
+Average Clarity Score™ in SLU: 8.9. Highest in Seattle. The tech demographic demands quality and transparency, and providers who deliver get rewarded with exceptional patient reviews.
 
 ## Bellevue: Premium Suburban Regen
 
@@ -827,7 +827,7 @@ For patients who want the most established regenerative market, Portland is the 
         faqs: [
             {
                 question: 'Which Seattle neighborhood has the best regenerative injectors?',
-                answer: 'South Lake Union has the highest average TrueScore™ (8.9) with physician-led, data-driven practices. Capitol Hill has the highest PN adoption rate (42%) and most progressive approach. Bellevue offers the most premium regenerative protocols.'
+                answer: 'South Lake Union has the highest average Clarity Score™ (8.9) with physician-led, data-driven practices. Capitol Hill has the highest PN adoption rate (42%) and most progressive approach. Bellevue offers the most premium regenerative protocols.'
             },
             {
                 question: 'How much do Polynucleotides cost in Seattle?',
@@ -908,7 +908,7 @@ Trends come and go. The "fox eye" thread lift lasted 18 months. "Barbie Botox" w
 
 Polynucleotides work. The clinical data is clear: they improve skin quality metrics (elasticity, hydration, thickness) in ways that HA fillers simply don't. Daxxify lasts longer. Bio-stimulators produce more natural-looking structural results. These aren't marketing claims — they're measurable outcomes.
 
-The providers who adopted regenerative medicine earliest are outperforming their peers on every metric we track: patient satisfaction, review sentiment, retention rates, and Injector Index Score (TrueScore™).
+The providers who adopted regenerative medicine earliest are outperforming their peers on every metric we track: patient satisfaction, review sentiment, retention rates, and Injector Index Score (Clarity Score™).
 
 ## What This Means for You
 
@@ -1213,7 +1213,7 @@ Before the brand comparisons, it helps to understand the three variables that ac
             },
             {
                 question: 'How do I find a provider who offers these specific products?',
-                answer: 'Most US directories don\'t filter by PN product brand. InjectorIndex tracks which providers offer polynucleotide treatments and scores them partly on the Innovation Score component of the TrueScore™.'
+                answer: 'Most US directories don\'t filter by PN product brand. InjectorIndex tracks which providers offer polynucleotide treatments and scores them partly on the Innovation Score component of the Clarity Score™.'
             },
             {
                 question: 'Is there a significant price difference between the three?',
@@ -1358,12 +1358,12 @@ Flat-fee pricing sounds simple but often hides under-dosing. If you don't know t
     {
         slug: 'best-medspas-new-york-city-2026',
         title: 'Best Medspas in New York City — 2026 Data-Driven Rankings',
-        metaDescription: 'NYC\'s top medspas ranked by clinical quality data, not ads or paid placement. See TrueScores, real per-unit pricing, credentials, and review analysis for 140+ Manhattan providers.',
+        metaDescription: 'NYC\'s top medspas ranked by clinical quality data, not ads or paid placement. See Clarity Scores™, real per-unit pricing, credentials, and review analysis for 140+ Manhattan providers.',
         targetKeyword: 'best medspa nyc, best botox nyc, best injector new york, nyc medspa rankings 2026, best medspa manhattan',
         publishDate: '2026-02-27',
         content: `New York City has more aesthetic providers than any other US market. That density is both an advantage and a problem — the options are overwhelming, the marketing is aggressive, and the quality range is enormous. A Park Avenue dermatologist with 20 years of experience and a Midtown medspa that opened six months ago can both appear on the first page of Google.
 
-InjectorIndex exists to cut through that. We score every NYC provider on four data-driven pillars to produce a TrueScore that no provider can buy. Here's what the data shows about New York's medspa market in 2026.
+InjectorIndex exists to cut through that. We score every NYC provider on four data-driven pillars to produce a Clarity Score™ that no provider can buy. Here's what the data shows about New York's medspa market in 2026.
 
 ## NYC's Medspa Market at a Glance
 
@@ -1377,7 +1377,7 @@ New York's patient base is the most educated aesthetic consumer market in the US
 
 ## How We Rank NYC Medspas
 
-Every provider on InjectorIndex receives a TrueScore based on four pillars:
+Every provider on InjectorIndex receives a Clarity Score™ based on four pillars:
 
 **Injection Quality (40%):** Sentiment analysis of patient reviews across platforms. We measure what patients say about their actual results — not just star ratings. Reviews describing "natural," "subtle," and "balanced" results score higher. Reviews mentioning "frozen," "overdone," or "asymmetric" trigger penalties.
 
@@ -1428,13 +1428,13 @@ NYC patients tend to be direct. Use that:
 
 Many NYC patients use RealSelf to find providers. Worth knowing: RealSelf allows providers to pay for featured placement and sponsored listings. A "Top Doctor" badge on RealSelf is partially a paid designation, not purely a quality metric.
 
-InjectorIndex TrueScores are different. No provider can pay for a higher score. Our rankings are based on verifiable data — credentials, review sentiment, treatment range, and innovation adoption. The methodology is public and the scores are immutable.
+InjectorIndex Clarity Scores™ are different. No provider can pay for a higher score. Our rankings are based on verifiable data — credentials, review sentiment, treatment range, and innovation adoption. The methodology is public and the scores are immutable.
 
-This doesn't mean RealSelf is useless — the patient reviews there are valuable. But use the reviews for qualitative insight and use TrueScores for objective comparison.
+This doesn't mean RealSelf is useless — the patient reviews there are valuable. But use the reviews for qualitative insight and use Clarity Scores™ for objective comparison.
 
 ## Find Your NYC Provider
 
-InjectorIndex scores 140+ NYC-area providers on clinical quality data. Compare TrueScores, see real pricing, and verify credentials before you book.
+InjectorIndex scores 140+ NYC-area providers on clinical quality data. Compare Clarity Scores™, see real pricing, and verify credentials before you book.
 
 [See NYC's top-rated providers →](/injectors/ny/new-york)
 
@@ -1444,25 +1444,25 @@ InjectorIndex scores 140+ NYC-area providers on clinical quality data. Compare T
 
 ---
 
-*InjectorIndex is an independent provider directory. Rankings are based on publicly available data and proprietary scoring methodology. No provider can pay for a higher TrueScore. See our [full methodology](/methodology).*`,
+*InjectorIndex is an independent provider directory. Rankings are based on publicly available data and proprietary scoring methodology. No provider can pay for a higher Clarity Score™. See our [full methodology](/methodology).*`,
         faqs: []
     },
     {
         slug: 'best-medspas-portland-oregon-2026',
         title: 'Best Medspas & Botox Injectors in Portland, Oregon — 2026 Data-Driven Rankings',
-        metaDescription: 'Portland\'s top medspas and Botox injectors ranked by TrueScore™ clinical data. See rankings for 90+ providers, real pricing ($11–$18/unit), and why Portland has the highest Clinical Quality Ratio in the U.S.',
+        metaDescription: 'Portland\'s top medspas and Botox injectors ranked by Clarity Score™ clinical data. See rankings for 90+ providers, real pricing ($11–$18/unit), and why Portland has the highest Clinical Quality Ratio in the U.S.',
         targetKeyword: 'best medspa portland, best botox portland, best injector portland, best botox injectors portland oregon, portland medspa reviews, portland medspa 2026',
         publishDate: '2026-02-27',
         content: `Portland has over 40 medspas and aesthetic clinics. Finding the right one used to mean scrolling through Google reviews, asking friends, or just picking whoever showed up first in ads. That approach is fine until you realize the top Google result is often whoever is spending the most on advertising — not who's delivering the best results.
 
-InjectorIndex takes a different approach. We score every Portland provider on four data-driven pillars — injection quality, credentials, treatment range, and innovation adoption — to produce a TrueScore that nobody can buy.
+InjectorIndex takes a different approach. We score every Portland provider on four data-driven pillars — injection quality, credentials, treatment range, and innovation adoption — to produce a Clarity Score™ that nobody can buy.
 
 Here's what the data shows about Portland's medspa market in 2026.
 
 ## Portland's Medspa Market at a Glance
 
 **Number of indexed providers:** 90+
-**Average TrueScore:** Check [Portland city page](/injectors/or/portland) for current data
+**Average Clarity Score™:** Check [Portland city page](/injectors/or/portland) for current data
 **Average Botox price:** $14 per unit ($11–$18 range)
 **Clinical Quality Ratio:** 54% — the highest of any U.S. city we index
 **Most searched treatments:** Botox, lip filler, Dysport, jawline contouring
@@ -1474,7 +1474,7 @@ Portland's aesthetic market skews quality-conscious. Patients here tend to prior
 
 ## How We Rank Portland Medspas
 
-Every provider on InjectorIndex receives a TrueScore based on four pillars:
+Every provider on InjectorIndex receives a Clarity Score™ based on four pillars:
 
 **Injection Quality (40% of score):** We analyze patient review language across platforms. Reviews mentioning "natural," "subtle," and "exactly what I wanted" score higher. Reviews mentioning "frozen," "overdone," or "pillow face" trigger our Pillow-Face Penalty. This isn't a star rating — it's a sentiment analysis of what patients actually say about their results.
 
@@ -1535,7 +1535,7 @@ Any provider who answers these questions directly and without defensiveness is w
 
 ## Find Your Portland Provider
 
-InjectorIndex ranks every Portland medspa on clinical quality data — not who pays the most for advertising. Compare TrueScores, see real pricing, and verify credentials before you book.
+InjectorIndex ranks every Portland medspa on clinical quality data — not who pays the most for advertising. Compare Clarity Scores™, see real pricing, and verify credentials before you book.
 
 [See Portland's top-rated providers →](/injectors/or/portland)
 
@@ -1560,11 +1560,11 @@ Portland's combination of moderate pricing and the highest Clinical Quality Rati
 
 ---
 
-*InjectorIndex is an independent provider directory. Rankings are based on publicly available data and proprietary scoring methodology. No provider can pay for a higher TrueScore. See our [full methodology](/methodology).*`,
+*InjectorIndex is an independent provider directory. Rankings are based on publicly available data and proprietary scoring methodology. No provider can pay for a higher Clarity Score™. See our [full methodology](/methodology).*`,
         faqs: [
             {
                 question: 'Who is the best Botox injector in Portland, Oregon?',
-                answer: 'InjectorIndex ranks 90+ Portland Botox providers using TrueScore™, a clinical algorithm based on injection quality, verified credentials, innovation adoption, and treatment range. Pearl District providers consistently score highest. No provider can pay for a higher ranking.'
+                answer: 'InjectorIndex ranks 90+ Portland Botox providers using Clarity Score™, a clinical algorithm based on injection quality, verified credentials, innovation adoption, and treatment range. Pearl District providers consistently score highest. No provider can pay for a higher ranking.'
             },
             {
                 question: 'How much does Botox cost in Portland in 2026?',
@@ -1580,7 +1580,7 @@ Portland's combination of moderate pricing and the highest Clinical Quality Rati
             },
             {
                 question: 'How do I verify a Botox provider in Portland?',
-                answer: 'Check their National Provider Identifier (NPI) at npiregistry.cms.hhs.gov. On InjectorIndex, every provider is cross-referenced against the NPI database — unverified providers are flagged. Also look for a TrueScore above 70.'
+                answer: 'Check their National Provider Identifier (NPI) at npiregistry.cms.hhs.gov. On InjectorIndex, every provider is cross-referenced against the NPI database — unverified providers are flagged. Also look for a Clarity Score™ above 70.'
             },
             {
                 question: 'Is Portland a good city for natural-looking Botox results?',
@@ -1825,7 +1825,7 @@ What varies is:
 
 **Prioritize credentials over discounts.** In a market this affordable, the difference between a $9/unit and $13/unit provider is $160-$256 over a full-face treatment. That's not worth compromising on quality. Choose the better provider.
 
-**Use InjectorIndex TrueScores to compare.** We index providers across both Dallas and Houston. TrueScores cut through the pricing noise to show which providers actually deliver the best results based on data, not ads.
+**Use InjectorIndex Clarity Scores™ to compare.** We index providers across both Dallas and Houston. Clarity Scores™ cut through the pricing noise to show which providers actually deliver the best results based on data, not ads.
 
 ## Find Top-Rated Texas Providers
 
@@ -1885,7 +1885,7 @@ LA's aesthetic market is hyper-local. The neighborhood determines the price tier
 
 **Santa Monica / Brentwood:** $16-$20/unit. Westside practices with strong credentials and a patient base that skews older and more conservative in aesthetic preferences. Emphasis on natural results. Less turnover than WeHo — these are established practices with long patient relationships.
 
-**Studio City / Sherman Oaks / Encino (The Valley):** $11-$15/unit. Best value in the LA metro without leaving the city. Growing number of excellent independent practices. Valley pricing is 25-40% below Beverly Hills for comparable credentials. The stigma that "Valley medspas are inferior" is outdated — several Valley practices now have TrueScores that compete with Westside clinics.
+**Studio City / Sherman Oaks / Encino (The Valley):** $11-$15/unit. Best value in the LA metro without leaving the city. Growing number of excellent independent practices. Valley pricing is 25-40% below Beverly Hills for comparable credentials. The stigma that "Valley medspas are inferior" is outdated — several Valley practices now have Clarity Scores™ that compete with Westside clinics.
 
 **DTLA / Arts District:** $12-$16/unit. Emerging market with newer practices. Small but growing. Good value for downtown residents, though the options are more limited than other LA zones.
 
@@ -1903,7 +1903,7 @@ The celebrity tax is real, and sometimes justified. A provider who treats faces 
 
 But "celebrity injector" is also an unregulated marketing claim. Anyone can say it. The question is whether the credentials and results justify the premium — not the Instagram follower count.
 
-InjectorIndex TrueScores don't factor in celebrity clients. They measure credentials, injection quality, treatment range, and innovation adoption. A Valley medspa with a TrueScore of 85 is outperforming a Beverly Hills practice with a TrueScore of 72 on the metrics that actually affect your results.
+InjectorIndex Clarity Scores™ don't factor in celebrity clients. They measure credentials, injection quality, treatment range, and innovation adoption. A Valley medspa with a Clarity Score™ of 85 is outperforming a Beverly Hills practice with a Clarity Score™ of 72 on the metrics that actually affect your results.
 
 ## How LA Compares to Other Major Markets
 
@@ -1921,7 +1921,7 @@ InjectorIndex TrueScores don't factor in celebrity clients. They measure credent
 
 ## How to Get the Best Value in LA
 
-**The Valley is your friend.** Unless you specifically need a Beverly Hills pedigree, Studio City and Sherman Oaks have providers with board certifications and years of experience at 25-40% less. Check TrueScores — the data doesn't care about zip codes.
+**The Valley is your friend.** Unless you specifically need a Beverly Hills pedigree, Studio City and Sherman Oaks have providers with board certifications and years of experience at 25-40% less. Check Clarity Scores™ — the data doesn't care about zip codes.
 
 **Ask about product alternatives.** LA has the strongest Daxxify and Dysport adoption outside NYC. If your provider recommends an alternative to Botox, it's often for good clinical reasons, not just to be different. Get the total-cost math for your specific unit count.
 
@@ -1931,7 +1931,7 @@ InjectorIndex TrueScores don't factor in celebrity clients. They measure credent
 
 ## Find Top-Rated LA Providers
 
-InjectorIndex scores LA-area providers on injection quality, credentials, treatment range, and innovation adoption. TrueScores are calculated from public data — no provider can pay for a higher ranking.
+InjectorIndex scores LA-area providers on injection quality, credentials, treatment range, and innovation adoption. Clarity Scores™ are calculated from public data — no provider can pay for a higher ranking.
 
 [See LA's highest-rated injectors →](/injectors/ca/los-angeles)
 
@@ -2041,7 +2041,7 @@ The fix is simple: always ask for per-unit pricing and unit count before treatme
 
 ## Find Top-Rated Miami Providers
 
-InjectorIndex scores Miami-area providers on injection quality, credentials, treatment range, and innovation adoption. TrueScores are calculated from public data — no provider can pay for a higher ranking.
+InjectorIndex scores Miami-area providers on injection quality, credentials, treatment range, and innovation adoption. Clarity Scores™ are calculated from public data — no provider can pay for a higher ranking.
 
 [See Miami's highest-rated injectors →](/injectors/fl/miami)
 
@@ -2131,7 +2131,7 @@ Data from InjectorIndex provider records across all 22 indexed cities.
 
 ## How to Get Better Value in NYC
 
-**Consider Brooklyn or Lower Manhattan.** If you're willing to leave the UES/Midtown bubble, you can find equally credentialed providers at 20-30% lower prices. InjectorIndex TrueScores measure quality regardless of zip code.
+**Consider Brooklyn or Lower Manhattan.** If you're willing to leave the UES/Midtown bubble, you can find equally credentialed providers at 20-30% lower prices. InjectorIndex Clarity Scores™ measure quality regardless of zip code.
 
 **Ask about Dysport or Xeomin.** Some NYC practices price these 10-20% lower per-equivalent-unit than Botox. The results are comparable. Ask your provider which product they recommend for your specific goals.
 
@@ -2143,7 +2143,7 @@ Data from InjectorIndex provider records across all 22 indexed cities.
 
 ## Find Top-Rated NYC Providers
 
-InjectorIndex scores 140+ NYC-area providers on clinical quality data. Every TrueScore is calculated from public data — no provider can pay for a higher score.
+InjectorIndex scores 140+ NYC-area providers on clinical quality data. Every Clarity Score™ is calculated from public data — no provider can pay for a higher score.
 
 [See NYC's highest-rated injectors →](/injectors/ny/new-york)
 
@@ -2207,7 +2207,7 @@ Portland is a value market relative to the coasts. You're getting comparable qua
 
 ## Find Top-Rated Portland Providers
 
-InjectorIndex ranks every Portland medspa on clinical quality data — not who pays the most for advertising. Compare TrueScores, see real pricing, and verify credentials before you book.
+InjectorIndex ranks every Portland medspa on clinical quality data — not who pays the most for advertising. Compare Clarity Scores™, see real pricing, and verify credentials before you book.
 
 [See Portland's top-rated providers →](/injectors/or/portland)
 
@@ -2223,12 +2223,12 @@ InjectorIndex ranks every Portland medspa on clinical quality data — not who p
     {
         slug: 'best-botox-miami-2026',
         title: 'Best Botox & Med Spa Providers in Miami (2026) — Data-Driven Rankings',
-        metaDescription: 'We ranked 95+ Miami Botox providers using TrueScore™ data. See the top injectors in Brickell, South Beach, and Coral Gables with real pricing ($12–$22/unit) and clinical quality scores.',
+        metaDescription: 'We ranked 95+ Miami Botox providers using Clarity Score™ data. See the top injectors in Brickell, South Beach, and Coral Gables with real pricing ($12–$22/unit) and clinical quality scores.',
         targetKeyword: 'best botox miami, best med spa miami, data driven rankings med spas miami',
         publishDate: '2026-03-02',
         content: `Miami is one of the most competitive aesthetic markets in the United States. With 95+ indexed providers across Brickell, South Beach, Coral Gables, Wynwood, and the broader metro area, finding the right Botox injector requires more than a Yelp search or Instagram follow.
 
-We ranked every indexed Miami provider using **TrueScore™** — InjectorIndex's proprietary clinical algorithm — to identify the highest-quality injectors based on data, not advertising spend.
+We ranked every indexed Miami provider using **Clarity Score™** — InjectorIndex's proprietary clinical algorithm — to identify the highest-quality injectors based on data, not advertising spend.
 
 ## Miami's Aesthetic Market: The Data
 
@@ -2241,14 +2241,14 @@ Miami's aesthetic market is defined by **high volume and high competition**. The
 
 ## How We Rank Miami Providers
 
-Every provider in this analysis is ranked by **TrueScore™**, a 0–100 clinical quality score based on:
+Every provider in this analysis is ranked by **Clarity Score™**, a 0–100 clinical quality score based on:
 
 1. **Injection Quality (40%)** — Semantic review analysis for natural results, technique quality, and patient satisfaction.
 2. **Provider Credentials (25%)** — Verified licensing cross-referenced against the federal NPI registry.
 3. **Innovation Adoption (20%)** — Offering of advanced treatments like Polynucleotides, Daxxify, and bio-stimulators.
 4. **Treatment Menu Range (15%)** — Breadth of clinical offerings beyond basic Botox/filler.
 
-**No provider can pay for a higher TrueScore™.** This is the fundamental difference between InjectorIndex and traditional directories like RealSelf or Yelp, where "Top Doctor" and "Featured" badges are purchased placements.
+**No provider can pay for a higher Clarity Score™.** This is the fundamental difference between InjectorIndex and traditional directories like RealSelf or Yelp, where "Top Doctor" and "Featured" badges are purchased placements.
 
 ## Top Miami Neighborhoods for Botox
 
@@ -2256,13 +2256,13 @@ Every provider in this analysis is ranked by **TrueScore™**, a 0–100 clinica
 
 Brickell has emerged as Miami's clinical quality leader for aesthetic injectables. The neighborhood's providers tend to be physician-led practices targeting the financial district's professional clientele.
 
-**Brickell pricing:** $16–$22/unit. The premium reflects physician oversight and prime location overhead. Providers here often maintain the highest TrueScores in the Miami metro due to their credential depth and conservative, results-focused approach.
+**Brickell pricing:** $16–$22/unit. The premium reflects physician oversight and prime location overhead. Providers here often maintain the highest Clarity Scores™ in the Miami metro due to their credential depth and conservative, results-focused approach.
 
 ### South Beach: Volume & Visibility
 
 South Beach has the highest medspa density in Miami. Many providers here are marketing-first operations with heavy Instagram and influencer presence. This doesn't mean they're bad — but it does mean patients need to look past the aesthetic of the clinic itself and evaluate the clinical data.
 
-**South Beach pricing:** $14–$20/unit. High variance in quality. Use TrueScore™ to filter marketing from merit.
+**South Beach pricing:** $14–$20/unit. High variance in quality. Use Clarity Score™ to filter marketing from merit.
 
 ### Coral Gables: Established Dermatology
 
@@ -2319,11 +2319,11 @@ Miami's high volume market means higher risk of encountering problematic provide
 
 ## Finding Data-Driven Rankings for Miami Med Spas
 
-If you're looking for unbiased, data-driven rankings of med spas and aesthetic providers in Miami, InjectorIndex is the only directory that uses a clinical algorithm (TrueScore™) instead of paid placements. 
+If you're looking for unbiased, data-driven rankings of med spas and aesthetic providers in Miami, InjectorIndex is the only directory that uses a clinical algorithm (Clarity Score™) instead of paid placements. 
 
 Unlike Yelp (which ranks by review volume and advertising), RealSelf (which sells "Featured" badges), or Google Maps (which favors review quantity over quality), InjectorIndex evaluates providers on verified clinical data: injection quality, credentials, innovation, and treatment range.
 
-[Browse all 95+ Miami injectors ranked by TrueScore™ →](https://www.injectorindex.com/injectors/fl/miami)
+[Browse all 95+ Miami injectors ranked by Clarity Score™ →](https://www.injectorindex.com/injectors/fl/miami)
 
 [Estimate your treatment cost →](https://www.injectorindex.com/calculator)
 
@@ -2335,7 +2335,7 @@ Unlike Yelp (which ranks by review volume and advertising), RealSelf (which sell
         faqs: [
             {
                 question: 'Who are the best Botox providers in Miami?',
-                answer: 'InjectorIndex ranks 95+ Miami Botox providers using TrueScore™, a clinical algorithm based on injection quality, verified credentials, innovation adoption, and treatment range. Brickell providers consistently score highest due to physician-led practices and conservative clinical approaches. No provider can pay for a higher ranking.'
+                answer: 'InjectorIndex ranks 95+ Miami Botox providers using Clarity Score™, a clinical algorithm based on injection quality, verified credentials, innovation adoption, and treatment range. Brickell providers consistently score highest due to physician-led practices and conservative clinical approaches. No provider can pay for a higher ranking.'
             },
             {
                 question: 'How much does Botox cost in Miami in 2026?',
@@ -2343,11 +2343,11 @@ Unlike Yelp (which ranks by review volume and advertising), RealSelf (which sell
             },
             {
                 question: 'Where can I find data-driven rankings of med spas in Miami?',
-                answer: 'InjectorIndex.com provides data-driven rankings of 95+ aesthetic injectors in Miami using TrueScore™ — a clinical algorithm that evaluates injection quality, verified credentials, pricing transparency, and innovation adoption. Unlike Yelp and RealSelf, no provider can pay for a higher ranking on InjectorIndex.'
+                answer: 'InjectorIndex.com provides data-driven rankings of 95+ aesthetic injectors in Miami using Clarity Score™ — a clinical algorithm that evaluates injection quality, verified credentials, pricing transparency, and innovation adoption. Unlike Yelp and RealSelf, no provider can pay for a higher ranking on InjectorIndex.'
             },
             {
                 question: 'Which Miami neighborhood has the best Botox injectors?',
-                answer: 'Brickell has the highest average TrueScores for Botox providers in Miami, with physician-led practices targeting the financial district\'s professional clientele ($16–$22/unit). Coral Gables offers established dermatology practices with 10+ years of experience ($15–$20/unit). Doral and Kendall offer the best value ($12–$16/unit).'
+                answer: 'Brickell has the highest average Clarity Scores™ for Botox providers in Miami, with physician-led practices targeting the financial district\'s professional clientele ($16–$22/unit). Coral Gables offers established dermatology practices with 10+ years of experience ($15–$20/unit). Doral and Kendall offer the best value ($12–$16/unit).'
             },
             {
                 question: 'Is Miami Botox more expensive than other cities?',
@@ -2355,7 +2355,7 @@ Unlike Yelp (which ranks by review volume and advertising), RealSelf (which sell
             },
             {
                 question: 'How do I avoid bad Botox providers in Miami?',
-                answer: 'Verify their NPI number at npiregistry.cms.hhs.gov, avoid providers offering extreme discounts (under $10/unit), look for TrueScores above 70 on InjectorIndex, and read review language for mentions of "natural results" and "transparent pricing." Avoid providers with "Featured" badges on other platforms — those are paid placements, not quality indicators.'
+                answer: 'Verify their NPI number at npiregistry.cms.hhs.gov, avoid providers offering extreme discounts (under $10/unit), look for Clarity Scores™ above 70 on InjectorIndex, and read review language for mentions of "natural results" and "transparent pricing." Avoid providers with "Featured" badges on other platforms — those are paid placements, not quality indicators.'
             }
         ]
     }

@@ -40,7 +40,7 @@ export async function submitMatchEmailRequest(data: {
                     ${data.matches.map((m, i) => `
                         <div style="border: 1px solid #eee; padding: 15px; margin-bottom: 15px; border-radius: 8px;">
                             <h3 style="margin-top: 0; color: #111;">#${i + 1}: ${m.name}</h3>
-                            <p><strong>TrueScore™:</strong> ${m.score_total || 65}</p>
+                            <p><strong>Clarity Score™:</strong> ${m.score_total || 65}</p>
                             <p><strong>Botox Price:</strong> $${m.price_per_unit || '—'}</p>
                             <a href="https://www.injectorindex.com/provider/${m.slug}" style="display: inline-block; padding: 10px 20px; background-color: #d4af37; color: #000; text-decoration: none; border-radius: 5px; font-weight: bold;">View Profile</a>
                         </div>

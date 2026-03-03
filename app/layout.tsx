@@ -1,26 +1,35 @@
 import type { Metadata } from 'next'
 import { NICHE } from '@/config/niche'
 import { Suspense } from 'react'
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import './globals.css'
-import Header from '@/components/layout/Header'
+import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import { StickyBar } from '@/components/navigation/StickyBar'
 import GoogleAnalytics from '@/components/seo/GoogleAnalytics'
-import { AIConcierge } from '@/components/AIConcierge'
 import Script from 'next/script'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
-const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-cormorant',
+  display: 'swap',
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: `Best ${NICHE.name} Injectors & MedSpas Near You | ${NICHE.siteName}`,
-  description: `Compare local injectors using TrueScore™ — independent data on injection quality, credentials, and real pricing. Find natural results, ranked by data.`,
+  description: `Compare local injectors using Clarity Score™ — independent data on injection quality, credentials, and real pricing. Find natural results, ranked by data.`,
   keywords: `${NICHE.name.toLowerCase()} near me, best fillers, medspa rankings, injector scores, natural ${NICHE.name.toLowerCase()}, lip filler, daxxify, polynucleotides, aesthetic directory`,
   metadataBase: new URL(`https://${NICHE.domain}`),
   openGraph: {
     title: `${NICHE.siteName} — Find & Compare the Best ${NICHE.name} Injectors Near You`,
-    description: `Compare 500+ injectors across 22 cities. See TrueScores, real pricing, and verified credentials. Find natural results, ranked by data.`,
+    description: `Compare 500+ injectors across 22 cities. See Clarity Scores, real pricing, and verified credentials. Find natural results, ranked by data.`,
     type: 'website',
     url: `https://${NICHE.domain}`,
     siteName: NICHE.siteName,
@@ -33,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -43,7 +52,7 @@ export default function RootLayout({
               "@type": "Organization",
               "name": NICHE.siteName,
               "url": `https://${NICHE.domain}`,
-              "description": `Find and compare ${NICHE.name.toLowerCase()} injectors ranked by TrueScore™`,
+              "description": `Find and compare ${NICHE.name.toLowerCase()} injectors ranked by Clarity Score™`,
               "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Portland",
@@ -54,7 +63,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans antialiased bg-[#0d1420] text-gray-100">
+      <body style={{ fontFamily: 'var(--font-body)' }}>
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="KXz5/TWsizsa5WSiUjnpWA"
@@ -64,13 +73,10 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_ID || ''} />
         </Suspense>
-        <Header />
+        <Navbar />
         <main className="min-h-screen">{children}</main>
-        <AIConcierge />
-        <StickyBar />
         <Footer />
       </body>
     </html>
   )
 }
-

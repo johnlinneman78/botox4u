@@ -67,7 +67,7 @@ export default async function PricingPage() {
                         </div>
                         <div className="flex items-center gap-3 bg-white/[0.03] px-6 py-3 rounded-2xl border border-white/10 shadow-2xl">
                             <Scale className="w-5 h-5 text-emerald-400" />
-                            <span className="text-sm font-bold text-gray-300">Immutable TrueScore™ Algorithm</span>
+                            <span className="text-sm font-bold text-gray-300">Immutable Clarity Score™ Algorithm</span>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ export default async function PricingPage() {
                             <div className="w-12 h-12 rounded-xl bg-[#d4af37]/10 border border-[#d4af37]/20 flex items-center justify-center mx-auto mb-6">
                                 <BarChart3 className="w-6 h-6 text-[#d4af37]" />
                             </div>
-                            <h3 className="text-xl font-bold text-white">TrueScore™ Clinical Intelligence</h3>
+                            <h3 className="text-xl font-bold text-white">Clarity Score™ Clinical Intelligence</h3>
                             <p className="text-gray-500 text-sm leading-relaxed">
                                 We index your menu. Clinics with higher clinical innovation and credential signal earn top-of-city visibility automatically.
                             </p>
@@ -187,13 +187,13 @@ export default async function PricingPage() {
                     <h2 className="text-3xl font-display font-bold text-center mb-16 text-white">Operational Intelligence FAQ</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <div className="space-y-4">
-                            <h4 className="font-bold text-white text-lg">Can I pay to increase my TrueScore™?</h4>
+                            <h4 className="font-bold text-white text-lg">Can I pay to increase my Clarity Score™?</h4>
                             <p className="text-gray-500 text-sm leading-relaxed">
-                                No. The TrueScore™ is derived from clinical data, public records, and AI sentiment analysis. It is an immutable ranking. Verified clinics may purchase featured placement, but their actual score remains 100% data-driven.
+                                No. The Clarity Score™ is derived from clinical data, public records, and AI sentiment analysis. It is an immutable ranking. Verified clinics may purchase featured placement, but their actual score remains 100% data-driven.
                             </p>
                         </div>
                         <div className="space-y-4">
-                            <h4 className="font-bold text-white text-lg">What defines the "TrueScore™"?</h4>
+                            <h4 className="font-bold text-white text-lg">What defines the "Clarity Score™"?</h4>
                             <p className="text-gray-500 text-sm leading-relaxed">
                                 It is a multi-pillar audit measuring injection quality, provider credentials, and adoption of next-gen technology like Polynucleotides and Exosomes. We believe the 2026 market rewards innovators.
                             </p>

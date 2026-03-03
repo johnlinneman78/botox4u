@@ -125,7 +125,7 @@ export default function ForProvidersPage() {
                                         </p>
                                         <p className="pl-4 text-emerald-400 flex items-start">
                                             <span className="text-gray-600 mr-2">"filter":</span>
-                                            <span>{"{ \"style\": \"natural\", \"min_truescore\": 90 }"}</span>
+                                            <span>{"{ \"style\": \"natural\", \"min_Clarity Score™\": 90 }"}</span>
                                         </p>
                                         <div className="pl-4 border-l-2 border-[#d4af37]/30 my-6 py-2">
                                             <p className="text-[#d4af37] italic">// AI Reasoning Agent Result:</p>
@@ -167,7 +167,7 @@ export default function ForProvidersPage() {
                             </div>
                             <h3 className="text-2xl font-bold mb-4">Immutable Trust</h3>
                             <p className="text-gray-500 leading-relaxed font-light">
-                                Our <strong>TrueScore™</strong> cannot be bought. This independence gives you instant authority. When you rank high, patients know it's because you're actually elite.
+                                Our <strong>Clarity Score™</strong> cannot be bought. This independence gives you instant authority. When you rank high, patients know it's because you're actually elite.
                             </p>
                         </div>
 
@@ -235,7 +235,7 @@ export default function ForProvidersPage() {
             {/* FOOTER PUSH */}
             <footer className="py-12 border-t border-white/[0.06] text-center">
                 <p className="text-[10px] text-gray-600 uppercase tracking-widest font-black flex items-center justify-center gap-2">
-                    <ShieldCheck className="w-3 h-3 text-emerald-500" /> ISO 27001 Data Standard Compliance · Powered by TrueScore™
+                    <ShieldCheck className="w-3 h-3 text-emerald-500" /> ISO 27001 Data Standard Compliance · Powered by Clarity Score™
                 </p>
             </footer>
         </main>

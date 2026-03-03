@@ -185,16 +185,16 @@ export async function getProvidersWithSearch(filters: {
             uses_ai_diagnostics: hasAI || p.uses_ai_diagnostics || p.enriched_attrs?.uses_ai_diagnostics
         })
 
-        const trueScore = scoreBreakdown.points
+        const clarityScore = scoreBreakdown.points
         const innovationBalance = calculateRegenRatio(servicesOffered)
         const fillerCount = servicesOffered.filter((s: string) => FILLER_TREATMENTS.includes(s)).length
 
         // Granularity Weighting (25%) -> Highlight specialized talent (Artisans) 
         const granularityBonus = ARTISANS.includes(p.business_type) ? 25 : 0
 
-        // Final Priority Score calculation (60% TrueScore / 15% Innovation / 25% Granularity)
-        // Heavier weight on TrueScore for the Botox-first repositioning
-        let priority_score = (trueScore * 0.60) + (innovationBalance * 0.15) + (granularityBonus * 0.25)
+        // Final Priority Score calculation (60% Clarity Score™ / 15% Innovation / 25% Granularity)
+        // Heavier weight on Clarity Score™ for the Botox-first repositioning
+        let priority_score = (clarityScore * 0.60) + (innovationBalance * 0.15) + (granularityBonus * 0.25)
 
         // 10+ Regen Boost (+5% visibility boost if highly specialized in next-gen)
         if (regenCount >= 10 && fillerCount === 0) priority_score += 5
@@ -236,12 +236,12 @@ export async function getProvidersWithSearch(filters: {
                 return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/provider_images/${url}`;
             })(),
             score: scoreBreakdown,
-            score_total: trueScore,
-            trueScore: trueScore,
+            score_total: clarityScore,
+            clarityScore,
             innovation_balance: innovationBalance,
             priority_score,
-            is_specialist: trueScore >= 55,
-            relegated: trueScore < 55,
+            is_specialist: clarityScore >= 55,
+            relegated: clarityScore < 55,
             warning_flag: p.warning_flag || false,
             has_real_photo: !!(p.hero_image_url || p.image_url),
             services_offered: servicesOffered
@@ -320,12 +320,12 @@ export async function getProvidersWithSearch(filters: {
             return distA - distB
         }
 
-        // Default: Priority Score -> TrueScore -> Reviews
+        // Default: Priority Score -> Clarity Score™ -> Reviews
         if (Math.abs((b.priority_score || 0) - (a.priority_score || 0)) > 0.1) {
             return (b.priority_score || 0) - (a.priority_score || 0)
         }
 
-        return (b.trueScore || 0) - (a.trueScore || 0)
+        return (b.clarityScore || 0) - (a.clarityScore || 0)
     })
 
     if (filters.limit) {
@@ -443,7 +443,7 @@ export async function getTopScoringProviders(limit: number = 6, userLat?: number
                 score_results_quality: p.score_results_quality || 0,
                 has_real_photo: !!(p.hero_image_url || p.image_url),
                 score: scoreBreakdown,
-                trueScore: scoreBreakdown.points
+                clarityScore: scoreBreakdown.points
             });
             seenTopKeys.add(p.slug);
             seenTopKeys.add(nameKey);
@@ -643,7 +643,7 @@ export async function getProviderBySlug(slug: string) {
 
         score,
         score_total: score.points,
-        trueScore: score.points,
+        clarityScore: score.points,
         innovation_score: score.breakdown.innovation,
 
         // Warning & Scoring Fields

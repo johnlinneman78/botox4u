@@ -5,7 +5,7 @@ import { NICHE } from '@/config/niche'
 
 export const metadata: Metadata = {
     title: 'API Documentation | InjectorIndex',
-    description: 'RESTful API for structured medical aesthetics provider data. Access TrueScore™ rankings, semantic review analysis, pricing, and provider credentials across 22 US cities.',
+    description: 'RESTful API for structured medical aesthetics provider data. Access Clarity Score™ rankings, semantic review analysis, pricing, and provider credentials across 22 US cities.',
     alternates: {
         canonical: 'https://www.injectorindex.com/docs',
     },
@@ -20,18 +20,18 @@ const endpoints = [
             { name: 'city', type: 'string', required: true, description: 'City name (e.g., "portland", "miami")' },
             { name: 'style', type: 'string', required: false, description: 'Aesthetic style tag (e.g., "natural", "conservative")' },
             { name: 'max_price', type: 'number', required: false, description: 'Maximum price per unit in USD' },
-            { name: 'min_truescore', type: 'number', required: false, description: 'Minimum TrueScore™ (0-100)' },
+            { name: 'min_Clarity Score™', type: 'number', required: false, description: 'Minimum Clarity Score™ (0-100)' },
             { name: 'tier', type: 'string', required: false, description: 'Listing tier: FEATURED, VERIFIED, or FREE' },
             { name: 'limit', type: 'number', required: false, description: 'Max results (default: 10, max: 50)' },
         ],
-        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.injectorindex.com/api/v1/providers?city=portland&min_truescore=70&limit=5"',
+        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.injectorindex.com/api/v1/providers?city=portland&min_Clarity Score™=70&limit=5"',
         exampleResponse: `{
   "results": [
     {
       "provider_id": "abc123",
       "name": "Pearl District Aesthetics",
       "city": "Portland",
-      "truescore": 87,
+      "Clarity Score™": 87,
       "tier": "VERIFIED",
       "style_tags": ["natural", "conservative"],
       "avg_price": 14,
@@ -41,13 +41,13 @@ const endpoints = [
   ],
   "total": 23,
   "city": "portland",
-  "powered_by": "InjectorIndex TrueScore™"
+  "powered_by": "InjectorIndex Clarity Score™"
 }`,
     },
     {
         method: 'GET',
         path: '/api/v1/providers/:slug',
-        description: 'Get a detailed provider profile including TrueScore™ breakdown, credentials, semantic review data, and services.',
+        description: 'Get a detailed provider profile including Clarity Score™ breakdown, credentials, semantic review data, and services.',
         params: [
             { name: 'slug', type: 'string', required: true, description: 'Provider URL slug (path parameter)' },
         ],
@@ -62,7 +62,7 @@ const endpoints = [
   "phone": "(503) 555-0100",
   "website": "https://example.com",
   "profile_url": "https://www.injectorindex.com/provider/pearl-district-aesthetics",
-  "truescore": 87,
+  "Clarity Score™": 87,
   "rating": 4.8,
   "review_count": 142,
   "tier": "VERIFIED",
@@ -78,7 +78,7 @@ const endpoints = [
   "score_results_quality": 28,
   "positive_keyword_count": 47,
   "negative_keyword_count": 3,
-  "powered_by": "InjectorIndex TrueScore™"
+  "powered_by": "InjectorIndex Clarity Score™"
 }`,
     },
     {
@@ -106,7 +106,7 @@ const endpoints = [
   ],
   "total_cities": 22,
   "total_providers": 500,
-  "powered_by": "InjectorIndex TrueScore™"
+  "powered_by": "InjectorIndex Clarity Score™"
 }`,
     },
     {
@@ -124,14 +124,14 @@ const endpoints = [
       "provider_id": "abc123",
       "name": "Pearl District Aesthetics",
       "city": "Portland",
-      "truescore": 87,
+      "Clarity Score™": 87,
       "relevance_score": 0.94,
       "profile_url": "https://injectorindex.com/provider/pearl-district-aesthetics"
     }
   ],
   "query": "natural looking botox portland",
   "total": 12,
-  "powered_by": "InjectorIndex TrueScore™"
+  "powered_by": "InjectorIndex Clarity Score™"
 }`,
     },
 ]
@@ -181,7 +181,7 @@ export default function ApiDocsPage() {
                     </h1>
                     <p className="text-xl text-gray-400 font-light leading-relaxed max-w-2xl mx-auto mb-8">
                         Structured, machine-readable data on 500+ medical aesthetics providers across 22 US cities.
-                        TrueScore™ rankings, semantic review analysis, verified credentials, and real pricing — all via REST.
+                        Clarity Score™ rankings, semantic review analysis, verified credentials, and real pricing — all via REST.
                     </p>
                     <div className="flex flex-wrap justify-center gap-4">
                         <Link href="/api-access" className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black text-sm rounded-xl shadow-lg shadow-[#d4af37]/20 transition-all">
@@ -232,7 +232,7 @@ export default function ApiDocsPage() {
                             <div>
                                 <h3 className="text-white font-bold mb-1">Build with structured data</h3>
                                 <p className="text-gray-500 text-sm">
-                                    All responses return JSON with TrueScore™, credentials, pricing, and semantic insights — ready for AI integration, apps, or research.
+                                    All responses return JSON with Clarity Score™, credentials, pricing, and semantic insights — ready for AI integration, apps, or research.
                                 </p>
                             </div>
                         </div>
@@ -339,9 +339,9 @@ export default function ApiDocsPage() {
 
                 {/* Data Model */}
                 <section className="mb-20">
-                    <h2 className="text-3xl font-display font-bold text-white mb-4">TrueScore™ Data Model</h2>
+                    <h2 className="text-3xl font-display font-bold text-white mb-4">Clarity Score™ Data Model</h2>
                     <p className="text-gray-400 mb-8 leading-relaxed">
-                        Every provider profile includes a TrueScore™ — a composite score from 0-100 based on four weighted pillars.
+                        Every provider profile includes a Clarity Score™ — a composite score from 0-100 based on four weighted pillars.
                         No provider can pay for a higher score.
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -371,7 +371,7 @@ export default function ApiDocsPage() {
                     <p className="text-gray-400 mb-6 leading-relaxed">
                         InjectorIndex provides an MCP (Model Context Protocol) server for direct integration with AI assistants
                         like Claude Desktop. When users ask "Who's the best Botox injector in Portland?", the AI can pull
-                        live TrueScore™ data directly from our API.
+                        live Clarity Score™ data directly from our API.
                     </p>
                     <div className="bg-[#080e17] rounded-xl border border-white/[0.06] overflow-hidden">
                         <div className="flex items-center gap-2 px-4 py-2 border-b border-white/[0.06] bg-white/[0.02]">
@@ -380,7 +380,7 @@ export default function ApiDocsPage() {
                         </div>
                         <pre className="p-4 text-sm text-gray-300 overflow-x-auto"><code>{`Available tools:
   search_injectors    — Search providers by city, state, specialty, min score
-  get_injector_profile — Get full profile with TrueScore™ and semantic data
+  get_injector_profile — Get full profile with Clarity Score™ and semantic data
   get_treatment_costs  — Get pricing data by city and treatment type
 
 GitHub: github.com/injectorindex/mcp-server
@@ -441,7 +441,7 @@ Contact: api@injectorindex.com for integration support`}</code></pre>
                             {
                                 icon: <Search className="w-6 h-6" />,
                                 title: 'Healthcare SaaS',
-                                description: 'Booking platforms (Boulevard, Zenoti) and practice management tools can enrich their data with TrueScore™ rankings and semantic insights.',
+                                description: 'Booking platforms (Boulevard, Zenoti) and practice management tools can enrich their data with Clarity Score™ rankings and semantic insights.',
                             },
                             {
                                 icon: <MapPin className="w-6 h-6" />,
@@ -451,7 +451,7 @@ Contact: api@injectorindex.com for integration support`}</code></pre>
                             {
                                 icon: <Globe className="w-6 h-6" />,
                                 title: 'Provider Platforms',
-                                description: 'SaaS tools for aesthetic practices can integrate TrueScore™ widgets, competitive benchmarks, and review analytics.',
+                                description: 'SaaS tools for aesthetic practices can integrate Clarity Score™ widgets, competitive benchmarks, and review analytics.',
                             },
                         ].map((useCase, i) => (
                             <div key={i} className="p-6 bg-white/[0.02] rounded-2xl border border-white/[0.06] group hover:border-[#d4af37]/20 transition-all">
@@ -468,7 +468,7 @@ Contact: api@injectorindex.com for integration support`}</code></pre>
                     <h2 className="text-3xl font-display font-bold text-white mb-4">Ready to Build?</h2>
                     <p className="text-gray-400 mb-8 max-w-lg mx-auto">
                         Get a free API key in 30 seconds. No credit card, no sales call.
-                        Start pulling TrueScore™ data into your app today.
+                        Start pulling Clarity Score™ data into your app today.
                     </p>
                     <Link
                         href="/api-access"

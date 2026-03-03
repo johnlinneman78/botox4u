@@ -163,7 +163,7 @@ function inferStrengths(
 
 interface SemanticInsightsProps {
     reviews: Review[]
-    trueScore: number
+    clarityScore: number
     providerName: string
     reviewCount?: number
     rating?: number
@@ -175,7 +175,7 @@ interface SemanticInsightsProps {
 
 export function SemanticInsights({
     reviews,
-    trueScore,
+    clarityScore,
     providerName,
     reviewCount = 0,
     rating = 0,
@@ -291,12 +291,12 @@ export function SemanticInsights({
                 </div>
             )}
 
-            {/* TrueScore Summary */}
+            {/* Clarity Score™ Summary */}
             <div className="mt-6 p-4 bg-white/[0.02] rounded-xl border border-white/[0.04]">
                 <div className="flex items-center gap-2">
                     <MessageSquareQuote className="w-4 h-4 text-[#d4af37]" />
                     <p className="text-xs text-gray-500 leading-relaxed">
-                        <strong className="text-gray-400">TrueScore™ Summary:</strong> This provider scores <span className="text-white font-bold">{trueScore}/100</span> based on credential verification, patient sentiment analysis, and review consistency.
+                        <strong className="text-gray-400">Clarity Score™ Summary:</strong> This provider scores <span className="text-white font-bold">{clarityScore}/100</span> based on credential verification, patient sentiment analysis, and review consistency.
                         Last updated: March 2026.
                     </p>
                 </div>

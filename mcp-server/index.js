@@ -9,9 +9,9 @@ const BASE_URL = 'https://www.injectorindex.com/api/v1';
 async function handleToolCall(name, args) {
     try {
         if (name === 'search_injectors') {
-            const { city, style, min_truescore } = args;
+            const { city, style, min_Clarity Score™ } = args;
             const res = await axios.get(`${BASE_URL}/providers`, {
-                params: { city, style, min_truescore },
+                params: { city, style, min_Clarity Score™ },
                 headers: { 'x-api-key': API_KEY }
             });
             return {
@@ -77,7 +77,7 @@ process.stdin.on('data', async (data) => {
                                 properties: {
                                     city: { type: 'string', description: 'City name (e.g. portland)' },
                                     style: { type: 'string', description: 'Style tag (e.g. natural)' },
-                                    min_truescore: { type: 'number', description: 'Minimum TrueScore (0-100)' }
+                                    min_Clarity Score™: { type: 'number', description: 'Minimum Clarity Score™ (0-100)' }
                                 },
                                 required: ['city']
                             }

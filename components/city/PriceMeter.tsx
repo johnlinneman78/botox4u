@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 import { NICHE } from '@/config/niche'
-import { MapPin, ChevronDown } from 'lucide-react'
+import { Button } from '@/components/ui/Button'
+import { ChevronDown, Info } from 'lucide-react'
 
 interface PriceMeterProps {
     avgCost: number
@@ -20,7 +22,7 @@ export function PriceMeter({ avgCost, city }: PriceMeterProps) {
         const max = NICHE.priceRange.max
         const p = ((avgCost - min) / (max - min)) * 100
         const clampedP = Math.min(Math.max(p, 5), 95)
-        const timer = setTimeout(() => setPercentage(clampedP), 100)
+        const timer = setTimeout(() => setPercentage(clampedP), 300)
         return () => clearTimeout(timer)
     }, [avgCost])
 
@@ -33,107 +35,171 @@ export function PriceMeter({ avgCost, city }: PriceMeterProps) {
     const diff = Math.abs(((avgCost - nationalAvg) / nationalAvg) * 100).toFixed(0)
 
     return (
-        <div className="bg-white/[0.02] p-10 rounded-3xl border border-white/[0.06] overflow-hidden relative group">
-            {/* Background Accent */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#d4af37]/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110 duration-700" />
+        <section id="price-meter" className="py-12">
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="p-10 md:p-16 rounded-[40px] border relative overflow-hidden group"
+                style={{
+                    background: 'var(--color-surface)',
+                    borderColor: 'var(--color-border)',
+                    boxShadow: 'var(--shadow-xl)'
+                }}
+            >
+                {/* Decorative Elements */}
+                <div
+                    className="absolute top-0 right-0 w-64 h-64 opacity-[0.03] transition-transform duration-1000 group-hover:scale-110 pointer-events-none"
+                    style={{
+                        background: 'radial-gradient(circle, var(--color-gold) 0%, transparent 70%)',
+                        marginRight: '-10%',
+                        marginTop: '-10%'
+                    }}
+                />
 
-            <div className="relative z-10">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
-                    <div>
-                        <div className="flex items-center gap-2 mb-2">
-                            <span className="flex h-2 w-2 rounded-full bg-[#d4af37] animate-pulse" />
-                            <h3 className="text-xs font-black text-gray-600 uppercase tracking-[0.2em]">Market Price Index</h3>
-                        </div>
-                        <h2 className="text-3xl font-display font-bold text-white">
-                            How does <span className="text-[#d4af37]">{city}</span> compare?
-                        </h2>
-                    </div>
-
-                    <div className="flex flex-col gap-2">
-                        <div className="relative">
-                            <select
-                                value={NICHE.cities.find(c => c.name === city)?.slug || ''}
-                                onChange={handleCityChange}
-                                className="appearance-none bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2 pr-10 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-[#d4af37]/20 outline-none cursor-pointer"
+                <div className="relative z-10">
+                    <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-16">
+                        <div className="max-w-xl">
+                            <div className="flex items-center gap-3 mb-6">
+                                <span className="flex h-2 w-2 rounded-full" style={{ background: 'var(--color-gold)' }} />
+                                <h3 className="font-body text-[10px] font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--color-taupe)' }}>
+                                    Market Price Index
+                                </h3>
+                            </div>
+                            <h2
+                                className="text-3xl md:text-5xl font-display font-light mb-6"
+                                style={{ color: 'var(--color-espresso)', lineHeight: 1.1 }}
                             >
-                                <option value="" disabled>Select a City</option>
-                                {NICHE.cities.map((c: any) => (
-                                    <option key={c.slug} value={c.slug}>{c.name}, {c.state}</option>
-                                ))}
-                            </select>
-                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+                                How does <span className="italic" style={{ color: 'var(--color-gold)' }}>{city}</span> compare <br className="hidden md:block" /> to the national average?
+                            </h2>
+                            <p className="font-body text-lg leading-relaxed" style={{ color: 'var(--color-stone)' }}>
+                                We track real-world pricing data to give you a transparent look at what patients are actually paying in your area.
+                            </p>
                         </div>
-                        <div className="bg-white/[0.03] px-6 py-4 rounded-2xl border border-white/[0.06] flex items-baseline gap-2">
-                            <span className="text-4xl font-display font-bold text-white">{NICHE.priceCurrency}{avgCost}</span>
-                            <span className="text-gray-600 font-medium text-sm">/{NICHE.priceUnit.split(' ').slice(-1)} avg</span>
+
+                        <div className="flex flex-col sm:flex-row lg:flex-col gap-4">
+                            <div className="relative group/select">
+                                <select
+                                    value={NICHE.cities.find(c => c.name === city)?.slug || ''}
+                                    onChange={handleCityChange}
+                                    className="appearance-none w-full sm:w-64 px-6 py-4 rounded-xl font-body font-bold text-xs uppercase tracking-widest cursor-pointer transition-all outline-none border"
+                                    style={{
+                                        background: 'var(--color-bg)',
+                                        borderColor: 'var(--color-border)',
+                                        color: 'var(--color-espresso)'
+                                    }}
+                                >
+                                    <option value="" disabled>Switch Location</option>
+                                    {NICHE.cities.map((c: any) => (
+                                        <option key={c.slug} value={c.slug}>{c.name}, {c.state}</option>
+                                    ))}
+                                </select>
+                                <ChevronDown className="absolute right-6 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none transition-transform group-hover/select:translate-y-[-40%]" style={{ color: 'var(--color-stone)' }} />
+                            </div>
+
+                            <div className="flex items-baseline gap-3 px-8 py-5 rounded-2xl border" style={{ background: 'var(--color-bg)', borderColor: 'var(--color-border)' }}>
+                                <span className="text-5xl font-display font-light" style={{ color: 'var(--color-espresso)' }}>
+                                    <span className="text-2xl align-top mr-1" style={{ color: 'var(--color-gold)' }}>$</span>{avgCost}
+                                </span>
+                                <span className="font-body text-[10px] font-bold uppercase tracking-[0.1em]" style={{ color: 'var(--color-taupe)' }}>
+                                    avg / {NICHE.priceUnit.split(' ').slice(-1)}
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {/* The Gauge */}
-                <div className="relative pt-8 pb-12">
-                    <div className="flex justify-between text-[10px] font-bold text-gray-700 uppercase tracking-widest mb-4">
-                        <span>Great Value</span>
-                        <span className="text-gray-500">National Average ({NICHE.priceCurrency}{nationalAvg})</span>
-                        <span>Premium Market</span>
-                    </div>
+                    {/* The Gauge Container */}
+                    <div className="relative py-12 px-2">
+                        <div className="flex justify-between font-body text-[9px] font-bold uppercase tracking-[0.3em] mb-6" style={{ color: 'var(--color-taupe)' }}>
+                            <span>Value Market</span>
+                            <span className="hidden sm:block">National Average (${nationalAvg})</span>
+                            <span>Premium Market</span>
+                        </div>
 
-                    <div className="h-4 w-full bg-white/5 rounded-full relative shadow-inner border border-white/[0.06]">
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-500/30 via-[#d4af37]/30 to-rose-500/30" />
-                        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-white/10 z-10" />
+                        <div className="relative h-3 w-full rounded-full border shadow-inner" style={{ background: 'rgba(0,0,0,0.03)', borderColor: 'var(--color-border)' }}>
+                            {/* Color Gradient Track */}
+                            <div
+                                className="absolute inset-0 rounded-full opacity-40"
+                                style={{ background: 'linear-gradient(to right, var(--color-success), var(--color-gold), var(--color-error))' }}
+                            />
 
-                        <div
-                            className="absolute top-1/2 -translate-y-1/2 transition-all duration-1000 cubic-bezier(0.34, 1.56, 0.64, 1)"
-                            style={{ left: `${percentage}%` }}
-                        >
-                            <div className="relative">
-                                <div className="w-1 h-8 bg-white rounded-full shadow-lg -mt-4 relative z-20" />
-                                <div className="w-4 h-4 bg-white ring-4 ring-[#0d1420] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 shadow-md" />
+                            {/* Marker line for national average */}
+                            <div className="absolute left-1/2 top-[-10px] bottom-[-10px] w-0.5 z-10" style={{ background: 'var(--color-border)' }} />
 
-                                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 whitespace-nowrap">
-                                    <div className="bg-white text-[#0d1420] text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-xl flex items-center gap-2">
-                                        Current: ${avgCost}
-                                        <span className={`w-2 h-2 rounded-full ${isExpensive ? 'bg-rose-400' : 'bg-emerald-400'}`} />
+                            {/* Animated Indicator */}
+                            <motion.div
+                                className="absolute top-1/2 -translate-y-1/2 z-20"
+                                style={{ left: `${percentage}%` }}
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ type: 'spring', damping: 12, stiffness: 200, delay: 0.5 }}
+                            >
+                                <div className="relative">
+                                    <div className="w-1.5 h-10 rounded-full shadow-lg -mt-5" style={{ background: 'var(--color-espresso)' }} />
+                                    <div className="w-4 h-4 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-md border-2" style={{ background: 'white', borderColor: 'var(--color-espresso)' }} />
+
+                                    {/* Floating Tooltip */}
+                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-6 whitespace-nowrap">
+                                        <div className="px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 border" style={{ background: 'white', borderColor: 'var(--color-border)' }}>
+                                            <span className="font-display text-2xl" style={{ color: 'var(--color-espresso)' }}>${avgCost}</span>
+                                            <div className={`w-2.5 h-2.5 rounded-full ${isExpensive ? 'animate-pulse' : ''}`} style={{ background: isExpensive ? 'var(--color-gold)' : 'var(--color-sage)' }} />
+                                        </div>
+                                        <div className="w-3 h-3 rotate-45 absolute -bottom-1.5 left-1/2 -translate-x-1/2 border-r border-b" style={{ background: 'white', borderColor: 'var(--color-border)' }} />
                                     </div>
-                                    <div className="w-2 h-2 bg-white rotate-45 absolute -bottom-1 left-1/2 -translate-x-1/2" />
                                 </div>
-                            </div>
+                            </motion.div>
+                        </div>
+
+                        {/* Tick Marks */}
+                        <div className="flex justify-between px-1 mt-8">
+                            {[NICHE.priceRange.min, nationalAvg, NICHE.priceRange.max].map((val) => (
+                                <div key={val} className="flex flex-col items-center">
+                                    <div className="w-px h-3 mb-2" style={{ background: 'var(--color-border)' }} />
+                                    <span className="font-body text-[10px] font-bold" style={{ color: 'var(--color-stone)' }}>${val}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
-                    <div className="flex justify-between px-1 mt-4">
-                        {Array.from({ length: NICHE.priceRange.max - NICHE.priceRange.min + 1 }, (_, i) => NICHE.priceRange.min + i).map((val) => (
-                            <div key={val} className="flex flex-col items-center gap-1">
-                                <div className={`w-0.5 h-2 ${val === nationalAvg ? 'bg-white/20 h-3' : 'bg-white/5'}`} />
-                                <span className={`text-[10px] font-bold ${val === nationalAvg ? 'text-gray-400' : 'text-gray-700'}`}>{NICHE.priceCurrency}{val}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Insight Footer */}
-                <div className="mt-4 flex flex-col md:flex-row items-center gap-4 p-6 bg-[#d4af37]/5 rounded-2xl border border-[#d4af37]/10">
-                    <div className="flex -space-x-2">
-                        {[1, 2, 3].map((i) => (
-                            <div key={i} className="w-8 h-8 rounded-full border-2 border-[#0d1420] bg-white/10 flex items-center justify-center text-xs">
-                                👩‍⚕️
-                            </div>
-                        ))}
-                    </div>
-                    <p className="text-sm text-gray-400 font-medium leading-tight text-center md:text-left">
-                        {isExpensive
-                            ? `Prices in ${city} are approximately ${diff}% higher than the US average. Best to compare multiple clinics for competitive unit rates.`
-                            : `Outstanding value! ${city} prices are ${diff}% lower than the national average, making this an excellent location for full-dose treatments.`
-                        }
-                    </p>
-                    <button
-                        onClick={() => document.getElementById('pricing-guide')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="md:ml-auto text-xs font-black text-[#d4af37] uppercase tracking-widest hover:text-white transition-colors"
+                    {/* Analysis Footer */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.8 }}
+                        className="mt-12 flex flex-col md:flex-row items-center gap-8 p-8 rounded-3xl border border-dashed"
+                        style={{ background: 'rgba(255,255,255,0.3)', borderColor: 'var(--color-border)' }}
                     >
-                        View Pricing Guide
-                    </button>
+                        <div className="flex -space-x-3 shrink-0">
+                            {[1, 2, 3].map((i) => (
+                                <div key={i} className="w-12 h-12 rounded-full border-2 border-[var(--color-surface)] bg-[var(--color-bg)] flex items-center justify-center text-xl shadow-sm">
+                                    ✨
+                                </div>
+                            ))}
+                        </div>
+                        <div className="flex-1">
+                            <h4 className="font-body text-[11px] font-bold uppercase tracking-[0.2em] mb-2" style={{ color: 'var(--color-taupe)' }}>
+                                Local Insight
+                            </h4>
+                            <p className="font-body text-base leading-relaxed" style={{ color: 'var(--color-espresso)' }}>
+                                {isExpensive
+                                    ? `Prices in ${city} are approximately ${diff}% higher than the US average. We recommend comparing top-rated clinical artists to ensure you are receiving the highest level of care for this premium rate.`
+                                    : `Outstanding local value detected. ${city} prices are ${diff}% lower than the national average, making it an ideal market for high-volume treatments without compromising on clinical quality.`
+                                }
+                            </p>
+                        </div>
+                        <div className="shrink-0">
+                            <Button
+                                variant="outline"
+                                className="h-12 px-6 rounded-pill text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 group/btn"
+                                style={{ background: 'white', borderColor: 'var(--color-border)', color: 'var(--color-stone)' }}
+                            >
+                                <Info className="w-3.5 h-3.5" /> Data Methodology
+                            </Button>
+                        </div>
+                    </motion.div>
                 </div>
-            </div>
-        </div>
+            </motion.div>
+        </section>
     )
 }

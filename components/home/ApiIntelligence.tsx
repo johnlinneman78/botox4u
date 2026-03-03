@@ -20,7 +20,7 @@ export default function ApiIntelligence() {
 
                         <div className="space-y-6 mb-10">
                             {[
-                                { icon: Terminal, title: 'RESTful API v1', desc: 'Secure, high-availability endpoints for provider profiles and TrueScore™ data.' },
+                                { icon: Terminal, title: 'RESTful API v1', desc: 'Secure, high-availability endpoints for provider profiles and Clarity Score™ data.' },
                                 { icon: Zap, title: 'MCP Server', desc: 'Direct integration for AI Assistants (Claude, GPT, Perplexity) to query live clinical data.' },
                                 { icon: Search, title: 'Semantic Insights', desc: 'Sentiment-audited review data distilled into structured quality signals.' }
                             ].map((feature, i) => (
@@ -57,7 +57,7 @@ export default function ApiIntelligence() {
                                     <code>{`{`}</code><br />
                                     <code>{`  "city": "Scottsdale",`}</code><br />
                                     <code>{`  "provider": "Aura Medical Spa",`}</code><br />
-                                    <code>{`  "truescore": 94,`}</code><br />
+                                    <code>{`  "Clarity Score™": 94,`}</code><br />
                                     <code>{`  "clinical_audit": {`}</code><br />
                                     <code>{`    "regenerative": true,`}</code><br />
                                     <code>{`    "sentiment": "highly_positive",`}</code><br />

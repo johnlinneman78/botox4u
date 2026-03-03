@@ -2,25 +2,34 @@ import { HTMLAttributes } from 'react'
 import { cn } from '@/lib/utils'
 
 interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
-    variant?: 'default' | 'featured' | 'premium' | 'verified' | 'outline' | 'secondary'
+    variant?: 'default' | 'sage' | 'gold' | 'outline' | 'premium' | 'secondary' | 'destructive'
 }
 
-export function Badge({ className, variant = 'default', ...props }: BadgeProps) {
+export function Badge({ className, variant = 'default', children, ...props }: BadgeProps) {
+    // Map legacy variants to new design system
+    const resolved = (variant === 'premium' || variant === 'secondary') ? 'gold'
+        : variant === 'destructive' ? 'outline'
+            : variant
+
     return (
         <span
             className={cn(
-                'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium',
+                'inline-flex items-center rounded-pill px-3 py-1 text-[11px] font-body font-medium',
                 {
-                    'bg-gray-100 text-gray-800': variant === 'default',
-                    'bg-accent/20 text-accent border border-accent': variant === 'featured',
-                    'bg-secondary/20 text-secondary border border-secondary': variant === 'premium',
-                    'bg-success/20 text-success border border-success': variant === 'verified',
-                    'bg-transparent border border-gray-200 text-gray-600': variant === 'outline',
-                    'bg-gray-200 text-gray-700': variant === 'secondary',
+                    'bg-surface text-espresso': resolved === 'default',
+                    'text-sage border border-sage/25': resolved === 'sage',
+                    'text-gold border border-gold/25': resolved === 'gold',
+                    'bg-transparent border border-border text-stone': resolved === 'outline',
                 },
                 className
             )}
+            style={{
+                ...(resolved === 'sage' ? { background: 'rgba(138, 158, 141, 0.1)' } : {}),
+                ...(resolved === 'gold' ? { background: 'rgba(201, 169, 110, 0.1)' } : {}),
+            }}
             {...props}
-        />
+        >
+            {children}
+        </span>
     )
 }

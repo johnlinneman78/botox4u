@@ -1,73 +1,182 @@
+'use client'
+
 import Link from 'next/link'
-import { MedicalDisclaimer } from '@/components/legal/MedicalDisclaimer'
-import Logo from '@/components/layout/Logo'
 import { NICHE } from '@/config/niche'
 
 export default function Footer() {
     const currentYear = 2026
 
+    const browseLinks = [
+        { href: '/find-providers', label: 'By City' },
+        { href: '/treatments', label: 'By Treatment' },
+        { href: '/find-providers?sort=score', label: 'Top Rated' },
+        { href: '/find-providers?outcome=natural', label: 'Natural Results' },
+    ]
+
+    const companyLinks = [
+        { href: '/about', label: 'About' },
+        { href: '/#how-it-works', label: 'How It Works' },
+        { href: '/for-providers', label: 'For Providers' },
+        { href: '/blog', label: 'Learn' },
+    ]
+
+    const legalLinks = [
+        { href: '/privacy', label: 'Privacy' },
+        { href: '/terms', label: 'Terms' },
+        { href: '/disclaimer', label: 'Contact' },
+    ]
+
     return (
-        <footer className="border-t border-white/[0.06] bg-[#080e17]">
-            <div className="container mx-auto px-4 py-16">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
-                    {/* Brand */}
-                    <div className="col-span-2 md:col-span-1 lg:col-span-1">
-                        <div className="h-12 w-auto mb-5 -ml-1">
-                            <Link href="/" className="flex items-center min-w-max flex-shrink-0 hover:opacity-90 transition-opacity">
-                                <Logo className="h-full w-auto" variant="shield" />
-                            </Link>
+        <footer style={{ background: 'var(--color-deep)' }}>
+            <div className="container-content py-16 lg:py-20">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-16">
+                    {/* Col 1: Logo + tagline */}
+                    <div className="col-span-2 md:col-span-1">
+                        <div className="flex items-center gap-2 mb-5">
+                            <span
+                                className="inline-block rounded-full"
+                                style={{ width: 6, height: 6, background: 'var(--color-sage)' }}
+                            />
+                            <span
+                                className="font-display font-medium"
+                                style={{ fontSize: '20px', color: 'var(--color-surface)' }}
+                            >
+                                InjectorIndex
+                            </span>
                         </div>
-                        <p className="text-sm text-gray-500 mb-5 leading-relaxed">
-                            The first provider directory built around clinical quality data — not paid placement.
+                        <p
+                            className="font-body text-sm leading-relaxed"
+                            style={{ color: 'var(--color-taupe)' }}
+                        >
+                            The independent standard for finding aesthetic injectors. Zero pay-to-rank. Ever.
                         </p>
                     </div>
 
-                    {/* For Patients */}
+                    {/* Col 2: Browse Providers */}
                     <div>
-                        <h4 className="font-bold mb-4 text-white text-xs uppercase tracking-widest">For Patients</h4>
-                        <ul className="space-y-2.5 text-sm">
-                            <li><Link href="/find-providers" className="text-gray-500 hover:text-[#d4af37] transition-colors">Find Providers</Link></li>
-                            <li><Link href="/calculator" className="text-gray-500 hover:text-[#d4af37] transition-colors">Cost Calculator</Link></li>
-                            <li><Link href="/blog" className="text-gray-500 hover:text-[#d4af37] transition-colors">Insights</Link></li>
-                            <li><Link href="/faq" className="text-gray-500 hover:text-[#d4af37] transition-colors">FAQ</Link></li>
+                        <h4
+                            className="font-body font-medium uppercase mb-4"
+                            style={{
+                                fontSize: '11px',
+                                letterSpacing: '0.08em',
+                                color: 'var(--color-taupe)',
+                            }}
+                        >
+                            Browse Providers
+                        </h4>
+                        <ul className="space-y-2.5">
+                            {browseLinks.map((link) => (
+                                <li key={link.href}>
+                                    <Link
+                                        href={link.href}
+                                        className="font-body text-sm transition-colors"
+                                        style={{ color: 'var(--color-stone)' }}
+                                        onMouseEnter={(e) => {
+                                            (e.currentTarget as HTMLElement).style.color = 'var(--color-surface)'
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            (e.currentTarget as HTMLElement).style.color = 'var(--color-stone)'
+                                        }}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
-                    {/* For Providers */}
+                    {/* Col 3: Company */}
                     <div>
-                        <h4 className="font-bold mb-4 text-white text-xs uppercase tracking-widest">For Providers</h4>
-                        <ul className="space-y-2.5 text-sm">
-                            <li><Link href="/claim" rel="nofollow" className="text-gray-500 hover:text-[#d4af37] transition-colors">Claim Profile</Link></li>
-                            <li><Link href="/pricing" className="text-gray-500 hover:text-[#d4af37] transition-colors">Pricing & Plans</Link></li>
-                            <li><Link href="/methodology" className="text-gray-500 hover:text-[#d4af37] transition-colors">TrueScore™</Link></li>
+                        <h4
+                            className="font-body font-medium uppercase mb-4"
+                            style={{
+                                fontSize: '11px',
+                                letterSpacing: '0.08em',
+                                color: 'var(--color-taupe)',
+                            }}
+                        >
+                            Company
+                        </h4>
+                        <ul className="space-y-2.5">
+                            {companyLinks.map((link) => (
+                                <li key={link.href}>
+                                    <Link
+                                        href={link.href}
+                                        className="font-body text-sm transition-colors"
+                                        style={{ color: 'var(--color-stone)' }}
+                                        onMouseEnter={(e) => {
+                                            (e.currentTarget as HTMLElement).style.color = 'var(--color-surface)'
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            (e.currentTarget as HTMLElement).style.color = 'var(--color-stone)'
+                                        }}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
-                    {/* For Developers */}
+                    {/* Col 4: Legal */}
                     <div>
-                        <h4 className="font-bold mb-4 text-white text-xs uppercase tracking-widest">Developers</h4>
-                        <ul className="space-y-2.5 text-sm">
-                            <li><Link href="/docs" className="text-gray-500 hover:text-[#d4af37] transition-colors">API Documentation</Link></li>
-                            <li><Link href="/api-access" className="text-gray-500 hover:text-[#d4af37] transition-colors">API Access</Link></li>
-                            <li><Link href="/llms.txt" className="text-gray-500 hover:text-[#d4af37] transition-colors">AI Knowledge Base</Link></li>
-                        </ul>
-                    </div>
-
-                    {/* Legal */}
-                    <div>
-                        <h4 className="font-bold mb-4 text-white text-xs uppercase tracking-widest">Legal</h4>
-                        <ul className="space-y-2.5 text-sm">
-                            <li><Link href="/privacy" className="text-gray-500 hover:text-[#d4af37] transition-colors">Privacy</Link></li>
-                            <li><Link href="/terms" className="text-gray-500 hover:text-[#d4af37] transition-colors">Terms</Link></li>
-                            <li><Link href="/disclaimer" className="text-gray-500 hover:text-[#d4af37] transition-colors">Disclaimer</Link></li>
+                        <h4
+                            className="font-body font-medium uppercase mb-4"
+                            style={{
+                                fontSize: '11px',
+                                letterSpacing: '0.08em',
+                                color: 'var(--color-taupe)',
+                            }}
+                        >
+                            Legal
+                        </h4>
+                        <ul className="space-y-2.5">
+                            {legalLinks.map((link) => (
+                                <li key={link.href}>
+                                    <Link
+                                        href={link.href}
+                                        className="font-body text-sm transition-colors"
+                                        style={{ color: 'var(--color-stone)' }}
+                                        onMouseEnter={(e) => {
+                                            (e.currentTarget as HTMLElement).style.color = 'var(--color-surface)'
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            (e.currentTarget as HTMLElement).style.color = 'var(--color-stone)'
+                                        }}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-white/[0.05] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-700">
-                    <p>© {currentYear} {NICHE.siteName}. All rights reserved. Built for patients, not providers.</p>
-                    <div className="mt-2">
-                        <MedicalDisclaimer variant="inline" />
+                {/* Bottom bar */}
+                <div
+                    className="mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4"
+                    style={{ borderTop: '1px solid rgba(250,248,245,0.06)' }}
+                >
+                    <p className="font-body text-xs" style={{ color: 'var(--color-stone)' }}>
+                        © {currentYear} {NICHE.siteName}. All rights reserved.
+                    </p>
+                    <div className="flex items-center gap-6">
+                        {['Instagram', 'TikTok', 'Pinterest'].map((social) => (
+                            <a
+                                key={social}
+                                href="#"
+                                className="font-body text-xs transition-colors"
+                                style={{ color: 'var(--color-stone)' }}
+                                onMouseEnter={(e) => {
+                                    (e.currentTarget as HTMLElement).style.color = 'var(--color-surface)'
+                                }}
+                                onMouseLeave={(e) => {
+                                    (e.currentTarget as HTMLElement).style.color = 'var(--color-stone)'
+                                }}
+                            >
+                                {social}
+                            </a>
+                        ))}
                     </div>
                 </div>
             </div>

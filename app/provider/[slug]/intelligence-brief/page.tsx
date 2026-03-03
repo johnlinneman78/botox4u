@@ -52,7 +52,7 @@ export default async function IntelligenceBriefPage({ params }: BriefPageProps) 
             </div>
 
             <div className="max-w-6xl mx-auto px-8 py-16 space-y-16">
-                {/* 1. Executive Summary: The TrueScore™ Audit */}
+                {/* 1. Executive Summary: The Clarity Score™ Audit */}
                 <section>
                     <div className="flex items-center gap-3 mb-8">
                         <Shield className="w-6 h-6 text-[#d4af37]" />
@@ -61,7 +61,7 @@ export default async function IntelligenceBriefPage({ params }: BriefPageProps) 
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div className="p-10 bg-slate-50 rounded-3xl border border-slate-100 flex flex-col items-center justify-center text-center">
-                            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">TrueScore™ Index</div>
+                            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Clarity Score™ Index</div>
                             <div className="text-7xl font-display font-black text-slate-900 mb-2">{provider.score_total}</div>
                             <div className={`text-xs font-bold uppercase tracking-widest flex items-center gap-1 ${scoreDelta >= 0 ? 'text-emerald-600' : 'text-amber-600'}`}>
                                 {scoreDelta >= 0 ? <ArrowUpRight className="w-3.5 h-3.5" /> : null}
@@ -170,7 +170,7 @@ export default async function IntelligenceBriefPage({ params }: BriefPageProps) 
                             </thead>
                             <tbody className="divide-y divide-slate-100">
                                 <tr>
-                                    <td className="px-8 py-6 font-bold text-slate-900 uppercase text-xs tracking-wider">TrueScore™ Index</td>
+                                    <td className="px-8 py-6 font-bold text-slate-900 uppercase text-xs tracking-wider">Clarity Score™ Index</td>
                                     <td className="px-8 py-6 text-center text-slate-900 font-bold">{provider.score_total}</td>
                                     <td className="px-8 py-6 text-center text-slate-500">{cityAvgScore}</td>
                                     <td className="px-8 py-6 text-center text-emerald-600 font-bold">94</td>

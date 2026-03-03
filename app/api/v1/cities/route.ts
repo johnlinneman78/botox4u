@@ -56,6 +56,6 @@ export async function GET(req: Request) {
         cities,
         total_cities: cities.length,
         total_providers: (data || []).length,
-        powered_by: "InjectorIndex TrueScore™"
+        powered_by: "InjectorIndex Clarity Score™"
     })
 }

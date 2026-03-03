@@ -111,13 +111,13 @@ export default function NewsletterAudit() {
                             {/* Left: Copy */}
                             <div className="p-10 md:p-14 border-b lg:border-b-0 lg:border-r border-white/[0.06] bg-white/[0.01]">
                                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-black tracking-widest uppercase mb-6">
-                                    <ShieldCheck className="w-3 h-3" /> TrueScore™ Match & Clinic Audit
+                                    <ShieldCheck className="w-3 h-3" /> Clarity Score™ Match & Clinic Audit
                                 </div>
                                 <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6 leading-tight">
-                                    Is Your Injector <span className="text-[#d4af37]">TrueScore™ Certified?</span>
+                                    Is Your Injector <span className="text-[#d4af37]">Clarity Score™ Certified?</span>
                                 </h2>
                                 <p className="text-gray-400 leading-relaxed mb-10 font-light text-lg">
-                                    Don't rely on unverified reviews. Tell us which clinics you're researching, and we'll cross-reference them with our independent TrueScore™ dataset for injection quality and pricing.
+                                    Don't rely on unverified reviews. Tell us which clinics you're researching, and we'll cross-reference them with our independent Clarity Score™ dataset for injection quality and pricing.
                                 </p>
 
                                 <div className="space-y-6">
@@ -362,7 +362,7 @@ export default function NewsletterAudit() {
                                                     >
                                                         {loading ? 'Analyzing Data...' : (
                                                             <span className="flex items-center justify-center gap-2">
-                                                                <ChevronRight className="w-4 h-4" /> Run TrueScore™ Audit
+                                                                <ChevronRight className="w-4 h-4" /> Run Clarity Score™ Audit
                                                             </span>
                                                         )}
                                                     </Button>

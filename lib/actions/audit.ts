@@ -166,7 +166,7 @@ export function generateAuditEmailHTML(auditResult: AuditResult, patientData: Au
             <div style="padding: 40px 20px; text-align: center;">
                 <p style="text-transform: uppercase; font-size: 11px; font-weight: bold; color: ${brandGold}; margin-bottom: 15px; letter-spacing: 2px;">Research Summary for ${city}, ${state}</p>
                 <div style="background-color: ${bgGray}; display: inline-block; padding: 40px 60px; border-radius: 40px; border: 1px solid rgba(212,175,55,0.15);">
-                    <p style="margin: 0; font-size: 13px; color: #999; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">TrueScore™</p>
+                    <p style="margin: 0; font-size: 13px; color: #999; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Clarity Score™</p>
                     <h2 style="margin: 5px 0; font-size: 80px; color: ${darkBlue}; font-family: Georgia, serif; line-height: 1;">${iiScore}</h2>
                     <p style="margin: 0; font-size: 12px; color: #bbb; font-weight: bold;">OUT OF 10</p>
                     <div style="margin-top: 20px; background-color: #5a9e6f; color: white; padding: 10px 24px; border-radius: 30px; font-size: 12px; font-weight: bold; display: inline-block; letter-spacing: 0.5px;">
@@ -237,7 +237,7 @@ export function generateAuditEmailHTML(auditResult: AuditResult, patientData: Au
                     <div style="background-color: white; border: 1px solid #eee; border-radius: 20px; padding: 15px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
                         <div>
                             <p style="margin: 0; font-weight: bold; color: ${darkBlue}; font-size: 15px;">${alt.name}</p>
-                            <p style="margin: 2px 0 0 0; font-size: 12px; color: #888;">TrueScore™: <span style="color: ${brandGold}; font-weight: bold;">${alt.score}</span> • Average Pricing: $${alt.price_per_unit}/unit</p>
+                            <p style="margin: 2px 0 0 0; font-size: 12px; color: #888;">Clarity Score™: <span style="color: ${brandGold}; font-weight: bold;">${alt.score}</span> • Average Pricing: $${alt.price_per_unit}/unit</p>
                         </div>
                         <a href="https://www.injectorindex.com/provider/${alt.slug}" style="background-color: ${bgGray}; color: ${darkBlue}; padding: 8px 15px; border-radius: 12px; text-decoration: none; font-size: 12px; font-weight: bold;">View Profile</a>
                     </div>
@@ -268,7 +268,7 @@ export function generateAuditEmailHTML(auditResult: AuditResult, patientData: Au
             <!-- Final CTA -->
             <div style="padding: 50px 20px; text-align: center; background-color: ${darkBlue}; color: #ffffff;">
                 <h3 style="margin-top: 0; font-size: 24px; color: white;">Ranked by Data. Not Ads.</h3>
-                <p style="color: rgba(255,255,255,0.6); font-size: 15px; margin-bottom: 35px; max-width: 450px; margin-left: auto; margin-right: auto;">Browser all ${city} clinics filtered by Clinical Quality, TrueScore™, and Real-World Pricing.</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 15px; margin-bottom: 35px; max-width: 450px; margin-left: auto; margin-right: auto;">Browser all ${city} clinics filtered by Clinical Quality, Clarity Score™, and Real-World Pricing.</p>
                 <a href="https://www.injectorindex.com/injectors/${state.toLowerCase()}/${city.toLowerCase().replace(/ /g, '-')}" 
                    style="background-color: ${brandGold}; color: ${darkBlue}; padding: 20px 45px; border-radius: 50px; text-decoration: none; font-weight: 900; display: inline-block; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;">
                     Explore Top ${city} Clinics

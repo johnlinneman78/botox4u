@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 export default function FAQPage() {
     const faqs = [
         {
-            question: "What is the TrueScore™?",
-            answer: "The TrueScore™ is a proprietary algorithm that ranks providers based on clinical data, verified credentials, and patient-reported pricing. Unlike other directories, you cannot pay to increase your TrueScore™."
+            question: "What is the Clarity Score™?",
+            answer: "The Clarity Score™ is a proprietary algorithm that ranks providers based on clinical data, verified credentials, and patient-reported pricing. Unlike other directories, you cannot pay to increase your Clarity Score™."
         },
         {
             question: "Is clinical data independently verified?",

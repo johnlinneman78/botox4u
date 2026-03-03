@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { Suspense } from 'react'
 import { getStateStats, getCitiesInState } from '@/lib/actions/providers'
 import { STATE_MAP, getStateName } from '@/lib/constants'
 import { StateHero } from '@/components/state/StateHero'
@@ -44,14 +45,19 @@ export default async function StatePage({ params }: StatePageProps) {
     const cities = await getCitiesInState(stateCode)
 
     return (
-        <main className="bg-[#0d1420] min-h-screen pb-20">
-            <StateHero
-                stateName={stateName}
-                providerCount={stats?.providerCount || 0}
-                avgCost={stats?.avgCost || 15}
-                cityCount={stats?.cityCount || 0}
-            />
-            <div className="container mx-auto px-4">
+        <main
+            className="min-h-screen pb-24"
+            style={{ background: 'var(--color-bg)' }}
+        >
+            <Suspense fallback={null}>
+                <StateHero
+                    stateName={stateName}
+                    providerCount={stats?.providerCount || 0}
+                    avgCost={stats?.avgCost || 15}
+                    cityCount={stats?.cityCount || 0}
+                />
+            </Suspense>
+            <div className="container-content">
                 <CityList
                     cities={cities}
                     stateName={stateName}

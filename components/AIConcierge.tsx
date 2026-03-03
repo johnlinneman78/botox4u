@@ -118,7 +118,7 @@ export function AIConcierge() {
                                                 <div className="flex-1 min-w-0">
                                                     <h5 className="text-white font-bold text-xs truncate">{rec.name}</h5>
                                                     <div className="flex items-center gap-2">
-                                                        <span className="text-[9px] text-[#d4af37] font-black uppercase">TrueScore {rec.truescore}</span>
+                                                        <span className="text-[9px] text-[#d4af37] font-black uppercase">Clarity Score™ {rec.clarityScore}</span>
                                                         <span className="text-[9px] text-gray-500 uppercase">{rec.city}</span>
                                                     </div>
                                                 </div>
