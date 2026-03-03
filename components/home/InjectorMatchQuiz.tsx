@@ -181,44 +181,44 @@ export default function InjectorMatchQuiz() {
 
     if (isSubmitted) {
         return (
-            <section className="py-24 bg-[#0d1420]" id="match-results">
+            <section className="py-24 bg-[#FAF8F5]" id="match-results">
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto text-center">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-black tracking-widest uppercase mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C9A96E]/10 border border-[#C9A96E]/20 text-[#C9A96E] text-xs font-black tracking-widest uppercase mb-6">
                             <Sparkles className="w-3.5 h-3.5" /> Your Personalized Matches
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-                            Your Top 3 Clinicians in <span className="text-[#d4af37]">{NICHE.cities.find(c => c.slug === selectedCity)?.name || 'Your City'}</span>
+                        <h2 className="text-4xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-6">
+                            Your Top 3 Clinicians in <span className="text-[#C9A96E]">{NICHE.cities.find(c => c.slug === selectedCity)?.name || 'Your City'}</span>
                         </h2>
-                        <p className="text-gray-400 mb-12 max-w-2xl mx-auto font-light">
+                        <p className="text-[#3D2B1F]/70 mb-12 max-w-2xl mx-auto font-light">
                             Based on your goal for {selectedTreatments.map(t => STEPS[0].options?.find(o => o.id === t)?.label).join(', ')} and your priority for natural results.
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
                             {matches.length > 0 ? (
                                 matches.map((provider, i) => (
-                                    <div key={provider.id || i} className="bg-white/[0.02] border border-white/[0.08] rounded-[2.5rem] p-6 text-left hover:bg-white/[0.04] transition-all group relative overflow-hidden">
+                                    <div key={provider.id || i} className="bg-[#3D2B1F]/5 border border-white/[0.08] rounded-[2.5rem] p-6 text-left hover:bg-[#3D2B1F]/5 transition-all group relative overflow-hidden">
                                         <div className="absolute top-0 right-0 p-4">
-                                            <div className="bg-[#d4af37] text-[#0d1420] text-[10px] font-black px-2 py-1 rounded-lg">
+                                            <div className="bg-[#C9A96E] text-white text-[10px] font-black px-2 py-1 rounded-lg">
                                                 Match #{i + 1}
                                             </div>
                                         </div>
                                         <div className="mb-6">
-                                            <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#d4af37] mb-4">
+                                            <div className="w-16 h-16 rounded-2xl bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 flex items-center justify-center text-[#C9A96E] mb-4">
                                                 <User className="w-8 h-8" />
                                             </div>
-                                            <h3 className="text-xl font-bold text-white mb-1 leading-tight">{provider.name}</h3>
-                                            <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">{provider.city}, {provider.state}</p>
+                                            <h3 className="text-xl font-bold text-[#3D2B1F] mb-1 leading-tight">{provider.name}</h3>
+                                            <p className="text-xs text-[#3D2B1F]/60 font-medium uppercase tracking-wider">{provider.city}, {provider.state}</p>
                                         </div>
 
                                         <div className="space-y-4 mb-8">
-                                            <div className="flex justify-between items-center bg-black/20 rounded-xl p-3 border border-white/5">
-                                                <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Clarity Score™</span>
-                                                <span className="text-lg font-display font-bold text-[#d4af37]">{provider.score_total || 65}</span>
+                                            <div className="flex justify-between items-center bg-black/20 rounded-xl p-3 border border-[#3D2B1F]/10">
+                                                <span className="text-[10px] font-black text-[#3D2B1F]/60 uppercase tracking-widest">Clarity Score™</span>
+                                                <span className="text-lg font-display font-bold text-[#C9A96E]">{provider.score_total || 65}</span>
                                             </div>
                                             <div className="flex justify-between items-center px-3">
-                                                <span className="text-[10px] font-bold text-gray-600 uppercase">Botox Price</span>
-                                                <span className="text-sm font-bold text-white">${provider.price_per_unit || '—'}</span>
+                                                <span className="text-[10px] font-bold text-[#3D2B1F]/50 uppercase">Botox Price</span>
+                                                <span className="text-sm font-bold text-[#3D2B1F]">${provider.price_per_unit || '—'}</span>
                                             </div>
                                         </div>
 
@@ -236,21 +236,21 @@ export default function InjectorMatchQuiz() {
                                                 }
                                             }}
                                         >
-                                            <Button className="w-full bg-white/5 border border-white/10 hover:bg-[#d4af37] hover:text-[#0d1420] hover:border-[#d4af37] transition-all font-black uppercase tracking-widest text-[10px] py-4 rounded-xl">
+                                            <Button className="w-full bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 hover:bg-[#C9A96E] hover:text-white hover:border-[#C9A96E] transition-all font-black uppercase tracking-widest text-[10px] py-4 rounded-xl">
                                                 View Profile
                                             </Button>
                                         </Link>
                                     </div>
                                 ))
                             ) : (
-                                <div className="col-span-3 py-16 text-center border border-dashed border-white/10 rounded-[2.5rem] bg-white/[0.01]">
+                                <div className="col-span-3 py-16 text-center border border-dashed border-[#3D2B1F]/10 rounded-[2.5rem] bg-white/[0.01]">
                                     <div className="text-4xl mb-6">🤷‍♀️</div>
-                                    <h3 className="text-xl font-bold text-white mb-2">No Clinicians Found in "{NICHE.cities.find(c => c.slug === selectedCity)?.name}"</h3>
-                                    <p className="text-gray-500 max-w-md mx-auto mb-8 font-light">
+                                    <h3 className="text-xl font-bold text-[#3D2B1F] mb-2">No Clinicians Found in "{NICHE.cities.find(c => c.slug === selectedCity)?.name}"</h3>
+                                    <p className="text-[#3D2B1F]/60 max-w-md mx-auto mb-8 font-light">
                                         Try selecting a nearby metro area or broadening your search criteria. You can also view our full directory for all top-rated injectors.
                                     </p>
                                     <Link href="/find-providers">
-                                        <Button className="bg-[#d4af37] text-[#0d1420] font-black uppercase tracking-widest px-8">
+                                        <Button className="bg-[#C9A96E] text-white font-black uppercase tracking-widest px-8">
                                             Browse All Top Injectors
                                         </Button>
                                     </Link>
@@ -259,16 +259,16 @@ export default function InjectorMatchQuiz() {
                         </div>
 
                         {/* Soft Email Capture */}
-                        <div className="bg-gradient-to-br from-[#131f30] to-[#0d1720] border border-[#d4af37]/20 rounded-[3rem] p-10 md:p-14 relative overflow-hidden group">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-[#d4af37] opacity-[0.03] blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2" />
+                        <div className="bg-gradient-to-br from-[#131f30] to-[#0d1720] border border-[#C9A96E]/20 rounded-[3rem] p-10 md:p-14 relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-[#C9A96E] opacity-[0.03] blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2" />
                             <div className="max-w-2xl mx-auto">
-                                <h3 className="text-3xl font-display font-bold text-white mb-4">Want the Full Comparison?</h3>
-                                <p className="text-gray-400 mb-8 font-light">
+                                <h3 className="text-3xl font-display font-bold text-[#3D2B1F] mb-4">Want the Full Comparison?</h3>
+                                <p className="text-[#3D2B1F]/70 mb-8 font-light">
                                     Get the complete provider breakdown for {NICHE.cities.find(c => c.slug === selectedCity)?.name || 'your city'} including pricing ranges, Clarity Score™ details, and matching insights.
                                 </p>
 
                                 {emailSuccess ? (
-                                    <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 p-6 rounded-2xl font-bold flex items-center justify-center gap-3">
+                                    <div className="bg-[#8A9E8D]/10 border border-[#8A9E8D]/20 text-[#8A9E8D] p-6 rounded-2xl font-bold flex items-center justify-center gap-3">
                                         <Check className="w-5 h-5" />
                                         Report sent! Check your inbox.
                                     </div>
@@ -276,25 +276,25 @@ export default function InjectorMatchQuiz() {
                                     <>
                                         <div className="flex flex-col md:flex-row gap-3">
                                             <div className="flex-1 relative">
-                                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#3D2B1F]/60" />
                                                 <input
                                                     type="email"
                                                     placeholder="Enter your email address"
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
-                                                    className="w-full h-14 pl-11 pr-6 bg-black/40 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-[#d4af37]/30 transition-all font-light"
+                                                    className="w-full h-14 pl-11 pr-6 bg-black/40 border border-[#3D2B1F]/10 rounded-2xl text-[#3D2B1F] focus:outline-none focus:ring-2 focus:ring-[#C9A96E]/30 transition-all font-light"
                                                     disabled={emailSubmitting}
                                                 />
                                             </div>
                                             <Button
                                                 onClick={handleEmailSubmit}
                                                 disabled={emailSubmitting || !email.includes('@')}
-                                                className="h-14 px-8 bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black uppercase tracking-widest shadow-xl shadow-[#d4af37]/10 rounded-2xl transition-all disabled:opacity-50"
+                                                className="h-14 px-8 bg-[#C9A96E] hover:bg-[#B5955B] text-white font-black uppercase tracking-widest shadow-xl shadow-[#C9A96E]/10 rounded-2xl transition-all disabled:opacity-50"
                                             >
                                                 {emailSubmitting ? 'Sending...' : 'Send My Report'}
                                             </Button>
                                         </div>
-                                        <p className="text-[10px] text-gray-600 mt-4 uppercase tracking-[0.2em]">We'll never spam you. Unsubscribe anytime.</p>
+                                        <p className="text-[10px] text-[#3D2B1F]/50 mt-4 uppercase tracking-[0.2em]">We'll never spam you. Unsubscribe anytime.</p>
                                     </>
                                 )}
                             </div>
@@ -306,42 +306,42 @@ export default function InjectorMatchQuiz() {
     }
 
     return (
-        <section className="py-24 bg-[#0d1420] border-t border-white/[0.05]" id="match-quiz">
+        <section className="py-24 bg-[#FAF8F5] border-t border-[#3D2B1F]/10" id="match-quiz">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-16">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-black tracking-widest uppercase mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C9A96E]/10 border border-[#C9A96E]/20 text-[#C9A96E] text-xs font-black tracking-widest uppercase mb-6">
                             <Zap className="w-3.5 h-3.5" /> 60-Second Matching
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-                            Find Your Perfect <span className="text-[#d4af37]">Clinician</span>
+                        <h2 className="text-4xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-4">
+                            Find Your Perfect <span className="text-[#C9A96E]">Clinician</span>
                         </h2>
-                        <p className="text-gray-400 font-light text-lg">
+                        <p className="text-[#3D2B1F]/70 font-light text-lg">
                             Answer 4 quick questions. Get matched with top-rated providers in your city.
                         </p>
                     </div>
 
                     {/* Quiz UI */}
-                    <div className="bg-white/[0.01] border border-white/[0.06] rounded-[3rem] p-8 md:p-14 relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-white/5">
+                    <div className="bg-white/[0.01] border border-[#3D2B1F]/10 rounded-[3rem] p-8 md:p-14 relative overflow-hidden">
+                        <div className="absolute top-0 left-0 w-full h-1 bg-[#3D2B1F]/5">
                             <div
-                                className="h-full bg-[#d4af37] transition-all duration-500"
+                                className="h-full bg-[#C9A96E] transition-all duration-500"
                                 style={{ width: `${((stepIndex + 1) / STEPS.length) * 100}%` }}
                             />
                         </div>
 
                         <div className="mb-10">
                             <div className="flex items-center justify-between mb-2">
-                                <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">Question {stepIndex + 1} of {STEPS.length}</span>
+                                <span className="text-[10px] font-black text-[#3D2B1F]/50 uppercase tracking-widest">Question {stepIndex + 1} of {STEPS.length}</span>
                                 {stepIndex > 0 && (
-                                    <button onClick={prevStep} className="text-gray-500 hover:text-white flex items-center gap-1 text-[10px] font-black uppercase tracking-widest transition-colors">
+                                    <button onClick={prevStep} className="text-[#3D2B1F]/60 hover:text-[#3D2B1F] flex items-center gap-1 text-[10px] font-black uppercase tracking-widest transition-colors">
                                         <ChevronLeft className="w-3 h-3" /> Back
                                     </button>
                                 )}
                             </div>
-                            <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-2">{currentStep.title}</h3>
-                            <p className="text-gray-500 font-light">{currentStep.subtitle}</p>
+                            <h3 className="text-2xl md:text-3xl font-display font-bold text-[#3D2B1F] mb-2">{currentStep.title}</h3>
+                            <p className="text-[#3D2B1F]/60 font-light">{currentStep.subtitle}</p>
                         </div>
 
                         {/* Options Grid */}
@@ -349,18 +349,18 @@ export default function InjectorMatchQuiz() {
                             {currentStep.id === 'location' ? (
                                 <div className="col-span-2 group">
                                     <div className="relative">
-                                        <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#d4af37]" />
+                                        <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#C9A96E]" />
                                         <select
                                             value={selectedCity}
                                             onChange={(e) => setSelectedCity(e.target.value)}
-                                            className="w-full h-16 pl-12 pr-6 bg-white/[0.04] border border-white/[0.1] rounded-2xl text-white font-bold text-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#d4af37]/30 hover:bg-white/[0.06] transition-all"
+                                            className="w-full h-16 pl-12 pr-6 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-2xl text-[#3D2B1F] font-bold text-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#C9A96E]/30 hover:bg-[#3D2B1F]/5 transition-all"
                                         >
-                                            <option value="" disabled className="bg-[#0d1420]">Select your city...</option>
+                                            <option value="" disabled className="bg-[#FAF8F5]">Select your city...</option>
                                             {NICHE.cities.map((c: any) => (
-                                                <option key={c.slug} value={c.slug} className="bg-[#0d1420]">{c.name}, {c.state}</option>
+                                                <option key={c.slug} value={c.slug} className="bg-[#FAF8F5]">{c.name}, {c.state}</option>
                                             ))}
                                         </select>
-                                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" />
+                                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#3D2B1F]/60 pointer-events-none" />
                                     </div>
                                 </div>
                             ) : currentStep.id === 'experience' ? (
@@ -369,13 +369,13 @@ export default function InjectorMatchQuiz() {
                                         key={opt.id}
                                         onClick={() => setExperience(opt.id)}
                                         className={`p-6 rounded-2xl border text-left transition-all ${experience === opt.id
-                                            ? 'bg-[#d4af37]/10 border-[#d4af37] ring-1 ring-[#d4af37]'
-                                            : 'bg-white/5 border-white/10 hover:border-white/20'
+                                            ? 'bg-[#C9A96E]/10 border-[#C9A96E] ring-1 ring-[#C9A96E]'
+                                            : 'bg-[#3D2B1F]/5 border-[#3D2B1F]/10 hover:border-white/20'
                                             }`}
                                     >
                                         <div className="flex items-center justify-between">
-                                            <span className={`font-bold ${experience === opt.id ? 'text-[#d4af37]' : 'text-white'}`}>{opt.label}</span>
-                                            {experience === opt.id && <Check className="w-4 h-4 text-[#d4af37]" />}
+                                            <span className={`font-bold ${experience === opt.id ? 'text-[#C9A96E]' : 'text-[#3D2B1F]'}`}>{opt.label}</span>
+                                            {experience === opt.id && <Check className="w-4 h-4 text-[#C9A96E]" />}
                                         </div>
                                     </button>
                                 ))
@@ -385,16 +385,16 @@ export default function InjectorMatchQuiz() {
                                         key={opt.id}
                                         onClick={() => toggleTreatment(opt.id)}
                                         className={`p-6 rounded-2xl border text-left transition-all group/opt ${selectedTreatments.includes(opt.id)
-                                            ? 'bg-[#d4af37]/10 border-[#d4af37] ring-1 ring-[#d4af37]'
-                                            : 'bg-white/5 border-white/10 hover:border-white/20'
+                                            ? 'bg-[#C9A96E]/10 border-[#C9A96E] ring-1 ring-[#C9A96E]'
+                                            : 'bg-[#3D2B1F]/5 border-[#3D2B1F]/10 hover:border-white/20'
                                             }`}
                                     >
                                         <div className="flex items-center gap-4">
-                                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${selectedTreatments.includes(opt.id) ? 'bg-[#d4af37] text-[#0d1420]' : 'bg-white/5 text-gray-500 group-hover/opt:text-white'
+                                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${selectedTreatments.includes(opt.id) ? 'bg-[#C9A96E] text-white' : 'bg-[#3D2B1F]/5 text-[#3D2B1F]/60 group-hover/opt:text-[#3D2B1F]'
                                                 }`}>
                                                 {opt.icon && <opt.icon className="w-5 h-5" />}
                                             </div>
-                                            <span className={`font-bold transition-colors ${selectedTreatments.includes(opt.id) ? 'text-white' : 'text-gray-400 group-hover/opt:text-white'}`}>
+                                            <span className={`font-bold transition-colors ${selectedTreatments.includes(opt.id) ? 'text-[#3D2B1F]' : 'text-[#3D2B1F]/70 group-hover/opt:text-[#3D2B1F]'}`}>
                                                 {opt.label}
                                             </span>
                                         </div>
@@ -406,16 +406,16 @@ export default function InjectorMatchQuiz() {
                                         key={opt.id}
                                         onClick={() => togglePriority(opt.id)}
                                         className={`p-6 rounded-2xl border text-left transition-all group/opt ${selectedPriorities.includes(opt.id)
-                                            ? 'bg-[#d4af37]/10 border-[#d4af37] ring-1 ring-[#d4af37]'
-                                            : 'bg-white/5 border-white/10 hover:border-white/20'
+                                            ? 'bg-[#C9A96E]/10 border-[#C9A96E] ring-1 ring-[#C9A96E]'
+                                            : 'bg-[#3D2B1F]/5 border-[#3D2B1F]/10 hover:border-white/20'
                                             }`}
                                     >
                                         <div className="flex items-center gap-4">
-                                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${selectedPriorities.includes(opt.id) ? 'bg-[#d4af37] text-[#0d1420]' : 'bg-white/5 text-gray-500 group-hover/opt:text-white'
+                                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${selectedPriorities.includes(opt.id) ? 'bg-[#C9A96E] text-white' : 'bg-[#3D2B1F]/5 text-[#3D2B1F]/60 group-hover/opt:text-[#3D2B1F]'
                                                 }`}>
                                                 {opt.icon && <opt.icon className="w-5 h-5" />}
                                             </div>
-                                            <span className={`font-bold transition-colors ${selectedPriorities.includes(opt.id) ? 'text-white' : 'text-gray-400 group-hover/opt:text-white'}`}>
+                                            <span className={`font-bold transition-colors ${selectedPriorities.includes(opt.id) ? 'text-[#3D2B1F]' : 'text-[#3D2B1F]/70 group-hover/opt:text-[#3D2B1F]'}`}>
                                                 {opt.label}
                                             </span>
                                         </div>
@@ -425,9 +425,9 @@ export default function InjectorMatchQuiz() {
                         </div>
 
                         {/* Footer / CTA */}
-                        <div className="flex justify-between items-center pt-8 border-t border-white/5">
-                            <p className="text-[10px] text-gray-600 uppercase tracking-widest font-black flex items-center gap-2">
-                                <ShieldCheck className="w-3 h-3 text-emerald-500" /> Secure & Anonymous
+                        <div className="flex justify-between items-center pt-8 border-t border-[#3D2B1F]/10">
+                            <p className="text-[10px] text-[#3D2B1F]/50 uppercase tracking-widest font-black flex items-center gap-2">
+                                <ShieldCheck className="w-3 h-3 text-[#8A9E8D]" /> Secure & Anonymous
                             </p>
                             <Button
                                 onClick={nextStep}
@@ -438,7 +438,7 @@ export default function InjectorMatchQuiz() {
                                     (currentStep.id === 'location' && !selectedCity) ||
                                     (currentStep.id === 'experience' && !experience)
                                 }
-                                className="bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black uppercase tracking-widest h-14 px-10 rounded-xl shadow-xl shadow-[#d4af37]/10 group disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="bg-[#C9A96E] hover:bg-[#B5955B] text-white font-black uppercase tracking-widest h-14 px-10 rounded-xl shadow-xl shadow-[#C9A96E]/10 group disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {loading ? 'Matching...' : stepIndex === STEPS.length - 1 ? 'See My Matches' : 'Next Question'}
                                 {!loading && <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />}

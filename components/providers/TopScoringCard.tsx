@@ -50,12 +50,12 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
             .slice(0, 3)
             .toUpperCase()
 
-        let bgColor = 'bg-white/[0.03]'
-        let textColor = 'text-gray-600'
-        let borderColor = 'border-white/[0.06]'
+        let bgColor = 'bg-[#3D2B1F]/5'
+        let textColor = 'text-[#3D2B1F]/50'
+        let borderColor = 'border-[#3D2B1F]/10'
         if (provider.score_total >= 85) {
             bgColor = 'bg-emerald-950/30'
-            textColor = 'text-emerald-400'
+            textColor = 'text-[#8A9E8D]'
             borderColor = 'border-emerald-800/20'
         } else if (provider.score_total >= 70) {
             bgColor = 'bg-blue-950/30'
@@ -79,25 +79,25 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
     }
 
     const getScoreColor = (score: number) => {
-        if (score >= 90) return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+        if (score >= 90) return 'bg-[#8A9E8D]/20 text-[#8A9E8D] border-[#8A9E8D]/30'
         if (score >= 75) return 'bg-blue-500/20 text-blue-400 border-blue-500/30'
-        return 'bg-gray-500/20 text-gray-400 border-gray-500/30'
+        return 'bg-gray-500/20 text-[#3D2B1F]/70 border-gray-500/30'
     }
 
     return (
         <>
-            <div className="group bg-white/[0.02] rounded-2xl hover:shadow-2xl hover:shadow-[#d4af37]/5 transition-all duration-500 border border-white/[0.06] hover:border-[#d4af37]/20 overflow-hidden flex flex-col h-full w-full max-w-[380px] mx-auto hover:-translate-y-2">
+            <div className="group bg-[#3D2B1F]/5 rounded-2xl hover:shadow-2xl hover:shadow-[#C9A96E]/5 transition-all duration-500 border border-[#3D2B1F]/10 hover:border-[#C9A96E]/20 overflow-hidden flex flex-col h-full w-full max-w-[380px] mx-auto hover:-translate-y-2">
                 {renderPlaceholder()}
 
                 <div className="p-6 flex flex-col flex-grow">
                     {/* Header */}
                     <div className="mb-4">
                         <Link href={`/provider/${provider.slug}`}>
-                            <h3 className="text-xl font-bold text-white leading-tight hover:text-[#d4af37] transition-colors line-clamp-1">
+                            <h3 className="text-xl font-bold text-[#3D2B1F] leading-tight hover:text-[#C9A96E] transition-colors line-clamp-1">
                                 {provider.name}
                             </h3>
                         </Link>
-                        <p className="text-xs font-bold text-gray-600 mt-1 uppercase tracking-widest">
+                        <p className="text-xs font-bold text-[#3D2B1F]/50 mt-1 uppercase tracking-widest">
                             {provider.city}, {provider.state}  ·  {getTopCategory(provider)}
                         </p>
                     </div>
@@ -105,14 +105,14 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
                     {/* Ratings */}
                     <div className="flex items-center gap-2 mb-6 text-sm">
                         <div className="flex flex-col">
-                            <div className="flex items-center gap-1.5 bg-white/5 px-2 py-1.5 rounded-lg border border-white/10 w-fit">
+                            <div className="flex items-center gap-1.5 bg-[#3D2B1F]/5 px-2 py-1.5 rounded-lg border border-[#3D2B1F]/10 w-fit">
                                 <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
-                                <span className="font-black text-white">{provider.rating || '4.0'}</span>
+                                <span className="font-black text-[#3D2B1F]">{provider.rating || '4.0'}</span>
                             </div>
-                            <span className="text-[9px] text-gray-600 font-bold uppercase mt-1">Rating from Google</span>
+                            <span className="text-[9px] text-[#3D2B1F]/50 font-bold uppercase mt-1">Rating from Google</span>
                         </div>
                         <div className="ml-2">
-                            <span className="text-xs font-medium text-gray-600">({provider.review_count || 0} reviews)</span>
+                            <span className="text-xs font-medium text-[#3D2B1F]/50">({provider.review_count || 0} reviews)</span>
                         </div>
                         <div className="ml-auto">
                             <img src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-non-white2.png" alt="Google" width="112" height="14" className="h-3.5 opacity-30" />
@@ -122,29 +122,29 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
                     {/* Score */}
                     <div className="mb-6">
                         <div className="flex items-center justify-between mb-2">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-600 flex items-center gap-1.5">
-                                <ShieldCheck className="w-3 h-3 text-[#d4af37]" />
+                            <span className="text-[10px] font-black uppercase tracking-widest text-[#3D2B1F]/50 flex items-center gap-1.5">
+                                <ShieldCheck className="w-3 h-3 text-[#C9A96E]" />
                                 Clarity Score™
                             </span>
-                            <span className="text-[10px] font-black text-[#d4af37] uppercase">{getPercentile(provider.score_total)}</span>
+                            <span className="text-[10px] font-black text-[#C9A96E] uppercase">{getPercentile(provider.score_total)}</span>
                         </div>
                         <div className="flex items-center gap-3">
                             <div className={`px-3 py-1.5 rounded-xl text-sm font-black tracking-tight border ${getScoreColor(provider.score_total)}`}>
                                 {provider.score_total}/100
                             </div>
-                            <div className="text-xs font-bold text-gray-600 italic">
+                            <div className="text-xs font-bold text-[#3D2B1F]/50 italic">
                                 Highest in: {getTopCategory(provider)}
                             </div>
                         </div>
                     </div>
 
                     {/* Pricing */}
-                    <div className="mb-6 p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                    <div className="mb-6 p-3 rounded-xl bg-[#3D2B1F]/5 border border-[#3D2B1F]/10">
                         <div className="flex items-center justify-between">
-                            <span className="text-[10px] font-bold text-gray-600 uppercase">Unit Pricing</span>
+                            <span className="text-[10px] font-bold text-[#3D2B1F]/50 uppercase">Unit Pricing</span>
                             <Info className="w-3 h-3 text-gray-700" />
                         </div>
-                        <div className="text-lg font-black text-white mt-1">
+                        <div className="text-lg font-black text-[#3D2B1F] mt-1">
                             {provider.price_per_unit
                                 ? `${NICHE.priceCurrency}${provider.price_per_unit}/unit`
                                 : `Estimated: $12–$16/unit (City Avg)`
@@ -162,13 +162,13 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
                     {/* CTAs */}
                     <div className="flex items-center gap-3">
                         <Link href={`/provider/${provider.slug}`} className="flex-1">
-                            <Button variant="outline" className="w-full py-6 text-xs font-bold border-white/10 text-gray-400 hover:bg-white/5 uppercase tracking-widest rounded-xl transition-all">
+                            <Button variant="outline" className="w-full py-6 text-xs font-bold border-[#3D2B1F]/10 text-[#3D2B1F]/70 hover:bg-[#3D2B1F]/5 uppercase tracking-widest rounded-xl transition-all">
                                 View Profile
                             </Button>
                         </Link>
                         <Button
                             onClick={() => setIsModalOpen(true)}
-                            className="flex-1 py-6 text-xs font-bold bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-[#d4af37]/10"
+                            className="flex-1 py-6 text-xs font-bold bg-[#C9A96E] hover:bg-[#B5955B] text-white uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-[#C9A96E]/10"
                         >
                             Request Quote
                         </Button>
@@ -180,13 +180,13 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
             {isModalOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     <div
-                        className="absolute inset-0 bg-[#0d1420]/90 backdrop-blur-md"
+                        className="absolute inset-0 bg-[#FAF8F5]/90 backdrop-blur-md"
                         onClick={() => setIsModalOpen(false)}
                     />
                     <div className="relative w-full max-w-lg animate-in zoom-in-95 duration-300">
                         <button
                             onClick={() => setIsModalOpen(false)}
-                            className="absolute -top-14 right-0 text-white hover:text-[#d4af37] transition-colors font-bold flex items-center gap-2 uppercase tracking-widest text-xs"
+                            className="absolute -top-14 right-0 text-[#3D2B1F] hover:text-[#C9A96E] transition-colors font-bold flex items-center gap-2 uppercase tracking-widest text-xs"
                         >
                             Close <X className="w-8 h-8 border border-white/20 rounded-full p-2" />
                         </button>

@@ -15,17 +15,17 @@ export const metadata: Metadata = {
 
 export default function ClaimDirectoryPage() {
     return (
-        <div className="bg-[#0d1420] min-h-screen">
+        <div className="bg-[#FAF8F5] min-h-screen">
             {/* HER SECTION */}
-            <div className="bg-[#1a2332] text-white py-24 px-4 overflow-hidden relative border-b border-white/5">
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-[#d4af37]/10 -skew-x-12 translate-x-1/3" />
+            <div className="bg-[#1a2332] text-[#3D2B1F] py-24 px-4 overflow-hidden relative border-b border-[#3D2B1F]/10">
+                <div className="absolute top-0 right-0 w-1/2 h-full bg-[#C9A96E]/10 -skew-x-12 translate-x-1/3" />
                 <div className="max-w-4xl mx-auto relative z-10">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#d4af37] text-xs font-bold tracking-widest uppercase mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 text-[#C9A96E] text-xs font-bold tracking-widest uppercase mb-6">
                         <ShieldCheck className="w-3 h-3" />
                         Provider Network
                     </div>
                     <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 leading-tight">
-                        Grow Your Practice with <span className="text-[#d4af37]">{NICHE.siteName}</span>
+                        Grow Your Practice with <span className="text-[#C9A96E]">{NICHE.siteName}</span>
                     </h1>
                     <p className="text-xl text-gray-300 font-light leading-relaxed max-w-2xl mb-12">
                         Join the most transparent aesthetics directory. Claim your free profile to list your pricing,
@@ -37,33 +37,33 @@ export default function ClaimDirectoryPage() {
             </div>
 
             {/* BENEFITS GRID */}
-            <div className="py-24 px-4 bg-[#0d1420]">
+            <div className="py-24 px-4 bg-[#FAF8F5]">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                        <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/[0.05] hover:border-[#d4af37]/20 transition-all">
-                            <div className="h-14 w-14 bg-[#d4af37]/10 rounded-2xl flex items-center justify-center text-[#d4af37] mb-8">
+                        <div className="p-8 rounded-[2rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 hover:border-[#C9A96E]/20 transition-all">
+                            <div className="h-14 w-14 bg-[#C9A96E]/10 rounded-2xl flex items-center justify-center text-[#C9A96E] mb-8">
                                 <ShieldCheck className="w-7 h-7" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-4">NPI Verification</h3>
-                            <p className="text-gray-500 leading-relaxed font-light">
+                            <h3 className="text-2xl font-bold text-[#3D2B1F] mb-4">NPI Verification</h3>
+                            <p className="text-[#3D2B1F]/60 leading-relaxed font-light">
                                 Authenticate your medical credentials with our direct NPI database integration. Earn the verification badge that 80% of patients look for.
                             </p>
                         </div>
-                        <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/[0.05] hover:border-[#d4af37]/20 transition-all">
-                            <div className="h-14 w-14 bg-[#d4af37]/10 rounded-2xl flex items-center justify-center text-[#d4af37] mb-8">
+                        <div className="p-8 rounded-[2rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 hover:border-[#C9A96E]/20 transition-all">
+                            <div className="h-14 w-14 bg-[#C9A96E]/10 rounded-2xl flex items-center justify-center text-[#C9A96E] mb-8">
                                 <ArrowRight className="w-7 h-7" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-4">Lead Generation</h3>
-                            <p className="text-gray-500 leading-relaxed font-light">
+                            <h3 className="text-2xl font-bold text-[#3D2B1F] mb-4">Lead Generation</h3>
+                            <p className="text-[#3D2B1F]/60 leading-relaxed font-light">
                                 Our users are high-intent patients ready to book. Verified profiles see a 4x increase in profile clicks and consultation requests.
                             </p>
                         </div>
-                        <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/[0.05] hover:border-[#d4af37]/20 transition-all">
-                            <div className="h-14 w-14 bg-[#d4af37]/10 rounded-2xl flex items-center justify-center text-[#d4af37] mb-8">
+                        <div className="p-8 rounded-[2rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 hover:border-[#C9A96E]/20 transition-all">
+                            <div className="h-14 w-14 bg-[#C9A96E]/10 rounded-2xl flex items-center justify-center text-[#C9A96E] mb-8">
                                 <Search className="w-7 h-7" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-4">Pricing Control</h3>
-                            <p className="text-gray-500 leading-relaxed font-light">
+                            <h3 className="text-2xl font-bold text-[#3D2B1F] mb-4">Pricing Control</h3>
+                            <p className="text-[#3D2B1F]/60 leading-relaxed font-light">
                                 Stop being compared on price without context. List your per-unit rates and specialized treatment packages to attract the right patients.
                             </p>
                         </div>

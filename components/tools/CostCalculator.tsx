@@ -298,15 +298,15 @@ export function CostCalculator() {
 
                 {/* 1. Location */}
                 <div className="space-y-3">
-                    <label className="text-sm font-bold text-white uppercase tracking-wide flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-white/[0.03] text-[#d4af37] flex items-center justify-center text-xs border border-white/[0.06]">1</span>
+                    <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-wide flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-[#3D2B1F]/5 text-[#C9A96E] flex items-center justify-center text-xs border border-[#3D2B1F]/10">1</span>
                         Your Location
                     </label>
                     <div className="relative">
                         <select
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
-                            className="w-full p-4 pr-12 bg-white/[0.03] border border-white/[0.06] rounded-xl text-lg font-medium text-white focus:ring-2 focus:ring-[#d4af37]/20 focus:border-[#d4af37]/30 outline-none appearance-none cursor-pointer hover:border-white/10 transition-colors z-10 relative"
+                            className="w-full p-4 pr-12 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-xl text-lg font-medium text-[#3D2B1F] focus:ring-2 focus:ring-[#C9A96E]/20 focus:border-[#C9A96E]/30 outline-none appearance-none cursor-pointer hover:border-[#3D2B1F]/10 transition-colors z-10 relative"
                         >
                             {CITY_OPTIONS.map(opt => (
                                 <option key={opt.value} value={opt.value}>
@@ -314,7 +314,7 @@ export function CostCalculator() {
                                 </option>
                             ))}
                         </select>
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-600 z-20">
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#3D2B1F]/50 z-20">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down w-5 h-5"><path d="m6 9 6 6 6-6" /></svg>
                         </div>
                     </div>
@@ -322,18 +322,18 @@ export function CostCalculator() {
 
                 {/* 2. Neurotoxin */}
                 <div className="space-y-3">
-                    <label className="text-sm font-bold text-white uppercase tracking-wide flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-white/[0.03] text-[#d4af37] flex items-center justify-center text-xs border border-white/[0.06]">2</span>
+                    <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-wide flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-[#3D2B1F]/5 text-[#C9A96E] flex items-center justify-center text-xs border border-[#3D2B1F]/10">2</span>
                         Treatment Type
                     </label>
-                    <div className="grid grid-cols-3 gap-2 p-1 bg-white/[0.03] rounded-xl border border-white/[0.06]">
+                    <div className="grid grid-cols-3 gap-2 p-1 bg-[#3D2B1F]/5 rounded-xl border border-[#3D2B1F]/10">
                         {NICHE.calculator.variables.map((v) => (
                             <button
                                 key={v.id}
                                 onClick={() => setTreatmentType(v.id)}
                                 className={`py-2.5 text-sm font-bold rounded-lg transition-all ${treatmentType === v.id
-                                    ? 'bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/20'
-                                    : 'text-gray-500 hover:text-white'
+                                    ? 'bg-[#C9A96E]/10 text-[#C9A96E] border border-[#C9A96E]/20'
+                                    : 'text-[#3D2B1F]/60 hover:text-[#3D2B1F]'
                                     }`}
                             >
                                 {v.label}
@@ -344,8 +344,8 @@ export function CostCalculator() {
 
                 {/* 3. Treatment Areas */}
                 <div className="space-y-3">
-                    <label className="text-sm font-bold text-white uppercase tracking-wide flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-white/[0.03] text-[#d4af37] flex items-center justify-center text-xs border border-white/[0.06]">3</span>
+                    <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-wide flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-[#3D2B1F]/5 text-[#C9A96E] flex items-center justify-center text-xs border border-[#3D2B1F]/10">3</span>
                         Target Areas
                     </label>
                     <div className="grid grid-cols-1 gap-2">
@@ -354,20 +354,20 @@ export function CostCalculator() {
                                 key={area.id}
                                 onClick={() => toggleArea(area.id)}
                                 className={`group flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-all ${selectedAreas.has(area.id)
-                                    ? 'bg-[#d4af37]/5 border-[#d4af37]/30'
-                                    : 'bg-white/[0.02] border-white/[0.06] hover:border-white/10'
+                                    ? 'bg-[#C9A96E]/5 border-[#C9A96E]/30'
+                                    : 'bg-[#3D2B1F]/5 border-[#3D2B1F]/10 hover:border-[#3D2B1F]/10'
                                     }`}
                             >
                                 <div className="flex items-center gap-3">
-                                    <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${selectedAreas.has(area.id) ? 'bg-[#d4af37] border-[#d4af37]' : 'border-gray-600 bg-white/[0.03]'
+                                    <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${selectedAreas.has(area.id) ? 'bg-[#C9A96E] border-[#C9A96E]' : 'border-gray-600 bg-[#3D2B1F]/5'
                                         }`}>
-                                        {selectedAreas.has(area.id) && <Check className="w-3.5 h-3.5 text-[#0d1420]" />}
+                                        {selectedAreas.has(area.id) && <Check className="w-3.5 h-3.5 text-white" />}
                                     </div>
-                                    <span className={`font-medium ${selectedAreas.has(area.id) ? 'text-white' : 'text-gray-500'}`}>
+                                    <span className={`font-medium ${selectedAreas.has(area.id) ? 'text-[#3D2B1F]' : 'text-[#3D2B1F]/60'}`}>
                                         {area.label}
                                     </span>
                                 </div>
-                                <Badge variant="outline" className={`bg-white/[0.03] font-mono text-xs ${selectedAreas.has(area.id) ? 'text-[#d4af37] border-[#d4af37]/20' : 'text-gray-600 border-white/[0.06]'
+                                <Badge variant="outline" className={`bg-[#3D2B1F]/5 font-mono text-xs ${selectedAreas.has(area.id) ? 'text-[#C9A96E] border-[#C9A96E]/20' : 'text-[#3D2B1F]/50 border-[#3D2B1F]/10'
                                     }`}>
                                     {area.units}u
                                 </Badge>
@@ -377,15 +377,15 @@ export function CostCalculator() {
                 </div>
 
                 {/* 4. Provider Tier */}
-                <div className="space-y-4 pt-4 border-t border-white/[0.06]">
+                <div className="space-y-4 pt-4 border-t border-[#3D2B1F]/10">
                     <div className="flex justify-between items-center">
-                        <label className="text-sm font-bold text-white uppercase tracking-wide flex items-center gap-2">
-                            <span className="w-6 h-6 rounded-full bg-white/[0.03] text-[#d4af37] flex items-center justify-center text-xs border border-white/[0.06]">4</span>
+                        <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-wide flex items-center gap-2">
+                            <span className="w-6 h-6 rounded-full bg-[#3D2B1F]/5 text-[#C9A96E] flex items-center justify-center text-xs border border-[#3D2B1F]/10">4</span>
                             Provider Level
                         </label>
                         <div className="group relative cursor-help">
-                            <HelpCircle className="w-4 h-4 text-gray-300 hover:text-gray-500 transition-colors" />
-                            <div className="absolute bottom-full right-0 mb-2 w-64 p-3 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-xl">
+                            <HelpCircle className="w-4 h-4 text-gray-300 hover:text-[#3D2B1F]/60 transition-colors" />
+                            <div className="absolute bottom-full right-0 mb-2 w-64 p-3 bg-gray-900 text-[#3D2B1F] text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-xl">
                                 Tier includes experience, credentials, and location overhead. Budget clinics often use nurse injectors; Premium often feature board-certified MDs.
                             </div>
                         </div>
@@ -399,9 +399,9 @@ export function CostCalculator() {
                             step={1}
                             className="py-4"
                         />
-                        <div className="flex justify-between text-[10px] font-black text-gray-400 uppercase tracking-widest mt-2">
+                        <div className="flex justify-between text-[10px] font-black text-[#3D2B1F]/70 uppercase tracking-widest mt-2">
                             <div className="flex flex-col items-start gap-1">
-                                <span className={tierCategory === 'budget' ? 'text-emerald-400' : ''}>Budget ($)</span>
+                                <span className={tierCategory === 'budget' ? 'text-[#8A9E8D]' : ''}>Budget ($)</span>
                                 <span className="opacity-50 font-mono italic">Standard Audit</span>
                             </div>
                             <div className="flex flex-col items-center gap-1">
@@ -409,7 +409,7 @@ export function CostCalculator() {
                                 <span className="opacity-50 font-mono italic">Verified Clinic</span>
                             </div>
                             <div className="flex flex-col items-end gap-1 text-right">
-                                <span className={tierCategory === 'premium' ? 'text-[#d4af37]' : ''}>Artisan Specialist ($$$)</span>
+                                <span className={tierCategory === 'premium' ? 'text-[#C9A96E]' : ''}>Artisan Specialist ($$$)</span>
                                 <span className="opacity-50 font-mono italic">Elite Audit Pass</span>
                             </div>
                         </div>
@@ -420,7 +420,7 @@ export function CostCalculator() {
             {/* Right Panel: Output */}
             <div className="lg:col-span-7">
                 <div className="sticky top-24 space-y-6">
-                    <Card className="border border-white/[0.06] shadow-2xl shadow-black/20 overflow-hidden bg-[#101827] ring-0">
+                    <Card className="border border-[#3D2B1F]/10 shadow-2xl shadow-black/20 overflow-hidden bg-[#F2EDE4] ring-0">
                         <div className="h-2 bg-gradient-to-r from-green-400 via-yellow-400 to-red-500 w-full relative">
                             <div
                                 className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.3)] z-10 transition-all duration-300 ease-out transform -translate-x-1/2"
@@ -435,68 +435,68 @@ export function CostCalculator() {
                         <CardContent className="p-8 lg:p-10 space-y-8">
                             {/* Headline */}
                             <div className="text-center space-y-2">
-                                <p className="text-gray-600 font-medium text-sm tracking-wide uppercase">Estimated Total Cost</p>
-                                <div className="text-5xl lg:text-7xl font-display font-bold text-white tracking-tight tabular-nums">
+                                <p className="text-[#3D2B1F]/50 font-medium text-sm tracking-wide uppercase">Estimated Total Cost</p>
+                                <div className="text-5xl lg:text-7xl font-display font-bold text-[#3D2B1F] tracking-tight tabular-nums">
                                     ${rangeLow} – ${rangeHigh}
                                 </div>
                                 <div className="flex items-center justify-center gap-3 pt-2">
-                                    <Badge variant="secondary" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
+                                    <Badge variant="secondary" className="bg-[#8A9E8D]/10 text-[#8A9E8D] border-[#8A9E8D]/20">
                                         <ShieldCheck className="w-3 h-3 mr-1" />
                                         Market Data
                                     </Badge>
-                                    <span className="text-sm text-gray-400 font-medium">
+                                    <span className="text-sm text-[#3D2B1F]/70 font-medium">
                                         Based on {cityData.providerCount} {CITY_OPTIONS.find(c => c.value === city)?.label} Providers
                                     </span>
                                 </div>
                             </div>
 
                             {/* Conversion Hook: Audit */}
-                            <div className="bg-[#d4af37]/10 rounded-2xl p-6 border border-[#d4af37]/20 flex flex-col md:flex-row items-center gap-6">
+                            <div className="bg-[#C9A96E]/10 rounded-2xl p-6 border border-[#C9A96E]/20 flex flex-col md:flex-row items-center gap-6">
                                 <div className="flex-1">
-                                    <h4 className="text-white font-bold mb-1">Audit Your Local Clinics</h4>
-                                    <p className="text-gray-400 text-xs leading-relaxed">
+                                    <h4 className="text-[#3D2B1F] font-bold mb-1">Audit Your Local Clinics</h4>
+                                    <p className="text-[#3D2B1F]/70 text-xs leading-relaxed">
                                         We'll cross-reference your quote against {cityData.providerCount} verified providers in {CITY_OPTIONS.find(c => c.value === city)?.label}.
                                     </p>
                                 </div>
                                 <Link href="/audit" className="w-full md:w-auto">
-                                    <Button size="sm" className="w-full bg-white text-[#0d1420] hover:bg-white/90 font-black rounded-lg text-[10px] uppercase tracking-wider h-10 px-6">
+                                    <Button size="sm" className="w-full bg-white text-white hover:bg-white/90 font-black rounded-lg text-[10px] uppercase tracking-wider h-10 px-6">
                                         Start Audit Free
                                     </Button>
                                 </Link>
                             </div>
 
                             {/* Breakdown Grid */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white/[0.02] rounded-2xl p-6 border border-white/[0.06]">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#3D2B1F]/5 rounded-2xl p-6 border border-[#3D2B1F]/10">
                                 <div className="space-y-1">
-                                    <p className="text-xs font-bold text-gray-600 uppercase">Unit Breakdown</p>
-                                    <p className="text-2xl font-bold text-white tabular-nums">{totalUnits} <span className="text-base font-normal text-gray-500">units</span></p>
+                                    <p className="text-xs font-bold text-[#3D2B1F]/50 uppercase">Unit Breakdown</p>
+                                    <p className="text-2xl font-bold text-[#3D2B1F] tabular-nums">{totalUnits} <span className="text-base font-normal text-[#3D2B1F]/60">units</span></p>
                                     <div className="flex flex-wrap gap-1 mt-2">
                                         {Array.from(selectedAreas).map(id => (
-                                            <span key={id} className="text-[10px] bg-white/[0.03] border border-white/[0.06] px-1.5 py-0.5 rounded text-gray-500">
+                                            <span key={id} className="text-[10px] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 px-1.5 py-0.5 rounded text-[#3D2B1F]/60">
                                                 {TREATMENT_AREAS.find(a => a.id === id)?.label}
                                             </span>
                                         ))}
-                                        {selectedAreas.size === 0 && <span className="text-xs text-gray-400 italic">Select areas to see units</span>}
+                                        {selectedAreas.size === 0 && <span className="text-xs text-[#3D2B1F]/70 italic">Select areas to see units</span>}
                                     </div>
                                 </div>
                                 <div className="space-y-1 md:text-right">
-                                    <p className="text-xs font-bold text-gray-600 uppercase">Est. Price Per {NICHE.priceUnit.split(' ').slice(-1)}</p>
-                                    <p className="text-2xl font-bold text-white tabular-nums">${unitPrice} <span className="text-base font-normal text-gray-500">/ {NICHE.priceUnit.split(' ').slice(-1)}</span></p>
-                                    <p className="text-xs text-gray-400">
+                                    <p className="text-xs font-bold text-[#3D2B1F]/50 uppercase">Est. Price Per {NICHE.priceUnit.split(' ').slice(-1)}</p>
+                                    <p className="text-2xl font-bold text-[#3D2B1F] tabular-nums">${unitPrice} <span className="text-base font-normal text-[#3D2B1F]/60">/ {NICHE.priceUnit.split(' ').slice(-1)}</span></p>
+                                    <p className="text-xs text-[#3D2B1F]/70">
                                         Market Avg: ${pricing.mid}
                                     </p>
                                 </div>
                             </div>
 
                             {/* Benchmark Context */}
-                            <div className="bg-[#d4af37]/5 rounded-xl p-4 flex items-start gap-3 border border-[#d4af37]/10">
-                                <Info className="w-5 h-5 text-[#d4af37] shrink-0 mt-0.5" />
+                            <div className="bg-[#C9A96E]/5 rounded-xl p-4 flex items-start gap-3 border border-[#C9A96E]/10">
+                                <Info className="w-5 h-5 text-[#C9A96E] shrink-0 mt-0.5" />
                                 <div>
-                                    <p className="text-sm text-white font-medium">
+                                    <p className="text-sm text-[#3D2B1F] font-medium">
                                         Market Insight
                                     </p>
-                                    <p className="text-sm text-gray-400 leading-relaxed mt-1">
-                                        Providers in <span className="font-semibold text-white">{CITY_OPTIONS.find(c => c.value === city)?.label}</span> average <span className={cityData.benchmarkDelta > 0 ? "text-red-400 font-bold" : "text-emerald-400 font-bold"}>{deltaText}</span> than the national median.
+                                    <p className="text-sm text-[#3D2B1F]/70 leading-relaxed mt-1">
+                                        Providers in <span className="font-semibold text-[#3D2B1F]">{CITY_OPTIONS.find(c => c.value === city)?.label}</span> average <span className={cityData.benchmarkDelta > 0 ? "text-red-400 font-bold" : "text-[#8A9E8D] font-bold"}>{deltaText}</span> than the national median.
                                         {tierCategory === 'budget' && " These clinics typically focus on efficiency while maintaining high clinical safety standards."}
                                         {tierCategory === 'mid' && " Institutional clinics balance volume and quality, generally falling into our primary verified range."}
                                         {tierCategory === 'premium' && " Premium Artisan Specialists pass our most rigorous multi-factor clinical audits for natural results."}
@@ -506,13 +506,13 @@ export function CostCalculator() {
 
                             {/* CTA */}
                             <Link href={`/${NICHE.baseSlug}/${city}`} className="block">
-                                <Button className="w-full text-lg py-7 rounded-xl shadow-xl shadow-[#d4af37]/10 hover:shadow-[#d4af37]/20 transition-all bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-bold group">
+                                <Button className="w-full text-lg py-7 rounded-xl shadow-xl shadow-[#C9A96E]/10 hover:shadow-[#C9A96E]/20 transition-all bg-[#C9A96E] hover:bg-[#B5955B] text-white font-bold group">
                                     See {cityData.providerCount} Verified Providers in {CITY_OPTIONS.find(c => c.value === city)?.label}
                                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </Button>
                             </Link>
 
-                            <p className="text-xs text-center text-gray-400">
+                            <p className="text-xs text-center text-[#3D2B1F]/70">
                                 *Estimates only. Final pricing requires an in-person consultation.
                             </p>
                         </CardContent>
@@ -521,7 +521,7 @@ export function CostCalculator() {
             </div>
 
             {/* Methodology Footnote */}
-            <div className="lg:col-span-12 mt-8 pt-8 border-t border-white/[0.06]">
+            <div className="lg:col-span-12 mt-8 pt-8 border-t border-[#3D2B1F]/10">
                 <div className="max-w-3xl mx-auto text-center">
                     <PricingMethodology />
                 </div>

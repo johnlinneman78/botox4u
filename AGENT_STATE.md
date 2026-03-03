@@ -7,72 +7,85 @@ If this file and your memory conflict, trust this file.
 
 ---
 
+## ⚠️ CRITICAL PROJECT IDENTITY — READ BEFORE DOING ANYTHING
+- **Project name**: InjectorIndex (NOT fiery-cosmos, NOT botox4u)
+- **Live URL**: https://www.injectorindex.com
+- **Vercel project**: `injectorindex` (org: `john-linnemans-projects`, ID: `prj_dhhPDqn6alh3lWBvmkxRGZyzPmsB`)
+- **GitHub remote**: `https://github.com/johnlinneman78/botox4u` (legacy repo name — the project IS InjectorIndex)
+- **Branch**: `main`
+- **Score branding**: Clarity Score™ (NOT TrueScore™)
+- **Design system**: Warm linen spa editorial — see `C:\Users\uriel\Downloads\InjectorIndex_Design_System.md`
+
+## ⚠️ DEPLOYMENT RULES
+1. **ALWAYS run `npx next build` locally before pushing** — if it fails, fix it first
+2. **ALWAYS commit and push to `main`** — Vercel auto-deploys from GitHub
+3. **If auto-deploy seems stuck, use `npx vercel --prod --yes`** to force-deploy
+4. **ALWAYS verify the live site after deploy** — open https://www.injectorindex.com and confirm changes are visible
+5. **NEVER deploy to any other Vercel project** — only `injectorindex`
+6. **NEVER let changes accumulate locally without pushing** — push after every session
+
+---
+
 ## CURRENT STATUS
-**Active Phase:** 6 — Maintenance & Scaling
-**Last Updated:** February 19, 2026
-**Last Commit:** [fix: provider display issues, add legal pages, and enforce google attribution]
-**Sessions Completed:** 3 (autonomous)
+**Active Phase:** 7 — Post-Redesign Polish & Scaling
+**Last Updated:** March 3, 2026
+**Last Commit:** `6267468` — feat: complete site redesign
+**Last Deploy:** March 3, 2026 — `npx vercel --prod --yes` → https://injectorindex.com
+**Git Status:** Clean (0 uncommitted changes)
+**Sessions Completed:** 4 (autonomous)
+
+---
+
+## DESIGN SYSTEM (Implemented & Live)
+- **Theme**: Warm linen spa editorial (luxury, NOT clinical/tech)
+- **Background**: `#FAF8F5` (Warm Linen)
+- **Surface**: `#F2EDE4` (Soft Champagne)
+- **Primary text**: `#3D2B1F` (Warm Espresso)
+- **Accent**: `#C9A96E` (Champagne Gold)
+- **Secondary accent**: `#8A9E8D` (Dusty Sage)
+- **Display font**: Cormorant Garamond (300, 400, 500, 600)
+- **Body font**: DM Sans (400, 500, 700)
+- **Radii**: 8/12/16/20/40px (small to pill)
+- **Full spec**: `C:\Users\uriel\Downloads\InjectorIndex_Design_System.md`
 
 ---
 
 ## WHAT TO DO RIGHT NOW
 > This section always contains exactly one thing — the next unfinished task.
 
-**Next task:** 7-Day Sprint — Day 1: Foundation & Critical Bugs
-**Details:** Fix NY search bug (add 142 missing NYC providers), update sitemap/robots config, and implement JSON-LD Schema.
-**Definition of done:** Search "New York" returns results, robots.txt is valid, Schema is visible in source.
+**Next task:** Post-redesign audit & polish
+**Details:** Walk through all pages on live site. Fix any remaining old-theme holdovers, broken layouts, or styling inconsistencies against the design system.
+**Definition of done:** All patient-facing pages match the warm linen design system. No dark navy remnants.
+
+---
+
+## TECH STACK
+- **Framework**: Next.js 16.1.6 (Turbopack)
+- **CSS**: Tailwind CSS v4 + CSS custom properties in `globals.css`
+- **Database**: Supabase
+- **Hosting**: Vercel (project: `injectorindex`)
+- **Email**: Resend.com
+- **Analytics**: Google Analytics + Ahrefs
+- **Config**: `config/niche.js` — single source of truth for branding
 
 ---
 
 ## PHASE COMPLETION STATUS
 
-### PHASE 1 — Critical Fixes
-| Task | Status | Completed | Notes |
-|------|--------|-----------|-------|
-| 1.1 Fix Google Places ToS violations | ✅ Complete | Feb 19 | Removed Google photo URLs, replaced with og:image scraping, replaced reviews with aggregate summary. |
-| 1.2 Fix Scottsdale card component | ✅ Complete | Feb 19 | Corrected mapping for `rating` and `price_per_unit`. |
-| 1.3 Fix homepage featured cards | ✅ Complete | Feb 19 | Replaced hardcoded cards with dynamic query (Top 3 by review_count). |
-| 1.4 Fix review text truncation | ✅ Complete | Feb 19 | Content hidden to comply with ToS; replaced by aggregate summary. |
-| 1.5 Remove Dental Implants from treatment options | ✅ Complete | Feb 19 | Hardcoded Botox-only lists in calculator and fallback UI. |
+### PHASE 1–6 — ✅ COMPLETE (see history below)
+All critical fixes, data cleanup, infrastructure, outreach, monetization, and maintenance tasks completed Feb 19, 2026.
 
-### PHASE 2 — Data Cleanup
+### PHASE 7 — Redesign (March 2026)
 | Task | Status | Completed | Notes |
 |------|--------|-----------|-------|
-| 2.1 Run ghost provider SQL | ✅ Complete | Feb 19 | Created migration `20240219_ghost_cleanup.sql` to hide ghosts & cleanup photo URLs. |
-| 2.2 Set city page live/hidden rules | ✅ Complete | Feb 19 | Min 3 enriched providers for city page to show listings (app/botox/[slug]/page.tsx). |
-| 2.3 Fix map component | ✅ Complete | Feb 19 | Map hidden if 0 markers; shows verified providers correctly. |
-| 2.4 Fix page titles 2024 → 2026 | ✅ Complete | Feb 19 | Updated city page metadata to "2026 Pricing & Reviews". |
-
-### PHASE 3 — Data Infrastructure
-| Task | Status | Completed | Notes |
-|------|--------|-----------|-------|
-| 3.1 Switch to og:image scraping | ✅ Complete | Feb 19 | Updated enrichment script with robust og:image & twitter:image extraction. |
-| 3.2 Batch Processor (enrich_city) | ✅ Complete | Feb 19 | Verified enrichProvider script supports city-based batching via --city flag. |
-| 3.3 Lead Form Integration | ✅ Complete | Feb 19 | Added call_time field and passed city/state context correctly. |
-| 3.4 Build /provider/[slug]/claim route | ✅ Complete | Feb 19 | Added Claim Listing CTA and claim page logic. |
-| 3.5 Admin Dashboard Enhancements | ✅ Complete | Feb 19 | Added Today's Leads and Pending Verifications counters, improved mobile layout. |
-| 3.6 Post-Recovery Verification | ✅ Complete | Feb 19 | Build passed (fixed prerender error in /provider/claim). |
-
-### PHASE 4 — Outreach Infrastructure
-| Task | Status | Completed | Notes |
-|------|--------|-----------|-------|
-| 4.1 Pull Track B provider list | ✅ Complete | Feb 19 | Found 118 targets; saved to docs/TRACK_B_OUTREACH.json. |
-| 4.2 Build Resend 3-email sequence | ✅ Complete | Feb 19 | Templates (Notification, Followup, Value-Add) in lib/email/outreach.ts. |
-| 4.3 Build bounce/unsubscribe webhook | ✅ Complete | Feb 19 | Route: /api/webhooks/resend, Page: /unsubscribe. Matches by domain. |
-
-### PHASE 5 — Monetization
-| Task | Status | Completed | Notes |
-|------|--------|-----------|-------|
-| 5.1 Build /pricing page | ✅ Complete | Feb 19 | 3 tiers ($99/$149/$299) with high-intent patient CTA. |
-| 5.2 Add quote form newsletter opt-in | ✅ Complete | Feb 19 | Separated patients table and newsletter sync in lead form. |
-| 5.3 Add "Claim your listing" CTA | ✅ Complete | Feb 19 | Fully integrated into provider header and profile. |
-| 5.4 Add Navigation to Pricing | ✅ Complete | Feb 19 | Added Pricing link to Header/Footer as requested by user. |
-
-### PHASE 6 — Maintenance & Scaling
-| Task | Status | Completed | Notes |
-|------|--------|-----------|-------|
-| 6.1 Monitor Lead Performance | ✅ Complete | Feb 19 | Added Recent Activity (Leads/Claims) to Admin Dashboard. |
-| 6.2 Automated Outreach Launch | ✅ Complete | Feb 19 | Sent notification emails to first 3 verified targets in Scottsdale/Austin. |
+| 7.1 Install design system fonts | ✅ Complete | Mar 3 | Cormorant Garamond + DM Sans via next/font/google |
+| 7.2 Set up CSS variables + Tailwind config | ✅ Complete | Mar 3 | All tokens in globals.css + tailwind.config.ts |
+| 7.3 Redesign homepage (Hero, HowItWorks, FeaturedProviders) | ✅ Complete | Mar 3 | New warm linen theme, Clarity Score branding |
+| 7.4 Redesign Navbar + Footer | ✅ Complete | Mar 3 | New Navbar component, editorial footer |
+| 7.5 Redesign provider cards + filters | ✅ Complete | Mar 3 | New card design, pill filters |
+| 7.6 New UI components (Button, Card, Badge, etc.) | ✅ Complete | Mar 3 | Full component library |
+| 7.7 Deploy redesign to production | ✅ Complete | Mar 3 | Live at injectorindex.com |
+| 7.8 Post-redesign audit | 🔴 Not started | — | Walk all pages, fix old-theme holdovers |
 
 ---
 
@@ -81,31 +94,17 @@ If this file and your memory conflict, trust this file.
 
 | Task | Completed | What was done | Files changed |
 |------|-----------|---------------|---------------|
-| 1.4 | Feb 19 | Truncated review text to aggregate count | EnhancedProviderCard.tsx |
-| 2.1 | Feb 19 | Created ghost cleanup migration | supabase/migrations/20240219_ghost_cleanup.sql |
-| 2.2 | Feb 19 | Implemented 3-provider rule | app/botox/[slug]/page.tsx |
-| 3.1 | Feb 19 | Added og:image & twitter:image scraping | scripts/enrichProvider.ts |
-| 3.6 | Feb 19 | Fixed prerender error in /provider/claim | app/provider/claim/page.tsx |
-| 4.1 | Feb 19 | Exported Track B outreach list | docs/TRACK_B_OUTREACH.json |
-| 4.2 | Feb 19 | Built Resend outreach sequence | lib/email/outreach.ts |
-| 4.3 | Feb 19 | Built Webhook & Unsubscribe page | /api/webhooks/resend, /unsubscribe |
-| 5.1 | Feb 19 | Built Pricing Page | /pricing |
-| 5.2 | Feb 19 | Added Patients table & Newsletter Opt-in | lib/actions/leads.ts, LeadForm.tsx |
-| 1.1 | Feb 19 | Reinforced Google ToS patterns | multiple components |
-| 1.2 | Feb 19 | Fixed Scottsdale 'undefined' bug | EnhancedProviderCard.tsx |
-| N/A | Feb 19 | Restored provider visibility (db filter fix) | lib/actions/providers.ts |
-| N/A | Feb 19 | Deployed fixes to production | git push |
-| N/A | Feb 19 | Built Notion HQ Workspace | Notion Page ID: 30cbaf92... |
+| 1.1–6.2 | Feb 19 | All Phase 1–6 tasks | See git history |
+| 7.1–7.7 | Mar 3 | Complete site redesign + deploy | 70+ files, commit 6267468 |
 
 ---
 
 ## KNOWN ISSUES & BLOCKERS
-*Agent adds to this list when it hits something that needs human decision.*
 
 | Issue | Phase | Needs Human? | Notes |
 |-------|-------|-------------|-------|
-| Yelp Fusion API requires manual application | 3.2 | YES — human must apply at api.yelp.com | Cannot be automated |
-| No email field in providers schema | 4.3 | No — match by website domain | Webhook workaround documented |
+| Yelp Fusion API requires manual application | 3.2 | YES | Cannot be automated |
+| Some pages may still have old dark theme remnants | 7.8 | No | Audit needed |
 
 ---
 
@@ -114,9 +113,12 @@ If this file and your memory conflict, trust this file.
 
 | Decision | Chosen Option | Reason |
 |----------|--------------|--------|
-| Review display | Aggregate only + Google Maps link | Google ToS compliant, more trustworthy to patients |
-| Hero image source | og:image from provider website | Legal, provider-controlled, no ToS risk |
-| 3-Provider Density | Show "Verifying" block if < 3 verified | Avoids "ghost town" feel; maintains high quality bar |
+| Review display | Aggregate only + Google Maps link | Google ToS compliant |
+| Hero image source | og:image from provider website | Legal, provider-controlled |
+| 3-Provider Density | Show "Verifying" block if < 3 verified | Quality bar |
+| Score branding | Clarity Score™ (not TrueScore™) | Brand evolution Mar 2026 |
+| Design aesthetic | Warm linen spa editorial | Target audience: women 28-45 researching aesthetics |
+| Deploy method | Push to main → Vercel auto-deploy | Simplest, most reliable |
 
 ---
 
@@ -124,9 +126,11 @@ If this file and your memory conflict, trust this file.
 **Every session, the agent must:**
 
 1. Read this file completely before writing a single line of code
-2. Confirm the current task in its first message: "Resuming from task [X.X] — [task name]"
+2. Confirm: "Resuming InjectorIndex — task [X.X]. Last deploy: [date]. Git status: [clean/dirty]."
 3. Complete one task fully before starting the next
-4. Mark completed tasks with ✅ and add to Completed Tasks Log
-5. Update "What to do right now" to the next task
-6. Update "Active Phase" in CURRENT STATUS
-7. End session message: "Session complete. Next task: [X.X]. AGENT_STATE.md updated."
+4. **Build locally before pushing**: `npx next build`
+5. **Push and verify deploy**: `git push origin main`, then check https://www.injectorindex.com
+6. Mark completed tasks with ✅ and add to Completed Tasks Log
+7. Update "What to do right now" to the next task
+8. Commit this file: `git add AGENT_STATE.md && git commit -m "chore: update agent state"`
+9. End session: "Session complete. Deployed commit [hash]. Next task: [X.X]. AGENT_STATE.md updated."

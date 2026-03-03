@@ -208,19 +208,19 @@ export function SemanticInsights({
     const hasData = strengths.length > 0
 
     return (
-        <div className="bg-white/[0.02] p-8 md:p-10 rounded-3xl border border-white/[0.06]">
+        <div className="bg-[#3D2B1F]/5 p-8 md:p-10 rounded-3xl border border-[#3D2B1F]/10">
             <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-xl bg-[#d4af37]/10 flex items-center justify-center">
-                    <BarChart3 className="w-5 h-5 text-[#d4af37]" />
+                <div className="w-10 h-10 rounded-xl bg-[#C9A96E]/10 flex items-center justify-center">
+                    <BarChart3 className="w-5 h-5 text-[#C9A96E]" />
                 </div>
                 <div>
-                    <h2 className="text-2xl font-display font-bold text-white">What Patients Say</h2>
-                    <p className="text-[11px] text-[#d4af37] font-black uppercase tracking-widest">Semantic Analysis</p>
+                    <h2 className="text-2xl font-display font-bold text-[#3D2B1F]">What Patients Say</h2>
+                    <p className="text-[11px] text-[#C9A96E] font-black uppercase tracking-widest">Semantic Analysis</p>
                 </div>
             </div>
 
-            <p className="text-gray-500 text-sm mb-8 leading-relaxed">
-                Based on semantic analysis of <span className="text-white font-bold">{totalAnalyzed} verified Google Reviews</span> for {providerName}.
+            <p className="text-[#3D2B1F]/60 text-sm mb-8 leading-relaxed">
+                Based on semantic analysis of <span className="text-[#3D2B1F] font-bold">{totalAnalyzed} verified Google Reviews</span> for {providerName}.
                 {' '}Our algorithm extracts quality signals that go beyond star ratings.
             </p>
 
@@ -228,8 +228,8 @@ export function SemanticInsights({
             {hasData && strengths.length > 0 && (
                 <div className="mb-8">
                     <div className="flex items-center gap-2 mb-4">
-                        <TrendingUp className="w-4 h-4 text-emerald-400" />
-                        <h3 className="text-xs font-black text-emerald-400 uppercase tracking-[0.2em]">Strengths Patients Highlight</h3>
+                        <TrendingUp className="w-4 h-4 text-[#8A9E8D]" />
+                        <h3 className="text-xs font-black text-[#8A9E8D] uppercase tracking-[0.2em]">Strengths Patients Highlight</h3>
                     </div>
                     <div className="space-y-3">
                         {strengths.map((theme, i) => (
@@ -237,11 +237,11 @@ export function SemanticInsights({
                                 <div className="flex-1">
                                     <div className="flex items-center justify-between mb-1.5">
                                         <span className="text-sm font-semibold text-emerald-300">{theme.label}</span>
-                                        <span className="text-xs font-black text-emerald-400/60">{theme.percentage}%</span>
+                                        <span className="text-xs font-black text-[#8A9E8D]/60">{theme.percentage}%</span>
                                     </div>
                                     <div className="w-full h-1.5 bg-emerald-950/50 rounded-full overflow-hidden">
                                         <div
-                                            className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all"
+                                            className="h-full bg-gradient-to-r from-[#8A9E8D] to-[#8A9E8D] rounded-full transition-all"
                                             style={{ width: `${theme.percentage}%` }}
                                         />
                                     </div>
@@ -282,21 +282,21 @@ export function SemanticInsights({
 
             {/* No detailed data yet */}
             {!hasData && (
-                <div className="flex items-start gap-3 p-4 bg-white/[0.02] rounded-xl border border-white/[0.04] mb-6">
-                    <Sparkles className="w-5 h-5 text-[#d4af37] shrink-0 mt-0.5" />
-                    <p className="text-sm text-gray-500 leading-relaxed">
-                        We've indexed <span className="text-white font-semibold">{reviewCount} reviews</span> for this provider.
+                <div className="flex items-start gap-3 p-4 bg-[#3D2B1F]/5 rounded-xl border border-white/[0.04] mb-6">
+                    <Sparkles className="w-5 h-5 text-[#C9A96E] shrink-0 mt-0.5" />
+                    <p className="text-sm text-[#3D2B1F]/60 leading-relaxed">
+                        We've indexed <span className="text-[#3D2B1F] font-semibold">{reviewCount} reviews</span> for this provider.
                         Detailed theme extraction is processing — check back soon for a full semantic breakdown.
                     </p>
                 </div>
             )}
 
             {/* Clarity Score™ Summary */}
-            <div className="mt-6 p-4 bg-white/[0.02] rounded-xl border border-white/[0.04]">
+            <div className="mt-6 p-4 bg-[#3D2B1F]/5 rounded-xl border border-white/[0.04]">
                 <div className="flex items-center gap-2">
-                    <MessageSquareQuote className="w-4 h-4 text-[#d4af37]" />
-                    <p className="text-xs text-gray-500 leading-relaxed">
-                        <strong className="text-gray-400">Clarity Score™ Summary:</strong> This provider scores <span className="text-white font-bold">{clarityScore}/100</span> based on credential verification, patient sentiment analysis, and review consistency.
+                    <MessageSquareQuote className="w-4 h-4 text-[#C9A96E]" />
+                    <p className="text-xs text-[#3D2B1F]/60 leading-relaxed">
+                        <strong className="text-[#3D2B1F]/70">Clarity Score™ Summary:</strong> This provider scores <span className="text-[#3D2B1F] font-bold">{clarityScore}/100</span> based on credential verification, patient sentiment analysis, and review consistency.
                         Last updated: March 2026.
                     </p>
                 </div>

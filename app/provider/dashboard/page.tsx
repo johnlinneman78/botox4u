@@ -31,14 +31,14 @@ export default async function ProviderDashboard() {
     }
 
     return (
-        <main className="min-h-screen bg-[#0d1420] text-white">
+        <main className="min-h-screen bg-[#FAF8F5] text-[#3D2B1F]">
             {/* Top Navbar */}
-            <nav className="border-b border-white/5 py-6 mb-12 bg-black/20 backdrop-blur-md sticky top-0 z-50">
+            <nav className="border-b border-[#3D2B1F]/10 py-6 mb-12 bg-black/20 backdrop-blur-md sticky top-0 z-50">
                 <div className="max-w-4xl mx-auto px-6 flex items-center justify-between">
                     <Logo className="h-8 w-auto" />
                     <div className="flex items-center gap-6">
                         <form action="/auth/signout" method="post">
-                            <button className="text-[10px] font-black text-gray-500 hover:text-white uppercase tracking-widest transition-colors flex items-center gap-2">
+                            <button className="text-[10px] font-black text-[#3D2B1F]/60 hover:text-[#3D2B1F] uppercase tracking-widest transition-colors flex items-center gap-2">
                                 Sign Out <LogOut className="w-3.5 h-3.5" />
                             </button>
                         </form>
@@ -53,20 +53,20 @@ export default async function ProviderDashboard() {
                         <div className="flex items-center gap-3">
                             <TierBadge tier={provider.listing_tier || 'free'} />
                             <span className="h-1.5 w-1.5 rounded-full bg-white/20" />
-                            <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">Active Provider Profile</span>
+                            <span className="text-[10px] font-black text-[#3D2B1F]/50 uppercase tracking-widest">Active Provider Profile</span>
                         </div>
                         <div>
-                            <h1 className="text-4xl md:text-5xl font-display font-bold text-white tracking-tight">
+                            <h1 className="text-4xl md:text-5xl font-display font-bold text-[#3D2B1F] tracking-tight">
                                 {provider.name}
                             </h1>
-                            <p className="text-gray-400 font-light text-lg mt-2 leading-relaxed">
+                            <p className="text-[#3D2B1F]/70 font-light text-lg mt-2 leading-relaxed">
                                 Welcome back. Here's your clinical performance data for 2026.
                             </p>
                         </div>
                     </div>
 
                     <div className="flex gap-4">
-                        <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#d4af37] shadow-2xl">
+                        <div className="w-14 h-14 rounded-2xl bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 flex items-center justify-center text-[#C9A96E] shadow-2xl">
                             <User className="w-6 h-6" />
                         </div>
                     </div>
@@ -94,19 +94,19 @@ export default async function ProviderDashboard() {
                         </div>
 
                         {/* Bottom Actions Row */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-12 border-t border-white/5 mt-12">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-12 border-t border-[#3D2B1F]/10 mt-12">
                             <ListingLink slug={provider.slug} />
                             <BillingButton customerId={provider.stripe_customer_id} />
                         </div>
 
                         {/* Beta Help Alert */}
-                        <div className="bg-[#d4af37]/5 border border-[#d4af37]/15 rounded-3xl p-8 flex items-start gap-5 relative overflow-hidden group">
-                            <div className="absolute top-0 left-0 w-1 h-full bg-[#d4af37]/40" />
-                            <Sparkles className="w-6 h-6 text-[#d4af37] shrink-0 mt-1" />
+                        <div className="bg-[#C9A96E]/5 border border-[#C9A96E]/15 rounded-3xl p-8 flex items-start gap-5 relative overflow-hidden group">
+                            <div className="absolute top-0 left-0 w-1 h-full bg-[#C9A96E]/40" />
+                            <Sparkles className="w-6 h-6 text-[#C9A96E] shrink-0 mt-1" />
                             <div>
-                                <h4 className="text-sm font-bold text-[#d4af37] uppercase tracking-widest mb-2">Private Beta Support</h4>
-                                <p className="text-gray-400 text-sm leading-relaxed font-light">
-                                    We are currently rolling out additional analytics including review sentiment analysis and Google Search console mapping. If you need a custom audit or location update, please contact John directly at <span className="text-white font-medium">hello@injectorindex.com</span>
+                                <h4 className="text-sm font-bold text-[#C9A96E] uppercase tracking-widest mb-2">Private Beta Support</h4>
+                                <p className="text-[#3D2B1F]/70 text-sm leading-relaxed font-light">
+                                    We are currently rolling out additional analytics including review sentiment analysis and Google Search console mapping. If you need a custom audit or location update, please contact John directly at <span className="text-[#3D2B1F] font-medium">hello@injectorindex.com</span>
                                 </p>
                             </div>
                         </div>

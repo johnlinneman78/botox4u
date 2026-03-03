@@ -6,8 +6,8 @@ export default function VerificationStandard() {
             title: 'Clarity Score™ Methodology',
             desc: 'We assess every provider\'s treatment menu: what percentage is innovative (PNs, Daxxify, Exosomes) vs. legacy HA filler? Technical progress = higher trust.',
             icon: ShieldCheck,
-            accent: 'text-[#d4af37]',
-            bg: 'bg-[#d4af37]/10 border-[#d4af37]/20',
+            accent: 'text-[#C9A96E]',
+            bg: 'bg-[#C9A96E]/10 border-[#C9A96E]/20',
         },
         {
             title: 'NPI Federal Registry',
@@ -33,18 +33,18 @@ export default function VerificationStandard() {
     ]
 
     return (
-        <section className="py-24 bg-[#101827] border-y border-white/[0.05]">
+        <section className="py-24 bg-[#F2EDE4] border-y border-[#3D2B1F]/10">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-16">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-black tracking-widest uppercase mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C9A96E]/10 border border-[#C9A96E]/20 text-[#C9A96E] text-xs font-black tracking-widest uppercase mb-6">
                             🛡️ Independent Audit Protocol
                         </div>
-                        <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6">
-                            Our Transparency <span className="text-[#d4af37]">Standard</span>
+                        <h2 className="text-3xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-6">
+                            Our Transparency <span className="text-[#C9A96E]">Standard</span>
                         </h2>
-                        <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto leading-relaxed">
-                            40% of patients fear over-injection. We built a data protocol to find injectors who value <span className="text-white font-semibold">biological repair</span> — not volume.
+                        <p className="text-xl text-[#3D2B1F]/70 font-light max-w-2xl mx-auto leading-relaxed">
+                            40% of patients fear over-injection. We built a data protocol to find injectors who value <span className="text-[#3D2B1F] font-semibold">biological repair</span> — not volume.
                         </p>
                     </div>
 
@@ -55,21 +55,21 @@ export default function VerificationStandard() {
                                     <s.icon className={`w-7 h-7 ${s.accent}`} />
                                 </div>
                                 <div className="space-y-2">
-                                    <h3 className="text-lg font-bold text-white">{s.title}</h3>
-                                    <p className="text-gray-500 leading-relaxed text-sm">{s.desc}</p>
+                                    <h3 className="text-lg font-bold text-[#3D2B1F]">{s.title}</h3>
+                                    <p className="text-[#3D2B1F]/60 leading-relaxed text-sm">{s.desc}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    <div className="mt-16 p-8 rounded-[2.5rem] bg-gradient-to-r from-[#d4af37]/10 to-transparent border border-[#d4af37]/15 flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div className="mt-16 p-8 rounded-[2.5rem] bg-gradient-to-r from-[#C9A96E]/10 to-transparent border border-[#C9A96E]/15 flex flex-col md:flex-row items-center justify-between gap-8">
                         <div>
-                            <div className="text-[#d4af37] font-black text-xs uppercase tracking-widest mb-2">Patient Protection</div>
-                            <h4 className="text-2xl font-bold text-white mb-2">Nobody pays for a better score.</h4>
-                            <p className="text-gray-500 font-light text-sm">Clinics can buy featured placement, but they cannot influence their proprietary clinical signals or trust categories with payment.</p>
+                            <div className="text-[#C9A96E] font-black text-xs uppercase tracking-widest mb-2">Patient Protection</div>
+                            <h4 className="text-2xl font-bold text-[#3D2B1F] mb-2">Nobody pays for a better score.</h4>
+                            <p className="text-[#3D2B1F]/60 font-light text-sm">Clinics can buy featured placement, but they cannot influence their proprietary clinical signals or trust categories with payment.</p>
                         </div>
                         <div className="shrink-0">
-                            <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-full text-[#d4af37] font-bold shadow-sm text-sm">
+                            <div className="inline-flex items-center gap-2 px-6 py-3 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-full text-[#C9A96E] font-bold shadow-sm text-sm">
                                 <ShieldCheck className="w-5 h-5" />
                                 100% Data Driven
                             </div>

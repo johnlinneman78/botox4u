@@ -47,41 +47,41 @@ export default function FAQPage() {
     }
 
     return (
-        <div className="bg-[#0d1420] min-h-screen pt-24 pb-20">
+        <div className="bg-[#FAF8F5] min-h-screen pt-24 pb-20">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
             />
             <div className="container mx-auto px-4 max-w-4xl">
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-bold uppercase tracking-widest mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C9A96E]/10 border border-[#C9A96E]/20 text-[#C9A96E] text-xs font-bold uppercase tracking-widest mb-6">
                         <HelpCircle className="w-3 h-3" />
                         <span>Support Center</span>
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-6">
+                    <h1 className="text-4xl md:text-6xl font-display font-bold text-[#3D2B1F] mb-6">
                         Common Questions
                     </h1>
-                    <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto">
+                    <p className="text-xl text-[#3D2B1F]/70 font-light max-w-2xl mx-auto">
                         Everything you need to know about the {NICHE.siteName} standard and how we rank providers.
                     </p>
                 </div>
 
                 <div className="space-y-6 mb-20">
                     {faqs.map((faq, i) => (
-                        <div key={i} className="p-8 rounded-[2rem] bg-white/5 border border-white/10 hover:border-[#d4af37]/30 transition-colors group">
-                            <h3 className="text-xl font-bold text-white mb-4 flex items-start gap-4">
-                                <span className="text-[#d4af37] opacity-50 font-mono">0{i + 1}</span>
+                        <div key={i} className="p-8 rounded-[2rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 hover:border-[#C9A96E]/30 transition-colors group">
+                            <h3 className="text-xl font-bold text-[#3D2B1F] mb-4 flex items-start gap-4">
+                                <span className="text-[#C9A96E] opacity-50 font-mono">0{i + 1}</span>
                                 {faq.question}
                             </h3>
-                            <p className="text-gray-400 font-light leading-relaxed pl-10">
+                            <p className="text-[#3D2B1F]/70 font-light leading-relaxed pl-10">
                                 {faq.answer}
                             </p>
                         </div>
                     ))}
                 </div>
 
-                <div className="p-12 rounded-[3rem] bg-gradient-to-br from-[#d4af37] to-[#b8962e] text-[#0d1420] text-center relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl group-hover:scale-110 transition-transform duration-700" />
+                <div className="p-12 rounded-[3rem] bg-gradient-to-br from-[#C9A96E] to-[#b8962e] text-white text-center relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#3D2B1F]/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl group-hover:scale-110 transition-transform duration-700" />
 
                     <h2 className="text-3xl font-display font-bold mb-4 relative z-10">Still have questions?</h2>
                     <p className="text-lg opacity-80 mb-8 relative z-10 font-medium">
@@ -91,13 +91,13 @@ export default function FAQPage() {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
                         <Link
                             href={`mailto:${NICHE.outreach.senderEmail}`}
-                            className="bg-[#0d1420] text-white px-8 py-4 rounded-2xl font-bold hover:scale-105 transition-transform"
+                            className="bg-[#FAF8F5] text-[#3D2B1F] px-8 py-4 rounded-2xl font-bold hover:scale-105 transition-transform"
                         >
                             Contact Support
                         </Link>
                         <Link
                             href="/methodology"
-                            className="bg-[#0d1420]/10 border border-[#0d1420]/20 text-[#0d1420] px-8 py-4 rounded-2xl font-bold hover:bg-[#0d1420]/20 transition-colors"
+                            className="bg-[#FAF8F5]/10 border border-[#0d1420]/20 text-white px-8 py-4 rounded-2xl font-bold hover:bg-[#FAF8F5]/20 transition-colors"
                         >
                             View Methodology
                         </Link>

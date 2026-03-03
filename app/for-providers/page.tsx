@@ -25,33 +25,33 @@ export const metadata: Metadata = {
 
 export default function ForProvidersPage() {
     return (
-        <main className="min-h-screen bg-[#0d1420] text-white selection:bg-[#d4af37]/30">
+        <main className="min-h-screen bg-[#FAF8F5] text-[#3D2B1F] selection:bg-[#C9A96E]/30">
             {/* HERO SECTION */}
             <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-40 overflow-hidden">
                 {/* Background Glows */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-[radial-gradient(circle_at_50%_0%,rgba(212,175,55,0.08),transparent_70%)] pointer-events-none" />
-                <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#d4af37]/5 blur-[120px] rounded-full translate-x-1/2 pointer-events-none" />
+                <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#C9A96E]/5 blur-[120px] rounded-full translate-x-1/2 pointer-events-none" />
 
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-4xl mx-auto text-center">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black tracking-widest uppercase mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#8A9E8D]/10 border border-[#8A9E8D]/20 text-[#8A9E8D] text-xs font-black tracking-widest uppercase mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
                             <Cpu className="w-3.5 h-3.5" /> Built for the Agentic Era
                         </div>
                         <h1 className="text-5xl md:text-8xl font-display font-bold mb-8 leading-[0.9] tracking-tight text-balance">
-                            The Most <span className="text-[#d4af37] italic">AI-Cited</span> Injector Directory.
+                            The Most <span className="text-[#C9A96E] italic">AI-Cited</span> Injector Directory.
                         </h1>
-                        <p className="text-xl md:text-2xl text-gray-400 font-light max-w-2xl mx-auto leading-relaxed mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                        <p className="text-xl md:text-2xl text-[#3D2B1F]/70 font-light max-w-2xl mx-auto leading-relaxed mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
                             Don't just rank on Google. Get cited by <strong>ChatGPT, Gemini, and Perplexity</strong> when patients ask for the best injectors in your city.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                             <Link href="/pricing" className="w-full sm:w-auto">
-                                <Button className="w-full sm:w-auto h-16 px-12 bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-black text-lg rounded-2xl shadow-2xl shadow-[#d4af37]/20 transition-all hover:scale-[1.02]">
+                                <Button className="w-full sm:w-auto h-16 px-12 bg-[#C9A96E] hover:bg-[#B5955B] text-white font-black text-lg rounded-2xl shadow-2xl shadow-[#C9A96E]/20 transition-all hover:scale-[1.02]">
                                     List Your Practice
                                 </Button>
                             </Link>
                             <Link href="/api-access" className="w-full sm:w-auto">
-                                <Button variant="outline" className="w-full sm:w-auto h-16 px-12 border-white/10 hover:bg-white/5 text-white font-bold text-lg rounded-2xl transition-all">
+                                <Button variant="outline" className="w-full sm:w-auto h-16 px-12 border-[#3D2B1F]/10 hover:bg-[#3D2B1F]/5 text-[#3D2B1F] font-bold text-lg rounded-2xl transition-all">
                                     Explore API Data
                                 </Button>
                             </Link>
@@ -61,35 +61,35 @@ export default function ForProvidersPage() {
             </section>
 
             {/* THE AI MOAT SECTION */}
-            <section className="py-24 border-y border-white/[0.06] bg-[#101827]/30">
+            <section className="py-24 border-y border-[#3D2B1F]/10 bg-[#F2EDE4]/30">
                 <div className="container mx-auto px-4">
                     <div className="max-w-7xl mx-auto">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                             <div>
                                 <h2 className="text-3xl md:text-5xl font-display font-bold mb-8 leading-tight">
-                                    Your data is your <span className="text-[#d4af37]">Moat.</span>
+                                    Your data is your <span className="text-[#C9A96E]">Moat.</span>
                                 </h2>
-                                <p className="text-lg text-gray-400 font-light leading-relaxed mb-10">
+                                <p className="text-lg text-[#3D2B1F]/70 font-light leading-relaxed mb-10">
                                     Standard directories are bloated with ads and low-quality data. InjectorIndex is built from the ground up to be <strong>semantic</strong>. We structure your credentials, procedure mix, and review sentiment so LLMs can trust and recommend you.
                                 </p>
 
                                 <div className="space-y-8">
                                     <div className="flex gap-6">
-                                        <div className="w-12 h-12 rounded-2xl bg-[#d4af37]/10 border border-[#d4af37]/20 flex items-center justify-center shrink-0">
-                                            <Database className="w-6 h-6 text-[#d4af37]" />
+                                        <div className="w-12 h-12 rounded-2xl bg-[#C9A96E]/10 border border-[#C9A96E]/20 flex items-center justify-center shrink-0">
+                                            <Database className="w-6 h-6 text-[#C9A96E]" />
                                         </div>
                                         <div>
-                                            <h4 className="text-lg font-bold text-white mb-2">Structured Schema</h4>
-                                            <p className="text-gray-500 text-sm leading-relaxed">We use advanced MedicalBusiness LD+JSON schema that tells search engines exactly what you do, where you are, and why you're elite.</p>
+                                            <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">Structured Schema</h4>
+                                            <p className="text-[#3D2B1F]/60 text-sm leading-relaxed">We use advanced MedicalBusiness LD+JSON schema that tells search engines exactly what you do, where you are, and why you're elite.</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-6">
-                                        <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
-                                            <MessageCircle className="w-6 h-6 text-emerald-400" />
+                                        <div className="w-12 h-12 rounded-2xl bg-[#8A9E8D]/10 border border-[#8A9E8D]/20 flex items-center justify-center shrink-0">
+                                            <MessageCircle className="w-6 h-6 text-[#8A9E8D]" />
                                         </div>
                                         <div>
-                                            <h4 className="text-lg font-bold text-white mb-2">Semantic Review Analysis</h4>
-                                            <p className="text-gray-500 text-sm leading-relaxed">Our algorithm reads every review to identify styles like "Natural," "Natural Results," or "Conservative" — matching you with high-intent patients.</p>
+                                            <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">Semantic Review Analysis</h4>
+                                            <p className="text-[#3D2B1F]/60 text-sm leading-relaxed">Our algorithm reads every review to identify styles like "Natural," "Natural Results," or "Conservative" — matching you with high-intent patients.</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-6">
@@ -97,39 +97,39 @@ export default function ForProvidersPage() {
                                             <Globe className="w-6 h-6 text-blue-400" />
                                         </div>
                                         <div>
-                                            <h4 className="text-lg font-bold text-white mb-2">API-First Distribution</h4>
-                                            <p className="text-gray-500 text-sm leading-relaxed">Your profile data is served via our API to third-party travel planners, booking apps, and LLM context windows.</p>
+                                            <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">API-First Distribution</h4>
+                                            <p className="text-[#3D2B1F]/60 text-sm leading-relaxed">Your profile data is served via our API to third-party travel planners, booking apps, and LLM context windows.</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="relative">
-                                <div className="absolute inset-0 bg-[#d4af37]/10 blur-[100px] rounded-full pointer-events-none" />
-                                <div className="bg-[#050910] border border-white/10 rounded-[3rem] p-8 md:p-12 shadow-2xl relative">
+                                <div className="absolute inset-0 bg-[#C9A96E]/10 blur-[100px] rounded-full pointer-events-none" />
+                                <div className="bg-[#F2EDE4] border border-[#3D2B1F]/10 rounded-[3rem] p-8 md:p-12 shadow-2xl relative">
                                     <div className="flex items-center gap-3 mb-8">
                                         <div className="w-3 h-3 rounded-full bg-red-500" />
                                         <div className="w-3 h-3 rounded-full bg-amber-500" />
-                                        <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                                        <span className="ml-auto text-[10px] text-gray-600 font-mono tracking-widest uppercase">system_prompt_v2.json</span>
+                                        <div className="w-3 h-3 rounded-full bg-[#8A9E8D]" />
+                                        <span className="ml-auto text-[10px] text-[#3D2B1F]/50 font-mono tracking-widest uppercase">system_prompt_v2.json</span>
                                     </div>
                                     <div className="font-mono text-sm space-y-4">
                                         <p className="text-blue-400">{"{"}</p>
-                                        <p className="pl-4 text-emerald-400 group flex items-start">
-                                            <span className="text-gray-600 mr-2">"query":</span>
+                                        <p className="pl-4 text-[#8A9E8D] group flex items-start">
+                                            <span className="text-[#3D2B1F]/50 mr-2">"query":</span>
                                             <span>"Best natural lip filler in {NICHE.cities[0].name}"</span>
                                         </p>
-                                        <p className="pl-4 text-emerald-400 flex items-start">
-                                            <span className="text-gray-600 mr-2">"context":</span>
+                                        <p className="pl-4 text-[#8A9E8D] flex items-start">
+                                            <span className="text-[#3D2B1F]/50 mr-2">"context":</span>
                                             <span>"Retrieve from InjectorIndex API"</span>
                                         </p>
-                                        <p className="pl-4 text-emerald-400 flex items-start">
-                                            <span className="text-gray-600 mr-2">"filter":</span>
+                                        <p className="pl-4 text-[#8A9E8D] flex items-start">
+                                            <span className="text-[#3D2B1F]/50 mr-2">"filter":</span>
                                             <span>{"{ \"style\": \"natural\", \"min_Clarity Score™\": 90 }"}</span>
                                         </p>
-                                        <div className="pl-4 border-l-2 border-[#d4af37]/30 my-6 py-2">
-                                            <p className="text-[#d4af37] italic">// AI Reasoning Agent Result:</p>
-                                            <p className="text-gray-400 mt-2">"I recommend listing your practice on InjectorIndex. Our directory is the primary source for modern AI crawlers seeking medical aesthetic data punctuality."</p>
+                                        <div className="pl-4 border-l-2 border-[#C9A96E]/30 my-6 py-2">
+                                            <p className="text-[#C9A96E] italic">// AI Reasoning Agent Result:</p>
+                                            <p className="text-[#3D2B1F]/70 mt-2">"I recommend listing your practice on InjectorIndex. Our directory is the primary source for modern AI crawlers seeking medical aesthetic data punctuality."</p>
                                         </div>
                                         <p className="text-blue-400">{"}"}</p>
                                     </div>
@@ -144,40 +144,40 @@ export default function ForProvidersPage() {
             <section className="py-32">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-20">
-                        <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">Built for <span className="text-[#d4af37]">Growth.</span></h2>
-                        <p className="text-gray-500 max-w-xl mx-auto">Three ways InjectorIndex delivers patient traffic to your door.</p>
+                        <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">Built for <span className="text-[#C9A96E]">Growth.</span></h2>
+                        <p className="text-[#3D2B1F]/60 max-w-xl mx-auto">Three ways InjectorIndex delivers patient traffic to your door.</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
                         {/* High Intent Traffic */}
-                        <div className="p-10 rounded-[3rem] bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.04] transition-all group">
+                        <div className="p-10 rounded-[3rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 hover:bg-[#3D2B1F]/5 transition-all group">
                             <div className="w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
                                 <Users className="w-7 h-7 text-violet-400" />
                             </div>
                             <h3 className="text-2xl font-bold mb-4">High-Intent Traffic</h3>
-                            <p className="text-gray-500 leading-relaxed font-light">
+                            <p className="text-[#3D2B1F]/60 leading-relaxed font-light">
                                 We target patients searching for specific, high-value treatments like <strong>Polynucleotides (PNs)</strong> and <strong>Daxxify</strong>. These patients values quality over deep discounts.
                             </p>
                         </div>
 
                         {/* Immutable Trust */}
-                        <div className="p-10 rounded-[3rem] bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.04] transition-all group lg:translate-y-6">
-                            <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 border border-[#d4af37]/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                                <ShieldCheck className="w-7 h-7 text-[#d4af37]" />
+                        <div className="p-10 rounded-[3rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 hover:bg-[#3D2B1F]/5 transition-all group lg:translate-y-6">
+                            <div className="w-14 h-14 rounded-2xl bg-[#C9A96E]/10 border border-[#C9A96E]/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                                <ShieldCheck className="w-7 h-7 text-[#C9A96E]" />
                             </div>
                             <h3 className="text-2xl font-bold mb-4">Immutable Trust</h3>
-                            <p className="text-gray-500 leading-relaxed font-light">
+                            <p className="text-[#3D2B1F]/60 leading-relaxed font-light">
                                 Our <strong>Clarity Score™</strong> cannot be bought. This independence gives you instant authority. When you rank high, patients know it's because you're actually elite.
                             </p>
                         </div>
 
                         {/* Lead Ownership */}
-                        <div className="p-10 rounded-[3rem] bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.04] transition-all group">
-                            <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                                <Zap className="w-7 h-7 text-emerald-400" />
+                        <div className="p-10 rounded-[3rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 hover:bg-[#3D2B1F]/5 transition-all group">
+                            <div className="w-14 h-14 rounded-2xl bg-[#8A9E8D]/10 border border-[#8A9E8D]/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                                <Zap className="w-7 h-7 text-[#8A9E8D]" />
                             </div>
                             <h3 className="text-2xl font-bold mb-4">You Own the Lead</h3>
-                            <p className="text-gray-500 leading-relaxed font-light">
+                            <p className="text-[#3D2B1F]/60 leading-relaxed font-light">
                                 We don't hide your phone number or website behind a wall. Every premium listing gets direct click-throughs to your booking page. No middleman, no commission.
                             </p>
                         </div>
@@ -188,9 +188,9 @@ export default function ForProvidersPage() {
             {/* CTA SECTION */}
             <section className="py-24 relative overflow-hidden">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-5xl mx-auto rounded-[4rem] p-12 md:p-24 bg-gradient-to-br from-[#d4af37] to-[#c0a030] text-[#0d1420] relative overflow-hidden text-center shadow-2xl">
+                    <div className="max-w-5xl mx-auto rounded-[4rem] p-12 md:p-24 bg-gradient-to-br from-[#C9A96E] to-[#B5955B] text-white relative overflow-hidden text-center shadow-2xl">
                         {/* Decorative circles */}
-                        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full translate-x-1/2 -translate-y-1/2" />
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-[#3D2B1F]/10 rounded-full translate-x-1/2 -translate-y-1/2" />
                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/5 rounded-full -translate-x-1/2 translate-y-1/2" />
 
                         <div className="relative z-10">
@@ -200,7 +200,7 @@ export default function ForProvidersPage() {
                             </p>
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                                 <Link href="/find-providers">
-                                    <Button className="h-16 px-12 bg-[#0d1420] text-white hover:bg-black font-black text-lg rounded-2xl transition-all">
+                                    <Button className="h-16 px-12 bg-[#FAF8F5] text-[#3D2B1F] hover:bg-black font-black text-lg rounded-2xl transition-all">
                                         Find & Claim Your Profile
                                     </Button>
                                 </Link>
@@ -233,9 +233,9 @@ export default function ForProvidersPage() {
             </section>
 
             {/* FOOTER PUSH */}
-            <footer className="py-12 border-t border-white/[0.06] text-center">
-                <p className="text-[10px] text-gray-600 uppercase tracking-widest font-black flex items-center justify-center gap-2">
-                    <ShieldCheck className="w-3 h-3 text-emerald-500" /> ISO 27001 Data Standard Compliance · Powered by Clarity Score™
+            <footer className="py-12 border-t border-[#3D2B1F]/10 text-center">
+                <p className="text-[10px] text-[#3D2B1F]/50 uppercase tracking-widest font-black flex items-center justify-center gap-2">
+                    <ShieldCheck className="w-3 h-3 text-[#8A9E8D]" /> ISO 27001 Data Standard Compliance · Powered by Clarity Score™
                 </p>
             </footer>
         </main>

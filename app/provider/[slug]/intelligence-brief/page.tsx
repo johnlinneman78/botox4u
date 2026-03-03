@@ -36,7 +36,7 @@ export default async function IntelligenceBriefPage({ params }: BriefPageProps) 
     return (
         <main className="min-h-screen bg-white text-slate-900 font-sans print:p-0">
             {/* Top Branding Bar */}
-            <div className="bg-slate-950 text-white py-12 px-8 md:px-16 flex flex-col md:flex-row justify-between items-center gap-8 border-b-4 border-[#d4af37]">
+            <div className="bg-slate-950 text-[#3D2B1F] py-12 px-8 md:px-16 flex flex-col md:flex-row justify-between items-center gap-8 border-b-4 border-[#C9A96E]">
                 <div className="space-y-4">
                     <Logo className="h-10 w-auto invert" variant="shield" />
                     <div>
@@ -47,7 +47,7 @@ export default async function IntelligenceBriefPage({ params }: BriefPageProps) 
                 <div className="text-right flex flex-col items-center md:items-end">
                     <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-2">Subject Provider</div>
                     <div className="text-2xl font-bold font-display">{provider.name}</div>
-                    <div className="text-xs text-[#d4af37] font-bold mt-1 uppercase tracking-widest">{provider.city}, {provider.state}</div>
+                    <div className="text-xs text-[#C9A96E] font-bold mt-1 uppercase tracking-widest">{provider.city}, {provider.state}</div>
                 </div>
             </div>
 
@@ -55,7 +55,7 @@ export default async function IntelligenceBriefPage({ params }: BriefPageProps) 
                 {/* 1. Executive Summary: The Clarity Score™ Audit */}
                 <section>
                     <div className="flex items-center gap-3 mb-8">
-                        <Shield className="w-6 h-6 text-[#d4af37]" />
+                        <Shield className="w-6 h-6 text-[#C9A96E]" />
                         <h2 className="text-xl font-black uppercase tracking-widest border-b-2 border-slate-100 pb-2 flex-grow">1.0 Clinical Performance Audit</h2>
                     </div>
 
@@ -71,25 +71,25 @@ export default async function IntelligenceBriefPage({ params }: BriefPageProps) 
 
                         <div className="md:col-span-2 grid grid-cols-2 gap-4">
                             <div className="p-8 bg-white border border-slate-100 rounded-3xl">
-                                <TrendingUp className="w-5 h-5 text-[#d4af37] mb-4" />
+                                <TrendingUp className="w-5 h-5 text-[#C9A96E] mb-4" />
                                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Market Percentile</div>
                                 <div className="text-3xl font-bold font-display">Top 8%</div>
                                 <p className="text-xs text-slate-500 mt-2 font-medium">Ranked #4 of 52 providers in {provider.city}.</p>
                             </div>
                             <div className="p-8 bg-white border border-slate-100 rounded-3xl">
-                                <Users className="w-5 h-5 text-[#d4af37] mb-4" />
+                                <Users className="w-5 h-5 text-[#C9A96E] mb-4" />
                                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Est. Search Reach</div>
                                 <div className="text-3xl font-bold font-display">{marketReach.toLocaleString()} Patients</div>
                                 <p className="text-xs text-slate-500 mt-2 font-medium">Monthly active baseline intent in your market.</p>
                             </div>
                             <div className="p-8 bg-white border border-slate-100 rounded-3xl">
-                                <DollarSign className="w-5 h-5 text-[#d4af37] mb-4" />
+                                <DollarSign className="w-5 h-5 text-[#C9A96E] mb-4" />
                                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Pricing Position</div>
                                 <div className="text-3xl font-bold font-display">${provider.price_per_unit}/unit</div>
                                 <p className="text-xs text-slate-500 mt-2 font-medium">{Math.abs(priceDelta).toFixed(1)}% {priceDelta >= 0 ? 'above' : 'below'} city median.</p>
                             </div>
                             <div className="p-8 bg-white border border-slate-100 rounded-3xl">
-                                <Award className="w-5 h-5 text-[#d4af37] mb-4" />
+                                <Award className="w-5 h-5 text-[#C9A96E] mb-4" />
                                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Verified Status</div>
                                 <div className="text-3xl font-bold font-display">{provider.verified ? 'Verified' : 'Unverified'}</div>
                                 <p className="text-xs text-slate-500 mt-2 font-medium">Registry verification increases trust by 32% (avg).</p>
@@ -101,12 +101,12 @@ export default async function IntelligenceBriefPage({ params }: BriefPageProps) 
                 {/* 2. Sentiment Mapping */}
                 <section>
                     <div className="flex items-center gap-3 mb-8">
-                        <TrendingUp className="w-6 h-6 text-[#d4af37]" />
+                        <TrendingUp className="w-6 h-6 text-[#C9A96E]" />
                         <h2 className="text-xl font-black uppercase tracking-widest border-b-2 border-slate-100 pb-2 flex-grow">2.0 Patient Sentiment Mapping</h2>
                     </div>
 
-                    <div className="bg-slate-900 rounded-[3rem] p-12 text-white overflow-hidden relative">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-[#d4af37]/10 blur-[100px] rounded-full pointer-events-none" />
+                    <div className="bg-slate-900 rounded-[3rem] p-12 text-[#3D2B1F] overflow-hidden relative">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-[#C9A96E]/10 blur-[100px] rounded-full pointer-events-none" />
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                             <div>
@@ -114,7 +114,7 @@ export default async function IntelligenceBriefPage({ params }: BriefPageProps) 
                                 <div className="space-y-6">
                                     {provider.style_tags?.map((tag: string, i: number) => (
                                         <div key={i} className="flex items-center gap-4">
-                                            <CheckCircle2 className="w-6 h-6 text-[#d4af37] shrink-0" />
+                                            <CheckCircle2 className="w-6 h-6 text-[#C9A96E] shrink-0" />
                                             <div>
                                                 <div className="font-bold text-lg uppercase tracking-wider">{tag}</div>
                                                 <p className="text-slate-400 text-sm font-light">Leading keyword in recent patient testimonials.</p>
@@ -131,16 +131,16 @@ export default async function IntelligenceBriefPage({ params }: BriefPageProps) 
                                 </div>
                             </div>
 
-                            <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
+                            <div className="bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-3xl p-8">
                                 <div className="flex items-center justify-between mb-8">
-                                    <h4 className="text-xs font-black uppercase tracking-widest text-[#d4af37]">Market Mismatch Alert</h4>
+                                    <h4 className="text-xs font-black uppercase tracking-widest text-[#C9A96E]">Market Mismatch Alert</h4>
                                     <AlertCircle className="w-5 h-5 text-amber-500" />
                                 </div>
                                 <p className="text-slate-300 leading-relaxed font-light mb-6">
-                                    Your clinic dominates in <span className="text-white font-bold italic">results quality</span> but lags in <span className="text-white font-bold italic">price transparency</span> compared to Top 3 competitors in {provider.city}.
+                                    Your clinic dominates in <span className="text-[#3D2B1F] font-bold italic">results quality</span> but lags in <span className="text-[#3D2B1F] font-bold italic">price transparency</span> compared to Top 3 competitors in {provider.city}.
                                 </p>
-                                <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden mb-2">
-                                    <div className="h-full bg-[#d4af37] w-[88%]" />
+                                <div className="h-2 w-full bg-[#3D2B1F]/10 rounded-full overflow-hidden mb-2">
+                                    <div className="h-full bg-[#C9A96E] w-[88%]" />
                                 </div>
                                 <div className="flex justify-between text-[10px] font-bold text-slate-500 uppercase tracking-widest">
                                     <span>Market Under-served</span>
@@ -154,7 +154,7 @@ export default async function IntelligenceBriefPage({ params }: BriefPageProps) 
                 {/* 3. Competitive Comparison */}
                 <section>
                     <div className="flex items-center gap-3 mb-8">
-                        <Award className="w-6 h-6 text-[#d4af37]" />
+                        <Award className="w-6 h-6 text-[#C9A96E]" />
                         <h2 className="text-xl font-black uppercase tracking-widest border-b-2 border-slate-100 pb-2 flex-grow">3.0 Local Market Benchmarking</h2>
                     </div>
 
@@ -195,10 +195,10 @@ export default async function IntelligenceBriefPage({ params }: BriefPageProps) 
                 {/* Footer / CTA */}
                 <footer className="text-center pt-16 border-t border-slate-100">
                     <p className="text-slate-500 text-sm font-light max-w-2xl mx-auto mb-10 leading-relaxed">
-                        This report is generated by <span className="font-bold text-slate-900 underline uppercase tracking-tighter decoration-[#d4af37]">InjectorIndex Intelligence</span>. Data is verified against 2026 clinical registries and patient sentiment audits.
+                        This report is generated by <span className="font-bold text-slate-900 underline uppercase tracking-tighter decoration-[#C9A96E]">InjectorIndex Intelligence</span>. Data is verified against 2026 clinical registries and patient sentiment audits.
                     </p>
                     <div className="flex justify-center gap-6 no-print">
-                        <button className="px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-colors shadow-2xl">
+                        <button className="px-8 py-4 bg-slate-900 text-[#3D2B1F] font-bold rounded-2xl hover:bg-slate-800 transition-colors shadow-2xl">
                             Unlock Full Competitive Audit
                         </button>
                         <button

@@ -18,13 +18,13 @@ export function BuyersGuideCTA() {
                             <h3 className="text-2xl font-display font-bold text-primary mb-2">
                                 Not sure how to choose a provider?
                             </h3>
-                            <p className="text-gray-600 max-w-md">
+                            <p className="text-[#3D2B1F]/50 max-w-md">
                                 Download the free Botox Buyer&apos;s Guide — 7 questions to ask before you book.
                             </p>
                         </div>
                     </div>
                     <Link href="/botox-buyers-guide">
-                        <Button className="bg-[#1a2332] hover:bg-slate-800 text-white px-8 py-7 text-base font-bold rounded-xl shadow-lg shadow-primary/10 group">
+                        <Button className="bg-[#1a2332] hover:bg-slate-800 text-[#3D2B1F] px-8 py-7 text-base font-bold rounded-xl shadow-lg shadow-primary/10 group">
                             Get the Free Guide
                             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </Button>

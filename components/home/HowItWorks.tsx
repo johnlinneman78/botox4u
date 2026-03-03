@@ -15,8 +15,8 @@ const FACTORS = [
         label: '30 Points',
         description: 'Our semantic algorithm reads every Google Review and extracts quality signals — not just "5 stars great!" but specific patterns like "natural results," "minimal bruising," "thorough consultation."',
         icon: <ShieldCheck className="w-7 h-7" />,
-        color: 'bg-[#d4af37]/10 text-[#d4af37] border-[#d4af37]/20',
-        glow: 'shadow-[#d4af37]/10',
+        color: 'bg-[#C9A96E]/10 text-[#C9A96E] border-[#C9A96E]/20',
+        glow: 'shadow-[#C9A96E]/10',
     },
     {
         title: 'Review Quality',
@@ -31,8 +31,8 @@ const FACTORS = [
         label: '15 Points',
         description: 'Complete online presence, responsive to reviews, up-to-date hours, professional photos of actual work.',
         icon: <Globe className="w-7 h-7" />,
-        color: 'bg-emerald-950/50 text-emerald-400 border-emerald-800/40',
-        glow: 'shadow-emerald-500/10',
+        color: 'bg-emerald-950/50 text-[#8A9E8D] border-emerald-800/40',
+        glow: 'shadow-[#8A9E8D]/10',
     },
     {
         title: 'Transparency',
@@ -59,25 +59,25 @@ const PENALTIES = [
 
 export default function HowItWorks() {
     return (
-        <section className="py-24 bg-[#0d1420] border-t border-white/[0.05]">
+        <section className="py-24 bg-[#FAF8F5] border-t border-[#3D2B1F]/10">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16 max-w-3xl mx-auto">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-black tracking-widest uppercase mb-6">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C9A96E]/10 border border-[#C9A96E]/20 text-[#C9A96E] text-xs font-black tracking-widest uppercase mb-6">
                         <ShieldCheck className="w-3.5 h-3.5" /> Clarity Score™ 2026 Ranking Algorithm
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-                        Your Injector&apos;s Score, <span className="text-[#d4af37]">Explained.</span>
+                    <h2 className="text-4xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-6">
+                        Your Injector&apos;s Score, <span className="text-[#C9A96E]">Explained.</span>
                     </h2>
                     <div className="flex justify-center mb-8">
                         <Link
                             href="/methodology"
-                            className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-[#d4af37] hover:border-[#d4af37]/30 transition-all text-xs font-black uppercase tracking-widest group"
+                            className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 text-[#3D2B1F]/70 hover:text-[#C9A96E] hover:border-[#C9A96E]/30 transition-all text-xs font-black uppercase tracking-widest group"
                         >
-                            <ShieldCheck className="w-4 h-4 text-[#d4af37] group-hover:scale-110 transition-transform" />
+                            <ShieldCheck className="w-4 h-4 text-[#C9A96E] group-hover:scale-110 transition-transform" />
                             Full Clarity Score™ Methodology →
                         </Link>
                     </div>
-                    <p className="text-xl text-gray-400 leading-relaxed font-light">
+                    <p className="text-xl text-[#3D2B1F]/70 leading-relaxed font-light">
                         Clarity Score™ isn&apos;t a star rating. It&apos;s a composite score (0-100) built from multiple data signals that no provider can buy their way to the top of.
                     </p>
                 </div>
@@ -87,18 +87,18 @@ export default function HowItWorks() {
                     {FACTORS.map((factor) => (
                         <div
                             key={factor.title}
-                            className={`bg-white/[0.02] border border-white/[0.06] rounded-3xl p-7 hover:bg-white/[0.05] transition-all hover:-translate-y-1 hover:shadow-xl ${factor.glow} group`}
+                            className={`bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-3xl p-7 hover:bg-[#3D2B1F]/5 transition-all hover:-translate-y-1 hover:shadow-xl ${factor.glow} group`}
                         >
                             <div className={`w-14 h-14 rounded-2xl ${factor.color} border flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
                                 {factor.icon}
                             </div>
                             <div className="flex items-center justify-between mb-2">
-                                <h3 className="text-base font-bold text-white">{factor.title}</h3>
+                                <h3 className="text-base font-bold text-[#3D2B1F]">{factor.title}</h3>
                             </div>
-                            <span className="inline-block text-[10px] font-black text-[#d4af37] bg-[#d4af37]/10 border border-[#d4af37]/20 px-2 py-0.5 rounded-lg uppercase tracking-widest mb-3">
+                            <span className="inline-block text-[10px] font-black text-[#C9A96E] bg-[#C9A96E]/10 border border-[#C9A96E]/20 px-2 py-0.5 rounded-lg uppercase tracking-widest mb-3">
                                 {factor.label}
                             </span>
-                            <p className="text-sm text-gray-500 leading-relaxed">
+                            <p className="text-sm text-[#3D2B1F]/60 leading-relaxed">
                                 {factor.description}
                             </p>
                         </div>
@@ -108,24 +108,24 @@ export default function HowItWorks() {
                 {/* Bonus / Penalty bar */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
                     {PENALTIES.map((p) => (
-                        <div key={p.label} className="flex items-start gap-4 bg-white/[0.02] border border-white/[0.05] rounded-2xl px-6 py-4">
-                            <div className="text-[#d4af37] mt-0.5 shrink-0">{p.icon}</div>
+                        <div key={p.label} className="flex items-start gap-4 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-2xl px-6 py-4">
+                            <div className="text-[#C9A96E] mt-0.5 shrink-0">{p.icon}</div>
                             <div>
-                                <div className="text-sm font-bold text-white mb-0.5">{p.label}</div>
-                                <div className="text-xs text-gray-500">{p.desc}</div>
+                                <div className="text-sm font-bold text-[#3D2B1F] mb-0.5">{p.label}</div>
+                                <div className="text-xs text-[#3D2B1F]/60">{p.desc}</div>
                             </div>
                         </div>
                     ))}
                 </div>
 
                 {/* Bottom bar */}
-                <div className="p-8 bg-gradient-to-r from-[#d4af37]/10 to-transparent rounded-[2rem] border border-[#d4af37]/15 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="p-8 bg-gradient-to-r from-[#C9A96E]/10 to-transparent rounded-[2rem] border border-[#C9A96E]/15 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div>
-                        <div className="text-[#d4af37] font-black text-xs uppercase tracking-widest mb-2">Independent Accountability</div>
-                        <p className="text-lg font-bold text-white">Nobody buys a higher Clarity Score™. Rankings are pure data.</p>
-                        <p className="text-sm text-gray-500 mt-1">Providers may buy featured search placement (clearly disclosed). Their Clarity Score™ remains independent and immutable.</p>
+                        <div className="text-[#C9A96E] font-black text-xs uppercase tracking-widest mb-2">Independent Accountability</div>
+                        <p className="text-lg font-bold text-[#3D2B1F]">Nobody buys a higher Clarity Score™. Rankings are pure data.</p>
+                        <p className="text-sm text-[#3D2B1F]/60 mt-1">Providers may buy featured search placement (clearly disclosed). Their Clarity Score™ remains independent and immutable.</p>
                     </div>
-                    <div className="shrink-0 text-[#d4af37]/40">
+                    <div className="shrink-0 text-[#C9A96E]/40">
                         <ShieldCheck className="w-12 h-12" />
                     </div>
                 </div>

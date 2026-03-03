@@ -78,7 +78,7 @@ function VerifyContent() {
                     <div className="space-y-6">
                         <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-secondary mx-auto"></div>
                         <h1 className="text-2xl font-display font-bold text-primary">Verifying Your Credentials...</h1>
-                        <p className="text-gray-500 text-sm">Securing your clinic dashboard access.</p>
+                        <p className="text-[#3D2B1F]/60 text-sm">Securing your clinic dashboard access.</p>
                     </div>
                 )}
 
@@ -88,7 +88,7 @@ function VerifyContent() {
                             <ShieldCheck className="w-12 h-12 text-green-500" />
                         </div>
                         <h1 className="text-2xl font-display font-bold text-primary">Access Verified!</h1>
-                        <p className="text-xl text-gray-600">
+                        <p className="text-xl text-[#3D2B1F]/50">
                             Welcome, <span className="font-bold">Clinic Partner</span>. We&apos;re preparing your dashboard.
                         </p>
                         <div className="flex items-center justify-center gap-2 text-xs font-bold text-secondary uppercase tracking-widest mt-8">
@@ -103,10 +103,10 @@ function VerifyContent() {
                             <Badge variant="outline" className="text-red-500 border-red-500">Error</Badge>
                         </div>
                         <h1 className="text-2xl font-display font-bold text-primary">Verification Failed</h1>
-                        <p className="text-gray-600">{message}</p>
+                        <p className="text-[#3D2B1F]/50">{message}</p>
                         <button
                             onClick={() => window.location.href = '/provider/claim'}
-                            className="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-primary/90 transition-colors"
+                            className="bg-primary text-[#3D2B1F] px-8 py-3 rounded-xl font-bold hover:bg-primary/90 transition-colors"
                         >
                             Try Again
                         </button>

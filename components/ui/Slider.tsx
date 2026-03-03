@@ -25,7 +25,7 @@ const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
                     value={value[0]}
                     onChange={handleChange}
                     className={cn(
-                        "h-2 w-full cursor-pointer appearance-none rounded-full bg-white/10 accent-[#d4af37]",
+                        "h-2 w-full cursor-pointer appearance-none rounded-full bg-[#3D2B1F]/10 accent-[#C9A96E]",
                         className
                     )}
                     ref={ref}

@@ -79,16 +79,16 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
 
     if (isSuccess) {
         return (
-            <Card className="border-emerald-500/20 bg-emerald-500/5 shadow-inner">
+            <Card className="border-[#8A9E8D]/20 bg-[#8A9E8D]/5 shadow-inner">
                 <CardContent className="pt-12 pb-12 text-center">
-                    <div className="w-16 h-16 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto mb-6 text-2xl shadow-lg animate-bounce">
+                    <div className="w-16 h-16 bg-[#8A9E8D] text-[#3D2B1F] rounded-full flex items-center justify-center mx-auto mb-6 text-2xl shadow-lg animate-bounce">
                         ✓
                     </div>
-                    <h3 className="text-2xl font-display font-bold text-white mb-3">Request Sent!</h3>
-                    <p className="text-gray-500 mb-8 max-w-[280px] mx-auto text-sm leading-relaxed">
-                        Thanks! We&apos;ll connect you with {providerName ? <strong className="text-white">{providerName}</strong> : `top providers in ${city}`} who match your needs within 24 hours.
+                    <h3 className="text-2xl font-display font-bold text-[#3D2B1F] mb-3">Request Sent!</h3>
+                    <p className="text-[#3D2B1F]/60 mb-8 max-w-[280px] mx-auto text-sm leading-relaxed">
+                        Thanks! We&apos;ll connect you with {providerName ? <strong className="text-[#3D2B1F]">{providerName}</strong> : `top providers in ${city}`} who match your needs within 24 hours.
                     </p>
-                    <Button variant="outline" onClick={() => setIsSuccess(false)} className="px-8 border-white/10 text-gray-400 hover:bg-white/5">
+                    <Button variant="outline" onClick={() => setIsSuccess(false)} className="px-8 border-[#3D2B1F]/10 text-[#3D2B1F]/70 hover:bg-[#3D2B1F]/5">
                         Done
                     </Button>
                 </CardContent>
@@ -97,18 +97,18 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
     }
 
     return (
-        <Card className="shadow-2xl border-white/[0.06] bg-[#101827] overflow-hidden">
+        <Card className="shadow-2xl border-[#3D2B1F]/10 bg-[#F2EDE4] overflow-hidden">
             {isPremium && (
-                <div className="bg-[#d4af37]/10 px-4 py-2.5 flex items-center justify-center gap-2 border-b border-[#d4af37]/20">
-                    <span className="text-[#d4af37] animate-pulse">💎</span>
-                    <span className="text-[10px] font-bold text-[#d4af37] uppercase tracking-wider">VIP Priority Callback</span>
+                <div className="bg-[#C9A96E]/10 px-4 py-2.5 flex items-center justify-center gap-2 border-b border-[#C9A96E]/20">
+                    <span className="text-[#C9A96E] animate-pulse">💎</span>
+                    <span className="text-[10px] font-bold text-[#C9A96E] uppercase tracking-wider">VIP Priority Callback</span>
                 </div>
             )}
             <CardHeader className="pb-4">
-                <CardTitle className="text-xl font-display text-white">
+                <CardTitle className="text-xl font-display text-[#3D2B1F]">
                     {providerName ? `Connect with ${providerName}` : `Find ${city} Specialists`}
                 </CardTitle>
-                <p className="text-xs text-gray-600">
+                <p className="text-xs text-[#3D2B1F]/50">
                     {providerName ? 'Independent data: response time typically < 2 hours' : 'Recieve 3 direct responses today'}
                 </p>
             </CardHeader>
@@ -124,7 +124,7 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                             <input
                                 {...register('full_name')}
                                 placeholder="Full Name"
-                                className={`w-full px-4 py-3 rounded-lg border text-sm text-white transition-all focus:ring-2 focus:ring-[#d4af37]/20 outline-none ${errors.full_name ? 'border-red-500/50 bg-red-500/5' : 'border-white/[0.06] bg-white/[0.03]'}`}
+                                className={`w-full px-4 py-3 rounded-lg border text-sm text-[#3D2B1F] transition-all focus:ring-2 focus:ring-[#C9A96E]/20 outline-none ${errors.full_name ? 'border-red-500/50 bg-red-500/5' : 'border-[#3D2B1F]/10 bg-[#3D2B1F]/5'}`}
                             />
                             {errors.full_name && <p className="text-[10px] text-red-400 mt-1 ml-1">{errors.full_name.message}</p>}
                         </div>
@@ -136,7 +136,7 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                                     {...register('email')}
                                     type="email"
                                     placeholder="Email Address"
-                                    className={`w-full px-4 py-3 rounded-lg border text-sm text-white transition-all focus:ring-2 focus:ring-[#d4af37]/20 outline-none ${errors.email ? 'border-red-500/50 bg-red-500/5' : 'border-white/[0.06] bg-white/[0.03]'}`}
+                                    className={`w-full px-4 py-3 rounded-lg border text-sm text-[#3D2B1F] transition-all focus:ring-2 focus:ring-[#C9A96E]/20 outline-none ${errors.email ? 'border-red-500/50 bg-red-500/5' : 'border-[#3D2B1F]/10 bg-[#3D2B1F]/5'}`}
                                 />
                                 {errors.email && <p className="text-[10px] text-red-400 mt-1 ml-1">{errors.email.message}</p>}
                             </div>
@@ -145,17 +145,17 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                                     {...register('phone')}
                                     type="tel"
                                     placeholder="Phone Number"
-                                    className={`w-full px-4 py-3 rounded-lg border text-sm text-white transition-all focus:ring-2 focus:ring-[#d4af37]/20 outline-none ${errors.phone ? 'border-red-500/50 bg-red-500/5' : 'border-white/[0.06] bg-white/[0.03]'}`}
+                                    className={`w-full px-4 py-3 rounded-lg border text-sm text-[#3D2B1F] transition-all focus:ring-2 focus:ring-[#C9A96E]/20 outline-none ${errors.phone ? 'border-red-500/50 bg-red-500/5' : 'border-[#3D2B1F]/10 bg-[#3D2B1F]/5'}`}
                                 />
                                 {errors.phone && <p className="text-[10px] text-red-400 mt-1 ml-1">{errors.phone.message}</p>}
                             </div>
                         </div>
 
                         <div className="grid grid-cols-1 gap-1">
-                            <label className="text-[11px] font-semibold text-gray-600 ml-1 uppercase tracking-tight">Interest</label>
+                            <label className="text-[11px] font-semibold text-[#3D2B1F]/50 ml-1 uppercase tracking-tight">Interest</label>
                             <select
                                 {...register('treatment_type')}
-                                className="w-full px-4 py-3 rounded-lg border border-white/[0.06] bg-white/[0.03] text-sm text-white focus:ring-2 focus:ring-[#d4af37]/20 outline-none appearance-none"
+                                className="w-full px-4 py-3 rounded-lg border border-[#3D2B1F]/10 bg-[#3D2B1F]/5 text-sm text-[#3D2B1F] focus:ring-2 focus:ring-[#C9A96E]/20 outline-none appearance-none"
                             >
                                 {NICHE.treatments.map((treatment) => (
                                     <option key={treatment} value={treatment.toLowerCase().replace(/\s+/g, '-')}>
@@ -169,10 +169,10 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                         {/* Budget & Timeframe */}
                         <div className="grid grid-cols-2 gap-3">
                             <div className="grid grid-cols-1 gap-1">
-                                <label className="text-[11px] font-semibold text-gray-600 ml-1 uppercase tracking-tight">Budget</label>
+                                <label className="text-[11px] font-semibold text-[#3D2B1F]/50 ml-1 uppercase tracking-tight">Budget</label>
                                 <select
                                     {...register('budget_range')}
-                                    className="w-full px-4 py-3 rounded-lg border border-white/[0.06] bg-white/[0.03] text-sm text-white focus:ring-2 focus:ring-[#d4af37]/20 outline-none appearance-none"
+                                    className="w-full px-4 py-3 rounded-lg border border-[#3D2B1F]/10 bg-[#3D2B1F]/5 text-sm text-[#3D2B1F] focus:ring-2 focus:ring-[#C9A96E]/20 outline-none appearance-none"
                                 >
                                     {NICHE.leadForm.budgetRanges.map((range) => (
                                         <option key={range.value} value={range.value}>
@@ -182,10 +182,10 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                                 </select>
                             </div>
                             <div className="grid grid-cols-1 gap-1">
-                                <label className="text-[11px] font-semibold text-gray-600 ml-1 uppercase tracking-tight">Timeframe</label>
+                                <label className="text-[11px] font-semibold text-[#3D2B1F]/50 ml-1 uppercase tracking-tight">Timeframe</label>
                                 <select
                                     {...register('timeframe')}
-                                    className="w-full px-4 py-3 rounded-lg border border-white/[0.06] bg-white/[0.03] text-sm text-white focus:ring-2 focus:ring-[#d4af37]/20 outline-none appearance-none"
+                                    className="w-full px-4 py-3 rounded-lg border border-[#3D2B1F]/10 bg-[#3D2B1F]/5 text-sm text-[#3D2B1F] focus:ring-2 focus:ring-[#C9A96E]/20 outline-none appearance-none"
                                 >
                                     <option value="asap">ASAP</option>
                                     <option value="this-week">This Week</option>
@@ -197,10 +197,10 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
 
                         {/* Call Time */}
                         <div className="grid grid-cols-1 gap-1">
-                            <label className="text-[11px] font-semibold text-gray-600 ml-1 uppercase tracking-tight">Best Time to Call</label>
+                            <label className="text-[11px] font-semibold text-[#3D2B1F]/50 ml-1 uppercase tracking-tight">Best Time to Call</label>
                             <select
                                 {...register('call_time')}
-                                className="w-full px-4 py-3 rounded-lg border border-white/[0.06] bg-white/[0.03] text-sm text-white focus:ring-2 focus:ring-[#d4af37]/20 outline-none appearance-none"
+                                className="w-full px-4 py-3 rounded-lg border border-[#3D2B1F]/10 bg-[#3D2B1F]/5 text-sm text-[#3D2B1F] focus:ring-2 focus:ring-[#C9A96E]/20 outline-none appearance-none"
                             >
                                 <option value="morning">Morning (8am - 12pm)</option>
                                 <option value="afternoon">Afternoon (12pm - 4pm)</option>
@@ -215,10 +215,10 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                                 <input
                                     {...register('newsletter_opt_in')}
                                     type="checkbox"
-                                    className="w-4 h-4 text-[#d4af37] border-white/10 rounded focus:ring-[#d4af37]/20 bg-white/5 accent-[#d4af37]"
+                                    className="w-4 h-4 text-[#C9A96E] border-[#3D2B1F]/10 rounded focus:ring-[#C9A96E]/20 bg-[#3D2B1F]/5 accent-[#C9A96E]"
                                 />
                             </div>
-                            <label className="text-[11px] text-gray-500 leading-tight">
+                            <label className="text-[11px] text-[#3D2B1F]/60 leading-tight">
                                 Send me exclusive {NICHE.name} deals, pricing updates, and clinic specials in my area.
                                 <span className="text-gray-700"> No spam, unsubscribe anytime.</span>
                             </label>
@@ -230,7 +230,7 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                     <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-7 bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] shadow-xl shadow-[#d4af37]/10 text-base font-bold transition-all hover:scale-[1.01] active:scale-[0.99]"
+                        className="w-full py-7 bg-[#C9A96E] hover:bg-[#B5955B] text-white shadow-xl shadow-[#C9A96E]/10 text-base font-bold transition-all hover:scale-[1.01] active:scale-[0.99]"
                     >
                         {isSubmitting ? 'Sending Request...' : 'Request Info from Clinic'}
                     </Button>

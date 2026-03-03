@@ -64,7 +64,7 @@ export default function NewListingPage() {
             <div className="max-w-2xl mx-auto">
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-display font-bold text-primary mb-4">Add Your Clinic</h1>
-                    <p className="text-gray-600">Grow your business by reaching more local aesthetic patients.</p>
+                    <p className="text-[#3D2B1F]/50">Grow your business by reaching more local aesthetic patients.</p>
                 </div>
 
                 <Card className="shadow-xl">

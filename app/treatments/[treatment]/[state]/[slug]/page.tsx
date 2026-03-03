@@ -102,23 +102,23 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
             />
             {/* Breadcrumbs */}
-            <div className="bg-primary/95 border-b border-white/10">
-                <div className="container mx-auto px-4 py-3 flex items-center gap-2 text-xs font-medium text-white/60">
-                    <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <div className="bg-primary/95 border-b border-[#3D2B1F]/10">
+                <div className="container mx-auto px-4 py-3 flex items-center gap-2 text-xs font-medium text-[#3D2B1F]/60">
+                    <Link href="/" className="hover:text-[#3D2B1F] transition-colors">Home</Link>
                     <span>/</span>
-                    <Link href={NICHE.baseSlug.slice(0, -1)} className="hover:text-white transition-colors">Directory</Link>
+                    <Link href={NICHE.baseSlug.slice(0, -1)} className="hover:text-[#3D2B1F] transition-colors">Directory</Link>
                     <span>/</span>
                     {stateSlug && (
-                        <Link href={`${NICHE.baseSlug}state/${stateSlug}`} className="hover:text-white transition-colors capitalize">
+                        <Link href={`${NICHE.baseSlug}state/${stateSlug}`} className="hover:text-[#3D2B1F] transition-colors capitalize">
                             {stateSlug.replace(/-/g, ' ')}
                         </Link>
                     )}
                     <span>/</span>
-                    <Link href={`${NICHE.baseSlug}${citySlug}-${stateCode.toLowerCase()}`} className="hover:text-white transition-colors">
+                    <Link href={`${NICHE.baseSlug}${citySlug}-${stateCode.toLowerCase()}`} className="hover:text-[#3D2B1F] transition-colors">
                         {cityName}
                     </Link>
                     <span>/</span>
-                    <span className="text-white">{treatment.name}</span>
+                    <span className="text-[#3D2B1F]">{treatment.name}</span>
                 </div>
             </div>
 
@@ -129,7 +129,7 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                         <h1 className="text-4xl md:text-5xl font-display font-bold text-primary mb-6">
                             {treatment.name} in <span className="text-secondary">{cityName}</span>
                         </h1>
-                        <p className="text-xl text-gray-600 leading-relaxed font-light mb-8">
+                        <p className="text-xl text-[#3D2B1F]/50 leading-relaxed font-light mb-8">
                             {treatment.description} Discover the top-rated providers in {cityName} specializing in {treatment.name} and compare local treatment costs.
                         </p>
                     </div>
@@ -194,7 +194,7 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
 
                         {providers.length === 0 && (
                             <div className="bg-white p-12 text-center rounded-2xl border border-gray-100 shadow-sm">
-                                <p className="text-gray-500 italic">No specialized providers found for {treatment.name} in {cityName} yet.</p>
+                                <p className="text-[#3D2B1F]/60 italic">No specialized providers found for {treatment.name} in {cityName} yet.</p>
                             </div>
                         )}
                     </div>
@@ -206,11 +206,11 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                             </h3>
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center text-sm">
-                                    <span className="text-gray-500">Typical {NICHE.priceUnit.split(' ').slice(-1).map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('')}s</span>
+                                    <span className="text-[#3D2B1F]/60">Typical {NICHE.priceUnit.split(' ').slice(-1).map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('')}s</span>
                                     <span className="font-bold text-primary">{treatment.slug.includes('masseter') ? '40-60' : '15-25'}</span>
                                 </div>
                                 <div className="flex justify-between items-center text-sm">
-                                    <span className="text-gray-500">Avg Cost {NICHE.priceUnit}</span>
+                                    <span className="text-[#3D2B1F]/60">Avg Cost {NICHE.priceUnit}</span>
                                     <span className="font-bold text-secondary">${stats?.avgCost || 15}</span>
                                 </div>
                                 <hr className="border-gray-50" />
@@ -222,14 +222,14 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                                     </span>
                                 </div>
                             </div>
-                            <button className="w-full mt-8 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/95 transition-all shadow-md">
+                            <button className="w-full mt-8 py-3 bg-primary text-[#3D2B1F] font-bold rounded-xl hover:bg-primary/95 transition-all shadow-md">
                                 Get Multi-Clinic Quote
                             </button>
                         </div>
 
                         <div className="bg-secondary/5 p-8 rounded-2xl border border-secondary/10">
                             <h3 className="text-lg font-display font-bold text-primary mb-4">Patient Tip</h3>
-                            <p className="text-sm text-gray-600 leading-relaxed italic">
+                            <p className="text-sm text-[#3D2B1F]/50 leading-relaxed italic">
                                 "{treatment.name} is a specialized technique. Always ensure your injector has specific training in facial anatomy for this area, as muscle placement is critical for natural results."
                             </p>
                         </div>

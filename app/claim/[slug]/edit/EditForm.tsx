@@ -60,7 +60,7 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
     return (
         <form onSubmit={handleSubmit} className="space-y-12">
             {message && (
-                <div className={`p-6 rounded-3xl text-sm font-medium animate-in fade-in slide-in-from-top-4 duration-300 ${message.type === 'success' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                <div className={`p-6 rounded-3xl text-sm font-medium animate-in fade-in slide-in-from-top-4 duration-300 ${message.type === 'success' ? 'bg-[#8A9E8D]/10 text-[#8A9E8D] border border-[#8A9E8D]/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'
                     }`}>
                     {message.text}
                 </div>
@@ -72,34 +72,34 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
             {/* SECTION 1: PUBLIC PRICING (HIGH IMPACT) */}
             <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-2xl bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/20">
+                    <div className="p-3 rounded-2xl bg-[#C9A96E]/10 text-[#C9A96E] border border-[#C9A96E]/20">
                         <DollarSign className="w-6 h-6" />
                     </div>
                     <div>
-                        <h3 className="text-xl font-bold text-white">Transparent Pricing</h3>
-                        <p className="text-sm text-gray-500 font-light">Listing your real cost-per-unit strengthens your Transparency Signal within our proprietary algorithm.</p>
+                        <h3 className="text-xl font-bold text-[#3D2B1F]">Transparent Pricing</h3>
+                        <p className="text-sm text-[#3D2B1F]/60 font-light">Listing your real cost-per-unit strengthens your Transparency Signal within our proprietary algorithm.</p>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-8 rounded-[2rem] bg-white/[0.02] border border-white/[0.06]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-8 rounded-[2rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10">
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-white uppercase tracking-wider">Botox Price per Unit ($)</label>
+                        <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-wider">Botox Price per Unit ($)</label>
                         <div className="relative">
-                            <span className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-500 font-bold">$</span>
+                            <span className="absolute left-6 top-1/2 -translate-y-1/2 text-[#3D2B1F]/60 font-bold">$</span>
                             <input
                                 required
                                 type="number"
                                 name="price_per_unit"
                                 step="0.01"
                                 defaultValue={provider.price_per_unit}
-                                className="w-full pl-12 pr-6 py-4 rounded-2xl border border-white/[0.08] bg-white/[0.03] focus:bg-white/[0.05] focus:ring-4 focus:ring-[#d4af37]/10 outline-none transition-all text-lg text-white placeholder-gray-600"
+                                className="w-full pl-12 pr-6 py-4 rounded-2xl border border-white/[0.08] bg-[#3D2B1F]/5 focus:bg-[#3D2B1F]/5 focus:ring-4 focus:ring-[#C9A96E]/10 outline-none transition-all text-lg text-[#3D2B1F] placeholder-gray-600"
                                 placeholder="12.00"
                             />
                         </div>
                     </div>
-                    <div className="bg-white/[0.02] p-6 rounded-2xl border border-white/[0.06] flex items-center justify-center">
-                        <p className="text-xs text-gray-500 text-center font-light">
-                            Typical price in <strong className="text-white">{provider.city}</strong>: $11 - $14 / unit.
+                    <div className="bg-[#3D2B1F]/5 p-6 rounded-2xl border border-[#3D2B1F]/10 flex items-center justify-center">
+                        <p className="text-xs text-[#3D2B1F]/60 text-center font-light">
+                            Typical price in <strong className="text-[#3D2B1F]">{provider.city}</strong>: $11 - $14 / unit.
                         </p>
                     </div>
                 </div>
@@ -112,25 +112,25 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
                         <Building className="w-6 h-6" />
                     </div>
                     <div>
-                        <h3 className="text-xl font-bold text-white">Practice Information</h3>
+                        <h3 className="text-xl font-bold text-[#3D2B1F]">Practice Information</h3>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-white uppercase tracking-wider">Clinic Name</label>
+                        <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-wider">Clinic Name</label>
                         <input
                             name="name"
                             defaultValue={provider.name}
-                            className="w-full px-6 py-4 rounded-2xl border border-white/[0.08] bg-white/[0.03] focus:bg-white/[0.05] focus:ring-4 focus:ring-[#d4af37]/10 outline-none transition-all text-white"
+                            className="w-full px-6 py-4 rounded-2xl border border-white/[0.08] bg-[#3D2B1F]/5 focus:bg-[#3D2B1F]/5 focus:ring-4 focus:ring-[#C9A96E]/10 outline-none transition-all text-[#3D2B1F]"
                         />
                     </div>
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-white uppercase tracking-wider">Business Type</label>
+                        <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-wider">Business Type</label>
                         <select
                             name="business_type"
                             defaultValue={provider.business_type}
-                            className="w-full px-6 py-4 rounded-2xl border border-white/[0.08] bg-white/[0.03] focus:bg-white/[0.05] focus:ring-4 focus:ring-[#d4af37]/10 outline-none transition-all text-white"
+                            className="w-full px-6 py-4 rounded-2xl border border-white/[0.08] bg-[#3D2B1F]/5 focus:bg-[#3D2B1F]/5 focus:ring-4 focus:ring-[#C9A96E]/10 outline-none transition-all text-[#3D2B1F]"
                         >
                             <option value="Medspa">Medspa</option>
                             <option value="Clinic">Clinic</option>
@@ -141,38 +141,38 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
                         </select>
                     </div>
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-white uppercase tracking-wider">Website URL</label>
+                        <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-wider">Website URL</label>
                         <div className="relative">
-                            <Globe className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-600 w-5 h-5" />
+                            <Globe className="absolute left-6 top-1/2 -translate-y-1/2 text-[#3D2B1F]/50 w-5 h-5" />
                             <input
                                 name="website"
                                 type="url"
                                 defaultValue={provider.website}
-                                className="w-full pl-14 pr-6 py-4 rounded-2xl border border-white/[0.08] bg-white/[0.03] focus:bg-white/[0.05] focus:ring-4 focus:ring-[#d4af37]/10 outline-none transition-all text-white"
+                                className="w-full pl-14 pr-6 py-4 rounded-2xl border border-white/[0.08] bg-[#3D2B1F]/5 focus:bg-[#3D2B1F]/5 focus:ring-4 focus:ring-[#C9A96E]/10 outline-none transition-all text-[#3D2B1F]"
                                 placeholder="https://example.com"
                             />
                         </div>
                     </div>
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-white uppercase tracking-wider">Display Phone</label>
+                        <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-wider">Display Phone</label>
                         <div className="relative">
-                            <Phone className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-600 w-5 h-5" />
+                            <Phone className="absolute left-6 top-1/2 -translate-y-1/2 text-[#3D2B1F]/50 w-5 h-5" />
                             <input
                                 name="phone"
                                 type="tel"
                                 defaultValue={provider.phone}
-                                className="w-full pl-14 pr-6 py-4 rounded-2xl border border-white/[0.08] bg-white/[0.03] focus:bg-white/[0.05] focus:ring-4 focus:ring-[#d4af37]/10 outline-none transition-all text-white"
+                                className="w-full pl-14 pr-6 py-4 rounded-2xl border border-white/[0.08] bg-[#3D2B1F]/5 focus:bg-[#3D2B1F]/5 focus:ring-4 focus:ring-[#C9A96E]/10 outline-none transition-all text-[#3D2B1F]"
                                 placeholder="(555) 000-0000"
                             />
                         </div>
                     </div>
                     <div className="space-y-2 md:col-span-2">
-                        <label className="text-sm font-bold text-white uppercase tracking-wider">Clinic Bio (About)</label>
+                        <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-wider">Clinic Bio (About)</label>
                         <textarea
                             name="description"
                             rows={4}
                             defaultValue={provider.description}
-                            className="w-full px-6 py-4 rounded-2xl border border-white/[0.08] bg-white/[0.03] focus:bg-white/[0.05] focus:ring-4 focus:ring-[#d4af37]/10 outline-none transition-all resize-none text-white placeholder-gray-600"
+                            className="w-full px-6 py-4 rounded-2xl border border-white/[0.08] bg-[#3D2B1F]/5 focus:bg-[#3D2B1F]/5 focus:ring-4 focus:ring-[#C9A96E]/10 outline-none transition-all resize-none text-[#3D2B1F] placeholder-gray-600"
                             placeholder="Share what makes your practice unique..."
                         />
                     </div>
@@ -182,27 +182,27 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
             {/* SECTION 3: REGENERATIVE TREATMENTS (NEW - HIGH PRIORITY) */}
             <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <div className="p-3 rounded-2xl bg-[#8A9E8D]/10 text-[#8A9E8D] border border-[#8A9E8D]/20">
                         <Dna className="w-6 h-6" />
                     </div>
                     <div>
-                        <h3 className="text-xl font-bold text-white">Regenerative Treatments</h3>
-                        <p className="text-sm text-gray-500 font-light">Offering next-gen treatments directly impacts your Innovation Adoption pillar and overall Clarity Score™.</p>
+                        <h3 className="text-xl font-bold text-[#3D2B1F]">Regenerative Treatments</h3>
+                        <p className="text-sm text-[#3D2B1F]/60 font-light">Offering next-gen treatments directly impacts your Innovation Adoption pillar and overall Clarity Score™.</p>
                     </div>
                 </div>
 
                 <div className="p-8 rounded-[3rem] bg-gradient-to-br from-emerald-950/30 to-[#101827] border border-emerald-800/20">
                     <div className="flex items-center gap-2 mb-6">
-                        <span className="text-xs font-black text-emerald-400 uppercase tracking-widest">2026 Regen Menu</span>
-                        <span className="text-[10px] font-bold text-[#d4af37] bg-[#d4af37]/10 px-2 py-0.5 rounded-full border border-[#d4af37]/20">Aesthetic Signal</span>
+                        <span className="text-xs font-black text-[#8A9E8D] uppercase tracking-widest">2026 Regen Menu</span>
+                        <span className="text-[10px] font-bold text-[#C9A96E] bg-[#C9A96E]/10 px-2 py-0.5 rounded-full border border-[#C9A96E]/20">Aesthetic Signal</span>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {REGEN_TREATMENTS.map(t => (
-                            <label key={t.value} className="flex items-center gap-3 cursor-pointer group p-3 rounded-2xl hover:bg-white/[0.03] transition-colors">
-                                <input type="checkbox" name="services" value={t.value} className="w-5 h-5 rounded border-emerald-800/40 bg-white/[0.03] text-emerald-500 focus:ring-emerald-500/20" defaultChecked={provider.services_offered?.includes(t.value)} />
+                            <label key={t.value} className="flex items-center gap-3 cursor-pointer group p-3 rounded-2xl hover:bg-[#3D2B1F]/5 transition-colors">
+                                <input type="checkbox" name="services" value={t.value} className="w-5 h-5 rounded border-emerald-800/40 bg-[#3D2B1F]/5 text-[#8A9E8D] focus:ring-[#8A9E8D]/20" defaultChecked={provider.services_offered?.includes(t.value)} />
                                 <span className="text-lg mr-1">{t.icon}</span>
-                                <span className="text-sm text-gray-400 group-hover:text-white transition-colors font-medium">{t.label}</span>
-                                {t.hot && <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37] animate-pulse ml-auto shrink-0" />}
+                                <span className="text-sm text-[#3D2B1F]/70 group-hover:text-[#3D2B1F] transition-colors font-medium">{t.label}</span>
+                                {t.hot && <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E] animate-pulse ml-auto shrink-0" />}
                             </label>
                         ))}
                     </div>
@@ -216,30 +216,30 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
                         <Target className="w-6 h-6" />
                     </div>
                     <div>
-                        <h3 className="text-xl font-bold text-white">Full Treatment Menu</h3>
-                        <p className="text-sm text-gray-500 font-light">Select all additional treatments offered at this location.</p>
+                        <h3 className="text-xl font-bold text-[#3D2B1F]">Full Treatment Menu</h3>
+                        <p className="text-sm text-[#3D2B1F]/60 font-light">Select all additional treatments offered at this location.</p>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 rounded-[3rem] bg-white/[0.02] border border-white/[0.06]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 rounded-[3rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10">
                     <div>
-                        <h4 className="text-xs font-black text-[#d4af37] uppercase tracking-[0.2em] mb-4">Injectables</h4>
+                        <h4 className="text-xs font-black text-[#C9A96E] uppercase tracking-[0.2em] mb-4">Injectables</h4>
                         <div className="space-y-3">
                             {INJECTABLE_TREATMENTS.map(t => (
                                 <label key={t} className="flex items-center gap-3 cursor-pointer group">
-                                    <input type="checkbox" name="services" value={t} className="w-5 h-5 rounded border-white/10 bg-white/[0.03] text-[#d4af37] focus:ring-[#d4af37]/20" defaultChecked={provider.services_offered?.includes(t)} />
-                                    <span className="text-sm text-gray-500 group-hover:text-white transition-colors">{t}</span>
+                                    <input type="checkbox" name="services" value={t} className="w-5 h-5 rounded border-[#3D2B1F]/10 bg-[#3D2B1F]/5 text-[#C9A96E] focus:ring-[#C9A96E]/20" defaultChecked={provider.services_offered?.includes(t)} />
+                                    <span className="text-sm text-[#3D2B1F]/60 group-hover:text-[#3D2B1F] transition-colors">{t}</span>
                                 </label>
                             ))}
                         </div>
                     </div>
                     <div>
-                        <h4 className="text-xs font-black text-[#d4af37] uppercase tracking-[0.2em] mb-4">Skin & Laser</h4>
+                        <h4 className="text-xs font-black text-[#C9A96E] uppercase tracking-[0.2em] mb-4">Skin & Laser</h4>
                         <div className="space-y-3">
                             {SKIN_TREATMENTS.map(t => (
                                 <label key={t} className="flex items-center gap-3 cursor-pointer group">
-                                    <input type="checkbox" name="services" value={t} className="w-5 h-5 rounded border-white/10 bg-white/[0.03] text-[#d4af37] focus:ring-[#d4af37]/20" defaultChecked={provider.services_offered?.includes(t)} />
-                                    <span className="text-sm text-gray-500 group-hover:text-white transition-colors">{t}</span>
+                                    <input type="checkbox" name="services" value={t} className="w-5 h-5 rounded border-[#3D2B1F]/10 bg-[#3D2B1F]/5 text-[#C9A96E] focus:ring-[#C9A96E]/20" defaultChecked={provider.services_offered?.includes(t)} />
+                                    <span className="text-sm text-[#3D2B1F]/60 group-hover:text-[#3D2B1F] transition-colors">{t}</span>
                                 </label>
                             ))}
                         </div>
@@ -248,19 +248,19 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
             </div>
 
             {/* SECTION 5: SMS OPT-IN (TCPA COMPLIANT) */}
-            <div className="p-8 rounded-[2rem] bg-[#d4af37]/5 border border-[#d4af37]/10 space-y-4">
+            <div className="p-8 rounded-[2rem] bg-[#C9A96E]/5 border border-[#C9A96E]/10 space-y-4">
                 <div className="flex items-start gap-4">
-                    <div className="p-2 rounded-xl bg-[#d4af37] text-[#0d1420] mt-1">
+                    <div className="p-2 rounded-xl bg-[#C9A96E] text-white mt-1">
                         <ShieldCheck className="w-5 h-5" />
                     </div>
                     <div>
-                        <h4 className="text-lg font-bold text-white">Get notified when patients view your profile</h4>
-                        <p className="text-sm text-gray-500 font-light mb-4">
+                        <h4 className="text-lg font-bold text-[#3D2B1F]">Get notified when patients view your profile</h4>
+                        <p className="text-sm text-[#3D2B1F]/60 font-light mb-4">
                             Receive weekly profile stats and patient activity alerts via text. Message frequency varies. Reply STOP to cancel.
                         </p>
                         <label className="flex items-start gap-3 cursor-pointer group">
-                            <input type="checkbox" name="sms_opt_in" value="true" className="mt-1 w-5 h-5 rounded border-white/10 bg-white/[0.03] text-[#d4af37] focus:ring-[#d4af37]/20" />
-                            <span className="text-xs text-gray-600 font-light leading-relaxed">
+                            <input type="checkbox" name="sms_opt_in" value="true" className="mt-1 w-5 h-5 rounded border-[#3D2B1F]/10 bg-[#3D2B1F]/5 text-[#C9A96E] focus:ring-[#C9A96E]/20" />
+                            <span className="text-xs text-[#3D2B1F]/50 font-light leading-relaxed">
                                 I agree to receive SMS updates from InjectorIndex.com. I understand my phone number will be stored securely with my opt-in timestamp and IP.
                             </span>
                         </label>
@@ -275,45 +275,45 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
                         <Leaf className="w-6 h-6" />
                     </div>
                     <div>
-                        <h3 className="text-xl font-bold text-white">Treatment Philosophy</h3>
-                        <p className="text-sm text-gray-500 font-light">This helps patients find providers aligned with their aesthetic goals.</p>
+                        <h3 className="text-xl font-bold text-[#3D2B1F]">Treatment Philosophy</h3>
+                        <p className="text-sm text-[#3D2B1F]/60 font-light">This helps patients find providers aligned with their aesthetic goals.</p>
                     </div>
                 </div>
 
-                <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/[0.06] space-y-4">
-                    <p className="text-sm text-gray-500 font-light">Does your practice align with the Neo-Romantic aesthetic movement in regenerative medicine?</p>
+                <div className="p-8 rounded-[2rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 space-y-4">
+                    <p className="text-sm text-[#3D2B1F]/60 font-light">Does your practice align with the Neo-Romantic aesthetic movement in regenerative medicine?</p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         {[
                             { id: 'regenerative', label: 'Clarity Score™ Aesthetic / Regenerative', desc: 'Biological repair, PNs, facial harmony, undetectable results.', recommended: true },
                             { id: 'natural', label: 'Conservative / Natural', desc: 'Subtle refreshment with minimal intervention.' },
                             { id: 'full', label: 'Full Correction', desc: 'Maximum wrinkle elimination & volume restoration.' }
                         ].map((opt) => (
-                            <label key={opt.id} className={`relative flex flex-col p-6 border rounded-3xl cursor-pointer transition-all group ${'recommended' in opt ? 'bg-emerald-950/20 border-emerald-800/30 hover:border-emerald-600/40' : 'bg-white/[0.02] border-white/[0.06] hover:border-[#d4af37]/30'
+                            <label key={opt.id} className={`relative flex flex-col p-6 border rounded-3xl cursor-pointer transition-all group ${'recommended' in opt ? 'bg-emerald-950/20 border-emerald-800/30 hover:border-emerald-600/40' : 'bg-[#3D2B1F]/5 border-[#3D2B1F]/10 hover:border-[#C9A96E]/30'
                                 }`}>
                                 <input type="radio" name="philosophy" value={opt.id} className="sr-only" defaultChecked={opt.id === 'regenerative'} />
                                 {'recommended' in opt && (
-                                    <span className="absolute -top-2.5 right-4 text-[9px] font-black uppercase tracking-widest bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                                    <span className="absolute -top-2.5 right-4 text-[9px] font-black uppercase tracking-widest bg-[#8A9E8D]/20 text-[#8A9E8D] px-2 py-0.5 rounded-full border border-[#8A9E8D]/30">
                                         Proprietary Clarity Score™ Signal
                                     </span>
                                 )}
-                                <div className="font-bold text-white group-has-[:checked]:text-[#d4af37] mb-1">{opt.label}</div>
-                                <div className="text-xs text-gray-500 font-light">{opt.desc}</div>
-                                <div className="absolute top-6 right-6 w-4 h-4 rounded-full border border-white/10 group-has-[:checked]:border-[#d4af37] group-has-[:checked]:bg-[#d4af37]" />
+                                <div className="font-bold text-[#3D2B1F] group-has-[:checked]:text-[#C9A96E] mb-1">{opt.label}</div>
+                                <div className="text-xs text-[#3D2B1F]/60 font-light">{opt.desc}</div>
+                                <div className="absolute top-6 right-6 w-4 h-4 rounded-full border border-[#3D2B1F]/10 group-has-[:checked]:border-[#C9A96E] group-has-[:checked]:bg-[#C9A96E]" />
                             </label>
                         ))}
                     </div>
                 </div>
             </div>
 
-            <div className="pt-8 border-t border-white/[0.06] flex flex-col md:flex-row gap-6 items-center justify-between">
-                <div className="flex items-center gap-2 text-gray-600">
+            <div className="pt-8 border-t border-[#3D2B1F]/10 flex flex-col md:flex-row gap-6 items-center justify-between">
+                <div className="flex items-center gap-2 text-[#3D2B1F]/50">
                     <ShieldCheck className="w-5 h-5" />
                     <span className="text-sm font-medium">Verified by NPI Integration · Free for 30 days</span>
                 </div>
                 <button
                     disabled={loading}
                     type="submit"
-                    className="w-full md:w-auto bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] px-12 py-5 rounded-2xl font-bold text-lg hover:shadow-2xl hover:shadow-[#d4af37]/20 hover:scale-[1.02] transition-all disabled:opacity-50 disabled:scale-100 flex items-center justify-center gap-3"
+                    className="w-full md:w-auto bg-[#C9A96E] hover:bg-[#B5955B] text-white px-12 py-5 rounded-2xl font-bold text-lg hover:shadow-2xl hover:shadow-[#C9A96E]/20 hover:scale-[1.02] transition-all disabled:opacity-50 disabled:scale-100 flex items-center justify-center gap-3"
                 >
                     {loading ? (
                         <Loader2 className="w-6 h-6 animate-spin" />

@@ -25,20 +25,20 @@ export default async function FeaturedCities() {
     })
 
     return (
-        <section className="py-20 bg-[#101827] border-t border-white/[0.05]">
+        <section className="py-20 bg-[#F2EDE4] border-t border-[#3D2B1F]/10">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-3">
+                        <h2 className="text-3xl md:text-4xl font-display font-bold text-[#3D2B1F] mb-3">
                             Explore by City
                         </h2>
-                        <p className="text-gray-500">
+                        <p className="text-[#3D2B1F]/60">
                             Real pricing, verified credentials, and Clarity Score™ rankings — every city.
                         </p>
                     </div>
-                    <Link href={`/${NICHE.baseSlug}`} className="group flex items-center gap-3 bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] px-6 py-2.5 rounded-xl font-black text-sm hover:bg-[#d4af37]/20 transition-all shrink-0">
+                    <Link href={`/${NICHE.baseSlug}`} className="group flex items-center gap-3 bg-[#C9A96E]/10 border border-[#C9A96E]/30 text-[#C9A96E] px-6 py-2.5 rounded-xl font-black text-sm hover:bg-[#C9A96E]/20 transition-all shrink-0">
                         Browse All Cities
-                        <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#d4af37] text-[#0d1420] text-[10px]">22</span>
+                        <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#C9A96E] text-white text-[10px]">22</span>
                         <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
@@ -46,49 +46,49 @@ export default async function FeaturedCities() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {sorted.map((city) => (
                         <Link key={city.slug} href={`/${NICHE.baseSlug}/${city.slug}`} className="group">
-                            <div className={`bg-white/[0.02] border rounded-2xl p-6 hover:bg-white/[0.05] hover:border-[#d4af37]/20 transition-all h-full ${city.name === userCity
-                                ? 'border-[#d4af37]/30 bg-[#d4af37]/5'
-                                : 'border-white/[0.06]'
+                            <div className={`bg-[#3D2B1F]/5 border rounded-2xl p-6 hover:bg-[#3D2B1F]/5 hover:border-[#C9A96E]/20 transition-all h-full ${city.name === userCity
+                                ? 'border-[#C9A96E]/30 bg-[#C9A96E]/5'
+                                : 'border-[#3D2B1F]/10'
                                 }`}>
                                 <div className="flex items-center justify-between mb-3">
                                     <div className="flex items-center gap-2">
-                                        <MapPin className="w-3.5 h-3.5 text-[#d4af37]" />
-                                        <h3 className="font-bold text-white text-sm">
+                                        <MapPin className="w-3.5 h-3.5 text-[#C9A96E]" />
+                                        <h3 className="font-bold text-[#3D2B1F] text-sm">
                                             {city.name}, {city.state}
                                         </h3>
                                     </div>
                                     {city.name === userCity && (
-                                        <span className="text-[9px] text-[#d4af37] font-black uppercase tracking-widest bg-[#d4af37]/10 px-2 py-0.5 rounded-full border border-[#d4af37]/20">
+                                        <span className="text-[9px] text-[#C9A96E] font-black uppercase tracking-widest bg-[#C9A96E]/10 px-2 py-0.5 rounded-full border border-[#C9A96E]/20">
                                             Near You
                                         </span>
                                     )}
                                 </div>
 
                                 {city.tag && (
-                                    <p className="text-[10px] text-gray-500 font-bold mb-3">{city.tag}</p>
+                                    <p className="text-[10px] text-[#3D2B1F]/60 font-bold mb-3">{city.tag}</p>
                                 )}
 
                                 <div className="space-y-1.5 text-[11px]">
-                                    <div className="flex justify-between text-gray-600">
+                                    <div className="flex justify-between text-[#3D2B1F]/50">
                                         <span>Avg. per unit</span>
-                                        <span className="font-bold text-[#d4af37]">${city.avgCost}</span>
+                                        <span className="font-bold text-[#C9A96E]">${city.avgCost}</span>
                                     </div>
-                                    <div className="flex justify-between text-gray-600">
+                                    <div className="flex justify-between text-[#3D2B1F]/50">
                                         <span>Clarity Score™</span>
-                                        <span className="font-bold text-[#d4af37]">{city.clarityScore}</span>
+                                        <span className="font-bold text-[#C9A96E]">{city.clarityScore}</span>
                                     </div>
-                                    <div className="flex justify-between text-gray-600">
+                                    <div className="flex justify-between text-[#3D2B1F]/50">
                                         <span>Providers indexed</span>
-                                        <span className="font-bold text-white">{city.providers}</span>
+                                        <span className="font-bold text-[#3D2B1F]">{city.providers}</span>
                                     </div>
                                     {city.topSearch && (
-                                        <div className="pt-2 mt-2 border-t border-white/[0.05]">
+                                        <div className="pt-2 mt-2 border-t border-[#3D2B1F]/10">
                                             <div className="text-[9px] text-gray-700 uppercase font-black mb-0.5">Most searched:</div>
-                                            <div className="text-[10px] text-gray-400 font-medium italic">{city.topSearch}</div>
+                                            <div className="text-[10px] text-[#3D2B1F]/70 font-medium italic">{city.topSearch}</div>
                                         </div>
                                     )}
                                 </div>
-                                <div className="mt-4 text-[10px] font-black uppercase tracking-widest text-[#d4af37]/50 group-hover:text-[#d4af37] transition-colors flex items-center gap-1">
+                                <div className="mt-4 text-[10px] font-black uppercase tracking-widest text-[#C9A96E]/50 group-hover:text-[#C9A96E] transition-colors flex items-center gap-1">
                                     View Rankings <ChevronRight className="w-3 h-3" />
                                 </div>
                             </div>
@@ -99,7 +99,7 @@ export default async function FeaturedCities() {
                 <div className="mt-8 text-center">
                     <Link
                         href="/claim"
-                        className="text-sm text-gray-600 hover:text-[#d4af37] font-semibold transition-colors"
+                        className="text-sm text-[#3D2B1F]/50 hover:text-[#C9A96E] font-semibold transition-colors"
                     >
                         Is your clinic missing? Claim your free listing →
                     </Link>

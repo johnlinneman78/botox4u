@@ -4,17 +4,17 @@ import { Button } from '@/components/ui/Button'
 
 export default function TreatmentGuides() {
     return (
-        <section className="py-24 bg-[#0d1420] border-t border-white/[0.05]">
+        <section className="py-24 bg-[#FAF8F5] border-t border-[#3D2B1F]/10">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                     <div>
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/20 text-[#d4af37] text-xs font-black tracking-widest uppercase mb-5">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C9A96E]/10 border border-[#C9A96E]/20 text-[#C9A96E] text-xs font-black tracking-widest uppercase mb-5">
                             Expert Treatment Intelligence
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-                            The Complete <span className="text-[#d4af37]">Buyer Guides.</span>
+                        <h2 className="text-4xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-4">
+                            The Complete <span className="text-[#C9A96E]">Buyer Guides.</span>
                         </h2>
-                        <p className="text-xl text-gray-400 max-w-2xl font-light leading-relaxed">
+                        <p className="text-xl text-[#3D2B1F]/70 max-w-2xl font-light leading-relaxed">
                             Don't book blind. Compare the top treatments, find vetted injectors, and see real-world pricing before your first consultation.
                         </p>
                     </div>
@@ -44,36 +44,36 @@ export default function TreatmentGuides() {
                             desc: 'Facials, lasers, skin tightening, and more. Browse indexed medical spas with verified clinical oversight.',
                             icon: Building2,
                             color: 'from-emerald-600/20 to-emerald-900/10',
-                            accent: 'text-emerald-400',
+                            accent: 'text-[#8A9E8D]',
                             link: '/botox-buyers-guide'
                         }
                     ].map((guide, i) => (
                         <Link
                             key={i}
                             href={guide.link}
-                            className={`group relative bg-gradient-to-br ${guide.color} border border-white/[0.06] rounded-[3rem] p-10 overflow-hidden hover:border-[#d4af37]/30 transition-all hover:scale-[1.01] hover:shadow-2xl hover:shadow-[#d4af37]/5`}
+                            className={`group relative bg-gradient-to-br ${guide.color} border border-[#3D2B1F]/10 rounded-[3rem] p-10 overflow-hidden hover:border-[#C9A96E]/30 transition-all hover:scale-[1.01] hover:shadow-2xl hover:shadow-[#C9A96E]/5`}
                         >
                             <div className="relative z-10">
-                                <div className={`w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center ${guide.accent} mb-8 group-hover:scale-110 transition-transform`}>
+                                <div className={`w-14 h-14 rounded-2xl bg-[#3D2B1F]/5 flex items-center justify-center ${guide.accent} mb-8 group-hover:scale-110 transition-transform`}>
                                     <guide.icon className="w-7 h-7" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-white mb-4">{guide.title}</h3>
-                                <p className="text-gray-400 mb-8 leading-relaxed font-light">
+                                <h3 className="text-2xl font-bold text-[#3D2B1F] mb-4">{guide.title}</h3>
+                                <p className="text-[#3D2B1F]/70 mb-8 leading-relaxed font-light">
                                     {guide.desc}
                                 </p>
-                                <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white group-hover:text-[#d4af37] transition-colors">
+                                <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#3D2B1F] group-hover:text-[#C9A96E] transition-colors">
                                     Compare Top Providers <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                 </div>
                             </div>
-                            <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-[#d4af37] opacity-[0.02] blur-[40px] rounded-full group-hover:opacity-[0.05] transition-opacity" />
+                            <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-[#C9A96E] opacity-[0.02] blur-[40px] rounded-full group-hover:opacity-[0.05] transition-opacity" />
                         </Link>
                     ))}
                 </div>
 
                 {/* Secondary (What's Next) */}
-                <div className="relative pt-12 border-t border-white/[0.05]">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-500 text-[10px] font-black tracking-widest uppercase mb-8">
-                        <Sparkles className="w-3 h-3 text-[#d4af37]" /> What's Next in 2026
+                <div className="relative pt-12 border-t border-[#3D2B1F]/10">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 text-[#3D2B1F]/60 text-[10px] font-black tracking-widest uppercase mb-8">
+                        <Sparkles className="w-3 h-3 text-[#C9A96E]" /> What's Next in 2026
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
@@ -99,16 +99,16 @@ export default function TreatmentGuides() {
                             <Link
                                 key={i}
                                 href={guide.link}
-                                className="group flex items-center gap-5 p-6 bg-white/[0.02] border border-white/[0.06] rounded-2xl hover:bg-white/[0.04] hover:border-[#d4af37]/20 transition-all"
+                                className="group flex items-center gap-5 p-6 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-2xl hover:bg-[#3D2B1F]/5 hover:border-[#C9A96E]/20 transition-all"
                             >
-                                <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 group-hover:text-[#d4af37] transition-colors">
+                                <div className="w-12 h-12 rounded-xl bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 flex items-center justify-center text-[#3D2B1F]/70 group-hover:text-[#C9A96E] transition-colors">
                                     <guide.icon className="w-5 h-5" />
                                 </div>
                                 <div className="flex-1">
-                                    <h4 className="text-sm font-bold text-white mb-1">{guide.title}</h4>
-                                    <p className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">{guide.desc}</p>
+                                    <h4 className="text-sm font-bold text-[#3D2B1F] mb-1">{guide.title}</h4>
+                                    <p className="text-[10px] text-[#3D2B1F]/60 font-medium uppercase tracking-wider">{guide.desc}</p>
                                 </div>
-                                <ChevronRight className="w-4 h-4 text-gray-700 group-hover:text-white transition-colors" />
+                                <ChevronRight className="w-4 h-4 text-gray-700 group-hover:text-[#3D2B1F] transition-colors" />
                             </Link>
                         ))}
                     </div>

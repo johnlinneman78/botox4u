@@ -14,8 +14,8 @@ interface AtAGlanceProps {
 
 export function AtAGlance({ title, summary, items }: AtAGlanceProps) {
     return (
-        <Card className="bg-primary text-white overflow-hidden border-none shadow-2xl mb-12">
-            <div className="bg-secondary/20 px-8 py-3 border-b border-white/10">
+        <Card className="bg-primary text-[#3D2B1F] overflow-hidden border-none shadow-2xl mb-12">
+            <div className="bg-secondary/20 px-8 py-3 border-b border-[#3D2B1F]/10">
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary-foreground">
                     Directory Insights
                 </span>
@@ -32,14 +32,14 @@ export function AtAGlance({ title, summary, items }: AtAGlanceProps) {
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         {items.map((item, idx) => (
-                            <div key={idx} className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors group">
-                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 group-hover:text-secondary transition-colors">
+                            <div key={idx} className="bg-[#3D2B1F]/5 backdrop-blur-sm p-6 rounded-2xl border border-[#3D2B1F]/10 hover:bg-[#3D2B1F]/10 transition-colors group">
+                                <p className="text-xs font-bold text-[#3D2B1F]/70 uppercase tracking-widest mb-3 group-hover:text-secondary transition-colors">
                                     {item.label}
                                 </p>
                                 <div className="text-2xl md:text-3xl font-display font-bold">
                                     {item.prefix && <span className="text-secondary mr-1">{item.prefix}</span>}
                                     {item.value}
-                                    {item.suffix && <span className="text-sm font-normal text-gray-400 ml-1">{item.suffix}</span>}
+                                    {item.suffix && <span className="text-sm font-normal text-[#3D2B1F]/70 ml-1">{item.suffix}</span>}
                                 </div>
                             </div>
                         ))}

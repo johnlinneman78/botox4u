@@ -24,18 +24,18 @@ const guides = [
         desc: 'The quick facts on longevity, safety, and what to actually expect during your first treatment.',
         href: '/botox-fact-sheet',
         icon: Shield,
-        color: 'text-[#d4af37]',
-        bg: 'bg-[#d4af37]/10',
-        border: 'border-[#d4af37]/20'
+        color: 'text-[#C9A96E]',
+        bg: 'bg-[#C9A96E]/10',
+        border: 'border-[#C9A96E]/20'
     },
     {
         title: 'The Botox Pulse Survey',
         desc: 'See live pricing data and patient satisfaction scores from across the country.',
         href: '/pulse',
         icon: Zap,
-        color: 'text-emerald-400',
-        bg: 'bg-emerald-400/10',
-        border: 'border-emerald-400/20'
+        color: 'text-[#8A9E8D]',
+        bg: 'bg-[#8A9E8D]/10',
+        border: 'border-[#8A9E8D]/20'
     },
     {
         title: 'How Much Does Botox Cost?',
@@ -50,13 +50,13 @@ const guides = [
 
 export default function GuidesPage() {
     return (
-        <main className="min-h-screen bg-[#0d1420] pt-32 pb-24">
+        <main className="min-h-screen bg-[#FAF8F5] pt-32 pb-24">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto text-center mb-20">
-                    <h1 className="text-5xl md:text-7xl font-display font-bold text-white mb-8 leading-tight">
-                        Clinical <span className="text-[#d4af37]">Intelligence.</span>
+                    <h1 className="text-5xl md:text-7xl font-display font-bold text-[#3D2B1F] mb-8 leading-tight">
+                        Clinical <span className="text-[#C9A96E]">Intelligence.</span>
                     </h1>
-                    <p className="text-xl text-gray-400 font-light leading-relaxed">
+                    <p className="text-xl text-[#3D2B1F]/70 font-light leading-relaxed">
                         Master the complexities of modern aesthetics with our independent, data-backed research. No ads, just outcomes.
                     </p>
                 </div>
@@ -66,7 +66,7 @@ export default function GuidesPage() {
                         <Link
                             key={guide.href}
                             href={guide.href}
-                            className={`group p-10 rounded-[3rem] bg-white/[0.02] border ${guide.border} hover:bg-white/[0.04] transition-all relative overflow-hidden`}
+                            className={`group p-10 rounded-[3rem] bg-[#3D2B1F]/5 border ${guide.border} hover:bg-[#3D2B1F]/5 transition-all relative overflow-hidden`}
                         >
                             <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
                                 <guide.icon className="w-32 h-32" />
@@ -76,12 +76,12 @@ export default function GuidesPage() {
                                 <guide.icon className={`w-7 h-7 ${guide.color}`} />
                             </div>
 
-                            <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#d4af37] transition-colors">{guide.title}</h3>
-                            <p className="text-gray-500 leading-relaxed font-light mb-8">
+                            <h3 className="text-2xl font-bold text-[#3D2B1F] mb-4 group-hover:text-[#C9A96E] transition-colors">{guide.title}</h3>
+                            <p className="text-[#3D2B1F]/60 leading-relaxed font-light mb-8">
                                 {guide.desc}
                             </p>
 
-                            <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white/40 group-hover:text-white transition-colors">
+                            <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#3D2B1F]/40 group-hover:text-[#3D2B1F] transition-colors">
                                 Read Guide <ArrowRight className="w-4 h-4" />
                             </div>
                         </Link>
@@ -89,17 +89,17 @@ export default function GuidesPage() {
                 </div>
 
                 {/* Newsletter / Audit CTA */}
-                <div className="mt-24 max-w-4xl mx-auto p-12 md:p-16 rounded-[4rem] bg-gradient-to-br from-[#101827] to-[#0d1420] border border-white/[0.06] text-center shadow-2xl relative overflow-hidden">
+                <div className="mt-24 max-w-4xl mx-auto p-12 md:p-16 rounded-[4rem] bg-gradient-to-br from-[#101827] to-[#0d1420] border border-[#3D2B1F]/10 text-center shadow-2xl relative overflow-hidden">
                     <div className="absolute top-0 left-0 p-8 opacity-10">
-                        <Sparkles className="w-16 h-16 text-[#d4af37]" />
+                        <Sparkles className="w-16 h-16 text-[#C9A96E]" />
                     </div>
 
-                    <h2 className="text-3xl font-display font-bold text-white mb-6">Want personalized advice?</h2>
-                    <p className="text-gray-400 mb-10 text-lg font-light">
+                    <h2 className="text-3xl font-display font-bold text-[#3D2B1F] mb-6">Want personalized advice?</h2>
+                    <p className="text-[#3D2B1F]/70 mb-10 text-lg font-light">
                         Use our Injector Match tool to find the perfect specialist for your unique clinical goals.
                     </p>
                     <Link href="/#match-quiz">
-                        <button className="h-16 px-12 bg-[#d4af37] text-[#0d1420] font-black text-lg rounded-2xl hover:bg-[#c0a030] transition-all hover:scale-[1.02]">
+                        <button className="h-16 px-12 bg-[#C9A96E] text-white font-black text-lg rounded-2xl hover:bg-[#B5955B] transition-all hover:scale-[1.02]">
                             Start Injector Match
                         </button>
                     </Link>

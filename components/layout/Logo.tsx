@@ -24,7 +24,7 @@ function BrandText({ theme, size = '1.5rem' }: { theme: 'light' | 'dark', size?:
             textShadow: theme === 'dark' ? '0 0 20px rgba(212, 175, 55, 0.2)' : 'none' // Added a subtle glow
         }}>
             {NICHE.siteName.split('.')[0]}
-            <span style={{ color: '#d4af37', fontWeight: 700 }}>.{NICHE.siteName.split('.').slice(1).join('.')}</span>
+            <span style={{ color: '#C9A96E', fontWeight: 700 }}>.{NICHE.siteName.split('.').slice(1).join('.')}</span>
         </span>
     )
 }
@@ -45,9 +45,9 @@ export function LogoShield({ className = "", theme = 'dark' }: { className?: str
                 <defs>
                     <linearGradient id="shieldGold" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stopColor="#f3e5ab" />
-                        <stop offset="45%" stopColor="#d4af37" />
+                        <stop offset="45%" stopColor="#C9A96E" />
                         <stop offset="55%" stopColor="#b8941f" />
-                        <stop offset="100%" stopColor="#d4af37" />
+                        <stop offset="100%" stopColor="#C9A96E" />
                     </linearGradient>
                     <filter id="shieldShadow" x="-20%" y="-20%" width="140%" height="140%">
                         <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
@@ -70,7 +70,7 @@ export function LogoWordmark({ className = "", theme = 'dark' }: { className?: s
     return (
         <div className={`flex flex-col whitespace-nowrap flex-shrink-0 ${className}`}>
             <BrandText theme={theme} size="2rem" />
-            <div style={{ height: '2px', background: 'linear-gradient(90deg, #d4af37, transparent)', marginTop: '4px' }} />
+            <div style={{ height: '2px', background: 'linear-gradient(90deg, #C9A96E, transparent)', marginTop: '4px' }} />
         </div>
     )
 }

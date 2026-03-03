@@ -125,7 +125,7 @@ export function CityFAQ({ city, avgCost }: CityFAQProps) {
                                         }}
                                     >
                                         <ChevronDown
-                                            className={`w-4 h-4 transition-transform duration-300 ${openIndex === i ? 'rotate-180 text-white' : 'text-[var(--color-stone)]'}`}
+                                            className={`w-4 h-4 transition-transform duration-300 ${openIndex === i ? 'rotate-180 text-[#3D2B1F]' : 'text-[var(--color-stone)]'}`}
                                         />
                                     </div>
                                 </button>

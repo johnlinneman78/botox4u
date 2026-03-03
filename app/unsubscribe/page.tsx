@@ -41,10 +41,10 @@ function UnsubscribeContent() {
                 <CardContent className="text-center">
                     {status === 'idle' && (
                         <>
-                            <p className="text-gray-600 mb-6">
+                            <p className="text-[#3D2B1F]/50 mb-6">
                                 Are you sure you want to stop receiving outreach emails for <strong>{domain || 'your clinic'}</strong>?
                             </p>
-                            <Button onClick={handleUnsubscribe} className="w-full bg-red-600 hover:bg-red-700 text-white">
+                            <Button onClick={handleUnsubscribe} className="w-full bg-red-600 hover:bg-red-700 text-[#3D2B1F]">
                                 Finalize Unsubscribe
                             </Button>
                         </>
@@ -56,7 +56,7 @@ function UnsubscribeContent() {
                         <div className="text-green-600">
                             <div className="text-4xl mb-4">✅</div>
                             <p className="font-bold">You have been unsubscribed.</p>
-                            <p className="text-sm text-gray-500 mt-2">We will no longer contact this clinic domain regarding this directory.</p>
+                            <p className="text-sm text-[#3D2B1F]/60 mt-2">We will no longer contact this clinic domain regarding this directory.</p>
                         </div>
                     )}
 

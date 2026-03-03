@@ -46,30 +46,30 @@ export default function CompetitiveComparison() {
     return (
         <section className="py-24 bg-[#080e17] relative overflow-hidden">
             {/* Ambient Background Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#d4af37]/5 blur-[160px] rounded-full pointer-events-none"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#C9A96E]/5 blur-[160px] rounded-full pointer-events-none"></div>
 
             <div className="container mx-auto px-4 relative z-10">
                 <div className="max-w-4xl mx-auto text-center mb-16">
-                    <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+                    <h2 className="text-3xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-6">
                         Not Another Directory.<br />
-                        <span className="text-[#d4af37]">A Smarter Way to Choose.</span>
+                        <span className="text-[#C9A96E]">A Smarter Way to Choose.</span>
                     </h2>
-                    <p className="text-gray-400 text-lg font-light leading-relaxed max-w-2xl mx-auto">
+                    <p className="text-[#3D2B1F]/70 text-lg font-light leading-relaxed max-w-2xl mx-auto">
                         You&apos;ve seen the other sites. RealSelf shows you whoever pays for placement. Yelp buries the best providers behind ads. Google Maps gives you star ratings with zero context. InjectorIndex is different.
                     </p>
                 </div>
 
                 <div className="max-w-6xl mx-auto">
-                    <Card className="overflow-hidden border-white/[0.06] bg-white/[0.02] backdrop-blur-sm">
+                    <Card className="overflow-hidden border-[#3D2B1F]/10 bg-[#3D2B1F]/5 backdrop-blur-sm">
                         <div className="overflow-x-auto">
                             <table className="w-full text-left border-collapse">
                                 <thead>
-                                    <tr className="border-b border-white/[0.06]">
-                                        <th className="px-6 py-5 text-xs font-bold uppercase tracking-widest text-gray-500 bg-white/[0.01] w-[200px]">What You Need</th>
-                                        <th className="px-4 py-5 text-xs font-bold uppercase tracking-widest text-gray-500 text-center bg-white/[0.01]">RealSelf</th>
-                                        <th className="px-4 py-5 text-xs font-bold uppercase tracking-widest text-gray-500 text-center bg-white/[0.01]">Yelp</th>
-                                        <th className="px-4 py-5 text-xs font-bold uppercase tracking-widest text-gray-500 text-center bg-white/[0.01]">ZocDoc</th>
-                                        <th className="px-4 py-5 text-xs font-bold uppercase tracking-widest text-[#d4af37] text-center bg-[#d4af37]/5">
+                                    <tr className="border-b border-[#3D2B1F]/10">
+                                        <th className="px-6 py-5 text-xs font-bold uppercase tracking-widest text-[#3D2B1F]/60 bg-white/[0.01] w-[200px]">What You Need</th>
+                                        <th className="px-4 py-5 text-xs font-bold uppercase tracking-widest text-[#3D2B1F]/60 text-center bg-white/[0.01]">RealSelf</th>
+                                        <th className="px-4 py-5 text-xs font-bold uppercase tracking-widest text-[#3D2B1F]/60 text-center bg-white/[0.01]">Yelp</th>
+                                        <th className="px-4 py-5 text-xs font-bold uppercase tracking-widest text-[#3D2B1F]/60 text-center bg-white/[0.01]">ZocDoc</th>
+                                        <th className="px-4 py-5 text-xs font-bold uppercase tracking-widest text-[#C9A96E] text-center bg-[#C9A96E]/5">
                                             <div className="flex items-center justify-center gap-2">
                                                 <Shield className="w-4 h-4" />
                                                 InjectorIndex
@@ -80,7 +80,7 @@ export default function CompetitiveComparison() {
                                 <tbody className="divide-y divide-white/[0.04]">
                                     {features.map((feature, idx) => (
                                         <tr key={idx} className="group hover:bg-white/[0.01] transition-colors">
-                                            <td className="px-6 py-4 text-sm font-medium text-white group-hover:text-[#d4af37] transition-colors">
+                                            <td className="px-6 py-4 text-sm font-medium text-[#3D2B1F] group-hover:text-[#C9A96E] transition-colors">
                                                 {feature.label}
                                             </td>
                                             <td className="px-4 py-4 text-center">
@@ -89,7 +89,7 @@ export default function CompetitiveComparison() {
                                                         ? <Check className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                                                         : <X className="w-3.5 h-3.5 text-red-500/50 shrink-0" />
                                                     }
-                                                    <span className={`text-xs ${feature.realself.pass ? 'text-gray-400' : 'text-gray-600 italic'}`}>
+                                                    <span className={`text-xs ${feature.realself.pass ? 'text-[#3D2B1F]/70' : 'text-[#3D2B1F]/50 italic'}`}>
                                                         {feature.realself.value}
                                                     </span>
                                                 </div>
@@ -97,19 +97,19 @@ export default function CompetitiveComparison() {
                                             <td className="px-4 py-4 text-center">
                                                 <div className="flex items-center justify-center gap-1.5">
                                                     <X className="w-3.5 h-3.5 text-red-500/50 shrink-0" />
-                                                    <span className="text-xs text-gray-600 italic">{feature.yelp.value}</span>
+                                                    <span className="text-xs text-[#3D2B1F]/50 italic">{feature.yelp.value}</span>
                                                 </div>
                                             </td>
                                             <td className="px-4 py-4 text-center">
                                                 <div className="flex items-center justify-center gap-1.5">
                                                     <X className="w-3.5 h-3.5 text-red-500/50 shrink-0" />
-                                                    <span className="text-xs text-gray-600 italic">{feature.zocdoc.value}</span>
+                                                    <span className="text-xs text-[#3D2B1F]/50 italic">{feature.zocdoc.value}</span>
                                                 </div>
                                             </td>
-                                            <td className="px-4 py-4 text-center bg-[#d4af37]/[0.02]">
+                                            <td className="px-4 py-4 text-center bg-[#C9A96E]/[0.02]">
                                                 <div className="flex items-center justify-center gap-1.5">
-                                                    <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                                                    <span className="text-xs font-bold text-white">{feature.injectorindex.value}</span>
+                                                    <Check className="w-3.5 h-3.5 text-[#8A9E8D] shrink-0" />
+                                                    <span className="text-xs font-bold text-[#3D2B1F]">{feature.injectorindex.value}</span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -120,13 +120,13 @@ export default function CompetitiveComparison() {
                     </Card>
 
                     {/* Bottom line quote */}
-                    <div className="mt-12 p-8 bg-gradient-to-r from-[#d4af37]/10 to-transparent rounded-[2rem] border border-[#d4af37]/15">
-                        <p className="text-lg text-white font-bold mb-2">The bottom line:</p>
-                        <p className="text-gray-400 leading-relaxed">
+                    <div className="mt-12 p-8 bg-gradient-to-r from-[#C9A96E]/10 to-transparent rounded-[2rem] border border-[#C9A96E]/15">
+                        <p className="text-lg text-[#3D2B1F] font-bold mb-2">The bottom line:</p>
+                        <p className="text-[#3D2B1F]/70 leading-relaxed">
                             RealSelf is a marketplace. Yelp is an ad platform. ZocDoc is for insurance-based healthcare.
-                            <span className="text-white font-semibold"> InjectorIndex is an independent data platform</span> built specifically for medical aesthetics — optimized for how patients actually discover providers in 2026: through AI recommendations backed by structured, trustworthy data.
+                            <span className="text-[#3D2B1F] font-semibold"> InjectorIndex is an independent data platform</span> built specifically for medical aesthetics — optimized for how patients actually discover providers in 2026: through AI recommendations backed by structured, trustworthy data.
                         </p>
-                        <p className="text-[#d4af37] text-sm font-bold mt-4 italic">
+                        <p className="text-[#C9A96E] text-sm font-bold mt-4 italic">
                             We&apos;re not competing with Google. We&apos;re the source Google&apos;s AI cites.
                         </p>
                     </div>

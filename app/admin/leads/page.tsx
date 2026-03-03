@@ -73,20 +73,20 @@ export default function LeadsPage() {
             <div className="max-w-7xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
                     <div>
-                        <h1 className="text-3xl font-display font-bold text-white mb-2">Lead CRM</h1>
-                        <p className="text-gray-400">Manage and route incoming patient inquiries.</p>
+                        <h1 className="text-3xl font-display font-bold text-[#3D2B1F] mb-2">Lead CRM</h1>
+                        <p className="text-[#3D2B1F]/70">Manage and route incoming patient inquiries.</p>
                     </div>
                     <div className="flex gap-2">
-                        <Button variant="outline" onClick={fetchLeads} className="border-white/10 text-white hover:bg-white/5">
+                        <Button variant="outline" onClick={fetchLeads} className="border-[#3D2B1F]/10 text-[#3D2B1F] hover:bg-[#3D2B1F]/5">
                             Refresh
                         </Button>
                     </div>
                 </div>
 
-                <Card className="bg-[#12151c]/50 border-white/5 backdrop-blur-xl">
+                <Card className="bg-[#12151c]/50 border-[#3D2B1F]/10 backdrop-blur-xl">
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm text-left">
-                            <thead className="text-xs text-gray-400 uppercase bg-white/5 border-b border-white/5">
+                            <thead className="text-xs text-[#3D2B1F]/70 uppercase bg-[#3D2B1F]/5 border-b border-[#3D2B1F]/10">
                                 <tr>
                                     <th className="px-6 py-4">Status</th>
                                     <th className="px-6 py-4">Patient</th>
@@ -100,19 +100,19 @@ export default function LeadsPage() {
                             <tbody className="divide-y divide-white/5">
                                 {loading ? (
                                     <tr>
-                                        <td colSpan={7} className="px-6 py-8 text-center text-gray-500">
+                                        <td colSpan={7} className="px-6 py-8 text-center text-[#3D2B1F]/60">
                                             Loading leads...
                                         </td>
                                     </tr>
                                 ) : leads.length === 0 ? (
                                     <tr>
-                                        <td colSpan={7} className="px-6 py-8 text-center text-gray-500">
+                                        <td colSpan={7} className="px-6 py-8 text-center text-[#3D2B1F]/60">
                                             No leads found yet.
                                         </td>
                                     </tr>
                                 ) : (
                                     leads.map((lead) => (
-                                        <tr key={lead.id} className="hover:bg-white/5 transition-colors">
+                                        <tr key={lead.id} className="hover:bg-[#3D2B1F]/5 transition-colors">
                                             <td className="px-6 py-4">
                                                 <Badge
                                                     variant={
@@ -126,13 +126,13 @@ export default function LeadsPage() {
                                                 </Badge>
                                             </td>
                                             <td className="px-6 py-4">
-                                                <div className="font-bold text-white">{lead.full_name}</div>
-                                                <div className="text-gray-400 text-xs">{lead.email}</div>
-                                                <div className="text-gray-400 text-xs">{lead.phone}</div>
+                                                <div className="font-bold text-[#3D2B1F]">{lead.full_name}</div>
+                                                <div className="text-[#3D2B1F]/70 text-xs">{lead.email}</div>
+                                                <div className="text-[#3D2B1F]/70 text-xs">{lead.phone}</div>
                                             </td>
                                             <td className="px-6 py-4">
                                                 <div className="font-medium text-gray-200">{lead.treatment_type}</div>
-                                                <div className="text-gray-500 text-xs mt-1">
+                                                <div className="text-[#3D2B1F]/60 text-xs mt-1">
                                                     Budget: {lead.budget_range}<br />
                                                     Time: {lead.timeframe}
                                                 </div>
@@ -144,15 +144,15 @@ export default function LeadsPage() {
                                                 {lead.provider?.name ? (
                                                     <span className="text-secondary font-medium">{lead.provider.name}</span>
                                                 ) : (
-                                                    <span className="text-gray-600 italic">Unassigned</span>
+                                                    <span className="text-[#3D2B1F]/50 italic">Unassigned</span>
                                                 )}
                                             </td>
-                                            <td className="px-6 py-4 text-gray-500">
+                                            <td className="px-6 py-4 text-[#3D2B1F]/60">
                                                 {new Date(lead.created_at).toLocaleDateString()}
                                             </td>
                                             <td className="px-6 py-4">
                                                 <select
-                                                    className="bg-[#0a0c10] border border-white/10 rounded px-2 py-1 text-xs text-gray-300 focus:border-secondary outline-none"
+                                                    className="bg-[#0a0c10] border border-[#3D2B1F]/10 rounded px-2 py-1 text-xs text-gray-300 focus:border-secondary outline-none"
                                                     value={lead.status}
                                                     onChange={(e) => updateStatus(lead.id, e.target.value)}
                                                 >

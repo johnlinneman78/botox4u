@@ -31,7 +31,7 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId, providerI
                     Patient Satisfaction
                 </h3>
 
-                <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                <p className="text-lg text-[#3D2B1F]/50 mb-8 leading-relaxed">
                     Based on <span className="font-bold text-primary">{totalReviews} verified patient reviews</span>. We use sentiment analysis to prioritize injectors known for <span className="text-secondary font-bold italic">natural, conservative results</span>.
                 </p>
 
@@ -57,7 +57,7 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId, providerI
                                 <div className="flex justify-between items-center">
                                     <div className="flex flex-col">
                                         <span className="text-xs font-bold text-primary">{review.author_name}</span>
-                                        <span className="text-[10px] text-gray-400 font-medium">Verified {NICHE.providerType === 'injector' ? 'Patient' : 'Customer'} • {NICHE.googleAttribution.reviewText}</span>
+                                        <span className="text-[10px] text-[#3D2B1F]/70 font-medium">Verified {NICHE.providerType === 'injector' ? 'Patient' : 'Customer'} • {NICHE.googleAttribution.reviewText}</span>
                                     </div>
                                     <div className="opacity-40">
                                         <img
@@ -76,7 +76,7 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId, providerI
 
                 <a
                     href={bookingTrackingUrl}
-                    className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#d4af37] text-[#0d1420] rounded-2xl text-lg font-black tracking-widest uppercase hover:bg-[#c0a030] transition-all shadow-xl shadow-[#d4af37]/20 group"
+                    className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#C9A96E] text-white rounded-2xl text-lg font-black tracking-widest uppercase hover:bg-[#B5955B] transition-all shadow-xl shadow-[#C9A96E]/20 group"
                     onClick={() => {
                         if (typeof window.gtag === 'function') {
                             window.gtag('event', 'booking_click', {
@@ -92,7 +92,7 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId, providerI
             </div>
 
             <div className="mt-8 flex flex-col items-center gap-4">
-                <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em]">
+                <p className="text-[10px] text-[#3D2B1F]/70 font-black uppercase tracking-[0.2em]">
                     Data Verified • 2026 Clinical Standard
                 </p>
             </div>

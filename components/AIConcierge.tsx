@@ -71,11 +71,11 @@ export function AIConcierge() {
             {/* Floating Toggle */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-6 right-6 w-16 h-16 bg-[#d4af37] text-[#0d1420] rounded-full shadow-2xl shadow-[#d4af37]/40 flex items-center justify-center hover:scale-110 transition-all z-[100] group"
+                className="fixed bottom-6 right-6 w-16 h-16 bg-[#C9A96E] text-white rounded-full shadow-2xl shadow-[#C9A96E]/40 flex items-center justify-center hover:scale-110 transition-all z-[100] group"
             >
                 {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
                 {!isOpen && (
-                    <div className="absolute -top-12 right-0 bg-white text-[#0d1420] text-[10px] font-black px-3 py-1.5 rounded-xl whitespace-nowrap shadow-xl animate-bounce">
+                    <div className="absolute -top-12 right-0 bg-white text-white text-[10px] font-black px-3 py-1.5 rounded-xl whitespace-nowrap shadow-xl animate-bounce">
                         Find My Injector 💉
                     </div>
                 )}
@@ -83,15 +83,15 @@ export function AIConcierge() {
 
             {/* Chat Box */}
             {isOpen && (
-                <div className="fixed bottom-24 right-6 w-[400px] h-[600px] bg-[#0d1420]/80 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] shadow-2xl z-[100] flex flex-col overflow-hidden animate-in slide-in-from-bottom-5">
+                <div className="fixed bottom-24 right-6 w-[400px] h-[600px] bg-[#FAF8F5]/80 backdrop-blur-2xl border border-[#3D2B1F]/10 rounded-[2.5rem] shadow-2xl z-[100] flex flex-col overflow-hidden animate-in slide-in-from-bottom-5">
                     {/* Header */}
-                    <div className="p-6 bg-white/[0.02] border-b border-white/10 flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-[#d4af37]/20 flex items-center justify-center">
-                            <Sparkles className="w-5 h-5 text-[#d4af37]" />
+                    <div className="p-6 bg-[#3D2B1F]/5 border-b border-[#3D2B1F]/10 flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-[#C9A96E]/20 flex items-center justify-center">
+                            <Sparkles className="w-5 h-5 text-[#C9A96E]" />
                         </div>
                         <div>
-                            <h4 className="text-white font-bold text-sm">Concierge AI</h4>
-                            <p className="text-[10px] text-gray-500 uppercase tracking-widest font-black">Online • Active Research</p>
+                            <h4 className="text-[#3D2B1F] font-bold text-sm">Concierge AI</h4>
+                            <p className="text-[10px] text-[#3D2B1F]/60 uppercase tracking-widest font-black">Online • Active Research</p>
                         </div>
                     </div>
 
@@ -100,8 +100,8 @@ export function AIConcierge() {
                         {messages.map((msg, i) => (
                             <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
                                 <div className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed ${msg.role === 'user'
-                                    ? 'bg-[#d4af37] text-[#0d1420] font-bold rounded-tr-none'
-                                    : 'bg-white/[0.03] text-gray-300 border border-white/5 rounded-tl-none'
+                                    ? 'bg-[#C9A96E] text-white font-bold rounded-tr-none'
+                                    : 'bg-[#3D2B1F]/5 text-gray-300 border border-[#3D2B1F]/10 rounded-tl-none'
                                     }`}>
                                     {msg.content}
                                 </div>
@@ -109,21 +109,21 @@ export function AIConcierge() {
                                 {/* Recommendations Cards */}
                                 {msg.recommendations && msg.recommendations.length > 0 && (
                                     <div className="mt-4 space-y-3 w-full">
-                                        <p className="text-[10px] font-black text-[#d4af37] uppercase tracking-widest mb-2">Recommended Injectors:</p>
+                                        <p className="text-[10px] font-black text-[#C9A96E] uppercase tracking-widest mb-2">Recommended Injectors:</p>
                                         {msg.recommendations.map((rec: any) => (
-                                            <div key={rec.id} className="bg-white/[0.02] border border-white/10 rounded-2xl p-4 flex items-center gap-4 group/rec">
-                                                <div className="w-12 h-12 rounded-xl bg-white/5 flex-shrink-0 flex items-center justify-center text-[#d4af37]">
+                                            <div key={rec.id} className="bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-2xl p-4 flex items-center gap-4 group/rec">
+                                                <div className="w-12 h-12 rounded-xl bg-[#3D2B1F]/5 flex-shrink-0 flex items-center justify-center text-[#C9A96E]">
                                                     <UserCheck className="w-6 h-6" />
                                                 </div>
                                                 <div className="flex-1 min-w-0">
-                                                    <h5 className="text-white font-bold text-xs truncate">{rec.name}</h5>
+                                                    <h5 className="text-[#3D2B1F] font-bold text-xs truncate">{rec.name}</h5>
                                                     <div className="flex items-center gap-2">
-                                                        <span className="text-[9px] text-[#d4af37] font-black uppercase">Clarity Score™ {rec.clarityScore}</span>
-                                                        <span className="text-[9px] text-gray-500 uppercase">{rec.city}</span>
+                                                        <span className="text-[9px] text-[#C9A96E] font-black uppercase">Clarity Score™ {rec.clarityScore}</span>
+                                                        <span className="text-[9px] text-[#3D2B1F]/60 uppercase">{rec.city}</span>
                                                     </div>
                                                 </div>
                                                 <Link href={`/provider/${rec.slug}`}>
-                                                    <Button size="sm" className="h-8 w-8 rounded-lg bg-white/5 p-0 hover:bg-[#d4af37] hover:text-[#0d1420]">
+                                                    <Button size="sm" className="h-8 w-8 rounded-lg bg-[#3D2B1F]/5 p-0 hover:bg-[#C9A96E] hover:text-white">
                                                         <ArrowRight className="w-4 h-4" />
                                                     </Button>
                                                 </Link>
@@ -134,14 +134,14 @@ export function AIConcierge() {
                             </div>
                         ))}
                         {loading && (
-                            <div className="flex items-center gap-2 text-gray-500 italic text-xs animate-pulse">
+                            <div className="flex items-center gap-2 text-[#3D2B1F]/60 italic text-xs animate-pulse">
                                 <Sparkles className="w-3 h-3" /> Assistant is thinking...
                             </div>
                         )}
                     </div>
 
                     {/* Input Area */}
-                    <div className="p-6 bg-white/[0.02] border-t border-white/10">
+                    <div className="p-6 bg-[#3D2B1F]/5 border-t border-[#3D2B1F]/10">
                         <div className="relative">
                             <input
                                 type="text"
@@ -149,17 +149,17 @@ export function AIConcierge() {
                                 onChange={(e) => setInputValue(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                                 placeholder="e.g. Find me natural botox in Miami"
-                                className="w-full h-12 pl-4 pr-12 bg-black/40 border border-white/10 rounded-xl text-white text-xs focus:outline-none focus:ring-1 focus:ring-[#d4af37]/30 font-light"
+                                className="w-full h-12 pl-4 pr-12 bg-black/40 border border-[#3D2B1F]/10 rounded-xl text-[#3D2B1F] text-xs focus:outline-none focus:ring-1 focus:ring-[#C9A96E]/30 font-light"
                             />
                             <button
                                 onClick={handleSend}
-                                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg bg-[#d4af37] text-[#0d1420] flex items-center justify-center hover:bg-[#c0a030] transition-all"
+                                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg bg-[#C9A96E] text-white flex items-center justify-center hover:bg-[#B5955B] transition-all"
                             >
                                 <Send className="w-4 h-4" />
                             </button>
                         </div>
-                        <p className="mt-3 text-center text-[9px] text-gray-600 uppercase tracking-widest font-black flex items-center justify-center gap-1.5">
-                            <ShieldCheck className="w-3 h-3 text-emerald-500" /> Powered by InjectorIndex Data
+                        <p className="mt-3 text-center text-[9px] text-[#3D2B1F]/50 uppercase tracking-widest font-black flex items-center justify-center gap-1.5">
+                            <ShieldCheck className="w-3 h-3 text-[#8A9E8D]" /> Powered by InjectorIndex Data
                         </p>
                     </div>
                 </div>

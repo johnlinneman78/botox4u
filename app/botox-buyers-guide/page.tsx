@@ -24,42 +24,42 @@ export const metadata: Metadata = {
 
 export default function BuyersGuidePage() {
     return (
-        <div className="min-h-screen bg-[#0d1420]">
+        <div className="min-h-screen bg-[#FAF8F5]">
             <Header />
 
             <main>
                 {/* Hero Section */}
                 <section className="relative pt-20 pb-32 overflow-hidden">
-                    <div className="absolute inset-0 bg-[#0d1420] -z-10" />
-                    <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#d4af37]/5 to-transparent -z-10" />
+                    <div className="absolute inset-0 bg-[#FAF8F5] -z-10" />
+                    <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#C9A96E]/5 to-transparent -z-10" />
 
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto text-center">
                             <Badge variant="secondary" className="mb-6 px-4 py-1.5 text-sm font-bold uppercase tracking-wider">
                                 Independent Patient Resource
                             </Badge>
-                            <h1 className="text-5xl md:text-7xl font-display font-bold text-white mb-8 leading-[1.1]">
+                            <h1 className="text-5xl md:text-7xl font-display font-bold text-[#3D2B1F] mb-8 leading-[1.1]">
                                 The No-Filter Guide to <span className="text-secondary italic">Baby Botox</span>
                             </h1>
-                            <p className="text-xl md:text-2xl text-gray-500 mb-12 max-w-2xl mx-auto leading-relaxed">
+                            <p className="text-xl md:text-2xl text-[#3D2B1F]/60 mb-12 max-w-2xl mx-auto leading-relaxed">
                                 How to Stay Subtle, Stay Safe, and Find the Right Injector.
                             </p>
 
-                            <div className="p-8 bg-[#101827] rounded-3xl border border-white/[0.06] max-w-lg mx-auto mb-16">
+                            <div className="p-8 bg-[#F2EDE4] rounded-3xl border border-[#3D2B1F]/10 max-w-lg mx-auto mb-16">
                                 <div className="text-6xl font-display font-bold text-secondary mb-2">40%</div>
-                                <div className="text-lg font-bold text-white mb-1">of Botox complaints are about over-injection.</div>
-                                <div className="text-sm text-gray-500 italic">Data powered by the Injector Index</div>
+                                <div className="text-lg font-bold text-[#3D2B1F] mb-1">of Botox complaints are about over-injection.</div>
+                                <div className="text-sm text-[#3D2B1F]/60 italic">Data powered by the Injector Index</div>
                             </div>
 
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                                 <Link href="#start">
-                                    <Button className="bg-[#1a2332] hover:bg-slate-800 text-white px-10 py-7 text-lg font-bold rounded-2xl shadow-xl shadow-primary/20 group">
+                                    <Button className="bg-[#1a2332] hover:bg-slate-800 text-[#3D2B1F] px-10 py-7 text-lg font-bold rounded-2xl shadow-xl shadow-primary/20 group">
                                         Read the Guide
                                         <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                     </Button>
                                 </Link>
                                 <Link href="/find-providers">
-                                    <Button variant="outline" className="border-white/[0.06] text-gray-400 px-10 py-7 text-lg font-bold rounded-2xl hover:bg-white/[0.03]">
+                                    <Button variant="outline" className="border-[#3D2B1F]/10 text-[#3D2B1F]/70 px-10 py-7 text-lg font-bold rounded-2xl hover:bg-[#3D2B1F]/5">
                                         Browse Providers
                                     </Button>
                                 </Link>
@@ -69,7 +69,7 @@ export default function BuyersGuidePage() {
                 </section>
 
                 {/* Table of Contents / Intro */}
-                <section id="start" className="py-24 bg-[#0d1420] scroll-mt-20">
+                <section id="start" className="py-24 bg-[#FAF8F5] scroll-mt-20">
                     <div className="container mx-auto px-4">
                         <div className="max-w-5xl mx-auto">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
@@ -86,29 +86,29 @@ export default function BuyersGuidePage() {
                                             "Before & after checklist"
                                         ].map((item, i) => (
                                             <li key={i} className="flex items-start gap-4 group">
-                                                <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary font-bold text-sm flex-shrink-0 group-hover:bg-secondary group-hover:text-white transition-colors">
+                                                <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary font-bold text-sm flex-shrink-0 group-hover:bg-secondary group-hover:text-[#3D2B1F] transition-colors">
                                                     {i + 1}
                                                 </div>
-                                                <span className="text-lg font-bold text-white group-hover:text-secondary transition-colors leading-tight pt-1">
+                                                <span className="text-lg font-bold text-[#3D2B1F] group-hover:text-secondary transition-colors leading-tight pt-1">
                                                     {item}
                                                 </span>
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
-                                <div className="aspect-[4/5] bg-[#101827] rounded-3xl p-12 flex flex-col justify-center border border-white/[0.06]">
-                                    <div className="text-white opacity-20 mb-8 decoration">
+                                <div className="aspect-[4/5] bg-[#F2EDE4] rounded-3xl p-12 flex flex-col justify-center border border-[#3D2B1F]/10">
+                                    <div className="text-[#3D2B1F] opacity-20 mb-8 decoration">
                                         <BookOpen className="w-20 h-20" />
                                     </div>
-                                    <h3 className="text-3xl font-display font-bold text-white mb-6">Free Patient Resource</h3>
-                                    <p className="text-gray-500 leading-relaxed mb-8">
+                                    <h3 className="text-3xl font-display font-bold text-[#3D2B1F] mb-6">Free Patient Resource</h3>
+                                    <p className="text-[#3D2B1F]/60 leading-relaxed mb-8">
                                         This guide was built by independent advocates for aesthetic medicine patients, not clinic owners. Our mission is to provide transparency across the broader aesthetic market, starting with the most common entry point: Botox.
                                     </p>
                                     <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-full bg-white/[0.06]" />
+                                        <div className="w-10 h-10 rounded-full bg-[#3D2B1F]/5" />
                                         <div>
-                                            <div className="text-sm font-bold text-white">Injector Index Editorial Team</div>
-                                            <div className="text-xs text-gray-400 font-medium italic">Verified Patient Advocates</div>
+                                            <div className="text-sm font-bold text-[#3D2B1F]">Injector Index Editorial Team</div>
+                                            <div className="text-xs text-[#3D2B1F]/70 font-medium italic">Verified Patient Advocates</div>
                                         </div>
                                     </div>
                                 </div>
@@ -118,22 +118,22 @@ export default function BuyersGuidePage() {
                 </section>
 
                 {/* Chapter 1: The Fear Is Valid */}
-                <section className="py-24 bg-[#101827]">
+                <section className="py-24 bg-[#F2EDE4]">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto">
                             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4 text-center">Chapter 01</h2>
-                            <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-12 text-center">
+                            <h3 className="text-4xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-12 text-center">
                                 The Fear Is Valid
                             </h3>
 
-                            <p className="text-xl text-gray-500 text-center mb-16 max-w-2xl mx-auto">
+                            <p className="text-xl text-[#3D2B1F]/60 text-center mb-16 max-w-2xl mx-auto">
                                 The frozen face isn't a punchline — it's the #1 fear patients have walking into their first appointment. And the data backs it up.
                             </p>
 
-                            <div className="bg-[#0d1420] rounded-3xl overflow-hidden border border-white/[0.06]">
+                            <div className="bg-[#FAF8F5] rounded-3xl overflow-hidden border border-[#3D2B1F]/10">
                                 <div className="grid grid-cols-1 md:grid-cols-2">
-                                    <div className="p-8 md:p-12 border-b md:border-b-0 md:border-r border-white/[0.06]">
-                                        <h4 className="text-lg font-bold text-white mb-8 uppercase tracking-wider">Top Patient Complaints</h4>
+                                    <div className="p-8 md:p-12 border-b md:border-b-0 md:border-r border-[#3D2B1F]/10">
+                                        <h4 className="text-lg font-bold text-[#3D2B1F] mb-8 uppercase tracking-wider">Top Patient Complaints</h4>
                                         <div className="space-y-8">
                                             {[
                                                 { label: "Frozen face / over-injection", value: 40, color: "bg-secondary" },
@@ -146,7 +146,7 @@ export default function BuyersGuidePage() {
                                                         <span>{item.label}</span>
                                                         <span className="text-secondary">{item.value}%</span>
                                                     </div>
-                                                    <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                                                    <div className="h-2 bg-[#3D2B1F]/5 rounded-full overflow-hidden">
                                                         <div
                                                             className={`h-full ${item.color} transition-all duration-1000`}
                                                             style={{ width: `${item.value}%` }}
@@ -156,8 +156,8 @@ export default function BuyersGuidePage() {
                                             ))}
                                         </div>
                                     </div>
-                                    <div className="p-8 md:p-12 bg-[#d4af37]/5 flex flex-col justify-center">
-                                        <blockquote className="text-2xl md:text-3xl font-display font-medium text-white italic leading-tight relative">
+                                    <div className="p-8 md:p-12 bg-[#C9A96E]/5 flex flex-col justify-center">
+                                        <blockquote className="text-2xl md:text-3xl font-display font-medium text-[#3D2B1F] italic leading-tight relative">
                                             <span className="absolute -top-8 -left-4 text-6xl text-secondary opacity-20">"</span>
                                             Patients don't fear the price. They fear looking wrong.
                                             <footer className="mt-8 not-italic">
@@ -172,22 +172,22 @@ export default function BuyersGuidePage() {
                 </section>
 
                 {/* Chapter 2: Baby Botox Actually Is */}
-                <section className="py-24 bg-[#0d1420]">
+                <section className="py-24 bg-[#FAF8F5]">
                     <div className="container mx-auto px-4">
                         <div className="max-w-5xl mx-auto">
                             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4 text-center">Chapter 02</h2>
-                            <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-8 text-center">
+                            <h3 className="text-4xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-8 text-center">
                                 What Baby Botox Actually Is
                             </h3>
-                            <p className="text-xl text-gray-500 text-center mb-20 max-w-3xl mx-auto">
+                            <p className="text-xl text-[#3D2B1F]/60 text-center mb-20 max-w-3xl mx-auto">
                                 Baby Botox isn&apos;t a product — it&apos;s a philosophy. Micro-dosing uses smaller, strategically placed amounts to soften lines while preserving natural expression.
                             </p>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 {/* Standard */}
-                                <div className="p-10 border border-white/[0.06] rounded-3xl bg-[#101827]">
+                                <div className="p-10 border border-[#3D2B1F]/10 rounded-3xl bg-[#F2EDE4]">
                                     <Badge variant="outline" className="mb-6 uppercase tracking-widest text-[10px] font-black border-gray-200 opacity-50">Standard Botox</Badge>
-                                    <div className="text-4xl font-display font-bold text-white mb-6">40-50 units</div>
+                                    <div className="text-4xl font-display font-bold text-[#3D2B1F] mb-6">40-50 units</div>
                                     <ul className="space-y-4">
                                         {[
                                             "Concentrated placement",
@@ -195,7 +195,7 @@ export default function BuyersGuidePage() {
                                             "Dramatic line reduction",
                                             "Higher frozen face risk"
                                         ].map((item, i) => (
-                                            <li key={i} className="flex items-center gap-3 text-gray-500 text-sm font-medium">
+                                            <li key={i} className="flex items-center gap-3 text-[#3D2B1F]/60 text-sm font-medium">
                                                 <div className="w-1.5 h-1.5 rounded-full bg-gray-600" />
                                                 {item}
                                             </li>
@@ -204,11 +204,11 @@ export default function BuyersGuidePage() {
                                 </div>
 
                                 {/* Baby */}
-                                <div className="p-10 border-2 border-[#d4af37]/20 rounded-3xl bg-[#d4af37]/5 relative overflow-hidden">
+                                <div className="p-10 border-2 border-[#C9A96E]/20 rounded-3xl bg-[#C9A96E]/5 relative overflow-hidden">
                                     <div className="absolute top-0 right-0 p-4">
                                         <Star className="w-8 h-8 text-secondary fill-secondary opacity-10" />
                                     </div>
-                                    <Badge variant="secondary" className="mb-6 uppercase tracking-widest text-[10px] font-black bg-secondary text-white border-transparent">Baby Botox</Badge>
+                                    <Badge variant="secondary" className="mb-6 uppercase tracking-widest text-[10px] font-black bg-secondary text-[#3D2B1F] border-transparent">Baby Botox</Badge>
                                     <div className="text-4xl font-display font-bold text-secondary mb-6">15-25 units</div>
                                     <ul className="space-y-4">
                                         {[
@@ -227,19 +227,19 @@ export default function BuyersGuidePage() {
                             </div>
 
                             <div className="mt-16 text-center">
-                                <h4 className="text-lg font-bold text-white mb-12">The three words that define a great result:</h4>
+                                <h4 className="text-lg font-bold text-[#3D2B1F] mb-12">The three words that define a great result:</h4>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-4xl mx-auto">
                                     <div>
                                         <div className="text-2xl font-display font-black text-secondary mb-2">Subtle</div>
-                                        <p className="text-gray-500 text-sm italic">Nobody should be able to tell. They should just think you look well-rested.</p>
+                                        <p className="text-[#3D2B1F]/60 text-sm italic">Nobody should be able to tell. They should just think you look well-rested.</p>
                                     </div>
                                     <div>
                                         <div className="text-2xl font-display font-black text-secondary mb-2">Conservative</div>
-                                        <p className="text-gray-500 text-sm italic">Start low. You can always add more — you can never take it back.</p>
+                                        <p className="text-[#3D2B1F]/60 text-sm italic">Start low. You can always add more — you can never take it back.</p>
                                     </div>
                                     <div>
                                         <div className="text-2xl font-display font-black text-secondary mb-2">Gentle</div>
-                                        <p className="text-gray-500 text-sm italic">Your face should still move. Expressiveness is the whole point.</p>
+                                        <p className="text-[#3D2B1F]/60 text-sm italic">Your face should still move. Expressiveness is the whole point.</p>
                                     </div>
                                 </div>
                             </div>
@@ -252,10 +252,10 @@ export default function BuyersGuidePage() {
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto">
                             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4 text-center">Chapter 03</h2>
-                            <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-8 text-center">
+                            <h3 className="text-4xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-8 text-center">
                                 Red Flags
                             </h3>
-                            <p className="text-xl text-gray-400 text-center mb-20 max-w-2xl mx-auto">
+                            <p className="text-xl text-[#3D2B1F]/70 text-center mb-20 max-w-2xl mx-auto">
                                 Walk away immediately if you see any of these.
                             </p>
 
@@ -268,14 +268,14 @@ export default function BuyersGuidePage() {
                                     { title: "Reviews mention 'frozen' or 'droopy'", desc: "Patient language never lies. Read the actual words, not just the star rating." },
                                     { title: "Can't confirm who's actually injecting you", desc: "A medical director on paper doesn't mean a qualified professional is in the room with you." }
                                 ].map((item, i) => (
-                                    <div key={i} className="p-8 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-colors">
+                                    <div key={i} className="p-8 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-2xl hover:bg-[#3D2B1F]/10 transition-colors">
                                         <div className="flex items-center gap-3 mb-4">
                                             <div className="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center">
                                                 <AlertTriangle className="w-4 h-4 text-red-500" />
                                             </div>
-                                            <h4 className="font-bold text-white leading-tight">{item.title}</h4>
+                                            <h4 className="font-bold text-[#3D2B1F] leading-tight">{item.title}</h4>
                                         </div>
-                                        <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
+                                        <p className="text-sm text-[#3D2B1F]/70 leading-relaxed">{item.desc}</p>
                                     </div>
                                 ))}
                             </div>
@@ -284,67 +284,67 @@ export default function BuyersGuidePage() {
                 </section>
 
                 {/* Chapter 4: Hot Girl Math */}
-                <section className="py-24 bg-[#0d1420]">
+                <section className="py-24 bg-[#FAF8F5]">
                     <div className="container mx-auto px-4">
                         <div className="max-w-5xl mx-auto">
                             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4 text-center">Chapter 04</h2>
-                            <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-8 text-center">
+                            <h3 className="text-4xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-8 text-center">
                                 Hot Girl Math
                             </h3>
-                            <p className="text-xl text-gray-500 text-center mb-16 max-w-3xl mx-auto leading-relaxed">
+                            <p className="text-xl text-[#3D2B1F]/60 text-center mb-16 max-w-3xl mx-auto leading-relaxed">
                                 Why the cheapest Botox is the most expensive option. The market varies by 40%+ across clinics in the same city. The danger isn&apos;t above that range — it&apos;s below it.
                             </p>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
                                 <div className="p-10 bg-red-500/5 border border-red-500/10 rounded-3xl">
-                                    <Badge className="mb-6 bg-red-600 text-white border-transparent">The Bargain Clinic</Badge>
+                                    <Badge className="mb-6 bg-red-600 text-[#3D2B1F] border-transparent">The Bargain Clinic</Badge>
                                     <div className="text-4xl font-display font-black text-red-700 mb-8">$10/unit</div>
                                     <div className="space-y-6">
                                         <div className="flex justify-between border-b border-red-500/10 pb-2">
-                                            <span className="text-gray-500">Uses</span>
-                                            <span className="font-bold text-white">50 units (oversold)</span>
+                                            <span className="text-[#3D2B1F]/60">Uses</span>
+                                            <span className="font-bold text-[#3D2B1F]">50 units (oversold)</span>
                                         </div>
                                         <div className="flex justify-between border-b border-red-500/10 pb-2">
-                                            <span className="text-gray-500">Total cost</span>
-                                            <span className="font-bold text-white">$500</span>
+                                            <span className="text-[#3D2B1F]/60">Total cost</span>
+                                            <span className="font-bold text-[#3D2B1F]">$500</span>
                                         </div>
                                         <div className="flex justify-between border-b border-red-500/10 pb-2">
-                                            <span className="text-gray-500">Result</span>
+                                            <span className="text-[#3D2B1F]/60">Result</span>
                                             <span className="font-black text-red-600">Frozen face</span>
                                         </div>
                                         <div className="flex justify-between pb-2">
-                                            <span className="text-gray-500">Correction</span>
+                                            <span className="text-[#3D2B1F]/60">Correction</span>
                                             <span className="font-black text-red-700">$3,000+</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="p-10 bg-emerald-500/5 border border-emerald-500/10 rounded-3xl">
-                                    <Badge className="mb-6 bg-emerald-600 text-white border-transparent">The Verified Expert</Badge>
+                                <div className="p-10 bg-[#8A9E8D]/5 border border-[#8A9E8D]/10 rounded-3xl">
+                                    <Badge className="mb-6 bg-emerald-600 text-[#3D2B1F] border-transparent">The Verified Expert</Badge>
                                     <div className="text-4xl font-display font-black text-emerald-700 mb-8">$18/unit</div>
                                     <div className="space-y-6">
-                                        <div className="flex justify-between border-b border-emerald-500/10 pb-2">
-                                            <span className="text-gray-500">Uses</span>
-                                            <span className="font-bold text-white">20 units (strategic)</span>
+                                        <div className="flex justify-between border-b border-[#8A9E8D]/10 pb-2">
+                                            <span className="text-[#3D2B1F]/60">Uses</span>
+                                            <span className="font-bold text-[#3D2B1F]">20 units (strategic)</span>
                                         </div>
-                                        <div className="flex justify-between border-b border-emerald-500/10 pb-2">
-                                            <span className="text-gray-500">Total cost</span>
-                                            <span className="font-bold text-white">$360</span>
+                                        <div className="flex justify-between border-b border-[#8A9E8D]/10 pb-2">
+                                            <span className="text-[#3D2B1F]/60">Total cost</span>
+                                            <span className="font-bold text-[#3D2B1F]">$360</span>
                                         </div>
-                                        <div className="flex justify-between border-b border-emerald-500/10 pb-2">
-                                            <span className="text-gray-500">Result</span>
+                                        <div className="flex justify-between border-b border-[#8A9E8D]/10 pb-2">
+                                            <span className="text-[#3D2B1F]/60">Result</span>
                                             <span className="font-black text-emerald-600">Natural glow</span>
                                         </div>
                                         <div className="flex justify-between pb-2">
-                                            <span className="text-gray-500">Correction</span>
+                                            <span className="text-[#3D2B1F]/60">Correction</span>
                                             <span className="font-black text-emerald-700 font-display">$0</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="bg-[#101827] rounded-3xl p-10 md:p-16 border border-white/[0.06]">
-                                <h4 className="text-2xl font-display font-bold text-white mb-12 text-center underline decoration-secondary decoration-4 underline-offset-8">Average Per-Unit Pricing by City</h4>
+                            <div className="bg-[#F2EDE4] rounded-3xl p-10 md:p-16 border border-[#3D2B1F]/10">
+                                <h4 className="text-2xl font-display font-bold text-[#3D2B1F] mb-12 text-center underline decoration-secondary decoration-4 underline-offset-8">Average Per-Unit Pricing by City</h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-8">
                                     {[
                                         { city: "New York, NY", price: "18-25" },
@@ -354,8 +354,8 @@ export default function BuyersGuidePage() {
                                         { city: "Dallas, TX", price: "12-16" },
                                         { city: "National Average", price: "10-25" }
                                     ].map((item, i) => (
-                                        <div key={i} className="flex justify-between items-center border-b border-white/[0.06] pb-4">
-                                            <span className="font-bold text-white">{item.city}</span>
+                                        <div key={i} className="flex justify-between items-center border-b border-[#3D2B1F]/10 pb-4">
+                                            <span className="font-bold text-[#3D2B1F]">{item.city}</span>
                                             <span className="font-display font-black text-secondary text-xl font-bold">${item.price}</span>
                                         </div>
                                     ))}
@@ -366,14 +366,14 @@ export default function BuyersGuidePage() {
                 </section>
 
                 {/* Chapter 5: The Score */}
-                <section className="py-24 bg-[#101827]">
+                <section className="py-24 bg-[#F2EDE4]">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto text-center">
                             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4">Chapter 05</h2>
-                            <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-8">
+                            <h3 className="text-4xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-8">
                                 The Clarity Score™
                             </h3>
-                            <p className="text-xl text-gray-500 mb-20 max-w-2xl mx-auto leading-relaxed">
+                            <p className="text-xl text-[#3D2B1F]/60 mb-20 max-w-2xl mx-auto leading-relaxed">
                                 Most directories rank providers by who paid the most for placement. The Clarity Score™ is a 0–100 merit-based algorithm for aesthetic providers. Nobody pays for a higher score.
                             </p>
 
@@ -385,25 +385,25 @@ export default function BuyersGuidePage() {
                                     { pts: 15, title: "Credentials", desc: "Cross-referenced against the federal NPI database. Every injector. No exceptions." },
                                     { pts: 10, title: "Transparency", desc: "Do they show real pricing? Real photos? A clear service list? Openness is scored." }
                                 ].map((item, i) => (
-                                    <div key={i} className="flex items-start gap-8 p-8 bg-[#0d1420] rounded-3xl border border-white/[0.06] hover:border-white/10 transition-shadow">
+                                    <div key={i} className="flex items-start gap-8 p-8 bg-[#FAF8F5] rounded-3xl border border-[#3D2B1F]/10 hover:border-[#3D2B1F]/10 transition-shadow">
                                         <div className="flex-shrink-0 flex flex-col items-center">
-                                            <div className="text-3xl font-display font-black text-white leading-none">{item.pts}</div>
-                                            <div className="text-[10px] uppercase tracking-widest font-bold text-gray-400">pts</div>
+                                            <div className="text-3xl font-display font-black text-[#3D2B1F] leading-none">{item.pts}</div>
+                                            <div className="text-[10px] uppercase tracking-widest font-bold text-[#3D2B1F]/70">pts</div>
                                         </div>
                                         <div>
-                                            <h4 className="text-xl font-bold text-white mb-2 line-clamp-1">{item.title}</h4>
-                                            <p className="text-sm text-gray-500 leading-relaxed font-medium">{item.desc}</p>
+                                            <h4 className="text-xl font-bold text-[#3D2B1F] mb-2 line-clamp-1">{item.title}</h4>
+                                            <p className="text-sm text-[#3D2B1F]/60 leading-relaxed font-medium">{item.desc}</p>
                                         </div>
                                     </div>
                                 ))}
                             </div>
 
-                            <div className="mt-16 bg-[#0d1420] p-8 rounded-3xl border border-white/[0.06] max-w-2xl mx-auto text-left">
-                                <h4 className="font-bold text-white mb-2 flex items-center gap-2">
+                            <div className="mt-16 bg-[#FAF8F5] p-8 rounded-3xl border border-[#3D2B1F]/10 max-w-2xl mx-auto text-left">
+                                <h4 className="font-bold text-[#3D2B1F] mb-2 flex items-center gap-2">
                                     <ShieldCheck className="w-5 h-5 text-secondary" />
                                     What is NPI verification?
                                 </h4>
-                                <p className="text-xs text-gray-500 leading-relaxed">
+                                <p className="text-xs text-[#3D2B1F]/60 leading-relaxed">
                                     The National Provider Identifier is a federal registry of every licensed US healthcare provider. We verify every injector before they appear in results.
                                 </p>
                             </div>
@@ -412,14 +412,14 @@ export default function BuyersGuidePage() {
                 </section>
 
                 {/* Chapter 6: Script */}
-                <section className="py-24 bg-[#0d1420]">
+                <section className="py-24 bg-[#FAF8F5]">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto">
                             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4 text-center">Chapter 06</h2>
-                            <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-8 text-center">
+                            <h3 className="text-4xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-8 text-center">
                                 Your Consultation Script
                             </h3>
-                            <p className="text-xl text-gray-500 text-center mb-16 max-w-2xl mx-auto leading-relaxed">
+                            <p className="text-xl text-[#3D2B1F]/60 text-center mb-16 max-w-2xl mx-auto leading-relaxed">
                                 5 questions that separate good injectors from great ones.
                             </p>
 
@@ -431,11 +431,11 @@ export default function BuyersGuidePage() {
                                     { q: "Can I have your NPI number?", a: "Any legitimate licensed provider gives you this without hesitation. It's public information. Reluctance is a red flag." },
                                     { q: "What's your follow-up policy?", a: "You want a specific answer: 'Come back in 2 weeks, we'll assess.' Not a vague 'we'll figure it out if needed.'" }
                                 ].map((item, i) => (
-                                    <div key={i} className="flex gap-8 p-10 bg-[#d4af37]/5 rounded-3xl border border-[#d4af37]/10 group hover:border-[#d4af37]/30 transition-colors items-start">
+                                    <div key={i} className="flex gap-8 p-10 bg-[#C9A96E]/5 rounded-3xl border border-[#C9A96E]/10 group hover:border-[#C9A96E]/30 transition-colors items-start">
                                         <div className="text-4xl font-display font-black text-secondary/30 group-hover:text-secondary transition-colors leading-none">0{i + 1}</div>
                                         <div className="flex-1">
-                                            <h4 className="text-xl font-bold text-white mb-4 leading-tight">{item.q}</h4>
-                                            <p className="text-gray-500 leading-relaxed font-medium">{item.a}</p>
+                                            <h4 className="text-xl font-bold text-[#3D2B1F] mb-4 leading-tight">{item.q}</h4>
+                                            <p className="text-[#3D2B1F]/60 leading-relaxed font-medium">{item.a}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -449,13 +449,13 @@ export default function BuyersGuidePage() {
                     <div className="container mx-auto px-4">
                         <div className="max-w-5xl mx-auto">
                             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4 text-center">Chapter 07</h2>
-                            <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-16 text-center">
+                            <h3 className="text-4xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-16 text-center">
                                 Before & After Checklist
                             </h3>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mb-20">
                                 <div className="space-y-8">
-                                    <h4 className="text-xs font-black uppercase tracking-widest text-[#d4af37] border-b border-white/10 pb-4">Before Your Appointment</h4>
+                                    <h4 className="text-xs font-black uppercase tracking-widest text-[#C9A96E] border-b border-[#3D2B1F]/10 pb-4">Before Your Appointment</h4>
                                     <div className="space-y-4">
                                         {[
                                             "Verify NPI at npiregistry.cms.hhs.gov",
@@ -465,7 +465,7 @@ export default function BuyersGuidePage() {
                                             "Get a consultation before any injection",
                                             "Check Clarity Score™ — aim for 70+"
                                         ].map((item, i) => (
-                                            <div key={i} className="flex items-center gap-4 text-white font-medium">
+                                            <div key={i} className="flex items-center gap-4 text-[#3D2B1F] font-medium">
                                                 <div className="w-5 h-5 border-2 border-white/20 rounded flex-shrink-0" />
                                                 <span>{item}</span>
                                             </div>
@@ -473,7 +473,7 @@ export default function BuyersGuidePage() {
                                     </div>
                                 </div>
                                 <div className="space-y-8">
-                                    <h4 className="text-xs font-black uppercase tracking-widest text-emerald-400 border-b border-white/10 pb-4">After Your Appointment</h4>
+                                    <h4 className="text-xs font-black uppercase tracking-widest text-[#8A9E8D] border-b border-[#3D2B1F]/10 pb-4">After Your Appointment</h4>
                                     <div className="space-y-4">
                                         {[
                                             "Stay upright for 4 hours (no lying down)",
@@ -483,8 +483,8 @@ export default function BuyersGuidePage() {
                                             "Book 2-week follow-up before you leave",
                                             "Full results visible in 7-14 days"
                                         ].map((item, i) => (
-                                            <div key={i} className="flex items-center gap-4 text-white font-medium">
-                                                <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                                            <div key={i} className="flex items-center gap-4 text-[#3D2B1F] font-medium">
+                                                <CheckCircle className="w-5 h-5 text-[#8A9E8D] flex-shrink-0" />
                                                 <span>{item}</span>
                                             </div>
                                         ))}
@@ -492,8 +492,8 @@ export default function BuyersGuidePage() {
                                 </div>
                             </div>
 
-                            <div className="p-12 md:p-16 bg-[#101827] rounded-[3rem] border border-white/[0.06]">
-                                <h4 className="text-3xl font-display font-bold text-white mb-12 text-center">The Final Checklist — Before You Book</h4>
+                            <div className="p-12 md:p-16 bg-[#F2EDE4] rounded-[3rem] border border-[#3D2B1F]/10">
+                                <h4 className="text-3xl font-display font-bold text-[#3D2B1F] mb-12 text-center">The Final Checklist — Before You Book</h4>
                                 <div className="max-w-2xl mx-auto space-y-6">
                                     {[
                                         "Checked their Clarity Score™ (aim for 70+)",
@@ -503,11 +503,11 @@ export default function BuyersGuidePage() {
                                         "Confirmed who is actually performing the injection",
                                         "Saw before/afters of natural, subtle results"
                                     ].map((item, i) => (
-                                        <div key={i} className="flex items-start gap-4 p-4 border border-white/[0.06] rounded-2xl hover:bg-white/[0.02] transition-colors">
-                                            <div className="w-6 h-6 rounded bg-secondary flex items-center justify-center text-white flex-shrink-0 mt-0.5 shadow-sm">
+                                        <div key={i} className="flex items-start gap-4 p-4 border border-[#3D2B1F]/10 rounded-2xl hover:bg-[#3D2B1F]/5 transition-colors">
+                                            <div className="w-6 h-6 rounded bg-secondary flex items-center justify-center text-[#3D2B1F] flex-shrink-0 mt-0.5 shadow-sm">
                                                 <CheckCircle className="w-4 h-4" />
                                             </div>
-                                            <span className="text-lg font-bold text-white leading-tight">{item}</span>
+                                            <span className="text-lg font-bold text-[#3D2B1F] leading-tight">{item}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -517,33 +517,33 @@ export default function BuyersGuidePage() {
                 </section>
 
                 {/* Final CTA */}
-                <section className="py-32 bg-[#0d1420] relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[#d4af37]/5 -z-10" />
+                <section className="py-32 bg-[#FAF8F5] relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[#C9A96E]/5 -z-10" />
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto text-center">
-                            <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-8">
+                            <h2 className="text-4xl md:text-6xl font-display font-bold text-[#3D2B1F] mb-8">
                                 Ready to find your match?
                             </h2>
-                            <p className="text-xl text-gray-500 mb-12 max-w-lg mx-auto leading-relaxed">
+                            <p className="text-xl text-[#3D2B1F]/60 mb-12 max-w-lg mx-auto leading-relaxed">
                                 Search free. No sign-up. Filter every injector in your city by their Clarity Score™.
                             </p>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16 max-w-2xl mx-auto">
                                 <Link href="/find-providers">
-                                    <Button className="w-full bg-secondary hover:bg-secondary/95 text-white py-8 text-xl font-bold rounded-2xl shadow-xl shadow-secondary/20 h-20">
+                                    <Button className="w-full bg-secondary hover:bg-secondary/95 text-[#3D2B1F] py-8 text-xl font-bold rounded-2xl shadow-xl shadow-secondary/20 h-20">
                                         Search Local Index
                                     </Button>
                                 </Link>
                                 <Link href="/calculator">
-                                    <Button variant="outline" className="w-full border-white/[0.06] text-white bg-[#101827] py-8 text-xl font-bold rounded-2xl hover:bg-[#101827]/80 h-20">
+                                    <Button variant="outline" className="w-full border-[#3D2B1F]/10 text-[#3D2B1F] bg-[#F2EDE4] py-8 text-xl font-bold rounded-2xl hover:bg-[#F2EDE4]/80 h-20">
                                         Dose Calculator
                                     </Button>
                                 </Link>
                             </div>
 
-                            <div className="text-sm font-bold text-gray-400 uppercase tracking-widest flex flex-col items-center gap-4">
+                            <div className="text-sm font-bold text-[#3D2B1F]/70 uppercase tracking-widest flex flex-col items-center gap-4">
                                 <div className="flex items-center gap-2">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                    <div className="w-1.5 h-1.5 rounded-full bg-[#8A9E8D] animate-pulse" />
                                     <span>Independent</span>
                                     <span className="mx-2 opacity-30">|</span>
                                     <span>Unbiased</span>

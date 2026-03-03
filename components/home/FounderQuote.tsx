@@ -32,7 +32,7 @@ export default function FounderQuote() {
 
                             <div className="mb-8">
                                 <div className="font-bold text-xl text-primary">John Linneman</div>
-                                <div className="text-gray-400 font-bold uppercase tracking-widest text-xs">Founder, {NICHE.siteName}</div>
+                                <div className="text-[#3D2B1F]/70 font-bold uppercase tracking-widest text-xs">Founder, {NICHE.siteName}</div>
                             </div>
 
                             <Link

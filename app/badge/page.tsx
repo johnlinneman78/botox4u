@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 
 export default function BadgePage() {
     return (
-        <div className="bg-[#0d1420] min-h-screen pb-24">
+        <div className="bg-[#FAF8F5] min-h-screen pb-24">
             {/* Hero Section */}
-            <section className="bg-primary pt-24 pb-32 text-white relative overflow-hidden">
+            <section className="bg-primary pt-24 pb-32 text-[#3D2B1F] relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-[#1a2332]" />
                 <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
@@ -38,9 +38,9 @@ export default function BadgePage() {
                     <div className="lg:col-span-8 space-y-12">
 
                         {/* 1. The Badge Preview */}
-                        <Card className="rounded-[2.5rem] border border-white/[0.06] shadow-2xl overflow-hidden bg-[#101827]">
-                            <CardHeader className="bg-white/[0.02] border-b border-white/[0.06] p-8">
-                                <CardTitle className="text-2xl font-display font-bold text-white flex items-center gap-3">
+                        <Card className="rounded-[2.5rem] border border-[#3D2B1F]/10 shadow-2xl overflow-hidden bg-[#F2EDE4]">
+                            <CardHeader className="bg-[#3D2B1F]/5 border-b border-[#3D2B1F]/10 p-8">
+                                <CardTitle className="text-2xl font-display font-bold text-[#3D2B1F] flex items-center gap-3">
                                     <ShieldCheck className="w-7 h-7 text-secondary" />
                                     Official Badge Assets
                                 </CardTitle>
@@ -49,28 +49,28 @@ export default function BadgePage() {
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center justify-items-center mb-16">
                                     {/* Large */}
                                     <div className="text-center group">
-                                        <div className="w-48 h-48 mb-6 flex items-center justify-center bg-[#0d1420] rounded-3xl border border-white/[0.06] shadow-xl group-hover:scale-105 transition-transform duration-500">
+                                        <div className="w-48 h-48 mb-6 flex items-center justify-center bg-[#FAF8F5] rounded-3xl border border-[#3D2B1F]/10 shadow-xl group-hover:scale-105 transition-transform duration-500">
                                             <BadgeLogo size={160} />
                                         </div>
-                                        <div className="text-[10px] font-black uppercase tracking-widest text-[#d4af37]">Large (200px)</div>
+                                        <div className="text-[10px] font-black uppercase tracking-widest text-[#C9A96E]">Large (200px)</div>
                                     </div>
                                     {/* Medium */}
                                     <div className="text-center group">
-                                        <div className="w-32 h-32 mb-6 flex items-center justify-center bg-[#0d1420] rounded-2xl border border-white/[0.06] shadow-lg group-hover:scale-105 transition-transform duration-500">
+                                        <div className="w-32 h-32 mb-6 flex items-center justify-center bg-[#FAF8F5] rounded-2xl border border-[#3D2B1F]/10 shadow-lg group-hover:scale-105 transition-transform duration-500">
                                             <BadgeLogo size={100} />
                                         </div>
-                                        <div className="text-[10px] font-black uppercase tracking-widest text-[#d4af37]">Medium (120px)</div>
+                                        <div className="text-[10px] font-black uppercase tracking-widest text-[#C9A96E]">Medium (120px)</div>
                                     </div>
                                     {/* Small */}
                                     <div className="text-center group">
-                                        <div className="w-24 h-24 mb-6 flex items-center justify-center bg-[#0d1420] rounded-xl border border-white/[0.06] shadow-md group-hover:scale-105 transition-transform duration-500">
+                                        <div className="w-24 h-24 mb-6 flex items-center justify-center bg-[#FAF8F5] rounded-xl border border-[#3D2B1F]/10 shadow-md group-hover:scale-105 transition-transform duration-500">
                                             <BadgeLogo size={60} />
                                         </div>
-                                        <div className="text-[10px] font-black uppercase tracking-widest text-[#d4af37]">Small (80px)</div>
+                                        <div className="text-[10px] font-black uppercase tracking-widest text-[#C9A96E]">Small (80px)</div>
                                     </div>
                                 </div>
 
-                                <div className="bg-gray-900 rounded-3xl p-8 text-white">
+                                <div className="bg-gray-900 rounded-3xl p-8 text-[#3D2B1F]">
                                     <div className="flex items-center justify-between mb-6">
                                         <h3 className="font-bold flex items-center gap-2">
                                             <Code className="w-5 h-5 text-secondary" />
@@ -78,7 +78,7 @@ export default function BadgePage() {
                                         </h3>
                                         <span className="text-[10px] uppercase tracking-widest opacity-50 font-bold">Recommended for Footer / About</span>
                                     </div>
-                                    <pre className="bg-black/40 p-6 rounded-2xl text-xs font-mono overflow-x-auto text-gray-300 border border-white/5 whitespace-pre-wrap leading-relaxed">
+                                    <pre className="bg-black/40 p-6 rounded-2xl text-xs font-mono overflow-x-auto text-gray-300 border border-[#3D2B1F]/10 whitespace-pre-wrap leading-relaxed">
                                         {`<!-- Injector Index Verified Badge -->
 <a href="https://www.injectorindex.com" target="_blank" rel="noopener">
   <img 
@@ -93,8 +93,8 @@ export default function BadgePage() {
                         </Card>
 
                         {/* 2. Eligibility Section */}
-                        <div className="bg-[#101827] rounded-[2.5rem] border border-white/[0.06] p-10 md:p-14">
-                            <h2 className="text-3xl font-display font-bold text-white mb-8 tracking-tight">Eligibility Criteria</h2>
+                        <div className="bg-[#F2EDE4] rounded-[2.5rem] border border-[#3D2B1F]/10 p-10 md:p-14">
+                            <h2 className="text-3xl font-display font-bold text-[#3D2B1F] mb-8 tracking-tight">Eligibility Criteria</h2>
                             <div className="space-y-8">
                                 {[
                                     {
@@ -114,12 +114,12 @@ export default function BadgePage() {
                                     }
                                 ].map((item) => (
                                     <div key={item.title} className="flex gap-6">
-                                        <div className="p-3 bg-white/[0.03] border border-white/[0.06] rounded-2xl text-secondary h-fit">
+                                        <div className="p-3 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-2xl text-secondary h-fit">
                                             <item.icon className="w-6 h-6" />
                                         </div>
                                         <div>
-                                            <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                                            <p className="text-gray-500 font-light leading-relaxed">{item.desc}</p>
+                                            <h3 className="text-xl font-bold text-[#3D2B1F] mb-2">{item.title}</h3>
+                                            <p className="text-[#3D2B1F]/60 font-light leading-relaxed">{item.desc}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -130,36 +130,36 @@ export default function BadgePage() {
                     {/* Sidebar: Check Eligibility */}
                     <div className="lg:col-span-4 space-y-8">
                         <div className="sticky top-24">
-                            <Card className="rounded-[2.5rem] border border-white/[0.06] shadow-xl overflow-hidden bg-[#101827]">
-                                <CardHeader className="bg-white/[0.02] border-b border-white/[0.06] p-8">
-                                    <CardTitle className="text-xl font-display font-bold text-white">Check Your Status</CardTitle>
+                            <Card className="rounded-[2.5rem] border border-[#3D2B1F]/10 shadow-xl overflow-hidden bg-[#F2EDE4]">
+                                <CardHeader className="bg-[#3D2B1F]/5 border-b border-[#3D2B1F]/10 p-8">
+                                    <CardTitle className="text-xl font-display font-bold text-[#3D2B1F]">Check Your Status</CardTitle>
                                 </CardHeader>
                                 <CardContent className="p-8">
-                                    <p className="text-sm text-gray-500 font-light leading-relaxed mb-8">
+                                    <p className="text-sm text-[#3D2B1F]/60 font-light leading-relaxed mb-8">
                                         Enter your practice name or provider handle to verify your current Clarity Score™ eligibility for the badge.
                                     </p>
                                     <div className="space-y-6">
                                         <div className="relative">
-                                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#3D2B1F]/70" />
                                             <input
                                                 type="text"
                                                 placeholder="Search practice name..."
-                                                className="w-full bg-white/[0.03] border border-white/[0.06] rounded-2xl py-4 pl-12 pr-4 text-sm text-white focus:ring-2 focus:ring-secondary focus:border-transparent transition-all placeholder:text-gray-600"
+                                                className="w-full bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-2xl py-4 pl-12 pr-4 text-sm text-[#3D2B1F] focus:ring-2 focus:ring-secondary focus:border-transparent transition-all placeholder:text-[#3D2B1F]/50"
                                             />
                                         </div>
-                                        <Button className="w-full bg-primary hover:bg-[#1a2332] text-white font-bold py-6 rounded-2xl shadow-lg transition-transform hover:-translate-y-1">
+                                        <Button className="w-full bg-primary hover:bg-[#1a2332] text-[#3D2B1F] font-bold py-6 rounded-2xl shadow-lg transition-transform hover:-translate-y-1">
                                             Check My Ranking
                                         </Button>
                                     </div>
                                 </CardContent>
                             </Card>
 
-                            <div className="mt-8 p-8 rounded-[2rem] bg-white/[0.02] border border-white/[0.06]">
-                                <div className="flex items-center gap-3 text-white font-bold mb-4">
+                            <div className="mt-8 p-8 rounded-[2rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10">
+                                <div className="flex items-center gap-3 text-[#3D2B1F] font-bold mb-4">
                                     <Info className="w-5 h-5" />
                                     Independence Notice
                                 </div>
-                                <p className="text-[13px] text-gray-500 leading-relaxed font-light">
+                                <p className="text-[13px] text-[#3D2B1F]/60 leading-relaxed font-light">
                                     Badge eligibility is determined strictly by data. Nobody can pay to lower the eligibility threshold or purchase a "Verified" status without meeting the Clarity Score™ criteria.
                                 </p>
                             </div>
@@ -180,11 +180,11 @@ function Award({ className }: { className?: string }) {
 function BadgeLogo({ size = 120 }: { size?: number }) {
     return (
         <svg width={size} height={size} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M100 15L170 40V100C170 144.18 140.35 180.26 100 190C59.65 180.26 30 144.18 30 100V40L100 15Z" fill="#1a2332" stroke="#d4af37" strokeWidth="8" />
-            <path d="M70 100L90 120L130 80" stroke="#d4af37" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
-            <text x="100" y="55" fontFamily="Inter, sans-serif" fontSize="12" fill="#d4af37" textAnchor="middle" fontWeight="900" style={{ letterSpacing: '0.2em', textTransform: 'uppercase' }}>Verified</text>
-            <text x="100" y="155" fontFamily="Inter, sans-serif" fontSize="10" fill="#d4af37" textAnchor="middle" fontWeight="bold">INJECTOR INDEX</text>
-            <circle cx="100" cy="100" r="85" stroke="#d4af37" strokeWidth="2" strokeDasharray="4 8" opacity="0.3" />
+            <path d="M100 15L170 40V100C170 144.18 140.35 180.26 100 190C59.65 180.26 30 144.18 30 100V40L100 15Z" fill="#1a2332" stroke="#C9A96E" strokeWidth="8" />
+            <path d="M70 100L90 120L130 80" stroke="#C9A96E" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
+            <text x="100" y="55" fontFamily="Inter, sans-serif" fontSize="12" fill="#C9A96E" textAnchor="middle" fontWeight="900" style={{ letterSpacing: '0.2em', textTransform: 'uppercase' }}>Verified</text>
+            <text x="100" y="155" fontFamily="Inter, sans-serif" fontSize="10" fill="#C9A96E" textAnchor="middle" fontWeight="bold">INJECTOR INDEX</text>
+            <circle cx="100" cy="100" r="85" stroke="#C9A96E" strokeWidth="2" strokeDasharray="4 8" opacity="0.3" />
         </svg>
     )
 }

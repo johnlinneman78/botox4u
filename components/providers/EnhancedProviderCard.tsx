@@ -72,7 +72,7 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
 
                 {provider.warning_flag && (
                     <div
-                        className="absolute inset-x-0 top-0 text-white p-2 z-30 flex items-center justify-center gap-2 shadow-lg"
+                        className="absolute inset-x-0 top-0 text-[#3D2B1F] p-2 z-30 flex items-center justify-center gap-2 shadow-lg"
                         style={{ background: 'var(--color-espresso)' }}
                     >
                         <AlertTriangle className="w-4 h-4 text-[var(--color-gold)]" />
@@ -279,7 +279,7 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                     <div className="relative w-full max-w-lg">
                         <button
                             onClick={() => setIsModalOpen(false)}
-                            className="absolute -top-14 right-0 text-white hover:text-[var(--color-gold)] transition-colors font-bold flex items-center gap-2 uppercase tracking-widest text-xs"
+                            className="absolute -top-14 right-0 text-[#3D2B1F] hover:text-[var(--color-gold)] transition-colors font-bold flex items-center gap-2 uppercase tracking-widest text-xs"
                         >
                             Close <X className="w-8 h-8 border border-white/20 rounded-full p-2" />
                         </button>

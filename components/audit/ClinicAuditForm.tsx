@@ -94,12 +94,12 @@ export default function ClinicAuditForm() {
 
     if (isSuccess) {
         return (
-            <div className="bg-[#0d1420] border border-[#d4af37]/30 rounded-2xl p-8 text-center max-w-2xl mx-auto">
-                <div className="w-16 h-16 bg-[#d4af37]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Check className="text-[#d4af37] w-8 h-8" />
+            <div className="bg-[#FAF8F5] border border-[#C9A96E]/30 rounded-2xl p-8 text-center max-w-2xl mx-auto">
+                <div className="w-16 h-16 bg-[#C9A96E]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Check className="text-[#C9A96E] w-8 h-8" />
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-2">Audit Report Generated</h2>
-                <p className="text-gray-400 mb-6">
+                <h2 className="text-2xl font-bold text-[#3D2B1F] mb-2">Audit Report Generated</h2>
+                <p className="text-[#3D2B1F]/70 mb-6">
                     Your personalized {providerName ? <strong>{providerName}</strong> : 'Regional'} Clinical Audit has been sent to <strong>{email}</strong>.
                     Check your inbox (and spam folder) for the PDF report.
                 </p>
@@ -110,7 +110,7 @@ export default function ClinicAuditForm() {
                         setIsSuccess(false)
                         setError(null)
                     }}
-                    className="bg-[#d4af37] text-[#0d1420] px-8 py-3 rounded-full font-bold hover:bg-[#c4a130] transition-colors"
+                    className="bg-[#C9A96E] text-white px-8 py-3 rounded-full font-bold hover:bg-[#c4a130] transition-colors"
                 >
                     New Audit Request
                 </button>
@@ -119,11 +119,11 @@ export default function ClinicAuditForm() {
     }
 
     return (
-        <div className="bg-[#0d1420] border border-white/5 rounded-2xl p-6 md:p-10 max-w-2xl mx-auto shadow-2xl relative overflow-hidden">
+        <div className="bg-[#FAF8F5] border border-[#3D2B1F]/10 rounded-2xl p-6 md:p-10 max-w-2xl mx-auto shadow-2xl relative overflow-hidden">
             {/* Background Glow */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#d4af37]/5 blur-[100px] -z-10" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#C9A96E]/5 blur-[100px] -z-10" />
 
-            <div className="flex items-center gap-2 mb-8 text-[#d4af37]">
+            <div className="flex items-center gap-2 mb-8 text-[#C9A96E]">
                 <ShieldCheck className="w-5 h-5" />
                 <span className="text-xs font-bold uppercase tracking-widest">Clinic Safety Audit v2.0</span>
             </div>
@@ -132,30 +132,30 @@ export default function ClinicAuditForm() {
                 {step === 1 && (
                     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
                         <div>
-                            <h1 className="text-3xl font-bold text-white mb-2">Audit Your Clinic</h1>
-                            <p className="text-gray-400">Enter details to see how they rank against 2026 InjectorIndex benchmarks.</p>
+                            <h1 className="text-3xl font-bold text-[#3D2B1F] mb-2">Audit Your Clinic</h1>
+                            <p className="text-[#3D2B1F]/70">Enter details to see how they rank against 2026 InjectorIndex benchmarks.</p>
                         </div>
 
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-400 mb-2">Patient Email (Required)</label>
+                                <label className="block text-sm font-medium text-[#3D2B1F]/70 mb-2">Patient Email (Required)</label>
                                 <input
                                     {...register('email')}
                                     type="email"
                                     placeholder="your@email.com"
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#d4af37] focus:outline-none transition-colors"
+                                    className="w-full bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-xl px-4 py-3 text-[#3D2B1F] focus:border-[#C9A96E] focus:outline-none transition-colors"
                                 />
                                 {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-400 mb-2">Clinic/Provider Name</label>
+                                <label className="block text-sm font-medium text-[#3D2B1F]/70 mb-2">Clinic/Provider Name</label>
                                 <div className="relative">
-                                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#3D2B1F]/60" />
                                     <input
                                         {...register('providerName')}
                                         placeholder="Search clinic or enter name..."
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white focus:border-[#d4af37] focus:outline-none transition-colors"
+                                        className="w-full bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-xl pl-12 pr-4 py-3 text-[#3D2B1F] focus:border-[#C9A96E] focus:outline-none transition-colors"
                                     />
                                 </div>
                                 {errors.providerName && <p className="text-red-500 text-xs mt-1">{errors.providerName.message}</p>}
@@ -163,10 +163,10 @@ export default function ClinicAuditForm() {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-400 mb-2">City</label>
+                                    <label className="block text-sm font-medium text-[#3D2B1F]/70 mb-2">City</label>
                                     <select
                                         {...register('city')}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#d4af37] focus:outline-none transition-colors"
+                                        className="w-full bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-xl px-4 py-3 text-[#3D2B1F] focus:border-[#C9A96E] focus:outline-none transition-colors"
                                     >
                                         <option value="">Select city</option>
                                         {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
@@ -174,11 +174,11 @@ export default function ClinicAuditForm() {
                                     {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city.message}</p>}
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-400 mb-2">State</label>
+                                    <label className="block text-sm font-medium text-[#3D2B1F]/70 mb-2">State</label>
                                     <input
                                         {...register('state')}
                                         placeholder="e.g. AZ"
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#d4af37] focus:outline-none transition-colors"
+                                        className="w-full bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-xl px-4 py-3 text-[#3D2B1F] focus:border-[#C9A96E] focus:outline-none transition-colors"
                                     />
                                     {errors.state && <p className="text-red-500 text-xs mt-1">{errors.state.message}</p>}
                                 </div>
@@ -188,7 +188,7 @@ export default function ClinicAuditForm() {
                         <button
                             type="button"
                             onClick={() => setStep(2)}
-                            className="w-full bg-[#d4af37] text-[#0d1420] py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#c4a130] transition-colors"
+                            className="w-full bg-[#C9A96E] text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#c4a130] transition-colors"
                         >
                             Next Step <ArrowRight className="w-4 h-4" />
                         </button>
@@ -198,8 +198,8 @@ export default function ClinicAuditForm() {
                 {step === 2 && (
                     <div className="space-y-6 animate-in fade-in slide-in-from-right-4">
                         <div>
-                            <h2 className="text-2xl font-bold text-white mb-2">Treatment Details</h2>
-                            <p className="text-gray-400">What are you considering at this clinic?</p>
+                            <h2 className="text-2xl font-bold text-[#3D2B1F] mb-2">Treatment Details</h2>
+                            <p className="text-[#3D2B1F]/70">What are you considering at this clinic?</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -207,8 +207,8 @@ export default function ClinicAuditForm() {
                                 <label
                                     key={t}
                                     className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all ${selectedTreatments.includes(t)
-                                        ? 'border-[#d4af37] bg-[#d4af37]/10 text-white'
-                                        : 'border-white/10 text-gray-400 hover:border-white/20'
+                                        ? 'border-[#C9A96E] bg-[#C9A96E]/10 text-[#3D2B1F]'
+                                        : 'border-[#3D2B1F]/10 text-[#3D2B1F]/70 hover:border-white/20'
                                         }`}
                                 >
                                     <input
@@ -221,9 +221,9 @@ export default function ClinicAuditForm() {
                                             else setValue('treatmentTypes', selectedTreatments.filter(x => x !== val))
                                         }}
                                     />
-                                    <div className={`w-4 h-4 rounded border flex items-center justify-center ${selectedTreatments.includes(t) ? 'bg-[#d4af37] border-[#d4af37]' : 'border-gray-600'
+                                    <div className={`w-4 h-4 rounded border flex items-center justify-center ${selectedTreatments.includes(t) ? 'bg-[#C9A96E] border-[#C9A96E]' : 'border-gray-600'
                                         }`}>
-                                        {selectedTreatments.includes(t) && <Check className="w-3 h-3 text-[#0d1420]" />}
+                                        {selectedTreatments.includes(t) && <Check className="w-3 h-3 text-white" />}
                                     </div>
                                     <span className="text-sm">{t}</span>
                                 </label>
@@ -231,7 +231,7 @@ export default function ClinicAuditForm() {
                         </div>
 
                         <div className="pt-4">
-                            <label className="block text-sm font-medium text-gray-400 mb-4">Primary Aesthetic Goal</label>
+                            <label className="block text-sm font-medium text-[#3D2B1F]/70 mb-4">Primary Aesthetic Goal</label>
                             <div className="space-y-3">
                                 {GOALS.map(g => (
                                     <label
@@ -242,9 +242,9 @@ export default function ClinicAuditForm() {
                                             {...register('primaryGoal')}
                                             type="radio"
                                             value={g}
-                                            className="w-4 h-4 border-white/10 bg-white/5 text-[#d4af37] focus:ring-[#d4af37]"
+                                            className="w-4 h-4 border-[#3D2B1F]/10 bg-[#3D2B1F]/5 text-[#C9A96E] focus:ring-[#C9A96E]"
                                         />
-                                        <span className="text-gray-400 group-hover:text-white transition-colors">{g}</span>
+                                        <span className="text-[#3D2B1F]/70 group-hover:text-[#3D2B1F] transition-colors">{g}</span>
                                     </label>
                                 ))}
                             </div>
@@ -254,14 +254,14 @@ export default function ClinicAuditForm() {
                             <button
                                 type="button"
                                 onClick={() => setStep(1)}
-                                className="flex-1 border border-white/10 text-white py-4 rounded-xl font-bold hover:bg-white/5 transition-colors"
+                                className="flex-1 border border-[#3D2B1F]/10 text-[#3D2B1F] py-4 rounded-xl font-bold hover:bg-[#3D2B1F]/5 transition-colors"
                             >
                                 Back
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setStep(3)}
-                                className="flex-[2] bg-[#d4af37] text-[#0d1420] py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#c4a130] transition-colors"
+                                className="flex-[2] bg-[#C9A96E] text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#c4a130] transition-colors"
                             >
                                 Calibration <ArrowRight className="w-4 h-4" />
                             </button>
@@ -272,28 +272,28 @@ export default function ClinicAuditForm() {
                 {step === 3 && (
                     <div className="space-y-6 animate-in fade-in slide-in-from-right-4">
                         <div>
-                            <h2 className="text-2xl font-bold text-white mb-2">Final Calibration</h2>
-                            <p className="text-gray-400">Optional benchmarks to refine your price integrity report.</p>
+                            <h2 className="text-2xl font-bold text-[#3D2B1F] mb-2">Final Calibration</h2>
+                            <p className="text-[#3D2B1F]/70">Optional benchmarks to refine your price integrity report.</p>
                         </div>
 
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-400 mb-2">Price Quoted (Optional)</label>
+                                <label className="block text-sm font-medium text-[#3D2B1F]/70 mb-2">Price Quoted (Optional)</label>
                                 <div className="relative">
-                                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#3D2B1F]/60">$</span>
                                     <input
                                         {...register('priceQuoted')}
                                         placeholder="e.g. 600 for 40 units"
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl pl-8 pr-4 py-3 text-white focus:border-[#d4af37] focus:outline-none transition-colors"
+                                        className="w-full bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-xl pl-8 pr-4 py-3 text-[#3D2B1F] focus:border-[#C9A96E] focus:outline-none transition-colors"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-400 mb-2">How did you find this clinic?</label>
+                                <label className="block text-sm font-medium text-[#3D2B1F]/70 mb-2">How did you find this clinic?</label>
                                 <select
                                     {...register('foundThrough')}
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#d4af37] focus:outline-none transition-colors"
+                                    className="w-full bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-xl px-4 py-3 text-[#3D2B1F] focus:border-[#C9A96E] focus:outline-none transition-colors"
                                 >
                                     <option value="Google Search">Google Search</option>
                                     <option value="Instagram">Instagram</option>
@@ -310,20 +310,20 @@ export default function ClinicAuditForm() {
                             <button
                                 type="button"
                                 onClick={() => setStep(2)}
-                                className="flex-1 border border-white/10 text-white py-4 rounded-xl font-bold hover:bg-white/5 transition-colors"
+                                className="flex-1 border border-[#3D2B1F]/10 text-[#3D2B1F] py-4 rounded-xl font-bold hover:bg-[#3D2B1F]/5 transition-colors"
                             >
                                 Back
                             </button>
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="flex-[2] bg-[#d4af37] text-[#0d1420] py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#c4a130] transition-colors disabled:opacity-50"
+                                className="flex-[2] bg-[#C9A96E] text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#c4a130] transition-colors disabled:opacity-50"
                             >
                                 {isSubmitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Analyzing...</> : 'Generate Audit Report'}
                             </button>
                         </div>
 
-                        <p className="text-center text-xs text-gray-500">
+                        <p className="text-center text-xs text-[#3D2B1F]/60">
                             Independent data powered by InjectorIndex clinical benchmarks.
                         </p>
                     </div>

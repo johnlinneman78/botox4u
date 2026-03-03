@@ -106,24 +106,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     }
 
     return (
-        <main className="min-h-screen bg-[#0d1420]">
+        <main className="min-h-screen bg-[#FAF8F5]">
             <JsonLd data={articleSchema} />
             <JsonLd data={faqSchema} />
             <JsonLd data={breadcrumbSchema} />
 
-            <div className="bg-[#101827] border-b border-white/[0.06] mb-12">
+            <div className="bg-[#F2EDE4] border-b border-[#3D2B1F]/10 mb-12">
                 <div className="container mx-auto px-4 py-16 text-center">
-                    <Link href="/blog" className="inline-flex items-center text-sm font-bold text-[#d4af37] mb-8 hover:-translate-x-1 transition-transform">
+                    <Link href="/blog" className="inline-flex items-center text-sm font-bold text-[#C9A96E] mb-8 hover:-translate-x-1 transition-transform">
                         <ArrowLeft className="w-4 h-4 mr-2" />
                         Back to Blog
                     </Link>
-                    <div className="flex items-center justify-center gap-4 text-[10px] font-black uppercase tracking-widest text-gray-600 mb-6">
+                    <div className="flex items-center justify-center gap-4 text-[10px] font-black uppercase tracking-widest text-[#3D2B1F]/50 mb-6">
                         <Clock className="w-3 h-3" />
                         5 Minute Read
                         <span className="w-1 h-1 bg-gray-700 rounded-full" />
                         {post.publishDate}
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-display font-bold text-white max-w-4xl mx-auto leading-tight">
+                    <h1 className="text-4xl md:text-6xl font-display font-bold text-[#3D2B1F] max-w-4xl mx-auto leading-tight">
                         {post.title}
                     </h1>
                 </div>
@@ -131,25 +131,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             <article className="container mx-auto px-4 max-w-3xl pb-24">
                 <div className="prose prose-lg prose-invert max-w-none 
-          prose-headings:font-display prose-headings:font-bold prose-headings:text-white
-          prose-a:text-[#d4af37] prose-a:no-underline hover:prose-a:underline
-          prose-strong:text-white prose-table:border prose-table:rounded-xl prose-table:overflow-hidden">
+          prose-headings:font-display prose-headings:font-bold prose-headings:text-[#3D2B1F]
+          prose-a:text-[#C9A96E] prose-a:no-underline hover:prose-a:underline
+          prose-strong:text-[#3D2B1F] prose-table:border prose-table:rounded-xl prose-table:overflow-hidden">
                     {post.content.split('\n').map((line, i) => {
-                        if (line.startsWith('## ')) return <h2 key={i} className="text-3xl mt-12 mb-6 text-white">{line.replace('## ', '')}</h2>
-                        if (line.startsWith('### ')) return <h3 key={i} className="text-2xl mt-10 mb-4 text-white">{line.replace('### ', '')}</h3>
+                        if (line.startsWith('## ')) return <h2 key={i} className="text-3xl mt-12 mb-6 text-[#3D2B1F]">{line.replace('## ', '')}</h2>
+                        if (line.startsWith('### ')) return <h3 key={i} className="text-2xl mt-10 mb-4 text-[#3D2B1F]">{line.replace('### ', '')}</h3>
                         if (line.startsWith('|')) return null;
                         if (line.trim() === '') return <br key={i} />
-                        return <p key={i} className="mb-6 text-gray-400 leading-relaxed font-light">{line}</p>
+                        return <p key={i} className="mb-6 text-[#3D2B1F]/70 leading-relaxed font-light">{line}</p>
                     })}
 
                     {/* FAQ Section */}
-                    <div className="mt-20 border-t border-white/[0.06] pt-16">
-                        <h2 className="text-3xl font-display font-bold text-white mb-10 text-center">Frequently Asked Questions</h2>
+                    <div className="mt-20 border-t border-[#3D2B1F]/10 pt-16">
+                        <h2 className="text-3xl font-display font-bold text-[#3D2B1F] mb-10 text-center">Frequently Asked Questions</h2>
                         <div className="space-y-8">
                             {post.faqs.map((faq, i) => (
-                                <div key={i} className="bg-white/[0.02] p-8 rounded-3xl border border-white/[0.06]">
-                                    <h3 className="text-xl font-bold text-white mb-4">{faq.question}</h3>
-                                    <p className="text-gray-500 font-light leading-relaxed">{faq.answer}</p>
+                                <div key={i} className="bg-[#3D2B1F]/5 p-8 rounded-3xl border border-[#3D2B1F]/10">
+                                    <h3 className="text-xl font-bold text-[#3D2B1F] mb-4">{faq.question}</h3>
+                                    <p className="text-[#3D2B1F]/60 font-light leading-relaxed">{faq.answer}</p>
                                 </div>
                             ))}
                         </div>
@@ -159,36 +159,36 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {/* Blog CTA Bar */}
             <section className="py-20 px-4">
-                <div className="max-w-4xl mx-auto bg-[#101827] rounded-[3rem] p-12 md:p-16 shadow-2xl relative overflow-hidden border border-white/[0.06]">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#d4af37]/5 rounded-full translate-x-1/2 -translate-y-1/2" />
+                <div className="max-w-4xl mx-auto bg-[#F2EDE4] rounded-[3rem] p-12 md:p-16 shadow-2xl relative overflow-hidden border border-[#3D2B1F]/10">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#C9A96E]/5 rounded-full translate-x-1/2 -translate-y-1/2" />
                     <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
                         <div className="flex-1 text-center md:text-left">
-                            <div className="inline-flex items-center gap-2 text-[#d4af37] font-black uppercase tracking-widest text-xs mb-4">
+                            <div className="inline-flex items-center gap-2 text-[#C9A96E] font-black uppercase tracking-widest text-xs mb-4">
                                 <BarChart3 className="w-4 h-4" />
                                 Botox Pulse Data
                             </div>
-                            <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">
+                            <h2 className="text-3xl md:text-4xl font-display font-bold text-[#3D2B1F] mb-6">
                                 Get Free Botox Pricing for Your Area
                             </h2>
-                            <p className="text-gray-500 text-lg font-light leading-relaxed">
+                            <p className="text-[#3D2B1F]/60 text-lg font-light leading-relaxed">
                                 Join 2,400+ patients getting monthly pricing updates, provider scores, and patient insights.
                             </p>
                         </div>
                         <div className="w-full md:w-auto min-w-[320px]">
                             <div className="flex flex-col gap-4">
                                 <div className="relative">
-                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 w-5 h-5" />
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#3D2B1F]/50 w-5 h-5" />
                                     <input
                                         type="email"
                                         placeholder="Enter your email"
-                                        className="w-full h-14 pl-12 pr-4 bg-white/[0.03] border border-white/[0.06] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#d4af37]/30 text-white placeholder:text-gray-700"
+                                        className="w-full h-14 pl-12 pr-4 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C9A96E]/30 text-[#3D2B1F] placeholder:text-gray-700"
                                     />
                                 </div>
-                                <Button className="w-full h-14 bg-[#d4af37] hover:bg-[#c0a030] text-[#0d1420] font-bold text-lg rounded-xl shadow-lg shadow-[#d4af37]/10">
+                                <Button className="w-full h-14 bg-[#C9A96E] hover:bg-[#B5955B] text-white font-bold text-lg rounded-xl shadow-lg shadow-[#C9A96E]/10">
                                     Get My Free Updates →
                                 </Button>
                                 <div className="text-center pt-2">
-                                    <Link href="/pulse" className="text-sm font-bold text-[#d4af37] hover:underline">
+                                    <Link href="/pulse" className="text-sm font-bold text-[#C9A96E] hover:underline">
                                         Or take the full 2-minute survey for personalized data →
                                     </Link>
                                 </div>

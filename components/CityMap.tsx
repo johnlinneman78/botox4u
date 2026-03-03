@@ -47,8 +47,8 @@ export default function CityMap({ providers, citySlug, userLat, userLng }: CityM
 
     if (!isMounted) {
         return (
-            <div style={mapContainerStyle} className="bg-[#101827] rounded-2xl animate-pulse flex items-center justify-center border border-white/5">
-                <div className="text-gray-600 font-medium italic">Loading Interactive Map...</div>
+            <div style={mapContainerStyle} className="bg-[#F2EDE4] rounded-2xl animate-pulse flex items-center justify-center border border-[#3D2B1F]/10">
+                <div className="text-[#3D2B1F]/50 font-medium italic">Loading Interactive Map...</div>
             </div>
         )
     }
@@ -74,9 +74,9 @@ export default function CityMap({ providers, citySlug, userLat, userLng }: CityM
 
     return (
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8 border border-gray-100">
-            <div className="bg-[#1a2332] p-6 text-white bg-gradient-to-r from-[#1a2332] to-[#1e2b3e]">
+            <div className="bg-[#1a2332] p-6 text-[#3D2B1F] bg-gradient-to-r from-[#1a2332] to-[#1e2b3e]">
                 <div className="flex items-center">
-                    <MapPin className="w-8 h-8 mr-3 text-[#d4af37]" />
+                    <MapPin className="w-8 h-8 mr-3 text-[#C9A96E]" />
                     <div>
                         <h3 className="text-xl font-bold font-display">Providers Near You</h3>
                         <p className="text-gray-300 text-sm">{markers.length} verified clinics mapped in this area</p>

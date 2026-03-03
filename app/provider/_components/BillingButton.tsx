@@ -35,9 +35,9 @@ export default function BillingButton({ customerId }: { customerId: string }) {
         <button
             onClick={handleBilling}
             disabled={loading}
-            className="flex items-center justify-center gap-3 w-full bg-white/[0.03] border border-white/10 hover:bg-white/5 text-white rounded-2xl py-5 px-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all group disabled:opacity-50"
+            className="flex items-center justify-center gap-3 w-full bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 hover:bg-[#3D2B1F]/5 text-[#3D2B1F] rounded-2xl py-5 px-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all group disabled:opacity-50"
         >
-            <CreditCard className="w-4 h-4 text-[#d4af37]" />
+            <CreditCard className="w-4 h-4 text-[#C9A96E]" />
             {loading ? 'Opening Portal...' : 'Manage Billing & Subscription'}
         </button>
     )

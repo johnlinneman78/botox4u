@@ -47,7 +47,7 @@ export default function ProviderLoginPage() {
                 <h2 className="text-center text-3xl font-display font-bold text-gray-900">
                     Provider Login
                 </h2>
-                <p className="mt-2 text-center text-sm text-gray-600">
+                <p className="mt-2 text-center text-sm text-[#3D2B1F]/50">
                     Access your clinic dashboard and manage leads.
                 </p>
             </div>
@@ -96,7 +96,7 @@ export default function ProviderLoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
+                            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-[#3D2B1F] bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50"
                         >
                             {loading ? 'Signing In...' : 'Sign In'}
                         </button>
