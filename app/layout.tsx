@@ -36,6 +36,8 @@ export const metadata: Metadata = {
   }
 }
 
+import { ExitIntentModal } from '@/components/ui/ExitIntentModal'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -76,6 +78,7 @@ export default function RootLayout({
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />
+        <ExitIntentModal />
       </body>
     </html>
   )

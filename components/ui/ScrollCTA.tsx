@@ -123,11 +123,11 @@ export function ScrollCTA({
                                     className="font-body text-sm hidden sm:block"
                                     style={{ color: 'var(--color-stone)' }}
                                 >
-                                    Find top-rated Botox & filler providers near you
+                                    Not sure what Botox should cost? Take our 30-second quiz.
                                 </p>
-                                <Link href="/find-providers" className="ml-auto">
+                                <Link href="/quiz" className="ml-auto">
                                     <Button variant="primary" size="sm">
-                                        Find My Injector Match →
+                                        Take the Price Quiz →
                                     </Button>
                                 </Link>
                             </>

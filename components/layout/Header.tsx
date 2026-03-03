@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
-import { Menu, X, Shield, Calculator, Info, UserCheck, TrendingUp, Code } from 'lucide-react'
+import { Menu, X, Shield, Calculator, Info, Sparkles, TrendingUp, Code } from 'lucide-react'
 import Logo from './Logo'
 
 export default function Header() {
@@ -22,6 +22,22 @@ export default function Header() {
                 <Link href="/" className="flex items-center flex-shrink-0 hover:opacity-90 transition-opacity">
                     <Logo className="h-11" variant="shield" />
                 </Link>
+
+                {/* Mobile: Quiz button + hamburger */}
+                <div className="flex items-center gap-2 md:hidden">
+                    <Link href="/quiz">
+                        <Button className="bg-[#C9A96E] hover:bg-[#B5955B] text-white font-bold py-2 px-4 rounded-lg transition-all text-xs whitespace-nowrap">
+                            Price Quiz
+                        </Button>
+                    </Link>
+                    <button
+                        className="p-2 text-[#3D2B1F]/70 hover:text-[#C9A96E] transition-colors"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                    </button>
+                </div>
 
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center gap-6">
@@ -46,15 +62,6 @@ export default function Header() {
                         </Button>
                     </Link>
                 </nav>
-
-                {/* Mobile menu button */}
-                <button
-                    className="md:hidden p-2 text-[#3D2B1F]/70 hover:text-[#C9A96E] transition-colors"
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    aria-label="Toggle menu"
-                >
-                    {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                </button>
             </div>
 
             {/* Mobile Menu Tray */}
@@ -65,7 +72,7 @@ export default function Header() {
                             key={link.href}
                             href={link.href}
                             onClick={() => setIsMenuOpen(false)}
-                            className="flex items-center gap-3 p-3 rounded-xl hover:bg-[#3D2B1F]/5 text-gray-300 font-bold transition-all"
+                            className="flex items-center gap-3 p-3 rounded-xl hover:bg-[#3D2B1F]/5 text-[#3D2B1F]/70 font-bold transition-all"
                         >
                             <link.icon className="w-5 h-5 text-[#C9A96E]" />
                             {link.label}
@@ -74,7 +81,7 @@ export default function Header() {
                     <Link
                         href="/for-providers"
                         onClick={() => setIsMenuOpen(false)}
-                        className="flex items-center gap-3 p-3 rounded-xl border border-white/20 text-[#3D2B1F] font-bold text-center justify-center hover:bg-[#3D2B1F]/5 transition-all mt-2"
+                        className="flex items-center gap-3 p-3 rounded-xl border border-[#3D2B1F]/10 text-[#3D2B1F] font-bold text-center justify-center hover:bg-[#3D2B1F]/5 transition-all mt-2"
                     >
                         <Info className="w-5 h-5" />
                         For Providers
@@ -84,8 +91,8 @@ export default function Header() {
                         onClick={() => setIsMenuOpen(false)}
                         className="flex items-center gap-3 p-3 rounded-xl bg-[#C9A96E] text-white font-black text-center justify-center hover:bg-[#B5955B] transition-all"
                     >
-                        <UserCheck className="w-5 h-5" />
-                        Price Quiz
+                        <Sparkles className="w-5 h-5" />
+                        Take the Price Quiz
                     </Link>
                 </div>
             )}
