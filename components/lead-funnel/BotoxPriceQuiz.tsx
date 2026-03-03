@@ -175,6 +175,7 @@ export default function BotoxPriceQuiz() {
 
         setIsLoading(true);
         try {
+            // Save lead to database
             const response = await fetch('/api/quiz-submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -185,20 +186,20 @@ export default function BotoxPriceQuiz() {
                 })
             });
 
-            if (response.ok) {
-                setSubmitted(true);
+            // Always show submitted state
+            setSubmitted(true);
 
-                // Enroll in 5-day drip sequence via Resend
-                await fetch('/api/subscribe', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        email,
-                        firstName: email.split('@')[0], // fallback name from email
-                        source: 'quiz'
-                    })
-                });
-            }
+            // Fire drip enrollment independently (don't await, don't block UI)
+            fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email,
+                    firstName: email.split('@')[0],
+                    source: 'quiz'
+                })
+            }).catch(err => console.error('Subscribe error:', err));
+
         } catch (error) {
             console.error('Submission error:', error);
         } finally {

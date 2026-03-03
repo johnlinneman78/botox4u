@@ -37,49 +37,50 @@ export async function enrollInDripSequence({
 }: EnrollParams) {
     const fromAddress = `InjectorIndex <${getSenderEmail()}>`
 
-    const sequence = [
-        {
+    console.log(`[Drip] Enrolling ${email} (${firstName}) from source: ${source}`)
+    console.log(`[Drip] Using sender: ${fromAddress}`)
+    console.log(`[Drip] RESEND_API_KEY present: ${!!process.env.RESEND_API_KEY}`)
+    console.log(`[Drip] FROM_EMAIL: ${process.env.FROM_EMAIL}`)
+
+    // Step 1: Send Day 0 immediately (no scheduledAt needed)
+    try {
+        const day0Result = await resend.emails.send({
+            from: fromAddress,
+            to: email,
             subject: day0Subject(),
             html: day0Html({ firstName, pdfLink }),
-            delay: undefined, // Send immediately
-        },
-        {
-            subject: day1Subject(),
-            html: day1Html({ firstName }),
-            delay: scheduledAt(1),
-        },
-        {
-            subject: day2Subject(),
-            html: day2Html({ firstName }),
-            delay: scheduledAt(2),
-        },
-        {
-            subject: day3Subject(),
-            html: day3Html({ firstName }),
-            delay: scheduledAt(3),
-        },
-        {
-            subject: day4Subject(),
-            html: day4Html({ firstName }),
-            delay: scheduledAt(4),
-        },
-        {
-            subject: day5Subject(),
-            html: day5Html({ firstName }),
-            delay: scheduledAt(5),
-        },
+            tags: [
+                { name: 'sequence', value: 'botox_price_course' },
+                { name: 'day', value: '0' },
+                { name: 'source', value: source },
+            ],
+        })
+        console.log('[Drip] Day 0 sent:', JSON.stringify(day0Result))
+    } catch (err) {
+        console.error('[Drip] Day 0 FAILED:', err)
+    }
+
+    // Step 2: Schedule Days 1-5 using Resend's scheduledAt
+    // Note: scheduledAt requires Resend Pro plan. If on free plan, these will fail silently.
+    const futureEmails = [
+        { subject: day1Subject(), html: day1Html({ firstName }), day: 1 },
+        { subject: day2Subject(), html: day2Html({ firstName }), day: 2 },
+        { subject: day3Subject(), html: day3Html({ firstName }), day: 3 },
+        { subject: day4Subject(), html: day4Html({ firstName }), day: 4 },
+        { subject: day5Subject(), html: day5Html({ firstName }), day: 5 },
     ]
 
     const results = await Promise.allSettled(
-        sequence.map(({ subject, html, delay }) =>
+        futureEmails.map(({ subject, html, day }) =>
             resend.emails.send({
                 from: fromAddress,
                 to: email,
                 subject,
                 html,
-                ...(delay && { scheduledAt: delay }),
+                scheduledAt: scheduledAt(day),
                 tags: [
                     { name: 'sequence', value: 'botox_price_course' },
+                    { name: 'day', value: String(day) },
                     { name: 'source', value: source },
                 ],
             })
@@ -88,9 +89,9 @@ export async function enrollInDripSequence({
 
     results.forEach((result, i) => {
         if (result.status === 'rejected') {
-            console.error(`Day ${i} failed to schedule:`, result.reason)
+            console.error(`[Drip] Day ${i + 1} failed to schedule:`, result.reason)
         } else {
-            console.log(`Day ${i} scheduled successfully:`, result.value)
+            console.log(`[Drip] Day ${i + 1} scheduled:`, JSON.stringify(result.value))
         }
     })
 
