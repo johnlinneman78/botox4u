@@ -13,22 +13,22 @@ export default function VerificationStandard() {
             title: 'NPI Federal Registry',
             desc: 'Every provider\'s credentials are cross-referenced against the federal NPI database. We verify license type, specialty, and active status in real-time.',
             icon: Activity,
-            accent: 'text-blue-400',
-            bg: 'bg-blue-950/30 border-blue-800/30',
+            accent: 'text-[#8A9E8D]',
+            bg: 'bg-[#8A9E8D]/10 border-[#8A9E8D]/20',
         },
         {
             title: 'Real Pricing Scraper',
             desc: 'We aggregate self-reported and public pricing data — per-unit, per-session, and per-area — so you see exact costs before you book.',
             icon: DollarSign,
-            accent: 'text-amber-400',
-            bg: 'bg-amber-950/30 border-amber-800/30',
+            accent: 'text-[#C9A96E]',
+            bg: 'bg-[#C9A96E]/10 border-[#C9A96E]/20',
         },
         {
             title: '2026 Innovation Check',
             desc: 'Is this provider offering Daxxify, ultrasound-guided technique, or exosome add-ons? Clinics that adopt 2026 standards get rewarded.',
             icon: Cpu,
-            accent: 'text-violet-400',
-            bg: 'bg-violet-950/30 border-violet-800/30',
+            accent: 'text-[#3D2B1F]',
+            bg: 'bg-[#3D2B1F]/5 border-[#3D2B1F]/10',
         }
     ]
 

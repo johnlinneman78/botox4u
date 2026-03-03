@@ -19,6 +19,7 @@ import { notFound } from 'next/navigation'
 import { JsonLd, generateBreadcrumbSchema, generateItemListSchema, generateFAQPageSchema } from '@/components/seo/JsonLd'
 import { GeolocationSorter } from '@/components/providers/GeolocationSorter'
 import { Suspense } from 'react'
+import { QuizBanner } from '@/components/lead-funnel/QuizBanner'
 
 interface CityPageProps {
     params: Promise<{ state: string; city: string }>
@@ -26,21 +27,13 @@ interface CityPageProps {
 }
 
 export async function generateStaticParams() {
-    return [
-        { state: 'or', city: 'portland' },
-        { state: 'wa', city: 'seattle' },
-        { state: 'ny', city: 'new-york' },
-        { state: 'ca', city: 'los-angeles' },
-        { state: 'ca', city: 'san-francisco' },
-        { state: 'fl', city: 'miami' },
-        { state: 'il', city: 'chicago' },
-        { state: 'tx', city: 'dallas' },
-        { state: 'tx', city: 'houston' },
-        { state: 'ma', city: 'boston' },
-        { state: 'az', city: 'scottsdale' },
-        { state: 'ga', city: 'atlanta' },
-        { state: 'co', city: 'denver' },
-    ]
+    return NICHE.cities.map((cityObj) => {
+        const parts = cityObj.slug.split('/')
+        return {
+            state: parts[0],
+            city: parts[1]
+        }
+    })
 }
 
 export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
@@ -242,6 +235,10 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                         />
                         <PromoteClinicCard city={cityName} />
                     </div>
+                </div>
+
+                <div className="mt-24 mb-16">
+                    <QuizBanner city={cityName} />
                 </div>
 
                 <div className="mt-24 mb-16">

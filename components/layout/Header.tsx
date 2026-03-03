@@ -40,9 +40,9 @@ export default function Header() {
                             For Providers
                         </Button>
                     </Link>
-                    <Link href="/#match-quiz">
+                    <Link href="/quiz">
                         <Button className="bg-[#C9A96E] hover:bg-[#B5955B] text-white font-black py-2.5 px-6 rounded-xl transition-all shadow-lg shadow-[#C9A96E]/10 text-sm">
-                            Injector Match
+                            Price Quiz
                         </Button>
                     </Link>
                 </nav>
@@ -80,12 +80,12 @@ export default function Header() {
                         For Providers
                     </Link>
                     <Link
-                        href="/#match-quiz"
+                        href="/quiz"
                         onClick={() => setIsMenuOpen(false)}
                         className="flex items-center gap-3 p-3 rounded-xl bg-[#C9A96E] text-white font-black text-center justify-center hover:bg-[#B5955B] transition-all"
                     >
                         <UserCheck className="w-5 h-5" />
-                        Injector Match
+                        Price Quiz
                     </Link>
                 </div>
             )}

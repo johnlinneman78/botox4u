@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
 import { ProviderCard } from '@/components/ui/ProviderCard'
 import { Button } from '@/components/ui/Button'
+import { QuizBanner } from '@/components/lead-funnel/QuizBanner'
 import { MorphingHeadline } from '@/components/ui/MorphingHeadline'
 import { TreatmentExplorer } from '@/components/ui/TreatmentExplorer'
 import { StatementSection } from '@/components/sections/StatementSection'
@@ -595,6 +596,11 @@ export default function HomeClient() {
                         </div>
                     </RevealOnScroll>
                 </div>
+            </section>
+
+            {/* ═══ QUIZ CTA ═══ */}
+            <section className="container-content py-24">
+                <QuizBanner />
             </section>
 
             {/* Scroll-triggered CTA */}

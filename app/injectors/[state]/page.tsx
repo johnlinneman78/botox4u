@@ -6,6 +6,7 @@ import { StateHero } from '@/components/state/StateHero'
 import { CityList } from '@/components/state/CityList'
 import { NICHE } from '@/config/niche'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 
 interface StatePageProps {
     params: Promise<{ state: string }>
@@ -49,6 +50,18 @@ export default async function StatePage({ params }: StatePageProps) {
             className="min-h-screen pb-24"
             style={{ background: 'var(--color-bg)' }}
         >
+            <div
+                className="border-b"
+                style={{ background: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
+            >
+                <div className="container mx-auto px-6 py-4 flex items-center gap-2 text-xs font-medium" style={{ color: 'var(--color-stone)' }}>
+                    <Link href="/" className="hover:text-[var(--color-espresso)] transition-colors">Home</Link>
+                    <span>/</span>
+                    <Link href={`/${NICHE.baseSlug}`} className="hover:text-[var(--color-espresso)] transition-colors">Directory</Link>
+                    <span>/</span>
+                    <span style={{ color: 'var(--color-espresso)' }}>{stateName}</span>
+                </div>
+            </div>
             <Suspense fallback={null}>
                 <StateHero
                     stateName={stateName}

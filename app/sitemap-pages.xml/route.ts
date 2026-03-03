@@ -10,6 +10,7 @@ export async function GET() {
         '/blog',
         '/calculator',
         '/about',
+        '/quiz',
         '/pricing',
         '/find-providers',
         '/for-providers',

@@ -177,19 +177,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         <div className="w-full md:w-auto min-w-[320px]">
                             <div className="flex flex-col gap-4">
                                 <div className="relative">
-                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#3D2B1F]/50 w-5 h-5" />
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#3D2B1F]/40 w-5 h-5" />
                                     <input
                                         type="email"
                                         placeholder="Enter your email"
-                                        className="w-full h-14 pl-12 pr-4 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C9A96E]/30 text-[#3D2B1F] placeholder:text-gray-700"
+                                        className="w-full h-16 pl-12 pr-6 bg-white border border-[#3D2B1F]/10 rounded-2xl focus:outline-none focus:ring-4 focus:ring-[#C9A96E]/10 text-lg text-[#3D2B1F] placeholder:text-[#3D2B1F]/40 transition-all"
                                     />
                                 </div>
-                                <Button className="w-full h-14 bg-[#C9A96E] hover:bg-[#B5955B] text-white font-bold text-lg rounded-xl shadow-lg shadow-[#C9A96E]/10">
+                                <Button className="w-full h-16 bg-[#C9A96E] hover:bg-[#B5955B] text-white font-black uppercase tracking-widest text-xs rounded-2xl shadow-xl shadow-[#C9A96E]/20 transition-all hover:scale-[1.02]">
                                     Get My Free Updates →
                                 </Button>
                                 <div className="text-center pt-2">
-                                    <Link href="/pulse" className="text-sm font-bold text-[#C9A96E] hover:underline">
-                                        Or take the full 2-minute survey for personalized data →
+                                    <Link href="/pulse" className="text-[10px] font-black uppercase tracking-widest text-[#C9A96E] hover:underline">
+                                        Take the 2-minute market survey →
                                     </Link>
                                 </div>
                             </div>

@@ -16,18 +16,18 @@ export const metadata: Metadata = {
 export default function ClaimDirectoryPage() {
     return (
         <div className="bg-[#FAF8F5] min-h-screen">
-            {/* HER SECTION */}
-            <div className="bg-[#1a2332] text-[#3D2B1F] py-24 px-4 overflow-hidden relative border-b border-[#3D2B1F]/10">
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-[#C9A96E]/10 -skew-x-12 translate-x-1/3" />
+            {/* HERO SECTION */}
+            <div className="bg-[#FAF8F5] text-[#3D2B1F] py-24 px-4 overflow-hidden relative border-b border-[#3D2B1F]/10">
+                <div className="absolute top-0 right-0 w-1/2 h-full bg-[#C9A96E]/5 -skew-x-12 translate-x-1/3" />
                 <div className="max-w-4xl mx-auto relative z-10">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 text-[#C9A96E] text-xs font-bold tracking-widest uppercase mb-6">
-                        <ShieldCheck className="w-3 h-3" />
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 text-[#C9A96E] text-xs font-black tracking-widest uppercase mb-10">
+                        <ShieldCheck className="w-3.5 h-3.5" />
                         Provider Network
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 leading-tight">
+                    <h1 className="text-5xl md:text-7xl font-display font-bold mb-8 leading-tight">
                         Grow Your Practice with <span className="text-[#C9A96E]">{NICHE.siteName}</span>
                     </h1>
-                    <p className="text-xl text-gray-300 font-light leading-relaxed max-w-2xl mb-12">
+                    <p className="text-xl md:text-2xl text-[#3D2B1F]/70 font-light leading-relaxed max-w-2xl mb-12">
                         Join the most transparent aesthetics directory. Claim your free profile to list your pricing,
                         verify your medical credentials, and start receiving high-intent patient inquiries.
                     </p>

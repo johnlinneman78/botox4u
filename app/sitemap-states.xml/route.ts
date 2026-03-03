@@ -2,7 +2,7 @@ import { STATE_MAP } from '@/lib/constants'
 import { NICHE } from '@/config/niche'
 
 export async function GET() {
-    const baseUrl = 'https://www.injectorindex.com'
+    const baseUrl = NICHE.baseUrl
     const lastMod = new Date().toISOString().split('T')[0]
 
     const states = Object.values(STATE_MAP)

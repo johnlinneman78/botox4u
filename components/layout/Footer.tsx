@@ -11,6 +11,7 @@ export default function Footer() {
         { href: '/treatments', label: 'By Treatment' },
         { href: '/find-providers?sort=score', label: 'Top Rated' },
         { href: '/find-providers?outcome=natural', label: 'Natural Results' },
+        { href: '/quiz', label: `${NICHE.name} Price Quiz` },
     ]
 
     const companyLinks = [

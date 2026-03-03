@@ -1,7 +1,7 @@
 import { NICHE } from '@/config/niche'
 
 export async function GET(request: Request) {
-    const baseUrl = 'https://www.injectorindex.com'
+    const baseUrl = NICHE.baseUrl
     const lastMod = new Date().toISOString().split('T')[0]
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

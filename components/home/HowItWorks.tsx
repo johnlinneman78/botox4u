@@ -7,8 +7,8 @@ const FACTORS = [
         label: '25 Points',
         description: 'Board certification, license verification, years of practice, specialized training in aesthetic medicine.',
         icon: <Award className="w-7 h-7" />,
-        color: 'bg-blue-950/50 text-blue-400 border-blue-800/40',
-        glow: 'shadow-blue-500/10',
+        color: 'bg-[#3D2B1F]/5 text-[#C9A96E] border-[#3D2B1F]/10',
+        glow: 'shadow-[#C9A96E]/5',
     },
     {
         title: 'Patient Sentiment',
@@ -23,8 +23,8 @@ const FACTORS = [
         label: '20 Points',
         description: 'Volume matters, but so does consistency. A provider with 200 reviews averaging 4.8 scores higher than one with 20 reviews averaging 4.9.',
         icon: <BarChart3 className="w-7 h-7" />,
-        color: 'bg-violet-950/50 text-violet-400 border-violet-800/40',
-        glow: 'shadow-violet-500/10',
+        color: 'bg-[#C9A96E]/10 text-[#C9A96E] border-[#C9A96E]/20',
+        glow: 'shadow-[#C9A96E]/10',
     },
     {
         title: 'Practice Signals',

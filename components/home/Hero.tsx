@@ -44,9 +44,9 @@ export default function Hero({
                 backgroundImage: 'radial-gradient(#C9A96E 1px, transparent 1px)',
                 backgroundSize: '28px 28px'
             }} />
-            {/* Glow accents */}
-            <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#C9A96E] opacity-[0.04] blur-[180px] rounded-full translate-x-1/3 -translate-y-1/4 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 opacity-[0.03] blur-[180px] rounded-full -translate-x-1/4 translate-y-1/4 pointer-events-none" />
+            {/* Ambient Background Accents */}
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#C9A96E]/10 blur-[160px] rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#8A9E8D]/10 blur-[180px] rounded-full -translate-x-1/4 translate-y-1/4 pointer-events-none" />
 
             {/* Trust Bar */}
             <div className="relative z-10 border-b border-[#3D2B1F]/10 bg-[#3D2B1F]/5 backdrop-blur-sm">

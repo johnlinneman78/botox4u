@@ -7,21 +7,21 @@ const STEPS = [
         title: 'Pick Your City',
         desc: 'Select your city from 22 major metros across the US.',
         icon: <MapPin className="w-6 h-6" />,
-        color: 'bg-blue-500/10 text-blue-400 border-blue-500/20'
+        color: 'bg-[#C9A96E]/10 text-[#C9A96E] border-[#C9A96E]/20'
     },
     {
         id: '02',
         title: 'Compare Scores',
         desc: 'Review Clarity Score™ rankings, credentials, pricing, and patient outcomes side by side.',
         icon: <Search className="w-6 h-6" />,
-        color: 'bg-[#C9A96E]/10 text-[#C9A96E] border-[#C9A96E]/20'
+        color: 'bg-[#8A9E8D]/10 text-[#8A9E8D] border-[#8A9E8D]/20'
     },
     {
         id: '03',
         title: 'Book with Confidence',
         desc: 'Contact your top-ranked injector directly — no middleman, no referral fees.',
         icon: <Calendar className="w-6 h-6" />,
-        color: 'bg-[#8A9E8D]/10 text-[#8A9E8D] border-[#8A9E8D]/20'
+        color: 'bg-[#C9A96E]/10 text-[#C9A96E] border-[#C9A96E]/20'
     }
 ]
 

@@ -15,23 +15,19 @@ export default function PulsePage() {
     return (
         <main className="min-h-screen bg-[#FAF8F5]">
             {/* Premium Hero */}
-            <section className="relative overflow-hidden bg-[#1a2332] py-24 md:py-32">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#1a2332] via-[#151b26] to-[#0f141c]" />
-                <div className="absolute inset-0 opacity-[0.05]" style={{
-                    backgroundImage: 'radial-gradient(#C9A96E 1px, transparent 1px)',
-                    backgroundSize: '40px 40px'
-                }} />
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-secondary opacity-10 blur-[150px] rounded-full translate-x-1/2 -translate-y-1/2" />
+            <section className="relative overflow-hidden bg-[#FAF8F5] py-24 md:py-32 border-b border-[#3D2B1F]/10">
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#C9A96E]/5 blur-[150px] rounded-full translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#8A9E8D]/5 blur-[180px] rounded-full -translate-x-1/2 translate-y-1/2" />
 
                 <div className="container mx-auto px-4 relative z-10 text-center">
-                    <div className="inline-flex items-center gap-2 bg-secondary/10 border border-secondary/20 text-secondary px-6 py-2 rounded-full text-xs font-black uppercase tracking-[0.2em] mb-10 backdrop-blur-md">
+                    <div className="inline-flex items-center gap-2 bg-[#C9A96E]/10 border border-[#C9A96E]/20 text-[#C9A96E] px-6 py-2 rounded-full text-xs font-black uppercase tracking-[0.2em] mb-10 backdrop-blur-md">
                         <LineChart className="w-4 h-4" />
                         Live Market Intel
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-display font-bold text-[#3D2B1F] mb-8 leading-[1.05]">
-                        The <span className="text-secondary italic">Pulse</span> Survey
+                    <h1 className="text-5xl md:text-7xl font-display font-medium text-[#3D2B1F] mb-8 leading-[1.05]">
+                        The <span className="text-[#C9A96E] italic">Pulse</span> Survey
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed mb-12">
+                    <p className="text-xl md:text-2xl text-[#3D2B1F]/70 max-w-2xl mx-auto font-light leading-relaxed mb-12">
                         Help us build the most transparent pricing index in aesthetic medicine. Join 2,400+ patients tracking real-time costs and results.
                     </p>
 

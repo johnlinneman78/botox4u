@@ -1,9 +1,10 @@
+import { NICHE } from '@/config/niche'
 import { getSupabaseServer } from '@/lib/supabase/factory'
 import { cookies } from 'next/headers'
 
 export async function GET() {
     const supabase = await getSupabaseServer(await cookies())
-    const baseUrl = 'https://www.injectorindex.com'
+    const baseUrl = NICHE.baseUrl
 
     if (!supabase) {
         return new Response('Supabase connection failed', { status: 500 })

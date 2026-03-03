@@ -30,18 +30,18 @@ export function ClarityBadge({ score, size = 'card' }: ClarityBadgeProps) {
     const ringColor = getRingColor(score)
     const fontSize = isProfile ? '32px' : '18px'
 
-    // Counting animation for profile size
+    // Counting animation
     const motionValue = useMotionValue(0)
     const rounded = useTransform(motionValue, (v) => Math.round(v))
-    const [displayScore, setDisplayScore] = useState(isProfile ? 0 : score)
+    const [displayScore, setDisplayScore] = useState(0)
 
     useEffect(() => {
-        if (!isProfile) return
         if (!isInView) return
 
         const controls = animate(motionValue, score, {
             duration: 1.4,
             ease: 'easeOut',
+            delay: 0.2
         })
 
         const unsubscribe = rounded.on('change', (v) => {
@@ -52,7 +52,7 @@ export function ClarityBadge({ score, size = 'card' }: ClarityBadgeProps) {
             controls.stop()
             unsubscribe()
         }
-    }, [isInView, isProfile, score, motionValue, rounded])
+    }, [isInView, score, motionValue, rounded])
 
     return (
         <div

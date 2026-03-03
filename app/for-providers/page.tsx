@@ -93,8 +93,8 @@ export default function ForProvidersPage() {
                                         </div>
                                     </div>
                                     <div className="flex gap-6">
-                                        <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0">
-                                            <Globe className="w-6 h-6 text-blue-400" />
+                                        <div className="w-12 h-12 rounded-2xl bg-[#C9A96E]/10 border border-[#C9A96E]/20 flex items-center justify-center shrink-0">
+                                            <Globe className="w-6 h-6 text-[#C9A96E]" />
                                         </div>
                                         <div>
                                             <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">Expanded Visibility</h4>
@@ -108,8 +108,8 @@ export default function ForProvidersPage() {
                                 <div className="absolute inset-0 bg-[#C9A96E]/10 blur-[100px] rounded-full pointer-events-none" />
                                 <div className="bg-[#F2EDE4] border border-[#3D2B1F]/10 rounded-[3rem] p-8 md:p-12 shadow-2xl relative">
                                     <div className="flex items-center gap-3 mb-8">
-                                        <div className="w-3 h-3 rounded-full bg-red-500" />
-                                        <div className="w-3 h-3 rounded-full bg-amber-500" />
+                                        <div className="w-3 h-3 rounded-full bg-red-400" />
+                                        <div className="w-3 h-3 rounded-full bg-[#C9A96E]" />
                                         <div className="w-3 h-3 rounded-full bg-[#8A9E8D]" />
                                         <span className="ml-auto text-[10px] text-[#3D2B1F]/50 font-mono tracking-widest uppercase">search_results.io</span>
                                     </div>
@@ -147,8 +147,8 @@ export default function ForProvidersPage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
                         {/* High Intent Traffic */}
                         <div className="p-10 rounded-[3rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 hover:bg-[#3D2B1F]/5 transition-all group">
-                            <div className="w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                                <Users className="w-7 h-7 text-violet-400" />
+                            <div className="w-14 h-14 rounded-2xl bg-[#8A9E8D]/10 border border-[#8A9E8D]/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                                <Users className="w-7 h-7 text-[#8A9E8D]" />
                             </div>
                             <h3 className="text-2xl font-bold mb-4">High-Intent Traffic</h3>
                             <p className="text-[#3D2B1F]/60 leading-relaxed font-light">

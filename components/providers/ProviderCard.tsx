@@ -94,8 +94,8 @@ export function ProviderCard({ provider }: ProviderCardProps) {
                     {/* Floating Badges on Image */}
                     <div className="absolute top-4 left-4 flex flex-col gap-2 pointer-events-none">
                         {provider.verified && (
-                            <Badge className="bg-white/95 text-primary border-none backdrop-blur-md shadow-md font-bold px-3 py-1 flex items-center gap-1.5">
-                                <CheckCircle className="w-3.5 h-3.5 text-blue-500 fill-blue-50" />
+                            <Badge className="bg-white/95 text-[#3D2B1F] border-none backdrop-blur-md shadow-md font-bold px-3 py-1 flex items-center gap-1.5">
+                                <CheckCircle className="w-3.5 h-3.5 text-[#8A9E8D] fill-[#8A9E8D]/10" />
                                 <span className="text-[10px] tracking-tight">VERIFIED PROVIDER</span>
                             </Badge>
                         )}
@@ -140,7 +140,7 @@ export function ProviderCard({ provider }: ProviderCardProps) {
                     {/* Differentiators / Credentials */}
                     <div className="flex flex-wrap gap-2.5 mb-8">
                         {provider.enriched_attrs?.injector_credentials?.slice(0, 3).map((cred, i) => (
-                            <span key={i} className="px-3 py-1.5 bg-blue-50/50 text-blue-700 text-[10px] font-bold uppercase tracking-wider rounded-lg border border-blue-100/50">
+                            <span key={i} className="px-3 py-1.5 bg-[#3D2B1F]/5 text-[#3D2B1F]/70 text-[10px] font-bold uppercase tracking-wider rounded-lg border border-[#3D2B1F]/10">
                                 🩺 {cred}
                             </span>
                         ))}

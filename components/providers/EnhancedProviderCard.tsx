@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
-import { motion, Variants } from 'framer-motion'
-import { Star, X, ShieldCheck, Info, Dna, Sparkles, AlertTriangle } from 'lucide-react'
+import { Star, X, ShieldCheck, Info, Dna, Sparkles, AlertTriangle, Search, Activity, Shield, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { EnrichedProvider } from '@/lib/types/enrichment'
 import { LeadForm } from './LeadForm'
 import { NICHE } from '@/config/niche'
+import { motion, Variants, AnimatePresence } from 'framer-motion'
 
 interface EnhancedProviderCardProps {
     provider: EnrichedProvider
@@ -28,6 +28,38 @@ export const cardItemVariants: Variants = {
 
 export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isScanning, setIsScanning] = useState(false)
+    const [scanPhase, setScanPhase] = useState(0)
+
+    const phases = [
+        { icon: Search, label: 'Connecting to Registry...' },
+        { icon: Activity, label: 'Running Outcomes Audit...' },
+        { icon: Shield, label: 'Safety Verification...' },
+        { icon: CheckCircle2, label: 'Scoring Complete' }
+    ]
+
+    const handleDemo = (e: React.MouseEvent) => {
+        const isMock = provider.slug.includes('dr-') || provider.slug.includes('james-')
+        if (isMock) {
+            e.preventDefault()
+            e.stopPropagation()
+            if (isScanning) return
+
+            setIsScanning(true)
+            setScanPhase(0)
+
+            const interval = setInterval(() => {
+                setScanPhase(prev => {
+                    if (prev >= phases.length - 1) {
+                        clearInterval(interval)
+                        setTimeout(() => setIsScanning(false), 1200)
+                        return prev
+                    }
+                    return prev + 1
+                })
+            }, 750)
+        }
+    }
 
     const getPercentile = (score: number) => {
         if (score >= 95) return 'Top 2%'
@@ -93,7 +125,39 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                 whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}
                 className="group relative bg-white rounded-2xl border hover:shadow-xl transition-all overflow-hidden flex flex-col h-full w-full"
                 style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-sm)' }}
+                onClick={handleDemo}
             >
+                <AnimatePresence>
+                    {isScanning && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute inset-0 z-[60] bg-[#FAF8F5]/95 backdrop-blur-sm flex flex-col items-center justify-center p-8 text-center"
+                        >
+                            <div className="relative w-16 h-16 mb-6">
+                                <motion.div
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                    className="absolute inset-0 border-2 border-[#C9A96E]/20 border-t-[#C9A96E] rounded-full"
+                                />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    {React.createElement(phases[scanPhase].icon, {
+                                        className: "w-6 h-6 text-[#C9A96E]"
+                                    })}
+                                </div>
+                            </div>
+                            <motion.p
+                                key={scanPhase}
+                                initial={{ opacity: 0, y: 5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="text-xs font-black uppercase tracking-[0.2em] text-[#3D2B1F]"
+                            >
+                                {phases[scanPhase].label}
+                            </motion.p>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
                 {renderPlaceholder()}
 
                 <div className="p-6 flex flex-col flex-grow">
@@ -240,14 +304,13 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
 
                     <div className="mt-auto" />
 
-                    {/* CTAs */}
                     <div className="flex items-center gap-3 relative z-30">
-                        <Link
-                            href={`/provider/${provider.slug}`}
-                            className="flex-1 px-4 py-3 text-[10px] font-bold uppercase tracking-widest rounded-xl border border-[var(--color-border)] text-[var(--color-espresso)] hover:bg-[var(--color-surface)] transition-all text-center"
+                        <div
+                            onClick={handleDemo}
+                            className="flex-1 px-4 py-3 text-[10px] font-bold uppercase tracking-widest rounded-xl border border-[var(--color-border)] text-[var(--color-espresso)] hover:bg-[var(--color-surface)] transition-all text-center cursor-pointer"
                         >
                             View Data
-                        </Link>
+                        </div>
                         <button
                             onClick={(e) => {
                                 e.preventDefault();
@@ -262,11 +325,13 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                     </div>
                 </div>
 
-                <Link
-                    href={`/provider/${provider.slug}`}
-                    className="absolute inset-0 z-10 focus:outline-none"
-                    aria-label={`View details for ${provider.name}`}
-                />
+                {!provider.slug.includes('dr-') && !provider.slug.includes('james-') && (
+                    <Link
+                        href={`/provider/${provider.slug}`}
+                        className="absolute inset-0 z-10 focus:outline-none"
+                        aria-label={`View details for ${provider.name}`}
+                    />
+                )}
             </motion.div>
 
             {/* Quote Modal */}
