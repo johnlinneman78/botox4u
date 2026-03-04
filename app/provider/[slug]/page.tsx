@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
             url: `https://www.injectorindex.com/provider/${provider.slug}`,
             images: [
                 {
-                    url: provider.hero_image_url || provider.imageUrl || "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1600",
+                    url: provider.hero_image_url || provider.imageUrl || `https://www.injectorindex.com/og-default.png`,
                     width: 1200,
                     height: 630,
                     alt: provider.name,

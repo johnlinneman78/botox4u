@@ -222,16 +222,7 @@ export async function getProvidersWithSearch(filters: {
             lng: p.lng || 0,
             imageUrl: (() => {
                 const url = p.hero_image_url || p.image_url;
-                if (!url || url.includes('placeholder')) {
-                    const fallbacks = [
-                        'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
-                        'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800',
-                        'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=800',
-                        'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80&w=800'
-                    ];
-                    const index = p.id ? p.id.length % fallbacks.length : 0;
-                    return fallbacks[index];
-                }
+                if (!url || url.includes('placeholder') || url.includes('unsplash.com')) return null;
                 if (url.startsWith('http')) return url;
                 return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/provider_images/${url}`;
             })(),
@@ -436,7 +427,11 @@ export async function getTopScoringProviders(limit: number = 6, userLat?: number
                 score_total: scoreBreakdown.points,
                 points: scoreBreakdown.points,
                 price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
-                imageUrl: p.hero_image_url || p.image_url || 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
+                imageUrl: (() => {
+                    const url = p.hero_image_url || p.image_url;
+                    if (!url || url.includes('placeholder') || url.includes('unsplash.com')) return null;
+                    return url;
+                })(),
                 website: p.website,
                 listingTier: p.listing_tier || 'free',
                 npi_verified: p.npi_verified || false,
@@ -626,9 +621,7 @@ export async function getProviderBySlug(slug: string) {
         listingTier: data.listing_tier || 'free',
         imageUrl: (() => {
             const url = data.hero_image_url || data.image_url;
-            if (!url || url.includes('placeholder')) {
-                return 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800';
-            }
+            if (!url || url.includes('placeholder') || url.includes('unsplash.com')) return null;
             if (url.startsWith('http')) return url;
             return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/provider_images/${url}`;
         })(),

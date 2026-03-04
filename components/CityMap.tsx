@@ -3,7 +3,7 @@
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 import { MapPin } from 'lucide-react'
 import { CITY_COORDS } from '@/lib/cityCoords'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 interface Provider {
     id: string
@@ -15,7 +15,7 @@ interface Provider {
 
 interface CityMapProps {
     providers: Provider[]
-    citySlug: string // Now uses citySlug for fallback coords
+    citySlug: string
     userLat?: number
     userLng?: number
 }
@@ -29,12 +29,11 @@ export default function CityMap({ providers, citySlug, userLat, userLng }: CityM
     const [userPos, setUserPos] = useState<{ lat: number, lng: number } | null>(
         userLat && userLng ? { lat: userLat, lng: userLng } : null
     )
-
     const [isMounted, setIsMounted] = useState(false)
+    const [mapsLoaded, setMapsLoaded] = useState(false)
 
     useEffect(() => {
         setIsMounted(true)
-        // If we don't have server-side coords, fallback to browser geolocation
         if (!userPos && "geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition((position) => {
                 setUserPos({
@@ -45,10 +44,14 @@ export default function CityMap({ providers, citySlug, userLat, userLng }: CityM
         }
     }, [userPos])
 
+    const onLoad = useCallback(() => {
+        setMapsLoaded(true)
+    }, [])
+
     if (!isMounted) {
         return (
-            <div style={mapContainerStyle} className="bg-[#F2EDE4] rounded-2xl animate-pulse flex items-center justify-center border border-[#3D2B1F]/10">
-                <div className="text-[#3D2B1F]/50 font-medium italic">Loading Interactive Map...</div>
+            <div style={mapContainerStyle} className="bg-surface rounded-2xl animate-pulse flex items-center justify-center border border-border">
+                <div className="text-stone font-medium italic">Loading Interactive Map...</div>
             </div>
         )
     }
@@ -60,7 +63,7 @@ export default function CityMap({ providers, citySlug, userLat, userLng }: CityM
     }
 
     const markers = providers
-        .filter(p => (p.lat || (p as any).latitude) && (p.lng || (p as any).longitude)) // Only show geocoded providers
+        .filter(p => (p.lat || (p as any).latitude) && (p.lng || (p as any).longitude))
         .map(provider => ({
             id: provider.id,
             position: {
@@ -72,19 +75,42 @@ export default function CityMap({ providers, citySlug, userLat, userLng }: CityM
 
     if (markers.length === 0) return null
 
+    // Build icon objects only after Google Maps is loaded
+    const getProviderIcon = () => {
+        if (!mapsLoaded || typeof google === 'undefined') return undefined
+        return {
+            url: 'https://maps.google.com/mapfiles/ms/icons/gold-pushpin.png',
+            scaledSize: new google.maps.Size(40, 40)
+        }
+    }
+
+    const getUserIcon = () => {
+        if (!mapsLoaded || typeof google === 'undefined') return undefined
+        return {
+            url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+            scaledSize: new google.maps.Size(32, 32)
+        }
+    }
+
     return (
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8 border border-gray-100">
-            <div className="bg-[#1a2332] p-6 text-[#3D2B1F] bg-gradient-to-r from-[#1a2332] to-[#1e2b3e]">
+        <div className="rounded-2xl shadow-md overflow-hidden mb-8 border" style={{ background: 'var(--color-bg)', borderColor: 'var(--color-border)' }}>
+            <div
+                className="p-6"
+                style={{ background: 'var(--color-surface)' }}
+            >
                 <div className="flex items-center">
-                    <MapPin className="w-8 h-8 mr-3 text-[#C9A96E]" />
+                    <MapPin className="w-8 h-8 mr-3" style={{ color: 'var(--color-gold)' }} />
                     <div>
-                        <h3 className="text-xl font-bold font-display">Providers Near You</h3>
-                        <p className="text-gray-300 text-sm">{markers.length} verified clinics mapped in this area</p>
+                        <h3 className="text-xl font-bold font-display" style={{ color: 'var(--color-espresso)' }}>Providers Near You</h3>
+                        <p className="text-sm" style={{ color: 'var(--color-stone)' }}>{markers.length} verified clinics mapped in this area</p>
                     </div>
                 </div>
             </div>
 
-            <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
+            <LoadScript
+                googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
+                onLoad={onLoad}
+            >
                 <GoogleMap
                     mapContainerStyle={mapContainerStyle}
                     center={center}
@@ -108,10 +134,7 @@ export default function CityMap({ providers, citySlug, userLat, userLng }: CityM
                             key={id}
                             position={position}
                             title={title}
-                            icon={{
-                                url: 'https://maps.google.com/mapfiles/ms/icons/gold-pushpin.png', // Fallback to standard gold pin
-                                scaledSize: new google.maps.Size(40, 40)
-                            }}
+                            icon={getProviderIcon()}
                         />
                     ))}
 
@@ -119,10 +142,7 @@ export default function CityMap({ providers, citySlug, userLat, userLng }: CityM
                         <Marker
                             position={userPos}
                             title="You are here"
-                            icon={{
-                                url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                                scaledSize: new google.maps.Size(32, 32)
-                            }}
+                            icon={getUserIcon()}
                         />
                     )}
                 </GoogleMap>

@@ -1,14 +1,19 @@
 import { NICHE } from '@/config/niche'
-import { getSupabaseServer } from '@/lib/supabase/factory'
-import { cookies } from 'next/headers'
+import { createClient } from '@supabase/supabase-js'
 
 export async function GET() {
-    const supabase = await getSupabaseServer(await cookies())
-    const baseUrl = NICHE.baseUrl
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
+    const key = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)?.trim()
 
-    if (!supabase) {
-        return new Response('Supabase connection failed', { status: 500 })
+    if (!url || !key) {
+        console.error('Sitemap: Supabase config missing')
+        return new Response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>', {
+            headers: { 'Content-Type': 'application/xml; charset=utf-8' },
+        })
     }
+
+    const supabase = createClient(url, key)
+    const baseUrl = NICHE.baseUrl
 
     // Only include providers with real data (phone OR website = real business)
     const { data: providers, error } = await supabase
@@ -17,7 +22,14 @@ export async function GET() {
         .or('phone.not.is.null,website.not.is.null')
 
     if (error) {
-        return new Response('Error fetching providers', { status: 500 })
+        console.error('Sitemap providers error:', error.message)
+        // Return empty valid sitemap instead of 500
+        return new Response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>', {
+            headers: {
+                'Content-Type': 'application/xml; charset=utf-8',
+                'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=59',
+            },
+        })
     }
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

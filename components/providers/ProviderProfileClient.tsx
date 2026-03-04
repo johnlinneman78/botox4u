@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ClarityBadge } from '@/components/ui/ClarityBadge'
 import { Badge } from '@/components/ui/Badge'
@@ -51,6 +51,7 @@ function ProgressBar({ label, score, maxScore, index }: { label: string; score: 
 }
 
 export default function ProviderProfileClient({ provider, themes }: ProviderProfileClientProps) {
+    const [imageError, setImageError] = useState(false)
     const initials = provider.name
         .split(' ')
         .map((w: string) => w[0])
@@ -70,7 +71,12 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
     ]
 
     const services = provider.services_offered || []
-    const hasImage = provider.hero_image_url || (provider.imageUrl && !provider.imageUrl.includes('placeholder') && provider.imageUrl.length > 5)
+    const isRealImageUrl = (url: string | undefined | null): boolean => {
+        if (!url || url.length < 5) return false
+        if (url.includes('placeholder') || url.includes('unsplash.com')) return false
+        return true
+    }
+    const hasImage = !imageError && (isRealImageUrl(provider.hero_image_url) || isRealImageUrl(provider.imageUrl))
 
     return (
         <div style={{ paddingTop: 'var(--nav-height)', background: 'var(--color-bg)' }}>
@@ -89,10 +95,11 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                 >
                     {hasImage ? (
                         <img
-                            src={provider.hero_image_url || provider.imageUrl}
+                            src={isRealImageUrl(provider.hero_image_url) ? provider.hero_image_url : provider.imageUrl}
                             alt={provider.name}
                             className="w-full h-full object-cover"
                             style={{ borderRadius: 'var(--radius-xl)' }}
+                            onError={() => setImageError(true)}
                         />
                     ) : (
                         <div className="text-center">
@@ -155,7 +162,7 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                 <RevealOnScroll>
                     <div
                         className="p-8 lg:p-10 rounded-lg"
-                        style={{ background: 'white', border: '1px solid var(--color-border)' }}
+                        style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)' }}
                     >
                         <h3
                             className="font-display font-medium mb-6"
@@ -273,7 +280,7 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                         <RevealOnScroll key={i} delay={i * 0.06}>
                             <div
                                 className="p-6 rounded-lg"
-                                style={{ background: 'white', border: '1px solid var(--color-border)' }}
+                                style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)' }}
                             >
                                 <div className="flex items-center gap-2 mb-3">
                                     <span style={{ color: 'var(--color-gold)', fontSize: '13px' }}>
