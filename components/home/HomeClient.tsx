@@ -48,9 +48,22 @@ const placeholderProviders = [
 ]
 
 const cities = [
-    'New York', 'Los Angeles', 'Miami', 'Chicago', 'Portland', 'Seattle',
-    'Scottsdale', 'Dallas', 'Austin', 'Denver', 'Nashville', 'Atlanta',
-    'San Francisco', 'Boston', 'Houston', 'Charlotte',
+    { name: 'New York', slug: 'ny/new-york' },
+    { name: 'Los Angeles', slug: 'ca/los-angeles' },
+    { name: 'Miami', slug: 'fl/miami' },
+    { name: 'Chicago', slug: 'il/chicago' },
+    { name: 'Portland', slug: 'or/portland' },
+    { name: 'Seattle', slug: 'wa/seattle' },
+    { name: 'Scottsdale', slug: 'az/scottsdale' },
+    { name: 'Dallas', slug: 'tx/dallas' },
+    { name: 'Austin', slug: 'tx/austin' },
+    { name: 'Denver', slug: 'co/denver' },
+    { name: 'Nashville', slug: 'tn/nashville' },
+    { name: 'Atlanta', slug: 'ga/atlanta' },
+    { name: 'San Diego', slug: 'ca/san-diego' },
+    { name: 'Boston', slug: 'ma/boston' },
+    { name: 'Houston', slug: 'tx/houston' },
+    { name: 'Charlotte', slug: 'nc/charlotte' },
 ]
 
 const trustStats = [
@@ -218,7 +231,7 @@ export default function HomeClient() {
                             >
                                 <option value="" disabled>Your city or zip ▾</option>
                                 {cities.map((city) => (
-                                    <option key={city} value={city.toLowerCase().replace(/\s/g, '-')}>{city}</option>
+                                    <option key={city.name} value={city.slug}>{city.name}</option>
                                 ))}
                             </select>
                             <div className="hidden sm:block w-px h-8" style={{ background: 'var(--color-border)' }} />
@@ -506,9 +519,9 @@ export default function HomeClient() {
 
                     <div className="flex flex-wrap justify-center gap-3">
                         {cities.map((city, i) => (
-                            <RevealOnScroll key={city} delay={i * 0.03} y={16}>
+                            <RevealOnScroll key={city.name} delay={i * 0.03} y={16}>
                                 <Link
-                                    href={`/injectors/${city.toLowerCase().replace(/\s/g, '-')}`}
+                                    href={`/injectors/${city.slug}`}
                                     className="font-body text-sm rounded-pill px-5 py-2.5 transition-all"
                                     style={{
                                         color: 'var(--color-taupe)',
@@ -527,7 +540,7 @@ export default function HomeClient() {
                                         e.currentTarget.style.background = 'transparent'
                                     }}
                                 >
-                                    {city}
+                                    {city.name}
                                 </Link>
                             </RevealOnScroll>
                         ))}
