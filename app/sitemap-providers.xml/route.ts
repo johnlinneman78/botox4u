@@ -10,10 +10,11 @@ export async function GET() {
         return new Response('Supabase connection failed', { status: 500 })
     }
 
+    // Only include providers with real data (phone OR website = real business)
     const { data: providers, error } = await supabase
         .from('providers')
-        .select('slug, updated_at')
-    // .eq('display_status', 'live') // Add filter if needed
+        .select('slug, updated_at, phone, website')
+        .or('phone.not.is.null,website.not.is.null')
 
     if (error) {
         return new Response('Error fetching providers', { status: 500 })
