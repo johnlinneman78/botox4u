@@ -8,6 +8,9 @@ export const metadata: Metadata = {
     openGraph: {
         title: `Personalized ${NICHE.name} Price Estimate | ${NICHE.siteName}`,
         description: `Independent pricing data for ${NICHE.name.toLowerCase()} treatments across 22 major cities. Find out if you're overpaying.`,
+    },
+    alternates: {
+        canonical: 'https://www.injectorindex.com/quiz',
     }
 }
 

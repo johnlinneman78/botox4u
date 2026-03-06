@@ -42,21 +42,16 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     const stateCode = state.toUpperCase()
     const stateName = STATE_MAP[stateCode] || stateCode
 
-    // Fetch top provider for a truly unique title
-    const providers = await getProvidersWithSearch({ city: cityName, state: stateCode, limit: 1 })
-    const topProviderName = providers[0]?.name
-    const providerCount = providers.length > 0 ? (providers.length > 40 ? "40+" : providers.length) : ""
-
-    const title = topProviderName
-        ? `Best Botox in ${cityName}: ${topProviderName} Ranked #1 (${providerCount} Verified Clinics)`
-        : `Best Botox Injectors in ${cityName}, ${stateName} (March 2026 Rankings)`
-
-    const description = `The 2026 clinical audit of ${cityName} Botox providers. Compare ${providers.length} injectors based on independent Clarity Score™ rankings, NPI-verified credentials, and real-time pricing data. No paid positions.`
+    const month = new Date().toLocaleString('default', { month: 'long' })
+    const providers = await getProvidersWithSearch({ city: cityName, state: stateCode })
+    const providerCount = providers.length > 0 ? providers.length : 'top'
+    const title = `Best Botox Providers in ${cityName}, ${stateCode} (2026) | InjectorIndex`
+    const description = `Compare ${providerCount} Botox & filler providers in ${cityName}, ${stateCode}. Independent Clarity Scores™, pricing, and patient reviews. Updated ${month} 2026.`
     const url = `https://www.injectorindex.com/${NICHE.baseSlug}/${state.toLowerCase()}/${city.toLowerCase()}`
 
     return {
         title: title.slice(0, 70),
-        description: description.slice(0, 165),
+        description: description.slice(0, 155),
         openGraph: {
             title,
             description,
@@ -410,6 +405,32 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                         This directory includes all observed and elite injectors in the {cityName} area. We continuously audit and add new clinics based on clinical excellence and pricing transparency.
                     </p>
                 </div>
+
+                {NICHE.cities.filter(c => c.slug.startsWith(state.toLowerCase() + '/') && c.slug !== `${state.toLowerCase()}/${city.toLowerCase()}`).length > 0 && (
+                    <div className="mt-16 pt-16 border-t" style={{ borderColor: 'var(--color-border)' }}>
+                        <h2 className="text-xl font-display font-medium mb-6" style={{ color: 'var(--color-espresso)' }}>
+                            Nearby Cities in {stateName}
+                        </h2>
+                        <div className="flex flex-wrap gap-4">
+                            {NICHE.cities
+                                .filter(c => c.slug.startsWith(state.toLowerCase() + '/') && c.slug !== `${state.toLowerCase()}/${city.toLowerCase()}`)
+                                .map(c => {
+                                    const cName = c.slug.split('/')[1].split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+                                    return (
+                                        <Link
+                                            key={c.slug}
+                                            href={`/${NICHE.baseSlug}/${c.slug}`}
+                                            className="px-4 py-2 border rounded-full text-sm font-medium hover:bg-black/5 transition-colors"
+                                            style={{ borderColor: 'var(--color-border)', color: 'var(--color-stone)' }}
+                                        >
+                                            Botox in {cName}
+                                        </Link>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                )}
 
                 <div className="mt-16">
                     <MedicalDisclaimer />

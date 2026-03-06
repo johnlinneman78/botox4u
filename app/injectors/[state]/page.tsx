@@ -24,12 +24,19 @@ export async function generateMetadata({ params }: StatePageProps): Promise<Meta
     if (!Object.values(STATE_MAP).includes(stateCode)) return { title: 'Not Found' }
 
     const stateName = getStateName(stateCode)
+    const cities = await getCitiesInState(stateCode)
+
+    const indexing = cities.length > 0
+        ? { index: true, follow: true }
+        : { index: false, follow: true }
+
     return {
-        title: `${stateName} ${NICHE.name} Providers | Costs & Reviews`,
-        description: `Find top-rated ${NICHE.name} providers and medical spas across ${stateName}. View average costs, patient reviews, and verified clinics in major cities.`,
+        title: `Botox Providers in ${stateName} | InjectorIndex`,
+        description: `Find top-rated Botox providers in ${stateName}. Browse by city, compare Clarity Scores™, and read verified patient reviews.`,
         alternates: {
             canonical: `https://www.injectorindex.com/${NICHE.baseSlug}/${state.toLowerCase()}`
-        }
+        },
+        robots: indexing
     }
 }
 
@@ -70,11 +77,31 @@ export default async function StatePage({ params }: StatePageProps) {
                     cityCount={stats?.cityCount || 0}
                 />
             </Suspense>
-            <div className="container-content">
+            <div className="container-content space-y-16">
                 <CityList
                     cities={cities}
                     stateName={stateName}
                 />
+
+                {cities.length > 0 && (
+                    <section className="bg-white/50 border border-[var(--color-border)] rounded-3xl p-8 md:p-12">
+                        <h2 className="text-3xl font-display font-medium text-[var(--color-espresso)] mb-6">
+                            The {stateName} Aesthetic Market: 2026 Analysis
+                        </h2>
+
+                        <div className="prose prose-lg prose-stone max-w-none text-[var(--color-stone)] leading-relaxed font-body">
+                            <p>
+                                The demand for high-quality aesthetic injectables in {stateName} has evolved significantly. Patients are increasingly prioritizing preventative treatments and natural-looking results over the heavy modifications of the past. This shift requires injectors who possess not only exceptional technical skill but also a refined artistic eye. In major metropolitan areas across {stateName}, medical spas, dermatology clinics, and independent aesthetic practices have expanded their offerings to include advanced neuromodulators like Daxxify and a wider array of biostimulatory treatments.
+                            </p>
+                            <p>
+                                Pricing for Botox and dermal fillers in {stateName} varies widely based on geographic location, practitioner credentials, and the overall clinical environment. While initial cost is a factor, our data consistently shows that prioritizing a board-certified professional or a highly specialized registered nurse yields superior long-term outcomes. The Clarity Score™ system was developed specifically to help patients navigate this complex landscape. By analyzing clinical safety records, patient outcome consistency, and the transparency of pricing models, InjectorIndex surfaces the most reliable practitioners in {stateName}.
+                            </p>
+                            <p>
+                                When evaluating a Botox provider in {stateName}, it's essential to look beyond marketing claims. A high Clarity Score™ indicates a clinic that maintains rigorous medical standards while delivering the nuanced, undetectable enhancements that define modern aesthetic medicine. Whether you reside in the state's largest city or a growing suburban community, our verified directory connects you with professionals who understand facial anatomy, prioritize patient safety above all else, and consistently achieve beautiful, harmonious results. Our 2026 data continues to monitor market shifts, ensuring that you have access to the most accurate and up-to-date provider intelligence available.
+                            </p>
+                        </div>
+                    </section>
+                )}
             </div>
         </main>
     )

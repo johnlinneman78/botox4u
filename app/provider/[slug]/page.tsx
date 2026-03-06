@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getProviderBySlug } from '@/lib/actions/providers'
+import { getProviderBySlug, getProvidersWithSearch } from '@/lib/actions/providers'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import { NICHE } from '@/config/niche'
@@ -18,19 +18,36 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
 
     if (!provider) return { title: 'Injector Profile | InjectorIndex' }
 
-    // Unique components for the title
-    const bizType = provider.businessType || 'Clinic'
-    const title = `${provider.name} — ${provider.city} ${bizType} | Clinical Outcomes & 2026 Botox Audit`
+    // Title logic
+    const fullTitle = `${provider.name} — Botox & Filler in ${provider.city} | InjectorIndex`
+    const shortTitle = `${provider.name} — ${provider.city} | InjectorIndex`
+    const title = fullTitle.length > 70 ? shortTitle : fullTitle
 
-    // Highly specific description
-    const priceTxt = provider.pricePerUnit ? ` Verified unit price: $${provider.pricePerUnit}.` : ''
+    // Meta Description logic
     const scoreVal = Math.round(provider.score_total || provider.clarityScore || 0)
-    const scoreTxt = scoreVal ? ` Clarity Score™: ${scoreVal}/100.` : ''
-    const description = `Analyze the March 2026 data for ${provider.name} in ${provider.city}, ${provider.state}. ${bizType} details cover clinical outcomes, ${scoreTxt}${priceTxt} Based on NPI and local market data.`
+    const reviewsCount = provider.reviewCount || 0
+    const bizType = provider.businessType || 'Clinic'
+
+    // Simple hash to deterministically rotate patterns
+    let hash = 0;
+    for (let i = 0; i < provider.slug.length; i++) {
+        hash = ((hash << 5) - hash) + provider.slug.charCodeAt(i);
+        hash |= 0; // Convert to 32bit int
+    }
+    const patternIndex = Math.abs(hash) % 3;
+
+    let description = '';
+    if (patternIndex === 0) {
+        description = `${provider.name} in ${provider.city} — Clarity Score™ ${scoreVal}/100 based on ${reviewsCount} reviews. Compare pricing, credentials, and patient ratings.`
+    } else if (patternIndex === 1) {
+        description = `Rated ${scoreVal}/100 on InjectorIndex. See ${provider.name}'s credentials, pricing, and ${reviewsCount} patient reviews in ${provider.city}, ${provider.state}.`
+    } else {
+        description = `${provider.name} — ${provider.city} ${bizType}. ${scoreVal}/100 Clarity Score™ · ${reviewsCount} reviews · Independent ratings and pricing data.`
+    }
 
     return {
         title: title.slice(0, 70),
-        description: description.slice(0, 165),
+        description: description.slice(0, 155),
         alternates: {
             canonical: `https://www.injectorindex.com/provider/${provider.slug}`,
         },
@@ -79,12 +96,41 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
         { name: provider.name || 'Provider', item: `/provider/${provider.slug || 'unknown'}` }
     ])
 
+    const localProviders = await getProvidersWithSearch({ city: provider.city, state: provider.state, limit: 12 })
+    const relatedProviders = localProviders.filter(p => p.slug !== provider.slug).slice(0, 8)
+
     return (
-        <>
+        <main className="min-h-screen bg-[var(--color-bg)]">
             <JsonLd data={enhancedSchema} />
             <JsonLd data={reviewSchema} />
             <JsonLd data={breadcrumbs} />
             <ProviderProfileClient provider={provider} themes={themes} />
-        </>
+
+            {/* COMPARE PROVIDERS CROSS-LINKING SECTION */}
+            {relatedProviders.length > 0 && (
+                <section className="container-content py-16 border-t" style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface)' }}>
+                    <h2 className="text-2xl font-display font-medium mb-8" style={{ color: 'var(--color-espresso)' }}>
+                        Compare {provider.businessType || 'Providers'} in {provider.city}
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {relatedProviders.map((p) => (
+                            <Link
+                                key={p.id}
+                                href={`/provider/${p.slug}`}
+                                className="group block p-4 rounded-2xl border transition-all hover:-translate-y-1"
+                                style={{ borderColor: 'var(--color-border)', background: 'var(--color-bg)' }}
+                            >
+                                <div className="font-semibold text-sm mb-1 group-hover:text-[var(--color-gold)] transition-colors" style={{ color: 'var(--color-espresso)' }}>
+                                    {p.name}
+                                </div>
+                                <div className="font-body text-xs" style={{ color: 'var(--color-stone)' }}>
+                                    {Math.round(p.clarityScore || p.score_total || 0)}/100 Clarity Score™
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+            )}
+        </main>
     )
 }

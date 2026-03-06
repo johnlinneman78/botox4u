@@ -60,8 +60,7 @@ export function CityHero({ city, state, treatmentName, providerCount }: CityHero
                         className="text-4xl md:text-7xl font-display font-light mb-8 leading-[1.05]"
                         style={{ color: 'var(--color-espresso)' }}
                     >
-                        Verified {treatmentName} <br />
-                        Providers in <span className="italic" style={{ color: 'var(--color-gold)' }}>{city}</span>
+                        Best Botox {"&"} Filler Providers in <span className="italic" style={{ color: 'var(--color-gold)' }}>{city}, {state}</span>
                     </motion.h1>
 
                     <motion.p

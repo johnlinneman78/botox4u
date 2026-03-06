@@ -127,7 +127,7 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                         className="font-display font-light mb-2"
                         style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', color: 'var(--color-espresso)' }}
                     >
-                        {provider.name}
+                        {provider.name} — {provider.city} {provider.businessType || 'Medical Spa'}
                     </h1>
                 </RevealOnScroll>
 

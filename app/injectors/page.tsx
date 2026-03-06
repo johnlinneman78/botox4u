@@ -31,13 +31,13 @@ export default function StatesPage() {
                         className="text-4xl md:text-6xl font-display font-light mb-8"
                         style={{ color: 'var(--color-espresso)', lineHeight: 1.1 }}
                     >
-                        Provider Directory by <span className="italic" style={{ color: 'var(--color-gold)' }}>State</span>
+                        Directory of Verified Aesthetic Practitioners
                     </h1>
                     <p
                         className="text-lg font-body mx-auto"
                         style={{ color: 'var(--color-stone)', maxWidth: '600px', lineHeight: 1.7 }}
                     >
-                        Find verified cosmetic {NICHE.providerTypePlural}, medical spas, and clinics across the United States. Every state audited for clinical excellence and pricing transparency.
+                        The US InjectorIndex directory tracks highly rated medical spas, dermatology clinics, and independent aesthetic practices. We actively monitor the American aesthetic outcomes and real-world pricing trends using our proprietary Clarity Score™ model.
                     </p>
                 </div>
 

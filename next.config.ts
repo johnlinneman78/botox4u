@@ -87,18 +87,13 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/botox/:path*',
+        source: '/botox/botox/:path*',
         destination: '/injectors/:path*',
         permanent: true,
       },
       {
-        source: '/botox/botox/:state/:city',
-        destination: '/injectors/:state/:city',
-        permanent: true,
-      },
-      {
-        source: '/botox/botox/:state/:city*',
-        destination: '/injectors/:state/:city',
+        source: '/botox/:path*',
+        destination: '/injectors/:path*',
         permanent: true,
       },
       {
