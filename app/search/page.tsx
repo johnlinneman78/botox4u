@@ -10,12 +10,12 @@ import { RevealSection } from '@/components/ui/RevealSection'
 
 // Placeholder data
 const mockProviders = [
-    { name: 'Dr. Sarah Chen', credentials: 'MD, Board Certified Dermatologist', specialties: ['Botox', 'Lip Filler', 'Sculptra'], outcomeTag: 'Natural Results', location: 'New York, NY', distance: '2.3 mi', clarityScore: 94, starRating: 4.9, profileUrl: '/provider/dr-sarah-chen' },
-    { name: 'Dr. James Rivera', credentials: 'DO, Facial Aesthetics', specialties: ['Cheek Filler', 'Daxxify'], location: 'New York, NY', distance: '3.1 mi', clarityScore: 88, starRating: 4.8, profileUrl: '/provider/dr-james-rivera' },
-    { name: 'Dr. Anika Patel', credentials: 'MD, Oculoplastic Surgeon', specialties: ['Under-Eye Filler', 'Botox'], outcomeTag: 'Conservative Approach', location: 'New York, NY', distance: '1.8 mi', clarityScore: 91, starRating: 4.9, profileUrl: '/provider/dr-anika-patel' },
-    { name: 'Dr. Michael Torres', credentials: 'MD, Plastic Surgeon', specialties: ['Full Face Rejuvenation', 'Botox'], location: 'New York, NY', distance: '4.2 mi', clarityScore: 85, starRating: 4.7, profileUrl: '/provider/dr-michael-torres' },
-    { name: 'Dr. Emily Nakamura', credentials: 'MD, Cosmetic Dermatologist', specialties: ['Lip Filler', 'Polynucleotides'], outcomeTag: 'Natural Results', location: 'New York, NY', distance: '5.0 mi', clarityScore: 82, starRating: 4.6, profileUrl: '/provider/dr-emily-nakamura' },
-    { name: 'Dr. David Kim', credentials: 'MD, Facial Aesthetics', specialties: ['Jaw Filler', 'Masseter Botox'], location: 'New York, NY', distance: '2.8 mi', clarityScore: 79, starRating: 4.5, profileUrl: '/provider/dr-david-kim' },
+    { name: 'Dr. Sarah Chen', credentials: 'MD, Board Certified Dermatologist', specialties: ['Botox', 'Lip Filler', 'Sculptra'], outcomeTag: 'Natural Results', location: 'New York, NY', distance: '2.3 mi', clarityScore: 94, starRating: 4.9, profileUrl: '/find-providers' },
+    { name: 'Dr. James Rivera', credentials: 'DO, Facial Aesthetics', specialties: ['Cheek Filler', 'Daxxify'], location: 'New York, NY', distance: '3.1 mi', clarityScore: 88, starRating: 4.8, profileUrl: '/find-providers' },
+    { name: 'Dr. Anika Patel', credentials: 'MD, Oculoplastic Surgeon', specialties: ['Under-Eye Filler', 'Botox'], outcomeTag: 'Conservative Approach', location: 'New York, NY', distance: '1.8 mi', clarityScore: 91, starRating: 4.9, profileUrl: '/find-providers' },
+    { name: 'Dr. Michael Torres', credentials: 'MD, Plastic Surgeon', specialties: ['Full Face Rejuvenation', 'Botox'], location: 'New York, NY', distance: '4.2 mi', clarityScore: 85, starRating: 4.7, profileUrl: '/find-providers' },
+    { name: 'Dr. Emily Nakamura', credentials: 'MD, Cosmetic Dermatologist', specialties: ['Lip Filler', 'Polynucleotides'], outcomeTag: 'Natural Results', location: 'New York, NY', distance: '5.0 mi', clarityScore: 82, starRating: 4.6, profileUrl: '/find-providers' },
+    { name: 'Dr. David Kim', credentials: 'MD, Facial Aesthetics', specialties: ['Jaw Filler', 'Masseter Botox'], location: 'New York, NY', distance: '2.8 mi', clarityScore: 79, starRating: 4.5, profileUrl: '/find-providers' },
 ]
 
 const filterOptions = [

@@ -219,7 +219,7 @@ export function ProviderCard({
                         className="font-body text-sm font-medium inline-flex items-center gap-1"
                         style={{ color: 'var(--color-espresso)' }}
                     >
-                        {name}
+                        {name} — {location.split(',')[0]}
                         <motion.span
                             className="ml-1"
                             whileHover={{ x: 4 }}

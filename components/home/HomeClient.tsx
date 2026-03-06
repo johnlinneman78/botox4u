@@ -22,7 +22,7 @@ const placeholderProviders = [
         distance: '2.3 mi',
         clarityScore: 94,
         starRating: 4.9,
-        profileUrl: '/provider/dr-sarah-chen',
+        profileUrl: '/find-providers',
     },
     {
         name: 'Dr. James Rivera',
@@ -32,7 +32,7 @@ const placeholderProviders = [
         distance: '5.1 mi',
         clarityScore: 88,
         starRating: 4.8,
-        profileUrl: '/provider/dr-james-rivera',
+        profileUrl: '/find-providers',
     },
     {
         name: 'Dr. Anika Patel',
@@ -43,7 +43,7 @@ const placeholderProviders = [
         distance: '1.8 mi',
         clarityScore: 91,
         starRating: 4.9,
-        profileUrl: '/provider/dr-anika-patel',
+        profileUrl: '/find-providers',
     },
 ]
 

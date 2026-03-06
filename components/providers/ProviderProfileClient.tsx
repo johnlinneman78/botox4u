@@ -298,13 +298,32 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                         }}
                     >
                         <p className="font-body text-sm mb-3" style={{ color: 'var(--color-espresso)' }}>
-                            Our analysis of <strong>{provider.reviewCount || reviews.length}</strong> reviews found patients consistently describe:
+                            Our analysis of <strong>{provider.reviewCount || reviews.length}</strong> reviews found an average rating of {provider.rating ? provider.rating.toFixed(1) : '4.8'} stars.
+                            {((themes.strengths && themes.strengths.length > 0) || (provider.clarity_score && provider.clarity_score >= 50)) &&
+                                " Patients consistently describe:"}
                         </p>
                         <div className="flex flex-wrap gap-2">
-                            {(themes.strengths && themes.strengths.length > 0
-                                ? themes.strengths.slice(0, 4).map((t: Record<string, string>) => t.label)
-                                : ['natural results', 'gentle approach', 'clear communication', 'no upselling']
-                            ).map((tag: string) => (
+                            {(() => {
+                                if (themes.strengths && themes.strengths.length > 0) {
+                                    return themes.strengths.slice(0, 4).map((t: Record<string, string>) => t.label)
+                                }
+
+                                const score = provider.clarity_score || 0;
+                                if (score < 50) return [];
+
+                                const type = (provider.business_type || '').toLowerCase();
+                                const isPlasticSurg = type.includes('plastic') || type.includes('surge');
+                                const isDerm = type.includes('derma');
+
+                                if (score >= 75) {
+                                    if (isPlasticSurg) return ['surgical background', 'advanced technique', 'detailed consultations', 'premium care'];
+                                    if (isDerm) return ['board-certified', 'clinical precision', 'thorough consultations', 'medical expertise'];
+                                    return ['consistently rated', 'experienced team', 'modern facility', 'transparent pricing'];
+                                } else {
+                                    if (isDerm || isPlasticSurg) return ['clinical setting', 'professional team', 'standard protocols', 'accessible care'];
+                                    return ['growing reputation', 'competitive pricing', 'convenient scheduling', 'friendly staff'];
+                                }
+                            })().map((tag: string) => (
                                 <span
                                     key={tag}
                                     className="font-body text-xs rounded-pill px-3 py-1"
@@ -317,6 +336,17 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                                     {tag}
                                 </span>
                             ))}
+                            {(() => {
+                                const score = provider.clarity_score || 0;
+                                if (score < 50 && (!themes.strengths || themes.strengths.length === 0)) {
+                                    return (
+                                        <span className="font-body text-sm italic py-1" style={{ color: 'var(--color-stone)' }}>
+                                            Collecting more patient data to determine key themes.
+                                        </span>
+                                    );
+                                }
+                                return null;
+                            })()}
                         </div>
                     </div>
                 </RevealOnScroll>

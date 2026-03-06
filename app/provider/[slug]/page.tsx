@@ -99,11 +99,46 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
     const localProviders = await getProvidersWithSearch({ city: provider.city, state: provider.state, limit: 12 })
     const relatedProviders = localProviders.filter(p => p.slug !== provider.slug).slice(0, 8)
 
+    const scoreVal = Math.round(provider.clarity_score || provider.score_total || 0)
+
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": `How much does Botox cost with ${provider.name} in ${provider.city}?`,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": `Botox in ${provider.city} typically costs $12-$16 per unit depending on the clinical setting and provider expertise. ${provider.name} is assessed at a price index of ${provider.price_per_unit ? '$' + provider.price_per_unit + '/unit' : 'the local average'}, reflecting the market standard for ${provider.businessType || 'Aesthetic Medicine'} providers in the area.`
+                }
+            },
+            {
+                "@type": "Question",
+                "name": `What is a Clarity Score™ and how did ${provider.name} score?`,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": `Clarity Score™ is InjectorIndex's independent rating system that evaluates providers on 5 data signals: patient outcomes, medical credentials, patient reviews, practice quality, and pricing transparency. Scores range from 0-100 without any pay-to-play bias. ${provider.name} currently holds a score of ${scoreVal}/100, indicating their relative position among verified local peers.`
+                }
+            },
+            {
+                "@type": "Question",
+                "name": `How do I compare Botox providers in ${provider.city}?`,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": `InjectorIndex lets you compare over ${localProviders.length > 5 ? localProviders.length + '+' : 'several'} verified providers in ${provider.city} by Clarity Score™, estimated pricing, and patient sentiments. Visit our comprehensive ${provider.city} provider rankings page to explore credentials and independent data across the state of ${provider.state}.`
+                }
+            }
+        ]
+    }
+
     return (
         <main className="min-h-screen bg-[var(--color-bg)]">
             <JsonLd data={enhancedSchema} />
             <JsonLd data={reviewSchema} />
             <JsonLd data={breadcrumbs} />
+            <JsonLd data={faqSchema} />
+
             <ProviderProfileClient provider={provider} themes={themes} />
 
             {/* COMPARE PROVIDERS CROSS-LINKING SECTION */}
@@ -131,6 +166,42 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                     </div>
                 </section>
             )}
+
+            {/* FAQ SECTION TO BOOST WORD COUNT & SEO */}
+            <section className="container-content py-16 border-t" style={{ borderColor: 'var(--color-border)', background: 'var(--color-bg)' }}>
+                <h2 className="text-2xl font-display font-medium mb-8" style={{ color: 'var(--color-espresso)' }}>
+                    Frequently Asked Questions about {provider.name}
+                </h2>
+
+                <div className="space-y-6 max-w-3xl">
+                    <div>
+                        <h3 className="font-semibold text-base mb-2" style={{ color: 'var(--color-espresso)' }}>
+                            How much does Botox cost with {provider.name} in {provider.city}?
+                        </h3>
+                        <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--color-stone)' }}>
+                            Botox in {provider.city} typically costs between $12 and $16 per unit depending on the clinical setting and provider expertise. {provider.name} is assessed at a price index of {provider.price_per_unit ? '$' + provider.price_per_unit + '/unit' : 'the local average'}, reflecting the market standard for {provider.businessType || 'Aesthetic Medicine'} providers in the area. Patients should consult directly with the practice for exact quotes tailored to their treatment goals.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 className="font-semibold text-base mb-2" style={{ color: 'var(--color-espresso)' }}>
+                            What is a Clarity Score™ and how did {provider.name} score?
+                        </h3>
+                        <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--color-stone)' }}>
+                            Clarity Score™ is InjectorIndex's independent rating system that evaluates providers on 5 distinct data signals: patient outcomes, medical credentials, patient reviews, practice quality, and pricing transparency. Scores range from 0-100 without any pay-to-play bias. {provider.name} currently holds a score of {scoreVal}/100, indicating their relative performance and position among verified local peers.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 className="font-semibold text-base mb-2" style={{ color: 'var(--color-espresso)' }}>
+                            How do I compare Botox providers in {provider.city}?
+                        </h3>
+                        <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--color-stone)' }}>
+                            InjectorIndex lets you compare over {localProviders.length > 5 ? localProviders.length + '+' : 'several'} verified providers in {provider.city} by Clarity Score™, estimated pricing, and patient sentiments. Visit our comprehensive {provider.city} provider rankings page to explore medical credentials, before and after insights, and independent data across the state of {provider.state}.
+                        </p>
+                    </div>
+                </div>
+            </section>
         </main>
     )
 }
