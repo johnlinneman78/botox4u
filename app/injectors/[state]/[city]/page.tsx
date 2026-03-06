@@ -41,13 +41,22 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     const cityName = city.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
     const stateCode = state.toUpperCase()
     const stateName = STATE_MAP[stateCode] || stateCode
-    const title = `Best Botox Injectors in ${cityName}, ${stateName} (2026) | Ranked by Clarity Score™`
-    const description = `Compare top-rated Botox injectors in ${cityName}, ${stateName}. Ranked by Clarity Score™ — an independent clinical algorithm based on injection quality, verified credentials, and real pricing data. No paid rankings.`
+
+    // Fetch top provider for a truly unique title
+    const providers = await getProvidersWithSearch({ city: cityName, state: stateCode, limit: 1 })
+    const topProviderName = providers[0]?.name
+    const providerCount = providers.length > 0 ? (providers.length > 40 ? "40+" : providers.length) : ""
+
+    const title = topProviderName
+        ? `Best Botox in ${cityName}: ${topProviderName} Ranked #1 (${providerCount} Verified Clinics)`
+        : `Best Botox Injectors in ${cityName}, ${stateName} (March 2026 Rankings)`
+
+    const description = `The 2026 clinical audit of ${cityName} Botox providers. Compare ${providers.length} injectors based on independent Clarity Score™ rankings, NPI-verified credentials, and real-time pricing data. No paid positions.`
     const url = `https://www.injectorindex.com/${NICHE.baseSlug}/${state.toLowerCase()}/${city.toLowerCase()}`
 
     return {
-        title,
-        description,
+        title: title.slice(0, 70),
+        description: description.slice(0, 165),
         openGraph: {
             title,
             description,
@@ -69,6 +78,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
 
     const stateCode = state.toUpperCase()
     const cityName = city.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+    const stateName = STATE_MAP[stateCode] || stateCode
 
     const providers = await getProvidersWithSearch({
         city: cityName,
@@ -118,7 +128,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
             style={{ background: 'var(--color-bg)' }}
         >
             <Suspense fallback={null}>
-                <GeolocationSorter />
+                {/* GeolocationSorter removed from city pages to prevent unintended redirects */}
             </Suspense>
             <JsonLd data={itemListSchema} />
             <JsonLd data={breadcrumbs} />
@@ -151,6 +161,16 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                 treatmentName={NICHE.name}
                 providerCount={providers.length}
             />
+            {/* Optimized SEO Summary — Unique & Minimal */}
+            <div className="container-content mt-6 mb-2">
+                <div className="max-w-3xl">
+                    <p className="text-[15px] leading-relaxed" style={{ color: 'var(--color-stone)' }}>
+                        Our March 2026 report for {cityName} analyzes {providers.length} aesthetic clinics to determine clinical quality without paid orientation.
+                        Each provider is audited for credentialing and pricing transparency.
+                        {stats?.avgCost ? ` Local market analysis shows average pricing in ${cityName} is currently $${stats.avgCost} per unit.` : ''}
+                    </p>
+                </div>
+            </div>
 
             <div className="container-content -mt-16 relative z-20">
                 {stats && (

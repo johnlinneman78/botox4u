@@ -9,7 +9,7 @@ export const NICHE = {
     providerType: "provider",               // "injector", "clinic", "provider", "dentist"
     providerTypePlural: "providers",
     siteName: "InjectorIndex",
-    domain: "injectorindex.com",
+    domain: "www.injectorindex.com",
     baseUrl: "https://www.injectorindex.com",
     contactEmail: "hello@injectorindex.com",
     tagline: "Find the Best Botox & Filler Injectors Near You — Rated by Data, Not Ads",

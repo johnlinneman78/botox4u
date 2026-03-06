@@ -118,14 +118,59 @@ export default function CityMap({ providers, citySlug, userLat, userLng }: CityM
                     options={{
                         styles: [
                             {
-                                featureType: 'poi',
-                                elementType: 'labels',
-                                stylers: [{ visibility: 'off' }]
+                                "featureType": "all",
+                                "elementType": "geometry",
+                                "stylers": [{ "color": "#FAF8F5" }]
+                            },
+                            {
+                                "featureType": "all",
+                                "elementType": "labels.text.fill",
+                                "stylers": [{ "color": "#7A6E62" }]
+                            },
+                            {
+                                "featureType": "all",
+                                "elementType": "labels.text.stroke",
+                                "stylers": [{ "visibility": "off" }]
+                            },
+                            {
+                                "featureType": "landscape",
+                                "elementType": "geometry",
+                                "stylers": [{ "color": "#F2EDE4" }]
+                            },
+                            {
+                                "featureType": "poi",
+                                "elementType": "geometry",
+                                "stylers": [{ "color": "#E8E0D4" }]
+                            },
+                            {
+                                "featureType": "poi",
+                                "elementType": "labels.text",
+                                "stylers": [{ "visibility": "off" }]
+                            },
+                            {
+                                "featureType": "road",
+                                "elementType": "geometry",
+                                "stylers": [{ "color": "#D8CABB" }]
+                            },
+                            {
+                                "featureType": "road.highway",
+                                "elementType": "geometry",
+                                "stylers": [{ "color": "#C9A96E" }, { "lightness": 60 }]
+                            },
+                            {
+                                "featureType": "transit",
+                                "elementType": "geometry",
+                                "stylers": [{ "color": "#F2EDE4" }]
+                            },
+                            {
+                                "featureType": "water",
+                                "elementType": "geometry",
+                                "stylers": [{ "color": "#D8CABB" }, { "lightness": 40 }]
                             }
                         ],
                         zoomControl: true,
                         mapTypeControl: false,
-                        streetViewControl: true,
+                        streetViewControl: false,
                         fullscreenControl: true
                     }}
                 >

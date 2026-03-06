@@ -25,7 +25,6 @@ export async function GET() {
         { path: '/privacy', priority: '0.3', changefreq: 'yearly' },
         { path: '/terms', priority: '0.3', changefreq: 'yearly' },
         { path: '/disclaimer', priority: '0.3', changefreq: 'yearly' },
-        { path: '/provider/claim', priority: '0.5', changefreq: 'monthly' },
     ]
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

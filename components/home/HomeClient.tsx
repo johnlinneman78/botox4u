@@ -208,7 +208,7 @@ export default function HomeClient() {
                                 lineHeight: 1.6,
                             }}
                         >
-                            Every provider independently scored for natural results. No ads. No pay-to-play. Just data.
+                            Every injector and MedSpa independently scored for natural results. Find the provider you can actually trust — no ads, no pay-to-play. Just data.
                         </p>
                     </motion.div>
 
@@ -249,6 +249,7 @@ export default function HomeClient() {
                             </select>
                             <Link
                                 href="/find-providers"
+                                aria-label="Search for injectors"
                                 className="shrink-0 rounded-full flex items-center justify-center transition-all hover:-translate-y-0.5 hover:shadow-lg"
                                 style={{
                                     width: 48,
@@ -462,8 +463,8 @@ export default function HomeClient() {
                                         ?
                                     </span>
                                     <span
-                                        className="font-body uppercase text-xs font-medium"
-                                        style={{ color: 'var(--color-taupe)', letterSpacing: '0.08em' }}
+                                        className="font-body uppercase text-xs font-bold"
+                                        style={{ color: 'var(--color-espresso)', opacity: 0.6, letterSpacing: '0.12em' }}
                                     >
                                         5-Question Match Quiz
                                     </span>
@@ -472,8 +473,8 @@ export default function HomeClient() {
                             <div>
                                 <RevealOnScroll>
                                     <span
-                                        className="font-body uppercase font-medium block mb-3"
-                                        style={{ fontSize: '12px', letterSpacing: '0.08em', color: 'var(--color-sage)' }}
+                                        className="font-body uppercase font-medium block mb-3 text-[10px] tracking-[0.2em]"
+                                        style={{ color: 'var(--color-espresso)', opacity: 0.6 }}
                                     >
                                         Free · 5 Questions · 60 Seconds
                                     </span>

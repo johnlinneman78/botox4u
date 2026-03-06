@@ -1,8 +1,15 @@
 import { getProviderBySlug } from '@/lib/actions/providers'
 import { notFound } from 'next/navigation'
 import { NICHE } from '@/config/niche'
+import { Metadata } from 'next'
 import { ShieldCheck, Target, DollarSign, Clock, CheckCircle, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+    title: 'Claim Your Provider Profile | InjectorIndex',
+    description: 'Verify and claim your InjectorIndex provider profile to update your pricing, credentials, and Clarity Score™.',
+    robots: { index: false, follow: false },
+}
 
 export default async function ClaimLandingPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params

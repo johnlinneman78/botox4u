@@ -50,12 +50,13 @@ export function ScrollCTA({
                     transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                     className="fixed bottom-0 left-0 right-0 z-50"
                     style={{
-                        background: 'var(--color-bg)',
+                        background: 'rgba(250, 248, 245, 0.95)',
+                        backdropFilter: 'blur(12px)',
                         borderTop: '1px solid var(--color-border)',
-                        boxShadow: '0 -4px 16px rgba(42,31,22,0.06)',
+                        boxShadow: '0 -8px 24px rgba(42,31,22,0.08)',
                     }}
                 >
-                    <div className="container-content py-3 flex items-center justify-between gap-4">
+                    <div className="container-content py-4 flex items-center justify-between gap-4">
                         {variant === 'profile' && providerName ? (
                             <>
                                 <div className="hidden sm:block">

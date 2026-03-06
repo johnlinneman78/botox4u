@@ -96,7 +96,7 @@ export function MorphingHeadline() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
         >
-            Find an{' '}
+            Find the{' '}
             <span className="relative inline-block">
                 <span
                     ref={morphRef}

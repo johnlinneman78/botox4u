@@ -1,9 +1,16 @@
 import { createClient } from '@supabase/supabase-js'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { Metadata } from 'next'
 import { Shield, TrendingUp, Users, DollarSign, Award, ArrowUpRight, CheckCircle2, AlertCircle } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import Logo from '@/components/layout/Logo'
+
+export const metadata: Metadata = {
+    title: 'Clinic Intelligence Brief | InjectorIndex',
+    description: 'Confidential market intelligence report for your clinic.',
+    robots: { index: false, follow: false },
+}
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

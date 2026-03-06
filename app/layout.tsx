@@ -27,6 +27,10 @@ export const metadata: Metadata = {
   description: `Compare local injectors using Clarity Score™ — independent data on injection quality, credentials, and real pricing. Find natural results, ranked by data.`,
   keywords: `${NICHE.name.toLowerCase()} near me, best fillers, medspa rankings, injector scores, natural ${NICHE.name.toLowerCase()}, lip filler, daxxify, polynucleotides, aesthetic directory`,
   metadataBase: new URL(`https://${NICHE.domain}`),
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.svg',
+  },
   openGraph: {
     title: `${NICHE.siteName} — Find & Compare the Best ${NICHE.name} Injectors Near You`,
     description: `Compare 500+ injectors across 22 cities. See Clarity Scores, real pricing, and verified credentials. Find natural results, ranked by data.`,
@@ -65,7 +69,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body style={{ fontFamily: 'var(--font-body)' }}>
+      <body style={{ fontFamily: 'var(--font-body)' }} suppressHydrationWarning>
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="KXz5/TWsizsa5WSiUjnpWA"

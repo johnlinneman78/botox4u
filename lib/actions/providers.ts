@@ -637,6 +637,8 @@ export async function getProviderBySlug(slug: string) {
         score,
         score_total: score.points,
         clarityScore: score.points,
+        pricePerUnit: data.price_per_unit || data.botox_price_per_unit || data.enriched_attrs?.price_per_unit_botox,
+        price_per_unit: data.price_per_unit || data.botox_price_per_unit || data.enriched_attrs?.price_per_unit_botox,
         innovation_score: score.breakdown.innovation,
 
         // Warning & Scoring Fields

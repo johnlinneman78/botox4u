@@ -1,6 +1,12 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound, redirect } from 'next/navigation'
 import { EditForm } from './EditForm'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: 'Edit Provider Profile | InjectorIndex',
+    robots: { index: false, follow: false },
+}
 
 export default async function EditPage({ params, searchParams }: { params: Promise<{ slug: string }>, searchParams: Promise<{ verify?: string }> }) {
     const { slug } = await params

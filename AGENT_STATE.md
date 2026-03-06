@@ -53,9 +53,9 @@ If this file and your memory conflict, trust this file.
 ## WHAT TO DO RIGHT NOW
 > This section always contains exactly one thing — the next unfinished task.
 
-**Next task:** Post-redesign audit & polish
-**Details:** Walk through all pages on live site. Fix any remaining old-theme holdovers, broken layouts, or styling inconsistencies against the design system.
-**Definition of done:** All patient-facing pages match the warm linen design system. No dark navy remnants.
+**Next task:** Post-redesign audit (Patient-facing pages)
+**Details:** Walk through Home, City, and Provider pages to fix any broken layouts or old-theme styling holdovers.
+**Definition of done:** All major routes match the warm linen spa design system.
 
 ---
 
@@ -96,6 +96,7 @@ All critical fixes, data cleanup, infrastructure, outreach, monetization, and ma
 |------|-----------|---------------|---------------|
 | 1.1–6.2 | Feb 19 | All Phase 1–6 tasks | See git history |
 | 7.1–7.7 | Mar 3 | Complete site redesign + deploy | 70+ files, commit 6267468 |
+| 7.9 | Mar 3 | Populated 22 target cities with 1,600+ real providers; fixed 404 city links on homepage | HomeClient.tsx, database |
 
 ---
 

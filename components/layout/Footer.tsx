@@ -7,10 +7,10 @@ export default function Footer() {
     const currentYear = 2026
 
     const browseLinks = [
-        { href: '/find-providers', label: 'By City' },
+        { href: '/find-providers', label: 'All Providers' },
         { href: '/treatments', label: 'By Treatment' },
-        { href: '/find-providers?sort=score', label: 'Top Rated' },
-        { href: '/find-providers?outcome=natural', label: 'Natural Results' },
+        { href: '/find-providers?sort=rating', label: 'Top Rated' },
+        { href: '/find-providers?q=natural', label: 'Natural Results' },
         { href: '/quiz', label: `${NICHE.name} Price Quiz` },
     ]
 
@@ -162,10 +162,16 @@ export default function Footer() {
                         © {currentYear} {NICHE.siteName}. All rights reserved.
                     </p>
                     <div className="flex items-center gap-6">
-                        {['Instagram', 'TikTok', 'Pinterest'].map((social) => (
+                        {[
+                            { label: 'Instagram', href: 'https://www.instagram.com/injectorindex' },
+                            { label: 'TikTok', href: 'https://www.tiktok.com/@injectorindex' },
+                            { label: 'Pinterest', href: 'https://www.pinterest.com/injectorindex' },
+                        ].map((social) => (
                             <a
-                                key={social}
-                                href="#"
+                                key={social.label}
+                                href={social.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="font-body text-xs transition-colors"
                                 style={{ color: 'var(--color-stone)' }}
                                 onMouseEnter={(e) => {
@@ -175,7 +181,7 @@ export default function Footer() {
                                     (e.currentTarget as HTMLElement).style.color = 'var(--color-stone)'
                                 }}
                             >
-                                {social}
+                                {social.label}
                             </a>
                         ))}
                     </div>
