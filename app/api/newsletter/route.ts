@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
                         email,
                         reactivate_existing: true,
                         send_welcome_email: true,
-                        utm_source: 'injectorindex-website',
+                        utm_source: 'verifiedaesthetics-website',
                         utm_medium: 'clinic-audit-form',
                         custom_fields: [
                             { name: 'clinic', value: clinic || '' },

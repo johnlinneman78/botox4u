@@ -62,7 +62,7 @@ export default function Navbar() {
                                 color: 'var(--color-espresso)',
                             }}
                         >
-                            InjectorIndex
+                            VerifiedAesthetics
                         </span>
                     </Link>
 

@@ -11,7 +11,7 @@ export default function SafetyGuidePage() {
                     <Shield className="w-20 h-20 text-secondary mx-auto mb-8 animate-pulse" />
                     <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">Patient Safety <span className="text-secondary">&</span> Verification</h1>
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed font-light">
-                        Choosing an injector is a medical decision, not a retail one. Our 3-pillar verification process ensures every clinic on InjectorIndex meets clinical standards.
+                        Choosing an injector is a medical decision, not a retail one. Our 3-pillar verification process ensures every clinic on VerifiedAesthetics meets clinical standards.
                     </p>
                 </div>
             </div>

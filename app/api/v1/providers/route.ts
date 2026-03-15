@@ -72,13 +72,13 @@ export async function GET(req: Request) {
         style_tags: p.style_tags || [],
         avg_price: p.price_per_unit,
         booking_url: p.booking_url || p.website,
-        profile_url: `https://injectorindex.com/provider/${p.slug}`
+        profile_url: `https://verifiedaesthetics.com/provider/${p.slug}`
     }))
 
     return NextResponse.json({
         results,
         total: count || 0,
         city: city,
-        powered_by: "InjectorIndex Clarity Score™"
+        powered_by: "VerifiedAesthetics Clarity Score™"
     })
 }

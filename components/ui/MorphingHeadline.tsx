@@ -96,7 +96,7 @@ export function MorphingHeadline() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
         >
-            Find the{' '}
+            Know Your{' '}
             <span className="relative inline-block">
                 <span
                     ref={morphRef}
@@ -133,7 +133,7 @@ export function MorphingHeadline() {
                 />
             </span>
             <br className="hidden sm:block" />
-            {' '}You&apos;ll Actually <em style={{ color: 'var(--color-gold)' }}>Trust.</em>
+            {' '}Before You <em style={{ color: 'var(--color-gold)' }}>Book.</em>
         </h1>
     )
 }

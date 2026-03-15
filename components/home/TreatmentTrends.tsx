@@ -140,7 +140,7 @@ export default function TreatmentTrends() {
                             Botox & Filler <span className="text-[#C9A96E]">Rankings.</span>
                         </h2>
                         <p className="text-xl text-[#3D2B1F]/70 max-w-2xl font-light leading-relaxed">
-                            Find the best injectors in your city. Our Clarity Score™ audit combines patient reviews, pricing transparency, and clinical excellence into a single, independent metric.
+                            Independently verify your aesthetic provider. Our Clarity Score™ audit combines patient reviews, pricing transparency, and clinical excellence into a single, independent metric.
                         </p>
                     </div>
                     <div className="flex flex-col items-end gap-3 text-right">
@@ -314,7 +314,7 @@ export default function TreatmentTrends() {
 
                 <div className="mt-16 text-center">
                     <p className="text-xs text-gray-700 max-w-2xl mx-auto leading-relaxed">
-                        Data powered by <span className="text-[#3D2B1F]/60 font-bold">Injector Index Intelligence™</span>. Every provider includes a <span className="text-[#C9A96E]">Clarity Score™</span> audit to verify clinical quality. Rankings are pure data, zero pay-to-rank.
+                        Data powered by <span className="text-[#3D2B1F]/60 font-bold">Verified Aesthetics Intelligence™</span>. Every provider includes a <span className="text-[#C9A96E]">Clarity Score™</span> audit to verify clinical quality. Rankings are pure data, zero pay-to-rank.
                     </p>
                 </div>
             </div>

@@ -4,15 +4,15 @@ import { NICHE } from '@/config/niche'
 import { JsonLd, generatePriceSpecificationSchema } from '@/components/seo/JsonLd'
 
 export const metadata: Metadata = {
-    title: "Botox Cost Calculator 2026 | InjectorIndex",
+    title: "Botox Cost Calculator 2026 | VerifiedAesthetics",
     description: "Calculate how much botox will cost based on area, units, and city.",
     alternates: {
-        canonical: 'https://www.injectorindex.com/calculator',
+        canonical: 'https://www.verifiedaesthetics.com/calculator',
     },
     openGraph: {
-        title: "Botox Cost Calculator 2026 | InjectorIndex",
+        title: "Botox Cost Calculator 2026 | VerifiedAesthetics",
         description: "Calculate how much botox will cost based on area, units, and city.",
-        url: 'https://www.injectorindex.com/calculator',
+        url: 'https://www.verifiedaesthetics.com/calculator',
     }
 }
 

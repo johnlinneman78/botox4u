@@ -99,7 +99,7 @@ function ProviderSignupContent() {
                     {existingProviderId ? 'Create Account to Claim Profile' : 'Create Your Provider Account'}
                 </h2>
                 <p className="mt-2 text-center text-sm text-[#3D2B1F]/60">
-                    Get started with InjectorIndex and {existingProviderId ? 'claim your listing' : 'add your clinic'}.
+                    Get started with VerifiedAesthetics and {existingProviderId ? 'claim your listing' : 'add your clinic'}.
                 </p>
             </div>
 

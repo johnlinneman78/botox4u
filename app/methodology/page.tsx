@@ -7,12 +7,12 @@ export const metadata: Metadata = {
     title: `Our Methodology — How We Rank Injectors | ${NICHE.siteName}`,
     description: `Learn how Clarity Score™ uses semantic analysis and clinical quality data to rank aesthetic providers. We prioritize natural results and pricing transparency.`,
     alternates: {
-        canonical: 'https://www.injectorindex.com/methodology',
+        canonical: 'https://www.verifiedaesthetics.com/methodology',
     },
     openGraph: {
         title: `Our Methodology — How We Rank Injectors | ${NICHE.siteName}`,
         description: `Learn how Clarity Score™ uses semantic analysis and clinical quality data to rank aesthetic providers. We prioritize natural results and pricing transparency.`,
-        url: 'https://www.injectorindex.com/methodology',
+        url: 'https://www.verifiedaesthetics.com/methodology',
     }
 }
 

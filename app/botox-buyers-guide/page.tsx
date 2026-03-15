@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     title: `The No-Filter Guide to Baby Botox | ${NICHE.siteName}`,
     description: "How to stay subtle, stay safe, and find the right injector. 40% of Botox complaints are about over-injection. Read our independent guide before you book.",
     alternates: {
-        canonical: 'https://www.injectorindex.com/botox-buyers-guide',
+        canonical: 'https://www.verifiedaesthetics.com/botox-buyers-guide',
     },
     openGraph: {
         title: `The No-Filter Guide to Baby Botox | ${NICHE.siteName}`,
         description: "How to stay subtle, stay safe, and find the right injector. 40% of Botox complaints are about over-injection. Read our independent guide before you book.",
-        url: 'https://www.injectorindex.com/botox-buyers-guide',
+        url: 'https://www.verifiedaesthetics.com/botox-buyers-guide',
     }
 }
 
@@ -48,7 +48,7 @@ export default function BuyersGuidePage() {
                             <div className="p-8 bg-[#F2EDE4] rounded-3xl border border-[#3D2B1F]/10 max-w-lg mx-auto mb-16">
                                 <div className="text-6xl font-display font-bold text-secondary mb-2">40%</div>
                                 <div className="text-lg font-bold text-[#3D2B1F] mb-1">of Botox complaints are about over-injection.</div>
-                                <div className="text-sm text-[#3D2B1F]/60 italic">Data powered by the Injector Index</div>
+                                <div className="text-sm text-[#3D2B1F]/60 italic">Data powered by the Verified Aesthetics</div>
                             </div>
 
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -107,7 +107,7 @@ export default function BuyersGuidePage() {
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 rounded-full bg-[#3D2B1F]/5" />
                                         <div>
-                                            <div className="text-sm font-bold text-[#3D2B1F]">Injector Index Editorial Team</div>
+                                            <div className="text-sm font-bold text-[#3D2B1F]">Verified Aesthetics Editorial Team</div>
                                             <div className="text-xs text-[#3D2B1F]/70 font-medium italic">Verified Patient Advocates</div>
                                         </div>
                                     </div>

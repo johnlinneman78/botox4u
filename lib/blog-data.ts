@@ -19,7 +19,7 @@ export const BLOG_POSTS: BlogPost[] = [
         content: `
 You Googled "how much does Botox cost" and got seventeen different answers ranging from $200 to $1,200 per session. That's not helpful. Here's what's actually going on.
 
-Botox pricing is confusing because there's no standard — every clinic sets its own rates, and most won't tell you the price until you're sitting in the chair. That's the exact problem we built Injector Index to solve: we index real pricing data from providers across the country so you can compare before you book.
+Botox pricing is confusing because there's no standard — every clinic sets its own rates, and most won't tell you the price until you're sitting in the chair. That's the exact problem we built Verified Aesthetics to solve: we index real pricing data from providers across the country so you can compare before you book.
 
 Here's what the data actually shows in 2026.
 
@@ -71,7 +71,7 @@ Some clinics charge per unit (transparent). Others charge "per area" (opaque). H
 
 If a clinic only quotes per-area pricing and won't tell you the per-unit rate, that's a yellow flag. It doesn't mean they're bad — but it means you can't compare them accurately against other providers.
 
-At Injector Index, we index per-unit pricing wherever possible specifically because it's the only honest way to compare.
+At Verified Aesthetics, we index per-unit pricing wherever possible specifically because it's the only honest way to compare.
 
 ## What Drives the Price Up
 
@@ -103,9 +103,9 @@ Here's a quick framework for comparing Botox pricing without getting burned:
 
 **Compare to your city average.** If you're in Portland and someone quotes you $22/unit, you're paying 57% above average. That doesn't mean it's wrong — but you should understand what you're paying a premium for.
 
-**Check the provider's score.** On Injector Index, every indexed provider has a score based on natural results, fair pricing, patient trust, verified credentials, and transparency. Nobody pays for a higher score. It's just data.
+**Check the provider's score.** On Verified Aesthetics, every indexed provider has a score based on natural results, fair pricing, patient trust, verified credentials, and transparency. Nobody pays for a higher score. It's just data.
 
-[Find Best Botox Providers in Portland →](https://www.injectorindex.com/find-providers?q=Botox&location=Portland)
+[Find Best Botox Providers in Portland →](https://www.verifiedaesthetics.com/find-providers?q=Botox&location=Portland)
     `,
         faqs: [
             {
@@ -165,11 +165,11 @@ To be clear: this is rare with FDA-approved product and qualified injectors. Ove
 
 There's no way to eliminate all risk from any medical procedure. But you can significantly reduce your exposure with a few straightforward checks.
 
-**Verify the provider's license.** Every legitimate medical provider in the U.S. has a National Provider Identifier (NPI) registered with the federal government. You can look up any provider at npiregistry.cms.hhs.gov. At Injector Index, every indexed provider is cross-referenced against the NPI database — if a provider's credentials don't verify, it shows in their score.
+**Verify the provider's license.** Every legitimate medical provider in the U.S. has a National Provider Identifier (NPI) registered with the federal government. You can look up any provider at npiregistry.cms.hhs.gov. At Verified Aesthetics, every indexed provider is cross-referenced against the NPI database — if a provider's credentials don't verify, it shows in their score.
 
 **Ask about the product.** FDA-approved botulinum toxin products in the U.S. include Botox (onabotulinumtoxinA), Dysport (abobotulinumtoxinA), Xeomin (incobotulinumtoxinA), Jeuveau (prabotulinumtoxinA), and the recently approved Letybo (letibotulinumtoxinA). If your provider is using anything else — or won't tell you what product they're using — leave.
 
-**Beware of extreme discounts.** If Botox is priced dramatically below the local average (under $8/unit in most markets), ask why. It may be legitimate — but it may indicate diluted or counterfeit product. At Injector Index, we publish city-average pricing so you know what "normal" looks like in your area.
+**Beware of extreme discounts.** If Botox is priced dramatically below the local average (under $8/unit in most markets), ask why. It may be legitimate — but it may indicate diluted or counterfeit product. At Verified Aesthetics, we publish city-average pricing so you know what "normal" looks like in your area.
 
 **Never buy Botox online for self-injection.** This should go without saying, but the 2024 and 2025 CDC reports make clear that people are doing this. Botulinum toxin purchased from overseas online vendors is unregulated, untested, and potentially lethal. Three people were hospitalized in late 2025 from self-injecting products bought this way.
 
@@ -268,7 +268,7 @@ Preventative Botox uses fewer units than traditional treatment, so per-session c
     {
         slug: 'botox-vs-dysport-vs-xeomin-vs-letybo-2026',
         title: "Botox vs Dysport vs Xeomin vs Letybo: Which Lasts Longest? (2026)",
-        metaDescription: "Side-by-side comparison of every major neuromodulator in 2026. Duration, cost, onset time, and which injectors actually recommend — by InjectorIndex.",
+        metaDescription: "Side-by-side comparison of every major neuromodulator in 2026. Duration, cost, onset time, and which injectors actually recommend — by VerifiedAesthetics.",
         targetKeyword: 'botox vs dysport 2026',
         publishDate: '2026-02-26',
         content: `
@@ -472,7 +472,7 @@ Botox doesn't work instantly. Here's what to expect:
 - **Day 10-14:** Final results. This is when you should evaluate if you need a touch-up.
 - **Month 3-4:** The results will gradually wear off as muscle movement returns.
 
-At Injector Index, we recommend booking your follow-up appointment for the 2-week mark if it's your first time. This gives your injector a chance to see how your muscles responded and make any necessary adjustments for your next session.
+At Verified Aesthetics, we recommend booking your follow-up appointment for the 2-week mark if it's your first time. This gives your injector a chance to see how your muscles responded and make any necessary adjustments for your next session.
     `,
         faqs: [
             {
@@ -548,9 +548,9 @@ How many PN sessions have they performed? PNs require different injection techni
 
 Do they combine PNs with other treatments? Providers who layer PNs with exosomes, PRF, or advanced volumizing treatments tend to see faster and more dramatic results. This is where Portland's most innovative providers differentiate themselves.
 
-What's their Clinical Quality Ratio? At Injector Index, we score every provider on what percentage of their practice is regenerative. A higher Clinical Quality Ratio means the provider is more committed to biological repair over volume-based correction.
+What's their Clinical Quality Ratio? At Verified Aesthetics, we score every provider on what percentage of their practice is regenerative. A higher Clinical Quality Ratio means the provider is more committed to biological repair over volume-based correction.
 
-[Find Best Polynucleotides (PNs) Providers in Portland →](https://www.injectorindex.com/find-providers?q=Polynucleotides&location=Portland)
+[Find Best Polynucleotides (PNs) Providers in Portland →](https://www.verifiedaesthetics.com/find-providers?q=Polynucleotides&location=Portland)
 `,
         faqs: [
             {
@@ -614,7 +614,7 @@ Daxxify is NOT ideal for first-time neurotoxin patients (start with standard Bot
 
     Clinical reports show that preventative Daxxify patients typically focus on early intervention (forehead and glabella) with sessions twice per year. This long-acting approach makes treatment schedules more manageable while providing consistent, natural-looking results.
 
-[Find Best Daxxify Providers in Portland →](https://www.injectorindex.com/find-providers?q=Daxxify&location=Portland)
+[Find Best Daxxify Providers in Portland →](https://www.verifiedaesthetics.com/find-providers?q=Daxxify&location=Portland)
 `,
         faqs: [
             {
@@ -690,7 +690,7 @@ Whether you're in Portland, Seattle, or San Francisco, the Neo-Romantic aestheti
 
 Don't just ask "do you do Botox?" Ask: what percentage of your practice is regenerative? Do you offer Polynucleotides? Can you explain your treatment philosophy for facial harmony? Is your approach centered on biological repair or volume-based correction?
 
-The providers who score highest on Injector Index in 2026 are consistently the ones who have embraced the Neo-Romantic aesthetic approach to regenerative medicine — not because we bias toward it, but because the clinical data shows their patients are happier, their results look more natural, and their review sentiment is overwhelmingly positive.
+The providers who score highest on Verified Aesthetics in 2026 are consistently the ones who have embraced the Neo-Romantic aesthetic approach to regenerative medicine — not because we bias toward it, but because the clinical data shows their patients are happier, their results look more natural, and their review sentiment is overwhelmingly positive.
 `,
         faqs: [
             {
@@ -707,7 +707,7 @@ The providers who score highest on Injector Index in 2026 are consistently the o
             },
             {
                 question: 'How do I find a Neo-Romantic aesthetic provider near me?',
-                answer: 'On Injector Index, look for providers with a high Clinical Quality Ratio score. This measures what percentage of their treatment menu is regenerative (Polynucleotides, bio-stimulators, exosomes, Daxxify) vs. traditional (HA fillers, standard Botox). The higher the Clinical Quality Ratio, the more aligned they are with the Neo-Romantic aesthetic philosophy in regenerative medicine.'
+                answer: 'On Verified Aesthetics, look for providers with a high Clinical Quality Ratio score. This measures what percentage of their treatment menu is regenerative (Polynucleotides, bio-stimulators, exosomes, Daxxify) vs. traditional (HA fillers, standard Botox). The higher the Clinical Quality Ratio, the more aligned they are with the Neo-Romantic aesthetic philosophy in regenerative medicine.'
             }
         ]
     },
@@ -839,14 +839,14 @@ For patients who want the most established regenerative market, Portland is the 
             },
             {
                 question: 'How do I find a regenerative injector in Seattle?',
-                answer: 'On Injector Index, filter Seattle providers by Clinical Quality Ratio to find those most committed to regenerative medicine. Providers with Clinical Quality Ratio above 50% offer predominantly regenerative treatments like PNs, Daxxify, advanced volumizers, and exosomes.'
+                answer: 'On Verified Aesthetics, filter Seattle providers by Clinical Quality Ratio to find those most committed to regenerative medicine. Providers with Clinical Quality Ratio above 50% offer predominantly regenerative treatments like PNs, Daxxify, advanced volumizers, and exosomes.'
             }
         ]
     },
     {
         slug: 'neo-romantic-manifesto-2026-aesthetic-shift',
         title: 'The Neo-Romantic Manifesto: Why the 2026 Aesthetic Shift in Medicine is Moving Away from Filler',
-        metaDescription: 'The Neo-Romantic Manifesto defines the 2026 aesthetic shift in regenerative medicine — from overdone fillers to Polynucleotides, bio-stimulators, Daxxify, and facial harmony. Injector Index\'s definitive guide to the aesthetic intelligence era.',
+        metaDescription: 'The Neo-Romantic Manifesto defines the 2026 aesthetic shift in regenerative medicine — from overdone fillers to Polynucleotides, bio-stimulators, Daxxify, and facial harmony. Verified Aesthetics\'s definitive guide to the aesthetic intelligence era.',
         targetKeyword: 'neo-romantic aesthetic manifesto regenerative medicine',
         publishDate: '2026-02-22',
         content: `
@@ -898,7 +898,7 @@ The Neo-Romantic aesthetic philosophy rejects the premise that aging is a proble
 
 ## The Clinical Quality Ratio: How We Measure It
 
-Injector Index created the Clinical Quality Ratio™ to quantify how aligned a provider is with the Neo-Romantic aesthetic philosophy in regenerative medicine. It measures the percentage of a provider's treatment menu that uses regenerative modalities (PNs, bio-stimulators, exosomes, Daxxify) vs. traditional modalities (HA fillers, standard Botox, Dysport).
+Verified Aesthetics created the Clinical Quality Ratio™ to quantify how aligned a provider is with the Neo-Romantic aesthetic philosophy in regenerative medicine. It measures the percentage of a provider's treatment menu that uses regenerative modalities (PNs, bio-stimulators, exosomes, Daxxify) vs. traditional modalities (HA fillers, standard Botox, Dysport).
 
 A Clinical Quality Ratio of 60% means 60% of that provider's offered treatments are regenerative. The national average is 28%. Portland leads at 54%. The top individual providers — the ones we consider fully Neo-Romantic aesthetic practices — score above 70%.
 
@@ -908,20 +908,20 @@ Trends come and go. The "fox eye" thread lift lasted 18 months. "Barbie Botox" w
 
 Polynucleotides work. The clinical data is clear: they improve skin quality metrics (elasticity, hydration, thickness) in ways that HA fillers simply don't. Daxxify lasts longer. Bio-stimulators produce more natural-looking structural results. These aren't marketing claims — they're measurable outcomes.
 
-The providers who adopted regenerative medicine earliest are outperforming their peers on every metric we track: patient satisfaction, review sentiment, retention rates, and Injector Index Score (Clarity Score™).
+The providers who adopted regenerative medicine earliest are outperforming their peers on every metric we track: patient satisfaction, review sentiment, retention rates, and Verified Aesthetics Score (Clarity Score™).
 
 ## What This Means for You
 
 If you're a patient: seek out providers who can explain their treatment philosophy. Ask about their Clinical Quality Ratio. Ask if they offer Polynucleotides. Ask if they prioritize facial harmony and undetectable results. The best providers in 2026 are the ones who see your face as a biological system, not a canvas to be painted.
 
-If you're a provider: the data is clear. The aesthetics market is moving toward regenerative medicine, and the providers who move with it are building more sustainable, more ethical, and more profitable practices. Claim your profile on Injector Index and let patients find you based on your clinical philosophy, not your advertising budget.
+If you're a provider: the data is clear. The aesthetics market is moving toward regenerative medicine, and the providers who move with it are building more sustainable, more ethical, and more profitable practices. Claim your profile on Verified Aesthetics and let patients find you based on your clinical philosophy, not your advertising budget.
 
 The Neo-Romantic aesthetic era of regenerative medicine isn't coming. It's here. And this index was built to measure it.
 `,
         faqs: [
             {
                 question: 'What is the Neo-Romantic aesthetic manifesto?',
-                answer: 'The Neo-Romantic Manifesto is Injector Index\'s defining document for the 2026 aesthetic shift in regenerative medicine. It outlines five principles: biological repair over synthetic volume, facial harmony over isolated correction, undetectable results as the standard, clinical data over marketing claims, and aging gracefully rather than aggressively.'
+                answer: 'The Neo-Romantic Manifesto is Verified Aesthetics\'s defining document for the 2026 aesthetic shift in regenerative medicine. It outlines five principles: biological repair over synthetic volume, facial harmony over isolated correction, undetectable results as the standard, clinical data over marketing claims, and aging gracefully rather than aggressively.'
             },
             {
                 question: 'What is Neo-Romantic filler?',
@@ -933,7 +933,7 @@ The Neo-Romantic aesthetic era of regenerative medicine isn't coming. It's here.
             },
             {
                 question: 'What is the Clinical Quality Ratio and how does it relate to Neo-Romantic aesthetics?',
-                answer: 'The Clinical Quality Ratio™ is Injector Index\'s proprietary metric measuring what percentage of a provider\'s treatment menu uses regenerative modalities (Polynucleotides, bio-stimulators, exosomes, Daxxify) vs. traditional modalities (HA fillers, standard Botox). A higher Clinical Quality Ratio indicates stronger alignment with the Neo-Romantic aesthetic philosophy in regenerative medicine. The national average is 28%; Portland leads at 54%.'
+                answer: 'The Clinical Quality Ratio™ is Verified Aesthetics\'s proprietary metric measuring what percentage of a provider\'s treatment menu uses regenerative modalities (Polynucleotides, bio-stimulators, exosomes, Daxxify) vs. traditional modalities (HA fillers, standard Botox). A higher Clinical Quality Ratio indicates stronger alignment with the Neo-Romantic aesthetic philosophy in regenerative medicine. The national average is 28%; Portland leads at 54%.'
             },
             {
                 question: 'Is the Neo-Romantic aesthetic movement the same as art history Neo-Romanticism?',
@@ -980,7 +980,7 @@ The most innovative trend we're tracking in New York for 2026 is "regenerative l
 
 Clinics in the Flatiron District and Tribeca are reporting that layering these modalities produces skin quality improvements that previously required invasive surgery. The investment is significant — often $3,000–$5,000 for a full course — but the results are the definition of the Neo-Romantic sublime: undetectable, natural, and biologically younger skin.
 
-[Find Best Regenerative Providers in New York →](https://www.injectorindex.com/find-providers?q=Regenerative&location=New+York)
+[Find Best Regenerative Providers in New York →](https://www.verifiedaesthetics.com/find-providers?q=Regenerative&location=New+York)
         `,
         faqs: [
             {
@@ -1080,9 +1080,9 @@ For contrast — here's what happens when you're in the right room:
 
 That last point is important. Any legitimate provider is completely comfortable with you saying "I need to think about it." A provider who makes you feel like you need to decide today, or who offers same-day discounts contingent on booking immediately, is using sales tactics that have no place in a medical setting.
 
-[Find providers whose patient reviews consistently describe natural, subtle results: Search InjectorIndex →](https://www.injectorindex.com/find-providers)
+[Find providers whose patient reviews consistently describe natural, subtle results: Search VerifiedAesthetics →](https://www.verifiedaesthetics.com/find-providers)
 
-[Not sure if your shortlisted clinic is trustworthy? Get your free 2026 clinic safety audit →](https://www.injectorindex.com/audit)
+[Not sure if your shortlisted clinic is trustworthy? Get your free 2026 clinic safety audit →](https://www.verifiedaesthetics.com/audit)
         `,
         faqs: [
             {
@@ -1194,9 +1194,9 @@ Before the brand comparisons, it helps to understand the three variables that ac
 | **Timeline** | 6–8 weeks | 8–12 weeks | 2 weeks (HA) + 6–8 (PN) |
 | **Best for** | Under-eye | Neck / Clinical | Fast + Lasting |
 
-[Find providers offering polynucleotide treatments in your city, ranked by Natural Integrity and Innovation Score: Search InjectorIndex →](https://www.injectorindex.com/find-providers?q=Polynucleotides)
+[Find providers offering polynucleotide treatments in your city, ranked by Natural Integrity and Innovation Score: Search VerifiedAesthetics →](https://www.verifiedaesthetics.com/find-providers?q=Polynucleotides)
 
-[Want to know if your shortlisted provider has PN expertise? Get your free 2026 clinic safety audit →](https://www.injectorindex.com/audit)
+[Want to know if your shortlisted provider has PN expertise? Get your free 2026 clinic safety audit →](https://www.verifiedaesthetics.com/audit)
         `,
         faqs: [
             {
@@ -1213,7 +1213,7 @@ Before the brand comparisons, it helps to understand the three variables that ac
             },
             {
                 question: 'How do I find a provider who offers these specific products?',
-                answer: 'Most US directories don\'t filter by PN product brand. InjectorIndex tracks which providers offer polynucleotide treatments and scores them partly on the Innovation Score component of the Clarity Score™.'
+                answer: 'Most US directories don\'t filter by PN product brand. VerifiedAesthetics tracks which providers offer polynucleotide treatments and scores them partly on the Innovation Score component of the Clarity Score™.'
             },
             {
                 question: 'Is there a significant price difference between the three?',
@@ -1260,9 +1260,9 @@ The core patient misconception about hyaluronic acid filler is that it "dissolve
 3. **Consider a regenerative protocol**: Rebuild tissue quality with PNs after or during the correction period.
 4. **Reassess your goals**: You might discover you wanted better skin quality, not volume.
 
-[Find providers whose philosophy matches 2026 biological standards — not 2015 volume culture: Search InjectorIndex →](https://www.injectorindex.com/find-providers)
+[Find providers whose philosophy matches 2026 biological standards — not 2015 volume culture: Search VerifiedAesthetics →](https://www.verifiedaesthetics.com/find-providers)
 
-[Want to know your shortlisted provider's Clinical Quality Ratio? Get your free 2026 clinic safety audit →](https://www.injectorindex.com/audit)
+[Want to know your shortlisted provider's Clinical Quality Ratio? Get your free 2026 clinic safety audit →](https://www.verifiedaesthetics.com/audit)
         `,
         faqs: [
             {
@@ -1332,9 +1332,9 @@ Flat-fee pricing sounds simple but often hides under-dosing. If you don't know t
 4. "What does the total cost come to before I agree?"
 5. "What happens if I'm not satisfied with the result?"
 
-[Check current Botox pricing in your city and find top-scored providers: Search InjectorIndex →](https://www.injectorindex.com/find-providers?q=Botox)
+[Check current Botox pricing in your city and find top-scored providers: Search VerifiedAesthetics →](https://www.verifiedaesthetics.com/find-providers?q=Botox)
 
-[Get a free breakdown of your shortlisted clinic's pricing practices: Get your free 2026 clinic safety audit →](https://www.injectorindex.com/audit)
+[Get a free breakdown of your shortlisted clinic's pricing practices: Get your free 2026 clinic safety audit →](https://www.verifiedaesthetics.com/audit)
         `,
         faqs: [
             {
@@ -1363,7 +1363,7 @@ Flat-fee pricing sounds simple but often hides under-dosing. If you don't know t
         publishDate: '2026-02-27',
         content: `New York City has more aesthetic providers than any other US market. That density is both an advantage and a problem — the options are overwhelming, the marketing is aggressive, and the quality range is enormous. A Park Avenue dermatologist with 20 years of experience and a Midtown medspa that opened six months ago can both appear on the first page of Google.
 
-InjectorIndex exists to cut through that. We score every NYC provider on four data-driven pillars to produce a Clarity Score™ that no provider can buy. Here's what the data shows about New York's medspa market in 2026.
+VerifiedAesthetics exists to cut through that. We score every NYC provider on four data-driven pillars to produce a Clarity Score™ that no provider can buy. Here's what the data shows about New York's medspa market in 2026.
 
 ## NYC's Medspa Market at a Glance
 
@@ -1377,7 +1377,7 @@ New York's patient base is the most educated aesthetic consumer market in the US
 
 ## How We Rank NYC Medspas
 
-Every provider on InjectorIndex receives a Clarity Score™ based on four pillars:
+Every provider on VerifiedAesthetics receives a Clarity Score™ based on four pillars:
 
 **Injection Quality (40%):** Sentiment analysis of patient reviews across platforms. We measure what patients say about their actual results — not just star ratings. Reviews describing "natural," "subtle," and "balanced" results score higher. Reviews mentioning "frozen," "overdone," or "asymmetric" trigger penalties.
 
@@ -1428,13 +1428,13 @@ NYC patients tend to be direct. Use that:
 
 Many NYC patients use RealSelf to find providers. Worth knowing: RealSelf allows providers to pay for featured placement and sponsored listings. A "Top Doctor" badge on RealSelf is partially a paid designation, not purely a quality metric.
 
-InjectorIndex Clarity Scores™ are different. No provider can pay for a higher score. Our rankings are based on verifiable data — credentials, review sentiment, treatment range, and innovation adoption. The methodology is public and the scores are immutable.
+VerifiedAesthetics Clarity Scores™ are different. No provider can pay for a higher score. Our rankings are based on verifiable data — credentials, review sentiment, treatment range, and innovation adoption. The methodology is public and the scores are immutable.
 
 This doesn't mean RealSelf is useless — the patient reviews there are valuable. But use the reviews for qualitative insight and use Clarity Scores™ for objective comparison.
 
 ## Find Your NYC Provider
 
-InjectorIndex scores 140+ NYC-area providers on clinical quality data. Compare Clarity Scores™, see real pricing, and verify credentials before you book.
+VerifiedAesthetics scores 140+ NYC-area providers on clinical quality data. Compare Clarity Scores™, see real pricing, and verify credentials before you book.
 
 [See NYC's top-rated providers →](/injectors/ny/new-york)
 
@@ -1444,7 +1444,7 @@ InjectorIndex scores 140+ NYC-area providers on clinical quality data. Compare C
 
 ---
 
-*InjectorIndex is an independent provider directory. Rankings are based on publicly available data and proprietary scoring methodology. No provider can pay for a higher Clarity Score™. See our [full methodology](/methodology).*`,
+*VerifiedAesthetics is an independent provider directory. Rankings are based on publicly available data and proprietary scoring methodology. No provider can pay for a higher Clarity Score™. See our [full methodology](/methodology).*`,
         faqs: []
     },
     {
@@ -1455,7 +1455,7 @@ InjectorIndex scores 140+ NYC-area providers on clinical quality data. Compare C
         publishDate: '2026-02-27',
         content: `Portland has over 40 medspas and aesthetic clinics. Finding the right one used to mean scrolling through Google reviews, asking friends, or just picking whoever showed up first in ads. That approach is fine until you realize the top Google result is often whoever is spending the most on advertising — not who's delivering the best results.
 
-InjectorIndex takes a different approach. We score every Portland provider on four data-driven pillars — injection quality, credentials, treatment range, and innovation adoption — to produce a Clarity Score™ that nobody can buy.
+VerifiedAesthetics takes a different approach. We score every Portland provider on four data-driven pillars — injection quality, credentials, treatment range, and innovation adoption — to produce a Clarity Score™ that nobody can buy.
 
 Here's what the data shows about Portland's medspa market in 2026.
 
@@ -1474,7 +1474,7 @@ Portland's aesthetic market skews quality-conscious. Patients here tend to prior
 
 ## How We Rank Portland Medspas
 
-Every provider on InjectorIndex receives a Clarity Score™ based on four pillars:
+Every provider on VerifiedAesthetics receives a Clarity Score™ based on four pillars:
 
 **Injection Quality (40% of score):** We analyze patient review language across platforms. Reviews mentioning "natural," "subtle," and "exactly what I wanted" score higher. Reviews mentioning "frozen," "overdone," or "pillow face" trigger our Pillow-Face Penalty. This isn't a star rating — it's a sentiment analysis of what patients actually say about their results.
 
@@ -1535,7 +1535,7 @@ Any provider who answers these questions directly and without defensiveness is w
 
 ## Find Your Portland Provider
 
-InjectorIndex ranks every Portland medspa on clinical quality data — not who pays the most for advertising. Compare Clarity Scores™, see real pricing, and verify credentials before you book.
+VerifiedAesthetics ranks every Portland medspa on clinical quality data — not who pays the most for advertising. Compare Clarity Scores™, see real pricing, and verify credentials before you book.
 
 [See Portland's top-rated providers →](/injectors/or/portland)
 
@@ -1560,11 +1560,11 @@ Portland's combination of moderate pricing and the highest Clinical Quality Rati
 
 ---
 
-*InjectorIndex is an independent provider directory. Rankings are based on publicly available data and proprietary scoring methodology. No provider can pay for a higher Clarity Score™. See our [full methodology](/methodology).*`,
+*VerifiedAesthetics is an independent provider directory. Rankings are based on publicly available data and proprietary scoring methodology. No provider can pay for a higher Clarity Score™. See our [full methodology](/methodology).*`,
         faqs: [
             {
                 question: 'Who is the best Botox injector in Portland, Oregon?',
-                answer: 'InjectorIndex ranks 90+ Portland Botox providers using Clarity Score™, a clinical algorithm based on injection quality, verified credentials, innovation adoption, and treatment range. Pearl District providers consistently score highest. No provider can pay for a higher ranking.'
+                answer: 'VerifiedAesthetics ranks 90+ Portland Botox providers using Clarity Score™, a clinical algorithm based on injection quality, verified credentials, innovation adoption, and treatment range. Pearl District providers consistently score highest. No provider can pay for a higher ranking.'
             },
             {
                 question: 'How much does Botox cost in Portland in 2026?',
@@ -1572,7 +1572,7 @@ Portland's combination of moderate pricing and the highest Clinical Quality Rati
             },
             {
                 question: 'What makes Portland\'s aesthetic market different?',
-                answer: 'Portland has the highest Clinical Quality Ratio (54%) of any U.S. city indexed by InjectorIndex. This means more than half of Portland providers offer regenerative treatments like Polynucleotides and Daxxify alongside standard Botox — signaling a focus on natural, biologically-driven results.'
+                answer: 'Portland has the highest Clinical Quality Ratio (54%) of any U.S. city indexed by VerifiedAesthetics. This means more than half of Portland providers offer regenerative treatments like Polynucleotides and Daxxify alongside standard Botox — signaling a focus on natural, biologically-driven results.'
             },
             {
                 question: 'Which Portland neighborhood has the best Botox injectors?',
@@ -1580,7 +1580,7 @@ Portland's combination of moderate pricing and the highest Clinical Quality Rati
             },
             {
                 question: 'How do I verify a Botox provider in Portland?',
-                answer: 'Check their National Provider Identifier (NPI) at npiregistry.cms.hhs.gov. On InjectorIndex, every provider is cross-referenced against the NPI database — unverified providers are flagged. Also look for a Clarity Score™ above 70.'
+                answer: 'Check their National Provider Identifier (NPI) at npiregistry.cms.hhs.gov. On VerifiedAesthetics, every provider is cross-referenced against the NPI database — unverified providers are flagged. Also look for a Clarity Score™ above 70.'
             },
             {
                 question: 'Is Portland a good city for natural-looking Botox results?',
@@ -1670,7 +1670,7 @@ The winter months (November-February) often see promotions as patient demand nat
 
 Seattle's aesthetic market is distinctive for two reasons: it's the most innovation-forward market in the Pacific Northwest, and the patient base strongly prefers natural-looking results.
 
-Seattle leads the West Coast (outside LA) in polynucleotide and Daxxify adoption. Providers here tend to be early adopters of new products and techniques, which is reflected in higher Innovation Adoption scores on InjectorIndex.
+Seattle leads the West Coast (outside LA) in polynucleotide and Daxxify adoption. Providers here tend to be early adopters of new products and techniques, which is reflected in higher Innovation Adoption scores on VerifiedAesthetics.
 
 The "Seattle aesthetic" favors subtle enhancement — patients want to look refreshed, not changed. Providers who emphasize "undetectable" results do well here. If you're seeking natural results and are willing to pay slightly more than Portland or Dallas, Seattle's provider market is aligned with that philosophy.
 
@@ -1704,7 +1704,7 @@ Both cities sit in the mid-range nationally. Chicago offers slightly better valu
 
 ---
 
-*InjectorIndex is an independent provider directory. Pricing data is based on real provider information and may not reflect current promotional pricing. Always confirm pricing directly with your provider before treatment.*`,
+*VerifiedAesthetics is an independent provider directory. Pricing data is based on real provider information and may not reflect current promotional pricing. Always confirm pricing directly with your provider before treatment.*`,
         faqs: []
     },
     {
@@ -1715,7 +1715,7 @@ Both cities sit in the mid-range nationally. Chicago offers slightly better valu
         publishDate: '2026-02-27',
         content: `Texas is the best value major market for Botox in the United States. Both Dallas and Houston offer pricing 30-50% below New York and LA — with a provider base that includes board-certified dermatologists, plastic surgeons, and experienced medspa injectors across both metros.
 
-Based on InjectorIndex data from indexed providers in both cities, here's what Botox actually costs in Texas in 2026.
+Based on VerifiedAesthetics data from indexed providers in both cities, here's what Botox actually costs in Texas in 2026.
 
 ## Dallas Botox Pricing
 
@@ -1825,7 +1825,7 @@ What varies is:
 
 **Prioritize credentials over discounts.** In a market this affordable, the difference between a $9/unit and $13/unit provider is $160-$256 over a full-face treatment. That's not worth compromising on quality. Choose the better provider.
 
-**Use InjectorIndex Clarity Scores™ to compare.** We index providers across both Dallas and Houston. Clarity Scores™ cut through the pricing noise to show which providers actually deliver the best results based on data, not ads.
+**Use VerifiedAesthetics Clarity Scores™ to compare.** We index providers across both Dallas and Houston. Clarity Scores™ cut through the pricing noise to show which providers actually deliver the best results based on data, not ads.
 
 ## Find Top-Rated Texas Providers
 
@@ -1837,7 +1837,7 @@ What varies is:
 
 ---
 
-*InjectorIndex is an independent provider directory. Pricing data is based on real provider information and may not reflect current promotional pricing. Always confirm pricing directly with your provider before treatment.*`,
+*VerifiedAesthetics is an independent provider directory. Pricing data is based on real provider information and may not reflect current promotional pricing. Always confirm pricing directly with your provider before treatment.*`,
         faqs: []
     },
     {
@@ -1848,7 +1848,7 @@ What varies is:
         publishDate: '2026-02-27',
         content: `Los Angeles is the aesthetic capital of the United States. More cosmetic procedures are performed in the LA metro than any other city, and the provider market reflects that — hundreds of options ranging from Beverly Hills plastic surgeons charging $25/unit to Valley medspas at $10/unit.
 
-That spread makes LA the hardest market to navigate on pricing. Based on InjectorIndex data from indexed LA-area providers, here's what Botox actually costs in 2026.
+That spread makes LA the hardest market to navigate on pricing. Based on VerifiedAesthetics data from indexed LA-area providers, here's what Botox actually costs in 2026.
 
 ## LA Botox Pricing: The Real Numbers
 
@@ -1903,7 +1903,7 @@ The celebrity tax is real, and sometimes justified. A provider who treats faces 
 
 But "celebrity injector" is also an unregulated marketing claim. Anyone can say it. The question is whether the credentials and results justify the premium — not the Instagram follower count.
 
-InjectorIndex Clarity Scores™ don't factor in celebrity clients. They measure credentials, injection quality, treatment range, and innovation adoption. A Valley medspa with a Clarity Score™ of 85 is outperforming a Beverly Hills practice with a Clarity Score™ of 72 on the metrics that actually affect your results.
+VerifiedAesthetics Clarity Scores™ don't factor in celebrity clients. They measure credentials, injection quality, treatment range, and innovation adoption. A Valley medspa with a Clarity Score™ of 85 is outperforming a Beverly Hills practice with a Clarity Score™ of 72 on the metrics that actually affect your results.
 
 ## How LA Compares to Other Major Markets
 
@@ -1931,7 +1931,7 @@ InjectorIndex Clarity Scores™ don't factor in celebrity clients. They measure 
 
 ## Find Top-Rated LA Providers
 
-InjectorIndex scores LA-area providers on injection quality, credentials, treatment range, and innovation adoption. Clarity Scores™ are calculated from public data — no provider can pay for a higher ranking.
+VerifiedAesthetics scores LA-area providers on injection quality, credentials, treatment range, and innovation adoption. Clarity Scores™ are calculated from public data — no provider can pay for a higher ranking.
 
 [See LA's highest-rated injectors →](/injectors/ca/los-angeles)
 
@@ -1939,7 +1939,7 @@ InjectorIndex scores LA-area providers on injection quality, credentials, treatm
 
 ---
 
-*InjectorIndex is an independent provider directory. Pricing data is based on real provider information and may not reflect current promotional pricing. Always confirm pricing directly with your provider before treatment.*`,
+*VerifiedAesthetics is an independent provider directory. Pricing data is based on real provider information and may not reflect current promotional pricing. Always confirm pricing directly with your provider before treatment.*`,
         faqs: []
     },
     {
@@ -1950,7 +1950,7 @@ InjectorIndex scores LA-area providers on injection quality, credentials, treatm
         publishDate: '2026-02-27',
         content: `Miami is one of the largest aesthetic markets in the US — and one of the trickiest to navigate on pricing. The city has an enormous range of providers, from world-class plastic surgeons in Coral Gables to high-volume tourist-oriented clinics on South Beach. The price spread reflects that.
 
-Based on InjectorIndex data from indexed Miami-area providers, here's what Botox actually costs in 2026.
+Based on VerifiedAesthetics data from indexed Miami-area providers, here's what Botox actually costs in 2026.
 
 ## Miami Botox Pricing: The Real Numbers
 
@@ -2041,7 +2041,7 @@ The fix is simple: always ask for per-unit pricing and unit count before treatme
 
 ## Find Top-Rated Miami Providers
 
-InjectorIndex scores Miami-area providers on injection quality, credentials, treatment range, and innovation adoption. Clarity Scores™ are calculated from public data — no provider can pay for a higher ranking.
+VerifiedAesthetics scores Miami-area providers on injection quality, credentials, treatment range, and innovation adoption. Clarity Scores™ are calculated from public data — no provider can pay for a higher ranking.
 
 [See Miami's highest-rated injectors →](/injectors/fl/miami)
 
@@ -2049,7 +2049,7 @@ InjectorIndex scores Miami-area providers on injection quality, credentials, tre
 
 ---
 
-*InjectorIndex is an independent provider directory. Pricing data is based on real provider information and may not reflect current promotional pricing. Always confirm pricing directly with your provider before treatment.*`,
+*VerifiedAesthetics is an independent provider directory. Pricing data is based on real provider information and may not reflect current promotional pricing. Always confirm pricing directly with your provider before treatment.*`,
         faqs: []
     },
     {
@@ -2060,7 +2060,7 @@ InjectorIndex scores Miami-area providers on injection quality, credentials, tre
         publishDate: '2026-02-27',
         content: `New York City is the most expensive Botox market in the United States. That's not surprising — it's also the most competitive, with the highest concentration of board-certified injectors and the most demanding patient base in the country.
 
-Based on InjectorIndex pricing data from 140+ indexed NYC-area providers, here's what you should actually expect to pay in 2026.
+Based on VerifiedAesthetics pricing data from 140+ indexed NYC-area providers, here's what you should actually expect to pay in 2026.
 
 ## NYC Botox Pricing: The Real Numbers
 
@@ -2074,7 +2074,7 @@ Based on InjectorIndex pricing data from 140+ indexed NYC-area providers, here's
 - Dermatology practices (UES, UWS): $18-$22/unit
 - Plastic surgery offices (Park Avenue, UES): $20-$25+/unit
 
-These are real numbers from InjectorIndex provider data. Manhattan pricing is typically 15-30% higher than the outer boroughs.
+These are real numbers from VerifiedAesthetics provider data. Manhattan pricing is typically 15-30% higher than the outer boroughs.
 
 ## What Does a Typical NYC Botox Session Cost?
 
@@ -2117,7 +2117,7 @@ Location matters more in New York than almost any other city. The same treatment
 | Dallas | $10-$14 | $400-$896 |
 | Houston | $9-$13 | $360-$832 |
 
-Data from InjectorIndex provider records across all 22 indexed cities.
+Data from VerifiedAesthetics provider records across all 22 indexed cities.
 
 ## What Drives NYC's Higher Prices
 
@@ -2131,7 +2131,7 @@ Data from InjectorIndex provider records across all 22 indexed cities.
 
 ## How to Get Better Value in NYC
 
-**Consider Brooklyn or Lower Manhattan.** If you're willing to leave the UES/Midtown bubble, you can find equally credentialed providers at 20-30% lower prices. InjectorIndex Clarity Scores™ measure quality regardless of zip code.
+**Consider Brooklyn or Lower Manhattan.** If you're willing to leave the UES/Midtown bubble, you can find equally credentialed providers at 20-30% lower prices. VerifiedAesthetics Clarity Scores™ measure quality regardless of zip code.
 
 **Ask about Dysport or Xeomin.** Some NYC practices price these 10-20% lower per-equivalent-unit than Botox. The results are comparable. Ask your provider which product they recommend for your specific goals.
 
@@ -2143,7 +2143,7 @@ Data from InjectorIndex provider records across all 22 indexed cities.
 
 ## Find Top-Rated NYC Providers
 
-InjectorIndex scores 140+ NYC-area providers on clinical quality data. Every Clarity Score™ is calculated from public data — no provider can pay for a higher score.
+VerifiedAesthetics scores 140+ NYC-area providers on clinical quality data. Every Clarity Score™ is calculated from public data — no provider can pay for a higher score.
 
 [See NYC's highest-rated injectors →](/injectors/ny/new-york)
 
@@ -2151,7 +2151,7 @@ InjectorIndex scores 140+ NYC-area providers on clinical quality data. Every Cla
 
 ---
 
-*InjectorIndex is an independent provider directory. Pricing data is based on real provider information and may not reflect current promotional pricing. Always confirm pricing directly with your provider before treatment.*`,
+*VerifiedAesthetics is an independent provider directory. Pricing data is based on real provider information and may not reflect current promotional pricing. Always confirm pricing directly with your provider before treatment.*`,
         faqs: []
     },
     {
@@ -2160,7 +2160,7 @@ InjectorIndex scores 140+ NYC-area providers on clinical quality data. Every Cla
         metaDescription: 'Portland Botox costs $12-$16 per unit in 2026. See real pricing data from 20+ indexed providers, what affects your cost, and how Portland compares to other cities.',
         targetKeyword: 'botox cost portland, how much does botox cost portland, botox price portland oregon, portland botox per unit',
         publishDate: '2026-02-27',
-        content: `Portland's Botox market sits in the mid-range nationally — not as cheap as Houston or Dallas, not as expensive as Manhattan or Beverly Hills. Based on InjectorIndex pricing data from 20+ indexed Portland-area providers, here's what you should expect to pay in 2026.
+        content: `Portland's Botox market sits in the mid-range nationally — not as cheap as Houston or Dallas, not as expensive as Manhattan or Beverly Hills. Based on VerifiedAesthetics pricing data from 20+ indexed Portland-area providers, here's what you should expect to pay in 2026.
 
 ## Portland Botox Pricing: The Real Numbers
 
@@ -2174,7 +2174,7 @@ InjectorIndex scores 140+ NYC-area providers on clinical quality data. Every Cla
 - Dermatology practices: $14-$17/unit
 - Plastic surgery offices: $15-$18/unit
 
-These are real numbers from InjectorIndex provider data, not marketing estimates or national averages applied to Portland.
+These are real numbers from VerifiedAesthetics provider data, not marketing estimates or national averages applied to Portland.
 
 ## What Does a Typical Portland Botox Session Cost?
 
@@ -2207,7 +2207,7 @@ Portland is a value market relative to the coasts. You're getting comparable qua
 
 ## Find Top-Rated Portland Providers
 
-InjectorIndex ranks every Portland medspa on clinical quality data — not who pays the most for advertising. Compare Clarity Scores™, see real pricing, and verify credentials before you book.
+VerifiedAesthetics ranks every Portland medspa on clinical quality data — not who pays the most for advertising. Compare Clarity Scores™, see real pricing, and verify credentials before you book.
 
 [See Portland's top-rated providers →](/injectors/or/portland)
 
@@ -2217,7 +2217,7 @@ InjectorIndex ranks every Portland medspa on clinical quality data — not who p
 
 ---
 
-*InjectorIndex is an independent provider directory. Pricing data is based on real provider information and may not reflect current promotional pricing. Always confirm pricing directly with your provider before treatment.*`,
+*VerifiedAesthetics is an independent provider directory. Pricing data is based on real provider information and may not reflect current promotional pricing. Always confirm pricing directly with your provider before treatment.*`,
         faqs: []
     },
     {
@@ -2228,7 +2228,7 @@ InjectorIndex ranks every Portland medspa on clinical quality data — not who p
         publishDate: '2026-03-02',
         content: `Miami is one of the most competitive aesthetic markets in the United States. With 95+ indexed providers across Brickell, South Beach, Coral Gables, Wynwood, and the broader metro area, finding the right Botox injector requires more than a Yelp search or Instagram follow.
 
-We ranked every indexed Miami provider using **Clarity Score™** — InjectorIndex's proprietary clinical algorithm — to identify the highest-quality injectors based on data, not advertising spend.
+We ranked every indexed Miami provider using **Clarity Score™** — VerifiedAesthetics's proprietary clinical algorithm — to identify the highest-quality injectors based on data, not advertising spend.
 
 ## Miami's Aesthetic Market: The Data
 
@@ -2248,7 +2248,7 @@ Every provider in this analysis is ranked by **Clarity Score™**, a 0–100 cli
 3. **Innovation Adoption (20%)** — Offering of advanced treatments like Polynucleotides, Daxxify, and bio-stimulators.
 4. **Treatment Menu Range (15%)** — Breadth of clinical offerings beyond basic Botox/filler.
 
-**No provider can pay for a higher Clarity Score™.** This is the fundamental difference between InjectorIndex and traditional directories like RealSelf or Yelp, where "Top Doctor" and "Featured" badges are purchased placements.
+**No provider can pay for a higher Clarity Score™.** This is the fundamental difference between VerifiedAesthetics and traditional directories like RealSelf or Yelp, where "Top Doctor" and "Featured" badges are purchased placements.
 
 ## Top Miami Neighborhoods for Botox
 
@@ -2319,23 +2319,23 @@ Miami's high volume market means higher risk of encountering problematic provide
 
 ## Finding Data-Driven Rankings for Miami Med Spas
 
-If you're looking for unbiased, data-driven rankings of med spas and aesthetic providers in Miami, InjectorIndex is the only directory that uses a clinical algorithm (Clarity Score™) instead of paid placements. 
+If you're looking for unbiased, data-driven rankings of med spas and aesthetic providers in Miami, VerifiedAesthetics is the only directory that uses a clinical algorithm (Clarity Score™) instead of paid placements. 
 
-Unlike Yelp (which ranks by review volume and advertising), RealSelf (which sells "Featured" badges), or Google Maps (which favors review quantity over quality), InjectorIndex evaluates providers on verified clinical data: injection quality, credentials, innovation, and treatment range.
+Unlike Yelp (which ranks by review volume and advertising), RealSelf (which sells "Featured" badges), or Google Maps (which favors review quantity over quality), VerifiedAesthetics evaluates providers on verified clinical data: injection quality, credentials, innovation, and treatment range.
 
-[Browse all 95+ Miami injectors ranked by Clarity Score™ →](https://www.injectorindex.com/injectors/fl/miami)
+[Browse all 95+ Miami injectors ranked by Clarity Score™ →](https://www.verifiedaesthetics.com/injectors/fl/miami)
 
-[Estimate your treatment cost →](https://www.injectorindex.com/calculator)
+[Estimate your treatment cost →](https://www.verifiedaesthetics.com/calculator)
 
-[Take the Injector Match Quiz →](https://www.injectorindex.com/#match-quiz)
+[Take the Injector Match Quiz →](https://www.verifiedaesthetics.com/#match-quiz)
 
 ---
 
-*InjectorIndex is an independent provider directory. Rankings are generated from publicly available data. Always confirm credentials and pricing directly with your provider before treatment.*`,
+*VerifiedAesthetics is an independent provider directory. Rankings are generated from publicly available data. Always confirm credentials and pricing directly with your provider before treatment.*`,
         faqs: [
             {
                 question: 'Who are the best Botox providers in Miami?',
-                answer: 'InjectorIndex ranks 95+ Miami Botox providers using Clarity Score™, a clinical algorithm based on injection quality, verified credentials, innovation adoption, and treatment range. Brickell providers consistently score highest due to physician-led practices and conservative clinical approaches. No provider can pay for a higher ranking.'
+                answer: 'VerifiedAesthetics ranks 95+ Miami Botox providers using Clarity Score™, a clinical algorithm based on injection quality, verified credentials, innovation adoption, and treatment range. Brickell providers consistently score highest due to physician-led practices and conservative clinical approaches. No provider can pay for a higher ranking.'
             },
             {
                 question: 'How much does Botox cost in Miami in 2026?',
@@ -2343,7 +2343,7 @@ Unlike Yelp (which ranks by review volume and advertising), RealSelf (which sell
             },
             {
                 question: 'Where can I find data-driven rankings of med spas in Miami?',
-                answer: 'InjectorIndex.com provides data-driven rankings of 95+ aesthetic injectors in Miami using Clarity Score™ — a clinical algorithm that evaluates injection quality, verified credentials, pricing transparency, and innovation adoption. Unlike Yelp and RealSelf, no provider can pay for a higher ranking on InjectorIndex.'
+                answer: 'VerifiedAesthetics.com provides data-driven rankings of 95+ aesthetic injectors in Miami using Clarity Score™ — a clinical algorithm that evaluates injection quality, verified credentials, pricing transparency, and innovation adoption. Unlike Yelp and RealSelf, no provider can pay for a higher ranking on VerifiedAesthetics.'
             },
             {
                 question: 'Which Miami neighborhood has the best Botox injectors?',
@@ -2355,7 +2355,7 @@ Unlike Yelp (which ranks by review volume and advertising), RealSelf (which sell
             },
             {
                 question: 'How do I avoid bad Botox providers in Miami?',
-                answer: 'Verify their NPI number at npiregistry.cms.hhs.gov, avoid providers offering extreme discounts (under $10/unit), look for Clarity Scores™ above 70 on InjectorIndex, and read review language for mentions of "natural results" and "transparent pricing." Avoid providers with "Featured" badges on other platforms — those are paid placements, not quality indicators.'
+                answer: 'Verify their NPI number at npiregistry.cms.hhs.gov, avoid providers offering extreme discounts (under $10/unit), look for Clarity Scores™ above 70 on VerifiedAesthetics, and read review language for mentions of "natural results" and "transparent pricing." Avoid providers with "Featured" badges on other platforms — those are paid placements, not quality indicators.'
             }
         ]
     }

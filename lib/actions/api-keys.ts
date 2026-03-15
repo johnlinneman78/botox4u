@@ -36,7 +36,7 @@ export async function requestApiKey(formData: FormData) {
         return { success: false, error: 'Failed to request key.' }
     }
 
-    // Note: Email notification to hello@injectorindex.com should be added here
+    // Note: Email notification to hello@verifiedaesthetics.com should be added here
     // using something like Resend (which seems to be in the project)
 
     return { success: true }

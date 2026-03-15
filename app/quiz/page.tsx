@@ -10,7 +10,7 @@ export const metadata: Metadata = {
         description: `Independent pricing data for ${NICHE.name.toLowerCase()} treatments across 22 major cities. Find out if you're overpaying.`,
     },
     alternates: {
-        canonical: 'https://www.injectorindex.com/quiz',
+        canonical: 'https://www.verifiedaesthetics.com/quiz',
     }
 }
 

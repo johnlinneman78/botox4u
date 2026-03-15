@@ -6,12 +6,12 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { getPlatformStats } from '@/lib/actions/providers'
 
 export const metadata: Metadata = {
-    title: 'About Injector Index — Independent Provider Scoring for Aesthetic Medicine',
-    description: 'Injector Index is an independent research platform that scores aesthetic injectors on natural results, fair pricing, and verified credentials. Nobody pays for a higher rank.',
+    title: 'About Verified Aesthetics — Independent Provider Scoring for Aesthetic Medicine',
+    description: 'Verified Aesthetics is an independent research platform that scores aesthetic injectors on natural results, fair pricing, and verified credentials. Nobody pays for a higher rank.',
     openGraph: {
-        title: 'About Injector Index — Independent Provider Scoring for Aesthetic Medicine',
-        description: 'Injector Index is an independent research platform that scores aesthetic injectors on natural results, fair pricing, and verified credentials. Nobody pays for a higher rank.',
-        url: 'https://www.injectorindex.com/about',
+        title: 'About Verified Aesthetics — Independent Provider Scoring for Aesthetic Medicine',
+        description: 'Verified Aesthetics is an independent research platform that scores aesthetic injectors on natural results, fair pricing, and verified credentials. Nobody pays for a higher rank.',
+        url: 'https://www.verifiedaesthetics.com/about',
     }
 }
 
@@ -21,8 +21,8 @@ export default async function AboutPage() {
     const organizationSchema = {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Injector Index",
-        "url": "https://www.injectorindex.com",
+        "name": "Verified Aesthetics",
+        "url": "https://www.verifiedaesthetics.com",
         "description": "Independent research platform that scores aesthetic medicine providers on natural results, fair pricing, and verified credentials.",
         "founder": {
             "@type": "Person",
@@ -36,7 +36,7 @@ export default async function AboutPage() {
         },
         "sameAs": [
             "https://www.linkedin.com/company/[injector-index-slug]",
-            "https://twitter.com/[InjectorIndex]",
+            "https://twitter.com/[VerifiedAesthetics]",
             "https://www.crunchbase.com/organization/[injector-index-slug]"
         ]
     }
@@ -64,7 +64,7 @@ export default async function AboutPage() {
                         <span className="text-[#C9A96E] italic">Aesthetic Medicine</span>
                     </h1>
                     <p className="text-xl md:text-2xl text-[#3D2B1F]/70 max-w-3xl mx-auto font-light leading-relaxed mb-8">
-                        Injector Index is a research platform that scores and ranks aesthetic injectors using public data — patient review language, verified pricing, and federal credential databases. We built it because patients deserve better information before making a healthcare decision.
+                        Verified Aesthetics is a research platform that scores and ranks aesthetic injectors using public data — patient review language, verified pricing, and federal credential databases. We built it because patients deserve better information before making a healthcare decision.
                     </p>
                     <p className="text-xl text-[#3D2B1F]/60 max-w-2xl mx-auto font-light leading-relaxed">
                         We are not a clinic. We don&apos;t perform procedures. We don&apos;t accept advertising from providers. And nobody pays for a higher score.
@@ -200,7 +200,7 @@ export default async function AboutPage() {
                     </div>
                     <h2 className="text-3xl font-display font-bold text-[#3D2B1F] mb-8 tracking-tight">Built By</h2>
                     <div className="space-y-6 text-lg text-[#3D2B1F]/60 font-light leading-relaxed max-w-2xl mx-auto text-left">
-                        Injector Index was founded in 2026 as a research project to solve the "Review Gap" in aesthetic medicine. Within months, it grew from a regional experiment into a <strong className="text-[#3D2B1F]">national platform</strong> indexing providers across 22+ cities.
+                        Verified Aesthetics was founded in 2026 as a research project to solve the "Review Gap" in aesthetic medicine. Within months, it grew from a regional experiment into a <strong className="text-[#3D2B1F]">national platform</strong> indexing providers across 22+ cities.
                         <p>
                             The scoring algorithm was developed through analysis of tens of thousands of patient reviews, identifying the specific language patterns that correlate with patient satisfaction, natural results, and provider trustworthiness. The platform is independently operated and has no financial relationships with product manufacturers, medical associations, or provider networks.
                         </p>
@@ -219,7 +219,7 @@ export default async function AboutPage() {
                     <div className="space-y-4">
                         <div className="font-bold uppercase tracking-widest text-[#C9A96E]">Medical Information</div>
                         <p>
-                            Injector Index is an independent provider directory and research index for aesthetic medicine. We are not a clinic, we do not perform medical procedures, and we do not provide clinical advice.
+                            Verified Aesthetics is an independent provider directory and research index for aesthetic medicine. We are not a clinic, we do not perform medical procedures, and we do not provide clinical advice.
                         </p>
                     </div>
                     <div className="space-y-4">

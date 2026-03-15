@@ -42,12 +42,12 @@ export async function submitMatchEmailRequest(data: {
                             <h3 style="margin-top: 0; color: #111;">#${i + 1}: ${m.name}</h3>
                             <p><strong>Clarity Score™:</strong> ${m.score_total || 65}</p>
                             <p><strong>Botox Price:</strong> $${m.price_per_unit || '—'}</p>
-                            <a href="https://www.injectorindex.com/provider/${m.slug}" style="display: inline-block; padding: 10px 20px; background-color: #d4af37; color: #000; text-decoration: none; border-radius: 5px; font-weight: bold;">View Profile</a>
+                            <a href="https://www.verifiedaesthetics.com/provider/${m.slug}" style="display: inline-block; padding: 10px 20px; background-color: #d4af37; color: #000; text-decoration: none; border-radius: 5px; font-weight: bold;">View Profile</a>
                         </div>
                     `).join('')}
 
                     <p style="font-size: 12px; color: #777; margin-top: 30px;">
-                        InjectorIndex.com - Independent Data & Matching
+                        VerifiedAesthetics.com - Independent Data & Matching
                     </p>
                 </div>
             `

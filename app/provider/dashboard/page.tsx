@@ -106,13 +106,13 @@ export default async function ProviderDashboard() {
                             <div>
                                 <h4 className="text-sm font-bold text-[#C9A96E] uppercase tracking-widest mb-2">Private Beta Support</h4>
                                 <p className="text-[#3D2B1F]/70 text-sm leading-relaxed font-light">
-                                    We are currently rolling out additional analytics including review sentiment analysis and Google Search console mapping. If you need a custom audit or location update, please contact John directly at <span className="text-[#3D2B1F] font-medium">hello@injectorindex.com</span>
+                                    We are currently rolling out additional analytics including review sentiment analysis and Google Search console mapping. If you need a custom audit or location update, please contact John directly at <span className="text-[#3D2B1F] font-medium">hello@verifiedaesthetics.com</span>
                                 </p>
                             </div>
                         </div>
 
                         <p className="text-[10px] text-gray-700 font-black uppercase tracking-widest text-center mt-12">
-                            InjectorIndex Dashboard V1.1.0 • Built for Clinical Outcomes
+                            VerifiedAesthetics Dashboard V1.1.0 • Built for Clinical Outcomes
                         </p>
                     </div>
                 </div>

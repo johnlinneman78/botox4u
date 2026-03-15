@@ -74,7 +74,7 @@ export default function Hero({
 
                     {/* Sub */}
                     <p className="text-lg md:text-xl text-[#3D2B1F]/70 max-w-2xl mb-10 leading-relaxed font-light">
-                        InjectorIndex is the independent platform that scores medical aesthetics providers using real patient data — not who pays the most. Search {providersCount.toLocaleString()}+ injectors across {citiesCount} cities, ranked by our proprietary Clarity Score™ algorithm.
+                        VerifiedAesthetics is the independent platform that scores medical aesthetics providers using real patient data — not who pays the most. Search {providersCount.toLocaleString()}+ injectors across {citiesCount} cities, ranked by our proprietary Clarity Score™ algorithm.
                     </p>
 
                     {/* CTA Row */}

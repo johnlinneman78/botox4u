@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Provider Verification Badge Assets | Injector Index',
-    description: 'Access official "Verified by Injector Index" badge assets for your clinic website. Available to top-scoring aesthetic providers.',
+    title: 'Provider Verification Badge Assets | Verified Aesthetics',
+    description: 'Access official "Verified by Verified Aesthetics" badge assets for your clinic website. Available to top-scoring aesthetic providers.',
 }
 
 export default function BadgePage() {
@@ -26,7 +26,7 @@ export default function BadgePage() {
                         The Badge of <br /><span className="text-secondary italic">Independent Trust</span>
                     </h1>
                     <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed">
-                        Top-scoring providers on Injector Index are eligible to display the "Verified" badge on their website to signal natural results, fair pricing, and transparency.
+                        Top-scoring providers on Verified Aesthetics are eligible to display the "Verified" badge on their website to signal natural results, fair pricing, and transparency.
                     </p>
                 </div>
             </section>
@@ -79,11 +79,11 @@ export default function BadgePage() {
                                         <span className="text-[10px] uppercase tracking-widest opacity-50 font-bold">Recommended for Footer / About</span>
                                     </div>
                                     <pre className="bg-black/40 p-6 rounded-2xl text-xs font-mono overflow-x-auto text-gray-300 border border-[#3D2B1F]/10 whitespace-pre-wrap leading-relaxed">
-                                        {`<!-- Injector Index Verified Badge -->
-<a href="https://www.injectorindex.com" target="_blank" rel="noopener">
+                                        {`<!-- Verified Aesthetics Verified Badge -->
+<a href="https://www.verifiedaesthetics.com" target="_blank" rel="noopener">
   <img 
-    src="https://www.injectorindex.com/badges/verified-badge-gold.svg" 
-    alt="Verified by Injector Index" 
+    src="https://www.verifiedaesthetics.com/badges/verified-badge-gold.svg" 
+    alt="Verified by Verified Aesthetics" 
     style="width: 140px; height: auto;"
   />
 </a>`}

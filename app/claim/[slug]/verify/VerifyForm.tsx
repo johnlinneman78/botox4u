@@ -94,7 +94,7 @@ export function VerifyForm({ provider }: { provider: any }) {
                             />
                         </div>
                         <span className="text-xs text-[#3D2B1F]/50 font-light leading-relaxed group-hover:text-[#3D2B1F]/70 transition-colors">
-                            I agree to receive occasional updates about my Injector Index listing, including score changes and patient activity alerts. Message frequency: up to 4/month. Reply STOP to unsubscribe.
+                            I agree to receive occasional updates about my Verified Aesthetics listing, including score changes and patient activity alerts. Message frequency: up to 4/month. Reply STOP to unsubscribe.
                         </span>
                     </label>
                 </div>

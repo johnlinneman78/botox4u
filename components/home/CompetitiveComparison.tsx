@@ -2,7 +2,7 @@ import React from 'react'
 import { Check, X, Shield, Zap, Star, DollarSign } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 
-const competitors = ['RealSelf', 'Yelp', 'ZocDoc', 'InjectorIndex'] as const
+const competitors = ['RealSelf', 'Yelp', 'ZocDoc', 'VerifiedAesthetics'] as const
 
 const features = [
     {
@@ -10,35 +10,35 @@ const features = [
         realself: { value: 'Pay-to-play', pass: false },
         yelp: { value: 'Ads above results', pass: false },
         zocdoc: { value: 'Insurance-first', pass: false },
-        injectorindex: { value: 'No paid placement', pass: true },
+        verifiedaesthetics: { value: 'No paid placement', pass: true },
     },
     {
         label: 'Aesthetic-specific',
         realself: { value: 'Broad', pass: true },
         yelp: { value: 'Generic', pass: false },
         zocdoc: { value: 'General healthcare', pass: false },
-        injectorindex: { value: '100% medical aesthetics', pass: true },
+        verifiedaesthetics: { value: '100% medical aesthetics', pass: true },
     },
     {
         label: 'AI-ready data',
         realself: { value: 'No structured data', pass: false },
         yelp: { value: 'No API', pass: false },
         zocdoc: { value: 'Outdated tech', pass: false },
-        injectorindex: { value: 'JSON-LD + API + MCP', pass: true },
+        verifiedaesthetics: { value: 'JSON-LD + API + MCP', pass: true },
     },
     {
         label: 'Semantic insights',
         realself: { value: 'Star ratings only', pass: false },
         yelp: { value: 'Star ratings only', pass: false },
         zocdoc: { value: 'No reviews', pass: false },
-        injectorindex: { value: 'NLP review analysis', pass: true },
+        verifiedaesthetics: { value: 'NLP review analysis', pass: true },
     },
     {
         label: 'Provider cost',
         realself: { value: '$$$ Premium listings', pass: false },
         yelp: { value: '$$$ Ad spend', pass: false },
         zocdoc: { value: '$$$ Per booking', pass: false },
-        injectorindex: { value: 'Free tier + affordable pro', pass: true },
+        verifiedaesthetics: { value: 'Free tier + affordable pro', pass: true },
     },
 ]
 
@@ -55,7 +55,7 @@ export default function CompetitiveComparison() {
                         <span className="text-[#C9A96E]">A Smarter Way to Choose.</span>
                     </h2>
                     <p className="text-[#3D2B1F]/70 text-lg font-light leading-relaxed max-w-2xl mx-auto">
-                        You&apos;ve seen the other sites. RealSelf shows you whoever pays for placement. Yelp buries the best providers behind ads. Google Maps gives you star ratings with zero context. InjectorIndex is different.
+                        You&apos;ve seen the other sites. RealSelf shows you whoever pays for placement. Yelp buries the best providers behind ads. Google Maps gives you star ratings with zero context. VerifiedAesthetics is different.
                     </p>
                 </div>
 
@@ -72,7 +72,7 @@ export default function CompetitiveComparison() {
                                         <th className="px-4 py-5 text-xs font-bold uppercase tracking-widest text-[#C9A96E] text-center bg-[#C9A96E]/5">
                                             <div className="flex items-center justify-center gap-2">
                                                 <Shield className="w-4 h-4" />
-                                                InjectorIndex
+                                                VerifiedAesthetics
                                             </div>
                                         </th>
                                     </tr>
@@ -109,7 +109,7 @@ export default function CompetitiveComparison() {
                                             <td className="px-4 py-4 text-center bg-[#C9A96E]/[0.02]">
                                                 <div className="flex items-center justify-center gap-1.5">
                                                     <Check className="w-3.5 h-3.5 text-[#8A9E8D] shrink-0" />
-                                                    <span className="text-xs font-bold text-[#3D2B1F]">{feature.injectorindex.value}</span>
+                                                    <span className="text-xs font-bold text-[#3D2B1F]">{feature.verifiedaesthetics.value}</span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -124,7 +124,7 @@ export default function CompetitiveComparison() {
                         <p className="text-lg text-[#3D2B1F] font-bold mb-2">The bottom line:</p>
                         <p className="text-[#3D2B1F]/70 leading-relaxed">
                             RealSelf is a marketplace. Yelp is an ad platform. ZocDoc is for insurance-based healthcare.
-                            <span className="text-[#3D2B1F] font-semibold"> InjectorIndex is an independent data platform</span> built specifically for medical aesthetics — optimized for how patients actually discover providers in 2026: through AI recommendations backed by structured, trustworthy data.
+                            <span className="text-[#3D2B1F] font-semibold"> VerifiedAesthetics is an independent data platform</span> built specifically for medical aesthetics — optimized for how patients actually discover providers in 2026: through AI recommendations backed by structured, trustworthy data.
                         </p>
                         <p className="text-[#C9A96E] text-sm font-bold mt-4 italic">
                             We&apos;re not competing with Google. We&apos;re the source Google&apos;s AI cites.

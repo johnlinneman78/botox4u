@@ -9,22 +9,46 @@ interface LogoProps {
     theme?: 'light' | 'dark'
 }
 
-// Renders "InjectorIndex" + ".com" in gold
+function CheckmarkAccent() {
+    return (
+        <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#8A9E8D"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{
+                marginRight: '2px',
+                marginBottom: '4px',
+                display: 'inline-block'
+            }}
+        >
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+    )
+}
+
 function BrandText({ theme, size = '1.5rem' }: { theme: 'light' | 'dark', size?: string }) {
-    const textColor = theme === 'dark' ? '#ffffff' : '#94a3b8' // Brightened light theme text just in case
+    // Warm Espresso #3D2B1F for both themes as this is a strictly defined brand color. 
+    // If dark theme requires it, we can use a slightly lighter shade, but instructions specify Warm Espresso.
+    const textColor = theme === 'dark' ? '#EAE5DF' : '#3D2B1F'
     return (
         <span style={{
-            fontFamily: 'var(--font-playfair), Georgia, serif',
-            fontWeight: 800,
+            fontFamily: 'var(--font-playfair), "Cormorant Garamond", Georgia, serif',
+            fontWeight: 500, // Medium
             color: textColor,
             fontSize: size,
             lineHeight: 1,
-            letterSpacing: '-0.02em',
+            letterSpacing: '-0.01em',
             whiteSpace: 'nowrap',
-            textShadow: theme === 'dark' ? '0 0 20px rgba(212, 175, 55, 0.2)' : 'none' // Added a subtle glow
+            display: 'flex',
+            alignItems: 'center'
         }}>
-            {NICHE.siteName.split('.')[0]}
-            <span style={{ color: '#C9A96E', fontWeight: 700 }}>.{NICHE.siteName.split('.').slice(1).join('.')}</span>
+            <CheckmarkAccent />
+            {NICHE.siteName}
         </span>
     )
 }
@@ -39,28 +63,7 @@ export function LogoPrecision({ className = "", theme = 'dark' }: { className?: 
 
 export function LogoShield({ className = "", theme = 'dark' }: { className?: string, theme?: 'light' | 'dark' }) {
     return (
-        <div className={`flex items-center gap-3 whitespace-nowrap flex-shrink-0 ${className}`}>
-            {/* Shield Icon */}
-            <svg width="36" height="44" viewBox="0 0 110 120" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
-                <defs>
-                    <linearGradient id="shieldGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#f3e5ab" />
-                        <stop offset="45%" stopColor="#C9A96E" />
-                        <stop offset="55%" stopColor="#b8941f" />
-                        <stop offset="100%" stopColor="#C9A96E" />
-                    </linearGradient>
-                    <filter id="shieldShadow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
-                        <feOffset dx="1" dy="1" result="offsetblur" />
-                        <feComponentTransfer><feFuncA type="linear" slope="0.3" /></feComponentTransfer>
-                        <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
-                    </filter>
-                </defs>
-                <g filter="url(#shieldShadow)">
-                    <path d="M10 20 C10 10 30 5 55 5 C80 5 100 10 100 20 V70 C100 95 55 115 55 115 C55 115 10 95 10 70 V20Z" fill="url(#shieldGold)" />
-                    <path d="M25 38 L45 82 L88 28" stroke="#1a2332" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
-                </g>
-            </svg>
+        <div className={`flex items-center gap-2 whitespace-nowrap flex-shrink-0 ${className}`}>
             <BrandText theme={theme} size="1.5rem" />
         </div>
     )
@@ -70,7 +73,6 @@ export function LogoWordmark({ className = "", theme = 'dark' }: { className?: s
     return (
         <div className={`flex flex-col whitespace-nowrap flex-shrink-0 ${className}`}>
             <BrandText theme={theme} size="2rem" />
-            <div style={{ height: '2px', background: 'linear-gradient(90deg, #C9A96E, transparent)', marginTop: '4px' }} />
         </div>
     )
 }

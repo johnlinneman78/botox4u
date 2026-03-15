@@ -42,7 +42,7 @@ export default function Footer() {
                                 className="font-display font-medium"
                                 style={{ fontSize: '20px', color: 'var(--color-surface)' }}
                             >
-                                InjectorIndex
+                                VerifiedAesthetics
                             </span>
                         </div>
                         <p
@@ -163,9 +163,9 @@ export default function Footer() {
                     </p>
                     <div className="flex items-center gap-6">
                         {[
-                            { label: 'Instagram', href: 'https://www.instagram.com/injectorindex' },
-                            { label: 'TikTok', href: 'https://www.tiktok.com/@injectorindex' },
-                            { label: 'Pinterest', href: 'https://www.pinterest.com/injectorindex' },
+                            { label: 'Instagram', href: 'https://www.instagram.com/verifiedaesthetics' },
+                            { label: 'TikTok', href: 'https://www.tiktok.com/@verifiedaesthetics' },
+                            { label: 'Pinterest', href: 'https://www.pinterest.com/verifiedaesthetics' },
                         ].map((social) => (
                             <a
                                 key={social.label}

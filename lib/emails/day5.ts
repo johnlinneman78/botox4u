@@ -19,7 +19,7 @@ export function day5Html({ firstName }: Day5Props): string {
 
   <div style="text-align:center;margin-bottom:32px;">
     <div style="display:inline-block;width:8px;height:8px;border-radius:50%;background-color:#B5936B;margin-right:8px;vertical-align:middle;"></div>
-    <span style="font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#B5936B;vertical-align:middle;">InjectorIndex</span>
+    <span style="font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#B5936B;vertical-align:middle;">VerifiedAesthetics</span>
   </div>
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">Hi ${firstName},</p>
@@ -30,7 +30,7 @@ export function day5Html({ firstName }: Day5Props): string {
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">It's communication.</p>
 
-  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">The providers with the highest TrueScore ratings on InjectorIndex share one thing: patients consistently describe feeling <em>heard</em> during consultations. They say things like:</p>
+  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">The providers with the highest TrueScore ratings on VerifiedAesthetics share one thing: patients consistently describe feeling <em>heard</em> during consultations. They say things like:</p>
 
   <div style="background-color:#F7F4F0;padding:20px 24px;border-radius:12px;margin:24px 0;">
     <p style="font-size:15px;line-height:1.8;color:#444;margin:0;">
@@ -55,20 +55,20 @@ export function day5Html({ firstName }: Day5Props): string {
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">A provider who communicates well will almost certainly deliver better results — because they understood what you actually wanted.</p>
 
-  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">That's what InjectorIndex was built to surface. Not who has the best ads or the most Instagram followers, but who consistently makes patients feel informed, respected, and satisfied with their results.</p>
+  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">That's what VerifiedAesthetics was built to surface. Not who has the best ads or the most Instagram followers, but who consistently makes patients feel informed, respected, and satisfied with their results.</p>
 
   <div style="text-align:center;margin:32px 0;">
-    <a href="https://injectorindex.com" style="display:inline-block;background-color:#B5936B;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Find Top-Rated Providers →</a>
+    <a href="https://verifiedaesthetics.com" style="display:inline-block;background-color:#B5936B;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Find Top-Rated Providers →</a>
   </div>
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">Thanks for reading this series. If you found it helpful, forward it to a friend who's considering Botox — they'll thank you.</p>
 
-  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">—InjectorIndex</p>
+  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">—VerifiedAesthetics</p>
 
   <p style="font-size:14px;line-height:1.6;color:#666;">P.S. — Want a personalized analysis of providers in your specific area? Reply to this email with your city and I'll send you a custom comparison.</p>
 
   <hr style="border:none;border-top:1px solid #ECE8E2;margin:32px 0;">
-  <p style="font-size:10px;color:#999;text-align:center;letter-spacing:0.05em;">© 2026 InjectorIndex · Independent clinical data for the regenerative era.<br><a href="https://injectorindex.com/unsubscribe" style="color:#999;">Unsubscribe</a></p>
+  <p style="font-size:10px;color:#999;text-align:center;letter-spacing:0.05em;">© 2026 VerifiedAesthetics · Independent clinical data for the regenerative era.<br><a href="https://verifiedaesthetics.com/unsubscribe" style="color:#999;">Unsubscribe</a></p>
 
 </div>
 </body>

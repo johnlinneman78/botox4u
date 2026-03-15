@@ -16,11 +16,11 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
     const resolvedParams = await params
     const provider = await getProviderBySlug(resolvedParams.slug)
 
-    if (!provider) return { title: 'Injector Profile | InjectorIndex' }
+    if (!provider) return { title: 'Injector Profile | VerifiedAesthetics' }
 
     // Title logic
-    const fullTitle = `${provider.name} — Botox & Filler in ${provider.city} | InjectorIndex`
-    const shortTitle = `${provider.name} — ${provider.city} | InjectorIndex`
+    const fullTitle = `${provider.name} — Botox & Filler in ${provider.city} | VerifiedAesthetics`
+    const shortTitle = `${provider.name} — ${provider.city} | VerifiedAesthetics`
     const title = fullTitle.length > 70 ? shortTitle : fullTitle
 
     // Meta Description logic
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
     if (patternIndex === 0) {
         description = `${provider.name} in ${provider.city} — Clarity Score™ ${scoreVal}/100 based on ${reviewsCount} reviews. Compare pricing, credentials, and patient ratings.`
     } else if (patternIndex === 1) {
-        description = `Rated ${scoreVal}/100 on InjectorIndex. See ${provider.name}'s credentials, pricing, and ${reviewsCount} patient reviews in ${provider.city}, ${provider.state}.`
+        description = `Rated ${scoreVal}/100 on VerifiedAesthetics. See ${provider.name}'s credentials, pricing, and ${reviewsCount} patient reviews in ${provider.city}, ${provider.state}.`
     } else {
         description = `${provider.name} — ${provider.city} ${bizType}. ${scoreVal}/100 Clarity Score™ · ${reviewsCount} reviews · Independent ratings and pricing data.`
     }
@@ -49,15 +49,15 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
         title: title.slice(0, 70),
         description: description.slice(0, 155),
         alternates: {
-            canonical: `https://www.injectorindex.com/provider/${provider.slug}`,
+            canonical: `https://www.verifiedaesthetics.com/provider/${provider.slug}`,
         },
         openGraph: {
             title,
             description,
-            url: `https://www.injectorindex.com/provider/${provider.slug}`,
+            url: `https://www.verifiedaesthetics.com/provider/${provider.slug}`,
             images: [
                 {
-                    url: provider.hero_image_url || provider.imageUrl || `https://www.injectorindex.com/og-default.png`,
+                    url: provider.hero_image_url || provider.imageUrl || `https://www.verifiedaesthetics.com/og-default.png`,
                     width: 1200,
                     height: 630,
                     alt: `${provider.name} — ${provider.city}`,
@@ -86,7 +86,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
         (enhancedSchema as any).review = themes.strengths.slice(0, 3).map((theme: any) => ({
             "@type": "Review",
             "reviewBody": `${theme.label} (mentioned in ${theme.percentage}% of ${themes.totalAnalyzed} analyzed reviews)`,
-            "author": { "@type": "Organization", "name": "InjectorIndex Clarity Score™ Semantic Analysis" }
+            "author": { "@type": "Organization", "name": "VerifiedAesthetics Clarity Score™ Semantic Analysis" }
         }))
     }
 
@@ -118,7 +118,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                 "name": `What is a Clarity Score™ and how did ${provider.name} score?`,
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": `Clarity Score™ is InjectorIndex's independent rating system that evaluates providers on 5 data signals: patient outcomes, medical credentials, patient reviews, practice quality, and pricing transparency. Scores range from 0-100 without any pay-to-play bias. ${provider.name} currently holds a score of ${scoreVal}/100, indicating their relative position among verified local peers.`
+                    "text": `Clarity Score™ is VerifiedAesthetics's independent rating system that evaluates providers on 5 data signals: patient outcomes, medical credentials, patient reviews, practice quality, and pricing transparency. Scores range from 0-100 without any pay-to-play bias. ${provider.name} currently holds a score of ${scoreVal}/100, indicating their relative position among verified local peers.`
                 }
             },
             {
@@ -126,7 +126,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                 "name": `How do I compare Botox providers in ${provider.city}?`,
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": `InjectorIndex lets you compare over ${localProviders.length > 5 ? localProviders.length + '+' : 'several'} verified providers in ${provider.city} by Clarity Score™, estimated pricing, and patient sentiments. Visit our comprehensive ${provider.city} provider rankings page to explore credentials and independent data across the state of ${provider.state}.`
+                    "text": `VerifiedAesthetics lets you compare over ${localProviders.length > 5 ? localProviders.length + '+' : 'several'} verified providers in ${provider.city} by Clarity Score™, estimated pricing, and patient sentiments. Visit our comprehensive ${provider.city} provider rankings page to explore credentials and independent data across the state of ${provider.state}.`
                 }
             }
         ]
@@ -188,7 +188,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                             What is a Clarity Score™ and how did {provider.name} score?
                         </h3>
                         <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                            Clarity Score™ is InjectorIndex's independent rating system that evaluates providers on 5 distinct data signals: patient outcomes, medical credentials, patient reviews, practice quality, and pricing transparency. Scores range from 0-100 without any pay-to-play bias. {provider.name} currently holds a score of {scoreVal}/100, indicating their relative performance and position among verified local peers.
+                            Clarity Score™ is VerifiedAesthetics's independent rating system that evaluates providers on 5 distinct data signals: patient outcomes, medical credentials, patient reviews, practice quality, and pricing transparency. Scores range from 0-100 without any pay-to-play bias. {provider.name} currently holds a score of {scoreVal}/100, indicating their relative performance and position among verified local peers.
                         </p>
                     </div>
 
@@ -197,7 +197,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                             How do I compare Botox providers in {provider.city}?
                         </h3>
                         <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                            InjectorIndex lets you compare over {localProviders.length > 5 ? localProviders.length + '+' : 'several'} verified providers in {provider.city} by Clarity Score™, estimated pricing, and patient sentiments. Visit our comprehensive {provider.city} provider rankings page to explore medical credentials, before and after insights, and independent data across the state of {provider.state}.
+                            VerifiedAesthetics lets you compare over {localProviders.length > 5 ? localProviders.length + '+' : 'several'} verified providers in {provider.city} by Clarity Score™, estimated pricing, and patient sentiments. Visit our comprehensive {provider.city} provider rankings page to explore medical credentials, before and after insights, and independent data across the state of {provider.state}.
                         </p>
                     </div>
                 </div>

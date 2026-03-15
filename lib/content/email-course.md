@@ -1,10 +1,10 @@
 # The Smart Botox Patient — 5-Day Email Course
-## InjectorIndex Lead Nurture Sequence
+## VerifiedAesthetics Lead Nurture Sequence
 
 > **Trigger:** User submits email via quiz or PDF download gate
 > **Tool:** ConvertKit, Mailchimp, or any email automation platform
-> **From:** InjectorIndex <hello@injectorindex.com>
-> **Goal:** Educate → Build Trust → Drive to Provider Search on InjectorIndex.com
+> **From:** VerifiedAesthetics <hello@verifiedaesthetics.com>
+> **Goal:** Educate → Build Trust → Drive to Provider Search on VerifiedAesthetics.com
 
 ---
 
@@ -34,9 +34,9 @@ Always ask: "How many units do you typically use for this area?" before comparin
 Over the next 5 days, I'll send you one short email each morning with an insider tip that most patients don't learn until they've already spent thousands. Each one takes about 90 seconds to read.
 
 Talk tomorrow,
-InjectorIndex
+VerifiedAesthetics
 
-P.S. — If you want to skip ahead and start comparing scored providers in your city, you can search now: [InjectorIndex.com →](https://injectorindex.com)
+P.S. — If you want to skip ahead and start comparing scored providers in your city, you can search now: [VerifiedAesthetics.com →](https://verifiedaesthetics.com)
 
 ---
 
@@ -65,13 +65,13 @@ Here's what to actually look for:
 
 → **Their complication history.** You can check your state medical board's website for any disciplinary actions. It takes 2 minutes. Do it.
 
-The bottom line: credentials are one factor, not the only factor. That's why InjectorIndex's TrueScore weights credentials at 25 out of 100 points — important, but not the whole picture.
+The bottom line: credentials are one factor, not the only factor. That's why VerifiedAesthetics's TrueScore weights credentials at 25 out of 100 points — important, but not the whole picture.
 
-**What the other 75 points measure →** [See how TrueScore works](https://injectorindex.com)
+**What the other 75 points measure →** [See how TrueScore works](https://verifiedaesthetics.com)
 
 Tomorrow: The touch-up trap (and how to avoid it).
 
-—InjectorIndex
+—VerifiedAesthetics
 
 ---
 
@@ -105,11 +105,11 @@ Their answer tells you two things:
 
 Both matter.
 
-**Find providers with transparent policies →** [Search InjectorIndex](https://injectorindex.com)
+**Find providers with transparent policies →** [Search VerifiedAesthetics](https://verifiedaesthetics.com)
 
 Tomorrow: The Allergan rewards program most patients don't know about.
 
-—InjectorIndex
+—VerifiedAesthetics
 
 ---
 
@@ -139,11 +139,11 @@ The math:
 
 **One more thing:** Some providers offer "Botox days" or seasonal promotions where pricing drops 10-20% for a limited time. Ask if they run these, and when the next one is. Planning your treatments around promotions is the easiest money you'll save.
 
-**Compare provider pricing and programs →** [Search InjectorIndex](https://injectorindex.com)
+**Compare provider pricing and programs →** [Search VerifiedAesthetics](https://verifiedaesthetics.com)
 
 Tomorrow: Alternatives to Botox (and why your provider might not mention them).
 
-—InjectorIndex
+—VerifiedAesthetics
 
 ---
 
@@ -172,11 +172,11 @@ Here's the thing: many providers only carry one or two brands. If yours only off
 
 A provider who takes time to explain your options — not just default to one brand — is one who's treating you as a patient, not a revenue line.
 
-**Find providers offering multiple neurotoxins →** [Search InjectorIndex](https://injectorindex.com)
+**Find providers offering multiple neurotoxins →** [Search VerifiedAesthetics](https://verifiedaesthetics.com)
 
 Tomorrow (final email): The one thing that matters more than price.
 
-—InjectorIndex
+—VerifiedAesthetics
 
 ---
 
@@ -195,7 +195,7 @@ This is the last email in this series, and I want to leave you with the most imp
 
 It's communication.
 
-The providers with the highest TrueScore ratings on InjectorIndex share one thing: patients consistently describe feeling *heard* during consultations. They say things like:
+The providers with the highest TrueScore ratings on VerifiedAesthetics share one thing: patients consistently describe feeling *heard* during consultations. They say things like:
 
 - "She actually listened to what I wanted"
 - "He explained why he recommended fewer units than I asked for"
@@ -214,12 +214,12 @@ Your first consultation is an audition — for the provider, not for you. Pay at
 
 A provider who communicates well will almost certainly deliver better results — because they understood what you actually wanted.
 
-That's what InjectorIndex was built to surface. Not who has the best ads or the most Instagram followers, but who consistently makes patients feel informed, respected, and satisfied with their results.
+That's what VerifiedAesthetics was built to surface. Not who has the best ads or the most Instagram followers, but who consistently makes patients feel informed, respected, and satisfied with their results.
 
-**Your next step:** [Find top-rated providers in your city →](https://injectorindex.com)
+**Your next step:** [Find top-rated providers in your city →](https://verifiedaesthetics.com)
 
 Thanks for reading this series. If you found it helpful, forward it to a friend who's considering Botox — they'll thank you.
 
-—InjectorIndex
+—VerifiedAesthetics
 
 P.S. — Want a personalized analysis of providers in your specific area? Reply to this email with your city and I'll send you a custom comparison.

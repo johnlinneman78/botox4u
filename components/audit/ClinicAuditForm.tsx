@@ -133,7 +133,7 @@ export default function ClinicAuditForm() {
                     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
                         <div>
                             <h1 className="text-3xl font-bold text-[#3D2B1F] mb-2">Audit Your Clinic</h1>
-                            <p className="text-[#3D2B1F]/70">Enter details to see how they rank against 2026 InjectorIndex benchmarks.</p>
+                            <p className="text-[#3D2B1F]/70">Enter details to see how they rank against 2026 VerifiedAesthetics benchmarks.</p>
                         </div>
 
                         <div className="space-y-4">
@@ -324,7 +324,7 @@ export default function ClinicAuditForm() {
                         </div>
 
                         <p className="text-center text-xs text-[#3D2B1F]/60">
-                            Independent data powered by InjectorIndex clinical benchmarks.
+                            Independent data powered by VerifiedAesthetics clinical benchmarks.
                         </p>
                     </div>
                 )}

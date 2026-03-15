@@ -1,0 +1,3766 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "title": "standard public schema",
+    "version": "14.1"
+  },
+  "host": "tgqgsmaqmyeguapcogel.supabase.co:443",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "application/vnd.pgrst.object+json;nulls=stripped",
+    "application/vnd.pgrst.object+json",
+    "text/csv"
+  ],
+  "produces": [
+    "application/json",
+    "application/vnd.pgrst.object+json;nulls=stripped",
+    "application/vnd.pgrst.object+json",
+    "text/csv"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "produces": [
+          "application/openapi+json",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "summary": "OpenAPI description (this document)",
+        "tags": [
+          "Introspection"
+        ]
+      }
+    },
+    "/leads": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.leads.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.provider_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.full_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.email"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.phone"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.treatment_type"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.message"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.status"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.created_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.city"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.state"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.budget_range"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.timeframe"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.current_considerations"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.is_first_timer"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.client_concerns"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.additional_metadata"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.zip_code"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.call_time"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/leads"
+              },
+              "type": "array"
+            }
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        },
+        "tags": [
+          "leads"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.leads"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferPost"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "tags": [
+          "leads"
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.leads.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.provider_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.full_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.email"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.phone"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.treatment_type"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.message"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.status"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.created_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.city"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.state"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.budget_range"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.timeframe"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.current_considerations"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.is_first_timer"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.client_concerns"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.additional_metadata"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.zip_code"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.call_time"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "leads"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.leads.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.provider_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.full_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.email"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.phone"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.treatment_type"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.message"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.status"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.created_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.city"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.state"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.budget_range"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.timeframe"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.current_considerations"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.is_first_timer"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.client_concerns"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.additional_metadata"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.zip_code"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.leads.call_time"
+          },
+          {
+            "$ref": "#/parameters/body.leads"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "leads"
+        ]
+      }
+    },
+    "/reviews_audit": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.table_schema"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.table_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.operation"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.performed_by"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.changed_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.old_data"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.new_data"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/reviews_audit"
+              },
+              "type": "array"
+            }
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        },
+        "tags": [
+          "reviews_audit"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.reviews_audit"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferPost"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "tags": [
+          "reviews_audit"
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.table_schema"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.table_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.operation"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.performed_by"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.changed_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.old_data"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.new_data"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "reviews_audit"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.table_schema"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.table_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.operation"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.performed_by"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.changed_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.old_data"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews_audit.new_data"
+          },
+          {
+            "$ref": "#/parameters/body.reviews_audit"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "reviews_audit"
+        ]
+      }
+    },
+    "/clinic_audits": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.created_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.patient_email"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.provider_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.provider_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.city"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.state"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.treatment_types"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.primary_goal"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.price_quoted"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.found_through"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.ii_score"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.regen_ratio"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.price_benchmark_status"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.natural_alignment"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.audit_data"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.pdf_url"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.status"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/clinic_audits"
+              },
+              "type": "array"
+            }
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        },
+        "summary": "Stores personalized clinic audit requests and results for lead generation.",
+        "tags": [
+          "clinic_audits"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.clinic_audits"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferPost"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "summary": "Stores personalized clinic audit requests and results for lead generation.",
+        "tags": [
+          "clinic_audits"
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.created_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.patient_email"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.provider_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.provider_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.city"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.state"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.treatment_types"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.primary_goal"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.price_quoted"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.found_through"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.ii_score"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.regen_ratio"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.price_benchmark_status"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.natural_alignment"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.audit_data"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.pdf_url"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.status"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "summary": "Stores personalized clinic audit requests and results for lead generation.",
+        "tags": [
+          "clinic_audits"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.created_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.patient_email"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.provider_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.provider_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.city"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.state"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.treatment_types"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.primary_goal"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.price_quoted"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.found_through"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.ii_score"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.regen_ratio"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.price_benchmark_status"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.natural_alignment"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.audit_data"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.pdf_url"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.clinic_audits.status"
+          },
+          {
+            "$ref": "#/parameters/body.clinic_audits"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "summary": "Stores personalized clinic audit requests and results for lead generation.",
+        "tags": [
+          "clinic_audits"
+        ]
+      }
+    },
+    "/providers_enrichment_queue": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.provider_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.status"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.retry_count"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.last_attempted_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.created_at"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/providers_enrichment_queue"
+              },
+              "type": "array"
+            }
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        },
+        "tags": [
+          "providers_enrichment_queue"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.providers_enrichment_queue"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferPost"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "tags": [
+          "providers_enrichment_queue"
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.provider_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.status"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.retry_count"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.last_attempted_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.created_at"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "providers_enrichment_queue"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.provider_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.status"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.retry_count"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.last_attempted_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers_enrichment_queue.created_at"
+          },
+          {
+            "$ref": "#/parameters/body.providers_enrichment_queue"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "providers_enrichment_queue"
+        ]
+      }
+    },
+    "/api_keys": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.key"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.owner_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.owner_email"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.tier"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.calls_this_month"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.call_limit"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.created_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.active"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/api_keys"
+              },
+              "type": "array"
+            }
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        },
+        "tags": [
+          "api_keys"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.api_keys"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferPost"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "tags": [
+          "api_keys"
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.key"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.owner_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.owner_email"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.tier"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.calls_this_month"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.call_limit"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.created_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.active"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "api_keys"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.key"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.owner_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.owner_email"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.tier"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.calls_this_month"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.call_limit"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.created_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.api_keys.active"
+          },
+          {
+            "$ref": "#/parameters/body.api_keys"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "api_keys"
+        ]
+      }
+    },
+    "/providers": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.providers.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.user_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.slug"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.business_type"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.city"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.state"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.address"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.phone"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.website"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.average_rating"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.review_count"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.listing_tier"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.verified"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.price_per_unit"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.min_treatment_price"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.description"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.credentials"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.services_offered"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.created_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.treatment_slugs"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.enriched_attrs"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.verified_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.notion_page_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.outreach_status"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.date_sent"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.lat"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.lng"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.google_place_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.rating"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.hero_image_url"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.gallery"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.top_reviews"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.ai_description"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.ai_description_confirmed"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.badges"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.enriched_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.warning_flag"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.warning_reason"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.flagged_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score_results_quality"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.positive_keyword_count"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.negative_keyword_count"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.sentiment_analyzed_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_number"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_verified"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_license_type"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_specialty"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_verified_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_lookup_attempted"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.allergan_tier"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score_grade"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score_breakdown"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.style_tags"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.views_30d"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.clicks_30d"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.booking_url"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score_total"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/providers"
+              },
+              "type": "array"
+            }
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        },
+        "tags": [
+          "providers"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.providers"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferPost"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "tags": [
+          "providers"
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.providers.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.user_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.slug"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.business_type"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.city"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.state"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.address"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.phone"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.website"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.average_rating"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.review_count"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.listing_tier"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.verified"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.price_per_unit"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.min_treatment_price"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.description"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.credentials"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.services_offered"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.created_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.treatment_slugs"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.enriched_attrs"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.verified_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.notion_page_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.outreach_status"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.date_sent"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.lat"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.lng"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.google_place_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.rating"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.hero_image_url"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.gallery"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.top_reviews"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.ai_description"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.ai_description_confirmed"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.badges"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.enriched_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.warning_flag"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.warning_reason"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.flagged_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score_results_quality"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.positive_keyword_count"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.negative_keyword_count"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.sentiment_analyzed_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_number"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_verified"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_license_type"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_specialty"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_verified_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_lookup_attempted"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.allergan_tier"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score_grade"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score_breakdown"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.style_tags"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.views_30d"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.clicks_30d"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.booking_url"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score_total"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "providers"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.providers.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.user_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.slug"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.business_type"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.city"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.state"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.address"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.phone"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.website"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.average_rating"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.review_count"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.listing_tier"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.verified"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.price_per_unit"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.min_treatment_price"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.description"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.credentials"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.services_offered"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.created_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.treatment_slugs"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.enriched_attrs"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.verified_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.notion_page_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.outreach_status"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.date_sent"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.lat"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.lng"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.google_place_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.rating"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.hero_image_url"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.gallery"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.top_reviews"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.ai_description"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.ai_description_confirmed"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.badges"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.enriched_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.warning_flag"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.warning_reason"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.flagged_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score_results_quality"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.positive_keyword_count"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.negative_keyword_count"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.sentiment_analyzed_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_number"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_verified"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_license_type"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_specialty"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_verified_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.npi_lookup_attempted"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.allergan_tier"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score_grade"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score_breakdown"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.style_tags"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.views_30d"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.clicks_30d"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.booking_url"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.providers.score_total"
+          },
+          {
+            "$ref": "#/parameters/body.providers"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "providers"
+        ]
+      }
+    },
+    "/reviews": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.reviews.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.provider_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.author_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.rating"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.content"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.created_at"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/reviews"
+              },
+              "type": "array"
+            }
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        },
+        "tags": [
+          "reviews"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.reviews"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferPost"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "tags": [
+          "reviews"
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.reviews.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.provider_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.author_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.rating"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.content"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.created_at"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "reviews"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.reviews.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.provider_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.author_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.rating"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.content"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.reviews.created_at"
+          },
+          {
+            "$ref": "#/parameters/body.reviews"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "reviews"
+        ]
+      }
+    },
+    "/patients": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.patients.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.email"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.first_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.last_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.phone"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.city"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.state"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.newsletter_opt_in"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.last_lead_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.created_at"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/patients"
+              },
+              "type": "array"
+            }
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        },
+        "tags": [
+          "patients"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.patients"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferPost"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "tags": [
+          "patients"
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.patients.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.email"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.first_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.last_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.phone"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.city"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.state"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.newsletter_opt_in"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.last_lead_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.created_at"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "patients"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.patients.id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.email"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.first_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.last_name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.phone"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.city"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.state"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.newsletter_opt_in"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.last_lead_at"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.patients.created_at"
+          },
+          {
+            "$ref": "#/parameters/body.patients"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "patients"
+        ]
+      }
+    },
+    "/rpc/delete_user_data": {
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "args",
+            "required": true,
+            "schema": {
+              "properties": {
+                "user_email": {
+                  "format": "text",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "user_email"
+              ],
+              "type": "object"
+            }
+          },
+          {
+            "$ref": "#/parameters/preferParams"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/vnd.pgrst.object+json;nulls=stripped",
+          "application/vnd.pgrst.object+json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "(rpc) delete_user_data"
+        ]
+      }
+    },
+    "/rpc/purge_old_deleted_data": {
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "args",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "$ref": "#/parameters/preferParams"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/vnd.pgrst.object+json;nulls=stripped",
+          "application/vnd.pgrst.object+json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "(rpc) purge_old_deleted_data"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "leads": {
+      "required": [
+        "id",
+        "full_name",
+        "email"
+      ],
+      "properties": {
+        "id": {
+          "default": "extensions.uuid_generate_v4()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "provider_id": {
+          "description": "Note:\nThis is a Foreign Key to `providers.id`.<fk table='providers' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "full_name": {
+          "format": "text",
+          "type": "string"
+        },
+        "email": {
+          "format": "text",
+          "type": "string"
+        },
+        "phone": {
+          "format": "text",
+          "type": "string"
+        },
+        "treatment_type": {
+          "format": "text",
+          "type": "string"
+        },
+        "message": {
+          "format": "text",
+          "type": "string"
+        },
+        "status": {
+          "default": "new",
+          "format": "text",
+          "type": "string"
+        },
+        "created_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "city": {
+          "format": "text",
+          "type": "string"
+        },
+        "state": {
+          "format": "text",
+          "type": "string"
+        },
+        "budget_range": {
+          "format": "text",
+          "type": "string"
+        },
+        "timeframe": {
+          "format": "text",
+          "type": "string"
+        },
+        "current_considerations": {
+          "format": "text",
+          "type": "string"
+        },
+        "is_first_timer": {
+          "default": true,
+          "format": "boolean",
+          "type": "boolean"
+        },
+        "client_concerns": {
+          "format": "text[]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "additional_metadata": {
+          "format": "jsonb"
+        },
+        "zip_code": {
+          "format": "text",
+          "type": "string"
+        },
+        "call_time": {
+          "format": "text",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reviews_audit": {
+      "required": [
+        "id",
+        "table_schema",
+        "table_name",
+        "operation",
+        "changed_at"
+      ],
+      "properties": {
+        "id": {
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "bigint",
+          "type": "integer"
+        },
+        "table_schema": {
+          "format": "text",
+          "type": "string"
+        },
+        "table_name": {
+          "format": "text",
+          "type": "string"
+        },
+        "operation": {
+          "format": "text",
+          "type": "string"
+        },
+        "performed_by": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "changed_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "old_data": {
+          "format": "jsonb"
+        },
+        "new_data": {
+          "format": "jsonb"
+        }
+      },
+      "type": "object"
+    },
+    "clinic_audits": {
+      "description": "Stores personalized clinic audit requests and results for lead generation.",
+      "required": [
+        "id",
+        "patient_email",
+        "city",
+        "state"
+      ],
+      "properties": {
+        "id": {
+          "default": "extensions.uuid_generate_v4()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "created_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "patient_email": {
+          "format": "text",
+          "type": "string"
+        },
+        "provider_id": {
+          "description": "Note:\nThis is a Foreign Key to `providers.id`.<fk table='providers' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "provider_name": {
+          "format": "text",
+          "type": "string"
+        },
+        "city": {
+          "format": "text",
+          "type": "string"
+        },
+        "state": {
+          "format": "text",
+          "type": "string"
+        },
+        "treatment_types": {
+          "format": "text[]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "primary_goal": {
+          "format": "text",
+          "type": "string"
+        },
+        "price_quoted": {
+          "format": "text",
+          "type": "string"
+        },
+        "found_through": {
+          "format": "text",
+          "type": "string"
+        },
+        "ii_score": {
+          "format": "numeric",
+          "type": "number"
+        },
+        "regen_ratio": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "price_benchmark_status": {
+          "format": "text",
+          "type": "string"
+        },
+        "natural_alignment": {
+          "format": "text",
+          "type": "string"
+        },
+        "audit_data": {
+          "format": "jsonb"
+        },
+        "pdf_url": {
+          "format": "text",
+          "type": "string"
+        },
+        "status": {
+          "default": "pending",
+          "format": "text",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "providers_enrichment_queue": {
+      "required": [
+        "provider_id"
+      ],
+      "properties": {
+        "provider_id": {
+          "description": "Note:\nThis is a Primary Key.<pk/>\nThis is a Foreign Key to `providers.id`.<fk table='providers' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "status": {
+          "default": "pending",
+          "format": "text",
+          "type": "string"
+        },
+        "retry_count": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "last_attempted_at": {
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "created_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "api_keys": {
+      "required": [
+        "id",
+        "key"
+      ],
+      "properties": {
+        "id": {
+          "default": "gen_random_uuid()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "key": {
+          "format": "text",
+          "type": "string"
+        },
+        "owner_name": {
+          "format": "text",
+          "type": "string"
+        },
+        "owner_email": {
+          "format": "text",
+          "type": "string"
+        },
+        "tier": {
+          "default": "FREE",
+          "format": "text",
+          "type": "string"
+        },
+        "calls_this_month": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "call_limit": {
+          "default": 100,
+          "format": "integer",
+          "type": "integer"
+        },
+        "created_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "active": {
+          "default": true,
+          "format": "boolean",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "providers": {
+      "required": [
+        "id",
+        "name",
+        "slug",
+        "city",
+        "state"
+      ],
+      "properties": {
+        "id": {
+          "default": "extensions.uuid_generate_v4()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "user_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "format": "text",
+          "type": "string"
+        },
+        "slug": {
+          "format": "text",
+          "type": "string"
+        },
+        "business_type": {
+          "format": "text",
+          "type": "string"
+        },
+        "city": {
+          "format": "text",
+          "type": "string"
+        },
+        "state": {
+          "format": "text",
+          "type": "string"
+        },
+        "address": {
+          "format": "text",
+          "type": "string"
+        },
+        "phone": {
+          "format": "text",
+          "type": "string"
+        },
+        "website": {
+          "format": "text",
+          "type": "string"
+        },
+        "average_rating": {
+          "default": 0,
+          "format": "numeric",
+          "type": "number"
+        },
+        "review_count": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "listing_tier": {
+          "default": "free",
+          "format": "text",
+          "type": "string"
+        },
+        "verified": {
+          "default": false,
+          "format": "boolean",
+          "type": "boolean"
+        },
+        "price_per_unit": {
+          "format": "numeric",
+          "type": "number"
+        },
+        "min_treatment_price": {
+          "format": "numeric",
+          "type": "number"
+        },
+        "description": {
+          "format": "text",
+          "type": "string"
+        },
+        "credentials": {
+          "format": "jsonb"
+        },
+        "services_offered": {
+          "format": "jsonb"
+        },
+        "created_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "treatment_slugs": {
+          "format": "text[]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "enriched_attrs": {
+          "description": "AI-extracted data: {offers_masseter: bool, price_per_unit_botox: float, new_patient_special: string, credentials: string[]}",
+          "format": "jsonb"
+        },
+        "verified_at": {
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "notion_page_id": {
+          "format": "text",
+          "type": "string"
+        },
+        "outreach_status": {
+          "default": "not_sent",
+          "format": "text",
+          "type": "string"
+        },
+        "date_sent": {
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "lat": {
+          "format": "double precision",
+          "type": "number"
+        },
+        "lng": {
+          "format": "double precision",
+          "type": "number"
+        },
+        "google_place_id": {
+          "format": "text",
+          "type": "string"
+        },
+        "rating": {
+          "format": "numeric",
+          "type": "number"
+        },
+        "hero_image_url": {
+          "format": "text",
+          "type": "string"
+        },
+        "gallery": {
+          "format": "jsonb"
+        },
+        "top_reviews": {
+          "format": "jsonb"
+        },
+        "ai_description": {
+          "format": "text",
+          "type": "string"
+        },
+        "ai_description_confirmed": {
+          "default": false,
+          "format": "boolean",
+          "type": "boolean"
+        },
+        "badges": {
+          "format": "jsonb"
+        },
+        "enriched_at": {
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "warning_flag": {
+          "default": false,
+          "format": "boolean",
+          "type": "boolean"
+        },
+        "warning_reason": {
+          "format": "text",
+          "type": "string"
+        },
+        "flagged_at": {
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "score_results_quality": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "positive_keyword_count": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "negative_keyword_count": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "sentiment_analyzed_at": {
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "npi_number": {
+          "format": "character varying",
+          "maxLength": 10,
+          "type": "string"
+        },
+        "npi_verified": {
+          "default": false,
+          "format": "boolean",
+          "type": "boolean"
+        },
+        "npi_license_type": {
+          "format": "character varying",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "npi_specialty": {
+          "format": "character varying",
+          "maxLength": 100,
+          "type": "string"
+        },
+        "npi_verified_at": {
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "npi_lookup_attempted": {
+          "default": false,
+          "format": "boolean",
+          "type": "boolean"
+        },
+        "allergan_tier": {
+          "format": "character varying",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "score": {
+          "default": 0,
+          "description": "Total Botox-4U Score (0-100)",
+          "format": "integer",
+          "type": "integer"
+        },
+        "score_grade": {
+          "description": "Letter grade based on total score (A+, A, B, etc.)",
+          "format": "text",
+          "type": "string"
+        },
+        "score_breakdown": {
+          "description": "Detailed breakdown of the 6 scoring factors",
+          "format": "jsonb"
+        },
+        "style_tags": {
+          "format": "text[]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "views_30d": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "clicks_30d": {
+          "default": 0,
+          "format": "integer",
+          "type": "integer"
+        },
+        "booking_url": {
+          "format": "text",
+          "type": "string"
+        },
+        "score_total": {
+          "default": 50,
+          "format": "integer",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "reviews": {
+      "required": [
+        "id",
+        "author_name"
+      ],
+      "properties": {
+        "id": {
+          "default": "extensions.uuid_generate_v4()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "provider_id": {
+          "description": "Note:\nThis is a Foreign Key to `providers.id`.<fk table='providers' column='id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "author_name": {
+          "format": "text",
+          "type": "string"
+        },
+        "rating": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "content": {
+          "format": "text",
+          "type": "string"
+        },
+        "created_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "patients": {
+      "required": [
+        "id",
+        "email"
+      ],
+      "properties": {
+        "id": {
+          "default": "extensions.uuid_generate_v4()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "email": {
+          "format": "text",
+          "type": "string"
+        },
+        "first_name": {
+          "format": "text",
+          "type": "string"
+        },
+        "last_name": {
+          "format": "text",
+          "type": "string"
+        },
+        "phone": {
+          "format": "text",
+          "type": "string"
+        },
+        "city": {
+          "format": "text",
+          "type": "string"
+        },
+        "state": {
+          "format": "text",
+          "type": "string"
+        },
+        "newsletter_opt_in": {
+          "default": false,
+          "format": "boolean",
+          "type": "boolean"
+        },
+        "last_lead_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        },
+        "created_at": {
+          "default": "now()",
+          "format": "timestamp with time zone",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "preferParams": {
+      "name": "Prefer",
+      "description": "Preference",
+      "required": false,
+      "in": "header",
+      "type": "string"
+    },
+    "preferReturn": {
+      "name": "Prefer",
+      "description": "Preference",
+      "required": false,
+      "enum": [
+        "return=representation",
+        "return=minimal",
+        "return=none"
+      ],
+      "in": "header",
+      "type": "string"
+    },
+    "preferCount": {
+      "name": "Prefer",
+      "description": "Preference",
+      "required": false,
+      "enum": [
+        "count=none"
+      ],
+      "in": "header",
+      "type": "string"
+    },
+    "preferPost": {
+      "name": "Prefer",
+      "description": "Preference",
+      "required": false,
+      "enum": [
+        "return=representation",
+        "return=minimal",
+        "return=none",
+        "resolution=ignore-duplicates",
+        "resolution=merge-duplicates"
+      ],
+      "in": "header",
+      "type": "string"
+    },
+    "select": {
+      "name": "select",
+      "description": "Filtering Columns",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "on_conflict": {
+      "name": "on_conflict",
+      "description": "On Conflict",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "order": {
+      "name": "order",
+      "description": "Ordering",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "range": {
+      "name": "Range",
+      "description": "Limiting and Pagination",
+      "required": false,
+      "in": "header",
+      "type": "string"
+    },
+    "rangeUnit": {
+      "name": "Range-Unit",
+      "description": "Limiting and Pagination",
+      "required": false,
+      "default": "items",
+      "in": "header",
+      "type": "string"
+    },
+    "offset": {
+      "name": "offset",
+      "description": "Limiting and Pagination",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "limit": {
+      "name": "limit",
+      "description": "Limiting and Pagination",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.leads": {
+      "name": "leads",
+      "description": "leads",
+      "required": false,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/leads"
+      }
+    },
+    "rowFilter.leads.id": {
+      "name": "id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.provider_id": {
+      "name": "provider_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.full_name": {
+      "name": "full_name",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.email": {
+      "name": "email",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.phone": {
+      "name": "phone",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.treatment_type": {
+      "name": "treatment_type",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.message": {
+      "name": "message",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.status": {
+      "name": "status",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.created_at": {
+      "name": "created_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.city": {
+      "name": "city",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.state": {
+      "name": "state",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.budget_range": {
+      "name": "budget_range",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.timeframe": {
+      "name": "timeframe",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.current_considerations": {
+      "name": "current_considerations",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.is_first_timer": {
+      "name": "is_first_timer",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.client_concerns": {
+      "name": "client_concerns",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.additional_metadata": {
+      "name": "additional_metadata",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.zip_code": {
+      "name": "zip_code",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.leads.call_time": {
+      "name": "call_time",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.reviews_audit": {
+      "name": "reviews_audit",
+      "description": "reviews_audit",
+      "required": false,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/reviews_audit"
+      }
+    },
+    "rowFilter.reviews_audit.id": {
+      "name": "id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.reviews_audit.table_schema": {
+      "name": "table_schema",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.reviews_audit.table_name": {
+      "name": "table_name",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.reviews_audit.operation": {
+      "name": "operation",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.reviews_audit.performed_by": {
+      "name": "performed_by",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.reviews_audit.changed_at": {
+      "name": "changed_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.reviews_audit.old_data": {
+      "name": "old_data",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.reviews_audit.new_data": {
+      "name": "new_data",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.clinic_audits": {
+      "name": "clinic_audits",
+      "description": "clinic_audits",
+      "required": false,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/clinic_audits"
+      }
+    },
+    "rowFilter.clinic_audits.id": {
+      "name": "id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.created_at": {
+      "name": "created_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.patient_email": {
+      "name": "patient_email",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.provider_id": {
+      "name": "provider_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.provider_name": {
+      "name": "provider_name",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.city": {
+      "name": "city",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.state": {
+      "name": "state",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.treatment_types": {
+      "name": "treatment_types",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.primary_goal": {
+      "name": "primary_goal",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.price_quoted": {
+      "name": "price_quoted",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.found_through": {
+      "name": "found_through",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.ii_score": {
+      "name": "ii_score",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.regen_ratio": {
+      "name": "regen_ratio",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.price_benchmark_status": {
+      "name": "price_benchmark_status",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.natural_alignment": {
+      "name": "natural_alignment",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.audit_data": {
+      "name": "audit_data",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.pdf_url": {
+      "name": "pdf_url",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.clinic_audits.status": {
+      "name": "status",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.providers_enrichment_queue": {
+      "name": "providers_enrichment_queue",
+      "description": "providers_enrichment_queue",
+      "required": false,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/providers_enrichment_queue"
+      }
+    },
+    "rowFilter.providers_enrichment_queue.provider_id": {
+      "name": "provider_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers_enrichment_queue.status": {
+      "name": "status",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers_enrichment_queue.retry_count": {
+      "name": "retry_count",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers_enrichment_queue.last_attempted_at": {
+      "name": "last_attempted_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers_enrichment_queue.created_at": {
+      "name": "created_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.api_keys": {
+      "name": "api_keys",
+      "description": "api_keys",
+      "required": false,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/api_keys"
+      }
+    },
+    "rowFilter.api_keys.id": {
+      "name": "id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.api_keys.key": {
+      "name": "key",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.api_keys.owner_name": {
+      "name": "owner_name",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.api_keys.owner_email": {
+      "name": "owner_email",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.api_keys.tier": {
+      "name": "tier",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.api_keys.calls_this_month": {
+      "name": "calls_this_month",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.api_keys.call_limit": {
+      "name": "call_limit",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.api_keys.created_at": {
+      "name": "created_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.api_keys.active": {
+      "name": "active",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.providers": {
+      "name": "providers",
+      "description": "providers",
+      "required": false,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/providers"
+      }
+    },
+    "rowFilter.providers.id": {
+      "name": "id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.user_id": {
+      "name": "user_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.name": {
+      "name": "name",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.slug": {
+      "name": "slug",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.business_type": {
+      "name": "business_type",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.city": {
+      "name": "city",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.state": {
+      "name": "state",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.address": {
+      "name": "address",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.phone": {
+      "name": "phone",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.website": {
+      "name": "website",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.average_rating": {
+      "name": "average_rating",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.review_count": {
+      "name": "review_count",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.listing_tier": {
+      "name": "listing_tier",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.verified": {
+      "name": "verified",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.price_per_unit": {
+      "name": "price_per_unit",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.min_treatment_price": {
+      "name": "min_treatment_price",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.description": {
+      "name": "description",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.credentials": {
+      "name": "credentials",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.services_offered": {
+      "name": "services_offered",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.created_at": {
+      "name": "created_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.treatment_slugs": {
+      "name": "treatment_slugs",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.enriched_attrs": {
+      "name": "enriched_attrs",
+      "description": "AI-extracted data: {offers_masseter: bool, price_per_unit_botox: float, new_patient_special: string, credentials: string[]}",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.verified_at": {
+      "name": "verified_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.notion_page_id": {
+      "name": "notion_page_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.outreach_status": {
+      "name": "outreach_status",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.date_sent": {
+      "name": "date_sent",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.lat": {
+      "name": "lat",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.lng": {
+      "name": "lng",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.google_place_id": {
+      "name": "google_place_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.rating": {
+      "name": "rating",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.hero_image_url": {
+      "name": "hero_image_url",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.gallery": {
+      "name": "gallery",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.top_reviews": {
+      "name": "top_reviews",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.ai_description": {
+      "name": "ai_description",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.ai_description_confirmed": {
+      "name": "ai_description_confirmed",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.badges": {
+      "name": "badges",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.enriched_at": {
+      "name": "enriched_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.warning_flag": {
+      "name": "warning_flag",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.warning_reason": {
+      "name": "warning_reason",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.flagged_at": {
+      "name": "flagged_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.score_results_quality": {
+      "name": "score_results_quality",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.positive_keyword_count": {
+      "name": "positive_keyword_count",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.negative_keyword_count": {
+      "name": "negative_keyword_count",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.sentiment_analyzed_at": {
+      "name": "sentiment_analyzed_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.npi_number": {
+      "name": "npi_number",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.npi_verified": {
+      "name": "npi_verified",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.npi_license_type": {
+      "name": "npi_license_type",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.npi_specialty": {
+      "name": "npi_specialty",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.npi_verified_at": {
+      "name": "npi_verified_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.npi_lookup_attempted": {
+      "name": "npi_lookup_attempted",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.allergan_tier": {
+      "name": "allergan_tier",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.score": {
+      "name": "score",
+      "description": "Total Botox-4U Score (0-100)",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.score_grade": {
+      "name": "score_grade",
+      "description": "Letter grade based on total score (A+, A, B, etc.)",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.score_breakdown": {
+      "name": "score_breakdown",
+      "description": "Detailed breakdown of the 6 scoring factors",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.style_tags": {
+      "name": "style_tags",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.views_30d": {
+      "name": "views_30d",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.clicks_30d": {
+      "name": "clicks_30d",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.booking_url": {
+      "name": "booking_url",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.providers.score_total": {
+      "name": "score_total",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.reviews": {
+      "name": "reviews",
+      "description": "reviews",
+      "required": false,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/reviews"
+      }
+    },
+    "rowFilter.reviews.id": {
+      "name": "id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.reviews.provider_id": {
+      "name": "provider_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.reviews.author_name": {
+      "name": "author_name",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.reviews.rating": {
+      "name": "rating",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.reviews.content": {
+      "name": "content",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.reviews.created_at": {
+      "name": "created_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.patients": {
+      "name": "patients",
+      "description": "patients",
+      "required": false,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/patients"
+      }
+    },
+    "rowFilter.patients.id": {
+      "name": "id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.patients.email": {
+      "name": "email",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.patients.first_name": {
+      "name": "first_name",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.patients.last_name": {
+      "name": "last_name",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.patients.phone": {
+      "name": "phone",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.patients.city": {
+      "name": "city",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.patients.state": {
+      "name": "state",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.patients.newsletter_opt_in": {
+      "name": "newsletter_opt_in",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.patients.last_lead_at": {
+      "name": "last_lead_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.patients.created_at": {
+      "name": "created_at",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "description": "PostgREST Documentation",
+    "url": "https://postgrest.org/en/v14/references/api.html"
+  }
+}

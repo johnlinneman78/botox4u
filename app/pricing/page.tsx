@@ -10,12 +10,12 @@ export const metadata: Metadata = {
     title: `Provider Plans & Pricing — Scale Your Clinic | ${NICHE.siteName}`,
     description: `Choose the visibility tier that fits your clinical goals. Join high-intent patients searching for natural results and regenerative protocols.`,
     alternates: {
-        canonical: 'https://www.injectorindex.com/pricing',
+        canonical: 'https://www.verifiedaesthetics.com/pricing',
     },
     openGraph: {
         title: `Provider Plans & Pricing — Scale Your Clinic | ${NICHE.siteName}`,
         description: `Choose the visibility tier that fits your clinical goals. Join high-intent patients searching for natural results and regenerative protocols.`,
-        url: 'https://www.injectorindex.com/pricing',
+        url: 'https://www.verifiedaesthetics.com/pricing',
     }
 }
 
@@ -57,7 +57,7 @@ export default async function PricingPage() {
                         <span className="text-[#C9A96E]">Regenerative.</span>
                     </h1>
                     <p className="text-xl text-[#3D2B1F]/70 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
-                        The era of high-volume HA filler is ending. Patients in 2026 are searching for Polynucleotides, Bio-stimulators, and natural integrity. **InjectorIndex** is the only platform that scores your clinic on clinical innovation — not marketing budget.
+                        The era of high-volume HA filler is ending. Patients in 2026 are searching for Polynucleotides, Bio-stimulators, and natural integrity. **VerifiedAesthetics** is the only platform that scores your clinic on clinical innovation — not marketing budget.
                     </p>
 
                     <div className="flex flex-wrap justify-center gap-6">
@@ -168,7 +168,7 @@ export default async function PricingPage() {
 
                 <div className="mt-24 p-10 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-[3rem] text-center">
                     <p className="text-[#3D2B1F]/70 text-lg mb-6 max-w-2xl mx-auto">
-                        "InjectorIndex has completely changed how we frame our regenerative protocols. We're finally getting the high-intent patients who value facial harmony over volume."
+                        "VerifiedAesthetics has completely changed how we frame our regenerative protocols. We're finally getting the high-intent patients who value facial harmony over volume."
                     </p>
                     <div className="text-sm font-bold text-[#3D2B1F] uppercase tracking-widest">— Clinical Director, Scottsdale, AZ</div>
                 </div>

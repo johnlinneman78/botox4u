@@ -4,10 +4,10 @@ import { Code, Shield, Zap, Globe, ArrowRight, Lock, Database, Search, MapPin, T
 import { NICHE } from '@/config/niche'
 
 export const metadata: Metadata = {
-    title: 'API Documentation | InjectorIndex',
+    title: 'API Documentation | VerifiedAesthetics',
     description: 'RESTful API for structured medical aesthetics provider data. Access Clarity Score™ rankings, semantic review analysis, pricing, and provider credentials across 22 US cities.',
     alternates: {
-        canonical: 'https://www.injectorindex.com/docs',
+        canonical: 'https://www.verifiedaesthetics.com/docs',
     },
 }
 
@@ -24,7 +24,7 @@ const endpoints = [
             { name: 'tier', type: 'string', required: false, description: 'Listing tier: FEATURED, VERIFIED, or FREE' },
             { name: 'limit', type: 'number', required: false, description: 'Max results (default: 10, max: 50)' },
         ],
-        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.injectorindex.com/api/v1/providers?city=portland&min_Clarity Score™=70&limit=5"',
+        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.verifiedaesthetics.com/api/v1/providers?city=portland&min_Clarity Score™=70&limit=5"',
         exampleResponse: `{
   "results": [
     {
@@ -36,12 +36,12 @@ const endpoints = [
       "style_tags": ["natural", "conservative"],
       "avg_price": 14,
       "booking_url": "https://example.com/book",
-      "profile_url": "https://injectorindex.com/provider/pearl-district-aesthetics"
+      "profile_url": "https://verifiedaesthetics.com/provider/pearl-district-aesthetics"
     }
   ],
   "total": 23,
   "city": "portland",
-  "powered_by": "InjectorIndex Clarity Score™"
+  "powered_by": "VerifiedAesthetics Clarity Score™"
 }`,
     },
     {
@@ -51,7 +51,7 @@ const endpoints = [
         params: [
             { name: 'slug', type: 'string', required: true, description: 'Provider URL slug (path parameter)' },
         ],
-        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.injectorindex.com/api/v1/providers/pearl-district-aesthetics"',
+        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.verifiedaesthetics.com/api/v1/providers/pearl-district-aesthetics"',
         exampleResponse: `{
   "provider_id": "abc123",
   "name": "Pearl District Aesthetics",
@@ -61,7 +61,7 @@ const endpoints = [
   "address": "123 NW 10th Ave, Portland, OR 97209",
   "phone": "(503) 555-0100",
   "website": "https://example.com",
-  "profile_url": "https://www.injectorindex.com/provider/pearl-district-aesthetics",
+  "profile_url": "https://www.verifiedaesthetics.com/provider/pearl-district-aesthetics",
   "Clarity Score™": 87,
   "rating": 4.8,
   "review_count": 142,
@@ -78,15 +78,15 @@ const endpoints = [
   "score_results_quality": 28,
   "positive_keyword_count": 47,
   "negative_keyword_count": 3,
-  "powered_by": "InjectorIndex Clarity Score™"
+  "powered_by": "VerifiedAesthetics Clarity Score™"
 }`,
     },
     {
         method: 'GET',
         path: '/api/v1/cities',
-        description: 'List all cities covered by InjectorIndex with provider counts and average pricing data.',
+        description: 'List all cities covered by VerifiedAesthetics with provider counts and average pricing data.',
         params: [],
-        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.injectorindex.com/api/v1/cities"',
+        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.verifiedaesthetics.com/api/v1/cities"',
         exampleResponse: `{
   "cities": [
     {
@@ -94,19 +94,19 @@ const endpoints = [
       "state": "OR",
       "provider_count": 90,
       "avg_price_per_unit": 14,
-      "url": "https://www.injectorindex.com/injectors/or/portland"
+      "url": "https://www.verifiedaesthetics.com/injectors/or/portland"
     },
     {
       "city": "Miami",
       "state": "FL",
       "provider_count": 95,
       "avg_price_per_unit": 16,
-      "url": "https://www.injectorindex.com/injectors/fl/miami"
+      "url": "https://www.verifiedaesthetics.com/injectors/fl/miami"
     }
   ],
   "total_cities": 22,
   "total_providers": 500,
-  "powered_by": "InjectorIndex Clarity Score™"
+  "powered_by": "VerifiedAesthetics Clarity Score™"
 }`,
     },
     {
@@ -117,7 +117,7 @@ const endpoints = [
             { name: 'q', type: 'string', required: true, description: 'Search query (e.g., "natural looking botox portland")' },
             { name: 'limit', type: 'number', required: false, description: 'Max results (default: 10, max: 50)' },
         ],
-        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.injectorindex.com/api/v1/search?q=natural+looking+botox+portland&limit=5"',
+        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.verifiedaesthetics.com/api/v1/search?q=natural+looking+botox+portland&limit=5"',
         exampleResponse: `{
   "results": [
     {
@@ -126,12 +126,12 @@ const endpoints = [
       "city": "Portland",
       "Clarity Score™": 87,
       "relevance_score": 0.94,
-      "profile_url": "https://injectorindex.com/provider/pearl-district-aesthetics"
+      "profile_url": "https://verifiedaesthetics.com/provider/pearl-district-aesthetics"
     }
   ],
   "query": "natural looking botox portland",
   "total": 12,
-  "powered_by": "InjectorIndex Clarity Score™"
+  "powered_by": "VerifiedAesthetics Clarity Score™"
 }`,
     },
 ]
@@ -161,7 +161,7 @@ const tiers = [
         description: 'For SaaS platforms, AI companies, and enterprise',
         features: ['Unlimited requests', 'Bulk data export', 'Custom endpoints', 'White-label licensing', 'Dedicated support'],
         cta: 'Contact Us',
-        href: 'mailto:api@injectorindex.com',
+        href: 'mailto:api@verifiedaesthetics.com',
         highlight: false,
     },
 ]
@@ -177,7 +177,7 @@ export default function ApiDocsPage() {
                         REST API v1
                     </div>
                     <h1 className="text-4xl md:text-6xl font-display font-bold text-[#3D2B1F] mb-6 max-w-4xl mx-auto">
-                        InjectorIndex API
+                        VerifiedAesthetics API
                     </h1>
                     <p className="text-xl text-[#3D2B1F]/70 font-light leading-relaxed max-w-2xl mx-auto mb-8">
                         Structured, machine-readable data on 500+ medical aesthetics providers across 22 US cities.
@@ -222,7 +222,7 @@ export default function ApiDocsPage() {
                                     </div>
                                     <pre className="p-4 text-sm text-gray-300 overflow-x-auto">
                                         <code>{`curl -H "x-api-key: YOUR_API_KEY" \\
-  "https://www.injectorindex.com/api/v1/providers?city=portland"`}</code>
+  "https://www.verifiedaesthetics.com/api/v1/providers?city=portland"`}</code>
                                     </pre>
                                 </div>
                             </div>
@@ -264,7 +264,7 @@ export default function ApiDocsPage() {
                 <section className="mb-20">
                     <h2 className="text-3xl font-display font-bold text-[#3D2B1F] mb-4">Base URL</h2>
                     <div className="bg-[#080e17] rounded-xl border border-[#3D2B1F]/10 p-6">
-                        <pre className="text-sm text-[#C9A96E]"><code>https://www.injectorindex.com/api/v1</code></pre>
+                        <pre className="text-sm text-[#C9A96E]"><code>https://www.verifiedaesthetics.com/api/v1</code></pre>
                     </div>
                     <p className="text-[#3D2B1F]/60 text-sm mt-3">All endpoints return JSON. Responses include <code className="text-[#3D2B1F]/70">powered_by</code> attribution.</p>
                 </section>
@@ -369,7 +369,7 @@ export default function ApiDocsPage() {
                 <section className="mb-20">
                     <h2 className="text-3xl font-display font-bold text-[#3D2B1F] mb-4">MCP Server (AI Integration)</h2>
                     <p className="text-[#3D2B1F]/70 mb-6 leading-relaxed">
-                        InjectorIndex provides an MCP (Model Context Protocol) server for direct integration with AI assistants
+                        VerifiedAesthetics provides an MCP (Model Context Protocol) server for direct integration with AI assistants
                         like Claude Desktop. When users ask "Who's the best Botox injector in Portland?", the AI can pull
                         live Clarity Score™ data directly from our API.
                     </p>
@@ -383,8 +383,8 @@ export default function ApiDocsPage() {
   get_injector_profile — Get full profile with Clarity Score™ and semantic data
   get_treatment_costs  — Get pricing data by city and treatment type
 
-GitHub: github.com/injectorindex/mcp-server
-Contact: api@injectorindex.com for integration support`}</code></pre>
+GitHub: github.com/verifiedaesthetics/mcp-server
+Contact: api@verifiedaesthetics.com for integration support`}</code></pre>
                     </div>
                 </section>
 
@@ -392,7 +392,7 @@ Contact: api@injectorindex.com for integration support`}</code></pre>
                 <section className="mb-20">
                     <h2 className="text-3xl font-display font-bold text-[#3D2B1F] mb-4">API Pricing</h2>
                     <p className="text-[#3D2B1F]/70 mb-8 leading-relaxed">
-                        Start free. We want AI platforms and developers citing InjectorIndex data — every citation is a patient helped.
+                        Start free. We want AI platforms and developers citing VerifiedAesthetics data — every citation is a patient helped.
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {tiers.map((tier, i) => (

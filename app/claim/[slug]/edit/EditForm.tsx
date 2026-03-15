@@ -261,7 +261,7 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
                         <label className="flex items-start gap-3 cursor-pointer group">
                             <input type="checkbox" name="sms_opt_in" value="true" className="mt-1 w-5 h-5 rounded border-[#3D2B1F]/10 bg-[#3D2B1F]/5 text-[#C9A96E] focus:ring-[#C9A96E]/20" />
                             <span className="text-xs text-[#3D2B1F]/50 font-light leading-relaxed">
-                                I agree to receive SMS updates from InjectorIndex.com. I understand my phone number will be stored securely with my opt-in timestamp and IP.
+                                I agree to receive SMS updates from VerifiedAesthetics.com. I understand my phone number will be stored securely with my opt-in timestamp and IP.
                             </span>
                         </label>
                     </div>

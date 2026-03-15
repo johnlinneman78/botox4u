@@ -6,15 +6,15 @@ import { ArrowRight, Clock, Search, BookOpen } from 'lucide-react'
 import { NICHE } from '@/config/niche'
 
 export const metadata: Metadata = {
-    title: "Botox Intelligence Blog 2026 | InjectorIndex",
+    title: "Botox Intelligence Blog 2026 | VerifiedAesthetics",
     description: "Research, guides, and data on botox injectors, costs, and trends.",
     alternates: {
-        canonical: 'https://www.injectorindex.com/blog',
+        canonical: 'https://www.verifiedaesthetics.com/blog',
     },
     openGraph: {
-        title: "Botox Intelligence Blog 2026 | InjectorIndex",
+        title: "Botox Intelligence Blog 2026 | VerifiedAesthetics",
         description: "Research, guides, and data on botox injectors, costs, and trends.",
-        url: 'https://www.injectorindex.com/blog',
+        url: 'https://www.verifiedaesthetics.com/blog',
     }
 }
 

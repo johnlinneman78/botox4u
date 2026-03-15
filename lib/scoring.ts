@@ -63,7 +63,9 @@ export function calculateProviderScore(factors: ScoringFactors, cityAveragePrice
 
     // 2. Provider Credentials (25 pts)
     // Verified NPI, board certifications (trust signals)
-    let credentials = (factors.npi_verified || factors.is_verified) ? 20 : 10
+    let credentials = 0
+    if (factors.npi_verified) credentials += 15
+    if (factors.is_verified) credentials += 5
     if (factors.allergan_tier && ['platinum', 'diamond', 'black_diamond'].includes(factors.allergan_tier.toLowerCase())) {
         credentials += 5
     }

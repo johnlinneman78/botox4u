@@ -109,7 +109,7 @@ export function TransparencyBlock({ city }: { city?: string }) {
                                     👨‍⚕️
                                 </div>
                                 <div>
-                                    <div className="font-body font-bold text-[10px] uppercase tracking-[0.2em]" style={{ color: 'var(--color-espresso)' }}>The InjectorIndex Editorial Board</div>
+                                    <div className="font-body font-bold text-[10px] uppercase tracking-[0.2em]" style={{ color: 'var(--color-espresso)' }}>The VerifiedAesthetics Editorial Board</div>
                                     <div className="font-body text-xs" style={{ color: 'var(--color-stone)' }}>Clinical Data Compliance Team</div>
                                 </div>
                             </div>

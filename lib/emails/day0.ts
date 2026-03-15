@@ -11,7 +11,7 @@ export function day0Subject() {
 }
 
 export function day0Html({ firstName, pdfLink }: Day0Props): string {
-    const downloadUrl = pdfLink || 'https://injectorindex.com/downloads/botox-price-guide-2026.pdf'
+    const downloadUrl = pdfLink || 'https://verifiedaesthetics.com/downloads/botox-price-guide-2026.pdf'
 
     return `
 <!DOCTYPE html>
@@ -22,7 +22,7 @@ export function day0Html({ firstName, pdfLink }: Day0Props): string {
 
   <div style="text-align:center;margin-bottom:32px;">
     <div style="display:inline-block;width:8px;height:8px;border-radius:50%;background-color:#B5936B;margin-right:8px;vertical-align:middle;"></div>
-    <span style="font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#B5936B;vertical-align:middle;">InjectorIndex</span>
+    <span style="font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#B5936B;vertical-align:middle;">VerifiedAesthetics</span>
   </div>
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">Hi ${firstName},</p>
@@ -45,12 +45,12 @@ export function day0Html({ firstName, pdfLink }: Day0Props): string {
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">Over the next 5 days, I'll send you one short email each morning with an insider tip that most patients don't learn until they've already spent thousands. Each one takes about 90 seconds to read.</p>
 
-  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">Talk tomorrow,<br>InjectorIndex</p>
+  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">Talk tomorrow,<br>VerifiedAesthetics</p>
 
-  <p style="font-size:14px;line-height:1.6;color:#666;">P.S. — If you want to skip ahead and start comparing scored providers in your city, you can search now: <a href="https://injectorindex.com" style="color:#B5936B;text-decoration:underline;">InjectorIndex.com →</a></p>
+  <p style="font-size:14px;line-height:1.6;color:#666;">P.S. — If you want to skip ahead and start comparing scored providers in your city, you can search now: <a href="https://verifiedaesthetics.com" style="color:#B5936B;text-decoration:underline;">VerifiedAesthetics.com →</a></p>
 
   <hr style="border:none;border-top:1px solid #ECE8E2;margin:32px 0;">
-  <p style="font-size:10px;color:#999;text-align:center;letter-spacing:0.05em;">© 2026 InjectorIndex · Independent clinical data for the regenerative era.<br><a href="https://injectorindex.com/unsubscribe" style="color:#999;">Unsubscribe</a></p>
+  <p style="font-size:10px;color:#999;text-align:center;letter-spacing:0.05em;">© 2026 VerifiedAesthetics · Independent clinical data for the regenerative era.<br><a href="https://verifiedaesthetics.com/unsubscribe" style="color:#999;">Unsubscribe</a></p>
 
 </div>
 </body>

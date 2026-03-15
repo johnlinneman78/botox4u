@@ -41,7 +41,7 @@ export function StateHero({ stateName, providerCount, avgCost, cityCount }: Stat
                             className="font-body text-[10px] font-medium uppercase tracking-[0.2em]"
                             style={{ color: 'var(--color-taupe)' }}
                         >
-                            InjectorIndex Audited
+                            VerifiedAesthetics Audited
                         </span>
                     </motion.div>
 

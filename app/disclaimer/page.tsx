@@ -6,12 +6,12 @@ export const metadata: Metadata = {
     title: `Medical Disclaimer | ${NICHE.siteName}`,
     description: `Important medical disclaimer regarding the information provided on the ${NICHE.siteName} platform.`,
     alternates: {
-        canonical: 'https://www.injectorindex.com/disclaimer',
+        canonical: 'https://www.verifiedaesthetics.com/disclaimer',
     },
     openGraph: {
         title: `Medical Disclaimer | ${NICHE.siteName}`,
         description: `Important medical disclaimer regarding the information provided on the ${NICHE.siteName} platform.`,
-        url: 'https://www.injectorindex.com/disclaimer',
+        url: 'https://www.verifiedaesthetics.com/disclaimer',
     }
 }
 
@@ -24,7 +24,7 @@ export default function DisclaimerPage() {
 
                 <section className="space-y-6 text-amber-300/80 leading-relaxed bg-amber-500/5 p-6 rounded-xl border border-amber-500/10 italic">
                     <p className="font-bold text-amber-300">
-                        The content provided on InjectorIndex.com is for informational purposes only. It is NOT intended to be a substitute for professional medical advice, diagnosis, or treatment.
+                        The content provided on VerifiedAesthetics.com is for informational purposes only. It is NOT intended to be a substitute for professional medical advice, diagnosis, or treatment.
                     </p>
                 </section>
 
@@ -35,12 +35,12 @@ export default function DisclaimerPage() {
 
                     <h2 className="text-xl font-bold text-[#3D2B1F] mt-8">No Doctor-Patient Relationship</h2>
                     <p>
-                        Use of this website or communication via this website (including lead forms or contact requests) does not create a doctor-patient relationship between you and InjectorIndex.com or any of its staff.
+                        Use of this website or communication via this website (including lead forms or contact requests) does not create a doctor-patient relationship between you and VerifiedAesthetics.com or any of its staff.
                     </p>
 
                     <h2 className="text-xl font-bold text-[#3D2B1F] mt-8">Clinic Responsibility</h2>
                     <p>
-                        Individual providers and clinics listed on this site are solely responsible for the medical advice and treatments they provide. InjectorIndex.com does not endorse or recommend any specific providers.
+                        Individual providers and clinics listed on this site are solely responsible for the medical advice and treatments they provide. VerifiedAesthetics.com does not endorse or recommend any specific providers.
                     </p>
 
                     <h2 className="text-xl font-bold text-[#3D2B1F] mt-8">Emergency Situations</h2>

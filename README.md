@@ -1,4 +1,4 @@
-# InjectorIndex (injectorindex.com) 💉
+# VerifiedAesthetics (verifiedaesthetics.com) 💉
 
 The premium platform connecting aesthetic patients with top-tier Botox and regenerative medicine providers across the United States. Powered by **Clarity Score™** intelligence and **Clinical Quality Ratio™** benchmarks.
 
@@ -10,7 +10,7 @@ The platform has been fully modernized and optimized for the next generation of 
 - **Elite Audit™ Reports:** Rich-HTML clinical audits delivered directly to patient inboxes, eliminating PDF friction and providing instant regional benchmarks.
 - **Advanced pSEO Architecture:** A high-performance hierarchical URL structure (`/botox/[state]/[city]`) optimized for local search authority and zero-duplicate content.
 - **Regenerative Focus:** Tracking the **Clinical Quality Ratio™** (PNs, Exosomes, Biostimulators) to help patients find clinics meeting 2026 biological standards.
-- **Standardized Domain:** Unified host authority under `https://www.injectorindex.com` with server-level SSL and subdomain enforcement.
+- **Standardized Domain:** Unified host authority under `https://www.verifiedaesthetics.com` with server-level SSL and subdomain enforcement.
 - **2026 Stability Audit:** Resolved 100% of major 404 errors found in the initial SEO crawl, including city patterns, blog redirects, and the provider claim system.
 
 ## 🏆 Technical Excellence
@@ -44,8 +44,8 @@ The platform is engineered for speed, stability, and conversion:
    NEXT_PUBLIC_SUPABASE_URL=your_url
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
    RESEND_API_KEY=your_key
-   CONTACT_EMAIL=reports@injectorindex.com
-   NEXT_PUBLIC_APP_URL=https://www.injectorindex.com
+   CONTACT_EMAIL=reports@verifiedaesthetics.com
+   NEXT_PUBLIC_APP_URL=https://www.verifiedaesthetics.com
    ```
 
 3. **Run Dev:**
@@ -79,4 +79,4 @@ We use automated discovery to gather real-world data from provider websites.
    ```
 
 ---
-© 2026 InjectorIndex. Independent data for the regenerative medicine era.
+© 2026 VerifiedAesthetics. Independent data for the regenerative medicine era.

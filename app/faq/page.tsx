@@ -4,12 +4,12 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: "FAQ | InjectorIndex",
+    title: "FAQ | VerifiedAesthetics",
     description: "Common questions about finding botox injectors",
     openGraph: {
-        title: "FAQ | InjectorIndex",
+        title: "FAQ | VerifiedAesthetics",
         description: "Common questions about finding botox injectors",
-        url: "https://www.injectorindex.com/faq",
+        url: "https://www.verifiedaesthetics.com/faq",
     }
 }
 

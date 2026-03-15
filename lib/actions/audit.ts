@@ -97,7 +97,7 @@ export async function submitAuditRequest(data: AuditPatientInput) {
                 const htmlBody = generateAuditEmailHTML(auditResult, data, clinicData)
 
                 await resend.emails.send({
-                    from: `InjectorIndex Audit Team <${getSenderEmail()}>`,
+                    from: `VerifiedAesthetics Audit Team <${getSenderEmail()}>`,
                     to: data.email,
                     subject: `Clinic Audit Report: ${data.providerName || 'Regional Results'}`,
                     html: htmlBody
@@ -239,7 +239,7 @@ export function generateAuditEmailHTML(auditResult: AuditResult, patientData: Au
                             <p style="margin: 0; font-weight: bold; color: ${darkBlue}; font-size: 15px;">${alt.name}</p>
                             <p style="margin: 2px 0 0 0; font-size: 12px; color: #888;">Clarity Score™: <span style="color: ${brandGold}; font-weight: bold;">${alt.score}</span> • Average Pricing: $${alt.price_per_unit}/unit</p>
                         </div>
-                        <a href="https://www.injectorindex.com/provider/${alt.slug}" style="background-color: ${bgGray}; color: ${darkBlue}; padding: 8px 15px; border-radius: 12px; text-decoration: none; font-size: 12px; font-weight: bold;">View Profile</a>
+                        <a href="https://www.verifiedaesthetics.com/provider/${alt.slug}" style="background-color: ${bgGray}; color: ${darkBlue}; padding: 8px 15px; border-radius: 12px; text-decoration: none; font-size: 12px; font-weight: bold;">View Profile</a>
                     </div>
                 `).join('')}
             </div>
@@ -260,7 +260,7 @@ export function generateAuditEmailHTML(auditResult: AuditResult, patientData: Au
                         <p style="margin: 8px 0 0 0; font-size: 13px; color: #777; line-height: 1.6;"><strong>Why ask:</strong> High volume in regenerative treatments indicates a clinic that is current with 2026 biological standards of care.</p>
                     </div>
                     <div style="text-align: center; margin-top: 30px; border-top: 1px solid #f0f0f0; pt: 20px;">
-                        <a href="https://www.injectorindex.com/methodology" style="font-size: 13px; color: ${brandGold}; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px;">View Full Specialist Methodology →</a>
+                        <a href="https://www.verifiedaesthetics.com/methodology" style="font-size: 13px; color: ${brandGold}; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px;">View Full Specialist Methodology →</a>
                     </div>
                 </div>
             </div>
@@ -269,13 +269,13 @@ export function generateAuditEmailHTML(auditResult: AuditResult, patientData: Au
             <div style="padding: 50px 20px; text-align: center; background-color: ${darkBlue}; color: #ffffff;">
                 <h3 style="margin-top: 0; font-size: 24px; color: white;">Ranked by Data. Not Ads.</h3>
                 <p style="color: rgba(255,255,255,0.6); font-size: 15px; margin-bottom: 35px; max-width: 450px; margin-left: auto; margin-right: auto;">Browser all ${city} clinics filtered by Clinical Quality, Clarity Score™, and Real-World Pricing.</p>
-                <a href="https://www.injectorindex.com/injectors/${state.toLowerCase()}/${city.toLowerCase().replace(/ /g, '-')}" 
+                <a href="https://www.verifiedaesthetics.com/injectors/${state.toLowerCase()}/${city.toLowerCase().replace(/ /g, '-')}" 
                    style="background-color: ${brandGold}; color: ${darkBlue}; padding: 20px 45px; border-radius: 50px; text-decoration: none; font-weight: 900; display: inline-block; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;">
                     Explore Top ${city} Clinics
                 </a>
                 <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05);">
                     <p style="color: rgba(255,255,255,0.2); font-size: 10px; line-height: 1.8;">
-                        © 2026 InjectorIndex. All rights reserved.<br>
+                        © 2026 VerifiedAesthetics. All rights reserved.<br>
                         Independent Audit Unit • Scottsdale, AZ<br>
                         You are receiving this report because you requested a free clinical audit.
                     </p>

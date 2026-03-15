@@ -69,25 +69,25 @@ const cities = [
 const trustStats = [
     { number: '500+', label: 'Verified Providers' },
     { number: '22', label: 'Cities & Growing' },
-    { number: '0', label: 'Pay-to-Rank. Ever.' },
-    { number: 'AI', label: 'Search Optimized' },
+    { number: '100%', label: 'NPI Synced' },
+    { number: 'Active', label: 'State Licensed' },
 ]
 
 const howItWorks = [
     {
         step: '01',
-        title: 'Search by City',
-        description: 'Tell us your city and what you\'re looking for — Botox, lip filler, Sculptra, or something else entirely.',
+        title: 'Find Board-Certified Providers',
+        description: 'Search by city and verify their medical credentials instantly.',
     },
     {
         step: '02',
-        title: 'Compare Clarity Scores™',
-        description: 'Side-by-side Clarity Scores — built from verified reviews, credentials, and outcome signals, not ad spend.',
+        title: 'Compare Verified Data',
+        description: 'Review independent data on pricing, specialty, and clinical background—not just star ratings.',
     },
     {
         step: '03',
         title: 'Book with Confidence',
-        description: 'Every provider has been independently scored. You found them because they earned it — not because they paid.',
+        description: 'Choose a provider who has been independently verified to meet high aesthetic and safety standards.',
     },
 ]
 
@@ -95,7 +95,7 @@ const providerValueProps = [
     {
         emoji: '🤖',
         title: 'Show Up in AI Search Results',
-        description: 'When patients ask Perplexity or ChatGPT for Botox recommendations in your city, InjectorIndex providers are the ones that appear.',
+        description: 'When patients ask Perplexity or ChatGPT for Botox recommendations in your city, VerifiedAesthetics providers are the ones that appear.',
     },
     {
         emoji: '✦',
@@ -336,7 +336,7 @@ export default function HomeClient() {
                                 className="font-body uppercase font-medium block mb-3"
                                 style={{ fontSize: '12px', letterSpacing: '0.08em', color: 'var(--color-sage)' }}
                             >
-                                The InjectorIndex Method
+                                The VerifiedAesthetics Method
                             </span>
                             <h2
                                 className="font-display font-light text-balance"
@@ -567,7 +567,7 @@ export default function HomeClient() {
                                 Be the provider patients find when they&apos;re ready to book.
                             </h2>
                             <p className="font-body" style={{ fontSize: '16px', color: 'var(--color-stone)', lineHeight: 1.7 }}>
-                                InjectorIndex profiles rank in Google search, AI assistants, and local results — so patients find you before they find your competitors.
+                                VerifiedAesthetics profiles rank in Google search, AI assistants, and local results — so patients find you before they find your competitors.
                             </p>
                         </div>
                     </RevealOnScroll>

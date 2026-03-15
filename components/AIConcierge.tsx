@@ -15,7 +15,7 @@ export function AIConcierge() {
     const shouldShow = pathname === '/' || pathname.startsWith('/injectors/')
 
     const [messages, setMessages] = useState<any[]>([
-        { role: 'assistant', content: "Hi! I'm your InjectorIndex assistant. Looking for natural results or a specific clinician in your city? I can help you find the perfect match." }
+        { role: 'assistant', content: "Hi! I'm your VerifiedAesthetics assistant. Looking for natural results or a specific clinician in your city? I can help you find the perfect match." }
     ])
     const [inputValue, setInputValue] = useState('')
     const [loading, setLoading] = useState(false)
@@ -159,7 +159,7 @@ export function AIConcierge() {
                             </button>
                         </div>
                         <p className="mt-3 text-center text-[9px] text-[#3D2B1F]/50 uppercase tracking-widest font-black flex items-center justify-center gap-1.5">
-                            <ShieldCheck className="w-3 h-3 text-[#8A9E8D]" /> Powered by InjectorIndex Data
+                            <ShieldCheck className="w-3 h-3 text-[#8A9E8D]" /> Powered by VerifiedAesthetics Data
                         </p>
                     </div>
                 </div>

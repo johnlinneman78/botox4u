@@ -78,7 +78,8 @@ export async function getProvidersWithSearch(filters: {
             npi_verified, npi_number, allergan_tier,
             score_results_quality,
             warning_flag, warning_reason, treatment_slugs,
-            style_tags
+            style_tags,
+            practitioners:provider_practitioners(name, credentials, taxonomy, is_npi_verified, npi_enumeration_date)
         `)
         // .eq('display_status', 'live') // Disabled until migration is confirmed to be run
         .order('listing_tier', { ascending: false }) // Premium first
@@ -235,7 +236,8 @@ export async function getProvidersWithSearch(filters: {
             relegated: clarityScore < 55,
             warning_flag: p.warning_flag || false,
             has_real_photo: !!(p.hero_image_url || p.image_url),
-            services_offered: servicesOffered
+            services_offered: servicesOffered,
+            practitioners: p.practitioners || []
         }
     })
 
@@ -336,7 +338,7 @@ export async function getTopScoringProviders(limit: number = 6, userLat?: number
     if (userCity) {
         const { data: cityData } = await supabase
             .from('providers')
-            .select('*')
+            .select('*, practitioners:provider_practitioners(name, credentials, taxonomy, is_npi_verified, npi_enumeration_date)')
             .not('score', 'is', null)
             .ilike('city', userCity)
             .order('score', { ascending: false })
@@ -354,7 +356,7 @@ export async function getTopScoringProviders(limit: number = 6, userLat?: number
 
         const { data: stateData } = await supabase
             .from('providers')
-            .select('*')
+            .select('*, practitioners:provider_practitioners(name, credentials, taxonomy, is_npi_verified, npi_enumeration_date)')
             .not('score', 'is', null)
             .eq('state', userState)
             .not('id', 'in', `(${existingIds.length ? existingIds.join(',') : '0'})`)
@@ -373,7 +375,7 @@ export async function getTopScoringProviders(limit: number = 6, userLat?: number
 
         const { data: nationalData } = await supabase
             .from('providers')
-            .select('*')
+            .select('*, practitioners:provider_practitioners(name, credentials, taxonomy, is_npi_verified, npi_enumeration_date)')
             .not('score', 'is', null)
             .not('id', 'in', `(${existingIds.length ? existingIds.join(',') : '0'})`)
             .order('score', { ascending: false })
@@ -438,7 +440,8 @@ export async function getTopScoringProviders(limit: number = 6, userLat?: number
                 score_results_quality: p.score_results_quality || 0,
                 has_real_photo: !!(p.hero_image_url || p.image_url),
                 score: scoreBreakdown,
-                clarityScore: scoreBreakdown.points
+                clarityScore: scoreBreakdown.points,
+                practitioners: p.practitioners || []
             });
             seenTopKeys.add(p.slug);
             seenTopKeys.add(nameKey);
@@ -585,7 +588,7 @@ export async function getProviderBySlug(slug: string) {
 
     const { data, error } = await supabase
         .from('providers')
-        .select('*')
+        .select('*, practitioners:provider_practitioners(*)')
         .eq('slug', slug)
         .single()
 

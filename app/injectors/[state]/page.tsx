@@ -31,10 +31,10 @@ export async function generateMetadata({ params }: StatePageProps): Promise<Meta
         : { index: false, follow: true }
 
     return {
-        title: `Botox Providers in ${stateName} | InjectorIndex`,
+        title: `Botox Providers in ${stateName} | VerifiedAesthetics`,
         description: `Find top-rated Botox providers in ${stateName}. Browse by city, compare Clarity Scores™, and read verified patient reviews.`,
         alternates: {
-            canonical: `https://www.injectorindex.com/${NICHE.baseSlug}/${state.toLowerCase()}`
+            canonical: `https://www.verifiedaesthetics.com/${NICHE.baseSlug}/${state.toLowerCase()}`
         },
         robots: indexing
     }
@@ -94,7 +94,7 @@ export default async function StatePage({ params }: StatePageProps) {
                                 The demand for high-quality aesthetic injectables in {stateName} has evolved significantly. Patients are increasingly prioritizing preventative treatments and natural-looking results over the heavy modifications of the past. This shift requires injectors who possess not only exceptional technical skill but also a refined artistic eye. In major metropolitan areas across {stateName}, medical spas, dermatology clinics, and independent aesthetic practices have expanded their offerings to include advanced neuromodulators like Daxxify and a wider array of biostimulatory treatments.
                             </p>
                             <p>
-                                Pricing for Botox and dermal fillers in {stateName} varies widely based on geographic location, practitioner credentials, and the overall clinical environment. While initial cost is a factor, our data consistently shows that prioritizing a board-certified professional or a highly specialized registered nurse yields superior long-term outcomes. The Clarity Score™ system was developed specifically to help patients navigate this complex landscape. By analyzing clinical safety records, patient outcome consistency, and the transparency of pricing models, InjectorIndex surfaces the most reliable practitioners in {stateName}.
+                                Pricing for Botox and dermal fillers in {stateName} varies widely based on geographic location, practitioner credentials, and the overall clinical environment. While initial cost is a factor, our data consistently shows that prioritizing a board-certified professional or a highly specialized registered nurse yields superior long-term outcomes. The Clarity Score™ system was developed specifically to help patients navigate this complex landscape. By analyzing clinical safety records, patient outcome consistency, and the transparency of pricing models, VerifiedAesthetics surfaces the most reliable practitioners in {stateName}.
                             </p>
                             <p>
                                 When evaluating a Botox provider in {stateName}, it's essential to look beyond marketing claims. A high Clarity Score™ indicates a clinic that maintains rigorous medical standards while delivering the nuanced, undetectable enhancements that define modern aesthetic medicine. Whether you reside in the state's largest city or a growing suburban community, our verified directory connects you with professionals who understand facial anatomy, prioritize patient safety above all else, and consistently achieve beautiful, harmonious results. Our 2026 data continues to monitor market shifts, ensuring that you have access to the most accurate and up-to-date provider intelligence available.

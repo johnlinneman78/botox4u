@@ -7,7 +7,7 @@ export const metadata = {
     title: `${NICHE.name} Directory by State | Find Local ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)}`,
     description: `Browse our comprehensive directory of ${NICHE.name} providers across the United States. Select your state to see top-rated clinics and local pricing.`,
     alternates: {
-        canonical: `https://www.injectorindex.com/${NICHE.baseSlug}`,
+        canonical: `https://www.verifiedaesthetics.com/${NICHE.baseSlug}`,
     },
 }
 
@@ -37,7 +37,7 @@ export default function StatesPage() {
                         className="text-lg font-body mx-auto"
                         style={{ color: 'var(--color-stone)', maxWidth: '600px', lineHeight: 1.7 }}
                     >
-                        The US InjectorIndex directory tracks highly rated medical spas, dermatology clinics, and independent aesthetic practices. We actively monitor the American aesthetic outcomes and real-world pricing trends using our proprietary Clarity Score™ model.
+                        The US VerifiedAesthetics directory tracks highly rated medical spas, dermatology clinics, and independent aesthetic practices. We actively monitor the American aesthetic outcomes and real-world pricing trends using our proprietary Clarity Score™ model.
                     </p>
                 </div>
 

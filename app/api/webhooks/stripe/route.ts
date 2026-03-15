@@ -101,7 +101,7 @@ export async function POST(req: NextRequest) {
                             <p>Hi there,</p>
                             <p>Your <strong>${apiPlanId.toUpperCase()}</strong> plan is now active.</p>
                             <p>Your API Key: <code style="background: #f4f4f4; padding: 4px 8px; border-radius: 4px;">${newKey}</code></p>
-                            <p>Documentation: <a href="https://www.injectorindex.com/api-access">https://www.injectorindex.com/api-access</a></p>
+                            <p>Documentation: <a href="https://www.verifiedaesthetics.com/api-access">https://www.verifiedaesthetics.com/api-access</a></p>
                             <p>Limits: ${callLimit.toLocaleString()} calls per month.</p>
                             <p>Happy building!</p>
                         </div>

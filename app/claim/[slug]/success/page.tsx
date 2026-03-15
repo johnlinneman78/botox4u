@@ -4,7 +4,7 @@ import { SuccessView } from './SuccessView'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Profile Claimed Successfully | InjectorIndex',
+    title: 'Profile Claimed Successfully | VerifiedAesthetics',
     robots: { index: false, follow: false },
 }
 

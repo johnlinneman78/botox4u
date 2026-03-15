@@ -45,9 +45,9 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     const month = new Date().toLocaleString('default', { month: 'long' })
     const providers = await getProvidersWithSearch({ city: cityName, state: stateCode })
     const providerCount = providers.length > 0 ? providers.length : 'top'
-    const title = `Best Botox Providers in ${cityName}, ${stateCode} (2026) | InjectorIndex`
+    const title = `Best Botox Providers in ${cityName}, ${stateCode} (2026) | VerifiedAesthetics`
     const description = `Compare ${providerCount} Botox & filler providers in ${cityName}, ${stateCode}. Independent Clarity Scores™, pricing, and patient reviews. Updated ${month} 2026.`
-    const url = `https://www.injectorindex.com/${NICHE.baseSlug}/${state.toLowerCase()}/${city.toLowerCase()}`
+    const url = `https://www.verifiedaesthetics.com/${NICHE.baseSlug}/${state.toLowerCase()}/${city.toLowerCase()}`
 
     return {
         title: title.slice(0, 70),
@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
             title,
             description,
             url,
-            siteName: 'InjectorIndex',
+            siteName: 'VerifiedAesthetics',
             type: 'website',
         },
         alternates: {
@@ -314,7 +314,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
                             <div className="space-y-5 text-[15px] leading-relaxed" style={{ color: 'var(--color-stone)' }}>
                                 <p>
-                                    {cityName} has <strong style={{ color: 'var(--color-espresso)' }}>{providers.length}+ verified aesthetic injectors</strong> on InjectorIndex,
+                                    {cityName} has <strong style={{ color: 'var(--color-espresso)' }}>{providers.length}+ verified aesthetic injectors</strong> on VerifiedAesthetics,
                                     with an average Botox price of <strong style={{ color: 'var(--color-espresso)' }}>${stats?.avgCost || 14} per unit</strong> as of March 2026.
                                 </p>
                                 <p>

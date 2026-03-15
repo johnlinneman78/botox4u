@@ -4,7 +4,7 @@ import { EditForm } from './EditForm'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Edit Provider Profile | InjectorIndex',
+    title: 'Edit Provider Profile | VerifiedAesthetics',
     robots: { index: false, follow: false },
 }
 

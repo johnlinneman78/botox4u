@@ -6,8 +6,8 @@ import { ShieldCheck, Target, DollarSign, Clock, CheckCircle, ArrowRight } from 
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-    title: 'Claim Your Provider Profile | InjectorIndex',
-    description: 'Verify and claim your InjectorIndex provider profile to update your pricing, credentials, and Clarity Score™.',
+    title: 'Claim Your Provider Profile | VerifiedAesthetics',
+    description: 'Verify and claim your VerifiedAesthetics provider profile to update your pricing, credentials, and Clarity Score™.',
     robots: { index: false, follow: false },
 }
 

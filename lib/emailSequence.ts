@@ -35,7 +35,7 @@ export async function enrollInDripSequence({
     pdfLink,
     source
 }: EnrollParams) {
-    const fromAddress = `InjectorIndex <${getSenderEmail()}>`
+    const fromAddress = `VerifiedAesthetics <${getSenderEmail()}>`
 
     console.log(`[Drip] Enrolling ${email} (${firstName}) from source: ${source}`)
     console.log(`[Drip] Using sender: ${fromAddress}`)

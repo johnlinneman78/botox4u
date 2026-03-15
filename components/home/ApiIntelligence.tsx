@@ -15,7 +15,7 @@ export default function ApiIntelligence() {
                             <span className="text-[#C9A96E]">at Scale.</span>
                         </h2>
                         <p className="text-lg text-[#3D2B1F]/70 font-light mb-10 leading-relaxed">
-                            InjectorIndex provides structured, machine-readable data on the medical aesthetics market. From REST APIs to MCP servers for AI agents, we provide the ground truth data that powers 2026 aesthetics discovery.
+                            VerifiedAesthetics provides structured, machine-readable data on the medical aesthetics market. From REST APIs to MCP servers for AI agents, we provide the ground truth data that powers 2026 aesthetics discovery.
                         </p>
 
                         <div className="space-y-6 mb-10">
@@ -51,7 +51,7 @@ export default function ApiIntelligence() {
                                         <div className="w-2.5 h-2.5 rounded-full bg-amber-500/20" />
                                         <div className="w-2.5 h-2.5 rounded-full bg-[#8A9E8D]/20" />
                                     </div>
-                                    <span className="text-[10px] text-[#3D2B1F]/50 font-bold uppercase tracking-widest ml-2">InjectorIndex API Response</span>
+                                    <span className="text-[10px] text-[#3D2B1F]/50 font-bold uppercase tracking-widest ml-2">VerifiedAesthetics API Response</span>
                                 </div>
                                 <pre className="text-[#8A9E8D] space-y-1">
                                     <code>{`{`}</code><br />

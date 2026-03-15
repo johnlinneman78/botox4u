@@ -11,7 +11,7 @@ export function SuccessView({ provider }: { provider: any }) {
         if (navigator.share) {
             try {
                 await navigator.share({
-                    title: `Check out ${provider.name} on Injector Index`,
+                    title: `Check out ${provider.name} on Verified Aesthetics`,
                     url: window.location.origin + `/provider/${provider.slug}`
                 })
             } catch (err) {

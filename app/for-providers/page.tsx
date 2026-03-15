@@ -19,7 +19,7 @@ import { Button } from '@/components/ui/Button'
 import { NICHE } from '@/config/niche'
 
 export const metadata: Metadata = {
-    title: 'For Providers — Scale Your Aesthetic Practice | InjectorIndex',
+    title: 'For Providers — Scale Your Aesthetic Practice | VerifiedAesthetics',
     description: 'The most semantically rich, AI-cited injector directory in the world. Help patients find you through search and AI agents like ChatGPT and Gemini.',
 }
 
@@ -35,13 +35,13 @@ export default function ForProvidersPage() {
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-4xl mx-auto text-center">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#8A9E8D]/10 border border-[#8A9E8D]/20 text-[#8A9E8D] text-xs font-black tracking-widest uppercase mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                            <Cpu className="w-3.5 h-3.5" /> Built for the Agentic Era
+                            <Cpu className="w-3.5 h-3.5" /> Built for Patient Trust
                         </div>
                         <h1 className="text-5xl md:text-8xl font-display font-bold mb-8 leading-[0.9] tracking-tight text-balance">
-                            The Most <span className="text-[#C9A96E] italic">AI-Cited</span> Injector Directory.
+                            The Standard for <span className="text-[#C9A96E] italic">Verification</span>.
                         </h1>
                         <p className="text-xl md:text-2xl text-[#3D2B1F]/70 font-light max-w-2xl mx-auto leading-relaxed mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                            Don't just rank on Google. Get cited by <strong>ChatGPT, Gemini, and Perplexity</strong> when patients ask for the best injectors in your city.
+                            Patients are looking for credentials, not just reviews. Claim your profile to display your verified NPI and state licenses directly in search results.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -70,7 +70,7 @@ export default function ForProvidersPage() {
                                     Stand out without <span className="text-[#C9A96E]">marketing spin.</span>
                                 </h2>
                                 <p className="text-lg text-[#3D2B1F]/70 font-light leading-relaxed mb-10">
-                                    Traditional directories look like billboards. InjectorIndex only surfaces the truth. We highlight your actual expertise, verified credentials, and patient outcomes, making it easy for the right patients to find you.
+                                    Traditional directories look like billboards. VerifiedAesthetics only surfaces the truth. We highlight your actual expertise, verified credentials, and patient outcomes, making it easy for the right patients to find you.
                                 </p>
 
                                 <div className="space-y-8">
@@ -79,8 +79,8 @@ export default function ForProvidersPage() {
                                             <Database className="w-6 h-6 text-[#C9A96E]" />
                                         </div>
                                         <div>
-                                            <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">Optimized for Patient Discovery</h4>
-                                            <p className="text-[#3D2B1F]/60 text-sm leading-relaxed">We structure your profile so that when patients search for specific treatments or "natural results" in your city, your clinic ranks exactly where it should.</p>
+                                            <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">Get Your Verified Badge</h4>
+                                            <p className="text-[#3D2B1F]/60 text-sm leading-relaxed">A verification badge signals to patients that your medical credentials, NPI, and state licenses have been independently verified.</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-6">
@@ -123,10 +123,10 @@ export default function ForProvidersPage() {
                                             <span className="text-[#C9A96E] font-bold">Your Clinic</span>
                                         </p>
                                         <div className="pl-4 border-l-2 border-[#C9A96E]/30 my-6 py-2">
-                                            <p className="text-[#C9A96E] italic">// Why You Ranked #1:</p>
-                                            <p className="text-[#3D2B1F]/70 mt-2">1. Verified Credentials</p>
-                                            <p className="text-[#3D2B1F]/70 mt-1">2. 45 Reviews mentioning "Natural"</p>
-                                            <p className="text-[#3D2B1F]/70 mt-1">3. Specialized in Facial Harmony</p>
+                                            <p className="text-[#C9A96E] italic">// Why Your Profile Converts:</p>
+                                            <p className="text-[#3D2B1F]/70 mt-2">1. Verified NPI Credentials</p>
+                                            <p className="text-[#3D2B1F]/70 mt-1">2. Active State Licensure</p>
+                                            <p className="text-[#3D2B1F]/70 mt-1">3. 45 Reviews mentioning "Natural"</p>
                                         </div>
                                     </div>
                                 </div>
@@ -141,7 +141,7 @@ export default function ForProvidersPage() {
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-20">
                         <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">Built for <span className="text-[#C9A96E]">Growth.</span></h2>
-                        <p className="text-[#3D2B1F]/60 max-w-xl mx-auto">Three ways InjectorIndex delivers patient traffic to your door.</p>
+                        <p className="text-[#3D2B1F]/60 max-w-xl mx-auto">Three ways VerifiedAesthetics delivers patient traffic to your door.</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">

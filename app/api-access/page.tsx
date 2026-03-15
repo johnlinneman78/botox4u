@@ -43,7 +43,7 @@ export default function ApiAccessPage() {
 
     const codeExample = `
 // curl -H "x-api-key: YOUR_KEY" \\
-// "https://www.injectorindex.com/api/v1/providers?city=portland&style=natural"
+// "https://www.verifiedaesthetics.com/api/v1/providers?city=portland&style=natural"
 
 {
   "results": [
@@ -53,11 +53,11 @@ export default function ApiAccessPage() {
       "Clarity Score™": 92,
       "style_tags": ["natural", "conservative"],
       "avg_price": 320,
-      "profile_url": "https://www.injectorindex.com/provider/pdx-injectables"
+      "profile_url": "https://www.verifiedaesthetics.com/provider/pdx-injectables"
     }
   ],
   "total": 1,
-  "powered_by": "InjectorIndex Clarity Score™"
+  "powered_by": "VerifiedAesthetics Clarity Score™"
 }`
 
     return (
@@ -71,7 +71,7 @@ export default function ApiAccessPage() {
                         <Code className="w-3.5 h-3.5" /> For Developers & AI Agents
                     </div>
                     <h1 className="text-5xl md:text-7xl font-display font-bold text-[#3D2B1F] mb-8 leading-tight">
-                        InjectorIndex API — <span className="text-[#C9A96E]">Provider Data</span> for AI
+                        VerifiedAesthetics API — <span className="text-[#C9A96E]">Provider Data</span> for AI
                     </h1>
                     <p className="text-xl text-[#3D2B1F]/70 font-light max-w-2xl mx-auto leading-relaxed">
                         Query ranked aesthetic providers by city, style, price, and Clarity Score™. Structured for AI agents, health apps, and booking platforms.

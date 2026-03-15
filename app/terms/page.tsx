@@ -6,12 +6,12 @@ export const metadata: Metadata = {
     title: `Terms of Service | ${NICHE.siteName}`,
     description: `The terms and conditions for using the ${NICHE.siteName} platform and services.`,
     alternates: {
-        canonical: 'https://www.injectorindex.com/terms',
+        canonical: 'https://www.verifiedaesthetics.com/terms',
     },
     openGraph: {
         title: `Terms of Service | ${NICHE.siteName}`,
         description: `The terms and conditions for using the ${NICHE.siteName} platform and services.`,
-        url: 'https://www.injectorindex.com/terms',
+        url: 'https://www.verifiedaesthetics.com/terms',
     }
 }
 
@@ -24,7 +24,7 @@ export default function TermsPage() {
 
                 <section className="space-y-6 text-[#3D2B1F]/70 leading-relaxed">
                     <p>
-                        By using InjectorIndex.com, you agree to comply with and be bound by the following terms and conditions of use.
+                        By using VerifiedAesthetics.com, you agree to comply with and be bound by the following terms and conditions of use.
                     </p>
 
                     <h2 className="text-xl font-bold text-[#3D2B1F] mt-8">1. Acceptance of Agreement</h2>
@@ -34,7 +34,7 @@ export default function TermsPage() {
 
                     <h2 className="text-xl font-bold text-[#3D2B1F] mt-8">2. Medical Information Disclaimer</h2>
                     <p>
-                        InjectorIndex.com is an informational directory and lead generation platform. We do not provide medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.
+                        VerifiedAesthetics.com is an informational directory and lead generation platform. We do not provide medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.
                     </p>
 
                     <h2 className="text-xl font-bold text-[#3D2B1F] mt-8">3. Provider Listings</h2>
@@ -44,7 +44,7 @@ export default function TermsPage() {
 
                     <h2 className="text-xl font-bold text-[#3D2B1F] mt-8">4. Limitation of Liability</h2>
                     <p>
-                        InjectorIndex.com shall not be liable for any damages resulting from the use or inability to use the site or services provided by any third-party providers found through the site.
+                        VerifiedAesthetics.com shall not be liable for any damages resulting from the use or inability to use the site or services provided by any third-party providers found through the site.
                     </p>
                 </section>
 

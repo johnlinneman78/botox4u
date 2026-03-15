@@ -8,7 +8,7 @@ const ARTICLES = [
         slug: "daxxify-long-acting-tox-city-reports-2026",
         tag: "Treatment Guide",
         trending: true,
-        author: "InjectorIndex Editorial",
+        author: "VerifiedAesthetics Editorial",
         readTime: "6 min"
     },
     {
@@ -17,7 +17,7 @@ const ARTICLES = [
         slug: "neo-romantic-manifesto-2026-aesthetic-shift",
         tag: "Core Manifesto",
         trending: true,
-        author: "InjectorIndex Editorial",
+        author: "VerifiedAesthetics Editorial",
         readTime: "8 min"
     },
     {
@@ -26,7 +26,7 @@ const ARTICLES = [
         slug: "new-york-regenerative-aesthetic-outlook-2026",
         tag: "NYC Intel",
         trending: true,
-        author: "InjectorIndex Editorial",
+        author: "VerifiedAesthetics Editorial",
         readTime: "7 min"
     },
 ];

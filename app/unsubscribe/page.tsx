@@ -36,7 +36,7 @@ function UnsubscribeContent() {
         <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
             <Card className="max-w-md w-full shadow-xl">
                 <CardHeader>
-                    <CardTitle className="text-center text-primary">Unsubscribe from InjectorIndex</CardTitle>
+                    <CardTitle className="text-center text-primary">Unsubscribe from VerifiedAesthetics</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
                     {status === 'idle' && (

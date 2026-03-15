@@ -69,6 +69,8 @@ export interface EnrichedProvider {
     positive_keyword_count?: number;
     negative_keyword_count?: number;
     has_real_photo?: boolean;
+
+    practitioners?: any[];
 }
 
 export interface Review {

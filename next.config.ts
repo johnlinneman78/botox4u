@@ -111,16 +111,16 @@ const nextConfig: NextConfig = {
         destination: '/injectors/ny/new-york',
         permanent: true,
       },
-      // Domain-level catch-all redirect (to be used when injectorindex.com points to this deployment)
+      // Domain-level catch-all redirect (to be used when verifiedaesthetics.com points to this deployment)
       {
         source: '/:path*',
         has: [
           {
             type: 'host',
-            value: 'injectorindex.com',
+            value: 'verifiedaesthetics.com',
           },
         ],
-        destination: 'https://www.injectorindex.com/:path*',
+        destination: 'https://www.verifiedaesthetics.com/:path*',
         permanent: true,
       },
       // Domain-level catch-all redirect (to be used when botox-4u.com points to this deployment)
@@ -132,7 +132,7 @@ const nextConfig: NextConfig = {
             value: 'www.botox-4u.com',
           },
         ],
-        destination: 'https://www.injectorindex.com/:path*',
+        destination: 'https://www.verifiedaesthetics.com/:path*',
         permanent: true,
       },
       {
@@ -143,7 +143,7 @@ const nextConfig: NextConfig = {
             value: 'botox-4u.com',
           },
         ],
-        destination: 'https://injectorindex.com/:path*',
+        destination: 'https://verifiedaesthetics.com/:path*',
         permanent: true,
       },
 

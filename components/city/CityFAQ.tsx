@@ -23,7 +23,7 @@ export function CityFAQ({ city, avgCost }: CityFAQProps) {
         },
         {
             q: `How do I find a reputable Botox injector in ${city}?`,
-            a: `Look for board-certified plastic surgeons, dermatologists, or specialized aesthetic injectors with a Clarity Score™ above 70. On InjectorIndex.com, our primary directory automatically filters for providers who pass our safety audit (55+ Score). Providers with the "Verified" badge have been cross-referenced against the federal NPI database for licensure and credential validity.`
+            a: `Look for board-certified plastic surgeons, dermatologists, or specialized aesthetic injectors with a Clarity Score™ above 70. On VerifiedAesthetics.com, our primary directory automatically filters for providers who pass our safety audit (55+ Score). Providers with the "Verified" badge have been cross-referenced against the federal NPI database for licensure and credential validity.`
         },
         {
             q: `How is the Clarity Score™ ranking determined for ${city} clinics?`,

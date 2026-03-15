@@ -31,7 +31,7 @@ export function CostComparisonTable({ id, title, rows, footer, updatedDate }: Co
                         Last Updated: {lastUpdated}
                     </span>
                     <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 bg-[#3D2B1F]/5 text-[#3D2B1F]/50 rounded-full text-[10px] font-bold uppercase tracking-widest border border-[#3D2B1F]/10">
-                        InjectorIndex.com Data
+                        VerifiedAesthetics.com Data
                     </span>
                 </div>
             </div>

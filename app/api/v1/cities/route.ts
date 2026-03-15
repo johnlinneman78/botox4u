@@ -49,13 +49,13 @@ export async function GET(req: Request) {
         .sort((a, b) => b.provider_count - a.provider_count)
         .map(c => ({
             ...c,
-            directory_url: `https://www.injectorindex.com/injectors/${c.state.toLowerCase()}/${c.city.toLowerCase().replace(/\s+/g, '-')}`
+            directory_url: `https://www.verifiedaesthetics.com/injectors/${c.state.toLowerCase()}/${c.city.toLowerCase().replace(/\s+/g, '-')}`
         }))
 
     return NextResponse.json({
         cities,
         total_cities: cities.length,
         total_providers: (data || []).length,
-        powered_by: "InjectorIndex Clarity Score™"
+        powered_by: "VerifiedAesthetics Clarity Score™"
     })
 }

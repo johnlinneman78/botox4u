@@ -9,7 +9,7 @@ import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
 import { ScrollCTA } from '@/components/ui/ScrollCTA'
 import { formatCurrency } from '@/lib/utils'
 import { NICHE } from '@/config/niche'
-import { ChevronRight, ShieldCheck, Search, Activity, Sparkles, Star, Info } from 'lucide-react'
+import { ChevronRight, ShieldCheck, Search, Activity, Sparkles, Star, Info, User, CheckCircle } from 'lucide-react'
 
 interface ProviderProfileClientProps {
     provider: Record<string, any>
@@ -159,51 +159,93 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                 </RevealOnScroll>
             </section>
 
-            {/* ═══ CLARITY SCORE SECTION ═══ */}
+            {/* ═══ VERIFIED CREDENTIALS (NEW) ═══ */}
             <section className="container-content pb-12">
                 <RevealOnScroll>
                     <div
-                        className="p-8 lg:p-10 rounded-lg"
-                        style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)' }}
+                        className="p-6 md:p-8 relative overflow-hidden"
+                        style={{ background: '#F2EDE4', borderLeft: '3px solid #8A9E8D', borderRadius: 'var(--radius-lg)' }}
                     >
                         <h3
-                            className="font-display font-medium mb-6"
-                            style={{ fontSize: '22px', color: 'var(--color-espresso)' }}
+                            className="font-bold uppercase tracking-[0.12em] mb-6 flex items-center gap-2 relative z-10"
+                            style={{ fontSize: '11px', color: '#8A9E8D' }}
                         >
-                            Why This Provider Scores Well
+                            <ShieldCheck className="w-4 h-4" />
+                            Verified Credentials
                         </h3>
 
-                        <div className="flex flex-col lg:flex-row gap-8 mb-8">
-                            <div className="shrink-0">
-                                <ClarityBadge score={clarityScore} size="profile" />
-                            </div>
-                            <div className="flex-1">
-                                <p
-                                    className="font-body mb-6"
-                                    style={{ fontSize: '15px', color: 'var(--color-stone)', lineHeight: 1.7 }}
-                                >
-                                    Scored on 5 independent data signals — not paid placement. This Clarity Score™ reflects verifiable credentials, patient sentiment analysis, and practice quality indicators.
-                                </p>
-                                <div className="space-y-4">
-                                    {scoreBreakdown.map((item, i) => (
-                                        <ProgressBar
-                                            key={item.label}
-                                            label={item.label}
-                                            score={item.score}
-                                            maxScore={item.maxScore}
-                                            index={i}
-                                        />
-                                    ))}
+                        <div className="space-y-4 relative z-10">
+                            {provider.practitioners && provider.practitioners.length > 0 ? (
+                                provider.practitioners.map((practitioner: any, index: number) => {
+                                    let expYears = 0;
+                                    let licYear = 0;
+                                    if (practitioner.npi_enumeration_date) {
+                                        licYear = new Date(practitioner.npi_enumeration_date).getFullYear();
+                                        expYears = new Date().getFullYear() - licYear;
+                                    }
+                                    return (
+                                        <div key={index} className="bg-white/80 backdrop-blur-sm p-5 md:p-6 rounded-xl border border-[#3D2B1F]/5 shadow-sm">
+                                            <div className="flex items-start gap-4">
+                                                <div className="w-12 h-12 rounded-full bg-[#FAF8F5] border border-[#3D2B1F]/10 flex items-center justify-center shrink-0">
+                                                    <User className="w-6 h-6 text-[#3D2B1F]/40" />
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-sans font-medium text-[17px] text-[#3D2B1F] mb-0.5">
+                                                        {practitioner.name}{practitioner.credentials ? `, ${practitioner.credentials}` : ''}
+                                                    </h4>
+                                                    <div className="w-12 h-[1px] bg-[#3D2B1F]/10 my-3 hidden md:block"></div>
+
+                                                    <div className="space-y-1.5 font-sans text-[14px]">
+                                                        <div className="text-[#A89B8C]">
+                                                            <span className="inline-block w-20 md:w-28 text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">Specialty</span>
+                                                            {practitioner.taxonomy || 'Aesthetics'}
+                                                        </div>
+                                                        <div className="text-[#A89B8C] flex items-center gap-1.5">
+                                                            <span className="inline-block w-20 md:w-28 text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">NPI</span>
+                                                            #{practitioner.npi_number || 'Verification pending'}
+                                                            {practitioner.is_npi_verified && (
+                                                                <span className="text-[#8A9E8D] font-medium flex items-center gap-1 ml-1.5 border border-[#8A9E8D]/20 bg-[#8A9E8D]/10 px-2 py-0.5 rounded-full text-xs">
+                                                                    Verified <CheckCircle className="w-3 h-3" />
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                        <div className="text-[#A89B8C]">
+                                                            <span className="inline-block w-20 md:w-28 text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">Licensed</span>
+                                                            {licYear > 0 ? (
+                                                                <>
+                                                                    Since {licYear} <span className="font-medium text-[#3D2B1F]">({expYears} years)</span>
+                                                                </>
+                                                            ) : 'Verification pending'}
+                                                        </div>
+                                                        <div className="text-[#A89B8C]">
+                                                            <span className="inline-block w-20 md:w-28 text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">State</span>
+                                                            {provider.state}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            ) : (
+                                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-[#3D2B1F]/5 shadow-sm text-center py-10">
+                                    <div className="w-12 h-12 rounded-full bg-[#FAF8F5] border border-[#3D2B1F]/10 flex items-center justify-center shrink-0 mx-auto mb-4">
+                                        <Info className="w-6 h-6 text-[#3D2B1F]/20" />
+                                    </div>
+                                    <h4 className="font-sans font-medium text-[16px] text-[#3D2B1F] mb-2">No Verified Practitioners Found</h4>
+                                    <p className="font-sans text-[14px] text-[#A89B8C] max-w-sm mx-auto">This business has not yet claimed their profile to add verified medical credential data.</p>
                                 </div>
-                            </div>
+                            )}
                         </div>
 
-                        <p
-                            className="font-body text-xs pt-4"
-                            style={{ color: 'var(--color-taupe)', borderTop: '1px solid var(--color-surface)' }}
-                        >
-                            Clarity Score™ is recalculated monthly.
-                        </p>
+                        <div className="mt-8 relative z-10">
+                            <p className="font-sans text-[12px] text-[#A89B8C]">
+                                Credential data sourced from the CMS National Provider Identifier (NPI) Registry. Last verified: {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}.
+                            </p>
+                        </div>
+
+                        {/* Decorative background element */}
+                        <div className="absolute right-0 top-0 w-64 h-64 bg-[#C9A96E]/5 rounded-full blur-3xl -translate-y-12 translate-x-12 z-0 pointer-events-none"></div>
                     </div>
                 </RevealOnScroll>
             </section>
@@ -275,6 +317,71 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
             </section>
 
 
+
+            {/* ═══ VERIFIED CREDENTIALS ═══ */}
+            {provider.practitioners && provider.practitioners.length > 0 && (
+                <section className="container-content pb-12">
+                    <RevealOnScroll>
+                        <h2
+                            className="font-display font-light pb-3 mb-6 flex items-center gap-3"
+                            style={{ fontSize: '26px', color: 'var(--color-espresso)', borderBottom: '1px solid var(--color-border)' }}
+                        >
+                            <ShieldCheck className="w-6 h-6" style={{ color: 'var(--color-sage)' }} />
+                            Verified Provider Credentials
+                        </h2>
+                    </RevealOnScroll>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {provider.practitioners.map((prac: any, i: number) => (
+                            <RevealOnScroll key={i} delay={i * 0.1}>
+                                <div className="p-6 rounded-xl border relative" style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface)' }}>
+                                    {prac.npi_verified && (
+                                        <div className="absolute top-4 right-4">
+                                            <Badge variant="sage" className="flex items-center gap-1.5 px-3 py-1">
+                                                <ShieldCheck className="w-3.5 h-3.5" />
+                                                NPI Verified
+                                            </Badge>
+                                        </div>
+                                    )}
+                                    <div className="pr-24">
+                                        <h3 className="font-display font-medium text-xl mb-1" style={{ color: 'var(--color-espresso)' }}>
+                                            {prac.first_name} {prac.last_name}{prac.license_type ? `, ${prac.license_type}` : ''}
+                                        </h3>
+                                        <p className="font-body text-sm font-medium mb-4" style={{ color: 'var(--color-taupe)' }}>
+                                            {prac.npi_taxonomy_description || prac.scraped_title || 'Aesthetic Provider'}
+                                        </p>
+                                    </div>
+
+                                    {(prac.npi_number || prac.npi_enumeration_date) && (
+                                        <div className="mt-4 pt-4 border-t border-[var(--color-border)] grid grid-cols-2 gap-4">
+                                            {prac.npi_number && (
+                                                <div>
+                                                    <span className="block text-[10px] uppercase tracking-wider mb-1" style={{ color: 'var(--color-taupe)' }}>
+                                                        NPI Registry #
+                                                    </span>
+                                                    <span className="font-mono text-sm" style={{ color: 'var(--color-stone)' }}>
+                                                        {prac.npi_number}
+                                                    </span>
+                                                </div>
+                                            )}
+                                            {prac.npi_enumeration_date && (
+                                                <div>
+                                                    <span className="block text-[10px] uppercase tracking-wider mb-1" style={{ color: 'var(--color-taupe)' }}>
+                                                        Licensed Since
+                                                    </span>
+                                                    <span className="font-mono text-sm" style={{ color: 'var(--color-stone)' }}>
+                                                        {new Date(prac.npi_enumeration_date).getFullYear()}
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            </RevealOnScroll>
+                        ))}
+                    </div>
+                </section>
+            )}
 
             {/* ═══ WHAT PATIENTS SAY ═══ */}
             <section className="container-content pb-12">

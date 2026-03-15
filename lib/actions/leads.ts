@@ -38,11 +38,11 @@ const getPatientAuditEmailHtml = (lead: any) => `
   <div style="font-family: sans-serif; padding: 40px; background-color: #0d1420; color: #ffffff; border-radius: 20px; max-width: 600px; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 30px;">
         <h1 style="color: #d4af37; margin-bottom: 5px; font-size: 24px;">Elite Audit™ Report Generated</h1>
-        <p style="color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">InjectorIndex Intelligence</p>
+        <p style="color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">VerifiedAesthetics Intelligence</p>
     </div>
     
     <p>Hello ${lead.full_name.split(' ')[0]},</p>
-    <p>Thank you for using the <strong>InjectorIndex independent Audit Portal</strong>. We are currently processing your request for the following clinic(s):</p>
+    <p>Thank you for using the <strong>VerifiedAesthetics independent Audit Portal</strong>. We are currently processing your request for the following clinic(s):</p>
     
     <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); padding: 20px; border-radius: 15px; margin: 20px 0;">
         <h3 style="color: #d4af37; margin-top: 0;">Audit Target: ${lead.current_considerations || 'Regional Audit'}</h3>
@@ -66,7 +66,7 @@ const getPatientAuditEmailHtml = (lead: any) => `
 
     <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
         <p style="font-size: 10px; color: #666;">
-            © 2026 InjectorIndex. Independent clinical data for the regenerative era.
+            © 2026 VerifiedAesthetics. Independent clinical data for the regenerative era.
         </p>
     </div>
   </div>

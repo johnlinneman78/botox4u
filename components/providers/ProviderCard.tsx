@@ -1,18 +1,14 @@
 import Link from 'next/link'
-import { Card } from '@/components/ui/Card'
-import { Badge } from '@/components/ui/Badge'
-import { Button } from '@/components/ui/Button'
+import { CheckCircle, MapPin, Star, Trophy, Calendar, Info, ShieldCheck, User, ArrowRight } from 'lucide-react'
 import { formatCurrency } from '@/lib/utils'
-import { CheckCircle, MapPin, Star, Trophy, Calendar, Info } from 'lucide-react'
 
-// Keep the existing interface to avoid breaking usages in page.tsx
 interface ProviderCardProps {
     provider: {
         id: string
         name: string
         slug: string
         businessType: string
-        address?: string // made optional
+        address?: string
         city: string
         state: string
         averageRating: number
@@ -22,187 +18,160 @@ interface ProviderCardProps {
         pricePerUnit?: number
         minTreatmentPrice?: number
         imageUrl?: string
-        enriched_attrs?: {
-            price_per_unit_botox?: number
-            price_per_unit_dysport?: number
-            membership_program?: boolean
-            new_patient_special?: string
-            phone_number?: string
-            contact_url?: string
-            online_booking_available?: boolean
-            injector_credentials?: string[]
-            offers_masseter_botox?: boolean
-            offers_gummy_smile?: boolean
-            offers_lip_flip?: boolean
-            offers_hyperhidrosis?: boolean
-            top_account_status?: string
-            years_in_business?: number
-        }
+        enriched_attrs?: any
         website?: string
         description?: string
         lat?: number
         lng?: number
+        clarityScore?: number
+        score_total?: number
+        practitioners?: any[]
     }
 }
 
 export function ProviderCard({ provider }: ProviderCardProps) {
     const isPremium = provider.listingTier === 'premium'
 
-    const description = provider.description ||
-        `${provider.name} is a top-rated aesthetic provider in ${provider.city}, ${provider.state}. They specialize in advanced ${provider.businessType || 'aesthetic'} treatments with a focus on natural, subtle results and patient safety.`
+    // Lead Practitioner logic
+    const leadPractitioner = provider.practitioners && provider.practitioners.length > 0
+        ? provider.practitioners[0]
+        : null;
+
+    let experienceYears = 0;
+    let licenseYear = 0;
+    if (leadPractitioner?.npi_enumeration_date) {
+        licenseYear = new Date(leadPractitioner.npi_enumeration_date).getFullYear();
+        experienceYears = new Date().getFullYear() - licenseYear;
+    }
+
+    const score = provider.clarityScore || provider.score_total || 85; // Default score if none present
+
+    // Treatments mock logic based on enriched_attrs
+    const treatments = [];
+    if (provider.enriched_attrs?.price_per_unit_botox || provider.pricePerUnit) treatments.push('Botox');
+    if (provider.enriched_attrs?.price_per_unit_dysport) treatments.push('Dysport');
+    if (provider.enriched_attrs?.offers_lip_flip) treatments.push('Lip Filler');
+    if (treatments.length === 0) treatments.push('Aesthetics', 'Injectables');
+
+    const ctaText = leadPractitioner
+        ? `${leadPractitioner.name} — ${provider.city}, ${provider.state}`
+        : `${provider.name} — ${provider.city}, ${provider.state}`;
 
     return (
-        <Card className={`group relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 bg-white border-gray-100 ${isPremium ? 'border-secondary/30 ring-1 ring-secondary/20 shadow-lg' : ''
-            }`}>
-            {/* Premium Header/Banner */}
-            {isPremium && (
-                <div className="bg-primary text-[#3D2B1F] text-[10px] uppercase font-bold tracking-widest px-4 py-2 flex justify-between items-center">
-                    <span className="flex items-center gap-1.5">
-                        <Trophy className="w-3.5 h-3.5 text-secondary" />
-                        Top National Partner
-                    </span>
-                    <span className="text-secondary font-extrabold">Verified Excellence</span>
-                </div>
-            )}
+        <div className={`group relative w-full rounded-2xl border transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 overflow-hidden flex flex-col ${isPremium ? 'border-[#C9A96E]/30 bg-white ring-1 ring-[#C9A96E]/20 shadow-lg' : 'bg-white border-[#3D2B1F]/10'}`}>
+            <div className="p-6 md:p-8 flex flex-col flex-1">
 
-            <div className="flex flex-col md:flex-row">
-                {/* Image Section */}
-                <div className="relative w-full md:w-72 h-72 md:h-auto bg-gray-50 flex-shrink-0 overflow-hidden">
-                    {provider.imageUrl ? (
-                        <img
-                            src={provider.imageUrl}
-                            alt={`${provider.name} Clinic`}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
-                        />
-                    ) : (
-                        <div className="w-full h-full relative group-hover:scale-110 transition-transform duration-1000 ease-out">
-                            <img
-                                src="https://images.unsplash.com/photo-1576091160550-217359f42f8c?auto=format&fit=crop&q=80&w=800"
-                                alt="Aesthetic Treatment Room"
-                                className="w-full h-full object-cover opacity-40 mix-blend-multiply transition-opacity group-hover:opacity-50"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/40" />
-                            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                                <div className="w-12 h-12 mb-3 rounded-full bg-[#3D2B1F]/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-                                    <MapPin className="w-6 h-6 text-[#3D2B1F]/60" />
+                {/* Row 1: Business identity + score */}
+                <div className="flex justify-between items-start mb-6 border-b border-[#3D2B1F]/10 pb-6">
+                    <div>
+                        <h3 className="text-[20px] font-display font-medium text-[#3D2B1F] leading-tight mb-1 group-hover:text-[#C9A96E] transition-colors">
+                            {provider.name}
+                        </h3>
+                        <p className="font-sans text-[12px] text-[#A89B8C]">
+                            {provider.businessType || 'Aesthetic Clinic'} · {provider.city}, {provider.state}
+                        </p>
+                    </div>
+
+                    <div className="flex flex-col items-end">
+                        <div className="flex flex-col items-center">
+                            <span className="text-[20px] font-display font-bold text-[#3D2B1F] leading-none mb-0.5">{score}/100</span>
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-[#C9A96E] flex items-center gap-1">
+                                <ShieldCheck className="w-3 h-3" />
+                                Clarity
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Row 2: Lead practitioner credentials */}
+                <div className="mb-6">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-[#3D2B1F]/40 mb-3">Lead Practitioner</p>
+
+                    {leadPractitioner ? (
+                        <div className="flex items-start gap-3">
+                            <div className="w-10 h-10 rounded-full bg-[#FAF8F5] border border-[#3D2B1F]/10 flex items-center justify-center shrink-0">
+                                <User className="w-5 h-5 text-[#3D2B1F]/40" />
+                            </div>
+                            <div>
+                                <h4 className="font-sans font-medium text-[15px] text-[#3D2B1F] mb-0.5">
+                                    {leadPractitioner.name}{leadPractitioner.credentials ? `, ${leadPractitioner.credentials}` : ''}
+                                </h4>
+                                <div className="flex items-center gap-1.5 font-sans text-[13px] text-[#A89B8C] mb-1">
+                                    <span>{leadPractitioner.taxonomy || 'Aesthetics'}</span>
+                                    {leadPractitioner.is_npi_verified && (
+                                        <>
+                                            <span className="opacity-50">·</span>
+                                            <span className="text-[#8A9E8D] font-medium flex items-center gap-1">
+                                                NPI Verified <CheckCircle className="w-3.5 h-3.5" />
+                                            </span>
+                                        </>
+                                    )}
                                 </div>
-                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#3D2B1F]/60">Verified Clinic</span>
+                                {licenseYear > 0 && (
+                                    <p className="font-sans text-[13px] text-[#A89B8C] italic">
+                                        Licensed since {licenseYear} · {experienceYears} years experience
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="flex items-start gap-3">
+                            <div className="w-10 h-10 rounded-full bg-[#FAF8F5] border border-[#3D2B1F]/5 flex items-center justify-center shrink-0">
+                                <User className="w-5 h-5 text-[#3D2B1F]/20" />
+                            </div>
+                            <div className="flex items-center h-10">
+                                <p className="font-sans text-[13px] text-[#A89B8C] italic">Credentials pending verification</p>
                             </div>
                         </div>
                     )}
-
-                    {/* Floating Badges on Image */}
-                    <div className="absolute top-4 left-4 flex flex-col gap-2 pointer-events-none">
-                        {provider.verified && (
-                            <Badge className="bg-white/95 text-[#3D2B1F] border-none backdrop-blur-md shadow-md font-bold px-3 py-1 flex items-center gap-1.5">
-                                <CheckCircle className="w-3.5 h-3.5 text-[#8A9E8D] fill-[#8A9E8D]/10" />
-                                <span className="text-[10px] tracking-tight">VERIFIED PROVIDER</span>
-                            </Badge>
-                        )}
-                        {provider.enriched_attrs?.top_account_status && (
-                            <Badge className="bg-primary/90 text-secondary border-none backdrop-blur-md shadow-md px-3 py-1 font-bold">
-                                💎 {provider.enriched_attrs.top_account_status}
-                            </Badge>
-                        )}
-                    </div>
                 </div>
 
-                {/* Content Section */}
-                <div className="flex-1 p-8 flex flex-col">
-                    <div className="flex justify-between items-start mb-4">
-                        <div className="flex-1 pr-4">
-                            <h3 className="text-2xl md:text-3xl font-display font-bold text-primary group-hover:text-secondary transition-colors mb-2 leading-tight">
-                                {provider.name}
-                            </h3>
-                            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[#3D2B1F]/60 font-medium">
-                                <div className="flex items-center gap-1.5">
-                                    <MapPin className="w-4 h-4 text-secondary" />
-                                    {provider.city}, {provider.state}
-                                </div>
-                                <div className="hidden sm:block w-1 h-1 rounded-full bg-gray-300" />
-                                <div>{provider.businessType || 'Aesthetic Clinic'}</div>
-                            </div>
-                        </div>
-                        <div className="flex flex-col items-end">
-                            <div className="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-100 shadow-sm">
-                                <Star className="w-5 h-5 fill-secondary text-secondary" />
-                                <span className="font-bold text-lg text-primary">{provider.averageRating || '5.0'}</span>
-                                <span className="text-xs text-[#3D2B1F]/70 font-medium">({provider.reviewCount || 'New'})</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-[#3D2B1F]/50 leading-relaxed mb-6 font-light line-clamp-3">
-                        {description}
-                    </p>
-
-                    {/* Differentiators / Credentials */}
-                    <div className="flex flex-wrap gap-2.5 mb-8">
-                        {provider.enriched_attrs?.injector_credentials?.slice(0, 3).map((cred, i) => (
-                            <span key={i} className="px-3 py-1.5 bg-[#3D2B1F]/5 text-[#3D2B1F]/70 text-[10px] font-bold uppercase tracking-wider rounded-lg border border-[#3D2B1F]/10">
-                                🩺 {cred}
+                {/* Row 3: Treatment tags */}
+                <div className="mb-6 border-t border-[#3D2B1F]/10 pt-6">
+                    <div className="flex flex-wrap gap-2">
+                        {treatments.map((tag, idx) => (
+                            <span key={idx} className="px-3 py-1.5 bg-[#F2EDE4] text-[#3D2B1F] text-[12px] font-sans rounded-full">
+                                {tag}
                             </span>
                         ))}
-                        {provider.enriched_attrs?.online_booking_available && (
-                            <span className="px-3 py-1.5 bg-green-50/50 text-green-700 text-[10px] font-bold uppercase tracking-wider rounded-lg border border-green-100/50 flex items-center gap-1.5">
-                                <Calendar className="w-3.5 h-3.5" /> Book Online
-                            </span>
-                        )}
-                        {provider.listingTier === 'premium' && (
-                            <span className="px-3 py-1.5 bg-secondary/10 text-secondary text-[10px] font-bold uppercase tracking-wider rounded-lg border border-secondary/20">
-                                Preferred Partner
-                            </span>
-                        )}
-                    </div>
-
-                    <div className="mt-auto pt-6 border-t border-gray-100 flex flex-col lg:flex-row items-center justify-between gap-6">
-                        {/* Pricing Transparency Box */}
-                        <div className="flex items-center gap-8 w-full lg:w-auto overflow-x-auto pb-4 lg:pb-0">
-                            {provider.pricePerUnit ? (
-                                <div className="flex-shrink-0">
-                                    <div className="text-[10px] text-[#3D2B1F]/70 uppercase tracking-widest font-bold mb-1">Botox Price</div>
-                                    <div className="flex items-baseline gap-1">
-                                        <span className="text-3xl font-bold text-primary font-display">{formatCurrency(provider.pricePerUnit)}</span>
-                                        <span className="text-xs text-[#3D2B1F]/70 font-sans font-medium uppercase tracking-tighter">/ unit</span>
-                                    </div>
-                                </div>
-                            ) : (
-                                <div className="text-sm text-[#3D2B1F]/70 italic flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-lg border border-dashed border-gray-200">
-                                    <Info className="w-4 h-4 text-secondary" /> Pricing by request
-                                </div>
-                            )}
-
-                            {provider.enriched_attrs?.price_per_unit_dysport && (
-                                <div className="hidden sm:block w-px h-10 bg-gray-200" />
-                            )}
-
-                            {provider.enriched_attrs?.price_per_unit_dysport && (
-                                <div className="flex-shrink-0">
-                                    <div className="text-[10px] text-[#3D2B1F]/70 uppercase tracking-widest font-bold mb-1">Dysport</div>
-                                    <div className="text-xl font-bold text-gray-700 font-display">
-                                        {formatCurrency(provider.enriched_attrs.price_per_unit_dysport)}
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* CTAs */}
-                        <div className="flex gap-4 w-full lg:w-auto">
-                            <Link href={`/provider/${provider.slug}`} className="flex-1 lg:flex-initial">
-                                <Button variant="outline" className="w-full border-gray-200 h-14 px-8 text-primary font-bold hover:border-secondary hover:text-secondary rounded-xl transition-all">
-                                    View Full Profile
-                                </Button>
-                            </Link>
-                            <Link href={`/provider/${provider.slug}#book`} className="flex-1 lg:flex-initial">
-                                <Button className="w-full bg-primary hover:bg-primary/90 text-[#3D2B1F] shadow-xl shadow-primary/20 h-14 px-10 font-bold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98]">
-                                    Check Availability
-                                </Button>
-                            </Link>
-                        </div>
                     </div>
                 </div>
+
+                <div className="mt-auto" />
+
+                {/* Row 4: Rating + pricing */}
+                <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-1.5">
+                        <span className="text-[var(--color-gold)] text-[14px]">
+                            {'★'.repeat(Math.round(provider.averageRating || 5))}
+                        </span>
+                        <span className="font-sans font-bold text-[14px] text-[#3D2B1F]">
+                            {(provider.averageRating || 5.0).toFixed(1)}
+                        </span>
+                        <span className="font-sans text-[13px] text-[#A89B8C] ml-1">
+                            ({provider.reviewCount || 0} reviews)
+                        </span>
+                    </div>
+
+                    {provider.pricePerUnit && (
+                        <div className="font-sans font-medium text-[14px] text-[#3D2B1F]">
+                            From {formatCurrency(provider.pricePerUnit)}/unit
+                        </div>
+                    )}
+                </div>
+
+                {/* Row 5: CTA */}
+                <div className="border-t border-[#3D2B1F]/10 pt-4 mt-2">
+                    <Link href={`/provider/${provider.slug}`} className="flex justify-between items-center group/cta w-full">
+                        <span className="font-sans font-medium text-[14px] text-[#3D2B1F]">
+                            {ctaText}
+                        </span>
+                        <ArrowRight className="w-4 h-4 text-[#3D2B1F] opacity-40 group-hover/cta:opacity-100 group-hover/cta:translate-x-1 transition-all" />
+                    </Link>
+                </div>
             </div>
-        </Card>
+
+            <Link href={`/provider/${provider.slug}`} className="absolute inset-0 z-10 focus:outline-none" aria-label={`View details for ${provider.name}`} />
+        </div>
     )
 }

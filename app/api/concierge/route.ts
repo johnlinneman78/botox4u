@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getProvidersWithSearch } from '@/lib/actions/providers'
 
-const SYSTEM_PROMPT = `You are an InjectorIndex assistant. Help patients find the right aesthetic injector based on their preferences. 
+const SYSTEM_PROMPT = `You are an VerifiedAesthetics assistant. Help patients find the right aesthetic injector based on their preferences. 
 Ask about: their city (if not known), desired results (natural/subtle vs volume), budget, and any specific concerns. 
 If you have enough info to recommend, output a special tag [SEARCH: city="...", style="...", max_price="..."] at the end of your message. 
 Always be professional, medical-grade, and helpful.`
@@ -20,8 +20,8 @@ export async function POST(req: Request) {
             headers: {
                 'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
                 'Content-Type': 'application/json',
-                'HTTP-Referer': 'https://injectorindex.com',
-                'X-Title': 'InjectorIndex Concierge'
+                'HTTP-Referer': 'https://verifiedaesthetics.com',
+                'X-Title': 'VerifiedAesthetics Concierge'
             },
             body: JSON.stringify({
                 model: 'google/gemini-2.0-flash-001',

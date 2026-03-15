@@ -46,7 +46,7 @@ export async function GET(
         phone: provider.phone,
         website: provider.website,
         booking_url: provider.booking_url,
-        profile_url: `https://www.injectorindex.com/provider/${provider.slug}`,
+        profile_url: `https://www.verifiedaesthetics.com/provider/${provider.slug}`,
 
         // Scoring
         clarityScore: provider.score_total,
@@ -86,7 +86,7 @@ export async function GET(
         // Metadata
         created_at: provider.created_at,
         updated_at: provider.updated_at,
-        powered_by: "InjectorIndex Clarity Score™"
+        powered_by: "VerifiedAesthetics Clarity Score™"
     }
 
     return NextResponse.json(result)
