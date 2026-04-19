@@ -1,10 +1,10 @@
-# Antigravity Rules — InjectorIndex
+# Antigravity Rules — VerifiedAesthetics
 
 ## RULE 0: PROJECT IDENTITY (NEVER VIOLATE)
-- The project is **InjectorIndex** — this is the ONLY name.
-- The Vercel project is `injectorindex` (ID: `prj_dhhPDqn6alh3lWBvmkxRGZyzPmsB`, org: `john-linnemans-projects`)
+- The project is **VerifiedAesthetics** — this is the ONLY name.
+- The Vercel project is `injectorindex` (ID: `prj_dhhPDqn6alh3lWBvmkxRGZyzPmsB`, org: `john-linnemans-projects`) — legacy project name, DO NOT rename
 - The GitHub repo is `johnlinneman78/botox4u` (legacy name, DO NOT rename)
-- The live URL is https://www.injectorindex.com
+- The live URL is https://www.verifiedaesthetics.com
 - The directory name `fiery-cosmos` is an internal workspace name — IGNORE IT
 - NEVER create or deploy to any other Vercel project
 
@@ -33,4 +33,4 @@ Follow the `/deploy` workflow exactly. ALWAYS verify the live site after deploym
 NEVER end a session with uncommitted local changes. If code changed, commit and push.
 
 ## Rule 9: Design System
-The design is warm linen spa editorial. Background `#FAF8F5`, text `#3D2B1F`, fonts Cormorant Garamond + DM Sans. Score is "Clarity Score™". Full spec: `C:\Users\uriel\Downloads\InjectorIndex_Design_System.md`
+The design is warm linen spa editorial. Background `#FAF8F5`, text `#3D2B1F`, fonts Cormorant Garamond + DM Sans. Score is "Clarity Score™". Full spec: design tokens in `app/globals.css`

@@ -3,7 +3,7 @@
 
 ---
 
-You are working on InjectorIndex.com — a Next.js + Supabase Botox provider directory.
+You are working on VerifiedAesthetics.com — a Next.js + Supabase Botox provider directory.
 
 **Your first action before anything else:**
 Read the file `AGENT_STATE.md` in the root of the repo. It contains your current task, all completed work, all decisions already made, and all known blockers.

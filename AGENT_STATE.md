@@ -1,4 +1,4 @@
-# AGENT STATE — InjectorIndex.com
+# AGENT STATE — VerifiedAesthetics.com
 **READ THIS FILE FIRST AT THE START OF EVERY SESSION.**
 **UPDATE THIS FILE AND COMMIT IT AT THE END OF EVERY SESSION.**
 
@@ -8,19 +8,19 @@ If this file and your memory conflict, trust this file.
 ---
 
 ## ⚠️ CRITICAL PROJECT IDENTITY — READ BEFORE DOING ANYTHING
-- **Project name**: InjectorIndex (NOT fiery-cosmos, NOT botox4u)
-- **Live URL**: https://www.injectorindex.com
+- **Project name**: VerifiedAesthetics (NOT fiery-cosmos, NOT botox4u, NOT InjectorIndex)
+- **Live URL**: https://www.verifiedaesthetics.com
 - **Vercel project**: `injectorindex` (org: `john-linnemans-projects`, ID: `prj_dhhPDqn6alh3lWBvmkxRGZyzPmsB`)
-- **GitHub remote**: `https://github.com/johnlinneman78/botox4u` (legacy repo name — the project IS InjectorIndex)
+- **GitHub remote**: `https://github.com/johnlinneman78/botox4u` (legacy repo name — the project IS VerifiedAesthetics)
 - **Branch**: `main`
 - **Score branding**: Clarity Score™ (NOT TrueScore™)
-- **Design system**: Warm linen spa editorial — see `C:\Users\uriel\Downloads\InjectorIndex_Design_System.md`
+- **Design system**: Warm linen spa editorial
 
 ## ⚠️ DEPLOYMENT RULES
 1. **ALWAYS run `npx next build` locally before pushing** — if it fails, fix it first
 2. **ALWAYS commit and push to `main`** — Vercel auto-deploys from GitHub
 3. **If auto-deploy seems stuck, use `npx vercel --prod --yes`** to force-deploy
-4. **ALWAYS verify the live site after deploy** — open https://www.injectorindex.com and confirm changes are visible
+4. **ALWAYS verify the live site after deploy** — open https://www.verifiedaesthetics.com and confirm changes are visible
 5. **NEVER deploy to any other Vercel project** — only `injectorindex`
 6. **NEVER let changes accumulate locally without pushing** — push after every session
 
@@ -30,7 +30,7 @@ If this file and your memory conflict, trust this file.
 **Active Phase:** 8 — Optimization & Maintenance
 **Last Updated:** March 5, 2026
 **Last Commit:** `18e32e8` — fix: provider profile reference errors, hydration mismatches, and SEO optimization
-**Last Deploy:** March 5, 2026 — GitHub push to main → https://injectorindex.com
+**Last Deploy:** March 5, 2026 — GitHub push to main → https://verifiedaesthetics.com
 **Git Status:** Clean (0 uncommitted changes)
 **Sessions Completed:** 5 (autonomous)
 
@@ -46,7 +46,7 @@ If this file and your memory conflict, trust this file.
 - **Display font**: Cormorant Garamond (300, 400, 500, 600)
 - **Body font**: DM Sans (400, 500, 700)
 - **Radii**: 8/12/16/20/40px (small to pill)
-- **Full spec**: `C:\Users\uriel\Downloads\InjectorIndex_Design_System.md`
+- **Full spec**: See design system tokens in `app/globals.css`
 
 ---
 
@@ -63,7 +63,7 @@ If this file and your memory conflict, trust this file.
 - **Framework**: Next.js 16.1.6 (Turbopack)
 - **CSS**: Tailwind CSS v4 + CSS custom properties in `globals.css`
 - **Database**: Supabase
-- **Hosting**: Vercel (project: `injectorindex`)
+- **Hosting**: Vercel (project: `injectorindex`, brand: VerifiedAesthetics)
 - **Email**: Resend.com
 - **Analytics**: Google Analytics + Ahrefs
 - **Config**: `config/niche.js` — single source of truth for branding
@@ -84,7 +84,7 @@ All critical fixes, data cleanup, infrastructure, outreach, monetization, and ma
 | 7.4 Redesign Navbar + Footer | ✅ Complete | Mar 3 | New Navbar component, editorial footer |
 | 7.5 Redesign provider cards + filters | ✅ Complete | Mar 3 | New card design, pill filters |
 | 7.6 New UI components (Button, Card, Badge, etc.) | ✅ Complete | Mar 3 | Full component library |
-| 7.7 Deploy redesign to production | ✅ Complete | Mar 3 | Live at injectorindex.com |
+| 7.7 Deploy redesign to production | ✅ Complete | Mar 3 | Live at verifiedaesthetics.com |
 | 7.8 Post-redesign audit | ✅ Complete | Mar 5 | Fixed hydration mismatches, Lucide-react reference errors, and missing price data |
 
 ---
@@ -128,10 +128,10 @@ All critical fixes, data cleanup, infrastructure, outreach, monetization, and ma
 **Every session, the agent must:**
 
 1. Read this file completely before writing a single line of code
-2. Confirm: "Resuming InjectorIndex — task [X.X]. Last deploy: [date]. Git status: [clean/dirty]."
+2. Confirm: "Resuming VerifiedAesthetics — task [X.X]. Last deploy: [date]. Git status: [clean/dirty]."
 3. Complete one task fully before starting the next
 4. **Build locally before pushing**: `npx next build`
-5. **Push and verify deploy**: `git push origin main`, then check https://www.injectorindex.com
+5. **Push and verify deploy**: `git push origin main`, then check https://www.verifiedaesthetics.com
 6. Mark completed tasks with ✅ and add to Completed Tasks Log
 7. Update "What to do right now" to the next task
 8. Commit this file: `git add AGENT_STATE.md && git commit -m "chore: update agent state"`

@@ -1,8 +1,8 @@
 ---
-description: how to deploy InjectorIndex to production
+description: how to deploy VerifiedAesthetics to production
 ---
 
-# Deploy InjectorIndex to Production
+# Deploy VerifiedAesthetics to Production
 
 ## Pre-Deploy Checklist
 // turbo-all
@@ -46,7 +46,7 @@ git push origin main
 7. Wait 60-90 seconds for Vercel to build, then verify:
 ```powershell
 Start-Sleep -Seconds 90
-# Then open https://www.injectorindex.com in browser to verify
+# Then open https://www.verifiedaesthetics.com in browser to verify
 ```
 
 8. If the site hasn't updated after 2 minutes, force deploy via CLI:

@@ -9,7 +9,7 @@ const LOG_FILE = path.join(__dirname, '../.notion-sync-log.json');
 const { Resend } = require('resend');
 require('dotenv').config({ path: '.env.prod' });
 const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM_EMAIL = process.env.CONTACT_EMAIL || 'hello@injectorindex.com';
+const FROM_EMAIL = process.env.CONTACT_EMAIL || 'hello@verifiedaesthetics.com';
 
 function makeNotionRequest(method, path, data = null) {
     return new Promise((resolve, reject) => {
@@ -210,7 +210,7 @@ function loadSyncLog() {
 }
 
 async function main() {
-    console.log('🔄 Daily Notion Sync - InjectorIndex.com');
+    console.log('🔄 Daily Notion Sync - VerifiedAesthetics.com');
     console.log(`⏰ ${new Date().toLocaleString()}\n`);
 
     try {
@@ -246,7 +246,7 @@ async function main() {
                     subject: `Daily Briefing: ${new Date().toLocaleDateString()}`,
                     html: `
                         <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee;">
-                            <h2 style="color: #1a2332;">InjectorIndex.com Daily Briefing</h2>
+                            <h2 style="color: #1a2332;">VerifiedAesthetics.com Daily Briefing</h2>
                             <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
                             
                             <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
