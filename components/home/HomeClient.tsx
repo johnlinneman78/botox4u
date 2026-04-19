@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
-import { ProviderCard } from '@/components/ui/ProviderCard'
 import { Button } from '@/components/ui/Button'
 import { QuizBanner } from '@/components/lead-funnel/QuizBanner'
 import { MorphingHeadline } from '@/components/ui/MorphingHeadline'
@@ -12,40 +11,6 @@ import { StatementSection } from '@/components/sections/StatementSection'
 import { ScrollCTA } from '@/components/ui/ScrollCTA'
 
 // ─── PLACEHOLDER DATA ────────────────────────────────────
-const placeholderProviders = [
-    {
-        name: 'Dr. Sarah Chen',
-        credentials: 'MD, Board Certified Dermatologist',
-        specialties: ['Botox', 'Lip Filler', 'Sculptra'],
-        outcomeTag: 'Natural Results',
-        location: 'New York, NY',
-        distance: '2.3 mi',
-        clarityScore: 94,
-        starRating: 4.9,
-        profileUrl: '/find-providers',
-    },
-    {
-        name: 'Dr. James Rivera',
-        credentials: 'DO, Facial Aesthetics Specialist',
-        specialties: ['Cheek Filler', 'Daxxify', 'PRP'],
-        location: 'Los Angeles, CA',
-        distance: '5.1 mi',
-        clarityScore: 88,
-        starRating: 4.8,
-        profileUrl: '/find-providers',
-    },
-    {
-        name: 'Dr. Anika Patel',
-        credentials: 'MD, Oculoplastic Surgeon',
-        specialties: ['Under-Eye Filler', 'Botox', 'Polynucleotides'],
-        outcomeTag: 'Conservative Approach',
-        location: 'Miami, FL',
-        distance: '1.8 mi',
-        clarityScore: 91,
-        starRating: 4.9,
-        profileUrl: '/find-providers',
-    },
-]
 
 const cities = [
     { name: 'New York', slug: 'ny/new-york' },
@@ -66,12 +31,7 @@ const cities = [
     { name: 'Charlotte', slug: 'nc/charlotte' },
 ]
 
-const trustStats = [
-    { number: '500+', label: 'Verified Providers' },
-    { number: '22', label: 'Cities & Growing' },
-    { number: '100%', label: 'NPI Synced' },
-    { number: 'Active', label: 'State Licensed' },
-]
+
 
 const howItWorks = [
     {
@@ -138,8 +98,26 @@ const cardItem = {
     },
 }
 
+interface HomeClientProps {
+    providersIndexed?: number;
+    npiVerified?: number;
+    citiesVerified?: number;
+}
+
 // ─── HOMEPAGE ────────────────────────────────────────────
-export default function HomeClient() {
+export default function HomeClient({ 
+    providersIndexed = 0, 
+    npiVerified = 0, 
+    citiesVerified = 0 
+}: HomeClientProps = {}) {
+    
+    // Dynamic Stats
+    const trustStats = [
+        { number: providersIndexed.toLocaleString(), label: 'Providers Indexed' },
+        { number: npiVerified.toLocaleString(), label: 'NPI-Verified' },
+        { number: citiesVerified.toLocaleString(), label: 'Cities Verified' },
+    ]
+
     return (
         <>
             {/* ═══ SECTION 1: HERO ═══ */}
@@ -270,7 +248,7 @@ export default function HomeClient() {
                             className="font-body text-center mt-4"
                             style={{ fontSize: '12px', color: 'var(--color-taupe)' }}
                         >
-                            500+ verified Botox & filler providers across 22 cities
+                            {providersIndexed.toLocaleString()} indexed Botox & filler providers
                         </p>
                     </motion.div>
                 </motion.div>
@@ -425,17 +403,23 @@ export default function HomeClient() {
                     </RevealOnScroll>
 
                     <motion.div
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                        className="w-full flex flex-col items-center justify-center py-20 px-8 text-center"
+                        style={{
+                            background: 'rgba(255,255,255,0.6)',
+                            border: '1px dashed var(--color-border)',
+                            borderRadius: '24px'
+                        }}
                         variants={cardGrid}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, margin: '-80px' }}
                     >
-                        {placeholderProviders.map((provider) => (
-                            <motion.div key={provider.name} variants={cardItem}>
-                                <ProviderCard {...provider} />
-                            </motion.div>
-                        ))}
+                        <h3 className="font-display font-medium mb-3" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', color: 'var(--color-espresso)' }}>
+                            Launching verification in Portland — Seattle and San Diego next
+                        </h3>
+                        <p className="font-body text-base max-w-2xl mx-auto" style={{ color: 'var(--color-stone)' }}>
+                            We are currently processing provider data for our first cohort of cities. NPI-verified profiles, real pricing, and clarity scores will appear here soon.
+                        </p>
                     </motion.div>
                 </div>
             </section>
