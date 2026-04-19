@@ -28,9 +28,9 @@ If this file and your memory conflict, trust this file.
 
 ## CURRENT STATUS
 **Active Phase:** 8 — Optimization & Maintenance
-**Last Updated:** March 5, 2026
-**Last Commit:** `18e32e8` — fix: provider profile reference errors, hydration mismatches, and SEO optimization
-**Last Deploy:** March 5, 2026 — GitHub push to main → https://verifiedaesthetics.com
+**Last Updated:** April 19, 2026
+**Last Commit:** `f76e8a7` — feat(home): phase 2 cleanup - dynamic stats and placeholders
+**Last Deploy:** April 19, 2026 — GitHub push to branch (brand-unify)
 **Git Status:** Clean (0 uncommitted changes)
 **Sessions Completed:** 5 (autonomous)
 
@@ -53,9 +53,9 @@ If this file and your memory conflict, trust this file.
 ## WHAT TO DO RIGHT NOW
 > This section always contains exactly one thing — the next unfinished task.
 
-**Next task:** Regional Pricing Index Audit
-**Details:** Analyze across all 22 cities to ensure price_per_unit data is populating correctly in the 'Verified Data Points' grid and not defaulting to averages unnecessarily.
-**Definition of done:** >90% of providers in top 3 cities show specific pricing info.
+**Next task:** Phase 3 NPI enrichment strategy
+**Details:** Enrich existing records via fuzzy name+address NPPES matching and city-wide discovery to update `npi_verified = true` and populate NPI records.
+**Definition of done:** Existing DB providers matched; new city-wide discovery script active; transparent logging without deleting valid data.
 
 ---
 
@@ -98,6 +98,7 @@ All critical fixes, data cleanup, infrastructure, outreach, monetization, and ma
 | 7.1–7.7 | Mar 3 | Complete site redesign + deploy | 70+ files, commit 6267468 |
 | 7.9 | Mar 3 | Populated 22 target cities with 1,600+ real providers; fixed 404 city links on homepage | HomeClient.tsx, database |
 | 7.10 | Mar 5 | Fixed critical hydration and reference errors; optimized SEO for provider pages; implemented 'Clinical Audit' style profiles | 27 files, commit 18e32e8 |
+| 8.1–8.2 | Apr 19 | VerifiedAesthetics Rebrand Phase 1 (Unification) & Phase 2 (Homepage dynamic DB cleanup) | Configs, scripts, docs, pages |
 
 ---
 
