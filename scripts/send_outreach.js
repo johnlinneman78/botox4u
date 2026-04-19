@@ -17,7 +17,7 @@ const resend = new Resend(resendApiKey);
 
 // Config
 const BATCH_SIZE = 10;
-const FROM_EMAIL = process.env.CONTACT_EMAIL || 'hello@injectorindex.com';
+const FROM_EMAIL = process.env.CONTACT_EMAIL || 'hello@verifiedaesthetics.com';
 const YOUR_NAME = 'John Linneman';
 
 async function sendOutreach() {
@@ -52,9 +52,9 @@ async function sendOutreach() {
             continue;
         }
 
-        const providerPageUrl = `https://injectorindex.com/provider/${provider.slug}`;
-        const claimUrl = `https://injectorindex.com/claim/${provider.slug}`;
-        const badgeUrl = `https://injectorindex.com/badge`;
+        const providerPageUrl = `https://www.verifiedaesthetics.com/provider/${provider.slug}`;
+        const claimUrl = `https://www.verifiedaesthetics.com/claim/${provider.slug}`;
+        const badgeUrl = `https://www.verifiedaesthetics.com/badge`;
 
         try {
             const firstName = provider.name.split(' ')[0];
@@ -78,18 +78,18 @@ async function sendOutreach() {
                     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #1a2332; max-width: 600px; font-size: 16px;">
                         <p>Hi ${firstName},</p>
                         
-                        <p>I'm the founder of <strong>InjectorIndex.com</strong>. I'm writing because your clinic, <strong>${provider.name}</strong>, has been identified as a top-scoring provider in our 2026 <strong>${provider.city}</strong> index based on our independent research into patient results and pricing transparency.</p>
+                        <p>I'm the founder of <strong>VerifiedAesthetics.com</strong>. I'm writing because your clinic, <strong>${provider.name}</strong>, has been identified as a top-scoring provider in our 2026 <strong>${provider.city}</strong> index based on our independent research into patient results and pricing transparency.</p>
                         
                         <p>Specifically, your <strong>Clarity Score™</strong> (Injector Index Score) is currently <strong>${Math.round(provider.score || 0)}/100</strong>, reflecting a high degree of patient trust and verified credentials compared to the ${cityTotal || 'other'} checked clinics in ${provider.city}.</p>
                         
-                        <p>Because of this ranking, you're eligible to display the <strong>"Verified by Injector Index"</strong> badge on your site. You can access the badge assets and your scoreboard breakdown here:</p>
+                        <p>Because of this ranking, you're eligible to display the <strong>"Verified by VerifiedAesthetics"</strong> badge on your site. You can access the badge assets and your scoreboard breakdown here:</p>
                         
                         <p><a href="${badgeUrl}" style="color: #d4af37; font-weight: bold; text-decoration: underline;">${badgeUrl}</a></p>
                         
                         <p>Can you confirm if your current average unit price of <strong>${priceStr}</strong> is still the best point of contact for patients we refer from the index?</p>
                         
                         <p>Best,</p>
-                        <p><strong>${YOUR_NAME}</strong><br>Founder, InjectorIndex.com</p>
+                        <p><strong>${YOUR_NAME}</strong><br>Founder, VerifiedAesthetics.com</p>
                         
                         <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
                         <p style="font-size: 11px; color: #999;">
@@ -100,12 +100,12 @@ async function sendOutreach() {
                 `;
             } else {
                 // Email 2: Follow-up / Claim Profile
-                subject = `your pricing listing on Injector Index`;
+                subject = `your pricing listing on VerifiedAesthetics`;
                 html = `
                     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #1a2332; max-width: 600px; font-size: 16px;">
                         <p>Hi ${firstName},</p>
                         
-                        <p>I'm the founder of <strong>InjectorIndex.com</strong>. I'm following up on the 2026 ${provider.city} index we just published. We've had several patients reach out asking about the <strong>${priceStr}/unit</strong> listing for your clinic here:</p>
+                        <p>I'm the founder of <strong>VerifiedAesthetics.com</strong>. I'm following up on the 2026 ${provider.city} index we just published. We've had several patients reach out asking about the <strong>${priceStr}/unit</strong> listing for your clinic here:</p>
                         
                         <p><a href="${providerPageUrl}" style="color: #2563eb; text-decoration: underline;">${providerPageUrl}</a></p>
                         
@@ -116,7 +116,7 @@ async function sendOutreach() {
                         <p>Nobody pays for a higher score on the Index, but claiming your profile allows you to add photos and product details that patients in ${provider.city} are looking for.</p>
                         
                         <p>Best,</p>
-                        <p><strong>${YOUR_NAME}</strong><br>Founder, InjectorIndex.com</p>
+                        <p><strong>${YOUR_NAME}</strong><br>Founder, VerifiedAesthetics.com</p>
                         
                         <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
                         <p style="font-size: 11px; color: #999;">

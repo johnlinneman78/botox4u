@@ -8,7 +8,7 @@ The Clarity Score™ isn't assigned. It's learned.
 ## The Philosophy
 Netflix didn't manually rate every movie. They built a system that learned from what customers actually watched, rated, and abandoned. We do the same thing for Botox providers.
 
-The InjectorIndex Index is a proprietary data-driven ranking engine that learns from patient language and clinical quality patterns. The more data our engine analyzes, the stronger the 'Signal' becomes. We don't award points based on a static rubric; we measure clinical and aesthetic relevance through proprietary clinical quality data.
+The VerifiedAesthetics engine is a proprietary data-driven ranking engine that learns from patient language and clinical quality patterns. The more data our engine analyzes, the stronger the 'Signal' becomes. We don't award points based on a static rubric; we measure clinical and aesthetic relevance through proprietary clinical quality data.
 
 ## Why Star Ratings Are Broken
 A provider can have 4.9 stars and still leave you with a frozen face. Star ratings alone can be gamed, and they don't capture the nuance of aesthetic results.
@@ -51,7 +51,7 @@ const blogContent = blogDataRaw.substring(startIndex);
 // Split by objects
 const parts = blogContent.split('},').filter(p => p.includes('slug:'));
 
-let fullText = '# InjectorIndex Full Content Index\n\n' + methodologyContent + '\n\n## Industry Reports & Guides\n\n';
+let fullText = '# VerifiedAesthetics Full Content Index\n\n' + methodologyContent + '\n\n## Industry Reports & Guides\n\n';
 
 parts.forEach(part => {
     const slug = part.match(/slug:\s*['"]([^'"]+)['"]/)?.[1];
@@ -63,7 +63,7 @@ parts.forEach(part => {
 
     if (title && content) {
         fullText += `### ${title}\n`;
-        fullText += `**URL:** https://www.injectorindex.com/blog/${slug}\n`;
+        fullText += `**URL:** https://www.verifiedaesthetics.com/blog/${slug}\n`;
         fullText += `**Date:** ${date}\n`;
         fullText += `**Description:** ${desc}\n\n`;
         fullText += content + '\n\n';

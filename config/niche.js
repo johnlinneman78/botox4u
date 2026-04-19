@@ -8,17 +8,17 @@ export const NICHE = {
     namePlural: "Aesthetic Medicine Providers",
     providerType: "provider",               // "injector", "clinic", "provider", "dentist"
     providerTypePlural: "providers",
-    siteName: "InjectorIndex",
-    domain: "www.injectorindex.com",
-    baseUrl: "https://www.injectorindex.com",
-    contactEmail: "hello@injectorindex.com",
+    siteName: "VerifiedAesthetics",
+    domain: "www.verifiedaesthetics.com",
+    baseUrl: "https://www.verifiedaesthetics.com",
+    contactEmail: "hello@verifiedaesthetics.com",
     tagline: "Find the Best Botox & Filler Injectors Near You — Rated by Data, Not Ads",
-    brandName: "InjectorIndex",
+    brandName: "VerifiedAesthetics",
     brandSuffix: "™",
     links: {
-        twitter: "InjectorIndex",
-        facebook: "InjectorIndex",
-        instagram: "InjectorIndex"
+        twitter: "verifiedaesthetics",
+        facebook: "verifiedaesthetics",
+        instagram: "verifiedaesthetics"
     },
 
     // Calculator Configuration
@@ -145,8 +145,8 @@ export const NICHE = {
     // Outreach email sender
     outreach: {
         senderName: "John Linneman",
-        senderEmail: "hello@injectorindex.com",
-        senderTitle: "Founder, Injector Index"
+        senderEmail: "hello@verifiedaesthetics.com",
+        senderTitle: "Founder, VerifiedAesthetics"
     },
 
     googleAttribution: {
@@ -160,15 +160,15 @@ export const NICHE = {
     copy: {
         hero: {
             headline: "Find the Best Injectors Near You — Ranked by Results, Not Reviews",
-            subtext: "InjectorIndex scores 500+ providers across 22 cities on credentials, technique quality, and patient outcomes. See real pricing before you book.",
+            subtext: "VerifiedAesthetics scores providers across multiple cities on credentials, technique quality, and patient outcomes. See real pricing before you book.",
             cta: "Compare Top-Rated Injectors"
         },
         trustBadges: [
             { icon: 'target', label: 'Injection Quality', description: 'AI-analyzed outcomes for natural facial harmony' },
             { icon: 'verify', label: 'Clarity Score™', description: 'Proprietary rating of credentials, technique, and innovation' },
-            { icon: 'shield', label: 'No Pay-to-Rank', description: ' rankings are 100% data-driven and independent' }
+            { icon: 'shield', label: 'No Pay-to-Rank', description: 'Rankings are 100% data-driven and independent' }
         ],
-        scoreDisclaimer: "The Injector Index is an independent data research platform for aesthetic providers. We are not a medical provider. Our mission is to provide transparency in the aesthetic market by indexing provider data, pricing, and neutral patient feedback. No provider can pay for a higher Clarity Score™ position.",
-        footerDisclaimer: "InjectorIndex.com is an independent provider directory and research index for aesthetic medicine. We are not a clinic, we do not perform medical procedures, and we do not provide clinical advice. All data is gathered from public records to facilitate independent research of aesthetic providers."
+        scoreDisclaimer: "VerifiedAesthetics is an independent data research platform for aesthetic providers. We are not a medical provider. Our mission is to provide transparency in the aesthetic market by indexing provider data, pricing, and neutral patient feedback. No provider can pay for a higher Clarity Score™ position.",
+        footerDisclaimer: "VerifiedAesthetics.com is an independent provider directory and research index for aesthetic medicine. We are not a clinic, we do not perform medical procedures, and we do not provide clinical advice. All data is gathered from public records to facilitate independent research of aesthetic providers."
     }
 }

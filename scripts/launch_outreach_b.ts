@@ -14,17 +14,17 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const NICHE = {
     name: "Botox",
-    siteName: "InjectorIndex.com",
-    domain: "injectorindex.com",
-    brandName: "Injector",
-    brandSuffix: "Index",
+    siteName: "VerifiedAesthetics.com",
+    domain: "www.verifiedaesthetics.com",
+    brandName: "Verified",
+    brandSuffix: "Aesthetics",
     providerType: "injector",
     providerTypePlural: "injectors",
     priceUnit: "per unit",
     outreach: {
         senderName: "John Linneman",
-        senderTitle: "Founder, InjectorIndex.com",
-        senderEmail: "hello@injectorindex.com"
+        senderTitle: "Founder, VerifiedAesthetics.com",
+        senderEmail: "hello@verifiedaesthetics.com"
     }
 };
 

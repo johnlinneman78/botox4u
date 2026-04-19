@@ -19,7 +19,7 @@ async function testGoogleDetails() {
         headers: {
             'X-Goog-Api-Key': GOOGLE_API_KEY,
             'X-Goog-FieldMask': '*',
-            'Referer': 'https://injectorindex.com'
+            'Referer': 'https://www.verifiedaesthetics.com'
         }
     });
     const data = await res.json();

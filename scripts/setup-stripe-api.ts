@@ -13,13 +13,13 @@ async function setup() {
     const products = [
         {
             id: 'api_starter',
-            name: 'InjectorIndex API Starter',
+            name: 'VerifiedAesthetics API Starter',
             description: '5,000 API calls per month for AI agents and platforms.',
             amount: 2900, // $29.00
         },
         {
             id: 'api_pro',
-            name: 'InjectorIndex API Pro',
+            name: 'VerifiedAesthetics API Pro',
             description: 'Unlimited API calls for enterprise AI infrastructure.',
             amount: 9900, // $99.00
         }

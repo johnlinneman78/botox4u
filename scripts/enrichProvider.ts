@@ -60,7 +60,7 @@ async function fetchGooglePlaceData(name: string, city: string, state: string, a
                 'Content-Type': 'application/json',
                 'X-Goog-Api-Key': GOOGLE_API_KEY,
                 'X-Goog-FieldMask': 'places.id,places.displayName,places.formattedAddress',
-                'Referer': process.env.NEXT_PUBLIC_APP_URL || 'https://injectorindex.com'
+                'Referer': process.env.NEXT_PUBLIC_APP_URL || 'https://www.verifiedaesthetics.com'
             },
             body: JSON.stringify({ textQuery: query })
         });
@@ -82,7 +82,7 @@ async function fetchGooglePlaceData(name: string, city: string, state: string, a
             headers: {
                 'X-Goog-Api-Key': GOOGLE_API_KEY,
                 'X-Goog-FieldMask': fields,
-                'Referer': process.env.NEXT_PUBLIC_APP_URL || 'https://injectorindex.com'
+                'Referer': process.env.NEXT_PUBLIC_APP_URL || 'https://www.verifiedaesthetics.com'
             }
         });
         const detailsData = await detailsRes.json();

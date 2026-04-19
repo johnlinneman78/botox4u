@@ -36,8 +36,8 @@ def main():
                 "provider_name": provider["name"],
                 "award": f"Top {i+1} in {city}",
                 "year": 2024,
-                "badge_url": f"https://www.injectorindex.com/badges/2024-{provider['slug']}.png",
-                "embed_code": f'<a href="https://www.injectorindex.com/provider/{provider["slug"]}"><img src="https://www.injectorindex.com/api/badge/{provider["id"]}" alt="Top Rated in {city}" /></a>'
+                "badge_url": f"https://www.verifiedaesthetics.com/badges/2024-{provider['slug']}.png",
+                "embed_code": f'<a href="https://www.verifiedaesthetics.com/provider/{provider["slug"]}"><img src="https://www.verifiedaesthetics.com/api/badge/{provider["id"]}" alt="Top Rated in {city}" /></a>'
             }
             badges_issued.append(badge)
             

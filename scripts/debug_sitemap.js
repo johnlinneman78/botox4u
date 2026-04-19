@@ -5,7 +5,7 @@ const { REVERSE_STATE_MAP, TREATMENTS } = require('./lib/constants.ts');
 async function testSitemap() {
     try {
         console.log('Testing sitemap logic...');
-        const baseUrl = 'https://injectorindex.com';
+        const baseUrl = 'https://www.verifiedaesthetics.com';
 
         const staticRoutes = [
             '',

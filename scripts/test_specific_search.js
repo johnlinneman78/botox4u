@@ -22,7 +22,7 @@ async function testSearch(name, city, state) {
             'Content-Type': 'application/json',
             'X-Goog-Api-Key': GOOGLE_API_KEY,
             'X-Goog-FieldMask': 'places.id,places.displayName,places.formattedAddress',
-            'Referer': 'https://injectorindex.com'
+            'Referer': 'https://www.verifiedaesthetics.com'
         },
         body: JSON.stringify({ textQuery: query })
     });
