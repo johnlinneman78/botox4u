@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CalmerPlaces — Places that actually get it.</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+
+:root {
+  --teal:        #0f4a52;
+  --teal-mid:    #1a6b77;
+  --teal-light:  #2a8a99;
+  --teal-wash:   #e8f4f6;
+  --teal-glow:   #c8e4e8;
+  --sage:        #4a7c6b;
+  --sage-light:  #d4e8e1;
+  --amber:       #e8a53a;
+  --amber-light: #fef3de;
+  --ink:         #0d1f22;
+  --ink-soft:    #2d4a4f;
+  --mist:        #f5f9fa;
+  --white:       #ffffff;
+  --border:      #d8e8ea;
+  --border-dark: #a8c4c8;
+  --grey:        #5a7a80;
+  --grey-soft:   #8aa4a8;
+  --font-d: 'Instrument Serif', Georgia, serif;
+  --font-b: 'DM Sans', system-ui, sans-serif;
+  --r-sm: 8px; --r-md: 14px; --r-lg: 22px; --r-xl: 30px;
+  --sh-sm: 0 2px 8px rgba(15,74,82,.07),0 4px 20px rgba(15,74,82,.05);
+  --sh-md: 0 4px 24px rgba(15,74,82,.10),0 12px 48px rgba(15,74,82,.07);
+  --sh-lg: 0 8px 40px rgba(15,74,82,.13),0 24px 72px rgba(15,74,82,.09);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-b);color:var(--ink);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--font-d);font-weight:400;line-height:1.1;letter-spacing:-.02em}
+img{max-width:100%;display:block}
+a{text-decoration:none}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 36px}
+@media(max-width:640px){.wrap{padding:0 20px}}
+
+/* NAV */
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.93);backdrop-filter:blur(18px) saturate(1.6);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px;gap:20px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:34px;height:34px;border-radius:9px;background:var(--teal);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-mark svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.logo-name{font-family:var(--font-d);font-size:1.35rem;color:var(--teal);letter-spacing:-.01em}
+.nav-links{display:flex;gap:4px}
+.nl{color:var(--ink-soft);font-size:.88rem;font-weight:500;padding:8px 13px;border-radius:var(--r-sm);transition:background .15s,color .15s}
+.nl:hover{background:var(--teal-wash);color:var(--teal)}
+.nav-ctas{display:flex;gap:8px;align-items:center}
+.btn-o{border:1.5px solid var(--border-dark);color:var(--ink-soft);padding:8px 17px;border-radius:var(--r-sm);font-family:var(--font-b);font-size:.85rem;font-weight:600;cursor:pointer;transition:border-color .15s,color .15s}
+.btn-o:hover{border-color:var(--teal);color:var(--teal)}
+.btn-p{background:var(--teal);color:#fff;border:none;padding:10px 19px;border-radius:var(--r-sm);font-family:var(--font-b);font-size:.85rem;font-weight:700;cursor:pointer;transition:background .15s,transform .15s;white-space:nowrap}
+.btn-p:hover{background:var(--teal-mid);transform:translateY(-1px)}
+
+/* HERO */
+.hero{background:var(--teal);overflow:hidden;position:relative}
+.hero-mesh{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 80% at 15% 60%,rgba(42,138,153,.4) 0%,transparent 70%),
+             radial-gradient(ellipse 40% 50% at 85% 20%,rgba(232,165,58,.07) 0%,transparent 60%)}
+.hero-dots{position:absolute;inset:0;pointer-events:none;opacity:.03;
+  background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:28px 28px}
+.hero-inner{display:grid;grid-template-columns:1fr 400px;min-height:560px;align-items:stretch;position:relative;z-index:2}
+.hero-l{padding:80px 52px 80px 0;display:flex;flex-direction:column;justify-content:center}
+.hero-r{background:rgba(0,0,0,.18);border-left:1px solid rgba(255,255,255,.1);padding:52px 44px;display:flex;flex-direction:column;justify-content:center}
+.pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);padding:6px 14px;border-radius:100px;margin-bottom:28px;width:fit-content}
+.pill-dot{width:7px;height:7px;border-radius:50%;background:var(--amber);flex-shrink:0;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+.pill span{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.hero h1{font-size:clamp(2.8rem,5.2vw,4.4rem);color:#fff;margin-bottom:24px}
+.hero h1 em{color:var(--amber);font-style:italic}
+.hero-p{font-size:1.08rem;color:rgba(255,255,255,.72);line-height:1.75;max-width:440px;margin-bottom:36px}
+.hero-meta{display:flex;align-items:center;gap:12px;font-size:.84rem;color:rgba(255,255,255,.5)}
+.hm-div{width:1px;height:14px;background:rgba(255,255,255,.22)}
+
+/* search */
+.srch-label{font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px}
+.srch-fields{display:flex;flex-direction:column;gap:9px;margin-bottom:12px}
+.srch-f{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:var(--r-sm);padding:13px 15px;width:100%;font-family:var(--font-b);font-size:.92rem;color:#fff;outline:none;transition:border-color .2s,background .2s;-webkit-appearance:none}
+.srch-f::placeholder{color:rgba(255,255,255,.42)}
+.srch-f:focus{border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.13)}
+.srch-f option{background:var(--teal);color:#fff}
+.srch-btn{width:100%;background:var(--amber);color:var(--ink);border:none;border-radius:var(--r-sm);padding:14px;font-family:var(--font-b);font-size:.92rem;font-weight:800;cursor:pointer;transition:background .15s,transform .15s;letter-spacing:.01em}
+.srch-btn:hover{background:#d4942e;transform:translateY(-1px)}
+.quick-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px;align-items:center}
+.qlabel{font-size:.7rem;color:rgba(255,255,255,.35);margin-right:3px}
+.qt{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.75);font-size:.74rem;font-weight:500;padding:5px 11px;border-radius:100px;cursor:pointer;transition:background .15s}
+.qt:hover{background:rgba(255,255,255,.18)}
+
+/* STATS */
+.stats{background:var(--ink);padding:22px 0}
+.stats-row{display:flex;justify-content:center;align-items:center;flex-wrap:wrap}
+.stat{padding:0 40px;position:relative;text-align:center}
+.stat+.stat::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:1px;height:28px;background:rgba(255,255,255,.12)}
+.sn{font-family:var(--font-d);font-size:1.9rem;color:var(--amber);display:block;line-height:1}
+.sl{font-size:.78rem;color:rgba(255,255,255,.45);margin-top:4px;line-height:1.35}
+
+/* SECTIONS */
+.sec{padding:96px 0}
+.sec-bg{background:var(--mist)}
+.s-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:13px}
+.s-head{margin-bottom:52px}
+.s-head.c{text-align:center;max-width:600px;margin:0 auto 52px}
+.s-head h2{font-size:clamp(1.9rem,3.8vw,3rem);color:var(--ink);margin-bottom:14px}
+.s-head p{font-size:1rem;color:var(--grey);line-height:1.75}
+
+/* CATEGORIES */
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cc{background:#fff;border:1px solid var(--border);border-radius:var(--r-md);padding:26px 22px;display:block;transition:transform .22s,box-shadow .22s,border-color .22s;position:relative;overflow:hidden}
+.cc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--teal);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.cc:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:var(--teal-glow)}
+.cc:hover::after{transform:scaleX(1)}
+.cc-icon{width:42px;height:42px;border-radius:var(--r-sm);background:var(--teal-wash);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.cc-icon svg{width:20px;height:20px;stroke:var(--teal);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.cc h3{font-family:var(--font-d);font-size:1.15rem;color:var(--ink);margin-bottom:7px}
+.cc p{color:var(--grey);font-size:.84rem;line-height:1.55}
+.cc-count{margin-top:14px;color:var(--teal);font-size:.78rem;font-weight:700}
+.cc.dark{background:var(--teal);border-color:var(--teal)}
+.cc.dark h3,.cc.dark p{color:#fff}
+.cc.dark p{opacity:.72}
+.cc.dark .cc-icon{background:rgba(255,255,255,.14)}
+.cc.dark .cc-icon svg{stroke:#fff}
+.cc.dark .cc-count{color:var(--amber)}
+.cc.dark::after{background:var(--amber)}
+
+/* HOW */
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.how-steps{display:flex;flex-direction:column}
+.hs{display:flex;gap:22px;padding:28px 0;border-bottom:1px solid var(--border)}
+.hs:last-child{border-bottom:none}
+.hs-n{font-family:var(--font-d);font-size:2.8rem;color:var(--teal-glow);line-height:1;flex-shrink:0;width:52px;text-align:right;transition:color .2s}
+.hs:hover .hs-n{color:var(--teal-light)}
+.hs-c h3{font-family:var(--font-d);font-size:1.28rem;color:var(--ink);margin-bottom:8px}
+.hs-c p{color:var(--grey);font-size:.9rem;line-height:1.7}
+.how-vis{background:var(--teal);border-radius:var(--r-lg);padding:32px;position:relative;overflow:hidden}
+.how-vis-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(42,138,153,.5),transparent 60%);pointer-events:none}
+.ml{background:#fff;border-radius:var(--r-md);padding:20px;margin-bottom:10px;position:relative;z-index:2;transition:opacity .2s}
+.ml+.ml{opacity:.58;transform:scale(.97);transform-origin:top}
+.ml+.ml+.ml{opacity:.32;transform:scale(.94)}
+.ml-h{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.ml-ico{width:44px;height:44px;border-radius:var(--r-sm);background:var(--teal-wash);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ml-ico svg{width:20px;height:20px;stroke:var(--teal);fill:none;stroke-width:1.9;stroke-linecap:round}
+.ml-nm{font-weight:700;color:var(--ink);font-size:.92rem;margin-bottom:2px}
+.ml-meta{color:var(--grey);font-size:.76rem}
+.ml-tags{display:flex;flex-wrap:wrap;gap:5px}
+.mt{font-size:.7rem;font-weight:600;padding:4px 9px;border-radius:100px;background:var(--teal-wash);color:var(--teal)}
+.mt.a{background:var(--amber-light);color:#7a5010}
+.mt.s{background:var(--sage-light);color:var(--sage)}
+
+/* VERIFIED */
+.ver-sec{background:var(--ink)}
+.ver-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.ver-text .s-eyebrow{color:var(--amber)}
+.ver-text h2{color:#fff;font-size:clamp(1.9rem,3.8vw,3rem);margin-bottom:18px}
+.ver-text>p{color:rgba(255,255,255,.62);font-size:1rem;line-height:1.78;margin-bottom:30px}
+.vchecks{list-style:none;display:flex;flex-direction:column;gap:15px}
+.vchecks li{display:flex;gap:13px;align-items:flex-start}
+.vck{width:21px;height:21px;border-radius:50%;background:rgba(232,165,58,.12);border:1.5px solid var(--amber);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.vck svg{width:10px;height:10px;stroke:var(--amber);fill:none;stroke-width:2.5}
+.vchecks li span{color:rgba(255,255,255,.75);font-size:.9rem;line-height:1.65}
+.vchecks li strong{color:#fff}
+.ld-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);overflow:hidden}
+.ld-top{background:var(--teal-mid);padding:22px;display:flex;gap:14px;align-items:center}
+.ld-icon{width:48px;height:48px;border-radius:var(--r-sm);background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ld-icon svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.9;stroke-linecap:round}
+.ld-nm{font-family:var(--font-d);font-size:1.18rem;color:#fff;margin-bottom:3px}
+.ld-sub{font-size:.78rem;color:rgba(255,255,255,.6)}
+.ld-body{padding:22px}
+.ld-sl{font-size:.68rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:11px}
+.ld-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+.ldt{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.8);font-size:.74rem;font-weight:500;padding:5px 11px;border-radius:100px}
+.ldt.v{background:rgba(232,165,58,.12);border-color:rgba(232,165,58,.35);color:var(--amber)}
+.ld-note{font-size:.86rem;color:rgba(255,255,255,.52);line-height:1.65;border-top:1px solid rgba(255,255,255,.08);padding-top:16px}
+
+/* VENUE CTA */
+.vcta{background:linear-gradient(140deg,var(--teal-wash) 0%,var(--white) 100%);border:1px solid var(--border);border-radius:var(--r-xl);padding:68px 56px;display:grid;grid-template-columns:1fr auto;gap:44px;align-items:center}
+.vcta h2{font-size:clamp(1.8rem,3vw,2.5rem);color:var(--ink);margin-bottom:13px;letter-spacing:-.015em}
+.vcta>div>p{color:var(--grey);font-size:.98rem;line-height:1.72;max-width:460px}
+.vcta-btns{display:flex;flex-direction:column;gap:9px;align-items:flex-start}
+.btn-teal{background:var(--teal);color:#fff;padding:14px 26px;border-radius:var(--r-sm);font-family:var(--font-b);font-weight:700;font-size:.92rem;cursor:pointer;border:none;transition:background .15s,transform .15s;display:inline-block;white-space:nowrap}
+.btn-teal:hover{background:var(--teal-mid);transform:translateY(-1px)}
+.btn-sm-o{border:1.5px solid var(--border-dark);color:var(--grey);padding:9px 18px;border-radius:var(--r-sm);font-family:var(--font-b);font-size:.82rem;font-weight:600;cursor:pointer;background:none;transition:border-color .15s,color .15s;display:inline-block}
+.btn-sm-o:hover{border-color:var(--teal);color:var(--teal)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:64px 0 30px}
+.ft-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px}
+.ft-logo{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.ft-logo .logo-mark{background:var(--teal-mid)}
+.ft-logo .logo-name{color:#fff}
+.ft-desc{color:rgba(255,255,255,.38);font-size:.84rem;line-height:1.7;max-width:235px;margin-bottom:16px}
+.ft-tagline{color:rgba(255,255,255,.22);font-size:.78rem;font-family:var(--font-d);font-style:italic}
+.ft-col h4{color:rgba(255,255,255,.32);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.ft-col a{display:block;color:rgba(255,255,255,.52);font-size:.84rem;margin-bottom:9px;transition:color .15s}
+.ft-col a:hover{color:#fff}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;display:flex;justify-content:space-between;align-items:center}
+.ft-copy{color:rgba(255,255,255,.25);font-size:.78rem}
+.ft-legal{display:flex;gap:18px}
+.ft-legal a{color:rgba(255,255,255,.25);font-size:.78rem;transition:color .15s}
+.ft-legal a:hover{color:rgba(255,255,255,.55)}
+
+/* ANIMATIONS */
+.fu{opacity:0;transform:translateY(22px);animation:fu .65s ease forwards}
+.fu.d1{animation-delay:.08s}.fu.d2{animation-delay:.16s}.fu.d3{animation-delay:.24s}.fu.d4{animation-delay:.32s}
+@keyframes fu{to{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-r{display:none}
+  .hero-l{padding:68px 0}
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .how-grid{grid-template-columns:1fr}
+  .how-vis{display:none}
+  .ver-grid{grid-template-columns:1fr;gap:44px}
+  .vcta{grid-template-columns:1fr;padding:44px 36px}
+  .ft-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .nav-links{display:none}
+}
+@media(max-width:640px){
+  .cat-grid{grid-template-columns:1fr}
+  .stats-row .stat{padding:10px 22px}
+  .ft-grid{grid-template-columns:1fr}
+  .ft-bottom{flex-direction:column;gap:14px;text-align:center}
+  .nav-ctas .btn-o{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="#" class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <span class="logo-name">CalmerPlaces</span>
+      </a>
+      <div class="nav-links">
+        <a href="#cats" class="nl">Explore</a>
+        <a href="#how" class="nl">How it works</a>
+        <a href="#verified" class="nl">Why verified</a>
+        <a href="#" class="nl">Portland</a>
+      </div>
+      <div class="nav-ctas">
+        <a href="#" class="btn-o">List your place</a>
+        <a href="#" class="btn-p">Find places &rarr;</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-dots"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-l fu">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span>Portland, OR &mdash; Verified sensory directory</span>
+        </div>
+        <h1>Places that<br><em>actually get it.</em></h1>
+        <p class="hero-p">A verified directory of sensory-friendly venues for autistic kids, neurodivergent families, and anyone who needs the world turned down a little.</p>
+        <div class="hero-meta">
+          <span>Every listing checked</span>
+          <span class="hm-div"></span>
+          <span>Real accommodations, not claims</span>
+          <span class="hm-div"></span>
+          <span>Free to use</span>
+        </div>
+      </div>
+      <div class="hero-r fu d2">
+        <div class="srch-label">Find a place near you</div>
+        <div class="srch-fields">
+          <select class="srch-f" aria-label="Category">
+            <option value="">What are you looking for?</option>
+            <option>Activities &amp; Play</option>
+            <option>Events &amp; Programs</option>
+            <option>Restaurants &amp; Dining</option>
+            <option>Parks &amp; Nature</option>
+            <option>Retail &amp; Shopping</option>
+            <option>Sports &amp; Fitness</option>
+            <option>Services</option>
+          </select>
+          <input class="srch-f" type="text" placeholder="Portland, OR" aria-label="Location">
+        </div>
+        <button class="srch-btn">Search CalmerPlaces &rarr;</button>
+        <div class="quick-row">
+          <span class="qlabel">Quick:</span>
+          <a href="#" class="qt">Quiet hours</a>
+          <a href="#" class="qt">IBCCES certified</a>
+          <a href="#" class="qt">Has quiet room</a>
+          <a href="#" class="qt">Sensory kits</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stats-row">
+      <div class="stat"><span class="sn">47</span><span class="sl">Verified places<br>in Portland</span></div>
+      <div class="stat"><span class="sn">7</span><span class="sl">Categories<br>covered</span></div>
+      <div class="stat"><span class="sn">12</span><span class="sl">IBCCES certified<br>venues</span></div>
+      <div class="stat"><span class="sn">100%</span><span class="sl">Checked before<br>they&rsquo;re listed</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="sec sec-bg" id="cats">
+  <div class="wrap">
+    <div class="s-head c">
+      <span class="s-eyebrow">Browse by type</span>
+      <h2>Where does your family need to go today?</h2>
+      <p>Every category filtered for genuine sensory accommodations &mdash; not marketing claims.</p>
+    </div>
+    <div class="cat-grid">
+      <a href="#" class="cc">
+        <div class="cc-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
+        <h3>Activities &amp; Play</h3>
+        <p>Sensory gyms, indoor playgrounds, children&rsquo;s museums with quiet programming.</p>
+        <div class="cc-count">14 places in Portland &rarr;</div>
+      </a>
+      <a href="#" class="cc">
+        <div class="cc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></div>
+        <h3>Events &amp; Programs</h3>
+        <p>Sensory-friendly screenings, relaxed performances, seasonal events.</p>
+        <div class="cc-count">8 places in Portland &rarr;</div>
+      </a>
+      <a href="#" class="cc">
+        <div class="cc-icon"><svg viewBox="0 0 24 24"><path d="M4 3v7a3 3 0 006 0V3M14 3c0 5 6 5 6 0"/></svg></div>
+        <h3>Restaurants &amp; Dining</h3>
+        <p>Cafes and restaurants with quiet hours, calm seating, low noise.</p>
+        <div class="cc-count">7 places in Portland &rarr;</div>
+      </a>
+      <a href="#" class="cc">
+        <div class="cc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="6"/><path d="M12 16v6M8 20h8"/></svg></div>
+        <h3>Parks &amp; Nature</h3>
+        <p>Accessible playgrounds, sensory gardens, and low-traffic quiet trails.</p>
+        <div class="cc-count">6 places in Portland &rarr;</div>
+      </a>
+      <a href="#" class="cc">
+        <div class="cc-icon"><svg viewBox="0 0 24 24"><path d="M6 2L4 6v14a2 2 0 002 2h12a2 2 0 002-2V6l-2-4zM4 6h16"/></svg></div>
+        <h3>Retail &amp; Shopping</h3>
+        <p>Stores with sensory hours, dimmed lighting, reduced background noise.</p>
+        <div class="cc-count">5 places in Portland &rarr;</div>
+      </a>
+      <a href="#" class="cc">
+        <div class="cc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Sports &amp; Fitness</h3>
+        <p>Adaptive gymnastics, sensory swim times, inclusive leagues.</p>
+        <div class="cc-count">4 places in Portland &rarr;</div>
+      </a>
+      <a href="#" class="cc">
+        <div class="cc-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg></div>
+        <h3>Services</h3>
+        <p>Sensory-aware salons, dental offices, and providers trained to help.</p>
+        <div class="cc-count">3 places in Portland &rarr;</div>
+      </a>
+      <a href="#" class="cc dark">
+        <div class="cc-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></div>
+        <h3>Browse all places</h3>
+        <p>Search the full directory with custom filters.</p>
+        <div class="cc-count">47 listings &rarr;</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="how-grid">
+      <div>
+        <div class="s-head">
+          <span class="s-eyebrow">How it works</span>
+          <h2>Know before you go.</h2>
+          <p>Planning an outing shouldn&rsquo;t require three phone calls and a gamble. We&rsquo;ve done that work for you.</p>
+        </div>
+        <div class="how-steps">
+          <div class="hs">
+            <div class="hs-n">01</div>
+            <div class="hs-c">
+              <h3>Search your area</h3>
+              <p>Filter by category, accommodation type, or exactly what your family needs &mdash; quiet rooms, sensory hours, trained staff, IBCCES certification.</p>
+            </div>
+          </div>
+          <div class="hs">
+            <div class="hs-n">02</div>
+            <div class="hs-c">
+              <h3>Read the real details</h3>
+              <p>Every listing tells you exactly what&rsquo;s offered &mdash; the hours, the setup, what to expect on arrival. No vague claims, no surprises.</p>
+            </div>
+          </div>
+          <div class="hs">
+            <div class="hs-n">03</div>
+            <div class="hs-c">
+              <h3>Go with confidence</h3>
+              <p>Arrive knowing it&rsquo;s a place that genuinely accommodates sensory differences &mdash; so your whole family can actually relax.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="how-vis">
+        <div class="how-vis-bg"></div>
+        <div class="ml">
+          <div class="ml-h">
+            <div class="ml-ico"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
+            <div><div class="ml-nm">We Rock the Spectrum</div><div class="ml-meta">Activities &amp; Play &middot; NE Portland</div></div>
+          </div>
+          <div class="ml-tags">
+            <span class="mt a">&#10003; IBCCES Certified</span>
+            <span class="mt">Quiet Room</span>
+            <span class="mt">Sensory Hours</span>
+            <span class="mt s">Trained Staff</span>
+            <span class="mt">Sensory Kits</span>
+          </div>
+        </div>
+        <div class="ml">
+          <div class="ml-h">
+            <div class="ml-ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg></div>
+            <div><div class="ml-nm">AMC Lloyd Center</div><div class="ml-meta">Events &amp; Programs &middot; Lloyd District</div></div>
+          </div>
+          <div class="ml-tags">
+            <span class="mt">Sensory Screenings</span>
+            <span class="mt s">Lowered Volume</span>
+            <span class="mt">Raised Lights</span>
+          </div>
+        </div>
+        <div class="ml">
+          <div class="ml-h">
+            <div class="ml-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="6"/><path d="M12 16v6"/></svg></div>
+            <div><div class="ml-nm">Leach Botanical Garden</div><div class="ml-meta">Parks &amp; Nature &middot; SE Portland</div></div>
+          </div>
+          <div class="ml-tags">
+            <span class="mt">Low Noise</span>
+            <span class="mt s">Wheelchair Accessible</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec ver-sec" id="verified">
+  <div class="wrap">
+    <div class="ver-grid">
+      <div class="ver-text">
+        <span class="s-eyebrow">Our standard</span>
+        <h2>Verified means we checked. Every time.</h2>
+        <p>Anyone can put &ldquo;autism-friendly&rdquo; on a website. We only list places where we&rsquo;ve confirmed what they actually offer &mdash; so you&rsquo;re not finding out on arrival that it wasn&rsquo;t what you hoped.</p>
+        <ul class="vchecks">
+          <li>
+            <div class="vck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span><strong>Real programming, confirmed.</strong> We check for specific accommodations &mdash; hours, rooms, policies &mdash; not marketing language.</span>
+          </li>
+          <li>
+            <div class="vck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span><strong>IBCCES certifications flagged clearly.</strong> Where venues hold Certified Autism Center status, we surface it prominently.</span>
+          </li>
+          <li>
+            <div class="vck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span><strong>Specific, not vague.</strong> &ldquo;Sensory hours every first Sunday 8&ndash;10am&rdquo; &mdash; not &ldquo;sensory accommodations available.&rdquo;</span>
+          </li>
+          <li>
+            <div class="vck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span><strong>Written by people who understand.</strong> Clear language, respectful framing, no clinical jargon.</span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="ld-card">
+          <div class="ld-top">
+            <div class="ld-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
+            <div>
+              <div class="ld-nm">We Rock the Spectrum</div>
+              <div class="ld-sub">Activities &amp; Play &middot; NE Portland, OR</div>
+            </div>
+          </div>
+          <div class="ld-body">
+            <div class="ld-sl">Verified accommodations</div>
+            <div class="ld-tags">
+              <span class="ldt v">&#10003; IBCCES Certified Autism Center</span>
+              <span class="ldt">Quiet room on-site</span>
+              <span class="ldt">Sensory kits available</span>
+              <span class="ldt">All-abilities equipment</span>
+              <span class="ldt">Trained staff</span>
+              <span class="ldt">Visual schedules</span>
+            </div>
+            <div class="ld-sl">What to know before you go</div>
+            <div class="ld-note">Sensory-friendly open play runs weekday mornings 9am&ndash;12pm with reduced capacity and lower music. The quiet room is available on request. Staff hold IBCCES training. Weekend sessions are busier &mdash; call ahead if noise sensitivity is a significant factor.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-bg" style="padding:80px 0">
+  <div class="wrap">
+    <div class="vcta">
+      <div>
+        <span class="s-eyebrow">For venues &amp; businesses</span>
+        <h2>Run a place that welcomes sensory-sensitive guests?</h2>
+        <p>If you&rsquo;ve invested in real accommodations &mdash; trained staff, quiet hours, a calm space &mdash; families need to find you. Listing your place is free, and always will be.</p>
+      </div>
+      <div class="vcta-btns">
+        <a href="#" class="btn-teal">Add your place &rarr;</a>
+        <a href="#" class="btn-sm-o">Learn what we verify</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="ft-grid">
+      <div>
+        <div class="ft-logo">
+          <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <span class="logo-name">CalmerPlaces</span>
+        </div>
+        <p class="ft-desc">A verified directory of sensory-friendly places for autistic individuals, neurodivergent families, and anyone who needs a little more calm. Starting in Portland, OR.</p>
+        <p class="ft-tagline">The world, a little calmer.</p>
+      </div>
+      <div class="ft-col">
+        <h4>Explore</h4>
+        <a href="#">Activities &amp; Play</a>
+        <a href="#">Events &amp; Programs</a>
+        <a href="#">Restaurants</a>
+        <a href="#">Parks &amp; Nature</a>
+        <a href="#">All categories</a>
+      </div>
+      <div class="ft-col">
+        <h4>More</h4>
+        <a href="#">Retail &amp; Shopping</a>
+        <a href="#">Sports &amp; Fitness</a>
+        <a href="#">Services</a>
+        <a href="#">Browse map</a>
+      </div>
+      <div class="ft-col">
+        <h4>About</h4>
+        <a href="#">Our verification standard</a>
+        <a href="#">Add your place</a>
+        <a href="#">Sensory guides</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span class="ft-copy">&copy; 2026 CalmerPlaces &middot; Portland, Oregon</span>
+      <div class="ft-legal">
+        <a href="#">Privacy policy</a>
+        <a href="#">Terms</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
