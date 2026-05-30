@@ -215,3 +215,243 @@ Text Domain: calmerplaces-child
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
+
+/* ===== SINGLE LISTING PAGE — CalmerPlaces brand ===== */
+
+body.single-gd_place {
+  background-color: var(--mist);
+}
+
+body.single-gd_place #primary {
+  background-color: transparent;
+}
+
+body.single-gd_place article.gd_place {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-md);
+  max-width: 820px;
+  margin: 40px auto;
+  padding: 40px;
+}
+
+@media(max-width:640px) {
+  body.single-gd_place article.gd_place {
+    margin: 20px 10px;
+    padding: 20px;
+  }
+}
+
+body.single-gd_place h1.entry-title {
+  font-family: var(--font-d);
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  color: var(--ink);
+  margin-bottom: 24px;
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+/* Hide the default WP post byline/date clutter on listings */
+body.single-gd_place .entry-meta,
+body.single-gd_place .posted-on,
+body.single-gd_place .byline {
+  display: none !important;
+}
+
+/* Turn default GeoDirectory run-together taxonomy links or spans into pills */
+.wp-block-geodirectory-geodir-widget-single-taxonomies a,
+.geodir-single-taxonomies-container a,
+.geodir_post_taxomomies a,
+.geodir-post-meta .gd-badge,
+.gd-accommodation {
+  display: inline-block;
+  background: rgba(15, 74, 82, 0.08);
+  color: var(--teal-mid);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 14px;
+  margin: 0 6px 8px 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none !important;
+}
+.wp-block-geodirectory-geodir-widget-single-taxonomies a:hover,
+.geodir-single-taxonomies-container a:hover,
+.geodir_post_taxomomies a:hover {
+  background: var(--teal-wash);
+  color: var(--teal);
+}
+
+/* Specific verified / IBCCES badges */
+.gd-badge--ibcces,
+.geodir-badge-verified,
+.geodir-post-meta .gd-badge.cp-a,
+.geodir-post-meta span.cp-a {
+  background: var(--amber-light) !important;
+  color: #7a5010 !important;
+  border-color: var(--amber) !important;
+}
+
+/* Suppress duplicate raw address widget on listing page */
+.single-gd_place .wp-block-geodirectory-geodir-widget-post-address {
+  display: none !important;
+}
+
+/* Contact block as a card */
+.cp-contact-info {
+  background: var(--white) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r-md) !important;
+  box-shadow: var(--sh-sm) !important;
+  padding: 20px !important;
+  margin-top: 10px !important;
+}
+
+/* Review form container */
+#respond, .comment-respond {
+  background: var(--white) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r-md) !important;
+  box-shadow: var(--sh-sm) !important;
+  padding: 28px !important;
+  margin-top: 40px !important;
+}
+
+#respond h3, .comment-reply-title {
+  font-family: var(--font-d);
+  color: var(--ink);
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+#respond input[type="text"],
+#respond input[type="email"],
+#respond input[type="url"],
+#respond textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 12px 16px;
+  margin: 8px 0 16px;
+  font-family: var(--font-b);
+  background: var(--mist);
+  color: var(--ink);
+  box-sizing: border-box;
+}
+
+#respond input:focus, #respond textarea:focus {
+  outline: none;
+  border-color: var(--teal-mid);
+  box-shadow: 0 0 0 3px rgba(26, 107, 119, 0.15);
+}
+
+#respond .submit, #respond input[type="submit"] {
+  background: var(--teal-mid);
+  color: var(--white);
+  border: none;
+  border-radius: 100px;
+  padding: 12px 28px;
+  font-weight: 700;
+  font-family: var(--font-b);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+#respond .submit:hover {
+  background: var(--teal);
+}
+
+.post-navigation a,
+.gd-listing-nav a {
+  color: var(--teal-mid);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ===== CATEGORY / ARCHIVE LISTING CARDS ===== */
+
+.geodir-loop-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 20px;
+}
+
+.geodir-loop-container .geodir-post {
+  margin-bottom: 24px;
+}
+
+.geodir-loop-container .geodir-post .card {
+  background: var(--white);
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r-md) !important;
+  box-shadow: var(--sh-sm);
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.geodir-loop-container .geodir-post:hover .card {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-md);
+  border-color: var(--teal-glow) !important;
+}
+
+.geodir-loop-container .card-body {
+  padding: 24px !important;
+}
+
+.geodir-loop-container .geodir-entry-title {
+  font-family: var(--font-d);
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.geodir-loop-container .geodir-entry-title a {
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.geodir-loop-container .geodir-entry-title a:hover {
+  color: var(--teal-mid);
+}
+
+.geodir-loop-container .geodir-field-post_content {
+  font-family: var(--font-b);
+  color: var(--grey);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.geodir-loop-container .geodir-field-address {
+  font-family: var(--font-b);
+  color: var(--grey-soft);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+/* Hide duplicate or placeholder author images on category cards */
+.geodir-post img.rounded-circle,
+.geodir-post img[src*="gravatar"],
+.geodir-post .tofront {
+  display: none !important;
+}
+
+/* Styles for the "New" badge on category cards */
+.geodir-post .gd-badge-meta .gd-badge {
+  background-color: var(--teal) !important;
+  border-color: var(--teal) !important;
+  color: var(--white) !important;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  padding: 4px 10px !important;
+  border-radius: 100px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
