@@ -9,12 +9,14 @@ Text Domain: calmerplaces-child
 */
 
 /* ============================================================
+   CALMERPLACES BRAND TOKENS
    CalmerPlaces Design System
    Fonts: Instrument Serif (display) + DM Sans (body)
    Loaded via functions.php (Google Fonts) + enqueued parent style
    ============================================================ */
 
 :root {
+  --cp-teal:     var(--teal);
   --teal:        #0f4a52;
   --teal-mid:    #1a6b77;
   --teal-light:  #2a8a99;
