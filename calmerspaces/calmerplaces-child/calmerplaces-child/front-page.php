@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Front Page Template â€” CalmerPlaces
  *
@@ -95,6 +95,9 @@ get_header();
               <input class="cp-srch-f" type="text" name="<?php echo esc_attr( $CP['loc_query_var'] ); ?>" placeholder="Portland, OR" aria-label="Location">
             </div>
             <button class="cp-srch-btn" type="submit">Search CalmerPlaces &rarr;</button>
+            <div style="text-align: center; margin-top: 12px;">
+              <a href="<?php echo esc_url( $CP['archive_url'] ); ?>" style="color: rgba(255,255,255,0.75); font-size: 0.88rem; font-weight: 600; text-decoration: underline;">Or browse all <?php echo esc_html( $cp_total ); ?> <?php echo ( $cp_total == 1 ) ? 'place' : 'places'; ?> in Portland &rarr;</a>
+            </div>
             <div class="cp-quick-row">
               <span class="cp-qlabel">Quick:</span>
               <a href="<?php echo esc_url( $CP['archive_url'] ); ?>" class="cp-qt">Quiet hours</a>
@@ -114,7 +117,11 @@ get_header();
       <div class="cp-stats-row">
         <div class="cp-stat"><span class="cp-sn"><?php echo esc_html( $cp_total ); ?></span><span class="cp-sl">Verified places<br>in Portland</span></div>
         <div class="cp-stat"><span class="cp-sn">7</span><span class="cp-sl">Categories<br>covered</span></div>
-        <div class="cp-stat"><span class="cp-sn"><?php echo esc_html( $cp_count( 'services' ) + 0 ); ?></span><span class="cp-sl">IBCCES certified<br>venues</span></div>
+        <?php
+        $ibcces_count = function_exists( 'calmerplaces_ibcces_count' ) ? calmerplaces_ibcces_count() : 0;
+        $ibcces_word = ( $ibcces_count == 1 ) ? 'venue' : 'venues';
+        ?>
+        <div class="cp-stat"><span class="cp-sn"><?php echo esc_html( $ibcces_count ); ?></span><span class="cp-sl">IBCCES certified<br><?php echo esc_html( $ibcces_word ); ?></span></div>
         <div class="cp-stat"><span class="cp-sn">100%</span><span class="cp-sl">Checked before<br>they&rsquo;re listed</span></div>
       </div>
     </div>
@@ -130,54 +137,76 @@ get_header();
       </div>
       <div class="cp-cat-grid">
 
-        <a href="<?php echo esc_url( $CP['cats']['activities-play'] ); ?>" class="cp-cc">
-          <div class="cp-cc-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
-          <h3>Activities &amp; Play</h3>
-          <p>Sensory gyms, indoor playgrounds, children&rsquo;s museums with quiet programming.</p>
-          <?php $c = $cp_count('activities-play'); if ($c): ?><div class="cp-cc-count"><?php echo esc_html($c); ?> places in Portland &rarr;</div><?php endif; ?>
-        </a>
+        <?php
+        $categories_config = array(
+            'activities-play' => array(
+                'name' => 'Activities & Play',
+                'desc' => 'Sensory gyms, indoor playgrounds, children&rsquo;s museums with quiet programming.',
+                'icon' => '<svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>'
+            ),
+            'events-programs' => array(
+                'name' => 'Events & Programs',
+                'desc' => 'Sensory-friendly screenings, relaxed performances, seasonal events.',
+                'icon' => '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>'
+            ),
+            'restaurants-dining' => array(
+                'name' => 'Restaurants & Dining',
+                'desc' => 'Cafes and restaurants with quiet hours, calm seating, low noise.',
+                'icon' => '<svg viewBox="0 0 24 24"><path d="M4 3v7a3 3 0 006 0V3M14 3c0 5 6 5 6 0"/></svg>'
+            ),
+            'parks-nature' => array(
+                'name' => 'Parks & Nature',
+                'desc' => 'Accessible playgrounds, sensory gardens, and low-traffic quiet trails.',
+                'icon' => '<svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="6"/><path d="M12 16v6M8 20h8"/></svg>'
+            ),
+            'retail-shopping' => array(
+                'name' => 'Retail & Shopping',
+                'desc' => 'Stores with sensory hours, dimmed lighting, reduced background noise.',
+                'icon' => '<svg viewBox="0 0 24 24"><path d="M6 2L4 6v14a2 2 0 002 2h12a2 2 0 002-2V6l-2-4zM4 6h16"/></svg>'
+            ),
+            'sports-fitness' => array(
+                'name' => 'Sports & Fitness',
+                'desc' => 'Adaptive gymnastics, sensory swim times, inclusive leagues.',
+                'icon' => '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>'
+            ),
+            'services' => array(
+                'name' => 'Services',
+                'desc' => 'Sensory-aware salons, dental offices, and providers trained to help.',
+                'icon' => '<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>'
+            )
+        );
 
-        <a href="<?php echo esc_url( $CP['cats']['events-programs'] ); ?>" class="cp-cc">
-          <div class="cp-cc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></div>
-          <h3>Events &amp; Programs</h3>
-          <p>Sensory-friendly screenings, relaxed performances, seasonal events.</p>
-          <?php $c = $cp_count('events-programs'); if ($c): ?><div class="cp-cc-count"><?php echo esc_html($c); ?> places in Portland &rarr;</div><?php endif; ?>
-        </a>
+        foreach ($categories_config as $slug => $info) {
+            $count = $cp_count($slug);
+            $cat_url = $CP['cats'][$slug];
+            $icon = $info['icon'];
+            $name = $info['name'];
+            $desc = $info['desc'];
 
-        <a href="<?php echo esc_url( $CP['cats']['restaurants-dining'] ); ?>" class="cp-cc">
-          <div class="cp-cc-icon"><svg viewBox="0 0 24 24"><path d="M4 3v7a3 3 0 006 0V3M14 3c0 5 6 5 6 0"/></svg></div>
-          <h3>Restaurants &amp; Dining</h3>
-          <p>Cafes and restaurants with quiet hours, calm seating, low noise.</p>
-          <?php $c = $cp_count('restaurants-dining'); if ($c): ?><div class="cp-cc-count"><?php echo esc_html($c); ?> places in Portland &rarr;</div><?php endif; ?>
-        </a>
-
-        <a href="<?php echo esc_url( $CP['cats']['parks-nature'] ); ?>" class="cp-cc">
-          <div class="cp-cc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="6"/><path d="M12 16v6M8 20h8"/></svg></div>
-          <h3>Parks &amp; Nature</h3>
-          <p>Accessible playgrounds, sensory gardens, and low-traffic quiet trails.</p>
-          <?php $c = $cp_count('parks-nature'); if ($c): ?><div class="cp-cc-count"><?php echo esc_html($c); ?> places in Portland &rarr;</div><?php endif; ?>
-        </a>
-
-        <a href="<?php echo esc_url( $CP['cats']['retail-shopping'] ); ?>" class="cp-cc">
-          <div class="cp-cc-icon"><svg viewBox="0 0 24 24"><path d="M6 2L4 6v14a2 2 0 002 2h12a2 2 0 002-2V6l-2-4zM4 6h16"/></svg></div>
-          <h3>Retail &amp; Shopping</h3>
-          <p>Stores with sensory hours, dimmed lighting, reduced background noise.</p>
-          <?php $c = $cp_count('retail-shopping'); if ($c): ?><div class="cp-cc-count"><?php echo esc_html($c); ?> places in Portland &rarr;</div><?php endif; ?>
-        </a>
-
-        <a href="<?php echo esc_url( $CP['cats']['sports-fitness'] ); ?>" class="cp-cc">
-          <div class="cp-cc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-          <h3>Sports &amp; Fitness</h3>
-          <p>Adaptive gymnastics, sensory swim times, inclusive leagues.</p>
-          <?php $c = $cp_count('sports-fitness'); if ($c): ?><div class="cp-cc-count"><?php echo esc_html($c); ?> places in Portland &rarr;</div><?php endif; ?>
-        </a>
-
-        <a href="<?php echo esc_url( $CP['cats']['services'] ); ?>" class="cp-cc">
-          <div class="cp-cc-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg></div>
-          <h3>Services</h3>
-          <p>Sensory-aware salons, dental offices, and providers trained to help.</p>
-          <?php $c = $cp_count('services'); if ($c): ?><div class="cp-cc-count"><?php echo esc_html($c); ?> places in Portland &rarr;</div><?php endif; ?>
-        </a>
+            if ($count > 0) {
+                // Active category — link normally
+                $place_word = ($count == 1) ? 'place' : 'places';
+                ?>
+                <a href="<?php echo esc_url($cat_url); ?>" class="cp-cc">
+                  <div class="cp-cc-icon"><?php echo $icon; ?></div>
+                  <h3><?php echo esc_html($name); ?></h3>
+                  <p><?php echo $desc; ?></p>
+                  <div class="cp-cc-count"><?php echo esc_html($count); ?> <?php echo $place_word; ?> in Portland &rarr;</div>
+                </a>
+                <?php
+            } else {
+                // Empty category — show as coming soon, NOT a link
+                ?>
+                <div class="cp-cc category-coming-soon">
+                  <div class="cp-cc-icon"><?php echo $icon; ?></div>
+                  <h3><?php echo esc_html($name); ?></h3>
+                  <p><?php echo $desc; ?></p>
+                  <div class="cp-cc-count count-soon">Coming soon</div>
+                </div>
+                <?php
+            }
+        }
+        ?>
 
         <a href="<?php echo esc_url( $CP['archive_url'] ); ?>" class="cp-cc cp-dark">
           <div class="cp-cc-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></div>
@@ -208,19 +237,131 @@ get_header();
         </div>
         <div class="cp-how-vis">
           <div class="cp-how-vis-bg"></div>
-          <div class="cp-ml">
-            <div class="cp-ml-h"><div class="cp-ml-ico"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div><div><div class="cp-ml-nm">We Rock the Spectrum</div><div class="cp-ml-meta">Activities &amp; Play &middot; NE Portland</div></div></div>
-            <div class="cp-ml-tags"><span class="cp-mt cp-a">&#10003; IBCCES Certified</span><span class="cp-mt">Quiet Room</span><span class="cp-mt">Sensory Hours</span><span class="cp-mt cp-s">Trained Staff</span><span class="cp-mt">Sensory Kits</span></div>
-          </div>
-          <div class="cp-ml">
-            <div class="cp-ml-h"><div class="cp-ml-ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg></div><div><div class="cp-ml-nm">AMC Lloyd Center</div><div class="cp-ml-meta">Events &amp; Programs &middot; Lloyd District</div></div></div>
-            <div class="cp-ml-tags"><span class="cp-mt">Sensory Screenings</span><span class="cp-mt cp-s">Lowered Volume</span><span class="cp-mt">Raised Lights</span></div>
-          </div>
-          <div class="cp-ml">
-            <div class="cp-ml-h"><div class="cp-ml-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="6"/><path d="M12 16v6"/></svg></div><div><div class="cp-ml-nm">Leach Botanical Garden</div><div class="cp-ml-meta">Parks &amp; Nature &middot; SE Portland</div></div></div>
-            <div class="cp-ml-tags"><span class="cp-mt">Low Noise</span><span class="cp-mt cp-s">Wheelchair Accessible</span></div>
-          </div>
+          <?php
+          $featured_query = new WP_Query(array(
+              'post_type'      => 'gd_place',
+              'posts_per_page' => 3,
+              'post_status'    => 'publish',
+              'orderby'        => 'date',
+              'order'          => 'DESC',
+          ));
+
+          if ($featured_query->have_posts()) :
+              while ($featured_query->have_posts()) : $featured_query->the_post();
+                  $post_id = get_the_ID();
+                  
+                  // Get category
+                  $terms = get_the_terms($post_id, 'gd_placecategory');
+                  $cat_name = '';
+                  $cat_slug = '';
+                  if ($terms && !is_wp_error($terms)) {
+                      $cat_name = $terms[0]->name;
+                      $cat_slug = $terms[0]->slug;
+                  }
+                  
+                  // Map category slug to SVG icon
+                  $svg_icon = '';
+                  switch ($cat_slug) {
+                      case 'activities-play':
+                          $svg_icon = '<svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>';
+                          break;
+                      case 'events-programs':
+                          $svg_icon = '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>';
+                          break;
+                      case 'restaurants-dining':
+                          $svg_icon = '<svg viewBox="0 0 24 24"><path d="M4 3v7a3 3 0 006 0V3M14 3c0 5 6 5 6 0"/></svg>';
+                          break;
+                      case 'parks-nature':
+                          $svg_icon = '<svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="6"/><path d="M12 16v6M8 20h8"/></svg>';
+                          break;
+                      case 'retail-shopping':
+                          $svg_icon = '<svg viewBox="0 0 24 24"><path d="M6 2L4 6v14a2 2 0 002 2h12a2 2 0 002-2V6l-2-4zM4 6h16"/></svg>';
+                          break;
+                      case 'sports-fitness':
+                          $svg_icon = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>';
+                          break;
+                      case 'services':
+                          $svg_icon = '<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>';
+                          break;
+                      default:
+                          $svg_icon = '<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+                          break;
+                  }
+
+                  // Get location (street/neighborhood/city)
+                  $city = get_post_meta($post_id, 'city', true);
+                  $street = get_post_meta($post_id, 'street', true);
+                  $location_str = '';
+                  if ($street) {
+                      $dir = '';
+                      if (preg_match('/\b(NE|SE|NW|SW)\b/i', $street, $matches)) {
+                          $dir = strtoupper($matches[1]) . ' ';
+                      }
+                      $location_str = $dir . ($city ? $city : 'Portland');
+                  } else {
+                      $location_str = $city ? $city : 'Portland';
+                  }
+                  
+                  $meta_str = $cat_name;
+                  if ($location_str) {
+                      $meta_str .= ' &middot; ' . esc_html($location_str);
+                  }
+
+                  // Retrieve active accommodation tags
+                  $fields = array(
+                      'ibcces_certified'      => array( 'label' => 'IBCCES Certified', 'class' => 'cp-mt cp-a', 'prefix' => '✓ ' ),
+                      'has_quiet_room'        => array( 'label' => 'Quiet Room', 'class' => 'cp-mt' ),
+                      'sensory_hours'         => array( 'label' => 'Sensory Hours', 'class' => 'cp-mt' ),
+                      'trained_staff'         => array( 'label' => 'Trained Staff', 'class' => 'cp-mt cp-s' ),
+                      'has_sensory_kits'      => array( 'label' => 'Sensory Kits', 'class' => 'cp-mt' ),
+                      'dimmed_lighting'       => array( 'label' => 'Dimmed Lighting', 'class' => 'cp-mt' ),
+                      'low_noise'             => array( 'label' => 'Low Noise', 'class' => 'cp-mt' ),
+                      'wheelchair_accessible' => array( 'label' => 'Wheelchair Accessible', 'class' => 'cp-mt cp-s' ),
+                  );
+
+                  $tags_html = '';
+                  foreach ($fields as $key => $data) {
+                      $val = get_post_meta($post_id, $key, true);
+                      if ($val && $val !== '0') {
+                          $prefix = isset($data['prefix']) ? $data['prefix'] : '';
+                          $tags_html .= sprintf(
+                              '<span class="%s">%s%s</span>',
+                              esc_attr($data['class']),
+                              $prefix,
+                              esc_html($data['label'])
+                          );
+                      }
+                  }
+                  ?>
+                  <div class="cp-ml">
+                    <div class="cp-ml-h">
+                      <div class="cp-ml-ico"><?php echo $svg_icon; ?></div>
+                      <div>
+                        <div class="cp-ml-nm"><?php the_title(); ?></div>
+                        <div class="cp-ml-meta"><?php echo $meta_str; ?></div>
+                      </div>
+                    </div>
+                    <?php if ($tags_html): ?>
+                      <div class="cp-ml-tags"><?php echo $tags_html; ?></div>
+                    <?php endif; ?>
+                  </div>
+                  <?php
+              endwhile;
+              wp_reset_postdata();
+          endif;
+          ?>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION (Founder story) -->
+  <section class="cp-sec cp-mission-sec">
+    <div class="cp-wrap">
+      <div class="cp-s-head cp-c" style="margin-bottom:0">
+        <span class="cp-s-eyebrow">Why we built this</span>
+        <h2>Made by people who&rsquo;ve done the gamble.</h2>
+        <p style="max-width:800px; margin:0 auto; font-size:1.15rem; line-height:1.8; color:var(--ink-soft)">CalmerPlaces started because finding somewhere to go shouldn&rsquo;t mean three phone calls, a hopeful drive across town, and a meltdown in the parking lot when it turns out the &ldquo;quiet&rdquo; restaurant has a live band on Fridays. We check every place so your family doesn&rsquo;t have to find out the hard way.</p>
       </div>
     </div>
   </section>

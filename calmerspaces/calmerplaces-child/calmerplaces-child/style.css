@@ -197,3 +197,21 @@ Text Domain: calmerplaces-child
 
 /* Hide stats bar until real listings exist — remove this rule once you have >=10 listings */
 .cp-stats.cp-hide{display:none}
+
+/* Coming soon styling for categories */
+.cp-cc.category-coming-soon {
+  opacity: 0.6;
+  cursor: default;
+  pointer-events: none;
+}
+.cp-cc-count.count-soon {
+  font-style: italic;
+  color: #888;
+}
+
+/* Mission Section styling */
+.cp-mission-sec {
+  background: var(--mist);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}

@@ -70,6 +70,27 @@ function calmerplaces_total_places() {
 }
 
 /**
+ * Helper: count of published GD places that are IBCCES certified.
+ */
+function calmerplaces_ibcces_count() {
+	$args = array(
+		'post_type'      => 'gd_place',
+		'post_status'    => 'publish',
+		'meta_query'     => array(
+			array(
+				'key'     => 'ibcces_certified',
+				'value'   => '1',
+				'compare' => '=',
+			),
+		),
+		'fields'         => 'ids',
+		'posts_per_page' => -1,
+	);
+	$posts = get_posts( $args );
+	return is_array( $posts ) ? count( $posts ) : 0;
+}
+
+/**
  * Render and return the verified accommodations and 'What to know before you go' section.
  */
 function calmerplaces_details_html() {
@@ -104,11 +125,36 @@ function calmerplaces_details_html() {
 	}
 
 	$before_you_go = get_post_meta( $id, 'before_you_go', true );
+	$street = get_post_meta( $id, 'street', true );
+	$city = get_post_meta( $id, 'city', true );
+	$region = get_post_meta( $id, 'region', true );
+	$zip = get_post_meta( $id, 'zip', true );
+	
+	$address_parts = array_filter( array( $street, $city, $region, $zip ) );
+	$full_address = implode( ', ', $address_parts );
+	
+	$phone = get_post_meta( $id, 'phone', true );
+	$website = get_post_meta( $id, 'website', true );
 	
 	$html = '<div class="cp-details-meta" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #d8e8ea;">';
 	if ( ! empty( $tags_html ) ) {
 		$html .= '<div class="cp-ld-sl" style="font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #5a7a80; margin-bottom: 10px;">VERIFIED ACCOMMODATIONS</div>';
 		$html .= '<div class="cp-ml-tags" style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px;">' . $tags_html . '</div>';
+	}
+	
+	if ( ! empty( $full_address ) || ! empty( $phone ) || ! empty( $website ) ) {
+		$html .= '<div class="cp-ld-sl" style="font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #5a7a80; margin-bottom: 10px;">CONTACT & LOCATION</div>';
+		$html .= '<div class="cp-contact-info" style="font-size: 14px; color: #2d4a4f; line-height: 1.6; background: #fafdfd; border: 1px solid #d8e8ea; border-radius: 8px; padding: 16px; margin-bottom: 24px;">';
+		if ( ! empty( $full_address ) ) {
+			$html .= '<div style="margin-bottom: 8px;"><strong>Address:</strong> ' . esc_html( $full_address ) . '</div>';
+		}
+		if ( ! empty( $phone ) ) {
+			$html .= '<div style="margin-bottom: 8px;"><strong>Phone:</strong> ' . esc_html( $phone ) . '</div>';
+		}
+		if ( ! empty( $website ) ) {
+			$html .= '<div><strong>Website:</strong> <a href="' . esc_url( $website ) . '" target="_blank" style="color: #1a6b77; font-weight: 600; text-decoration: none;">' . esc_html( $website ) . ' &rarr;</a></div>';
+		}
+		$html .= '</div>';
 	}
 	
 	if ( ! empty( $before_you_go ) ) {
@@ -131,6 +177,7 @@ function calmerplaces_append_details_to_content( $content ) {
 	return $content;
 }
 add_filter( 'the_content', 'calmerplaces_append_details_to_content' );
+
 
 /**
  * Warmer and category-specific dynamic "No listings found" empty state message.
@@ -191,3 +238,151 @@ function calmerplaces_comment_form_before() {
 }
 add_action( 'comment_form_before', 'calmerplaces_comment_form_before' );
 
+/**
+ * SEO: Override H1 on GeoDirectory category archive pages.
+ * Pattern: "Sensory-Friendly {Category Name} in Portland, OR"
+ * This ensures each category page has a keyword-rich H1 for search engines.
+ */
+function calmerplaces_category_archive_h1( $title ) {
+	if ( is_tax( 'gd_placecategory' ) ) {
+		$term = get_queried_object();
+		if ( $term && ! is_wp_error( $term ) ) {
+			return 'Sensory-Friendly ' . esc_html( $term->name ) . ' in Portland, OR';
+		}
+	}
+	return $title;
+}
+add_filter( 'get_the_archive_title', 'calmerplaces_category_archive_h1', 999 );
+
+/**
+ * SEO: Prepend category description to the page content on GeoDirectory archive pages.
+ */
+function calmerplaces_prepend_category_description( $content ) {
+	if ( is_tax( 'gd_placecategory' ) && is_main_query() && ! in_the_loop() ) {
+		$desc = get_the_archive_description();
+		if ( $desc ) {
+			$desc_html = '<div class="taxonomy-description ast-archive-description" style="margin-bottom: 24px; font-size: 16px; color: #5a7a80; line-height: 1.6; background: #fafdfd; border: 1px solid #d8e8ea; border-radius: 8px; padding: 16px;">' . wp_kses_post( $desc ) . '</div>';
+			return $desc_html . $content;
+		}
+	}
+	return $content;
+}
+add_filter( 'the_content', 'calmerplaces_prepend_category_description' );
+
+/**
+ * SEO: Inject amenityFeature schema markup on listing pages.
+ * Outputs a supplemental JSON-LD block declaring sensory-friendly
+ * accommodation features. This is the key competitive differentiator —
+ * no competitor (BeLikeBuddy, PDX Parent, Travel Oregon) has this.
+ *
+ * Only fires on single gd_place pages. Reads the checked custom fields
+ * and builds LocationFeatureSpecification entries for each.
+ */
+function calmerplaces_amenity_feature_schema() {
+	if ( ! is_singular( 'gd_place' ) ) {
+		return;
+	}
+
+	$id = get_the_ID();
+	if ( ! $id ) {
+		return;
+	}
+
+	// Map custom field keys to human-readable feature names
+	$feature_map = array(
+		'ibcces_certified'      => 'IBCCES Certified Autism Center',
+		'has_sensory_kits'      => 'Sensory Kits Available',
+		'has_quiet_room'        => 'Quiet Room',
+		'sensory_hours'         => 'Sensory-Friendly Hours',
+		'dimmed_lighting'       => 'Dimmed Lighting',
+		'low_noise'             => 'Low Noise Environment',
+		'trained_staff'         => 'Trained Staff',
+		'wheelchair_accessible' => 'Wheelchair Accessible',
+	);
+
+	$features = array();
+
+	// Always include the base "Sensory-Friendly" feature
+	$features[] = array(
+		'@type' => 'LocationFeatureSpecification',
+		'name'  => 'Sensory-Friendly',
+		'value' => true,
+	);
+
+	// Add specific features based on checked fields
+	foreach ( $feature_map as $key => $label ) {
+		$val = get_post_meta( $id, $key, true );
+		if ( $val && $val !== '0' ) {
+			$features[] = array(
+				'@type' => 'LocationFeatureSpecification',
+				'name'  => $label,
+				'value' => true,
+			);
+		}
+	}
+
+	// Build the schema block
+	$schema = array(
+		'@context'       => 'https://schema.org',
+		'@type'          => 'LocalBusiness',
+		'name'           => get_the_title( $id ),
+		'amenityFeature' => $features,
+	);
+
+	// Add address if available
+	$street = get_post_meta( $id, 'street', true );
+	$city   = get_post_meta( $id, 'city', true );
+	$region = get_post_meta( $id, 'region', true );
+	$zip    = get_post_meta( $id, 'zip', true );
+
+	if ( $street || $city ) {
+		$schema['address'] = array(
+			'@type'           => 'PostalAddress',
+			'streetAddress'   => $street ?: '',
+			'addressLocality' => $city ?: 'Portland',
+			'addressRegion'   => $region ?: 'OR',
+			'postalCode'      => $zip ?: '',
+			'addressCountry'  => 'US',
+		);
+	}
+
+	// Add URL and phone if available
+	$phone   = get_post_meta( $id, 'phone', true );
+	$website = get_post_meta( $id, 'website', true );
+	if ( $phone ) {
+		$schema['telephone'] = $phone;
+	}
+	if ( $website ) {
+		$schema['url'] = $website;
+	}
+
+	// Output as JSON-LD
+	echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+}
+add_action( 'wp_head', 'calmerplaces_amenity_feature_schema' );
+
+/**
+ * Fix hidden tab Leaflet map height/width initialization bug.
+ */
+add_action( 'wp_footer', function() {
+	if ( is_singular( 'gd_place' ) ) {
+		?>
+		<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			// Trigger invalidateSize and center alignment when the map tab is activated
+			$('a[href="#post_map"], button[data-bs-target="#post_map"], #post_map-tab').on('click shown.bs.tab', function() {
+				setTimeout(function() {
+					if (typeof jQuery.goMap !== 'undefined' && typeof jQuery.goMap.map !== 'undefined') {
+						jQuery.goMap.map.invalidateSize();
+						var center = jQuery.goMap.map.getCenter();
+						if (center) {
+							jQuery.goMap.map.panTo(center);
+						}
+					}
+				}, 250);
+			});
+		});
+		</script>
+		<?php
+	}
+}, 100 );
