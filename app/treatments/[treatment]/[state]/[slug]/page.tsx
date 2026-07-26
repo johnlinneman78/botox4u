@@ -32,7 +32,10 @@ export async function generateMetadata({ params }: TreatmentCityPageProps): Prom
         openGraph: {
             title: `${treatment.name} in ${city}: What to Expect & Local Costs`,
             description: `A complete guide to ${treatment.name} in ${city}, including pricing, unit estimates, and clinic recommendations.`,
-        }
+        },
+        alternates: {
+            canonical: `/treatments/${resolvedParams.treatment}/${resolvedParams.state.toLowerCase()}/${resolvedParams.slug.toLowerCase()}`,
+        },
     }
 }
 

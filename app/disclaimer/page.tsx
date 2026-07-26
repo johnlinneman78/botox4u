@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     title: `Medical Disclaimer | ${NICHE.siteName}`,
     description: `Important medical disclaimer regarding the information provided on the ${NICHE.siteName} platform.`,
     alternates: {
-        canonical: 'https://www.verifiedaesthetics.com/disclaimer',
+        canonical: '/disclaimer',
     },
     openGraph: {
         title: `Medical Disclaimer | ${NICHE.siteName}`,

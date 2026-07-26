@@ -11,8 +11,11 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'About Verified Aesthetics — Independent Provider Scoring for Aesthetic Medicine',
         description: 'Verified Aesthetics is an independent research platform that scores aesthetic injectors on natural results, fair pricing, and verified credentials. Nobody pays for a higher rank.',
-        url: 'https://www.verifiedaesthetics.com/about',
-    }
+        url: '/about',
+    },
+    alternates: {
+        canonical: '/about',
+    },
 }
 
 export default async function AboutPage() {

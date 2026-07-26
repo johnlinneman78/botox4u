@@ -21,6 +21,9 @@ import { NICHE } from '@/config/niche'
 export const metadata: Metadata = {
     title: 'For Providers — Scale Your Aesthetic Practice | VerifiedAesthetics',
     description: 'The most semantically rich, AI-cited injector directory in the world. Help patients find you through search and AI agents like ChatGPT and Gemini.',
+    alternates: {
+        canonical: '/for-providers',
+    },
 }
 
 export default function ForProvidersPage() {

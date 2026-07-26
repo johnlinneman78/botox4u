@@ -9,8 +9,8 @@ export const NICHE = {
     providerType: "provider",               // "injector", "clinic", "provider", "dentist"
     providerTypePlural: "providers",
     siteName: "VerifiedAesthetics",
-    domain: "www.verifiedaesthetics.com",
-    baseUrl: "https://www.verifiedaesthetics.com",
+    domain: "injectorindex.com",
+    baseUrl: "https://injectorindex.com",
     contactEmail: "hello@verifiedaesthetics.com",
     tagline: "Find the Best Botox & Filler Injectors Near You — Rated by Data, Not Ads",
     brandName: "VerifiedAesthetics",

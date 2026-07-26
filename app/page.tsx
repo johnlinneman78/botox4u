@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: `${NICHE.name} Injectors & MedSpas | ${NICHE.siteName}`,
   description: `Compare local injectors using Clarity Score™ — independent data on injection quality, credentials, and real pricing. Find natural results, ranked by data.`,
   alternates: {
-    canonical: `https://${NICHE.domain}/`,
+    canonical: '/',
   }
 }
 

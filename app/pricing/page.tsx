@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: `Provider Plans & Pricing — Scale Your Clinic | ${NICHE.siteName}`,
     description: `Choose the visibility tier that fits your clinical goals. Join high-intent patients searching for natural results and regenerative protocols.`,
     alternates: {
-        canonical: 'https://www.verifiedaesthetics.com/pricing',
+        canonical: '/pricing',
     },
     openGraph: {
         title: `Provider Plans & Pricing — Scale Your Clinic | ${NICHE.siteName}`,

@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     const providerCount = providers.length > 0 ? providers.length : 'top'
     const title = `Best Botox Providers in ${cityName}, ${stateCode} (2026) | VerifiedAesthetics`
     const description = `Compare ${providerCount} Botox & filler providers in ${cityName}, ${stateCode}. Independent Clarity Scores™, pricing, and patient reviews. Updated ${month} 2026.`
-    const url = `https://www.verifiedaesthetics.com/${NICHE.baseSlug}/${state.toLowerCase()}/${city.toLowerCase()}`
+    const url = `/${NICHE.baseSlug}/${state.toLowerCase()}/${city.toLowerCase()}`
 
     return {
         title: title.slice(0, 70),

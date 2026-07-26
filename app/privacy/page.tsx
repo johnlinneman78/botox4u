@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     title: `Privacy Policy | ${NICHE.siteName}`,
     description: `How we collect, use, and protect your personal information at ${NICHE.siteName}.`,
     alternates: {
-        canonical: 'https://www.verifiedaesthetics.com/privacy',
+        canonical: '/privacy',
     },
     openGraph: {
         title: `Privacy Policy | ${NICHE.siteName}`,

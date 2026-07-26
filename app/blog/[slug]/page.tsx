@@ -45,10 +45,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
             title: post.title,
             description: post.metaDescription,
             type: 'article',
-            url: `https://www.verifiedaesthetics.com/blog/${post.slug}`,
+            url: `/blog/${post.slug}`,
         },
         alternates: {
-            canonical: `https://www.verifiedaesthetics.com/blog/${post.slug}`,
+            canonical: `/blog/${post.slug}`,
         },
         twitter: {
             card: 'summary_large_image',

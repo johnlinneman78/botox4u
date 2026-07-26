@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     title: `Terms of Service | ${NICHE.siteName}`,
     description: `The terms and conditions for using the ${NICHE.siteName} platform and services.`,
     alternates: {
-        canonical: 'https://www.verifiedaesthetics.com/terms',
+        canonical: '/terms',
     },
     openGraph: {
         title: `Terms of Service | ${NICHE.siteName}`,

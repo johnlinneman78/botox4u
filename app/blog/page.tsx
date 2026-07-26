@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: "Botox Intelligence Blog 2026 | VerifiedAesthetics",
     description: "Research, guides, and data on botox injectors, costs, and trends.",
     alternates: {
-        canonical: 'https://www.verifiedaesthetics.com/blog',
+        canonical: '/blog',
     },
     openGraph: {
         title: "Botox Intelligence Blog 2026 | VerifiedAesthetics",

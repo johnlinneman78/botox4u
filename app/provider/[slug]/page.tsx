@@ -49,12 +49,12 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
         title: title.slice(0, 70),
         description: description.slice(0, 155),
         alternates: {
-            canonical: `https://www.verifiedaesthetics.com/provider/${provider.slug}`,
+            canonical: `/provider/${provider.slug}`,
         },
         openGraph: {
             title,
             description,
-            url: `https://www.verifiedaesthetics.com/provider/${provider.slug}`,
+            url: `/provider/${provider.slug}`,
             images: [
                 {
                     url: provider.hero_image_url || provider.imageUrl || `https://www.verifiedaesthetics.com/og-default.png`,

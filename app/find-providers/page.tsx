@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: `Find & Compare Best ${NICHE.name} Providers | Clarity Score™ Verified`,
     description: `Compare local ${NICHE.name} providers by clinical quality and pricing. Find top-rated injectors and medspas near you with our 100% data-driven Clarity Score™ ranking.`,
     alternates: {
-        canonical: 'https://www.verifiedaesthetics.com/find-providers',
+        canonical: '/find-providers',
     },
     openGraph: {
         title: `Find & Compare Best ${NICHE.name} Providers | Clarity Score™ Verified`,

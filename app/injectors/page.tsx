@@ -7,7 +7,7 @@ export const metadata = {
     title: `${NICHE.name} Directory by State | Find Local ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)}`,
     description: `Browse our comprehensive directory of ${NICHE.name} providers across the United States. Select your state to see top-rated clinics and local pricing.`,
     alternates: {
-        canonical: `https://www.verifiedaesthetics.com/${NICHE.baseSlug}`,
+        canonical: `/${NICHE.baseSlug}`,
     },
 }
 

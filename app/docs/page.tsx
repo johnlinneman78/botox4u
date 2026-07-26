@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: 'API Documentation | VerifiedAesthetics',
     description: 'RESTful API for structured medical aesthetics provider data. Access Clarity Score™ rankings, semantic review analysis, pricing, and provider credentials across 22 US cities.',
     alternates: {
-        canonical: 'https://www.verifiedaesthetics.com/docs',
+        canonical: '/docs',
     },
 }
 

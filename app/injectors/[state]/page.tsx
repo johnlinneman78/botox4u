@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: StatePageProps): Promise<Meta
         title: `Botox Providers in ${stateName} | VerifiedAesthetics`,
         description: `Find top-rated Botox providers in ${stateName}. Browse by city, compare Clarity Scores™, and read verified patient reviews.`,
         alternates: {
-            canonical: `https://www.verifiedaesthetics.com/${NICHE.baseSlug}/${state.toLowerCase()}`
+            canonical: `/${NICHE.baseSlug}/${state.toLowerCase()}`
         },
         robots: indexing
     }

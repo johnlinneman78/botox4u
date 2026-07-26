@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: `The No-Filter Guide to Baby Botox | ${NICHE.siteName}`,
     description: "How to stay subtle, stay safe, and find the right injector. 40% of Botox complaints are about over-injection. Read our independent guide before you book.",
     alternates: {
-        canonical: 'https://www.verifiedaesthetics.com/botox-buyers-guide',
+        canonical: '/botox-buyers-guide',
     },
     openGraph: {
         title: `The No-Filter Guide to Baby Botox | ${NICHE.siteName}`,
