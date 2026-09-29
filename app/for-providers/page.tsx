@@ -44,7 +44,7 @@ export default function ForProvidersPage() {
                             The Standard for <span className="text-[#C9A96E] italic">Verification</span>.
                         </h1>
                         <p className="text-xl md:text-2xl text-[#3D2B1F]/70 font-light max-w-2xl mx-auto leading-relaxed mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                            Patients are looking for credentials, not just reviews. Claim your profile to display your verified NPI and state licenses directly in search results.
+                            Patients are looking for credentials, not just reviews. Claim your profile to show your credentials, pricing and photos, and to have your NPI match confirmed.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -82,8 +82,8 @@ export default function ForProvidersPage() {
                                             <Database className="w-6 h-6 text-[#C9A96E]" />
                                         </div>
                                         <div>
-                                            <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">Get Your Verified Badge</h4>
-                                            <p className="text-[#3D2B1F]/60 text-sm leading-relaxed">A verification badge signals to patients that your medical credentials, NPI, and state licenses have been independently verified.</p>
+                                            <h4 className="text-lg font-bold text-[#3D2B1F] mb-2">Earn the Verified Badge</h4>
+                                            <p className="text-[#3D2B1F]/60 text-sm leading-relaxed">The badge appears once we've confirmed your NPI registry record. It can't be bought, and it isn't a state license check.</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-6">
@@ -193,9 +193,9 @@ export default function ForProvidersPage() {
                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/5 rounded-full -translate-x-1/2 translate-y-1/2" />
 
                         <div className="relative z-10">
-                            <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">Ready to rank better?</h2>
+                            <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">Ready to claim your profile?</h2>
                             <p className="text-xl md:text-2xl font-medium mb-12 opacity-90 text-balance">
-                                Claim your practice today. Verified badges are currently free for the first 30 days of the beta.
+                                Claim your practice today. Claiming is free, and paid plans never change your ranking.
                             </p>
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                                 <Link href="/claim">
@@ -208,18 +208,10 @@ export default function ForProvidersPage() {
                                 </Link>
                             </div>
 
-                            <div className="mt-16 pt-12 border-t border-black/10 grid grid-cols-2 md:grid-cols-4 gap-8">
+                            <div className="mt-16 pt-12 border-t border-black/10 grid grid-cols-2 gap-8">
                                 <div>
                                     <div className="text-3xl font-black mb-1">22</div>
                                     <div className="text-[10px] font-bold uppercase tracking-widest opacity-60">Cities Indexed</div>
-                                </div>
-                                <div>
-                                    <div className="text-3xl font-black mb-1">500+</div>
-                                    <div className="text-[10px] font-bold uppercase tracking-widest opacity-60">Verified Clinicians</div>
-                                </div>
-                                <div>
-                                    <div className="text-3xl font-black mb-1">1M+</div>
-                                    <div className="text-[10px] font-bold uppercase tracking-widest opacity-60">Reviews Analyzed</div>
                                 </div>
                                 <div>
                                     <div className="text-3xl font-black mb-1">100%</div>

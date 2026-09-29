@@ -47,7 +47,7 @@ const howItWorks = [
     {
         step: '03',
         title: 'Book with Confidence',
-        description: 'Choose a provider who has been independently verified to meet high aesthetic and safety standards.',
+        description: 'Choose a provider after checking their credentials, pricing and patient reviews side by side.',
     },
 ]
 

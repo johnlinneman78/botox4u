@@ -102,6 +102,7 @@ export const NICHE = {
     // Pricing tiers (for /pricing page)
     pricingTiers: [
         {
+            id: "free",
             name: "Free",
             price: 0,
             interval: "month",
@@ -114,29 +115,33 @@ export const NICHE = {
             bestFor: "Individual providers getting started"
         },
         {
-            name: "Verified",
+            // id stays "verified" because Stripe price mapping and stored
+            // subscription_tier values use it. The display name is "Enhanced":
+            // a "verified" label must come from passing checks, not payment.
+            id: "verified",
+            name: "Enhanced",
             price: 49,
             interval: "month",
             anchor: true,                        // highlighted tier
             features: [
-                "Verified Badge on profile",
+                "Your photos, description and pricing on your profile",
                 "Real pricing listed for patients",
                 "Tracked 'Go to Website' clicks",
                 "Prominent Contact button",
-                "Verified badge visible to all patients searching your city"
+                "Does not change your ranking or Clarity Score™"
             ],
             bestFor: "Active med spas wanting more leads"
         },
         {
+            id: "featured",
             name: "Featured",
             price: 99,
             interval: "month",
             features: [
-                "Everything in Verified",
-                "Top placement in city search results",
-                "Featured Provider highlight",
-                "Priority in Injector Match Quiz",
-                "Priority placement above all Verified and Free providers in search"
+                "Everything in Enhanced",
+                "\"Featured\" highlight on your profile card",
+                "Monthly profile-views and clicks report",
+                "Visual only: does not change your ranking or Clarity Score™"
             ],
             bestFor: "Market leaders wanting maximum visibility"
         }
@@ -166,7 +171,7 @@ export const NICHE = {
         trustBadges: [
             { icon: 'target', label: 'Injection Quality', description: 'AI-analyzed outcomes for natural facial harmony' },
             { icon: 'verify', label: 'Clarity Score™', description: 'Proprietary rating of credentials, technique, and innovation' },
-            { icon: 'shield', label: 'No Pay-to-Rank', description: 'Rankings are 100% data-driven and independent' }
+            { icon: 'shield', label: 'No Pay-to-Rank', description: 'Paid plans never change a ranking or a score' }
         ],
         scoreDisclaimer: "VerifiedAesthetics is an independent data research platform for aesthetic providers. We are not a medical provider. Our mission is to provide transparency in the aesthetic market by indexing provider data, pricing, and neutral patient feedback. No provider can pay for a higher Clarity Score™ position.",
         footerDisclaimer: "VerifiedAesthetics.com is an independent provider directory and research index for aesthetic medicine. We are not a clinic, we do not perform medical procedures, and we do not provide clinical advice. All data is gathered from public records to facilitate independent research of aesthetic providers."

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: `Provider Plans & Pricing — Scale Your Clinic | ${NICHE.siteName}`,
         description: `Choose the visibility tier that fits your clinical goals. Join high-intent patients searching for natural results and regenerative protocols.`,
-        url: 'https://www.verifiedaesthetics.com/pricing',
+        url: 'https://injectorindex.com/pricing',
     }
 }
 
@@ -154,7 +154,7 @@ export default async function PricingPage() {
                             </div>
 
                             <PricingCta
-                                planId={tier.name.toLowerCase() as any}
+                                planId={((tier as any).id || tier.name.toLowerCase()) as any}
                                 providerId={providerId}
                                 isLoggedIn={!!user}
                                 className={`w-full py-6 rounded-2xl text-[10px] font-black tracking-[0.2em] uppercase transition-all shadow-xl flex items-center justify-center ${tier.anchor

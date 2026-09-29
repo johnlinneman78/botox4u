@@ -46,7 +46,7 @@ export async function GET(
         phone: provider.phone,
         website: provider.website,
         booking_url: provider.booking_url,
-        profile_url: `https://www.verifiedaesthetics.com/provider/${provider.slug}`,
+        profile_url: `https://injectorindex.com/provider/${provider.slug}`,
 
         // Scoring
         clarityScore: provider.score_total,

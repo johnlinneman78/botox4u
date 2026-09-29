@@ -80,9 +80,9 @@ export default function BadgePage() {
                                     </div>
                                     <pre className="bg-black/40 p-6 rounded-2xl text-xs font-mono overflow-x-auto text-gray-300 border border-[#3D2B1F]/10 whitespace-pre-wrap leading-relaxed">
                                         {`<!-- Verified Aesthetics Verified Badge -->
-<a href="https://www.verifiedaesthetics.com" target="_blank" rel="noopener">
+<a href="https://injectorindex.com" target="_blank" rel="noopener">
   <img 
-    src="https://www.verifiedaesthetics.com/badges/verified-badge-gold.svg" 
+    src="https://injectorindex.com/badges/verified-badge-gold.svg" 
     alt="Verified by Verified Aesthetics" 
     style="width: 140px; height: auto;"
   />

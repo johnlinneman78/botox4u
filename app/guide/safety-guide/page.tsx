@@ -28,7 +28,7 @@ export default function SafetyGuidePage() {
                         <Stethoscope className="w-12 h-12 text-secondary mb-6" />
                         <h3 className="text-2xl font-bold text-primary mb-4">Pillar 1: Credentials</h3>
                         <p className="text-[#3D2B1F]/50 leading-relaxed">
-                            We manually verify active state licenses for MDs, DOs, NPs, PAs, and RNs. Every clinic must have a designated Medical Director for clinical oversight.
+                            Check that your injector holds an active state license (MD, DO, NP, PA or RN) and that the clinic has a medical director. We show NPI registry matches where we have confirmed them.
                         </p>
                     </div>
                     <div className="p-10 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all">

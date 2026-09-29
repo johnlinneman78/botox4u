@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "FAQ | VerifiedAesthetics",
         description: "Common questions about finding botox injectors",
-        url: "https://www.verifiedaesthetics.com/faq",
+        url: "https://injectorindex.com/faq",
     }
 }
 
@@ -21,7 +21,7 @@ export default function FAQPage() {
         },
         {
             question: "Is clinical data independently verified?",
-            answer: "Yes. We cross-reference provider credentials with state licensing boards and NPI records. We also aggregate patient-reported outcomes to verify 'Natural Results' claims."
+            answer: "Partly. Where we've confirmed a match in the federal NPI registry, the profile shows it. Profiles marked 'Credentials pending verification' have not been checked yet. We don't currently check state licensing boards, so confirm an injector's license with your state board before booking."
         },
         {
             question: "How do I add my practice to the Index?",

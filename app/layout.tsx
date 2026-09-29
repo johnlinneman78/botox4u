@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `${NICHE.siteName} — Find & Compare the Best ${NICHE.name} Injectors Near You`,
-    description: `Compare 500+ injectors across 22 cities. See Clarity Scores, real pricing, and verified credentials. Find natural results, ranked by data.`,
+    description: `Compare Botox and filler providers by credentials, published pricing and patient reviews. Independent, and rankings can't be bought.`,
     type: 'website',
     url: `https://${NICHE.domain}`,
     siteName: NICHE.siteName,

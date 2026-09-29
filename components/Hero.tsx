@@ -83,7 +83,7 @@ export default function Hero({ city, state, userLat, userLng }: { city?: string,
                     style={{ borderColor: 'var(--color-border)' }}
                 >
                     {[
-                        { value: '500+', label: 'Verified Clinics' },
+                        { value: 'Free', label: 'For Patients' },
                         { value: '$12–25', label: 'Unit Pricing' },
                         { value: '94', label: 'Top Clarity Score™' },
                         { value: '22', label: 'US Markets' },

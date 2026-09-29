@@ -58,7 +58,7 @@ export function day5Html({ firstName }: Day5Props): string {
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">That's what VerifiedAesthetics was built to surface. Not who has the best ads or the most Instagram followers, but who consistently makes patients feel informed, respected, and satisfied with their results.</p>
 
   <div style="text-align:center;margin:32px 0;">
-    <a href="https://verifiedaesthetics.com" style="display:inline-block;background-color:#B5936B;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Find Top-Rated Providers →</a>
+    <a href="https://injectorindex.com" style="display:inline-block;background-color:#B5936B;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Find Top-Rated Providers →</a>
   </div>
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">Thanks for reading this series. If you found it helpful, forward it to a friend who's considering Botox — they'll thank you.</p>
@@ -68,7 +68,7 @@ export function day5Html({ firstName }: Day5Props): string {
   <p style="font-size:14px;line-height:1.6;color:#666;">P.S. — Want a personalized analysis of providers in your specific area? Reply to this email with your city and I'll send you a custom comparison.</p>
 
   <hr style="border:none;border-top:1px solid #ECE8E2;margin:32px 0;">
-  <p style="font-size:10px;color:#999;text-align:center;letter-spacing:0.05em;">© 2026 VerifiedAesthetics · Independent clinical data for the regenerative era.<br><a href="https://verifiedaesthetics.com/unsubscribe" style="color:#999;">Unsubscribe</a></p>
+  <p style="font-size:10px;color:#999;text-align:center;letter-spacing:0.05em;">© 2026 VerifiedAesthetics · Independent clinical data for the regenerative era.<br><a href="https://injectorindex.com/unsubscribe" style="color:#999;">Unsubscribe</a></p>
 
 </div>
 </body>

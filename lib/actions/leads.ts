@@ -35,40 +35,27 @@ const getLeadEmailHtml = (lead: any, providerName: string) => `
 `;
 
 const getPatientAuditEmailHtml = (lead: any) => `
-  <div style="font-family: sans-serif; padding: 40px; background-color: #0d1420; color: #ffffff; border-radius: 20px; max-width: 600px; margin: 0 auto;">
-    <div style="text-align: center; margin-bottom: 30px;">
-        <h1 style="color: #d4af37; margin-bottom: 5px; font-size: 24px;">Elite Audit™ Report Generated</h1>
-        <p style="color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">VerifiedAesthetics Intelligence</p>
-    </div>
-    
+  <div style="font-family: sans-serif; padding: 32px; background-color: #FAF8F5; color: #3D2B1F; border-radius: 16px; max-width: 600px; margin: 0 auto;">
+    <h1 style="color: #3D2B1F; margin: 0 0 16px; font-size: 22px;">We got your request</h1>
+
     <p>Hello ${lead.full_name.split(' ')[0]},</p>
-    <p>Thank you for using the <strong>VerifiedAesthetics independent Audit Portal</strong>. We are currently processing your request for the following clinic(s):</p>
-    
-    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); padding: 20px; border-radius: 15px; margin: 20px 0;">
-        <h3 style="color: #d4af37; margin-top: 0;">Audit Target: ${lead.current_considerations || 'Regional Audit'}</h3>
-        <p style="font-size: 14px; color: #ccc;"><strong>Status:</strong> Processing Independent Verification...</p>
-        <p style="font-size: 14px; color: #ccc;"><strong>Focus:</strong> ${lead.treatment_type}</p>
-    </div>
+    <p>Thanks for asking about <strong>${lead.current_considerations || 'providers in your area'}</strong>${lead.treatment_type ? ` for ${lead.treatment_type}` : ''}.</p>
 
-    <div style="margin: 30px 0;">
-        <h4 style="color: #d4af37; font-size: 14px; text-transform: uppercase;">What happens next?</h4>
-        <ul style="color: #ccc; font-size: 14px; line-height: 1.6; padding-left: 20px;">
-            <li><strong>NPI Verification:</strong> We are cross-referencing these injectors against official registers.</li>
-            <li><strong>Risk Sentiment Analysis:</strong> Our AI is scanning patient reviews for "over-filled" or "unnatural" mentions.</li>
-            <li><strong>Price Integrity Check:</strong> We are comparing their rates against our neighborhood benchmarks.</li>
-        </ul>
-    </div>
+    <p>Here's what you can check before you book, whoever you choose:</p>
+    <ul style="font-size: 14px; line-height: 1.6; padding-left: 20px;">
+        <li><strong>License:</strong> look the injector up on your state's medical or nursing board website and confirm the license is active.</li>
+        <li><strong>Who injects:</strong> ask for the injector's name and credentials (MD, DO, NP, PA or RN) and who the supervising physician is.</li>
+        <li><strong>Price:</strong> ask for the price per unit and how many units they expect to use, so you can compare quotes.</li>
+        <li><strong>Product:</strong> ask which brand they use (Botox, Dysport, Xeomin, Daxxify) and whether it comes from a U.S. distributor.</li>
+    </ul>
 
-    <p style="font-size: 14px; line-height: 1.6; color: #ccc;">
-        You will receive a <strong>Detailed Breakdown</strong> shortly if any red flags are identified. In the meantime, feel free to browse our 
-        <a href="${process.env.NEXT_PUBLIC_APP_URL}/botox-buyers-guide" style="color: #d4af37; text-decoration: none; font-weight: bold;">2026 Regen Aesthetic Buyers Guide</a>.
+    <p style="font-size: 14px; line-height: 1.6;">
+        Our <a href="${NICHE.baseUrl}/botox-buyers-guide" style="color: #8A6D3B; font-weight: bold;">Botox buyer's guide</a> covers these in more detail.
     </p>
 
-    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
-        <p style="font-size: 10px; color: #666;">
-            © 2026 VerifiedAesthetics. Independent clinical data for the regenerative era.
-        </p>
-    </div>
+    <p style="font-size: 11px; color: #8A7F74; margin-top: 32px;">
+        ${NICHE.siteName} is an independent directory. We are not a medical provider and this is not medical advice.
+    </p>
   </div>
 `;
 
@@ -261,7 +248,7 @@ export async function submitLead(formData: FormData) {
             await resend.emails.send({
                 from: `${NICHE.siteName} <${getSenderEmail()}>`,
                 to: lead.email,
-                subject: `Elite Audit™ Generated: ${lead.current_considerations || 'Your Request'}`,
+                subject: `We got your request`,
                 html: getPatientAuditEmailHtml(lead)
             })
         } catch (patientEmailError) {

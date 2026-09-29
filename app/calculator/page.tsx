@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Botox Cost Calculator 2026 | VerifiedAesthetics",
         description: "Calculate how much botox will cost based on area, units, and city.",
-        url: 'https://www.verifiedaesthetics.com/calculator',
+        url: 'https://injectorindex.com/calculator',
     }
 }
 

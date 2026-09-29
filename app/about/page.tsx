@@ -25,7 +25,7 @@ export default async function AboutPage() {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Verified Aesthetics",
-        "url": "https://www.verifiedaesthetics.com",
+        "url": "https://injectorindex.com",
         "description": "Independent research platform that scores aesthetic medicine providers on natural results, fair pricing, and verified credentials.",
         "founder": {
             "@type": "Person",

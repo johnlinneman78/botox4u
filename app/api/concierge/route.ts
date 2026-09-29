@@ -47,7 +47,7 @@ export async function POST(req: Request) {
             headers: {
                 'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
                 'Content-Type': 'application/json',
-                'HTTP-Referer': 'https://verifiedaesthetics.com',
+                'HTTP-Referer': 'https://injectorindex.com',
                 'X-Title': 'VerifiedAesthetics Concierge'
             },
             body: JSON.stringify({
