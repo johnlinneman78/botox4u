@@ -2,7 +2,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const NOTION_TOKEN = process.env.NOTION_API_KEY || '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';
+const NOTION_TOKEN = process.env.NOTION_API_KEY;
 const NOTION_VERSION = '2022-06-28';
 const LOG_FILE = path.join(__dirname, '../.notion-sync-log.json');
 

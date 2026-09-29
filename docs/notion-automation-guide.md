@@ -332,7 +332,7 @@ $env:NOTION_API_KEY='your_token_here'
 echo $env:NOTION_API_KEY
 
 # If not set, add it
-$env:NOTION_API_KEY='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'
+$env:NOTION_API_KEY='<your-notion-token>'
 ```
 
 ### Database not found

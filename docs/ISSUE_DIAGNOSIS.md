@@ -8,7 +8,7 @@ When I pulled your production environment variables, they looked like this:
 
 ```bash
 NEXT_PUBLIC_SUPABASE_URL="https://tgqgsmaqmyeguapcogel.supabase.co\r\n"
-NEXT_PUBLIC_SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...BjDeo0\r\n"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="<anon-key>\r\n"
 ```
 
 Notice the `\r\n` at the end? Those are "Carriage Return" and "Newline" characters. 

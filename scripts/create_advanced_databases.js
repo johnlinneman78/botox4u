@@ -1,6 +1,6 @@
 const https = require('https');
 
-const NOTION_TOKEN = process.env.NOTION_API_KEY || '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';
+const NOTION_TOKEN = process.env.NOTION_API_KEY;
 const PARENT_PAGE_ID = '309baf92-cb44-813c-b5b3-f160fb4c73b8';
 
 function createDatabase(title, properties) {

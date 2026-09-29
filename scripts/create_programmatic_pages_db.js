@@ -1,6 +1,6 @@
 const https = require('https');
 
-const NOTION_TOKEN = process.env.NOTION_API_KEY || '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';
+const NOTION_TOKEN = process.env.NOTION_API_KEY;
 
 function makeNotionRequest(method, path, data = null) {
     return new Promise((resolve, reject) => {
