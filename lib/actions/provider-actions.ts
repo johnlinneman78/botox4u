@@ -70,7 +70,7 @@ export async function claimProviderProfile(formData: FormData) {
             // Claiming a profile is not verification. The NPI number the
             // provider typed still has to be matched against the registry
             // (lib/npi/verifyProvider.ts) before any "verified" label shows.
-            claimed: true,
+            // The claim itself is recorded by outreach_status below.
             npi_verified: false,
             outreach_status: 'claimed',
             services_offered: formData.getAll('services') as string[]
