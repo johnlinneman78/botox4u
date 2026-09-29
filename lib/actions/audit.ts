@@ -6,6 +6,8 @@ import { getCityStats } from './providers'
 import { calculateClinicAudit, AuditPatientInput, AuditResult } from '@/lib/audit-scoring'
 import { Resend } from 'resend'
 import { NICHE } from '@/config/niche'
+import { z } from 'zod'
+import { checkRateLimit, sanitizeString } from '@/lib/validation'
 
 const getResend = () => {
     const apiKey = process.env.SENDGRID_API_KEY || process.env.RESEND_API_KEY;
@@ -17,7 +19,37 @@ const getSenderEmail = () => {
     return process.env.CONTACT_EMAIL || NICHE.outreach.senderEmail;
 }
 
-export async function submitAuditRequest(data: AuditPatientInput) {
+const auditInputSchema = z.object({
+    email: z.string().email().max(254),
+    providerId: z.string().uuid().optional().or(z.literal('')),
+    providerName: z.string().max(150),
+    city: z.string().max(100),
+    state: z.string().max(50),
+    treatmentTypes: z.array(z.string().max(60)).max(15),
+    primaryGoal: z.string().max(200),
+    priceQuoted: z.string().max(50).optional(),
+    foundThrough: z.string().max(100).optional(),
+})
+
+export async function submitAuditRequest(rawData: AuditPatientInput) {
+    // Public server action: validate and escape everything before it reaches
+    // the database or an email sent from our domain.
+    const parsed = auditInputSchema.safeParse(rawData)
+    if (!parsed.success) return { error: 'Invalid request' }
+    if (!checkRateLimit(`audit:${parsed.data.email.toLowerCase()}`, 3, 60 * 60 * 1000)) {
+        return { error: 'Too many requests' }
+    }
+    const data: AuditPatientInput = {
+        ...parsed.data,
+        providerId: parsed.data.providerId || undefined,
+        providerName: sanitizeString(parsed.data.providerName),
+        city: sanitizeString(parsed.data.city),
+        state: sanitizeString(parsed.data.state),
+        treatmentTypes: parsed.data.treatmentTypes.map(sanitizeString),
+        primaryGoal: sanitizeString(parsed.data.primaryGoal),
+        priceQuoted: parsed.data.priceQuoted ? sanitizeString(parsed.data.priceQuoted) : undefined,
+        foundThrough: parsed.data.foundThrough ? sanitizeString(parsed.data.foundThrough) : undefined,
+    }
     console.log('Audit requested for:', data.providerName, 'in', data.city)
     const supabase = await getSupabaseServer(await cookies())
     if (!supabase) return { error: 'Database connection failed' }
@@ -31,7 +63,7 @@ export async function submitAuditRequest(data: AuditPatientInput) {
         const { data: results } = await supabase
             .from('providers')
             .select('*')
-            .ilike('name', `%${data.providerName}%`)
+            .ilike('name', `%${data.providerName.replace(/[%_]/g, '')}%`)
             .ilike('city', data.city)
             .order('listing_tier', { ascending: false })
             .limit(1)

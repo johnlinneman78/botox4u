@@ -1,18 +1,45 @@
 import { NextResponse } from 'next/server'
 import { getProvidersWithSearch } from '@/lib/actions/providers'
+import { checkRateLimit } from '@/lib/validation'
 
 const SYSTEM_PROMPT = `You are an VerifiedAesthetics assistant. Help patients find the right aesthetic injector based on their preferences. 
 Ask about: their city (if not known), desired results (natural/subtle vs volume), budget, and any specific concerns. 
 If you have enough info to recommend, output a special tag [SEARCH: city="...", style="...", max_price="..."] at the end of your message. 
 Always be professional, medical-grade, and helpful.`
 
+const MAX_MESSAGES = 12
+const MAX_MESSAGE_CHARS = 1000
+
 export async function POST(req: Request) {
+    // The concierge UI is not mounted anywhere on the site. Keep the paid LLM
+    // endpoint closed unless it is switched on deliberately.
+    if (process.env.CONCIERGE_ENABLED !== 'true') {
+        return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    }
+
     if (!process.env.OPENROUTER_API_KEY) {
         return NextResponse.json({ error: 'OpenRouter API key not configured' }, { status: 500 })
     }
 
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+    if (!checkRateLimit(`concierge:${ip}`, 10, 60_000)) {
+        return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
+    }
+
     try {
-        const { messages, city } = await req.json()
+        const body = await req.json()
+        const city = typeof body?.city === 'string' ? body.city.slice(0, 100) : undefined
+
+        // Only user/assistant turns, capped in count and length. Visitors must
+        // not be able to send their own system prompts.
+        const messages = (Array.isArray(body?.messages) ? body.messages : [])
+            .filter((m: any) => (m?.role === 'user' || m?.role === 'assistant') && typeof m?.content === 'string')
+            .slice(-MAX_MESSAGES)
+            .map((m: any) => ({ role: m.role, content: m.content.slice(0, MAX_MESSAGE_CHARS) }))
+
+        if (messages.length === 0) {
+            return NextResponse.json({ error: 'No message' }, { status: 400 })
+        }
 
         // 1. Analyze user intent with OpenRouter
         const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
