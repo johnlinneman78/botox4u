@@ -1,7 +1,8 @@
+import { NICHE } from '@/config/niche'
 import { BLOG_POSTS } from '@/lib/blog-data'
 
 export async function GET(request: Request) {
-    const baseUrl = 'https://www.verifiedaesthetics.com'
+    const baseUrl = NICHE.baseUrl
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

@@ -82,8 +82,9 @@ export async function getProvidersWithSearch(filters: {
             practitioners:provider_practitioners(name:full_name, credentials:credential_suffix, taxonomy:npi_taxonomy_description, is_npi_verified:npi_verified, npi_enumeration_date, npi_number)
         `)
         // .eq('display_status', 'live') // Disabled until migration is confirmed to be run
-        .order('listing_tier', { ascending: false }) // Premium first
-        .order('rating', { ascending: false }) // Changed from average_rating to rating
+        // Ranking never depends on what a provider pays (see /pricing, /about).
+        .order('rating', { ascending: false, nullsFirst: false })
+        .order('review_count', { ascending: false, nullsFirst: false })
 
     if (filters.query) {
         const q = filters.query.trim()

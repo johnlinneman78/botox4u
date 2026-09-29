@@ -112,11 +112,15 @@ export default function HomeClient({
 }: HomeClientProps = {}) {
     
     // Dynamic Stats
+    // Only show numbers we actually have. A row of zeros reads as a broken
+    // site, and a verification count we haven't earned reads as a false claim.
     const trustStats = [
-        { number: providersIndexed.toLocaleString(), label: 'Providers Indexed' },
-        { number: npiVerified.toLocaleString(), label: 'NPI-Verified' },
-        { number: citiesVerified.toLocaleString(), label: 'Cities Verified' },
+        { value: providersIndexed, label: 'Providers Indexed' },
+        { value: npiVerified, label: 'NPI-Verified' },
+        { value: citiesVerified, label: 'Cities Verified' },
     ]
+        .filter(s => s.value > 0)
+        .map(s => ({ number: s.value.toLocaleString(), label: s.label }))
 
     return (
         <>
@@ -248,7 +252,7 @@ export default function HomeClient({
                             className="font-body text-center mt-4"
                             style={{ fontSize: '12px', color: 'var(--color-taupe)' }}
                         >
-                            {providersIndexed.toLocaleString()} indexed Botox & filler providers
+                            {providersIndexed > 0 ? `${providersIndexed.toLocaleString()} indexed Botox & filler providers` : 'Independent Botox & filler provider data'}
                         </p>
                     </motion.div>
                 </motion.div>

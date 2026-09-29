@@ -1,34 +1,31 @@
 import { NICHE } from '@/config/niche'
-import { createClient } from '@supabase/supabase-js'
+import { createPublicClient } from '@/lib/supabase/public'
 
 export async function GET() {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
-    const key = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)?.trim()
+    const supabase = createPublicClient()
 
-    if (!url || !key) {
-        console.error('Sitemap: Supabase config missing')
-        return new Response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>', {
-            headers: { 'Content-Type': 'application/xml; charset=utf-8' },
-        })
+    if (!supabase) {
+        // Fail loudly: an empty sitemap tells Google there are no provider pages
+        return new Response('Sitemap unavailable: Supabase config missing', { status: 503 })
     }
 
-    const supabase = createClient(url, key)
     const baseUrl = NICHE.baseUrl
 
-    // Only include providers with real data (phone OR website = real business)
+    // Only providers matched to a real Google listing. Rows without a place ID
+    // were never confirmed to exist. Note: the providers table has no
+    // updated_at column (selecting it made this query fail), so lastmod uses
+    // the most recent enrichment or creation date.
     const { data: providers, error } = await supabase
         .from('providers')
-        .select('slug, updated_at, phone, website')
-        .or('phone.not.is.null,website.not.is.null')
+        .select('slug, created_at, enriched_at, npi_verified_at')
+        .not('google_place_id', 'is', null)
 
     if (error) {
         console.error('Sitemap providers error:', error.message)
-        // Return empty valid sitemap instead of 500
-        return new Response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>', {
-            headers: {
-                'Content-Type': 'application/xml; charset=utf-8',
-                'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=59',
-            },
+        // 503 keeps Google on the last good copy instead of reading "no pages"
+        return new Response('Sitemap temporarily unavailable', {
+            status: 503,
+            headers: { 'Retry-After': '3600' },
         })
     }
 
@@ -37,7 +34,7 @@ export async function GET() {
     ${(providers || []).map((p) => `
     <url>
         <loc>${baseUrl}/provider/${p.slug}</loc>
-        <lastmod>${p.updated_at ? new Date(p.updated_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}</lastmod>
+        <lastmod>${new Date(p.npi_verified_at || p.enriched_at || p.created_at || Date.now()).toISOString().split('T')[0]}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>`).join('')}
