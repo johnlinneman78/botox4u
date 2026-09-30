@@ -42,17 +42,7 @@ export interface EnrichedProvider {
     enriched_attrs?: any;
     reviews?: Review[];
 
-    score?: {
-        grade: string;
-        points: number;
-        total: string; // Legacy support
-        breakdown: {
-            injectionQuality: number;
-            credentials: number;
-            innovation: number;
-            treatmentRange: number;
-        };
-    };
+    score?: import('@/lib/scoring').ClarityScore;
 
     // NPI Verification fields
     npi_number?: string | null;

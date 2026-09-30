@@ -31,12 +31,6 @@ export const generateMedicalClinicSchema = (provider: any) => {
             "postalCode": provider.zip_code,
             "addressCountry": "US"
         },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": (provider.score_total / 10).toFixed(1),
-            "bestRating": "10",
-            "ratingCount": provider.review_count || 1
-        },
         "priceRange": provider.price_per_unit ? `$${provider.price_per_unit}/unit` : "$$",
         "medicalSpecialty": "CosmeticDermatology",
         "currenciesAccepted": "USD",
@@ -101,6 +95,8 @@ export const generateMedicalClinicSchema = (provider: any) => {
 };
 
 export const generateReviewSchema = (provider: any) => {
+    // Only publish our editorial score when there is one; never a default.
+    if (typeof provider.score_total !== 'number') return null
     return {
         "@context": "https://schema.org",
         "@type": "Review",
@@ -110,7 +106,7 @@ export const generateReviewSchema = (provider: any) => {
         },
         "reviewRating": {
             "@type": "Rating",
-            "ratingValue": provider.score_total || 50,
+            "ratingValue": provider.score_total,
             "bestRating": "100"
         },
         "author": {

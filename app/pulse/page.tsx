@@ -213,7 +213,7 @@ export default function PulsePage() {
                     <div className="mt-12 p-6 rounded-2xl bg-red-950/20 border border-red-900/30 flex items-center justify-center gap-4">
                         <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
                         <span className="text-[10px] font-bold text-red-400 uppercase tracking-widest">Specialist Audit Active:</span>
-                        <p className="text-[10px] text-[#3D2B1F]/60">Providers who do not meet our proprietary Safety Floor requirements are relegated to our general index.</p>
+                        <p className="text-[10px] text-[#3D2B1F]/60">Providers without enough confirmed data show "Not enough data" instead of a score.</p>
                     </div>
                 </div>
             </section>

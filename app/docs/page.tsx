@@ -341,15 +341,15 @@ export default function ApiDocsPage() {
                 <section className="mb-20">
                     <h2 className="text-3xl font-display font-bold text-[#3D2B1F] mb-4">Clarity Score™ Data Model</h2>
                     <p className="text-[#3D2B1F]/70 mb-8 leading-relaxed">
-                        Every provider profile includes a Clarity Score™ — a composite score from 0-100 based on four weighted pillars.
+                        Every provider profile includes a Clarity Score™ from 0-100 (or null when there isn't enough data), built from four parts.
                         No provider can pay for a higher score.
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {[
-                            { label: 'Injection Quality', weight: '40%', icon: <Shield className="w-5 h-5" />, description: 'Semantic analysis of patient reviews for result quality, technique, and complication avoidance.' },
-                            { label: 'Provider Credentials', weight: '25%', icon: <Shield className="w-5 h-5" />, description: 'NPI verification, board certifications, license type, and years of practice.' },
-                            { label: 'Innovation Adoption', weight: '20%', icon: <Zap className="w-5 h-5" />, description: 'Usage of current-gen products: Daxxify, Polynucleotides, Sculptra, biostimulators.' },
-                            { label: 'Treatment Range', weight: '15%', icon: <Globe className="w-5 h-5" />, description: 'Breadth of services from neuromodulators to advanced fillers and regenerative therapy.' },
+                            { label: 'Confirmed Credentials', weight: '40%', icon: <Shield className="w-5 h-5" />, description: 'Confirmed NPI registry match, injector license type, and 5+ years licensed.' },
+                            { label: 'Patient Reviews', weight: '40%', icon: <Shield className="w-5 h-5" />, description: 'Star rating adjusted for review count, plus review volume.' },
+                            { label: 'Published Pricing', weight: '10%', icon: <Zap className="w-5 h-5" />, description: 'A published per-unit neurotoxin price.' },
+                            { label: 'Contact & Booking', weight: '10%', icon: <Globe className="w-5 h-5" />, description: 'Website, phone number and online booking link.' },
                         ].map((pillar, i) => (
                             <div key={i} className="p-6 bg-[#3D2B1F]/5 rounded-2xl border border-[#3D2B1F]/10">
                                 <div className="flex items-center justify-between mb-3">

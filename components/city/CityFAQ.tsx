@@ -27,15 +27,15 @@ export function CityFAQ({ city, avgCost }: CityFAQProps) {
         },
         {
             q: `How is the Clarity Score™ ranking determined for ${city} clinics?`,
-            a: `Our ranking is the result of a proprietary multi-factor clinical audit. We evaluate clinics based on four foundational pillars: (1) Injection Quality; (2) Provider Credentials; (3) Innovation Adoption; and (4) Treatment Range. This ensures artisan practitioners receive proper visibility for their technical expertise.`
+            a: `Clinics in ${city} are ranked by Clarity Score™, a 0–100 measure of how much you can confirm before booking: confirmed credentials (40 points), patient reviews adjusted for how many there are (40), published pricing (10) and contact and booking details (10). Paid plans never change the ranking. Our methodology page shows exactly how each part is calculated.`
         },
         {
-            q: `What is the "Safety Floor" and why do some providers show as "Pending"?`,
-            a: `As an independent rating agency, we maintain a strict Safety Floor audit. In ${city}, providers who have not yet met our clinical data requirements or safety benchmarks are relegated to our General Directory. A "Pending" status indicates that a clinic is still undergoing our proprietary specialist audit process, ensuring only vetted talent is recommended in our primary search.`
+            q: `Why do some providers show "Not enough data"?`,
+            a: `A provider in ${city} gets a Clarity Score™ once it has at least 5 reviews or a confirmed NPI registry record. Below that, a number would say more about our data than about the clinic, so we show "Not enough data" instead. It is not a judgment of the provider.`
         },
         {
-            q: `What is the significance of "Innovation Adoption" in ${city}?`,
-            a: `Innovation Adoption is a key Clarity Score™ pillar that measures a provider's commitment to modern aesthetic medicine and the latest clinical protocols. High-innovation clinics in ${city} are recognized for staying ahead of legacy standards, representing the current benchmark for quality results.`
+            q: `Does offering newer treatments raise a clinic's score?`,
+            a: `No. How many or how new a clinic's treatments are doesn't affect the Clarity Score™. Newer isn't automatically better for you, and we don't want to reward clinics for selling more.`
         },
         {
             q: `Is there a difference in Botox brands available in ${city}?`,

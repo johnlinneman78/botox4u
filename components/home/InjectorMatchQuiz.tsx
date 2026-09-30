@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { formatScore } from '@/lib/scoring'
 import {
     ChevronRight,
     ArrowRight,
@@ -214,7 +215,7 @@ export default function InjectorMatchQuiz() {
                                         <div className="space-y-4 mb-8">
                                             <div className="flex justify-between items-center bg-black/20 rounded-xl p-3 border border-[#3D2B1F]/10">
                                                 <span className="text-[10px] font-black text-[#3D2B1F]/60 uppercase tracking-widest">Clarity Score™</span>
-                                                <span className="text-lg font-display font-bold text-[#C9A96E]">{provider.score_total || 65}</span>
+                                                <span className="text-lg font-display font-bold text-[#C9A96E]">{formatScore(provider.score_total)}</span>
                                             </div>
                                             <div className="flex justify-between items-center px-3">
                                                 <span className="text-[10px] font-bold text-[#3D2B1F]/50 uppercase">Botox Price</span>

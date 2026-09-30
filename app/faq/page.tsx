@@ -17,7 +17,7 @@ export default function FAQPage() {
     const faqs = [
         {
             question: "What is the Clarity Score™?",
-            answer: "The Clarity Score™ is a proprietary algorithm that ranks providers based on clinical data, verified credentials, and patient-reported pricing. Unlike other directories, you cannot pay to increase your Clarity Score™."
+            answer: "The Clarity Score™ is a 0–100 measure of how much you can confirm about a provider before booking: confirmed credentials (40 points), patient reviews (40), published pricing (10) and contact and booking details (10). Paying us never changes it. See our methodology page for exactly how each part is calculated."
         },
         {
             question: "Is clinical data independently verified?",

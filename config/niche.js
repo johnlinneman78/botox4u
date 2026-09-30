@@ -169,8 +169,8 @@ export const NICHE = {
             cta: "Compare Top-Rated Injectors"
         },
         trustBadges: [
-            { icon: 'target', label: 'Injection Quality', description: 'AI-analyzed outcomes for natural facial harmony' },
-            { icon: 'verify', label: 'Clarity Score™', description: 'Proprietary rating of credentials, technique, and innovation' },
+            { icon: 'target', label: 'Confirmed Credentials', description: 'Injector licenses matched against the federal NPI registry' },
+            { icon: 'verify', label: 'Clarity Score™', description: 'Credentials, reviews, published pricing and contact details, scored in the open' },
             { icon: 'shield', label: 'No Pay-to-Rank', description: 'Paid plans never change a ranking or a score' }
         ],
         scoreDisclaimer: "VerifiedAesthetics is an independent data research platform for aesthetic providers. We are not a medical provider. Our mission is to provide transparency in the aesthetic market by indexing provider data, pricing, and neutral patient feedback. No provider can pay for a higher Clarity Score™ position.",

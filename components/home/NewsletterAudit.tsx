@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { formatScore } from '@/lib/scoring'
 import { Mail, Dna, ChevronRight, CheckCircle, Search, User, UserCheck, ShieldAlert, Sparkles, Building2, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { submitLead } from '@/lib/actions/leads'
@@ -78,15 +79,15 @@ export default function NewsletterAudit() {
             if (foundProvider && foundProvider.name.toLowerCase().includes(clinic.toLowerCase().split(' ')[0])) {
                 setAuditResult({
                     clinicName: foundProvider.name,
-                    status: foundProvider.score_total >= 60 ? 'PASS' : 'PENDING',
-                    score: foundProvider.score_total || 50,
+                    status: (foundProvider.score_total ?? 0) >= 55 ? 'PASS' : 'PENDING',
+                    score: foundProvider.score_total ?? null,
                     isReal: true
                 })
             } else {
                 setAuditResult({
                     clinicName: clinic || 'Regional Analysis',
                     status: 'PENDING',
-                    score: 45, // Manual audit required indicator
+                    score: null, // not in our data yet
                     isReal: false
                 })
             }
@@ -175,22 +176,22 @@ export default function NewsletterAudit() {
 
                                             <div className="p-5 rounded-2xl bg-[#3D2B1F]/5 border border-[#3D2B1F]/10">
                                                 <div className="flex justify-between items-center mb-3">
-                                                    <p className="text-[10px] text-[#3D2B1F]/50 font-black uppercase tracking-widest">Injection Quality Status</p>
-                                                    <p className={`text-xs font-black ${auditResult?.score > 70 ? 'text-[#8A9E8D]' : 'text-[#C9A96E]'}`}>
-                                                        {auditResult?.score > 70 ? 'ELITE' : 'QUALIFIED'}
+                                                    <p className="text-[10px] text-[#3D2B1F]/50 font-black uppercase tracking-widest">Clarity Score™</p>
+                                                    <p className={`text-xs font-black ${(auditResult?.score ?? 0) >= 70 ? 'text-[#8A9E8D]' : 'text-[#C9A96E]'}`}>
+                                                        {formatScore(auditResult?.score)}
                                                     </p>
                                                 </div>
                                                 <div className="h-1.5 w-full bg-[#3D2B1F]/5 rounded-full overflow-hidden">
                                                     <div
                                                         className="h-full bg-gradient-to-r from-[#C9A96E] to-[#8A9E8D] transition-all duration-1000"
-                                                        style={{ width: `${auditResult?.score}%` }}
+                                                        style={{ width: `${auditResult?.score ?? 0}%` }}
                                                     />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <p className="text-sm text-[#3D2B1F]/70 text-center leading-relaxed">
-                                            Check your inbox. A detailed breakdown including <strong>Treatment Longevity Forecast</strong> and <strong>NPI Verification Data</strong> has been sent to <span className="text-[#3D2B1F] font-bold">{email}</span>.
+                                            Thanks. We&apos;ll email what we have on this clinic to <span className="text-[#3D2B1F] font-bold">{email}</span>.
                                         </p>
 
                                         <Button

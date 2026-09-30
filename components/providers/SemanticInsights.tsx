@@ -296,7 +296,7 @@ export function SemanticInsights({
                 <div className="flex items-center gap-2">
                     <MessageSquareQuote className="w-4 h-4 text-[#C9A96E]" />
                     <p className="text-xs text-[#3D2B1F]/60 leading-relaxed">
-                        <strong className="text-[#3D2B1F]/70">Clarity Score™ Summary:</strong> This provider scores <span className="text-[#3D2B1F] font-bold">{clarityScore}/100</span> based on credential verification, patient sentiment analysis, and review consistency.
+                        <strong className="text-[#3D2B1F]/70">Clarity Score™:</strong> <span className="text-[#3D2B1F] font-bold">{clarityScore}/100</span>, based on confirmed credentials, patient reviews, published pricing and contact details.
                         Last updated: March 2026.
                     </p>
                 </div>

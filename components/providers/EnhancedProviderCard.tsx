@@ -73,7 +73,7 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
         experienceYears = new Date().getFullYear() - licenseYear;
     }
 
-    const score = provider.score_total || provider.score?.points || 85;
+    const score = provider.score_total ?? provider.score?.points ?? null;
 
     // Treatments mock logic based on enriched_attrs
     const treatments = [];
@@ -140,7 +140,7 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
 
                         <div className="flex flex-col items-end">
                             <div className="flex flex-col items-center">
-                                <span className="text-[20px] font-display font-bold text-[#3D2B1F] leading-none mb-0.5">{score}/100</span>
+                                <span className="text-[20px] font-display font-bold text-[#3D2B1F] leading-none mb-0.5">{score === null ? '—' : `${Math.round(score)}/100`}</span>
                                 <span className="text-[10px] font-bold uppercase tracking-widest text-[#C9A96E] flex items-center gap-1">
                                     <ShieldCheck className="w-3 h-3" />
                                     Clarity

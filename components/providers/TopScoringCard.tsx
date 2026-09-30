@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { formatScore } from '@/lib/scoring'
 import { Star, X, Info, ShieldCheck, Search, Activity, Shield, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { LeadForm } from './LeadForm'
@@ -17,7 +18,8 @@ interface TopScoringCardProps {
         state: string
         rating: number
         review_count: number
-        score_total: number
+        score_total: number | null
+        score?: { grade?: string } | null
         price_per_unit?: number
         imageUrl?: string
         listingTier?: string
@@ -62,20 +64,7 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
         }
     }
 
-    const getPercentile = (score: number) => {
-        if (score >= 95) return 'Top 2%'
-        if (score >= 90) return 'Top 5%'
-        if (score >= 80) return 'Top 10%'
-        if (score >= 70) return 'Top 15%'
-        if (score >= 60) return 'Top 25%'
-        return 'Top Tier'
-    }
 
-    const getTopCategory = (p: any) => {
-        const categories = ["Injection Quality", "Natural Integrity", "Clinical Innovation", "Provider Credentials", "Patient Trust"]
-        const hash = p.name.length + (p.score_total || 0)
-        return categories[hash % categories.length]
-    }
 
     const renderPlaceholder = () => {
         const initials = provider.name
@@ -88,11 +77,11 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
         let bgColor = 'bg-[#3D2B1F]/5'
         let textColor = 'text-[#3D2B1F]/50'
         let borderColor = 'border-[#3D2B1F]/10'
-        if (provider.score_total >= 85) {
+        if ((provider.score_total ?? 0) >= 85) {
             bgColor = 'bg-[#8A9E8D]/10'
             textColor = 'text-[#8A9E8D]'
             borderColor = 'border-[#8A9E8D]/20'
-        } else if (provider.score_total >= 70) {
+        } else if ((provider.score_total ?? 0) >= 70) {
             bgColor = 'bg-[#C9A96E]/10'
             textColor = 'text-[#C9A96E]'
             borderColor = 'border-[#C9A96E]/20'
@@ -164,7 +153,7 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
                             </h3>
                         </div>
                         <p className="text-xs font-bold text-[#3D2B1F]/50 mt-1 uppercase tracking-widest">
-                            {provider.city}, {provider.state}  ·  {getTopCategory(provider)}
+                            {provider.city}, {provider.state}
                         </p>
                     </div>
 
@@ -192,14 +181,11 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
                                 <ShieldCheck className="w-3 h-3 text-[#C9A96E]" />
                                 Clarity Score™
                             </span>
-                            <span className="text-[10px] font-black text-[#C9A96E] uppercase">{getPercentile(provider.score_total)}</span>
+                            <span className="text-[10px] font-black text-[#C9A96E] uppercase">Clarity Score™</span>
                         </div>
                         <div className="flex items-center gap-3">
-                            <div className={`px-3 py-1.5 rounded-xl text-sm font-black tracking-tight border ${getScoreColor(provider.score_total)}`}>
-                                {provider.score_total}/100
-                            </div>
-                            <div className="text-xs font-bold text-[#3D2B1F]/50 italic">
-                                Highest in: {getTopCategory(provider)}
+                            <div className={`px-3 py-1.5 rounded-xl text-sm font-black tracking-tight border ${getScoreColor(provider.score_total ?? 0)}`}>
+                                {formatScore(provider.score_total)}
                             </div>
                         </div>
                     </div>

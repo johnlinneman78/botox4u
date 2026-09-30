@@ -187,7 +187,7 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
                     </div>
                     <div>
                         <h3 className="text-xl font-bold text-[#3D2B1F]">Regenerative Treatments</h3>
-                        <p className="text-sm text-[#3D2B1F]/60 font-light">Offering next-gen treatments directly impacts your Innovation Adoption pillar and overall Clarity Score™.</p>
+                        <p className="text-sm text-[#3D2B1F]/60 font-light">List the treatments you offer so patients can find you. The treatments you offer don&apos;t change your Clarity Score™; publishing your price per unit does.</p>
                     </div>
                 </div>
 

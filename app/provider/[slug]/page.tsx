@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { formatScore } from '@/lib/scoring'
 import { getProviderBySlug, getProvidersWithSearch } from '@/lib/actions/providers'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
     const title = fullTitle.length > 70 ? shortTitle : fullTitle
 
     // Meta Description logic
-    const scoreVal = Math.round(provider.score_total || provider.clarityScore || 0)
+    const scoreText = formatScore(provider.score_total ?? provider.clarityScore)
     const reviewsCount = provider.reviewCount || 0
     const bizType = provider.businessType || 'Clinic'
 
@@ -38,11 +39,11 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
 
     let description = '';
     if (patternIndex === 0) {
-        description = `${provider.name} in ${provider.city} — Clarity Score™ ${scoreVal}/100 based on ${reviewsCount} reviews. Compare pricing, credentials, and patient ratings.`
+        description = `${provider.name} in ${provider.city} — Clarity Score™ ${scoreText} based on ${reviewsCount} reviews. Compare pricing, credentials, and patient ratings.`
     } else if (patternIndex === 1) {
-        description = `Rated ${scoreVal}/100 on VerifiedAesthetics. See ${provider.name}'s credentials, pricing, and ${reviewsCount} patient reviews in ${provider.city}, ${provider.state}.`
+        description = `Clarity Score™ ${scoreText} on VerifiedAesthetics. See ${provider.name}'s credentials, pricing, and ${reviewsCount} patient reviews in ${provider.city}, ${provider.state}.`
     } else {
-        description = `${provider.name} — ${provider.city} ${bizType}. ${scoreVal}/100 Clarity Score™ · ${reviewsCount} reviews · Independent ratings and pricing data.`
+        description = `${provider.name} — ${provider.city} ${bizType}. Clarity Score™ ${scoreText} · ${reviewsCount} reviews · Independent ratings and pricing data.`
     }
 
     return {
@@ -99,7 +100,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
     const localProviders = await getProvidersWithSearch({ city: provider.city, state: provider.state, limit: 12 })
     const relatedProviders = localProviders.filter(p => p.slug !== provider.slug).slice(0, 8)
 
-    const scoreVal = Math.round(provider.clarity_score || provider.score_total || 0)
+    const scoreText = formatScore(provider.score_total ?? provider.clarityScore)
 
     const faqSchema = {
         "@context": "https://schema.org",
@@ -118,7 +119,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                 "name": `What is a Clarity Score™ and how did ${provider.name} score?`,
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": `Clarity Score™ is VerifiedAesthetics's independent rating system that evaluates providers on 5 data signals: patient outcomes, medical credentials, patient reviews, practice quality, and pricing transparency. Scores range from 0-100 without any pay-to-play bias. ${provider.name} currently holds a score of ${scoreVal}/100, indicating their relative position among verified local peers.`
+                    "text": `The Clarity Score™ measures how much a patient can confirm about a provider before booking: confirmed credentials (40 points), patient reviews (40), published pricing (10) and contact and booking details (10). Paid plans never change it. ${provider.name}: ${scoreText}.`
                 }
             },
             {
@@ -135,7 +136,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
     return (
         <main className="min-h-screen bg-[var(--color-bg)]">
             <JsonLd data={enhancedSchema} />
-            <JsonLd data={reviewSchema} />
+            {reviewSchema && <JsonLd data={reviewSchema} />}
             <JsonLd data={breadcrumbs} />
             <JsonLd data={faqSchema} />
 
@@ -159,7 +160,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                     {p.name}
                                 </div>
                                 <div className="font-body text-xs" style={{ color: 'var(--color-stone)' }}>
-                                    {Math.round(p.clarityScore || p.score_total || 0)}/100 Clarity Score™
+                                    Clarity Score™ {formatScore(p.clarityScore ?? p.score_total)}
                                 </div>
                             </Link>
                         ))}
@@ -188,7 +189,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                             What is a Clarity Score™ and how did {provider.name} score?
                         </h3>
                         <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                            Clarity Score™ is VerifiedAesthetics's independent rating system that evaluates providers on 5 distinct data signals: patient outcomes, medical credentials, patient reviews, practice quality, and pricing transparency. Scores range from 0-100 without any pay-to-play bias. {provider.name} currently holds a score of {scoreVal}/100, indicating their relative performance and position among verified local peers.
+                            The Clarity Score™ measures how much a patient can confirm about a provider before booking: confirmed credentials (40 points), patient reviews (40), published pricing (10) and contact and booking details (10). Paid plans never change it. {provider.name}: {scoreText}. <Link href="/methodology" className="underline">How the score works</Link>.
                         </p>
                     </div>
 

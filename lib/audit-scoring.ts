@@ -1,4 +1,3 @@
-import { calculateProviderScore } from './scoring'
 import { NICHE } from '@/config/niche'
 
 export interface AuditPatientInput {

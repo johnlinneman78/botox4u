@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { formatScore } from '@/lib/scoring'
 import { getProvidersWithSearch, getCityStats, getNearbyCities } from '@/lib/actions/providers'
 import { REVERSE_STATE_MAP, STATE_MAP, TREATMENTS } from '@/lib/constants'
 import { CityStats } from '@/components/city/CityStats'
@@ -97,7 +98,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
         slug: p.slug,
         listingTier: p.listingTier,
         rating: p.averageRating,
-        clarityScore: p.clarityScore || p.score_total
+        clarityScore: p.clarityScore ?? p.score_total ?? null
     }));
 
     const itemListSchema = generateItemListSchema(providers.slice(0, 50), cityName)
@@ -357,7 +358,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                                                 {p.name}
                                             </Link>
                                             <div className="text-xs font-bold" style={{ color: 'var(--color-gold)' }}>
-                                                Score: {Math.round(p.clarityScore || p.score_total)}
+                                                Score: {formatScore(p.clarityScore ?? p.score_total)}
                                             </div>
                                         </div>
                                     ))}

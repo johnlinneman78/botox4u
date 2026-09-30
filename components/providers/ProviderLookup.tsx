@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, Suspense } from 'react'
+import { formatScore } from '@/lib/scoring'
 import { Search, ShieldCheck, Zap, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useSearchParams } from 'next/navigation'
@@ -93,7 +94,7 @@ function ProviderLookupInner() {
                                         </div>
                                         <div className="text-right">
                                             <div className="text-[10px] font-black text-[#3D2B1F]/50 uppercase tracking-widest mb-1">Clarity Score™</div>
-                                            <div className="text-lg font-black text-[#C9A96E]">{Math.round(p.score_total)}</div>
+                                            <div className="text-lg font-black text-[#C9A96E]">{formatScore(p.score_total)}</div>
                                         </div>
                                     </div>
                                 </button>
@@ -120,7 +121,7 @@ function ProviderLookupInner() {
                         <div className="text-right">
                             <div className="text-[10px] font-black text-[#C9A96E] uppercase tracking-widest mb-1">Data-Generated Score</div>
                             <div className="text-5xl font-display font-black text-[#3D2B1F] leading-none">
-                                {Math.round(selectedProvider.score_total)}
+                                {formatScore(selectedProvider.score_total)}
                             </div>
                         </div>
                     </div>

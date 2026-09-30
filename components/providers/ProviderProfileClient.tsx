@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ClarityBadge } from '@/components/ui/ClarityBadge'
+import { SCORE_MAX, formatScore } from '@/lib/scoring'
 import { Badge } from '@/components/ui/Badge'
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
 import { ScrollCTA } from '@/components/ui/ScrollCTA'
@@ -61,17 +62,18 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
         .slice(0, 2)
 
     // Calculate dynamic scores for the visual profile
-    const clarityScore = provider.score_total || provider.clarityScore || 0
+    const clarityScore: number | null = provider.score_total ?? provider.clarityScore ?? null
     const reviews = provider.top_reviews || provider.reviews || []
     const services = provider.services_offered || []
 
+    // Same four parts as lib/scoring.ts and /methodology
     const scoreBreakdown = [
-        { label: 'Patient Outcome Signals', score: provider.score_results_quality || 0, maxScore: 30 },
-        { label: 'Credentials & Training', score: provider.score?.breakdown?.credentials || 0, maxScore: 25 },
-        { label: 'Patient Voice', score: Math.min(provider.reviewCount || 0, 20), maxScore: 20 },
-        { label: 'Practice Quality', score: provider.score?.breakdown?.innovation || 0, maxScore: 15 },
-        { label: 'Pricing Transparency', score: provider.pricePerUnit ? 10 : 0, maxScore: 10 },
+        { label: 'Confirmed credentials', score: provider.score?.breakdown?.credentials ?? 0, maxScore: SCORE_MAX.credentials },
+        { label: 'Patient reviews', score: provider.score?.breakdown?.reviews ?? 0, maxScore: SCORE_MAX.reviews },
+        { label: 'Published pricing', score: provider.score?.breakdown?.pricing ?? 0, maxScore: SCORE_MAX.pricing },
+        { label: 'Contact & booking', score: provider.score?.breakdown?.access ?? 0, maxScore: SCORE_MAX.access },
     ]
+    const scoreNotes: string[] = provider.score?.notes || []
 
     const isRealImageUrl = (url: string | undefined | null): boolean => {
         if (!url || url.length < 5) return false
@@ -247,6 +249,37 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                         {/* Decorative background element */}
                         <div className="absolute right-0 top-0 w-64 h-64 bg-[#C9A96E]/5 rounded-full blur-3xl -translate-y-12 translate-x-12 z-0 pointer-events-none"></div>
                     </div>
+                </RevealOnScroll>
+            </section>
+
+            {/* ═══ HOW THE CLARITY SCORE ADDS UP ═══ */}
+            <section className="container-content pb-12">
+                <RevealOnScroll>
+                    <h2
+                        className="font-display font-light pb-3 mb-6"
+                        style={{ fontSize: '26px', color: 'var(--color-espresso)', borderBottom: '1px solid var(--color-border)' }}
+                    >
+                        Clarity Score™: {formatScore(clarityScore)}
+                    </h2>
+                    {clarityScore === null ? (
+                        <p className="font-body text-sm" style={{ color: 'var(--color-stone)' }}>
+                            We don&apos;t have enough confirmed information to score this provider yet: fewer than 5 reviews and no confirmed NPI record.
+                        </p>
+                    ) : (
+                        <div className="space-y-4 max-w-xl">
+                            {scoreBreakdown.map((item, i) => (
+                                <ProgressBar key={item.label} label={item.label} score={item.score} maxScore={item.maxScore} index={i} />
+                            ))}
+                        </div>
+                    )}
+                    {scoreNotes.length > 0 && (
+                        <ul className="mt-5 space-y-1 font-body text-sm list-disc pl-5" style={{ color: 'var(--color-stone)' }}>
+                            {scoreNotes.map(n => <li key={n}>{n}</li>)}
+                        </ul>
+                    )}
+                    <a href="/methodology" className="inline-block mt-4 font-body text-sm underline" style={{ color: 'var(--color-espresso)' }}>
+                        How the score works
+                    </a>
                 </RevealOnScroll>
             </section>
 
@@ -674,7 +707,7 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                 providerName={provider.name}
                 providerCity={provider.city}
                 providerState={provider.state}
-                clarityScore={clarityScore}
+                clarityScore={clarityScore ?? undefined}
                 phoneNumber={provider.phone}
                 googlePlaceId={provider.google_place_id}
             />

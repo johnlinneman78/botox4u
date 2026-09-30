@@ -97,10 +97,10 @@ export default async function FindProvidersPage({
                         <div>
                             <h4 className="font-bold text-[var(--color-espresso)] text-sm mb-1 uppercase tracking-tight">Clarity Score™ Ranking Algorithm</h4>
                             <p className="text-xs leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                                Our directory uses a 100% data-driven algorithm. Providers are ranked based on
-                                <b style={{ color: 'var(--color-espresso)' }}> Injection Quality</b>,
-                                <b style={{ color: 'var(--color-espresso)' }}> Verified Credentials</b>, and
-                                <b style={{ color: 'var(--color-espresso)' }}> Clinical Innovation</b>.
+                                Providers are ranked by how much you can confirm before booking:
+                                <b style={{ color: 'var(--color-espresso)' }}> confirmed credentials</b>,
+                                <b style={{ color: 'var(--color-espresso)' }}> patient reviews</b>,
+                                <b style={{ color: 'var(--color-espresso)' }}> published pricing</b> and contact details. Paid plans never change the order.
                             </p>
                         </div>
                     </div>
