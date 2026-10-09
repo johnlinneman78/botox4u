@@ -47,6 +47,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const GA_ID = process.env.NEXT_PUBLIC_GA_ID || ''
+
   return (
     <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <head>
@@ -68,6 +70,25 @@ export default function RootLayout({
             })
           }}
         />
+        {/* Google Analytics bootstrap.
+            These are plain <script> tags in <head> on purpose. next/script's
+            "beforeInteractive" is only honoured when written directly in the
+            root layout, and even here a raw tag is the dependable way to get
+            gtag defined and configured BEFORE React hydrates — otherwise the
+            first page_view of every visit is lost. send_page_view is off
+            because GoogleAnalytics.tsx sends each view itself, including the
+            first, so App Router navigations are counted too. */}
+        {GA_ID && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+            <script
+              id="ga-bootstrap"
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','${GA_ID}',{send_page_view:false});`,
+              }}
+            />
+          </>
+        )}
       </head>
       <body style={{ fontFamily: 'var(--font-body)' }} suppressHydrationWarning>
         <Script

@@ -1,19 +1,23 @@
 'use client'
 
-import Script from 'next/script'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 
 /**
- * GA4 for an App Router site.
+ * GA4 page views for an App Router site.
  *
- * Next.js client-side navigations don't reload the page, so GA's automatic
- * page_view only fires on the first load. We turn the automatic one off
- * (send_page_view: false) and send every page_view ourselves, including the
- * first, so counts aren't doubled on load and aren't missing on navigation.
+ * The gtag library and its `config` call live in app/layout.tsx as plain
+ * <script> tags in <head>, so they run before React hydrates. That config
+ * sets `send_page_view: false`, which means GA sends no view of its own and
+ * this component sends every one — including the first.
  *
- * Set NEXT_PUBLIC_GA_ID (looks like G-XXXXXXXXXX) in Vercel and .env.local.
- * Without it this renders nothing at all.
+ * Why not let GA send the first one automatically: Next.js client-side
+ * navigation never reloads the page, so GA's automatic view fires once and
+ * then never again. Sending them all from one place keeps every page equal
+ * and avoids double-counting the landing page.
+ *
+ * A path is only recorded as sent once the hit is actually queued, so a hit
+ * is never silently dropped if the library hasn't arrived yet.
  */
 export default function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: string }) {
     const pathname = usePathname()
@@ -25,38 +29,27 @@ export default function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_
         const qs = searchParams?.toString()
         const url = qs ? `${pathname}?${qs}` : pathname
         if (lastPath.current === url) return
-        lastPath.current = url
-        if (typeof window.gtag === 'function') {
-            window.gtag('event', 'page_view', {
+
+        try {
+            const params = {
                 page_path: url,
                 page_location: window.location.href,
                 page_title: document.title,
-            })
+            }
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'page_view', params)
+            } else {
+                // Belt and braces: gtag.js drains anything already queued.
+                window.dataLayer = window.dataLayer || []
+                window.dataLayer.push(['event', 'page_view', { ...params, send_to: GA_MEASUREMENT_ID }])
+            }
+            lastPath.current = url
+        } catch {
+            // analytics must never break the page
         }
     }, [pathname, searchParams, GA_MEASUREMENT_ID])
 
-    if (!GA_MEASUREMENT_ID) return null
-
-    return (
-        <>
-            <Script
-                strategy="afterInteractive"
-                src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-            />
-            <Script
-                id="google-analytics"
-                strategy="afterInteractive"
-                dangerouslySetInnerHTML={{
-                    __html: `
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
-                    `,
-                }}
-            />
-        </>
-    )
+    return null
 }
 
 declare global {
