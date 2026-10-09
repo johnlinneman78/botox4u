@@ -20,9 +20,9 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
     if (!provider) return { title: 'Injector Profile | VerifiedAesthetics' }
 
     // Title logic
-    const fullTitle = `${provider.name} — Botox & Filler in ${provider.city} | VerifiedAesthetics`
-    const shortTitle = `${provider.name} — ${provider.city} | VerifiedAesthetics`
-    const title = fullTitle.length > 70 ? shortTitle : fullTitle
+    const fullTitle = `${provider.name} — Reviews, Pricing & Credentials | ${provider.city}, ${provider.state}`
+    const shortTitle = `${provider.name} — Reviews & Pricing | ${provider.city}`
+    const title = fullTitle.length > 65 ? shortTitle : fullTitle
 
     // Meta Description logic
     const scoreText = formatScore(provider.score_total ?? provider.clarityScore)

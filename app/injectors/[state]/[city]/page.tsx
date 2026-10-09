@@ -43,11 +43,16 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     const stateCode = state.toUpperCase()
     const stateName = STATE_MAP[stateCode] || stateCode
 
-    const month = new Date().toLocaleString('default', { month: 'long' })
+    const now = new Date()
+    const month = now.toLocaleString('en-US', { month: 'long' })
+    const year = now.getFullYear()
     const providers = await getProvidersWithSearch({ city: cityName, state: stateCode })
     const providerCount = providers.length > 0 ? providers.length : 'top'
-    const title = `Best Botox Providers in ${cityName}, ${stateCode} (2026) | VerifiedAesthetics`
-    const description = `Compare ${providerCount} Botox & filler providers in ${cityName}, ${stateCode}. Independent Clarity Scores™, pricing, and patient reviews. Updated ${month} 2026.`
+    const avgPrice = providers.map(p => p.price_per_unit).filter(Boolean)[0]
+    const title = `Botox in ${cityName}, ${stateCode}: Prices & Verified Injectors (${year})`
+    const description = avgPrice
+        ? `Compare ${providerCount} Botox & filler injectors in ${cityName}. See price per unit (from $${avgPrice}), confirmed credentials and patient reviews side by side. No paid placement. Updated ${month} ${year}.`
+        : `Compare ${providerCount} Botox & filler injectors in ${cityName}, ${stateCode}. Confirmed credentials, published pricing and patient reviews side by side. No paid placement. Updated ${month} ${year}.`
     const url = `/${NICHE.baseSlug}/${state.toLowerCase()}/${city.toLowerCase()}`
 
     return {
@@ -161,7 +166,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
             <div className="container-content mt-6 mb-2">
                 <div className="max-w-3xl">
                     <p className="text-[15px] leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                        Our March 2026 report for {cityName} analyzes {providers.length} aesthetic clinics to determine clinical quality without paid orientation.
+                        Our {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })} report for {cityName} analyzes {providers.length} aesthetic clinics to determine clinical quality without paid orientation.
                         Each provider is audited for credentialing and pricing transparency.
                         {stats?.avgCost ? ` Local market analysis shows average pricing in ${cityName} is currently $${stats.avgCost} per unit.` : ''}
                     </p>
@@ -316,7 +321,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                             <div className="space-y-5 text-[15px] leading-relaxed" style={{ color: 'var(--color-stone)' }}>
                                 <p>
                                     {cityName} has <strong style={{ color: 'var(--color-espresso)' }}>{providers.length}+ verified aesthetic injectors</strong> on VerifiedAesthetics,
-                                    with an average Botox price of <strong style={{ color: 'var(--color-espresso)' }}>${stats?.avgCost || 14} per unit</strong> as of March 2026.
+                                    with an average Botox price of <strong style={{ color: 'var(--color-espresso)' }}>${stats?.avgCost || 14} per unit</strong> as of {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}.
                                 </p>
                                 <p>
                                     {(stats?.avgCost || 14) > 15
