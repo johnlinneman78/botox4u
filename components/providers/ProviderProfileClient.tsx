@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { track, providerParams } from '@/lib/analytics'
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ClarityBadge } from '@/components/ui/ClarityBadge'
@@ -525,6 +526,7 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
 
                 {provider.google_place_id && (
                     <a
+                        onClick={() => track('provider_maps_click', providerParams({ slug: provider.slug, name: provider.name, city: provider.city, state: provider.state, score: clarityScore }))}
                         href={`https://www.google.com/maps/place/?q=place_id:${provider.google_place_id}`}
                         target="_blank"
                         rel="noopener noreferrer"

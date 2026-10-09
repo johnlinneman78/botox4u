@@ -48,6 +48,10 @@ export default function CityMap({ providers, citySlug, userLat, userLng }: CityM
         setMapsLoaded(true)
     }, [])
 
+    // Without a Maps key the embed never resolves and every city page shows a
+    // permanent "Loading..." block. Render nothing instead.
+    if (!process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY) return null
+
     if (!isMounted) {
         return (
             <div style={mapContainerStyle} className="bg-surface rounded-2xl animate-pulse flex items-center justify-center border border-border">
@@ -108,7 +112,7 @@ export default function CityMap({ providers, citySlug, userLat, userLng }: CityM
             </div>
 
             <LoadScript
-                googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
+                googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}
                 onLoad={onLoad}
             >
                 <GoogleMap

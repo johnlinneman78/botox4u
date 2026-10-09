@@ -36,7 +36,7 @@ export function CityStats({ avgCost, providerCount, avgRating, city }: CityStats
             label: 'Quality Score',
             value: 'Audited',
             suffix: '',
-            description: 'Providers are manually verified for clinical credentials and price transparency.'
+            description: 'Scored on confirmed credentials, patient reviews, published pricing and contact details.'
         }
     ]
 

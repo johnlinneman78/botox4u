@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { track } from '@/lib/analytics'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -71,6 +72,11 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
 
         setIsSubmitting(false)
         if (result.success) {
+            track('lead_submitted', {
+                provider_id: providerId ?? undefined,
+                provider_name: providerName ?? undefined,
+                treatment: data.treatment_type ?? undefined,
+            })
             setIsSuccess(true)
         } else {
             setError(result.error || 'Something went wrong')

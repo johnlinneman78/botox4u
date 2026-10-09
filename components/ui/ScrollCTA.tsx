@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { track } from '@/lib/analytics'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { Button } from './Button'
@@ -83,6 +84,7 @@ export function ScrollCTA({
                                 <div className="flex items-center gap-4 ml-auto">
                                     {phoneNumber && (
                                         <a
+                                            onClick={() => track('provider_phone_click', { provider_name: providerName, provider_city: providerCity })}
                                             href={`tel:${phoneNumber}`}
                                             className="font-body text-sm font-medium transition-colors hidden md:inline-flex items-center gap-2"
                                             style={{ color: 'var(--color-espresso)' }}

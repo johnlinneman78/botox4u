@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { track } from '@/lib/analytics'
 import { Star, ChevronRight, ExternalLink } from 'lucide-react'
 import { NICHE } from '@/config/niche'
 
@@ -77,14 +78,7 @@ export function ReviewCarousel({ reviews, totalReviews, googlePlaceId, providerI
                 <a
                     href={bookingTrackingUrl}
                     className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#C9A96E] text-white rounded-2xl text-lg font-black tracking-widest uppercase hover:bg-[#B5955B] transition-all shadow-xl shadow-[#C9A96E]/20 group"
-                    onClick={() => {
-                        if (typeof window.gtag === 'function') {
-                            window.gtag('event', 'booking_click', {
-                                provider_id: providerId,
-                                source: 'reviews_section'
-                            })
-                        }
-                    }}
+                    onClick={() => track('provider_outbound_click', { provider_id: providerId, source: 'reviews_section' })}
                 >
                     Book a Consultation
                     <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

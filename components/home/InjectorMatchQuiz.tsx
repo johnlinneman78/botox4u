@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { track } from '@/lib/analytics'
 import { formatScore } from '@/lib/scoring'
 import {
     ChevronRight,
@@ -132,6 +133,7 @@ export default function InjectorMatchQuiz() {
             }) as any[]
 
             setMatches(providers.slice(0, 3))
+            track('quiz_completed', { city: selectedCity, matches: providers.slice(0, 3).length })
             setIsSubmitted(true)
 
             // GA4: Track successful completion (Key Event)
@@ -171,6 +173,7 @@ export default function InjectorMatchQuiz() {
                 matches
             })
             if (result.success) {
+                track('quiz_email_submitted', { city: cityObj?.name || selectedCity })
                 setEmailSuccess(true)
             }
         } catch (e) {

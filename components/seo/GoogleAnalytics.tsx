@@ -2,21 +2,35 @@
 
 import Script from 'next/script'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
+/**
+ * GA4 for an App Router site.
+ *
+ * Next.js client-side navigations don't reload the page, so GA's automatic
+ * page_view only fires on the first load. We turn the automatic one off
+ * (send_page_view: false) and send every page_view ourselves, including the
+ * first, so counts aren't doubled on load and aren't missing on navigation.
+ *
+ * Set NEXT_PUBLIC_GA_ID (looks like G-XXXXXXXXXX) in Vercel and .env.local.
+ * Without it this renders nothing at all.
+ */
 export default function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: string }) {
     const pathname = usePathname()
     const searchParams = useSearchParams()
+    const lastPath = useRef<string | null>(null)
 
     useEffect(() => {
-        if (!pathname) return
-
-        const url = pathname + searchParams.toString()
-
-        // Push to dataLayer for GA4
+        if (!GA_MEASUREMENT_ID || !pathname) return
+        const qs = searchParams?.toString()
+        const url = qs ? `${pathname}?${qs}` : pathname
+        if (lastPath.current === url) return
+        lastPath.current = url
         if (typeof window.gtag === 'function') {
-            window.gtag('config', GA_MEASUREMENT_ID, {
+            window.gtag('event', 'page_view', {
                 page_path: url,
+                page_location: window.location.href,
+                page_title: document.title,
             })
         }
     }, [pathname, searchParams, GA_MEASUREMENT_ID])
@@ -37,9 +51,7 @@ export default function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_
                         window.dataLayer = window.dataLayer || [];
                         function gtag(){dataLayer.push(arguments);}
                         gtag('js', new Date());
-                        gtag('config', '${GA_MEASUREMENT_ID}', {
-                            page_path: window.location.pathname,
-                        });
+                        gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
                     `,
                 }}
             />
@@ -47,9 +59,9 @@ export default function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_
     )
 }
 
-// Add gtag to window type definition
 declare global {
     interface Window {
-        gtag: (command: string, id: string, config: any) => void
+        gtag?: (...args: any[]) => void
+        dataLayer?: any[]
     }
 }

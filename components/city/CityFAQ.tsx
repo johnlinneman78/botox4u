@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ChevronDown, HelpCircle } from 'lucide-react'
 import { NICHE } from '@/config/niche'
 
@@ -130,23 +130,23 @@ export function CityFAQ({ city, avgCost }: CityFAQProps) {
                                     </div>
                                 </button>
 
-                                <AnimatePresence initial={false}>
-                                    {openIndex === i && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: 'auto', opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.3, ease: 'easeInOut' }}
-                                        >
-                                            <div className="px-8 pb-8">
-                                                <div className="h-px w-12 mb-6" style={{ background: 'var(--color-border)' }} />
-                                                <p className="font-body text-base leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                                                    {faq.a}
-                                                </p>
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
+                                {/* Always in the DOM so search engines and screen
+                                    readers get the answers; collapsed with height,
+                                    not by unmounting. */}
+                                <motion.div
+                                    initial={false}
+                                    animate={{ height: openIndex === i ? 'auto' : 0, opacity: openIndex === i ? 1 : 0 }}
+                                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                    style={{ overflow: 'hidden' }}
+                                    aria-hidden={openIndex !== i}
+                                >
+                                    <div className="px-8 pb-8">
+                                        <div className="h-px w-12 mb-6" style={{ background: 'var(--color-border)' }} />
+                                        <p className="font-body text-base leading-relaxed" style={{ color: 'var(--color-stone)' }}>
+                                            {faq.a}
+                                        </p>
+                                    </div>
+                                </motion.div>
                             </div>
                         ))}
                     </div>
