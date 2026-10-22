@@ -9,7 +9,7 @@ import { day3Html, day3Subject } from './emails/day3'
 import { day4Html, day4Subject } from './emails/day4'
 import { day5Html, day5Subject } from './emails/day5'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder_for_build')
 
 function scheduledAt(daysFromNow: number): string {
     const date = new Date()

@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
 import { NICHE } from '@/config/niche';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder_for_build');
 const SENDER = process.env.CONTACT_EMAIL || `${NICHE.outreach.senderName} from ${NICHE.siteName} <${NICHE.outreach.senderEmail}>`;
 
 export type OutreachEmailType = 'notification' | 'followup' | 'final';
