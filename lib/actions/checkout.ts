@@ -41,6 +41,15 @@ export async function createCheckoutSession(providerId: string, planId: 'verifie
             },
         ],
         mode: 'subscription',
+        subscription_data: {
+            // The approved offer is a 30-day trial before the first charge,
+            // with billing and cancellation terms disclosed before signup.
+            trial_period_days: 30,
+            metadata: {
+                providerId: provider.id,
+                planId: planId,
+            },
+        },
         success_url: `${process.env.NEXT_PUBLIC_APP_URL}/provider/${provider.slug}?success=true`,
         cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/pricing?canceled=true`,
         customer_email: provider.email || undefined,

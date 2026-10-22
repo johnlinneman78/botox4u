@@ -259,27 +259,16 @@ export async function getProvidersWithSearch(filters: {
         }
     }
 
-    const tierWeight = {
-        'featured': 1000,
-        'premium': 1000,
-        'verified': 500,
-        'free': 0
-    }
-
     // 5. Final Sort & Limit
+    // Ranking is never affected by payment: paid tiers change what a profile
+    // shows, never where it ranks. (See config/niche.js pricing tiers:
+    // "Does not change your ranking or Clarity Score".)
     const sorted = finalProviders.sort((a: any, b: any) => {
         // Distance Sort requested: evaluate proximity first
         if (filters.sort === 'distance' && filters.userLat && filters.userLng && a.lat && a.lng && b.lat && b.lng) {
             const distA = Math.sqrt(Math.pow(a.lat - filters.userLat, 2) + Math.pow(a.lng - filters.userLng, 2))
             const distB = Math.sqrt(Math.pow(b.lat - filters.userLat, 2) + Math.pow(b.lng - filters.userLng, 2))
             return distA - distB
-        }
-
-        // Higher tier first (for default ranking)
-        if (a.listing_tier !== b.listing_tier) {
-            const weightA = tierWeight[a.listing_tier as keyof typeof tierWeight] || 0
-            const weightB = tierWeight[b.listing_tier as keyof typeof tierWeight] || 0
-            if (weightB !== weightA) return weightB - weightA
         }
 
         // Priority Sort requested

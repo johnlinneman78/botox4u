@@ -38,11 +38,14 @@ export async function POST(req: NextRequest) {
 
         if (providerId && planId) {
             console.log(`✅ Payment success for provider ${providerId} (${planId})`);
-            // Existing provider logic...
+            // listing_tier is the field the finder, search, dashboard and
+            // profile pages read. subscription_tier is kept in sync for
+            // historical records, but listing_tier is the entitlement.
             const { data: provider, error } = await supabase
                 .from('providers')
                 .update({
                     outreach_status: 'paying',
+                    listing_tier: planId,
                     subscription_tier: planId,
                     subscription_status: 'active',
                     subscription_start: new Date().toISOString(),
@@ -56,11 +59,12 @@ export async function POST(req: NextRequest) {
                 console.error('Error updating provider subscription:', error);
             } else if (provider && (provider.email || (provider.enriched_attrs as any)?.email)) {
                 const targetEmail = provider.email || (provider.enriched_attrs as any)?.email;
+                const planDisplayName = planId === 'featured' ? 'Featured' : 'Enhanced';
                 await resend.emails.send({
                     from: `John from ${NICHE.siteName} <${NICHE.outreach.senderEmail}>`,
                     to: targetEmail,
-                    subject: `Welcome to ${NICHE.siteName} Premium`,
-                    html: `<p>Your listing ${provider.name} is now active on the ${planId} plan.</p>`
+                    subject: `Welcome to ${NICHE.siteName} ${planDisplayName}`,
+                    html: `<p>Your listing ${provider.name} is now active on the ${planDisplayName} plan.</p>`
                 });
             }
         }
@@ -108,6 +112,38 @@ export async function POST(req: NextRequest) {
                     `
                 });
             }
+        }
+    }
+
+    // Cancellation / terminal subscription states: revert the entitlement so
+    // a provider who stops paying returns to the free listing.
+    if (
+        event.type === 'customer.subscription.deleted' ||
+        (event.type === 'customer.subscription.updated' &&
+            ['canceled', 'unpaid'].includes((event.data.object as Stripe.Subscription).status))
+    ) {
+        const subscription = event.data.object as Stripe.Subscription;
+        const customerId = subscription.customer as string;
+        const providerIdFromMeta = subscription.metadata?.providerId;
+
+        let query = supabase
+            .from('providers')
+            .update({
+                listing_tier: 'free',
+                subscription_tier: null,
+                subscription_status: 'canceled',
+                outreach_status: 'churned'
+            });
+
+        query = providerIdFromMeta
+            ? query.eq('id', providerIdFromMeta)
+            : query.eq('stripe_customer_id', customerId);
+
+        const { error } = await query;
+        if (error) {
+            console.error('Error reverting provider subscription:', error);
+        } else {
+            console.log(`Subscription ended for customer ${customerId}; listing reverted to free.`);
         }
     }
 

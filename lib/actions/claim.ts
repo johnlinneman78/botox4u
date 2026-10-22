@@ -20,7 +20,7 @@ export async function initiateClaim(formData: {
     // 1. Check if provider exists and is not already claimed
     const { data: provider, error: fetchError } = await supabase
         .from('providers')
-        .select('name, claimed')
+        .select('name, claimed, email, website')
         .eq('id', formData.providerId)
         .single();
 
@@ -32,8 +32,46 @@ export async function initiateClaim(formData: {
         return { success: false, message: 'This listing has already been claimed.' };
     }
 
-    // 2. Create or find provider account
+    // 1b. Ownership check: the verification link is only sent automatically
+    // when the claimant's email matches the practice on file (the listed
+    // email, or an email on the practice's own website domain). Anything
+    // else is recorded and waits for manual review by the owner.
+    const claimantEmail = formData.email.trim().toLowerCase();
+    const claimantDomain = claimantEmail.split('@')[1] || '';
+    const listedEmail = (provider.email || '').trim().toLowerCase();
+    const websiteDomain = (provider.website || '')
+        .trim()
+        .toLowerCase()
+        .replace(/^https?:\/\//, '')
+        .replace(/^www\./, '')
+        .split('/')[0]
+        .split(':')[0];
+    const emailMatchesPractice =
+        (listedEmail !== '' && claimantEmail === listedEmail) ||
+        (websiteDomain !== '' && claimantDomain === websiteDomain);
+
     const verificationToken = crypto.randomBytes(32).toString('hex');
+
+    if (!emailMatchesPractice) {
+        await supabase
+            .from('provider_accounts')
+            .upsert({
+                provider_id: formData.providerId,
+                email: formData.email,
+                verification_token: verificationToken,
+                verified: false
+            });
+        await supabase
+            .from('providers')
+            .update({ crm_status: 'claim_review' })
+            .eq('id', formData.providerId);
+        return {
+            success: true,
+            message: 'Claim received. Because this email does not match the practice details we have on file, we review claims like this by hand and will reply to the email you gave.'
+        };
+    }
+
+    // 2. Create or find provider account
 
     const { data: account, error: accountError } = await supabase
         .from('provider_accounts')

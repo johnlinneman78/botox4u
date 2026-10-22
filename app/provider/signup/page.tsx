@@ -49,17 +49,20 @@ function ProviderSignupContent() {
             if (authData?.user) {
 
                 if (existingProviderId) {
-                    // Claim existing
+                    // Claim existing. The plan in the URL is never granted
+                    // here: paid tiers are set only by the Stripe webhook
+                    // after payment. New claims start on the free tier.
                     await supabase
                         .from('providers')
                         .update({
                             user_id: authData.user.id,
                             claimed: true,
-                            listing_tier: plan
+                            listing_tier: 'free'
                         })
                         .eq('id', existingProviderId)
                 } else {
-                    // Create new provider
+                    // Create new provider (free tier; paid tiers come from
+                    // the Stripe webhook after payment, never from signup)
                     const slug = slugify(clinicName)
                     await supabase
                         .from('providers')
@@ -69,7 +72,7 @@ function ProviderSignupContent() {
                             city,
                             state,
                             slug,
-                            listing_tier: plan,
+                            listing_tier: 'free',
                             claimed: true,
                             verified: false,
                             business_type: 'Medspa'
