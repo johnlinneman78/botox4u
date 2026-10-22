@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { track } from '@/lib/analytics'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 import { submitLead } from '@/lib/actions/leads'
 import { NICHE } from '@/config/niche'
+import { normalizeUsPhone } from '@/lib/utils/phone'
 
 const leadFormSchema = z.object({
     provider_id: z.string().uuid().optional(),
@@ -16,7 +17,7 @@ const leadFormSchema = z.object({
     state: z.string().optional(),
     full_name: z.string().min(2, 'Please enter your full name'),
     email: z.string().email('Please enter a valid email address'),
-    phone: z.string().min(10, 'Please enter a valid phone number'),
+    phone: z.string().refine((val) => normalizeUsPhone(val) !== null, 'Please enter a valid 10-digit U.S. phone number'),
     treatment_type: z.string().min(1, 'Please select a treatment'),
     budget_range: z.string().min(1, 'Please select your budget'),
     timeframe: z.string().min(1, 'Please select a timeframe'),
@@ -39,6 +40,17 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const hasStartedRef = useRef(false)
+
+    const handleFormInteraction = () => {
+        if (!hasStartedRef.current) {
+            hasStartedRef.current = true
+            track('lead_form_start', {
+                provider_id: providerId ?? undefined,
+                provider_name: providerName ?? undefined,
+            })
+        }
+    }
 
     const {
         register,
@@ -61,25 +73,38 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
         setIsSubmitting(true)
         setError(null)
 
-        const formData = new FormData()
-        Object.entries(data).forEach(([key, value]) => {
-            if (value !== undefined && value !== null) {
-                formData.append(key, value.toString())
-            }
-        })
-
-        const result = await submitLead(formData)
-
-        setIsSubmitting(false)
-        if (result.success) {
-            track('lead_submitted', {
-                provider_id: providerId ?? undefined,
-                provider_name: providerName ?? undefined,
-                treatment: data.treatment_type ?? undefined,
+        try {
+            const formData = new FormData()
+            Object.entries(data).forEach(([key, value]) => {
+                if (value !== undefined && value !== null) {
+                    if (key === 'phone') {
+                        const normalized = normalizeUsPhone(value.toString())
+                        if (normalized) {
+                            formData.append(key, normalized)
+                        }
+                    } else {
+                        formData.append(key, value.toString())
+                    }
+                }
             })
-            setIsSuccess(true)
-        } else {
-            setError(result.error || 'Something went wrong')
+
+            const result = await submitLead(formData)
+
+            if (result.success) {
+                track('lead_submitted', {
+                    provider_id: providerId ?? undefined,
+                    provider_name: providerName ?? undefined,
+                    treatment: data.treatment_type ?? undefined,
+                })
+                setIsSuccess(true)
+            } else {
+                setError(result.error || 'Submission could not be completed. Please review your details and try again.')
+            }
+        } catch (err) {
+            console.error('Lead submission network or server error:', err)
+            setError('Unable to send your request right now. Please try again or contact the clinic directly.')
+        } finally {
+            setIsSubmitting(false)
         }
     }
 
@@ -92,7 +117,7 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                     </div>
                     <h3 className="text-2xl font-display font-bold text-[#3D2B1F] mb-3">Request Sent!</h3>
                     <p className="text-[#3D2B1F]/60 mb-8 max-w-[280px] mx-auto text-sm leading-relaxed">
-                        Thanks! We&apos;ll connect you with {providerName ? <strong className="text-[#3D2B1F]">{providerName}</strong> : `top providers in ${city}`} who match your needs within 24 hours.
+                        Thank you. Your consultation inquiry has been forwarded to {providerName ? <strong className="text-[#3D2B1F]">{providerName}</strong> : `verified providers in ${city}`}.
                     </p>
                     <Button variant="outline" onClick={() => setIsSuccess(false)} className="px-8 border-[#3D2B1F]/10 text-[#3D2B1F]/70 hover:bg-[#3D2B1F]/5">
                         Done
@@ -115,11 +140,11 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                     {providerName ? `Connect with ${providerName}` : `Find ${city} Specialists`}
                 </CardTitle>
                 <p className="text-xs text-[#3D2B1F]/50">
-                    {providerName ? 'Independent data: response time typically < 2 hours' : 'Recieve 3 direct responses today'}
+                    {providerName ? 'Independent directory listing · Direct clinic inquiry' : 'Connect with verified local specialists'}
                 </p>
             </CardHeader>
             <CardContent>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                <form onSubmit={handleSubmit(onSubmit)} onFocus={handleFormInteraction} className="space-y-4">
                     <input type="hidden" {...register('provider_id')} />
                     <input type="hidden" {...register('city')} />
                     <input type="hidden" {...register('state')} />

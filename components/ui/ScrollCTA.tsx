@@ -104,6 +104,7 @@ export function ScrollCTA({
                                     )}
                                     {googlePlaceId && (
                                         <a
+                                            onClick={() => track('provider_maps_click', { provider_name: providerName, provider_city: providerCity, source: 'sticky_bar' })}
                                             href={`https://www.google.com/maps/place/?q=place_id:${googlePlaceId}`}
                                             target="_blank"
                                             rel="noopener noreferrer"

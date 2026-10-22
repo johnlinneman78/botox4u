@@ -145,7 +145,7 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
 
                 <RevealOnScroll delay={0.1}>
                     <div className="flex flex-wrap gap-2 mb-4">
-                        {provider.npi_verified && <Badge variant="sage">Board Certified</Badge>}
+                        {provider.npi_verified && <Badge variant="sage">NPI Verified</Badge>}
                         {provider.npi_specialty && <Badge variant="sage">{provider.npi_specialty}</Badge>}
                         {provider.allergan_tier && provider.allergan_tier !== 'None' && (
                             <Badge variant="sage">Allergan {provider.allergan_tier}</Badge>
@@ -180,11 +180,9 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                         <div className="space-y-4 relative z-10">
                             {provider.practitioners && provider.practitioners.length > 0 ? (
                                 provider.practitioners.map((practitioner: any, index: number) => {
-                                    let expYears = 0;
-                                    let licYear = 0;
+                                    let enumYear = 0;
                                     if (practitioner.npi_enumeration_date) {
-                                        licYear = new Date(practitioner.npi_enumeration_date).getFullYear();
-                                        expYears = new Date().getFullYear() - licYear;
+                                        enumYear = new Date(practitioner.npi_enumeration_date).getFullYear();
                                     }
                                     return (
                                         <div key={index} className="bg-white/80 backdrop-blur-sm p-5 md:p-6 rounded-xl border border-[#3D2B1F]/5 shadow-sm">
@@ -213,12 +211,12 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                                                             )}
                                                         </div>
                                                         <div className="text-[#A89B8C]">
-                                                            <span className="inline-block w-20 md:w-28 text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">Licensed</span>
-                                                            {licYear > 0 ? (
+                                                            <span className="inline-block w-20 md:w-28 text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">NPI Enumeration</span>
+                                                            {enumYear > 0 ? (
                                                                 <>
-                                                                    Since {licYear} <span className="font-medium text-[#3D2B1F]">({expYears} years)</span>
+                                                                    {enumYear}
                                                                 </>
-                                                            ) : 'Verification pending'}
+                                                            ) : 'Not on file'}
                                                         </div>
                                                         <div className="text-[#A89B8C]">
                                                             <span className="inline-block w-20 md:w-28 text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">State</span>
@@ -243,7 +241,7 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
 
                         <div className="mt-8 relative z-10">
                             <p className="font-sans text-[12px] text-[#A89B8C]">
-                                Credential data sourced from the CMS National Provider Identifier (NPI) Registry. Last verified: {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}.
+                                Credential data sourced from the public CMS National Provider Identifier (NPI) Registry records. NPI dates reflect enumeration only; an NPI does not validate medical licensure, board certification, or clinical competence.
                             </p>
                         </div>
 
@@ -306,7 +304,7 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                             >
                                 {provider.ai_description || (reviews[0]?.text
                                     ? `Observed clinical performance for ${provider.name} in the ${provider.city} market indicates a focus on ${services[0] || 'aesthetic excellence'}. Patient feedback highlights: "${reviews[0].text.substring(0, 180)}..."`
-                                    : `This ${provider.city} ${provider.businessType || 'clinic'} is currently being indexed for longitudinal outcomes. Our audit for 2026 focuses on credentialing, safety protocols, and pricing transparency in the ${provider.state} region.`)}
+                                    : `This ${provider.city} ${provider.businessType || 'clinic'} is indexed by VerifiedAesthetics. Our data audit focuses on verified credentials, published pricing, and patient reviews in the ${provider.state} region.`)}
                             </p>
                             <div className="pt-6">
                                 {provider.city && provider.state && (
@@ -327,20 +325,36 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                         <RevealOnScroll delay={0.1}>
                             <h2 className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--color-taupe)' }}>Verified Data Points</h2>
                             <div className="grid grid-cols-1 gap-4">
-                                {[
-                                    { label: 'Market Tenure', value: '7+ Years (Verified)', icon: ShieldCheck },
-                                    { label: 'Primary Focus', value: services[0] || 'Aesthetic Medicine', icon: Search },
-                                    { label: 'Price Index', value: provider.price_per_unit ? `$${provider.price_per_unit}/unit` : 'City Average ($12-$16)', icon: Activity },
-                                    { label: 'Outcome Signal', value: 'High Accuracy (AI-Audit)', icon: Sparkles }
-                                ].map((item, i) => (
-                                    <div key={i} className="flex items-center justify-between p-4 rounded-xl border border-[var(--color-border)] bg-white/50">
-                                        <div className="flex items-center gap-3">
-                                            <item.icon className="w-4 h-4" style={{ color: 'var(--color-gold)' }} />
-                                            <span className="text-[11px] font-bold uppercase tracking-tight" style={{ color: 'var(--color-stone)' }}>{item.label}</span>
+                                {(() => {
+                                    const leadPractitioner = provider.practitioners && provider.practitioners.length > 0 ? provider.practitioners[0] : null
+                                    let enumerationText = 'Not on file'
+                                    if (leadPractitioner?.npi_enumeration_date) {
+                                        const yr = new Date(leadPractitioner.npi_enumeration_date).getFullYear()
+                                        if (!isNaN(yr)) enumerationText = `Enumerated ${yr}`
+                                    } else if (provider.npi_enumeration_date) {
+                                        const yr = new Date(provider.npi_enumeration_date).getFullYear()
+                                        if (!isNaN(yr)) enumerationText = `Enumerated ${yr}`
+                                    }
+
+                                    const priceDisplay = (provider.price_per_unit || provider.pricePerUnit)
+                                        ? `$${provider.price_per_unit || provider.pricePerUnit}/unit`
+                                        : 'Pricing on inquiry'
+
+                                    return [
+                                        { label: 'NPI Enumeration', value: enumerationText, icon: ShieldCheck },
+                                        { label: 'Primary Focus', value: services[0] || 'Aesthetic Medicine', icon: Search },
+                                        { label: 'Price Index', value: priceDisplay, icon: Activity },
+                                        { label: 'Audit Standard', value: 'Credentials, Reviews & Pricing', icon: Sparkles }
+                                    ].map((item, i) => (
+                                        <div key={i} className="flex items-center justify-between p-4 rounded-xl border border-[var(--color-border)] bg-white/50">
+                                            <div className="flex items-center gap-3">
+                                                <item.icon className="w-4 h-4" style={{ color: 'var(--color-gold)' }} />
+                                                <span className="text-[11px] font-bold uppercase tracking-tight" style={{ color: 'var(--color-stone)' }}>{item.label}</span>
+                                            </div>
+                                            <span className="text-[12px] font-medium" style={{ color: 'var(--color-espresso)' }}>{item.value}</span>
                                         </div>
-                                        <span className="text-[12px] font-medium" style={{ color: 'var(--color-espresso)' }}>{item.value}</span>
-                                    </div>
-                                ))}
+                                    ))
+                                })()}
                             </div>
                             <p className="mt-4 text-[10px] italic leading-tight" style={{ color: 'var(--color-taupe)' }}>
                                 Data points are gathered via independent NPI registry audit and local market research. Not an endorsement.
@@ -401,7 +415,7 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                                             {prac.npi_enumeration_date && (
                                                 <div>
                                                     <span className="block text-[10px] uppercase tracking-wider mb-1" style={{ color: 'var(--color-taupe)' }}>
-                                                        Licensed Since
+                                                        NPI Enumeration
                                                     </span>
                                                     <span className="font-mono text-sm" style={{ color: 'var(--color-stone)' }}>
                                                         {new Date(prac.npi_enumeration_date).getFullYear()}
@@ -439,7 +453,11 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                         }}
                     >
                         <p className="font-body text-sm mb-3" style={{ color: 'var(--color-espresso)' }}>
-                            Our analysis of <strong>{provider.reviewCount || reviews.length}</strong> reviews found an average rating of {provider.rating ? provider.rating.toFixed(1) : '4.8'} stars.
+                            {provider.rating ? (
+                                <>Our analysis of <strong>{provider.reviewCount || reviews.length}</strong> reviews found an average rating of {provider.rating.toFixed(1)} stars.</>
+                            ) : (
+                                <>Our directory indexes <strong>{provider.reviewCount || reviews.length}</strong> patient reviews from public clinic listings.</>
+                            )}
                             {((themes.strengths && themes.strengths.length > 0) || (provider.clarity_score && provider.clarity_score >= 50)) &&
                                 " Patients consistently describe:"}
                         </p>
@@ -492,37 +510,6 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                     </div>
                 </RevealOnScroll>
 
-                {/* Review cards */}
-                <div className="space-y-4 mb-6">
-                    {reviews.slice(0, 3).map((review: Record<string, any>, i: number) => (
-                        <RevealOnScroll key={i} delay={i * 0.06}>
-                            <div
-                                className="p-6 rounded-lg"
-                                style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)' }}
-                            >
-                                <div className="flex items-center gap-2 mb-3">
-                                    <span style={{ color: 'var(--color-gold)', fontSize: '13px' }}>
-                                        {'★'.repeat(review.rating || 5)}
-                                    </span>
-                                    {review.author_name && (
-                                        <span className="font-body text-xs" style={{ color: 'var(--color-taupe)' }}>
-                                            {review.author_name}
-                                        </span>
-                                    )}
-                                </div>
-                                {review.text && review.text.trim().length > 0 ? (
-                                    <p className="font-body text-sm" style={{ color: 'var(--color-stone)', lineHeight: 1.7 }}>
-                                        &ldquo;{review.text.substring(0, 250)}{review.text.length > 250 ? '...' : ''}&rdquo;
-                                    </p>
-                                ) : (
-                                    <p className="font-body text-sm italic" style={{ color: 'var(--color-taupe)' }}>
-                                        Verified 5-star rating on Google
-                                    </p>
-                                )}
-                            </div>
-                        </RevealOnScroll>
-                    ))}
-                </div>
 
                 {provider.google_place_id && (
                     <a

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Search, Dna, Clock, Sparkles, ChevronRight, TrendingUp, MapPin, ChevronDown } from 'lucide-react'
 import { NICHE } from '@/config/niche'
+import { track } from '@/lib/analytics'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
@@ -14,6 +15,8 @@ const TREND_TREATMENTS = [
     { label: 'Exosome Therapy', tag: 'Emerging', hot: false },
     { label: 'Baby Botox', tag: 'Preventative', hot: true },
 ]
+
+import { resolveKnownCity } from '@/lib/constants/locations'
 
 export default function Hero({
     city: initialCity,
@@ -33,6 +36,14 @@ export default function Hero({
     const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const citySlug = e.target.value
         if (citySlug) {
+            const resolved = resolveKnownCity(citySlug)
+            track('provider_search', {
+                search_city: resolved ? resolved.slug : undefined,
+                search_state: resolved ? resolved.state : undefined,
+                location_resolved: !!resolved,
+                has_search_query: false,
+                source: 'hero_city_select',
+            })
             router.push(`/${NICHE.baseSlug}/${citySlug}`)
         }
     }
@@ -146,7 +157,7 @@ export default function Hero({
                         { value: `${providersCount.toLocaleString()}+`, label: 'Providers Indexed', note: `Across ${citiesCount} Cities` },
                         { value: '$12–25', label: 'Per Unit Pricing', note: 'Verified Market Rates' },
                         { value: '98', label: 'Top Clarity Score™', note: initialCity ? `${initialCity} Market` : 'Top Neighborhoods' },
-                        { value: 'AI-Audit', label: 'Results Verification', note: 'Zero Pay-to-Rank' },
+                        { value: 'Data-Led', label: 'Clarity Score™ Model', note: 'Zero Pay-to-Rank' },
                     ].map((stat, i) => (
                         <div key={i} className="bg-[#3D2B1F]/5 px-6 py-5 text-center hover:bg-[#3D2B1F]/5 transition-colors">
                             <div className="text-3xl font-black text-[#C9A96E] mb-1 font-display">{stat.value}</div>

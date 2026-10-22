@@ -5,6 +5,9 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { MapPin, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { NICHE } from '@/config/niche'
+import { track } from '@/lib/analytics'
+import { setGeoSession } from '@/lib/actions/geo'
+import { resolveKnownCity, isKnownState } from '@/lib/constants/locations'
 
 interface ProviderFiltersProps {
     currentCity?: string
@@ -41,6 +44,20 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
         else params.set('view', 'specialist')
 
         if (city || state) params.delete('q')
+
+        const resolvedCity = resolveKnownCity(city)
+        const isStateValid = isKnownState(state)
+
+        track('provider_search', {
+            search_city: resolvedCity ? resolvedCity.slug : undefined,
+            search_state: isStateValid ? state.trim().toUpperCase() : undefined,
+            filter_tier: tier || undefined,
+            filter_type: type || undefined,
+            filter_view: finalView || undefined,
+            location_resolved: !!resolvedCity,
+            has_search_query: !resolvedCity && !!city,
+            source: 'provider_filters',
+        })
 
         router.push(`/find-providers?${params.toString()}`)
     }
@@ -207,13 +224,24 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
                         variant="outline"
                         className="px-4"
                         onClick={() => {
-                            if (navigator.geolocation) {
-                                navigator.geolocation.getCurrentPosition((pos) => {
-                                    const params = new URLSearchParams(searchParams.toString());
-                                    params.set('lat', pos.coords.latitude.toString());
-                                    params.set('lng', pos.coords.longitude.toString());
-                                    router.push(`/find-providers?${params.toString()}`);
-                                });
+                            if (typeof window !== 'undefined' && "geolocation" in navigator) {
+                                navigator.geolocation.getCurrentPosition(async (pos) => {
+                                    const ok = await setGeoSession(pos.coords.latitude, pos.coords.longitude)
+                                    if (ok) {
+                                        const params = new URLSearchParams(searchParams.toString())
+                                        params.delete('lat')
+                                        params.delete('lng')
+                                        params.set('sort', 'distance')
+                                        track('provider_search', {
+                                            filter_view: view,
+                                            has_search_query: false,
+                                            source: 'near_me_button'
+                                        })
+                                        router.push(`/find-providers?${params.toString()}`)
+                                    }
+                                }, (err) => {
+                                    console.warn("Geolocation unavailable:", err)
+                                }, { timeout: 5000 })
                             }
                         }}
                         title="Search Near Me"

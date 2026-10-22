@@ -6,6 +6,7 @@ import { getSupabaseServer } from '@/lib/supabase/factory'
 import { cookies } from 'next/headers'
 import { checkRateLimit, sanitizeString } from '@/lib/validation'
 import { NICHE } from '@/config/niche'
+import { normalizeUsPhone } from '@/lib/utils/phone'
 
 const getResend = () => {
     const apiKey = process.env.SENDGRID_API_KEY || process.env.RESEND_API_KEY;
@@ -73,7 +74,7 @@ const leadSchema = z.object({
         .email('Invalid email')
         .max(254, 'Email too long'),
     phone: z.string()
-        .regex(/^\d{10,11}$/, 'Invalid phone number')
+        .refine((val) => !val || normalizeUsPhone(val) !== null, 'Please enter a valid 10-digit U.S. phone number')
         .nullable()
         .optional()
         .or(z.literal('')),
@@ -111,13 +112,24 @@ export async function submitLead(formData: FormData) {
         }
     }
 
+    // Shared U.S. Phone Normalization Rule:
+    // Exactly 10 digits or 11 digits starting with 1 normalized to 10; reject all other cases.
+    const rawPhone = formData.get('phone') ? String(formData.get('phone')).trim() : ''
+    const normalizedPhone = rawPhone ? normalizeUsPhone(rawPhone) : null
+    if (rawPhone && !normalizedPhone) {
+        return {
+            error: 'Please enter a valid 10-digit U.S. phone number',
+            details: { phone: ['Invalid phone number. Must be 10 digits or 11 digits starting with 1.'] }
+        }
+    }
+
     const rawData = {
         provider_id: formData.get('provider_id'),
         city: formData.get('city'),
         state: formData.get('state'),
         full_name: formData.get('full_name'),
         email: formData.get('email'),
-        phone: formData.get('phone'),
+        phone: normalizedPhone,
         treatment_type: formData.get('treatment_type'),
         budget_range: formData.get('budget_range'),
         timeframe: formData.get('timeframe'),
@@ -134,7 +146,9 @@ export async function submitLead(formData: FormData) {
     const validated = leadSchema.safeParse(rawData)
 
     if (!validated.success) {
-        return { error: 'Validation failed', details: validated.error.flatten() }
+        const fieldErrors = validated.error.flatten().fieldErrors
+        const firstErrorMessage = Object.values(fieldErrors).flat()[0] || 'Validation failed. Please check your information.'
+        return { error: firstErrorMessage, details: fieldErrors }
     }
 
     // Sanitize all text inputs to prevent XSS

@@ -32,10 +32,10 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
     const isPremium = provider.listing_tier === 'premium' || provider.listingTier === 'premium'
 
     const phases = [
-        { icon: Search, label: 'Connecting to Registry...' },
-        { icon: Activity, label: 'Running Outcomes Audit...' },
-        { icon: Shield, label: 'Safety Verification...' },
-        { icon: CheckCircle2, label: 'Scoring Complete' }
+        { icon: Search, label: 'Loading directory information...' },
+        { icon: Activity, label: 'Retrieving listing details...' },
+        { icon: Shield, label: 'Preparing profile view...' },
+        { icon: CheckCircle2, label: 'Information Ready' }
     ]
 
     const handleDemo = (e: React.MouseEvent) => {
@@ -66,11 +66,9 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
         ? provider.practitioners[0]
         : null;
 
-    let experienceYears = 0;
-    let licenseYear = 0;
+    let enumerationYear = 0;
     if (leadPractitioner?.npi_enumeration_date) {
-        licenseYear = new Date(leadPractitioner.npi_enumeration_date).getFullYear();
-        experienceYears = new Date().getFullYear() - licenseYear;
+        enumerationYear = new Date(leadPractitioner.npi_enumeration_date).getFullYear();
     }
 
     const score = provider.score_total ?? provider.score?.points ?? null;
@@ -168,14 +166,14 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                                             <>
                                                 <span className="opacity-50">·</span>
                                                 <span className="text-[#8A9E8D] font-medium flex items-center gap-1">
-                                                    NPI Verified <CheckCircle className="w-3.5 h-3.5" />
+                                                    NPI Registry Matched <CheckCircle className="w-3.5 h-3.5" />
                                                 </span>
                                             </>
                                         )}
                                     </div>
-                                    {licenseYear > 0 && (
+                                    {enumerationYear > 0 && (
                                         <p className="font-sans text-[13px] text-[#A89B8C] italic">
-                                            Licensed since {licenseYear} · {experienceYears} years experience
+                                            NPI Enumeration: {enumerationYear}
                                         </p>
                                     )}
                                 </div>
@@ -207,17 +205,27 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
 
                     {/* Row 4: Rating + pricing */}
                     <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center gap-1.5">
-                            <span className="text-[var(--color-gold)] text-[14px]">
-                                {'★'.repeat(Math.round(provider.rating || provider.averageRating || 5))}
-                            </span>
-                            <span className="font-sans font-bold text-[14px] text-[#3D2B1F]">
-                                {(provider.rating || provider.averageRating || 5.0).toFixed(1)}
-                            </span>
-                            <span className="font-sans text-[13px] text-[#A89B8C] ml-1">
-                                ({provider.review_count || provider.reviewCount || 0} reviews)
-                            </span>
-                        </div>
+                        {(provider.rating || provider.averageRating) ? (
+                            <div className="flex items-center gap-1.5">
+                                <span className="text-[var(--color-gold)] text-[14px]">
+                                    {'★'.repeat(Math.round(provider.rating || provider.averageRating || 0))}
+                                </span>
+                                <span className="font-sans font-bold text-[14px] text-[#3D2B1F]">
+                                    {(provider.rating || provider.averageRating || 0).toFixed(1)}
+                                </span>
+                                {(provider.review_count || provider.reviewCount) ? (
+                                    <span className="font-sans text-[13px] text-[#A89B8C] ml-1">
+                                        ({provider.review_count || provider.reviewCount} reviews)
+                                    </span>
+                                ) : null}
+                            </div>
+                        ) : (
+                            <div className="flex items-center gap-1.5">
+                                <span className="font-sans text-[12px] text-[#A89B8C] italic">
+                                    Reviews being indexed
+                                </span>
+                            </div>
+                        )}
 
                         {(provider.price_per_unit || provider.pricePerUnit) && (
                             <div className="font-sans font-medium text-[14px] text-[#3D2B1F]">

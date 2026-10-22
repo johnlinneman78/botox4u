@@ -24,20 +24,42 @@ export const metadata: Metadata = {
     }
 }
 
+import { cookies } from 'next/headers'
+import { isValidCoordinate } from '@/lib/utils/geo'
+
 export default async function FindProvidersPage({
     searchParams,
 }: {
-    searchParams: Promise<{ q?: string; city?: string; state?: string; tier?: string; type?: string; view?: string; lat?: string; lng?: string }>
+    searchParams: Promise<{ q?: string; city?: string; state?: string; tier?: string; type?: string; view?: string; sort?: string }>
 }) {
     const sParams = await searchParams
+    const cookieStore = await cookies()
+    const geoCookie = cookieStore.get('user_geo')?.value
+    let cookieLat: number | undefined
+    let cookieLng: number | undefined
+    if (geoCookie) {
+        try {
+            const parsed = JSON.parse(decodeURIComponent(geoCookie))
+            if (isValidCoordinate(parsed?.lat, parsed?.lng)) {
+                cookieLat = parsed.lat
+                cookieLng = parsed.lng
+            }
+        } catch {}
+    }
+
     const query = sParams.q || ''
     const city = sParams.city || ''
     const state = sParams.state || ''
     const tier = sParams.tier || ''
     const type = sParams.type || ''
     const view = sParams.view
-    const userLat = sParams.lat ? parseFloat(sParams.lat) : undefined
-    const userLng = sParams.lng ? parseFloat(sParams.lng) : undefined
+    const sort = sParams.sort
+
+    // Only sort by distance if sort=distance and coordinates exist in the HttpOnly session cookie.
+    // Legacy coordinate URLs are intercepted at the edge in middleware, so coordinates are never read from query parameters.
+    const isDistanceSort = (sort === 'distance' || (!city && !query && cookieLat !== undefined && cookieLng !== undefined)) && (cookieLat !== undefined && cookieLng !== undefined)
+    const userLat = isDistanceSort ? cookieLat : undefined
+    const userLng = isDistanceSort ? cookieLng : undefined
 
     const providers = await getProvidersWithSearch({
         query,
@@ -48,7 +70,7 @@ export default async function FindProvidersPage({
         view,
         userLat,
         userLng,
-        sort: (userLat && userLng) ? 'distance' : undefined
+        sort: isDistanceSort ? 'distance' : undefined
     })
 
     const itemListSchema = generateItemListSchema(providers.slice(0, 50), city || 'All Locations')
