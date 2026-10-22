@@ -268,7 +268,14 @@ export async function getProvidersWithSearch(filters: {
 
     // 5. Final Sort & Limit
     const sorted = finalProviders.sort((a: any, b: any) => {
-        // Higher tier first
+        // Distance Sort requested: evaluate proximity first
+        if (filters.sort === 'distance' && filters.userLat && filters.userLng && a.lat && a.lng && b.lat && b.lng) {
+            const distA = Math.sqrt(Math.pow(a.lat - filters.userLat, 2) + Math.pow(a.lng - filters.userLng, 2))
+            const distB = Math.sqrt(Math.pow(b.lat - filters.userLat, 2) + Math.pow(b.lng - filters.userLng, 2))
+            return distA - distB
+        }
+
+        // Higher tier first (for default ranking)
         if (a.listing_tier !== b.listing_tier) {
             const weightA = tierWeight[a.listing_tier as keyof typeof tierWeight] || 0
             const weightB = tierWeight[b.listing_tier as keyof typeof tierWeight] || 0
@@ -278,13 +285,6 @@ export async function getProvidersWithSearch(filters: {
         // Priority Sort requested
         if (filters.sort === 'priority') {
             return (b.priority_score || 0) - (a.priority_score || 0)
-        }
-
-        // Distance Sort requested
-        if (filters.sort === 'distance' && filters.userLat && filters.userLng && a.lat && a.lng && b.lat && b.lng) {
-            const distA = Math.sqrt(Math.pow(a.lat - filters.userLat, 2) + Math.pow(a.lng - filters.userLng, 2))
-            const distB = Math.sqrt(Math.pow(b.lat - filters.userLat, 2) + Math.pow(b.lng - filters.userLng, 2))
-            return distA - distB
         }
 
         // Default: Priority Score -> Clarity Score™ -> Reviews

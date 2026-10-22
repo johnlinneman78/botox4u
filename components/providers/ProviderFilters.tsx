@@ -85,6 +85,9 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
         setType('')
         setView('specialist')
         router.push('/find-providers')
+        if (typeof window !== 'undefined') {
+            window.history.pushState(null, '', '/find-providers')
+        }
     }
 
     return (
@@ -237,7 +240,11 @@ export function ProviderFilters({ currentCity = '', currentState = '' }: Provide
                                             has_search_query: false,
                                             source: 'near_me_button'
                                         })
-                                        router.push(`/find-providers?${params.toString()}`)
+                                        const nextUrl = `/find-providers?${params.toString()}`
+                                        router.push(nextUrl)
+                                        if (typeof window !== 'undefined') {
+                                            window.history.pushState(null, '', nextUrl)
+                                        }
                                     }
                                 }, (err) => {
                                     console.warn("Geolocation unavailable:", err)

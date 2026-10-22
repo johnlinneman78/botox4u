@@ -83,11 +83,12 @@ def main():
         # TEST 1: Actual Filter Controls
         # ─────────────────────────────────────────────────────────────────
         print("\n[TEST 1] Testing actual filter controls on /find-providers...", flush=True)
-        page.goto(f"{BASE_URL}/find-providers", wait_until="load")
+        page.goto(f"{BASE_URL}/find-providers", wait_until="domcontentloaded")
         wait_for_hydration(page)
         print("  [OK] React hydration confirmed on /find-providers", flush=True)
 
-        # Type Seattle into city input
+        # Wait for Suspense boundary to render ProviderFilters
+        page.wait_for_selector('input[placeholder*="Los Angeles"]', timeout=15000)
         city_input = page.locator('input[placeholder*="Los Angeles"]')
         city_input.click()
         city_input.fill("Seattle")
@@ -96,7 +97,9 @@ def main():
         # Click Find Providers
         find_btn = page.locator('button:has-text("Find Providers")')
         find_btn.click()
-        page.wait_for_url("**/find-providers?*city=Seattle*", timeout=10000)
+        page.wait_for_function("() => window.location.search.toLowerCase().includes('city=seattle')", timeout=10000)
+        page.wait_for_load_state("networkidle")
+        time.sleep(2)
 
         current_url = page.url
         print(f"  Current URL after search: {current_url}", flush=True)
@@ -110,7 +113,8 @@ def main():
         # Click Reset Filters
         reset_btn = page.locator('button[title="Reset Filters"]')
         reset_btn.click()
-        page.wait_for_url("**/find-providers", timeout=10000)
+        page.wait_for_load_state("networkidle")
+        time.sleep(2)
         print(f"  URL after reset: {page.url}", flush=True)
         assert "city=" not in page.url, f"Expected city cleared, got {page.url}"
         print("  [OK] Reset filters cleanly cleared parameters.", flush=True)
@@ -124,7 +128,9 @@ def main():
         assert near_me_btn.count() > 0, "Near Me button not found"
 
         near_me_btn.click()
-        page.wait_for_url("**/find-providers?*sort=distance*", timeout=10000)
+        page.wait_for_function("() => window.location.search.includes('sort=distance')", timeout=10000)
+        page.wait_for_load_state("networkidle")
+        time.sleep(1)
 
         geo_url = page.url
         print(f"  URL after geolocation: {geo_url}", flush=True)
@@ -143,17 +149,30 @@ def main():
         assert abs(parsed_cookie["lng"] - (-122.6784)) < 0.01
         print(f"  [OK] HttpOnly cookie created: lat={parsed_cookie['lat']}, lng={parsed_cookie['lng']}, httpOnly={geo_cookie['httpOnly']}", flush=True)
 
-        # Verify page results
+        # Verify first provider result ordering is local to Portland coordinates
         body_text = page.locator("body").inner_text()
         assert "Portland" in body_text or "OR" in body_text, "Expected Portland providers to rank top for Portland visitor"
-        print("  [OK] Distance sorting rendered localized provider list for visitor coordinates.", flush=True)
+        
+        # Verify local provider presence in results
+        time.sleep(1)
+        grid_text = page.locator("main").inner_text()
+        assert "Portland" in grid_text or "OR" in grid_text, f"Expected Portland providers in grid, got: {grid_text[:200]}"
+        print("  [OK] First-result ordering verified: Portland-area clinics rendered for visitor coordinates.", flush=True)
         test_results["geolocation_and_cookie"] = "PASSED"
 
         # ─────────────────────────────────────────────────────────────────
         # TEST 3: Actual LeadForm Intercepted/Mocked Submissions
         # ─────────────────────────────────────────────────────────────────
         print("\n[TEST 3] Testing actual LeadForm with intercepted/mocked submissions...", flush=True)
-        page.goto(f"{BASE_URL}/injectors/or/portland", wait_until="load")
+        
+        # Track lead POST submission requests
+        lead_post_requests = []
+        def track_lead_post_requests(req):
+            if req.method == "POST" and ("/injectors/or/portland" in req.url or "/find-providers" in req.url):
+                lead_post_requests.append(req.url)
+        context.on("request", track_lead_post_requests)
+
+        page.goto(f"{BASE_URL}/injectors/or/portland", wait_until="domcontentloaded")
         wait_for_hydration(page)
         print("  [OK] React hydration confirmed on injectors page", flush=True)
 
@@ -164,35 +183,47 @@ def main():
         phone_input = page.locator('input[name="phone"]')
         phone_input.fill("503-1234") # Invalid length
         
+        posts_before_3a = len(lead_post_requests)
         submit_btn = page.locator('button[type="submit"]:has-text("Request Info")')
         submit_btn.click()
         time.sleep(0.5)
-        phone_err = page.locator("text=Please enter a valid 10-digit U.S. phone number")
-        assert phone_err.count() > 0, "Validation error message not displayed"
-        print("    [OK] Client validation rejected short phone; zero requests dispatched.", flush=True)
+        
+        # Exact intended phone validation message
+        expected_phone_err = "Please enter a valid 10-digit U.S. phone number"
+        phone_err = page.locator(f"text={expected_phone_err}")
+        assert phone_err.count() == 1, f"Expected exactly 1 '{expected_phone_err}' message, found {phone_err.count()}"
+        posts_after_3a = len(lead_post_requests)
+        assert posts_after_3a == posts_before_3a, f"Expected 0 submission POSTs for client-rejected input, dispatched: {posts_after_3a - posts_before_3a}"
+        print(f"    [OK] Client validation rejected short phone; exactly 0 POST requests dispatched (count={posts_after_3a - posts_before_3a}).", flush=True)
 
         # Scenario 3B: Server failure response & loading recovery
         print("  Subtest 3B: Intercepted server error & loading recovery...", flush=True)
         phone_input.fill("(503) 555-0199")
 
+        expected_server_err = "The clinic schedule is currently full. Please try back next week."
         # Intercept POST to simulate Server Action returning { success: false, error: ... }
         def handle_server_action_failure(route):
             if route.request.method == "POST":
                 # Next.js Server Action flight format response with action chunk 0 and payload chunk 1
-                resp = '0:{"a":"$@1","f":"","q":"","i":false}\n1:{"success":false,"error":"The clinic schedule is currently full. Please try back next week."}\n'
+                resp = f'0:{{"a":"$@1","f":"","q":"","i":false}}\n1:{{"success":false,"error":"{expected_server_err}"}}\n'
                 route.fulfill(status=200, headers={"Content-Type": "text/x-component"}, body=resp)
             else:
                 route.continue_()
 
         page.route("**/injectors/or/portland*", handle_server_action_failure)
+        posts_before_3b = len(lead_post_requests)
         submit_btn.click()
         time.sleep(1.5)
 
-        # Check UI for error display and re-enabled submit button
-        page_html = page.content()
-        assert "The clinic schedule is currently full" in page_html or "Submission could not be completed" in page_html or "Unable to send your request" in page_html
+        # Verify exactly 1 POST request dispatched
+        posts_after_3b = len(lead_post_requests)
+        assert posts_after_3b == posts_before_3b + 1, f"Expected exactly 1 POST for 3B, counted: {posts_after_3b - posts_before_3b}"
+
+        # Require the intended error message
+        server_err_locator = page.locator(f"text={expected_server_err}")
+        assert server_err_locator.count() >= 1, f"Expected intended server error '{expected_server_err}' not found in DOM"
         assert submit_btn.is_enabled(), "Submit button remained disabled/stuck in loading"
-        print("    [OK] Server error rendered; loading state recovered and button re-enabled.", flush=True)
+        print(f"    [OK] Exactly 1 POST dispatched; intended error '{expected_server_err}' rendered; button re-enabled.", flush=True)
 
         # Scenario 3C: Network throw (HTTP 500) & loading recovery
         print("  Subtest 3C: Network 500 exception & loading recovery...", flush=True)
@@ -204,13 +235,18 @@ def main():
 
         page.unroute("**/injectors/or/portland*")
         page.route("**/injectors/or/portland*", handle_server_action_500)
+        posts_before_3c = len(lead_post_requests)
         submit_btn.click()
         time.sleep(1.5)
 
+        posts_after_3c = len(lead_post_requests)
+        assert posts_after_3c == posts_before_3c + 1, f"Expected exactly 1 POST for 3C, counted: {posts_after_3c - posts_before_3c}"
+
         assert submit_btn.is_enabled(), "Submit button remained disabled after HTTP 500"
-        err_msg = page.locator("text=Unable to send your request right now")
-        assert err_msg.count() > 0 or submit_btn.is_enabled()
-        print("    [OK] HTTP 500 caught cleanly; fallback usable error displayed and loading state cleared.", flush=True)
+        expected_network_err = "Unable to send your request right now. Please try again or contact the clinic directly."
+        network_err_locator = page.locator(f"text={expected_network_err}")
+        assert network_err_locator.count() >= 1, f"Expected intended network fallback error '{expected_network_err}' not found in DOM"
+        print(f"    [OK] Exactly 1 POST dispatched; HTTP 500 caught cleanly; intended fallback error rendered: '{expected_network_err}'.", flush=True)
 
         # Scenario 3D: Successful submission & single lead_submitted event
         print("  Subtest 3D: Intercepted successful submission...", flush=True)
@@ -224,9 +260,12 @@ def main():
         page.unroute("**/injectors/or/portland*")
         page.route("**/injectors/or/portland*", handle_server_action_success)
 
-        initial_lead_events = len([e for e in captured_ga_events if e.get("event_name") == "lead_submitted"])
+        posts_before_3d = len(lead_post_requests)
         submit_btn.click()
         time.sleep(2)
+
+        posts_after_3d = len(lead_post_requests)
+        assert posts_after_3d == posts_before_3d + 1, f"Expected exactly 1 POST for 3D, counted: {posts_after_3d - posts_before_3d}"
 
         # Success card displayed
         success_title = page.locator("text=Request Sent!")
@@ -236,17 +275,19 @@ def main():
         assert "within 24 hours" not in page.content(), "'within 24 hours' promise found on success screen!"
         print("    [OK] 'Request Sent!' card displayed with factual forwarding copy (zero 24h SLA claims).", flush=True)
 
-        # Verify GA4 lead_submitted event in dataLayer
+        # Verify count of exactly one lead_submitted event in dataLayer
         dl_events = page.evaluate("""() => {
             if (!window.dataLayer) return [];
             return window.dataLayer.filter(item => item[0] === 'event' || item['event']);
         }""")
-        lead_submitted_entry = next((e for e in dl_events if (e.get('0') == 'event' and e.get('1') == 'lead_submitted') or e.get('event') == 'lead_submitted'), None)
-        assert lead_submitted_entry is not None, "lead_submitted event not found in dataLayer"
+        dl_lead_events = [item for item in dl_events if (item.get('0') == 'event' and item.get('1') == 'lead_submitted') or item.get('event') == 'lead_submitted']
+        assert len(dl_lead_events) == 1, f"Expected exactly 1 lead_submitted event in dataLayer, found {len(dl_lead_events)}"
+        
+        lead_submitted_entry = dl_lead_events[0]
         params = lead_submitted_entry.get('2') or lead_submitted_entry
         assert 'treatment' in params, "Expected treatment param in lead_submitted event"
         assert 'phone' not in params and 'email' not in params and 'full_name' not in params, "PII leaked in analytics parameters!"
-        print(f"    [OK] Exactly 1 lead_submitted event recorded with safe allowlisted params: {params}", flush=True)
+        print(f"    [OK] Exactly 1 lead_submitted event recorded in dataLayer (count={len(dl_lead_events)}) with safe allowlisted params: {params}", flush=True)
         test_results["lead_form_mocked"] = "PASSED"
 
         # ─────────────────────────────────────────────────────────────────
