@@ -12,7 +12,7 @@ import { NICHE } from '@/config/niche'
 import { normalizeUsPhone } from '@/lib/utils/phone'
 
 const leadFormSchema = z.object({
-    provider_id: z.string().uuid().optional(),
+    provider_id: z.string().uuid().optional().or(z.literal('')),
     city: z.string().optional(),
     state: z.string().optional(),
     full_name: z.string().min(2, 'Please enter your full name'),
@@ -59,11 +59,11 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
     } = useForm<LeadFormData>({
         resolver: zodResolver(leadFormSchema),
         defaultValues: {
-            provider_id: providerId,
+            provider_id: providerId || '',
             city: city,
             state: state,
             treatment_type: NICHE.treatments[0].toLowerCase().replace(/\s+/g, '-'),
-            budget_range: `${NICHE.priceRange.min * 20}-${NICHE.priceRange.max * 20}`,
+            budget_range: NICHE.leadForm?.budgetRanges?.[1]?.value || '300-500',
             timeframe: 'asap',
             call_time: 'morning',
         },

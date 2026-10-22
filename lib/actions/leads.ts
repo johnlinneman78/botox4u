@@ -62,7 +62,7 @@ const getPatientAuditEmailHtml = (lead: any) => `
 
 // Enhanced schema with security validation
 const leadSchema = z.object({
-    provider_id: z.string().uuid().nullable().optional(),
+    provider_id: z.string().uuid().nullable().optional().or(z.literal('')),
     city: z.string().max(100).nullable().optional(),
     state: z.string().max(100).nullable().optional(),
     full_name: z.string()
