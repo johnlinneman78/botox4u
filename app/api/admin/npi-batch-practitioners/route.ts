@@ -18,6 +18,20 @@ import { createClient } from '@supabase/supabase-js'
 //  - Practitioner without an NPI: individual search by first+last name +
 //    state; verify only if exactly one candidate survives with exact name
 //    match AND a practice city+state match AND active status.
+//  - National-unique fallback: a name with exactly one active registry
+//    record nationwide verifies ONLY if that record's practice state is
+//    the clinic's state or an adjacent state (border-metro cases like a
+//    Portland injector registered in Vancouver, WA). A same-name record
+//    3,000 miles away is more likely a different person than a commuter.
+//  - A practitioner is only searched when BOTH first_name and last_name
+//    columns are filled. First-name-only roster rows ("Nicole, Registered
+//    Nurse") used to fall back to splitting full_name, which searched a
+//    literal surname "Nurse" and matched real people named Nicole Nurse /
+//    Monica Nurse / Natalie Nurse — three false verifications caught by
+//    hand review in the San Diego dry-run. Such rows report 'no_name'.
+//  - Rows previously rejected by hand review (npi_match_confidence =
+//    'rejected_national_unique') are never re-searched, so a rollback
+//    cannot resurrect itself on a re-run.
 //  - Anything else -> ambiguous / no_match: row left unverified, listed
 //    for review. Never pick first-of-many.
 //  - Providers with no practitioner rows -> 'no_practitioners' (a data gap,
@@ -47,6 +61,39 @@ function stateCode(raw: string | null): string | null {
     const s = (raw || '').trim()
     if (/^[A-Za-z]{2}$/.test(s)) return s.toUpperCase()
     return STATE_MAP[s.toLowerCase()] || null
+}
+
+// Adjacent states, conservative: when unsure a pair is omitted, which only
+// ever holds a verification (safe direction), never grants a false one.
+const ADJACENT: Record<string, string[]> = {
+    AL: ['FL', 'GA', 'MS', 'TN'], AK: [], AZ: ['CA', 'NV', 'UT', 'CO', 'NM'],
+    AR: ['MO', 'TN', 'MS', 'LA', 'TX', 'OK'], CA: ['OR', 'NV', 'AZ'],
+    CO: ['WY', 'NE', 'KS', 'OK', 'NM', 'UT'], CT: ['NY', 'MA', 'RI'],
+    DE: ['MD', 'PA', 'NJ'], FL: ['GA', 'AL'], GA: ['FL', 'AL', 'TN', 'NC', 'SC'],
+    HI: [], ID: ['WA', 'OR', 'NV', 'UT', 'WY', 'MT'], IL: ['WI', 'IN', 'KY', 'MO', 'IA'],
+    IN: ['MI', 'OH', 'KY', 'IL'], IA: ['MN', 'WI', 'IL', 'MO', 'NE', 'SD'],
+    KS: ['NE', 'MO', 'OK', 'CO'], KY: ['OH', 'IN', 'IL', 'MO', 'TN', 'VA', 'WV'],
+    LA: ['TX', 'AR', 'MS'], ME: ['NH'], MD: ['VA', 'WV', 'PA', 'DE'],
+    MA: ['RI', 'CT', 'NY', 'NH', 'VT'], MI: ['OH', 'IN', 'WI'],
+    MN: ['WI', 'IA', 'SD', 'ND'], MS: ['LA', 'AR', 'TN', 'AL'],
+    MO: ['IA', 'IL', 'KY', 'TN', 'AR', 'OK', 'KS', 'NE'], MT: ['ND', 'SD', 'WY', 'ID'],
+    NE: ['SD', 'IA', 'MO', 'KS', 'CO', 'WY'], NV: ['OR', 'ID', 'UT', 'AZ', 'CA'],
+    NH: ['ME', 'MA', 'VT'], NJ: ['NY', 'PA', 'DE'], NM: ['CO', 'OK', 'TX', 'AZ'],
+    NY: ['VT', 'MA', 'CT', 'NJ', 'PA'], NC: ['VA', 'TN', 'GA', 'SC'],
+    ND: ['MN', 'SD', 'MT'], OH: ['MI', 'IN', 'KY', 'WV', 'PA'],
+    OK: ['KS', 'MO', 'AR', 'TX', 'NM', 'CO'], OR: ['WA', 'ID', 'NV', 'CA'],
+    PA: ['NY', 'NJ', 'DE', 'MD', 'WV', 'OH'], RI: ['CT', 'MA'], SC: ['NC', 'GA'],
+    SD: ['ND', 'MN', 'IA', 'NE', 'WY', 'MT'], TN: ['KY', 'VA', 'NC', 'GA', 'AL', 'MS', 'AR', 'MO'],
+    TX: ['NM', 'OK', 'AR', 'LA'], UT: ['ID', 'WY', 'CO', 'AZ', 'NV'],
+    VT: ['NY', 'NH', 'MA'], VA: ['MD', 'WV', 'KY', 'TN', 'NC'], WA: ['OR', 'ID'],
+    WV: ['OH', 'PA', 'MD', 'VA', 'KY'], WI: ['MI', 'MN', 'IA', 'IL'],
+    WY: ['MT', 'SD', 'NE', 'CO', 'UT', 'ID'], DC: ['MD', 'VA'],
+}
+
+function practiceState(result: any): string | null {
+    const addrs = result?.addresses || []
+    const loc = addrs.find((a: any) => a.address_purpose === 'LOCATION') || addrs[0]
+    return loc?.state ? String(loc.state).toUpperCase() : null
 }
 
 function addressMatches(result: any, city: string, state: string | null): boolean {
@@ -126,7 +173,7 @@ export async function POST(req: NextRequest) {
         const state = stateCode(p.state)
         const { data: pracs } = await supabase
             .from('provider_practitioners')
-            .select('id,first_name,last_name,full_name,npi_number,npi_verified')
+            .select('id,first_name,last_name,full_name,npi_number,npi_verified,npi_match_confidence')
             .eq('provider_id', p.id)
             .order('id', { ascending: true })
 
@@ -143,10 +190,14 @@ export async function POST(req: NextRequest) {
                 decisions.push({ provider_id: p.id, provider_name: p.name, practitioner: pr.full_name, decision: 'already_verified', dryRun })
                 continue
             }
+            if (pr.npi_match_confidence === 'rejected_national_unique') {
+                decisions.push({ provider_id: p.id, provider_name: p.name, practitioner: pr.full_name, decision: 'previously_rejected', dryRun })
+                continue
+            }
             await sleep(350)
             try {
-                const first = pr.first_name || (pr.full_name || '').split(' ')[0] || ''
-                const last = pr.last_name || (pr.full_name || '').split(' ').slice(-1)[0] || ''
+                const first = pr.first_name || ''
+                const last = pr.last_name || ''
                 let verified: any = null
                 let decision = 'no_match'
                 let path: string | null = null
@@ -155,7 +206,7 @@ export async function POST(req: NextRequest) {
                     const { results } = await nppes({ number: String(pr.npi_number) })
                     const r = results[0]
                     if (r && (r.basic?.status || 'A') === 'A') {
-                        if (nameMatches(r, first, last) || addressMatches(r, p.city, state)) { verified = r; path = 'by_number' }
+                        if ((first && last && nameMatches(r, first, last)) || addressMatches(r, p.city, state)) { verified = r; path = 'by_number' }
                         else decision = 'ambiguous'
                     }
                 } else if (first && last) {
@@ -173,17 +224,25 @@ export async function POST(req: NextRequest) {
                     if (survivors.length === 1 && count <= 10) { verified = survivors[0]; path = 'name_city_state' }
                     else if (survivors.length > 1 || count > 10) decision = 'ambiguous'
                     else {
-                        // Path B: national unique. A name with exactly one
-                        // active registry record nationwide is that person.
-                        // This catches border-metro cases (e.g. a Portland
-                        // injector registered in Vancouver, WA) that the
-                        // city/state filter wrongly rejects. Ambiguous names
+                        // Path B: national unique, gated by proximity. A name
+                        // with exactly one active registry record nationwide
+                        // verifies ONLY if that record's practice state is
+                        // the clinic's state or an adjacent state. This
+                        // catches border-metro cases (e.g. a Portland
+                        // injector registered in Vancouver, WA) while
+                        // holding same-name records from far away, which
+                        // are more likely different people. Ambiguous names
                         // never reach this path: count > 1 stays unmatched.
                         const nat = await nppes({ first_name: first, last_name: last })
                         if (nat.count === 1 && nat.results.length === 1 && (nat.results[0].basic?.status || 'A') === 'A' && nameMatches(nat.results[0], first, last)) {
-                            verified = nat.results[0]; path = 'national_unique'
+                            const regState = practiceState(nat.results[0])
+                            if (regState && state && (regState === state || (ADJACENT[state] || []).includes(regState))) {
+                                verified = nat.results[0]; path = 'national_unique'
+                            }
                         }
                     }
+                } else {
+                    decision = 'no_name'
                 }
 
                 if (verified) {
@@ -208,7 +267,7 @@ export async function POST(req: NextRequest) {
                     anyVerified = true
                     decisions.push({ provider_id: p.id, provider_name: p.name, practitioner: pr.full_name, decision: 'verified', npi: verified.number, path, dryRun })
                 } else {
-                    if (!dryRun) {
+                    if (!dryRun && decision !== 'no_name') {
                         await supabase.from('provider_practitioners').update({ npi_lookup_attempted: true }).eq('id', pr.id)
                     }
                     decisions.push({ provider_id: p.id, provider_name: p.name, practitioner: pr.full_name, decision, dryRun })
