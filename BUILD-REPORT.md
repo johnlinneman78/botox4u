@@ -144,3 +144,8 @@ Cleanup: test auth user deleted; providers row verified zero-diff against the 68
 - Deploy: commit 78d4d13 live Oct 23, 2026 10:06:54 PM PDT, deployment 8vB5joAcba8PYbSZtG6YCgfUdYR8, Ready.
 - Changes: claim card badge "Already Indexed" -> "Listed in the Directory"; hardcoded "Top 15% in <city>" rank removed ("Directory Listing / Live, not yet claimed"); "Action Required" -> "Not yet claimed"; buttons now "Create Account to Request Claim" / "Create Account & Request Claim"; signup subtext now states every claim is reviewed before approval.
 - Verified live read-only: all 6 new strings present verbatim, all 4 old strings absent. No forms submitted.
+
+## Quiz capture diagnostic (live, Oct 23, 2026)
+- The pricing quiz does NOT persist signups in production: public.leads exists (19 columns) but a live quiz submission created no row (count unchanged at 3), and public.patients gained none either — while the page claimed "We've sent the 2026 Price Guide."
+- Root cause in app/api/quiz-submit/route.ts: wrote via the visitor's cookie-session client, upserted a `lead_source` column that does not exist on prod leads, derived a fake first name from the first quiz answer, and returned success:true on every path including DB errors and a null client. The component also showed the success state unconditionally ("Always show submitted state").
+- Fix in the following commit.

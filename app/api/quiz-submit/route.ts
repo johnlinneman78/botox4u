@@ -1,55 +1,68 @@
 import { NextResponse } from 'next/server'
-import { getSupabaseServer } from '@/lib/supabase/factory'
-import { cookies } from 'next/headers'
+import { createClient } from '@supabase/supabase-js'
 
+// Consumer quiz signups are the demand list: a visitor answers the
+// pricing quiz and leaves an email to get the full price guide.
+//
+// This route used to write through the visitor's cookie-session
+// client and return success in every code path: when the database
+// call errored (it upserted a `lead_source` column that does not
+// exist on the production leads table), and even when no Supabase
+// client could be built at all. A live test on 2026-10-23 confirmed
+// the result: the page told the visitor a guide had been sent while
+// the leads table gained no row. The write now runs server side with
+// the service-role key, uses only columns that exist, and failure is
+// returned as failure so the page can say so honestly.
 export async function POST(req: Request) {
     try {
         const body = await req.json()
         const { email, answers, source } = body
 
-        if (!email || !email.includes('@')) {
+        if (!email || typeof email !== 'string' || !email.includes('@')) {
             return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
         }
 
-        const supabase = await getSupabaseServer(await cookies())
-
-        if (!supabase) {
-            return NextResponse.json({ success: true, leadId: null })
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
+        const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()
+        if (!supabaseUrl || !serviceKey) {
+            console.error('quiz-submit: Supabase service credentials missing')
+            return NextResponse.json({ error: 'Signup is unavailable right now' }, { status: 500 })
         }
+        const supabase = createClient(supabaseUrl, serviceKey)
 
-        // Parse quiz answers for targeted storage
-        const first_name = answers[0]?.text?.split(' ')[0] || 'Patient'
-        const city_tier = answers[2]?.tier || 'major'
-        const treatment = answers[1]?.value || 'forehead'
-        const experience = answers[3]?.value || 'first_time'
-        const priority = answers[4]?.value || 'value'
+        // Quiz answers arrive keyed by question index. Only fields the
+        // quiz actually asks for are mapped, onto columns that exist.
+        const cityTier = answers?.[2]?.tier || 'major'
+        const treatment = answers?.[1]?.value || 'forehead'
+        const experience = answers?.[3]?.value || 'first_time'
+        const priority = answers?.[4]?.value || 'value'
 
-        // Save to Supabase Leads
-        const { data: lead, error: dbError } = await supabase
+        const { data: inserted, error } = await supabase
             .from('leads')
-            .upsert({
+            .insert({
                 email,
-                full_name: first_name,
-                city: city_tier,
+                city: cityTier,
                 treatment_type: treatment,
-                lead_source: source || 'botox_price_quiz',
+                is_first_timer: experience === 'first_time',
                 additional_metadata: {
-                    quiz_answers: answers,
+                    source: source || 'botox_price_quiz',
+                    quiz_answers: answers ?? null,
                     experience,
                     priority,
+                    city_tier: cityTier,
                     submitted_at: new Date().toISOString()
                 }
-            }, { onConflict: 'email' })
-            .select()
-            .single()
+            })
+            .select('id')
 
-        if (dbError) {
-            console.error('Supabase error:', dbError)
+        if (error) throw error
+        if (!inserted || inserted.length === 0) {
+            throw new Error('Lead insert matched no rows')
         }
 
-        return NextResponse.json({ success: true, leadId: lead?.id })
+        return NextResponse.json({ success: true, leadId: inserted[0].id })
     } catch (error) {
-        console.error('API Error:', error)
-        return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+        console.error('quiz-submit error:', error)
+        return NextResponse.json({ error: 'Could not save your signup' }, { status: 500 })
     }
 }
