@@ -131,3 +131,11 @@ Result: FAILED, silent. An auth user was created (unconfirmed, email_confirmed_a
 Cause (code, app/provider/signup/page.tsx): the claim update runs through the browser Supabase client with no session (email unconfirmed), the update's returned error is never checked, and the flow pushes to /provider/dashboard, which bounces the sessionless user to login. Same silent-write failure class fixed in the verify-first flow in round 3 (service-role write + zero-row check). Design note: even if the update had landed, the code sets claimed=true instantly with no review or NPI check, which contradicts the claim_review model adopted in round 3.
 
 Cleanup: test auth user deleted; providers row verified zero-diff against the 68-column baseline. Production pristine.
+
+## Signup-first claim path — ROUND 4 re-test (live, Oct 23, 2026)
+- Deploy: commit 33484c0 live Oct 23, 2026 9:54:00 PM PDT, deployment DNFwqPPKkbniENnfhXz1z6jV1Cxv, Ready (26s build). Test ran only after Ready.
+- Fix: signup claim/listing writes moved server side (recordSignupClaim / createSignupProvider, service role, zero-row check); a signup claim lands in claim_review with the account linked, claimed/verified stay false; a failed write surfaces an error; success shows an honest in-review panel instead of a dashboard push that bounced sessionless users to login.
+- RESULT: PASS. Submit stayed on the signup URL and showed "Account Created — Claim In Review / Your claim has been recorded and is in review. Nothing is marked claimed or verified until the review is complete..." No login bounce, no error banner.
+- Database diff vs 68-column baseline: exactly 4 columns changed, all by design — user_id set to the new auth user, email = test email, crm_status lead -> claim_review, outreach_status not_sent -> claimed. claimed false, verified false, tier free unchanged. provider_accounts row created. Test email urielpro78+signuptest2@gmail.com.
+- Cleanup verified: providers row restored, provider_accounts row deleted, auth user deleted — zero diff vs baseline, zero test rows.
+- Remaining copy nits (not blockers): signup subtext/button still say "claim your listing" / "CREATE ACCOUNT & CLAIM" (ahead of the review the success panel now describes accurately); claim-search card uses pressure copy ("Action Required", "Top 15% in New York").
