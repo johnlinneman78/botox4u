@@ -146,6 +146,7 @@ export default function BotoxPriceQuiz() {
     const [showResults, setShowResults] = useState(false);
     const [email, setEmail] = useState("");
     const [submitted, setSubmitted] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSelect = (option: any) => {
@@ -174,8 +175,11 @@ export default function BotoxPriceQuiz() {
         if (!email.includes('@')) return;
 
         setIsLoading(true);
+        setSubmitError(null);
         try {
-            // Save lead to database
+            // Save lead to database. The success state shows only when
+            // the server confirms the write; this form used to show
+            // success unconditionally while signups were being lost.
             const response = await fetch('/api/quiz-submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -186,7 +190,10 @@ export default function BotoxPriceQuiz() {
                 })
             });
 
-            // Always show submitted state
+            if (!response.ok) {
+                throw new Error('quiz-submit failed')
+            }
+
             setSubmitted(true);
 
             // Fire drip enrollment independently (don't await, don't block UI)
@@ -202,6 +209,7 @@ export default function BotoxPriceQuiz() {
 
         } catch (error) {
             console.error('Submission error:', error);
+            setSubmitError('We could not save your signup. Check your connection and try again — your email has not been recorded yet.');
         } finally {
             setIsLoading(false);
         }
@@ -432,6 +440,11 @@ export default function BotoxPriceQuiz() {
                                             {!isLoading && <ArrowRight size={14} />}
                                         </button>
                                     </form>
+                                    {submitError && (
+                                        <p className="mt-4 text-sm text-red-700 font-medium">
+                                            {submitError}
+                                        </p>
+                                    )}
                                     <p className="mt-4 text-[10px] text-[#999] font-light">
                                         Verified Data · No Spam · Independent Clinical Research
                                     </p>
@@ -441,10 +454,10 @@ export default function BotoxPriceQuiz() {
                                     <div className="w-16 h-16 bg-[#5A9E6F] rounded-full flex items-center justify-center mx-auto mb-6">
                                         <CheckCircle2 className="text-white" size={32} />
                                     </div>
-                                    <h3 className="text-2xl font-serif text-[#1A1A1A] mb-3">Guide on the way!</h3>
+                                    <h3 className="text-2xl font-serif text-[#1A1A1A] mb-3">You're on the list</h3>
                                     <p className="text-sm text-[#666] font-light mb-8 max-w-sm mx-auto">
-                                        We've sent the 2026 Price Guide to <strong className="text-[#1A1A1A] font-medium">{email}</strong>.
-                                        Your Day 1 masterclass lesson arrives tomorrow morning.
+                                        Your signup for the full 2026 Price Guide is saved under <strong className="text-[#1A1A1A] font-medium">{email}</strong>.
+                                        Your estimate above stays on this page, and the guide goes to that inbox when it ships.
                                     </p>
                                     <Link
                                         href="/"
