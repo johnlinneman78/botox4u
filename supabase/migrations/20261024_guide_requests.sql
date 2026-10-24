@@ -11,9 +11,10 @@
 -- can read or write this table — the same pattern as price_reports,
 -- leads, and quiz signups.
 --
--- What gets sent, and when, is the owner's call (existing guide now,
--- or first access when the full contributor guide launches). This
--- migration only stores the request; it sends nothing.
+-- What gets sent, and when (owner's decision, Oct 24): HOLD. Requests
+-- are saved now; contributors get first access when the full guide
+-- launches (phase 4). This migration only stores the request; it
+-- sends nothing.
 
 CREATE TABLE IF NOT EXISTS guide_requests (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,

@@ -18,8 +18,9 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 // checks "Send me the free pricing guide" and enters an email, the email
 // is saved in guide_requests ONLY — never on the price report, never
 // linked to it. The price stays anonymous even when the visitor opts in.
-// What gets sent, and when, is decided separately; this widget only
-// saves the request.
+// Delivery (owner's decision, Oct 24): HOLD — requests are saved now;
+// contributors get first access when the full guide launches (phase 4).
+// This widget only saves the request and sends nothing.
 //
 // Measurement is the deliverable; collection without display is the rule.
 // This widget saves reports for moderation and never shows them: no
