@@ -103,13 +103,17 @@ interface HomeClientProps {
     providersIndexed?: number;
     npiVerified?: number;
     citiesVerified?: number;
+    heroCity?: string | null;
+    heroRange?: string | null;
 }
 
 // ─── HOMEPAGE ────────────────────────────────────────────
 export default function HomeClient({
     providersIndexed = 0,
     npiVerified = 0,
-    citiesVerified = 0
+    citiesVerified = 0,
+    heroCity = null,
+    heroRange = null
 }: HomeClientProps = {}) {
 
     // Hero search: selections are carried into the results page as query
@@ -146,9 +150,13 @@ export default function HomeClient({
         <>
             {/* ═══ SECTION 1: HERO ═══ */}
             <section
-                className="relative flex items-center justify-center overflow-hidden"
+                className="relative flex items-center overflow-hidden"
                 style={{
                     minHeight: '100vh',
+                    // Safe centering: the hero stays centered when it fits,
+                    // but on a short phone viewport a tall hero aligns to
+                    // the top instead of clipping the badge off-screen.
+                    justifyContent: 'safe center',
                     background: 'linear-gradient(160deg, #F2EDE4 0%, #FAF8F5 45%, #EDE5DA 100%)',
                 }}
             >
@@ -190,13 +198,13 @@ export default function HomeClient({
                                 border: '1px solid rgba(138, 158, 141, 0.2)',
                             }}
                         >
-                            Independent · Data-Scored · Ad-Free
+                            Independent · Data-Scored
                         </span>
                     </motion.div>
 
                     {/* Headline */}
                     <motion.div variants={heroItem} className="mb-6">
-                        <MorphingHeadline />
+                        <MorphingHeadline city={heroCity} range={heroRange} />
                     </motion.div>
 
                     {/* Subheadline */}
@@ -210,7 +218,7 @@ export default function HomeClient({
                                 lineHeight: 1.6,
                             }}
                         >
-                            Real prices. Confirmed credentials. InjectorIndex publishes what clinics actually charge for Botox, filler, and laser, and confirms every provider&apos;s credentials against the national NPI registry. You choose on facts. Good clinics get found for the right reasons.
+                            InjectorIndex tracks the listed price and the injector&apos;s license for every clinic in the directory, so you can compare before you book.
                         </p>
                     </motion.div>
 
@@ -270,8 +278,18 @@ export default function HomeClient({
                         </div>
                     </motion.div>
 
-                    {/* Below search */}
+                    {/* Below search: the price quiz is the funnel, so the
+                        hero leads to it directly, not only to provider search. */}
                     <motion.div variants={heroItem}>
+                        <p className="font-body text-center mt-5">
+                            <Link
+                                href="/quiz"
+                                className="font-medium underline underline-offset-4"
+                                style={{ fontSize: '15px', color: 'var(--color-gold)' }}
+                            >
+                                See what Botox costs in your city →
+                            </Link>
+                        </p>
                         <p
                             className="font-body text-center mt-4"
                             style={{ fontSize: '12px', color: 'var(--color-taupe)' }}

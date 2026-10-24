@@ -168,3 +168,24 @@ cleanup deleted the test row, baseline back to 3, zero diff. Production
 pristine. NOT verified in this test: drip-email enrollment (best-effort
 /api/subscribe call) and the guide itself, which does not ship yet — the
 confirmation copy says "when it ships" and is honest about that.
+
+## Homepage hero — dynamic location price line + quiz-signup notification (2026-10-24, ~12:00 AM PDT)
+
+Hero B, location-aware: homepage headline now reads "In {City}, clinics
+publish Botox at {range} a unit. Most people learn their price at the
+front desk." City comes from the hosting geo header; the price table
+(lib/city-botox-prices.ts) holds exactly one verified entry — Portland
+$12–$17 — and any unverified city falls back to "Clinics publish Botox
+prices. Most people learn their price at the front desk." No range is
+ever invented and no city's price is ever shown as another city's.
+Eyebrow "Ad-Free" dropped (ad-free stance retired Oct 23); hero quiz CTA
+"See what Botox costs in your city" added to /quiz. Quiz-signup
+notification added to app/api/quiz-submit/route.ts: after a successful
+leads insert, a Resend email goes to John (urielpro78@gmail.com) with the
+signup email, treatment, city tier, first-timer flag, and time; wrapped
+so it can never break a visitor signup. Verified locally (build pass,
+HTML checks for Portland/fallback/Austin, phone screenshot) before
+deploy; live loop test (signup → leads row → inbox notification) runs
+after this deploy. Known blemish: on short phone viewports the
+"Independent · Data-Scored" pill hides behind the fixed navbar (hero
+spacing job, not content).

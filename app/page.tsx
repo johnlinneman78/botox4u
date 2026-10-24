@@ -1,8 +1,10 @@
 import { Metadata } from 'next'
+import { headers } from 'next/headers'
 import { NICHE } from '@/config/niche'
 import { JsonLd, generateWebSiteSchema } from '@/components/seo/JsonLd'
 import HomeClient from '@/components/home/HomeClient'
 import { createPublicClient } from '@/lib/supabase/public'
+import { findCityBotoxPrice } from '@/lib/city-botox-prices'
 
 export const metadata: Metadata = {
   title: `${NICHE.name} Injectors & MedSpas | ${NICHE.siteName}`,
@@ -15,6 +17,25 @@ export const metadata: Metadata = {
 export const revalidate = 3600 // Cache for 1 hour
 
 export default async function HomePage() {
+  // Hero price line: resolve the visitor's city from the hosting
+  // platform's geo header (Vercel sends x-vercel-ip-city, URL-encoded).
+  // Only a city with a VERIFIED range in lib/city-botox-prices.ts gets
+  // a city line; everyone else gets the range-free fallback. Reading
+  // headers() makes this page dynamic, which is the price of a
+  // location-aware hero. A malformed header falls back, never crashes.
+  let heroCity: string | null = null
+  let heroRange: string | null = null
+  try {
+    const rawCity = (await headers()).get('x-vercel-ip-city')
+    const match = findCityBotoxPrice(rawCity ? decodeURIComponent(rawCity) : null)
+    if (match) {
+      heroCity = match.city
+      heroRange = match.range
+    }
+  } catch {
+    // Fallback hero below; geo must never break the homepage.
+  }
+
   const supabase = createPublicClient()
 
   let providersIndexed = 0
@@ -42,10 +63,12 @@ export default async function HomePage() {
   return (
     <>
       <JsonLd data={generateWebSiteSchema()} />
-      <HomeClient 
+      <HomeClient
         providersIndexed={providersIndexed}
         npiVerified={npiVerified}
         citiesVerified={citiesVerified}
+        heroCity={heroCity}
+        heroRange={heroRange}
       />
     </>
   )

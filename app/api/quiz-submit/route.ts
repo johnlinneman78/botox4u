@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { Resend } from 'resend'
+import { NICHE } from '@/config/niche'
 
 // Consumer quiz signups are the demand list: a visitor answers the
 // pricing quiz and leaves an email to get the full price guide.
@@ -63,6 +65,37 @@ export async function POST(req: Request) {
         if (error) throw error
         if (!inserted || inserted.length === 0) {
             throw new Error('Lead insert matched no rows')
+        }
+
+        // Notify John that a quiz signup landed. Fire-and-forget: it
+        // must never break or delay the visitor's signup. No code
+        // before this point emailed John about quiz signups — the
+        // visitor's drip enrollment (via /api/subscribe, called
+        // separately by the quiz component) only emails the visitor.
+        // Skipped silently when no Resend key is configured.
+        try {
+            const apiKey = process.env.RESEND_API_KEY?.trim()
+            if (apiKey) {
+                const resend = new Resend(apiKey)
+                const notifyTo = process.env.QUIZ_NOTIFY_EMAIL?.trim() || 'urielpro78@gmail.com'
+                const sender = process.env.FROM_EMAIL?.trim() || NICHE.outreach.senderEmail
+                const submittedAt = new Date().toISOString()
+                await resend.emails.send({
+                    from: `InjectorIndex <${sender}>`,
+                    to: [notifyTo],
+                    subject: 'New quiz signup',
+                    text: [
+                        'New pricing-quiz signup on InjectorIndex.',
+                        `Email: ${email}`,
+                        `Treatment: ${treatment}`,
+                        `City tier: ${cityTier}`,
+                        `First timer: ${experience === 'first_time' ? 'yes' : 'no'}`,
+                        `Submitted: ${submittedAt}`,
+                    ].join('\n'),
+                })
+            }
+        } catch (notifyError) {
+            console.error('quiz-submit notify failed (signup unaffected):', notifyError)
         }
 
         return NextResponse.json({ success: true, leadId: inserted[0].id })
