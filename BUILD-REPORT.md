@@ -235,3 +235,15 @@ live. Still owed: provider detail pages' "Request a Consultation" button
 is dead (appends #quote-form, renders no form) — working quote modal
 lives on city listing cards only; and the quiz route's new log line
 ("quiz-submit notify sent: <id>") is proven in server logs.
+
+## Guide lightening + provider-page quote button verified live (2026-10-24, ~1:28 AM PDT)
+
+Commit d126cc0 verified on Production (Ready 1:24:40 AM): the Buyers Guide
+Chapter 3 Red Flags and Chapter 7 Checklist sections now render on light
+cream with dark readable text (were dark navy bg + dark brown text);
+the hero button label is light on navy. Provider detail pages: the sticky
+"Request a Consultation" button now opens the LeadForm modal (was a dead
+#quote-form anchor) — test via Peachy West SoHo's page: modal opened,
+"Request Sent!" shown, exactly 1 leads row with provider_id, zero Vercel
+errors, test rows deleted, baseline back to 3. Inbox proof 1:28:55 AM:
+"LEAD ALERT: New York - Sample Request" + "We got your request".
