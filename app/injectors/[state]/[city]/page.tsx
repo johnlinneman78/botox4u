@@ -20,6 +20,7 @@ import { notFound } from 'next/navigation'
 import { JsonLd, generateBreadcrumbSchema, generateItemListSchema, generateFAQPageSchema } from '@/components/seo/JsonLd'
 import { Suspense } from 'react'
 import { QuizBanner } from '@/components/lead-funnel/QuizBanner'
+import { PriceReportCTA } from '@/components/providers/PriceReportCTA'
 
 interface CityPageProps {
     params: Promise<{ state: string; city: string }>
@@ -196,6 +197,14 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                         avgCost={stats?.avgCost || 15}
                         city={cityName}
                     />
+                </div>
+
+                {/* Price-report CTA: right where city prices are shown.
+                    Prefills the quick path with this city. Branch phase 1:
+                    opens the widget inline only; nothing submitted displays
+                    publicly. */}
+                <div className="container-content">
+                    <PriceReportCTA variant="full" city={cityName} />
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
