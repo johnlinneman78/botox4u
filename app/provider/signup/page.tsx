@@ -3,10 +3,11 @@
 import { useState, Suspense } from 'react'
 import Link from 'next/link'
 import Logo from '@/components/layout/Logo'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Button } from '@/components/ui/Button'
 import { slugify } from '@/lib/utils'
+import { recordSignupClaim, createSignupProvider } from '@/lib/actions/provider-actions'
 
 function ProviderSignupContent() {
     const [name, setName] = useState('')
@@ -18,7 +19,7 @@ function ProviderSignupContent() {
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
-    const router = useRouter()
+    const [submitted, setSubmitted] = useState(false)
     const searchParams = useSearchParams()
     const plan = searchParams.get('plan') || 'free'
     const existingProviderId = searchParams.get('id')
@@ -48,40 +49,39 @@ function ProviderSignupContent() {
             // but for a seamless experience in dev/beta, or if auto confirm is on:
             if (authData?.user) {
 
+                // The account has no session yet (email unconfirmed), so
+                // the claim/listing write cannot run through this
+                // browser client: row-level security matches zero rows
+                // and the write fails silently. Both writes go through
+                // server actions with checked results instead, and a
+                // failed write surfaces as an error here, never as a
+                // silent trip to the dashboard (which bounces a
+                // sessionless user to the login page anyway).
                 if (existingProviderId) {
                     // Claim existing. The plan in the URL is never granted
                     // here: paid tiers are set only by the Stripe webhook
-                    // after payment. New claims start on the free tier.
-                    await supabase
-                        .from('providers')
-                        .update({
-                            user_id: authData.user.id,
-                            claimed: true,
-                            listing_tier: 'free'
-                        })
-                        .eq('id', existingProviderId)
+                    // after payment. A claim starts on the free tier and
+                    // lands in manual review, not claimed outright.
+                    const result = await recordSignupClaim(existingProviderId, email, authData.user.id)
+                    if (!result.success) {
+                        throw new Error('Your account was created, but we could not record your claim. Sign in after confirming your email and try claiming again, or contact support.')
+                    }
                 } else {
                     // Create new provider (free tier; paid tiers come from
                     // the Stripe webhook after payment, never from signup)
-                    const slug = slugify(clinicName)
-                    await supabase
-                        .from('providers')
-                        .insert([{
-                            user_id: authData.user.id,
-                            name: clinicName,
-                            city,
-                            state,
-                            slug,
-                            listing_tier: 'free',
-                            claimed: true,
-                            verified: false,
-                            business_type: 'Medspa'
-                        }])
+                    const result = await createSignupProvider({
+                        userId: authData.user.id,
+                        clinicName,
+                        city,
+                        state,
+                        slug: slugify(clinicName)
+                    })
+                    if (!result.success) {
+                        throw new Error('Your account was created, but we could not save your clinic listing. Sign in after confirming your email and try again, or contact support.')
+                    }
                 }
 
-                // Push to dashboard
-                router.push('/provider/dashboard')
-                router.refresh()
+                setSubmitted(true)
             } else {
                 setError('Registration successful. Please check your email to verify your account before logging in.')
             }
@@ -108,6 +108,25 @@ function ProviderSignupContent() {
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
                 <div className="bg-white py-8 px-4 shadow-xl shadow-[#3D2B1F]/5 sm:rounded-[2rem] sm:px-10 border border-[#3D2B1F]/10">
+                    {submitted ? (
+                        <div className="text-center space-y-4">
+                            <h3 className="text-xl font-display font-bold text-[#3D2B1F]">
+                                {existingProviderId ? 'Account Created — Claim In Review' : 'Account Created — Listing Saved'}
+                            </h3>
+                            <p className="text-sm text-[#3D2B1F]/70">
+                                {existingProviderId
+                                    ? 'Your claim has been recorded and is in review. Nothing is marked claimed or verified until the review is complete, and the decision is sent by email.'
+                                    : 'Your clinic listing has been saved on the free tier. It is not marked verified; verification is a separate review.'}
+                            </p>
+                            <p className="text-sm text-[#3D2B1F]/70">
+                                Check your email to confirm your account, then sign in to reach your dashboard.
+                            </p>
+                            <Link href="/provider/login" className="inline-block text-sm font-semibold text-[#C9A96E] hover:text-[#B5955B]">
+                                Go to sign in →
+                            </Link>
+                        </div>
+                    ) : (
+                    <>
                     <form onSubmit={handleSignup} className="space-y-6">
 
                         {error && (
@@ -205,6 +224,8 @@ function ProviderSignupContent() {
                             {loading ? 'Processing...' : existingProviderId ? 'Create Account & Claim' : 'Create Account & Add Clinic'}
                         </Button>
                     </form>
+                    </>
+                    )}
 
                     <div className="mt-8 text-center border-t border-[#3D2B1F]/10 pt-6">
                         <Link href="/provider/login" className="text-sm font-semibold text-[#C9A96E] hover:text-[#B5955B]">

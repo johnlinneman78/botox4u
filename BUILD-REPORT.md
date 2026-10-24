@@ -121,3 +121,13 @@ Claim flow:
 - `app/claim/[slug]/verify/page.tsx`, `app/claim/[slug]/edit/page.tsx`, `app/claim/[slug]/success/page.tsx` (fetch via getProviderBySlug)
 
 Nothing touching ranking, scoring, or payment was modified.
+
+## Signup-first claim path — live test Oct 23, 2026 ~9:35-9:45 PM PDT (commit f512201)
+
+Test: /claim search "Peachy" -> click Peachy West SoHo -> "CREATE ACCOUNT TO CLAIM" -> /provider/signup?id=616e88be-02a4-46db-90b4-d9e0fa31347e&plan=free -> submitted form (test email urielpro78+signuptest@gmail.com).
+
+Result: FAILED, silent. An auth user was created (unconfirmed, email_confirmed_at NULL), but the providers row changed in ZERO of 68 columns (user_id NULL, claimed false, crm_status lead, email NULL), no provider_accounts row was created, and the user was bounced to /provider/login, whose Beta Notice says self-service logins are still rolling out and to check an invitation email. No error or confirmation message was shown.
+
+Cause (code, app/provider/signup/page.tsx): the claim update runs through the browser Supabase client with no session (email unconfirmed), the update's returned error is never checked, and the flow pushes to /provider/dashboard, which bounces the sessionless user to login. Same silent-write failure class fixed in the verify-first flow in round 3 (service-role write + zero-row check). Design note: even if the update had landed, the code sets claimed=true instantly with no review or NPI check, which contradicts the claim_review model adopted in round 3.
+
+Cleanup: test auth user deleted; providers row verified zero-diff against the 68-column baseline. Production pristine.

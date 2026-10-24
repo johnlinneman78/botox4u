@@ -46,6 +46,109 @@ export async function updateProviderProfile(formData: FormData) {
     }
 }
 
+function getServiceRoleClient() {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()
+    if (!supabaseUrl || !serviceKey) throw new Error('Supabase not initialized')
+    return createClient(supabaseUrl, serviceKey)
+}
+
+// Signup-first claim: a visitor finds their clinic on /claim, clicks
+// "Create Account to Claim", and creates an account on
+// /provider/signup?id=<provider_id>. The claim record must be written
+// here, server side. The signup page used to run this update through
+// the browser client before the new account had a session (email
+// unconfirmed), row-level security matched zero rows, the returned
+// error was never checked, and the flow reported success while
+// writing nothing (verified live 2026-10-23: auth user created,
+// providers row unchanged in all 68 columns, user bounced to login).
+//
+// A signup claim is a claim, not an approval: the listing goes to
+// manual review (crm_status 'claim_review'), the claimant's account
+// is linked (user_id) and recorded in provider_accounts, and claimed /
+// verified stay false until a human approves the claim.
+export async function recordSignupClaim(providerId: string, email: string, userId: string) {
+    try {
+        if (!providerId || !email || !userId) throw new Error('Missing claim details')
+        const supabase = getServiceRoleClient()
+
+        const { data: updatedRows, error } = await supabase
+            .from('providers')
+            .update({
+                user_id: userId,
+                email,
+                outreach_status: 'claimed',
+                crm_status: 'claim_review',
+                claimed: false,
+                verified: false,
+                listing_tier: 'free'
+            })
+            .eq('id', providerId)
+            .select('id')
+
+        if (error) throw error
+        if (!updatedRows || updatedRows.length === 0) {
+            throw new Error('Claim update matched no provider row')
+        }
+
+        const { error: accountError } = await supabase
+            .from('provider_accounts')
+            .insert({ provider_id: providerId, email })
+
+        if (accountError && accountError.code !== '23505') {
+            console.error('provider_accounts insert failed:', accountError)
+        }
+
+        return { success: true }
+    } catch (error: any) {
+        console.error('Error recording signup claim:', error)
+        return { success: false, error: error.message || 'Failed to record claim' }
+    }
+}
+
+// Brand-new listing created during signup (no existing provider id).
+// Same failure class as the claim above: the insert ran through the
+// browser client with no session and its error was never checked.
+// A listing its owner just created is theirs, so claimed is true;
+// verification stays a separate human decision.
+export async function createSignupProvider(input: {
+    userId: string
+    clinicName: string
+    city: string
+    state: string
+    slug: string
+}) {
+    try {
+        if (!input.userId || !input.clinicName) throw new Error('Missing clinic details')
+        const supabase = getServiceRoleClient()
+
+        const { data: insertedRows, error } = await supabase
+            .from('providers')
+            .insert([{
+                user_id: input.userId,
+                name: input.clinicName,
+                city: input.city,
+                state: input.state,
+                slug: input.slug,
+                listing_tier: 'free',
+                claimed: true,
+                verified: false,
+                business_type: 'Medspa'
+            }])
+            .select('id')
+
+        if (error) throw error
+        if (!insertedRows || insertedRows.length === 0) {
+            throw new Error('Provider insert matched no rows')
+        }
+
+        return { success: true }
+    } catch (error: any) {
+        console.error('Error creating signup provider:', error)
+        return { success: false, error: error.message || 'Failed to create listing' }
+    }
+}
+
 export async function claimProviderProfile(formData: FormData) {
     try {
         // The claim write must use a service-role client. The regular
