@@ -31,24 +31,6 @@ export default function PulsePage() {
                         Help us build the most transparent pricing index in aesthetic medicine. Join 2,400+ patients tracking real-time costs and results.
                     </p>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto text-[#3D2B1F] mt-16 pt-12 border-t border-[#3D2B1F]/10">
-                        <div>
-                            <div className="text-3xl font-bold font-display mb-1">$14.22</div>
-                            <div className="text-[10px] text-[#3D2B1F]/70 font-bold uppercase tracking-widest">Global Avg / Unit</div>
-                        </div>
-                        <div>
-                            <div className="text-3xl font-bold font-display mb-1">32</div>
-                            <div className="text-[10px] text-[#3D2B1F]/70 font-bold uppercase tracking-widest">Cities Tracked</div>
-                        </div>
-                        <div>
-                            <div className="text-3xl font-bold font-display mb-1">2,324</div>
-                            <div className="text-[10px] text-[#3D2B1F]/70 font-bold uppercase tracking-widest">Verified Providers</div>
-                        </div>
-                        <div>
-                            <div className="text-3xl font-bold font-display mb-1">100%</div>
-                            <div className="text-[10px] text-[#3D2B1F]/70 font-bold uppercase tracking-widest">Independent Data</div>
-                        </div>
-                    </div>
                 </div>
             </section>
 
@@ -223,19 +205,6 @@ export default function PulsePage() {
                 <div className="container mx-auto px-4 text-center">
                     <h3 className="text-xl font-bold text-[#3D2B1F] mb-16 uppercase tracking-[0.2em]">Verified Community Insights</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                        <div className="text-left">
-                            <div className="text-secondary mb-4 flex">
-                                {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-4 h-4 fill-secondary" />)}
-                            </div>
-                            <p className="text-[#3D2B1F]/60 italic mb-6">"I thought $22/unit was normal for the Pearl District. After seeing the Pulse data, I realized I was overpaying by $400 per visit. Found a new injector 2 miles away with more experience."</p>
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-[#3D2B1F]/5" />
-                                <div>
-                                    <div className="text-sm font-bold text-[#3D2B1F]">Sarah J.</div>
-                                    <div className="text-[10px] text-[#3D2B1F]/70 uppercase font-bold tracking-widest">New York, NY</div>
-                                </div>
-                            </div>
-                        </div>
                         <div className="text-left">
                             <div className="text-secondary mb-4 flex">
                                 {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-4 h-4 fill-secondary" />)}

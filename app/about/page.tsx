@@ -127,7 +127,7 @@ export default async function AboutPage() {
                             {
                                 icon: DollarSign,
                                 label: 'Fair Pricing',
-                                desc: 'We collect real per-unit pricing and compare each provider against their local market average. You see whether a clinic charges above, at, or below the norm for your city — before you walk in the door.'
+                                desc: 'We are building a crowdsourced price pool — real prices from real people. Until clinics publish prices here, we show no price rather than an estimate.'
                             },
                             {
                                 icon: ShieldCheck,

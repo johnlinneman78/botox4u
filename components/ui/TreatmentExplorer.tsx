@@ -9,14 +9,14 @@ const treatments = [
         label: 'Botox & Dysport',
         query: 'botox',
         title: 'Smooth lines, not your identity.',
-        description: 'Neurotoxins relax the muscles that create dynamic wrinkles — forehead lines, crow\'s feet, and frown lines. Results last 3–4 months. Expect $10–$18/unit depending on your city.',
+        description: 'Neurotoxins relax the muscles that create dynamic wrinkles — forehead lines, crow\'s feet, and frown lines. Results last 3–4 months. Expect $10–$18/unit depending on your city. (Illustrative range, not a clinic price.)',
         tags: ['Forehead', 'Crow\'s Feet', '11 Lines', 'Masseter'],
     },
     {
         label: 'Lip Filler',
         query: 'filler',
         title: 'Volume and shape, done right.',
-        description: 'Hyaluronic acid fillers add subtle volume and definition to lips. A skilled injector focuses on proportion and balance — not overcorrection. Expect $500–$900/syringe.',
+        description: 'Hyaluronic acid fillers add subtle volume and definition to lips. A skilled injector focuses on proportion and balance — not overcorrection. Expect $500–$900/syringe. (Illustrative range, not a clinic price.)',
         tags: ['Shape', 'Volume', 'Hydration', 'Border Definition'],
     },
     {

@@ -275,11 +275,6 @@ export default function CalculatorClient() {
     const rangeLow = Math.round(calculatedTotal * 0.9)
     const rangeHigh = Math.round(calculatedTotal * 1.1)
 
-    // Benchmark Delta Text
-    const deltaText = (cityData.benchmarkDelta || 0) > 0
-        ? `${cityData.benchmarkDelta}% higher`
-        : `${Math.abs(cityData.benchmarkDelta || 0)}% lower`
-
     // Gradient Position (for visual bar)
     const markerPosition = tierValue[0]
 
@@ -496,10 +491,9 @@ export default function CalculatorClient() {
                                         Market Insight
                                     </p>
                                     <p className="text-sm text-[#3D2B1F]/70 leading-relaxed mt-1">
-                                        Providers in <span className="font-semibold text-[#3D2B1F]">{CITY_OPTIONS.find(c => c.value === city)?.label}</span> average <span className={cityData.benchmarkDelta > 0 ? "text-red-400 font-bold" : "text-[#8A9E8D] font-bold"}>{deltaText}</span> than the national median.
-                                        {tierCategory === 'budget' && " These clinics typically focus on efficiency while maintaining high clinical safety standards."}
-                                        {tierCategory === 'mid' && " Institutional clinics balance volume and quality, generally falling into our primary verified range."}
-                                        {tierCategory === 'premium' && " Premium Artisan Specialists pass our most rigorous multi-factor clinical audits for natural results."}
+                                        {tierCategory === 'budget' && "These clinics typically focus on efficiency while maintaining high clinical safety standards."}
+                                        {tierCategory === 'mid' && "Institutional clinics balance volume and quality, generally falling into our primary verified range."}
+                                        {tierCategory === 'premium' && "Premium Artisan Specialists pass our most rigorous multi-factor clinical audits for natural results."}
                                     </p>
                                 </div>
                             </div>
@@ -507,7 +501,7 @@ export default function CalculatorClient() {
                             {/* CTA */}
                             <Link href={`/${NICHE.baseSlug}/${city}`} className="block">
                                 <Button className="w-full text-lg py-7 rounded-xl shadow-xl shadow-[#C9A96E]/10 hover:shadow-[#C9A96E]/20 transition-all bg-[#C9A96E] hover:bg-[#B5955B] text-white font-bold group">
-                                    See {cityData.providerCount} Verified Providers in {CITY_OPTIONS.find(c => c.value === city)?.label}
+                                    See Verified Providers in {CITY_OPTIONS.find(c => c.value === city)?.label}
                                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </Button>
                             </Link>

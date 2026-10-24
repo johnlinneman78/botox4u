@@ -294,6 +294,9 @@ export default function BuyersGuidePage() {
                             <p className="text-xl text-[#3D2B1F]/60 text-center mb-16 max-w-3xl mx-auto leading-relaxed">
                                 Why the cheapest Botox is the most expensive option. The market varies by 40%+ across clinics in the same city. The danger isn&apos;t above that range — it&apos;s below it.
                             </p>
+                            <p className="text-sm text-[#3D2B1F]/50 text-center mb-12 max-w-3xl mx-auto">
+                                Example — not market data: the panels below are made-up scenarios showing why unit counts matter, not prices any clinic charges.
+                            </p>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
                                 <div className="p-10 bg-red-500/5 border border-red-500/10 rounded-3xl">

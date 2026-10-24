@@ -5,6 +5,7 @@ import { formatScore } from '@/lib/scoring'
 import { Star, X, Info, ShieldCheck, Search, Activity, Shield, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { LeadForm } from './LeadForm'
+import { PriceReportCTA } from './PriceReportCTA'
 import { NICHE } from '@/config/niche'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -199,13 +200,11 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
                         <div className="text-lg font-black text-[#3D2B1F] mt-1">
                             {provider.price_per_unit
                                 ? `${NICHE.priceCurrency}${provider.price_per_unit}/unit`
-                                : `Estimated: $12–$16/unit (City Avg)`
+                                : `Price not published`
                             }
                         </div>
                         {!provider.price_per_unit && (
-                            <p className="text-[9px] text-gray-700 mt-1 leading-tight tracking-tight">
-                                Based on aggregated local data. Claim listing to update.
-                            </p>
+                            <PriceReportCTA variant="missing-price" providerId={provider.id} providerName={provider.name} city={provider.city} state={provider.state} />
                         )}
                     </div>
 

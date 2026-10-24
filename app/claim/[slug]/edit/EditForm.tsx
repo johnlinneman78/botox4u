@@ -100,7 +100,7 @@ export function EditForm({ provider, initialNpi, initialEmail }: { provider: any
                     </div>
                     <div className="bg-[#3D2B1F]/5 p-6 rounded-2xl border border-[#3D2B1F]/10 flex items-center justify-center">
                         <p className="text-xs text-[#3D2B1F]/60 text-center font-light">
-                            Typical price in <strong className="text-[#3D2B1F]">{provider.city}</strong>: $11 - $14 / unit.
+                            Clinics set their own prices — enter what you charge per unit.
                         </p>
                     </div>
                 </div>

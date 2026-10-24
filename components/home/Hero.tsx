@@ -155,7 +155,7 @@ export default function Hero({
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#3D2B1F]/5 rounded-2xl overflow-hidden border border-[#3D2B1F]/10">
                     {[
                         { value: `${providersCount.toLocaleString()}+`, label: 'Providers Indexed', note: `Across ${citiesCount} Cities` },
-                        { value: '$12–25', label: 'Per Unit Pricing', note: 'Verified Market Rates' },
+                        { value: 'Price not published', label: 'Per Unit Pricing', note: 'Clinics set their own prices' },
                         { value: '98', label: 'Top Clarity Score™', note: initialCity ? `${initialCity} Market` : 'Top Neighborhoods' },
                         { value: 'Data-Led', label: 'Clarity Score™ Model', note: 'Zero Pay-to-Rank' },
                     ].map((stat, i) => (
