@@ -39,8 +39,10 @@ export function VerifyForm({ provider }: { provider: any }) {
             const providerNameParts = provider.name.toLowerCase().split(' ')
             const npiName = (npiRecord.basic.organization_name || `${npiRecord.basic.first_name} ${npiRecord.basic.last_name}`).toLowerCase()
 
-            // Success! Redirect to edit page with NPI
-            router.push(`/claim/${provider.slug}/edit?verify=${npi}`)
+            // Success! Redirect to edit page with NPI. The practice email
+            // travels too — the claim submission records it on the
+            // provider row and the claimant account.
+            router.push(`/claim/${provider.slug}/edit?verify=${npi}&email=${encodeURIComponent(email)}`)
         } catch (err) {
             console.error('NPI Verification Error:', err)
             setError('Verification service unavailable. Please try again or contact support.')

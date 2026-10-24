@@ -1,6 +1,7 @@
 'use server'
 
 import { cookies } from 'next/headers'
+import { createClient } from '@supabase/supabase-js'
 import { getSupabaseServer } from '@/lib/supabase/factory'
 
 export async function updateProviderProfile(formData: FormData) {
@@ -47,11 +48,21 @@ export async function updateProviderProfile(formData: FormData) {
 
 export async function claimProviderProfile(formData: FormData) {
     try {
-        const supabase = await getSupabaseServer(await cookies())
-        if (!supabase) throw new Error('Supabase not initialized')
+        // The claim write must use a service-role client. The regular
+        // server client runs as the anonymous visitor for a claimant, and
+        // row-level security silently matched zero rows on this update:
+        // PostgREST returned no error, the action reported success, and
+        // nothing was ever written (verified live 2026-10-23 — success
+        // page shown, providers row byte-identical afterward).
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
+        const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()
+        if (!supabaseUrl || !serviceKey) throw new Error('Supabase not initialized')
+        const supabase = createClient(supabaseUrl, serviceKey)
 
         const providerId = formData.get('provider_id') as string
         if (!providerId) throw new Error('Provider ID is missing')
+
+        const claimEmail = (formData.get('claim_email') as string) || ''
 
         // Fetch existing data for merging enriched_attrs
         const { data: existing } = await supabase
@@ -73,7 +84,14 @@ export async function claimProviderProfile(formData: FormData) {
             // The claim itself is recorded by outreach_status below.
             npi_verified: false,
             outreach_status: 'claimed',
+            // A submitted claim goes to manual review. Nothing about the
+            // listing is verified or live until a human approves it.
+            crm_status: 'claim_review',
             services_offered: formData.getAll('services') as string[]
+        }
+
+        if (claimEmail) {
+            updates.email = claimEmail
         }
 
         const pricePerUnit = formData.get('price_per_unit');
@@ -100,12 +118,32 @@ export async function claimProviderProfile(formData: FormData) {
 
         updates.enriched_attrs = enriched_attrs
 
-        const { error } = await supabase
+        const { data: updatedRows, error } = await supabase
             .from('providers')
             .update(updates)
             .eq('id', providerId)
+            .select('id')
 
         if (error) throw error
+
+        // Never report success for a write that touched nothing again.
+        if (!updatedRows || updatedRows.length === 0) {
+            throw new Error('Claim update matched no provider row')
+        }
+
+        // Record the claimant so the account can be linked at approval.
+        // provider_accounts.email is UNIQUE — a repeat claim from the
+        // same email is not an error, so insert failures are logged,
+        // not fatal.
+        if (claimEmail) {
+            const { error: accountError } = await supabase
+                .from('provider_accounts')
+                .insert({ provider_id: providerId, email: claimEmail })
+
+            if (accountError && accountError.code !== '23505') {
+                console.error('provider_accounts insert failed:', accountError)
+            }
+        }
 
         return { success: true }
     } catch (error: any) {
