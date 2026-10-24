@@ -19,8 +19,14 @@ export function VerifyForm({ provider }: { provider: any }) {
         const npi = formData.get('npi') as string
 
         try {
-            // Real NPI Verification via CMS API
-            const response = await fetch(`https://npiregistry.cms.hhs.gov/api/?version=2.1&number=${npi}`)
+            // Real NPI Verification via CMS API, through our server-side
+            // proxy (/api/npi/verify): the registry sends no CORS headers,
+            // so a direct browser fetch is blocked and always landed here
+            // as "service unavailable".
+            const response = await fetch(`/api/npi/verify?number=${npi}`)
+            if (!response.ok) {
+                throw new Error('NPI verify request failed')
+            }
             const data = await response.json()
 
             if (data.result_count === 0) {
