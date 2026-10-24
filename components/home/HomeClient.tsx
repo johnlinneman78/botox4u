@@ -199,7 +199,7 @@ export default function HomeClient({
                                 border: '1px solid rgba(138, 158, 141, 0.2)',
                             }}
                         >
-                            Independent · Data-Scored
+                            Real prices, from real people
                         </span>
                     </motion.div>
 
@@ -219,7 +219,7 @@ export default function HomeClient({
                                 lineHeight: 1.6,
                             }}
                         >
-                            InjectorIndex tracks the listed price and the injector&apos;s license for every clinic in the directory, so you can compare before you book.
+                            Clinics hide their prices. We collect what people actually paid, to build accurate pricing and push the market toward transparent pricing. It starts with people like you.
                         </p>
                     </motion.div>
 
@@ -271,7 +271,7 @@ export default function HomeClient({
                                     color: 'var(--color-linen)',
                                 }}
                             >
-                                See real prices near you
+                                Find injectors near you
                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                                     <path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="var(--color-linen)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
