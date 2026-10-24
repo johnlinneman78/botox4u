@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, Suspense } from 'react'
 import { formatScore } from '@/lib/scoring'
-import { Search, ShieldCheck, Zap, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { Search, ShieldCheck, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -113,7 +113,7 @@ function ProviderLookupInner() {
                     <div className="flex items-start justify-between mb-8">
                         <div>
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C9A96E] text-white text-[10px] font-black tracking-widest uppercase mb-4">
-                                <CheckCircle2 className="w-3 h-3" /> Already Indexed
+                                <CheckCircle2 className="w-3 h-3" /> Listed in the Directory
                             </div>
                             <h3 className="text-2xl font-bold text-[#3D2B1F] mb-1">{selectedProvider.name}</h3>
                             <p className="text-[#3D2B1F]/70 text-sm">{selectedProvider.city}, {selectedProvider.state}</p>
@@ -128,20 +128,18 @@ function ProviderLookupInner() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                         <div className="bg-[#3D2B1F]/5 rounded-2xl p-4 border border-[#3D2B1F]/10">
-                            <div className="text-[10px] font-black text-[#3D2B1F]/60 uppercase tracking-widest mb-2">Visibility Rank</div>
-                            <div className="text-[#3D2B1F] font-bold">Top 15% in {selectedProvider.city}</div>
+                            <div className="text-[10px] font-black text-[#3D2B1F]/60 uppercase tracking-widest mb-2">Directory Listing</div>
+                            <div className="text-[#3D2B1F] font-bold">Live, not yet claimed</div>
                         </div>
                         <div className="bg-[#3D2B1F]/5 rounded-2xl p-4 border border-[#3D2B1F]/10">
                             <div className="text-[10px] font-black text-[#3D2B1F]/60 uppercase tracking-widest mb-2">Claim Status</div>
-                            <div className="text-amber-500 font-bold flex items-center gap-2">
-                                <Zap className="w-3 h-3 fill-amber-500" /> Action Required
-                            </div>
+                            <div className="text-[#3D2B1F] font-bold">Not yet claimed</div>
                         </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3">
                         <Link href={`/provider/signup?id=${selectedProvider.id}&plan=${plan}`} className="flex-1 inline-flex items-center justify-center w-full bg-[#C9A96E] hover:bg-[#B5955B] text-white font-black py-6 rounded-xl shadow-xl shadow-[#C9A96E]/10 transition-all uppercase tracking-widest text-xs group">
-                            Create Account to Claim
+                            Create Account to Request Claim
                             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Link>
                         <Button

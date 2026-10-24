@@ -102,7 +102,9 @@ function ProviderSignupContent() {
                     {existingProviderId ? 'Create Account to Claim Profile' : 'Create Your Provider Account'}
                 </h2>
                 <p className="mt-2 text-center text-sm text-[#3D2B1F]/60">
-                    Get started with VerifiedAesthetics and {existingProviderId ? 'claim your listing' : 'add your clinic'}.
+                    {existingProviderId
+                        ? 'Create an account to request this listing. Every claim is reviewed before it is approved.'
+                        : 'Get started with VerifiedAesthetics and add your clinic.'}
                 </p>
             </div>
 
@@ -221,7 +223,7 @@ function ProviderSignupContent() {
                             disabled={loading}
                             className="w-full flex justify-center py-6 border border-transparent rounded-xl shadow-lg shadow-[#C9A96E]/20 text-sm font-black tracking-widest uppercase text-white bg-[#C9A96E] hover:bg-[#B5955B] transition-all disabled:opacity-50"
                         >
-                            {loading ? 'Processing...' : existingProviderId ? 'Create Account & Claim' : 'Create Account & Add Clinic'}
+                            {loading ? 'Processing...' : existingProviderId ? 'Create Account & Request Claim' : 'Create Account & Add Clinic'}
                         </Button>
                     </form>
                     </>
