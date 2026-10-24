@@ -111,7 +111,9 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                 "name": `How much does Botox cost with ${provider.name} in ${provider.city}?`,
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": `Botox in ${provider.city} typically costs $12-$16 per unit depending on the clinical setting and provider expertise. ${provider.name} is assessed at a price index of ${provider.price_per_unit ? '$' + provider.price_per_unit + '/unit' : 'the local average'}, reflecting the market standard for ${provider.businessType || 'Aesthetic Medicine'} providers in the area.`
+                    "text": provider.price_per_unit
+                        ? `Botox with ${provider.name} in ${provider.city} is listed at $${provider.price_per_unit} per unit.`
+                        : `Prices vary by clinic — ${provider.name} does not publish a per-unit price here. Ask the clinic directly for a per-unit quote tailored to your treatment goals.`
                 }
             },
             {
@@ -180,7 +182,11 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                             How much does Botox cost with {provider.name} in {provider.city}?
                         </h3>
                         <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                            Botox in {provider.city} typically costs between $12 and $16 per unit depending on the clinical setting and provider expertise. {provider.name} is assessed at a price index of {provider.price_per_unit ? '$' + provider.price_per_unit + '/unit' : 'the local average'}, reflecting the market standard for {provider.businessType || 'Aesthetic Medicine'} providers in the area. Patients should consult directly with the practice for exact quotes tailored to their treatment goals.
+                            {provider.price_per_unit ? (
+                                <>Botox with {provider.name} in {provider.city} is listed at ${provider.price_per_unit} per unit. Patients should consult directly with the practice for exact quotes tailored to their treatment goals.</>
+                            ) : (
+                                <>Prices vary by clinic — {provider.name} does not publish a per-unit price here. Patients should consult directly with the practice for exact quotes tailored to their treatment goals.</>
+                            )}
                         </p>
                     </div>
 

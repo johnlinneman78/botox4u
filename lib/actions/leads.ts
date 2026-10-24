@@ -213,31 +213,12 @@ export async function submitLead(formData: FormData) {
         return { error: `Failed to submit lead: ${dbError.message}` }
     }
 
-    // 2. Fetch Provider Email
-    if (lead.provider_id) {
-        const { data: provider } = await supabase
-            .from('providers')
-            .select('name, email')
-            .eq('id', lead.provider_id)
-            .single()
-
-        // Send Email Notification to specific provider
-        if (provider?.email) {
-            const resend = getResend();
-            if (resend) {
-                try {
-                    await resend.emails.send({
-                        from: `${NICHE.siteName} <${getSenderEmail()}>`,
-                        to: provider.email,
-                        subject: `New Patient Lead: ${lead.full_name}`,
-                        html: getLeadEmailHtml(lead, provider.name)
-                    })
-                } catch (emailError) {
-                    console.error('Error sending email:', emailError)
-                }
-            }
-        }
-    } else if (lead.city) {
+    // 2. Held in John's queue — NOT forwarded to the clinic.
+    // Owner's rule (Oct 24): providers receive quote requests only
+    // after engaging with John. The request stays in the leads table
+    // and the admin alert below is John's queue; no email goes to the
+    // clinic from this flow, even when the clinic has an email on file.
+    if (lead.city) {
         // City-wide lead notification logic
         console.log(`City lead received for ${lead.city}:`, lead.id)
     }

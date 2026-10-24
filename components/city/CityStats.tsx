@@ -2,7 +2,7 @@ import { formatCurrency } from '@/lib/utils'
 import { NICHE } from '@/config/niche'
 
 interface CityStatsProps {
-    avgCost: number
+    avgCost: number | null
     providerCount: number
     avgRating: number
     city: string
@@ -12,9 +12,11 @@ export function CityStats({ avgCost, providerCount, avgRating, city }: CityStats
     const stats = [
         {
             label: 'Market Average',
-            value: `${formatCurrency(avgCost)}`,
-            suffix: `/${NICHE.priceUnit.split(' ').slice(-1)}`,
-            description: `Based on an audit of ${providerCount} local clinics in ${city}.`
+            value: avgCost != null ? `${formatCurrency(avgCost)}` : 'Price not published',
+            suffix: avgCost != null ? `/${NICHE.priceUnit.split(' ').slice(-1)}` : '',
+            description: avgCost != null
+                ? `Based on an audit of ${providerCount} local clinics in ${city}.`
+                : `No clinic in ${city} has published a price yet.`
         },
         {
             label: 'Patient Choice',

@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 interface StateHeroProps {
     stateName: string
     providerCount: number
-    avgCost: number
+    avgCost: number | null
     cityCount: number
 }
 
@@ -73,9 +73,15 @@ export function StateHero({ stateName, providerCount, avgCost, cityCount }: Stat
                         className="flex flex-wrap gap-12"
                     >
                         <div className="space-y-2">
-                            <div className="font-display text-4xl font-light" style={{ color: 'var(--color-espresso)' }}>
-                                <span className="text-2xl align-top mr-1" style={{ color: 'var(--color-gold)' }}>$</span>
-                                {avgCost}
+                            <div className="font-display font-light" style={{ color: 'var(--color-espresso)', fontSize: avgCost != null ? '2.25rem' : '1.25rem' }}>
+                                {avgCost != null ? (
+                                    <>
+                                        <span className="text-2xl align-top mr-1" style={{ color: 'var(--color-gold)' }}>$</span>
+                                        {avgCost}
+                                    </>
+                                ) : (
+                                    'Price not published'
+                                )}
                             </div>
                             <div className="font-body text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--color-taupe)' }}>Avg. Cost / Unit</div>
                         </div>

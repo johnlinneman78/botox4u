@@ -468,10 +468,12 @@ export default function HomeClient({
                         viewport={{ once: true, margin: '-80px' }}
                     >
                         <h3 className="font-display font-medium mb-3" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', color: 'var(--color-espresso)' }}>
-                            Launching verification in Portland — Seattle and San Diego next
+                            {npiVerified > 0
+                                ? `NPI verification is live — ${npiVerified.toLocaleString()} clinics verified`
+                                : 'NPI verification is live'}
                         </h3>
                         <p className="font-body text-base max-w-2xl mx-auto" style={{ color: 'var(--color-stone)' }}>
-                            We are currently processing provider data for our first cohort of cities. NPI-verified profiles, real pricing, and clarity scores will appear here soon.
+                            NPI-verified profiles now appear across the directory. Real pricing arrives as clinics publish their prices and patients share what they paid.
                         </p>
                     </motion.div>
                 </div>

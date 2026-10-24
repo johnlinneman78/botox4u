@@ -32,6 +32,9 @@ export default function CalculatorPage() {
                     <p className="text-lg text-[#3D2B1F]/70 leading-relaxed mb-4">
                         Planning your next treatment? Our interactive calculator helps you estimate the number of {NICHE.name} {NICHE.priceUnit.split(' ').slice(-1)}s you might need and the total cost based on your specific goals.
                     </p>
+                    <p className="text-sm text-[#3D2B1F]/60 leading-relaxed mb-4">
+                        These are planning estimates, not prices any clinic charges.
+                    </p>
                     <div className="flex items-center justify-center gap-2 flex-wrap">
                         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#C9A96E]/10 text-[#C9A96E] rounded-full text-[10px] font-black uppercase tracking-widest border border-[#C9A96E]/20">
                             <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

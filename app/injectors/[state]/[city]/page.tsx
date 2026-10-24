@@ -114,12 +114,11 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
         { name: cityName, item: `/${NICHE.baseSlug}/${stateCode.toLowerCase()}/${cityName.toLowerCase().replace(/\s+/g, '-')}` }
     ])
 
-    const avg = stats?.avgCost || 15;
     const faqSchema = generateFAQPageSchema(
         cityName,
         stateCode,
-        stats?.avgCost ? stats.avgCost - 2 : (NICHE.priceRange.min + 2),
-        stats?.avgCost ? stats.avgCost + 2 : (NICHE.priceRange.max - 2),
+        stats?.avgCost != null ? stats.avgCost - 2 : null,
+        stats?.avgCost != null ? stats.avgCost + 2 : null,
         providers.length
     )
 
@@ -193,10 +192,19 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                 </div>
 
                 <div className="mt-12 mb-16">
-                    <PriceMeter
-                        avgCost={stats?.avgCost || 15}
-                        city={cityName}
-                    />
+                    {stats?.avgCost != null ? (
+                        <PriceMeter
+                            avgCost={stats.avgCost}
+                            city={cityName}
+                        />
+                    ) : (
+                        <>
+                            <p className="text-lg font-medium mb-4" style={{ color: 'var(--color-espresso)' }}>
+                                Price not published for {cityName} yet.
+                            </p>
+                            <PriceReportCTA variant="missing-price" city={cityName} state={stateCode} />
+                        </>
+                    )}
                 </div>
 
                 {/* Price-report CTA: right where city prices are shown.
@@ -248,10 +256,14 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                                 rows={NICHE.calculator.treatmentAreas.map(area => ({
                                     label: area.label,
                                     units: `${area.minUnits || area.defaultUnits}-${area.maxUnits || area.defaultUnits * 1.5} Units`,
-                                    costRange: `$${(stats?.avgCost || 14) * (area.minUnits || area.defaultUnits)} - $${(stats?.avgCost || 14) * (area.maxUnits || area.defaultUnits * 1.5)}`,
+                                    costRange: stats?.avgCost != null
+                                        ? `$${stats.avgCost * (area.minUnits || area.defaultUnits)} - $${stats.avgCost * (area.maxUnits || area.defaultUnits * 1.5)}`
+                                        : 'Price not published',
                                     notes: area.description || ''
                                 }))}
-                                footer={`*Pricing estimates in ${cityName} are based on a local average of $${stats?.avgCost || 14}/${NICHE.priceUnit.split(' ').slice(-1)}.`}
+                                footer={stats?.avgCost != null
+                                    ? `*Pricing estimates in ${cityName} are based on a local average of $${stats.avgCost}/${NICHE.priceUnit.split(' ').slice(-1)}.`
+                                    : `*No clinic in ${cityName} has published a price yet. Ask clinics for a per-unit quote.`}
                             />
                         </div>
                     </div>
@@ -296,7 +308,9 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                 </div>
 
                 <div className="mt-24">
-                    <CityFAQ city={cityName} avgCost={stats?.avgCost || 14} />
+                    {stats?.avgCost != null && (
+                        <CityFAQ city={cityName} avgCost={stats.avgCost} />
+                    )}
                 </div>
 
                 {/* City Market Intelligence */}
@@ -328,24 +342,22 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
                             <div className="space-y-5 text-[15px] leading-relaxed" style={{ color: 'var(--color-stone)' }}>
                                 <p>
-                                    {cityName} has <strong style={{ color: 'var(--color-espresso)' }}>{providers.length}+ verified aesthetic injectors</strong> on VerifiedAesthetics,
-                                    with an average Botox price of <strong style={{ color: 'var(--color-espresso)' }}>${stats?.avgCost || 14} per unit</strong> as of {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}.
-                                </p>
-                                <p>
-                                    {(stats?.avgCost || 14) > 15
-                                        ? ` This places ${cityName} above the national average, reflecting the city's premium aesthetic market and concentration of board-certified specialists.`
-                                        : (stats?.avgCost || 14) < 13
-                                            ? ` This is below the national average, making ${cityName} one of the more accessible major markets for cosmetic injectables.`
-                                            : ` This is consistent with national pricing trends, ensuring a healthy balance of premium clinical options and competitive rates.`
-                                    }
+                                    {cityName} has <strong style={{ color: 'var(--color-espresso)' }}>{providers.length}+ verified aesthetic injectors</strong> on VerifiedAesthetics
+                                    {stats?.avgCost != null ? (
+                                        <>, with an average Botox price of <strong style={{ color: 'var(--color-espresso)' }}>${stats.avgCost} per unit</strong> as of {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}.</>
+                                    ) : (
+                                        <>. No clinic in {cityName} has published a Botox price yet.</>
+                                    )}
                                 </p>
                             </div>
 
                             <div className="space-y-5 text-[15px] leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                                <p>
-                                    A typical treatment session for the upper face (30–50 units) in {cityName} currently ranges from
-                                    <strong style={{ color: 'var(--color-espresso)' }}> ${Math.round((stats?.avgCost || 14) * 30)} to ${Math.round((stats?.avgCost || 14) * 50)}</strong>.
-                                </p>
+                                {stats?.avgCost != null && (
+                                    <p>
+                                        A typical treatment session for the upper face (30–50 units) in {cityName} currently ranges from
+                                        <strong style={{ color: 'var(--color-espresso)' }}> ${Math.round(stats.avgCost * 30)} to ${Math.round(stats.avgCost * 50)}</strong>.
+                                    </p>
+                                )}
                                 <p>
                                     Our rankings show a high adoption rate of clinical innovations like Daxxify (for longevity) and biostimulators like Sculptra among {cityName}'s top-tier injectors.
                                 </p>
