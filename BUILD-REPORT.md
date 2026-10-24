@@ -139,3 +139,8 @@ Cleanup: test auth user deleted; providers row verified zero-diff against the 68
 - Database diff vs 68-column baseline: exactly 4 columns changed, all by design — user_id set to the new auth user, email = test email, crm_status lead -> claim_review, outreach_status not_sent -> claimed. claimed false, verified false, tier free unchanged. provider_accounts row created. Test email urielpro78+signuptest2@gmail.com.
 - Cleanup verified: providers row restored, provider_accounts row deleted, auth user deleted — zero diff vs baseline, zero test rows.
 - Remaining copy nits (not blockers): signup subtext/button still say "claim your listing" / "CREATE ACCOUNT & CLAIM" (ahead of the review the success panel now describes accurately); claim-search card uses pressure copy ("Action Required", "Top 15% in New York").
+
+## Claim copy honesty pass (live, Oct 23, 2026)
+- Deploy: commit 78d4d13 live Oct 23, 2026 10:06:54 PM PDT, deployment 8vB5joAcba8PYbSZtG6YCgfUdYR8, Ready.
+- Changes: claim card badge "Already Indexed" -> "Listed in the Directory"; hardcoded "Top 15% in <city>" rank removed ("Directory Listing / Live, not yet claimed"); "Action Required" -> "Not yet claimed"; buttons now "Create Account to Request Claim" / "Create Account & Request Claim"; signup subtext now states every claim is reviewed before approval.
+- Verified live read-only: all 6 new strings present verbatim, all 4 old strings absent. No forms submitted.
