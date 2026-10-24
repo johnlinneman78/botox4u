@@ -96,8 +96,7 @@ export async function getProvidersWithSearch(filters: {
             `city.ilike.%${q}%`,
             `state.ilike.%${q}%`,
             `business_type.ilike.%${q}%`,
-            `description.ilike.%${q}%`,
-            `credentials.ilike.%${q}%`
+            `description.ilike.%${q}%`
         ]
 
         // Add array contains conditions.
@@ -107,6 +106,11 @@ export async function getProvidersWithSearch(filters: {
         // search request, so every text search returned zero results
         // (the /claim clinic lookup showed "No clinic found" for real
         // clinics). Name/city/description matching covers clinic search.
+        // Same rule for `credentials`: in production that column is jsonb,
+        // and ilike (~~*) has no jsonb operator — Postgres error 42883
+        // ("operator does not exist: jsonb ~~* unknown", confirmed in the
+        // Vercel runtime logs 2026-10-23) errored every text search the
+        // same way even after the badges condition was removed.
         orConditions.push(`treatment_slugs.cs.{"${qLower}"}`)
         orConditions.push(`services_offered.cs.{"${q}"}`)
 
