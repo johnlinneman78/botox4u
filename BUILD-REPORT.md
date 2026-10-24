@@ -149,3 +149,22 @@ Cleanup: test auth user deleted; providers row verified zero-diff against the 68
 - The pricing quiz does NOT persist signups in production: public.leads exists (19 columns) but a live quiz submission created no row (count unchanged at 3), and public.patients gained none either — while the page claimed "We've sent the 2026 Price Guide."
 - Root cause in app/api/quiz-submit/route.ts: wrote via the visitor's cookie-session client, upserted a `lead_source` column that does not exist on prod leads, derived a fake first name from the first quiz answer, and returned success:true on every path including DB errors and a null client. The component also showed the success state unconditionally ("Always show submitted state").
 - Fix in the following commit.
+
+## Quiz capture — round 2 (2026-10-23, ~11:00 PM PDT) — PASS
+
+Round-1 re-test failed on the live site (two attempts, honest error shown,
+zero rows). Production logs named the cause: leads.full_name is NOT NULL
+with no default, and the quiz collects email only — Postgres 23502 on
+every insert. Fix commit 564effa records full_name as 'Not provided
+(pricing quiz)' (truthful; the old code invented a name from a quiz
+answer). Round-2 live re-test on deployment 564effa (Ready 10:55 PM):
+baseline leads 3, test email quiztest3 0 rows; quiz completed (forehead /
+premium / first-time / value); confirmation "You're on the list" with the
+honest saved-under-email copy; database check exactly 1 row, all fields
+verified (treatment_type forehead, city premium, is_first_timer true,
+status new, additional_metadata source botox_price_quiz, experience
+first_time, priority value, city_tier premium, full quiz answers stored);
+cleanup deleted the test row, baseline back to 3, zero diff. Production
+pristine. NOT verified in this test: drip-email enrollment (best-effort
+/api/subscribe call) and the guide itself, which does not ship yet — the
+confirmation copy says "when it ships" and is honest about that.
