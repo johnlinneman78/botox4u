@@ -6,8 +6,10 @@ import { createClient } from '@supabase/supabase-js'
 // registry probes proved why — small med spas hold no organization (Type 2)
 // NPI under their marketing names; they operate under their injectors'
 // individual (Type 1) NPIs. So this route verifies PEOPLE, then flags the
-// clinic: a provider counts as NPI-verified when its LEAD practitioner
-// (first practitioner row) is verified. Practitioner badges already render
+// clinic: a provider counts as NPI-verified when ANY of its practitioners
+// is verified (a clinic with a verified injector on staff is a verified
+// profile; requiring the lead row specifically would wrongly exclude
+// clinics whose lead is an RN with no NPI at all). Practitioner badges already render
 // individually on profiles; the provider flag is what the homepage counts.
 //
 // Token-gated via NPI_BATCH_TOKEN; remove after the run. Strict rules:
@@ -61,7 +63,7 @@ function nameMatches(result: any, first: string, last: string): boolean {
         norm(result?.basic?.last_name || '') === norm(last)
 }
 
-async function nppes(params: Record<string, string>): Promise<any[]> {
+async function nppes(params: Record<string, string>): Promise<{ results: any[]; count: number }> {
     const q = new URLSearchParams({ version: '2.1', limit: '10', ...params })
     for (let attempt = 0; attempt < 3; attempt++) {
         try {
@@ -70,14 +72,14 @@ async function nppes(params: Record<string, string>): Promise<any[]> {
                 await sleep(2000 * (attempt + 1))
                 continue
             }
-            if (!res.ok) return []
+            if (!res.ok) return { results: [], count: 0 }
             const data = await res.json()
-            return data.results || []
+            return { results: data.results || [], count: data.result_count || 0 }
         } catch {
             await sleep(2000 * (attempt + 1))
         }
     }
-    return []
+    return { results: [], count: 0 }
 }
 
 export async function POST(req: NextRequest) {
@@ -133,11 +135,11 @@ export async function POST(req: NextRequest) {
             continue
         }
 
-        let leadVerified = false
+        let anyVerified = false
         for (let i = 0; i < pracs.length; i++) {
             const pr = pracs[i]
             if (pr.npi_verified) {
-                if (i === 0) leadVerified = true
+                anyVerified = true
                 decisions.push({ provider_id: p.id, provider_name: p.name, practitioner: pr.full_name, decision: 'already_verified', dryRun })
                 continue
             }
@@ -147,25 +149,41 @@ export async function POST(req: NextRequest) {
                 const last = pr.last_name || (pr.full_name || '').split(' ').slice(-1)[0] || ''
                 let verified: any = null
                 let decision = 'no_match'
+                let path: string | null = null
 
                 if (pr.npi_number && /^\d{10}$/.test(String(pr.npi_number))) {
-                    const results = await nppes({ number: String(pr.npi_number) })
+                    const { results } = await nppes({ number: String(pr.npi_number) })
                     const r = results[0]
                     if (r && (r.basic?.status || 'A') === 'A') {
-                        if (nameMatches(r, first, last) || addressMatches(r, p.city, state)) verified = r
+                        if (nameMatches(r, first, last) || addressMatches(r, p.city, state)) { verified = r; path = 'by_number' }
                         else decision = 'ambiguous'
                     }
                 } else if (first && last) {
+                    // Path A: name + state, then practice city/state match.
+                    // Requires all results visible (count <= 10) so a single
+                    // survivor is genuinely unique, not just page one.
                     const params: Record<string, string> = { first_name: first, last_name: last }
                     if (state) params.state = state
-                    const results = await nppes(params)
+                    const { results, count } = await nppes(params)
                     const survivors = results.filter((r: any) => {
                         if ((r.basic?.status || 'A') !== 'A') return false
                         if (!nameMatches(r, first, last)) return false
                         return addressMatches(r, p.city, state)
                     })
-                    if (survivors.length === 1) verified = survivors[0]
-                    else if (survivors.length > 1) decision = 'ambiguous'
+                    if (survivors.length === 1 && count <= 10) { verified = survivors[0]; path = 'name_city_state' }
+                    else if (survivors.length > 1 || count > 10) decision = 'ambiguous'
+                    else {
+                        // Path B: national unique. A name with exactly one
+                        // active registry record nationwide is that person.
+                        // This catches border-metro cases (e.g. a Portland
+                        // injector registered in Vancouver, WA) that the
+                        // city/state filter wrongly rejects. Ambiguous names
+                        // never reach this path: count > 1 stays unmatched.
+                        const nat = await nppes({ first_name: first, last_name: last })
+                        if (nat.count === 1 && nat.results.length === 1 && (nat.results[0].basic?.status || 'A') === 'A' && nameMatches(nat.results[0], first, last)) {
+                            verified = nat.results[0]; path = 'national_unique'
+                        }
+                    }
                 }
 
                 if (verified) {
@@ -187,8 +205,8 @@ export async function POST(req: NextRequest) {
                             continue
                         }
                     }
-                    if (i === 0) leadVerified = true
-                    decisions.push({ provider_id: p.id, provider_name: p.name, practitioner: pr.full_name, decision: 'verified', npi: verified.number, dryRun })
+                    anyVerified = true
+                    decisions.push({ provider_id: p.id, provider_name: p.name, practitioner: pr.full_name, decision: 'verified', npi: verified.number, path, dryRun })
                 } else {
                     if (!dryRun) {
                         await supabase.from('provider_practitioners').update({ npi_lookup_attempted: true }).eq('id', pr.id)
@@ -200,13 +218,13 @@ export async function POST(req: NextRequest) {
             }
         }
 
-        if (leadVerified && !dryRun) {
+        if (anyVerified && !dryRun) {
             await supabase.from('providers').update({
                 npi_verified: true,
                 npi_verified_at: new Date().toISOString(),
             }).eq('id', p.id)
         }
-        decisions.push({ provider_id: p.id, provider_name: p.name, city: p.city, decision: leadVerified ? 'provider_flag_set' : 'provider_flag_unset', dryRun })
+        decisions.push({ provider_id: p.id, provider_name: p.name, city: p.city, decision: anyVerified ? 'provider_flag_set' : 'provider_flag_unset', dryRun })
     }
 
     const last = (providers || [])[(providers || []).length - 1]
