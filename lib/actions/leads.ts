@@ -97,11 +97,21 @@ const leadSchema = z.object({
 })
 
 export async function submitLead(formData: FormData) {
-    const supabase = await getSupabaseServer(await cookies())
-
-    if (!supabase) {
+    // Write with the service-role client, not the visitor's session
+    // client. The session client runs as anon, and the leads table's
+    // RLS policy rejects anonymous inserts — production error 42501
+    // on 2026-10-24: every public quote request failed with "new row
+    // violates row-level security policy". The quiz route and the
+    // claim flows already write this way. Validation, sanitization,
+    // and the per-email rate limit below still run first, so the
+    // service key never writes unvalidated input.
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()
+    if (!supabaseUrl || !serviceKey) {
         return { error: 'Database connection failed. Please try again later.' }
     }
+    const { createClient } = await import('@supabase/supabase-js')
+    const supabase = createClient(supabaseUrl, serviceKey)
 
     // Rate limiting: 5 submissions per minute per email
     const email = formData.get('email') as string

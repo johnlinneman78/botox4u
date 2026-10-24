@@ -91,7 +91,7 @@ export async function POST(req: Request) {
                 const { data: sent, error: sendError } = await resend.emails.send({
                     from: `InjectorIndex <${sender}>`,
                     to: [notifyTo],
-                    subject: 'New quiz signup',
+                    subject: `New quiz signup: ${email}`,
                     text: [
                         'New pricing-quiz signup on InjectorIndex.',
                         `Email: ${email}`,
