@@ -119,23 +119,20 @@ export function ScrollCTA({
                                             Get Directions
                                         </a>
                                     )}
-                                    {providerId ? (
-                                        <Button
-                                            variant="primary"
-                                            size="sm"
-                                            onClick={() => {
-                                                setIsModalOpen(true)
-                                            }}
-                                        >
-                                            Request a Consultation →
-                                        </Button>
-                                    ) : (
-                                        <a href="#quote-form">
-                                            <Button variant="primary" size="sm">
-                                                Request a Consultation →
-                                            </Button>
-                                        </a>
-                                    )}
+                                    {/* Always the quote modal — never a dead
+                                        anchor. LeadForm accepts a missing
+                                        providerId (city-level quote), so
+                                        this button works on every profile
+                                        page, the same as the listing cards. */}
+                                    <Button
+                                        variant="primary"
+                                        size="sm"
+                                        onClick={() => {
+                                            setIsModalOpen(true)
+                                        }}
+                                    >
+                                        Request a Consultation →
+                                    </Button>
                                 </div>
                             </>
                         ) : (
@@ -157,7 +154,7 @@ export function ScrollCTA({
                 </motion.div>
             )}
         </AnimatePresence>
-        {isModalOpen && providerId && providerName && (
+        {isModalOpen && providerName && (
             <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center">
                 <div
                     className="absolute inset-0 bg-black/50"
