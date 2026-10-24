@@ -433,12 +433,14 @@ export async function getCityStats(city: string) {
     const prices = data.map((p: any) => Number(p.price_per_unit)).filter(p => !isNaN(p) && p > 0)
     const ratings = data.map((p: any) => Number(p.rating || p.average_rating)).filter(r => !isNaN(r) && r > 0)
 
-    // ANTI-ZERO GUARD: Ensure Scottsdale (and others) never show $0 or 0.0 rating
-    const avgCost = prices.length > 0 ? prices.reduce((acc, p) => acc + p, 0) / prices.length : (NICHE.priceRange.min + 4)
+    // No fallback: when no clinic in this city has published a price,
+    // the average is null and pages say "Price not published" instead
+    // of inventing a number from the config range.
+    const avgCost = prices.length > 0 ? Math.round(prices.reduce((acc, p) => acc + p, 0) / prices.length) : null
     const avgRating = ratings.length > 0 ? ratings.reduce((acc, r) => acc + r, 0) / ratings.length : 4.8
 
     return {
-        avgCost: Math.round(avgCost) || (NICHE.priceRange.min + 4),
+        avgCost,
         avgRating: Number((avgRating || 4.8).toFixed(1)),
         providerCount: data.length || 0
     }
@@ -456,10 +458,18 @@ export async function getStateStats(state: string) {
     if (error || !data || data.length === 0) return null
 
     const cities = new Set(data.map((p: any) => p.city))
-    const avgCost = data.reduce((acc: number, curr: any) => acc + (Number(curr.price_per_unit) || 0), 0) / data.length
+    // Only real published prices count; with none, the average is null
+    // and pages say "Price not published" instead of showing $0 or a
+    // config-derived number.
+    const realPrices = data
+        .map((curr: any) => Number(curr.price_per_unit))
+        .filter((p: number) => !isNaN(p) && p > 0)
+    const avgCost = realPrices.length > 0
+        ? Math.round(realPrices.reduce((acc: number, curr: number) => acc + curr, 0) / realPrices.length)
+        : null
 
     return {
-        avgCost: Math.round(avgCost),
+        avgCost,
         providerCount: data.length,
         cityCount: cities.size
     }
@@ -526,7 +536,14 @@ export async function getTreatmentStats(treatment: string, city: string, state: 
 
     if (error || !data || data.length === 0) return null
 
-    const prices = data.map((p: any) => Number(p.price_per_unit || (NICHE.priceRange.min + 5)))
+    // Only real published prices count. A null price used to be replaced
+    // with a config-derived 15, which invented an average out of nothing.
+    // When no clinic in this city/treatment has a real price, there is no
+    // average and pages say "Price not published".
+    const prices = data
+        .map((p: any) => Number(p.price_per_unit))
+        .filter((p: number) => !isNaN(p) && p > 0)
+    if (prices.length === 0) return null
     const avg = prices.reduce((a: number, b: number) => a + b, 0) / prices.length
 
     return {

@@ -20,7 +20,7 @@ export interface AuditResult {
     regenStatus: 'Innovation-Forward ✅' | 'Mixed Protocol ⚠️' | 'Traditional-Heavy 🔴'
     priceBenchmark: {
         quoted?: number
-        average: number
+        average: number | null
         status: string
         label: string
         percentageDiff?: number
@@ -87,15 +87,17 @@ export function calculateClinicAudit(
     if (regenRatioPercent > 40) regenStatus = 'Innovation-Forward ✅'
     else if (regenRatioPercent >= 20) regenStatus = 'Mixed Protocol ⚠️'
 
-    // 3. Price Benchmark
-    const cityAvg = cityStats?.avgCost || (NICHE.priceRange.min + 5)
+    // 3. Price Benchmark — no fallback. When no clinic in the city has
+    // published a price, there is no market average to compare against,
+    // so the benchmark says so instead of comparing to an invented 15.
+    const cityAvg = cityStats?.avgCost ?? null
     let priceResult: AuditResult['priceBenchmark'] = {
         average: cityAvg,
         status: 'neutral',
-        label: 'Fair Market Pricing ✅'
+        label: cityAvg == null ? 'No market average yet' : 'Fair Market Pricing ✅'
     }
 
-    if (patientInput.priceQuoted) {
+    if (patientInput.priceQuoted && cityAvg != null) {
         const quoted = parseFloat(patientInput.priceQuoted.replace(/[^0-9.]/g, ''))
         if (!isNaN(quoted)) {
             const diff = ((quoted - cityAvg) / cityAvg) * 100
