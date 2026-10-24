@@ -5,9 +5,16 @@ import { checkRateLimit } from '@/lib/validation'
 
 // Anonymous "What did you pay?" submissions (price-guide phase 1).
 //
-// Two paths, both fully anonymous (no name, email, or contact either way):
+// Two paths, both anonymous for the PRICE itself (no name, no contact):
 //   quick    city + product + quantity + total. No clinic required.
 //   detailed provider selected from search + the full field set.
+//
+// Guide opt-in (owner's rule: optional, never required): if the visitor
+// checks the guide box and enters an email, the email is saved in
+// guide_requests ONLY — never on the price report, never linked to it.
+// The price stays anonymous even when the visitor opts in. What gets
+// sent, and when, is decided separately; this route only saves the
+// request and sends nothing.
 //
 // Every submission lands pending in price_reports and NOTHING from that
 // table is shown publicly in phase 1: no averages, no per-clinic prices
@@ -26,8 +33,10 @@ import { checkRateLimit } from '@/lib/validation'
 // Writes run server side with the service-role key, the same pattern as
 // quiz-submit and submitLead: the visitor's session client cannot insert
 // (RLS has no anonymous policy on price_reports), and validation below
-// runs before the service key touches anything. No name, email, phone,
-// or receipt is collected in v1.
+// runs before the service key touches anything. No name, phone, or
+// receipt is collected in v1. Email is collected ONLY when the visitor
+// opts into the guide, and it lands in guide_requests, never on the
+// price report.
 
 const TOXIN_PRODUCTS = ['botox', 'dysport', 'daxxify', 'xeomin'] as const
 
@@ -59,6 +68,8 @@ const reportSchema = z
         injector_title: z.enum(['MD', 'DO', 'NP', 'PA', 'RN', 'other']).nullable().optional(),
         membership_flag: z.boolean().nullable().optional(),
         units_disclosed_flag: z.boolean().nullable().optional(),
+        guide_opt_in: z.boolean().optional(),
+        guide_email: z.string().max(254).nullable().optional(),
     })
     .superRefine((data, ctx) => {
         // Path rules: detailed needs a real clinic; quick needs a city.
@@ -101,6 +112,14 @@ const reportSchema = z
             }
             if (data.product.toLowerCase() !== 'sculptra') {
                 ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['product'], message: 'This tier is for Sculptra only' })
+            }
+        }
+        // Guide opt-in: email required and valid only when the box is
+        // checked. Unchecked means no email, even if one was typed.
+        if (data.guide_opt_in) {
+            const email = data.guide_email?.trim()
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['guide_email'], message: 'Please enter a valid email to get the guide' })
             }
         }
     })
@@ -181,6 +200,18 @@ export async function POST(req: Request) {
             source: 'widget',
         })
         if (error) throw error
+
+        // Guide opt-in: saved separately, never linked to the report.
+        // The report is already saved at this point, so a guide-request
+        // failure must never fail the report — it is logged for manual
+        // recovery and the report still succeeds.
+        if (data.guide_opt_in && data.guide_email?.trim()) {
+            const { error: guideError } = await supabase.from('guide_requests').insert({
+                email: data.guide_email.trim(),
+                source: 'widget',
+            })
+            if (guideError) console.error('price-reports: failed to save guide request', guideError.message)
+        }
 
         return NextResponse.json({ success: true })
     } catch (error) {

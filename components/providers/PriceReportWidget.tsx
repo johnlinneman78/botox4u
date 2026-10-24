@@ -10,9 +10,17 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 // so the market data is live instead of a yearly survey. Contributor-first
 // copy: "add your price — you make the guide real."
 //
-// Two paths, both fully anonymous (no name, email, or contact either way):
+// Two paths, both anonymous for the PRICE itself (no name, no contact):
 //   quick    city + product + quantity + total. No clinic required.
 //   detailed provider selected from search + the full field set.
+//
+// Guide opt-in (owner's rule: optional, never required): if the visitor
+// checks "Send me the free pricing guide" and enters an email, the email
+// is saved in guide_requests ONLY — never on the price report, never
+// linked to it. The price stays anonymous even when the visitor opts in.
+// Delivery (owner's decision, Oct 24): HOLD — requests are saved now;
+// contributors get first access when the full guide launches (phase 4).
+// This widget only saves the request and sends nothing.
 //
 // Measurement is the deliverable; collection without display is the rule.
 // This widget saves reports for moderation and never shows them: no
@@ -92,6 +100,10 @@ export function PriceReportWidget({
     const [injectorTitle, setInjectorTitle] = useState<string>('RN')
     const [membership, setMembership] = useState<'yes' | 'no'>('no')
     const [unitsDisclosed, setUnitsDisclosed] = useState(false)
+
+    // Guide opt-in: optional, never required. Shown on both paths.
+    const [guideOptIn, setGuideOptIn] = useState(false)
+    const [guideEmail, setGuideEmail] = useState('')
 
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
@@ -198,6 +210,10 @@ export function PriceReportWidget({
                 return
             }
         }
+        if (guideOptIn && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(guideEmail.trim())) {
+            setError('Please enter a valid email to get the guide.')
+            return
+        }
 
         setIsSubmitting(true)
         try {
@@ -217,6 +233,8 @@ export function PriceReportWidget({
                     injector_title: path === 'detailed' ? injectorTitle : null,
                     membership_flag: path === 'detailed' ? membership === 'yes' : null,
                     units_disclosed_flag: path === 'detailed' && category === 'toxin' ? unitsDisclosed : null,
+                    guide_opt_in: guideOptIn,
+                    guide_email: guideOptIn ? guideEmail.trim() : null,
                 }),
             })
             const data = await res.json()
@@ -244,6 +262,11 @@ export function PriceReportWidget({
                         person&apos;s report on its own — any numbers we ever show will come from many reviewed reports
                         together, each carrying its date and how many reports it is based on.
                     </p>
+                    {guideOptIn && (
+                        <p className="text-[#3D2B1F]/70 leading-relaxed pt-3">
+                            You asked for the free pricing guide — your request is saved.
+                        </p>
+                    )}
                 </CardContent>
             </Card>
         )
@@ -543,8 +566,39 @@ export function PriceReportWidget({
                     <Button type="submit" disabled={isSubmitting} className="w-full" size="lg">
                         {isSubmitting ? 'Saving…' : 'Share what you paid'}
                     </Button>
+
+                    <div className="space-y-2 pt-1">
+                        <label className="flex items-start gap-3 cursor-pointer">
+                            <input
+                                type="checkbox"
+                                checked={guideOptIn}
+                                onChange={(e) => setGuideOptIn(e.target.checked)}
+                                className="mt-1 h-5 w-5 accent-[#3D2B1F]"
+                            />
+                            <span className="text-[#3D2B1F]/80 leading-relaxed">
+                                Send me the free pricing guide. Optional — only if you want it.
+                            </span>
+                        </label>
+                        {guideOptIn && (
+                            <>
+                                <input
+                                    type="email"
+                                    value={guideEmail}
+                                    onChange={(e) => setGuideEmail(e.target.value)}
+                                    placeholder="Your email"
+                                    maxLength={254}
+                                    className={inputClass}
+                                    autoComplete="email"
+                                />
+                                <p className="text-sm text-[#3D2B1F]/50 leading-relaxed">
+                                    Your email is only used to send the guide. It is never linked to your price.
+                                </p>
+                            </>
+                        )}
+                    </div>
                     <p className="text-xs text-[#3D2B1F]/50 leading-relaxed text-center">
-                        No name or email asked. No receipt upload. Your report goes to a review queue first.
+                        No name asked. Email only if you want the guide. No receipt upload. Your report goes to a review
+                        queue first.
                     </p>
                 </form>
             </CardContent>
