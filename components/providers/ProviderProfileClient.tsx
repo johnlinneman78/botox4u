@@ -9,6 +9,7 @@ import { SCORE_MAX, formatScore } from '@/lib/scoring'
 import { Badge } from '@/components/ui/Badge'
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
 import { ScrollCTA } from '@/components/ui/ScrollCTA'
+import { PriceReportCTA } from '@/components/providers/PriceReportCTA'
 import { formatCurrency } from '@/lib/utils'
 import { NICHE } from '@/config/niche'
 import { ChevronRight, ShieldCheck, Search, Activity, Sparkles, Star, Info, User, CheckCircle } from 'lucide-react'
@@ -615,6 +616,23 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                         </>
                     )}
                 </div>
+
+                {/* Price-report CTA: right where prices are shown. When this
+                    clinic publishes no price, the missing-price variant
+                    speaks directly to past patients ("Were you treated
+                    here?"). Branch phase 1: opens the widget inline only;
+                    nothing submitted displays publicly. */}
+                <PriceReportCTA
+                    variant={
+                        provider.pricePerUnit || provider.enriched_attrs?.price_per_unit_botox || provider.enriched_attrs?.price_per_unit_dysport
+                            ? 'full'
+                            : 'missing-price'
+                    }
+                    providerId={provider.id}
+                    providerName={provider.name}
+                    city={provider.city}
+                    state={provider.state}
+                />
 
                 {provider.enriched_attrs?.new_patient_special && (
                     <RevealOnScroll delay={0.1}>
