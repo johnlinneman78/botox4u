@@ -75,12 +75,20 @@ export async function POST(req: Request) {
         // Skipped silently when no Resend key is configured.
         try {
             const apiKey = process.env.RESEND_API_KEY?.trim()
-            if (apiKey) {
+            if (!apiKey) {
+                console.warn('quiz-submit notify skipped: no RESEND_API_KEY (signup unaffected)')
+            } else {
                 const resend = new Resend(apiKey)
                 const notifyTo = process.env.QUIZ_NOTIFY_EMAIL?.trim() || 'urielpro78@gmail.com'
                 const sender = process.env.FROM_EMAIL?.trim() || NICHE.outreach.senderEmail
                 const submittedAt = new Date().toISOString()
-                await resend.emails.send({
+                // Log the outcome either way. The Resend SDK returns
+                // API rejections (e.g. unverified-domain 403) as a
+                // result.error object instead of throwing, so an
+                // earlier version that only awaited the call recorded
+                // nothing on failure — the Oct 23 11:59 PM outage was
+                // invisible for exactly this reason.
+                const { data: sent, error: sendError } = await resend.emails.send({
                     from: `InjectorIndex <${sender}>`,
                     to: [notifyTo],
                     subject: 'New quiz signup',
@@ -93,6 +101,11 @@ export async function POST(req: Request) {
                         `Submitted: ${submittedAt}`,
                     ].join('\n'),
                 })
+                if (sendError) {
+                    console.error('quiz-submit notify rejected (signup unaffected):', sendError)
+                } else {
+                    console.log('quiz-submit notify sent:', sent?.id, 'to', notifyTo, 'from', sender)
+                }
             }
         } catch (notifyError) {
             console.error('quiz-submit notify failed (signup unaffected):', notifyError)
