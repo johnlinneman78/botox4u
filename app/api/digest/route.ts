@@ -28,7 +28,7 @@ type LeadRow = {
     treatment_type: string | null
     provider_id: string | null
     created_at: string
-    providers: { name: string | null } | null
+    providers: { name: string | null } | { name: string | null }[] | null
     additional_metadata: Record<string, unknown> | null
 }
 
@@ -68,8 +68,10 @@ export async function GET(req: Request) {
         const quotes = leads.filter((l) => !!l.provider_id)
         const quizzes = leads.filter((l) => !l.provider_id)
 
+        const providerName = (l: LeadRow) =>
+            Array.isArray(l.providers) ? l.providers[0]?.name ?? null : l.providers?.name ?? null
         const quoteLines = quotes.map((l) =>
-            `  - ${ptTime(l.created_at)} — ${l.full_name || 'No name'} (${l.email}) asked ${l.providers?.name || 'a clinic'} about ${l.treatment_type || 'treatment'} in ${l.city || 'unknown city'}`)
+            `  - ${ptTime(l.created_at)} — ${l.full_name || 'No name'} (${l.email}) asked ${providerName(l) || 'a clinic'} about ${l.treatment_type || 'treatment'} in ${l.city || 'unknown city'}`)
         const quizLines = quizzes.map((l) =>
             `  - ${ptTime(l.created_at)} — ${l.email} (${l.treatment_type || 'treatment'}, ${l.city || 'unknown tier'} tier)`)
 
@@ -97,7 +99,7 @@ export async function GET(req: Request) {
                 quoteRequests: quotes.length,
                 quizSignups: quizzes.length,
                 sample: [
-                    ...quotes.slice(0, 3).map((l) => ({ type: 'quote', email: maskEmail(l.email), provider: l.providers?.name || null })),
+                    ...quotes.slice(0, 3).map((l) => ({ type: 'quote', email: maskEmail(l.email), provider: providerName(l) })),
                     ...quizzes.slice(0, 3).map((l) => ({ type: 'quiz', email: maskEmail(l.email) })),
                 ],
             })
