@@ -30,6 +30,15 @@ export async function generateStaticParams() {
         { slug: 'exosome-therapy-portland-seattle-2026' },
         { slug: 'seattle-regenerative-injectors-guide-2026' },
         { slug: 'best-botox-miami-2026' },
+        { slug: 'celebrity-plastic-surgery-transparency-2025' },
+        { slug: 'botox-before-your-first-treatment' },
+        { slug: 'glp-1-face-after-weight-loss-options' },
+        { slug: 'hot-girl-fall-glow-up-guide' },
+        { slug: 'erewhon-flex-psychology' },
+        { slug: 'stanley-owala-basic-fomo' },
+        { slug: 'the-ick-disgust-psychology' },
+        { slug: 'neurodivergent-tiktok-language' },
+        { slug: 'fda-fake-botox-warning-2025' },
     ]
 }
 
