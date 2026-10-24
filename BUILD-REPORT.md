@@ -189,3 +189,25 @@ deploy; live loop test (signup → leads row → inbox notification) runs
 after this deploy. Known blemish: on short phone viewports the
 "Independent · Data-Scored" pill hides behind the fixed navbar (hero
 spacing job, not content).
+
+## Email sender fix — loop proven end to end (2026-10-24, ~12:21 AM PDT)
+
+Root cause of the silent email outage: injectorindex.com was never added
+to the Resend account, so every send from hello@injectorindex.com failed
+403 "domain is not verified" — including the quiz notification and all six
+visitor welcome sends on the 11:59 PM Oct 23 test signup. The code default
+sender was already hello@verifiedaesthetics.com (verified Oct 23, 5:12 PM);
+Vercel Production env FROM_EMAIL/CONTACT_EMAIL overrode it to the
+unverified domain. Fix (John's call, site stays on injectorindex.com):
+FROM_EMAIL and CONTACT_EMAIL switched to hello@verifiedaesthetics.com
+(12:17/12:18 AM), redeploy 9nsAT6P9e Ready 12:19:39 AM, same commit e2b60b1.
+Re-test 12:21:17 AM (quiztest5): exactly 1 leads row (forehead/premium/
+first-timer), server logs show sender hello@verifiedaesthetics.com with
+every Resend send error:null, test row deleted, baseline back to 3.
+Inbox proof: "New quiz signup" notification AND the visitor Day 0 welcome
+("Your 2026 Botox Price Guide is here") both landed in urielpro78@gmail.com
+at 12:21:17 AM, notification body carrying email/treatment/city tier/
+first-timer/time. Email leg is live. Still owed: quiz-submit logs nothing
+of its own sends (silent try/catch), and no ADMIN_EMAIL exists, so lead
+admin alerts fall back to the sender address — worth pointing ADMIN_EMAIL
+at John's inbox.
