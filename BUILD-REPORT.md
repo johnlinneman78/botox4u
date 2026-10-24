@@ -211,3 +211,27 @@ first-timer/time. Email leg is live. Still owed: quiz-submit logs nothing
 of its own sends (silent try/catch), and no ADMIN_EMAIL exists, so lead
 admin alerts fall back to the sender address — worth pointing ADMIN_EMAIL
 at John's inbox.
+
+## Quote-request RLS fix + digest/admin-alert proof (2026-10-24, ~12:52 AM PDT)
+
+Sample run found the quote form broken for anonymous visitors: submitLead
+wrote through the visitor session (anon) client and the leads RLS policy
+rejects anon inserts — production error 42501, every public Request Quote
+failed with "new row violates row-level security policy" (first seen
+12:43 AM, test clinic Peachy West SoHo, no email on file, no clinic
+emailed). Fix (commit f7a8997): submitLead now writes via the
+service-role client, same pattern as quiz/claim writes; validation,
+sanitization, and per-email rate limiting unchanged. Quiz notification
+subject now carries the signup email (repeat notices no longer identical;
+the 12:40 AM notice had landed in Gmail spam).
+Re-test 12:52 AM on deploy f7a8997: "Request Sent!" shown, exactly 1 leads
+row (provider_id set, status new), no new RLS error, digest re-run
+returned 1 quote / 0 quizzes, leads + patients test rows deleted,
+baseline back to 3. Inbox proof, all at 12:52–12:54 AM: "LEAD ALERT:
+New York - Sample Request" (admin alert, proves ADMIN_EMAIL live),
+"We got your request" (visitor confirmation), and the digest
+"(1 quotes, 0 quizzes)". Quote loop, digest, and admin alerts are all
+live. Still owed: provider detail pages' "Request a Consultation" button
+is dead (appends #quote-form, renders no form) — working quote modal
+lives on city listing cards only; and the quiz route's new log line
+("quiz-submit notify sent: <id>") is proven in server logs.
