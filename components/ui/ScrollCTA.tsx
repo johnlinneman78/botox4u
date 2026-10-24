@@ -5,9 +5,11 @@ import { track } from '@/lib/analytics'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { Button } from './Button'
+import { LeadForm } from '@/components/providers/LeadForm'
 
 interface ScrollCTAProps {
     variant?: 'homepage' | 'profile'
+    providerId?: string
     providerName?: string
     providerCity?: string
     providerState?: string
@@ -18,6 +20,7 @@ interface ScrollCTAProps {
 
 export function ScrollCTA({
     variant = 'homepage',
+    providerId,
     providerName,
     providerCity,
     providerState,
@@ -27,6 +30,7 @@ export function ScrollCTA({
 }: ScrollCTAProps) {
     const [isVisible, setIsVisible] = useState(false)
     const [isDuringHours, setIsDuringHours] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -42,6 +46,7 @@ export function ScrollCTA({
     }, [])
 
     return (
+        <>
         <AnimatePresence>
             {isVisible && (
                 <motion.div
@@ -114,11 +119,23 @@ export function ScrollCTA({
                                             Get Directions
                                         </a>
                                     )}
-                                    <a href="#quote-form">
-                                        <Button variant="primary" size="sm">
+                                    {providerId ? (
+                                        <Button
+                                            variant="primary"
+                                            size="sm"
+                                            onClick={() => {
+                                                setIsModalOpen(true)
+                                            }}
+                                        >
                                             Request a Consultation →
                                         </Button>
-                                    </a>
+                                    ) : (
+                                        <a href="#quote-form">
+                                            <Button variant="primary" size="sm">
+                                                Request a Consultation →
+                                            </Button>
+                                        </a>
+                                    )}
                                 </div>
                             </>
                         ) : (
@@ -140,5 +157,29 @@ export function ScrollCTA({
                 </motion.div>
             )}
         </AnimatePresence>
+        {isModalOpen && providerId && providerName && (
+            <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center">
+                <div
+                    className="absolute inset-0 bg-black/50"
+                    onClick={() => setIsModalOpen(false)}
+                />
+                <div className="relative bg-white w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl p-6">
+                    <button
+                        onClick={() => setIsModalOpen(false)}
+                        className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl leading-none"
+                        aria-label="Close"
+                    >
+                        ×
+                    </button>
+                    <LeadForm
+                        providerId={providerId}
+                        providerName={providerName}
+                        city={providerCity || ''}
+                        state={providerState || ''}
+                    />
+                </div>
+            </div>
+        )}
+        </>
     )
 }

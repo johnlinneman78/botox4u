@@ -693,6 +693,7 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
             {/* ═══ SCROLL-TRIGGERED CTA BAR ═══ */}
             <ScrollCTA
                 variant="profile"
+                providerId={provider.id}
                 providerName={provider.name}
                 providerCity={provider.city}
                 providerState={provider.state}

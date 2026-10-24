@@ -53,7 +53,7 @@ export default function BuyersGuidePage() {
 
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                                 <Link href="#start">
-                                    <Button className="bg-[#1a2332] hover:bg-slate-800 text-[#3D2B1F] px-10 py-7 text-lg font-bold rounded-2xl shadow-xl shadow-primary/20 group">
+                                    <Button className="bg-[#1a2332] hover:bg-slate-800 text-[#FAF8F5] px-10 py-7 text-lg font-bold rounded-2xl shadow-xl shadow-primary/20 group">
                                         Read the Guide
                                         <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                     </Button>
@@ -248,7 +248,7 @@ export default function BuyersGuidePage() {
                 </section>
 
                 {/* Chapter 3: Red Flags */}
-                <section className="py-24 bg-[#1a2332]">
+                <section className="py-24 bg-[#F2EDE4]">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto">
                             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4 text-center">Chapter 03</h2>
@@ -445,7 +445,7 @@ export default function BuyersGuidePage() {
                 </section>
 
                 {/* Chapter 7: Checklist */}
-                <section className="py-24 bg-[#1a2332]">
+                <section className="py-24 bg-[#F2EDE4]">
                     <div className="container mx-auto px-4">
                         <div className="max-w-5xl mx-auto">
                             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4 text-center">Chapter 07</h2>
@@ -466,7 +466,7 @@ export default function BuyersGuidePage() {
                                             "Check Clarity Score™ — aim for 70+"
                                         ].map((item, i) => (
                                             <div key={i} className="flex items-center gap-4 text-[#3D2B1F] font-medium">
-                                                <div className="w-5 h-5 border-2 border-white/20 rounded flex-shrink-0" />
+                                                <div className="w-5 h-5 border-2 border-[#3D2B1F]/30 rounded flex-shrink-0" />
                                                 <span>{item}</span>
                                             </div>
                                         ))}
