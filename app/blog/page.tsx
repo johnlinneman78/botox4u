@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 // Static index page for better SEO performance
 
 export default function BlogIndexPage() {
+    const sortedPosts = [...BLOG_POSTS].sort((a, b) => b.publishDate.localeCompare(a.publishDate))
     return (
         <main className="min-h-screen bg-[#FAF8F5]">
             {/* Blog Hero */}
@@ -44,7 +45,7 @@ export default function BlogIndexPage() {
             <section className="py-24 px-4">
                 <div className="container mx-auto max-w-6xl">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                        {BLOG_POSTS.map((post) => (
+                        {sortedPosts.map((post) => (
                             <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
                                 <article className="bg-[#3D2B1F]/5 rounded-[2.5rem] border border-[#3D2B1F]/10 overflow-hidden h-full flex flex-col hover:shadow-2xl hover:shadow-[#C9A96E]/5 transition-all duration-500 hover:-translate-y-2 hover:border-[#C9A96E]/20">
                                     <div className="p-10 flex flex-col h-full bg-gradient-to-br from-[#C9A96E]/5 to-transparent relative overflow-hidden">

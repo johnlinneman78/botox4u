@@ -45,6 +45,15 @@ const guides = [
         color: 'text-blue-400',
         bg: 'bg-blue-400/10',
         border: 'border-blue-400/20'
+    },
+    {
+        title: 'Per-Area Pricing Hides How Many Units You Got',
+        desc: 'A flat price per area sounds simple — until you realize it hides the one number that tells you whether the price is fair: the unit count.',
+        href: '/blog/per-area-pricing-hides-how-many-units',
+        icon: Star,
+        color: 'text-amber-400',
+        bg: 'bg-amber-400/10',
+        border: 'border-amber-400/20'
     }
 ]
 
