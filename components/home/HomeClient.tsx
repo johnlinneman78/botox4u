@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
@@ -105,12 +106,31 @@ interface HomeClientProps {
 }
 
 // ─── HOMEPAGE ────────────────────────────────────────────
-export default function HomeClient({ 
-    providersIndexed = 0, 
-    npiVerified = 0, 
-    citiesVerified = 0 
+export default function HomeClient({
+    providersIndexed = 0,
+    npiVerified = 0,
+    citiesVerified = 0
 }: HomeClientProps = {}) {
-    
+
+    // Hero search: selections are carried into the results page as query
+    // params (city/state/q). Nothing here asks the browser for the user's
+    // location — the results page ranks what the visitor actually picked.
+    const [citySlug, setCitySlug] = useState('')
+    const [treatment, setTreatment] = useState('')
+
+    const selectedCity = cities.find((c) => c.slug === citySlug)
+    const searchParams = new URLSearchParams()
+    if (selectedCity) {
+        searchParams.set('city', selectedCity.name)
+        searchParams.set('state', selectedCity.slug.split('/')[0].toUpperCase())
+    }
+    if (treatment) {
+        searchParams.set('q', treatment)
+    }
+    const searchHref = searchParams.toString()
+        ? `/find-providers?${searchParams.toString()}`
+        : '/find-providers'
+
     // Dynamic Stats
     // Only show numbers we actually have. A row of zeros reads as a broken
     // site, and a verification count we haven't earned reads as a false claim.
@@ -190,7 +210,7 @@ export default function HomeClient({
                                 lineHeight: 1.6,
                             }}
                         >
-                            Every injector and MedSpa independently scored for natural results. Find the provider you can actually trust — no ads, no pay-to-play. Just data.
+                            Real prices. Confirmed credentials. InjectorIndex publishes what clinics actually charge for Botox, filler, and laser, and confirms every provider&apos;s credentials against the national NPI registry. You choose on facts. Good clinics get found for the right reasons.
                         </p>
                     </motion.div>
 
@@ -209,7 +229,9 @@ export default function HomeClient({
                             <select
                                 className="flex-1 w-full sm:w-auto bg-transparent font-body text-sm px-4 py-3 appearance-none cursor-pointer outline-none"
                                 style={{ color: 'var(--color-stone)' }}
-                                defaultValue=""
+                                value={citySlug}
+                                onChange={(e) => setCitySlug(e.target.value)}
+                                aria-label="Your city"
                             >
                                 <option value="" disabled>Your city or zip ▾</option>
                                 {cities.map((city) => (
@@ -220,7 +242,9 @@ export default function HomeClient({
                             <select
                                 className="flex-1 w-full sm:w-auto bg-transparent font-body text-sm px-4 py-3 appearance-none cursor-pointer outline-none"
                                 style={{ color: 'var(--color-stone)' }}
-                                defaultValue=""
+                                value={treatment}
+                                onChange={(e) => setTreatment(e.target.value)}
+                                aria-label="Treatment you are looking for"
                             >
                                 <option value="" disabled>What are you looking for? ▾</option>
                                 <option value="botox">Botox & Dysport</option>
@@ -230,15 +254,15 @@ export default function HomeClient({
                                 <option value="daxxify">Daxxify</option>
                             </select>
                             <Link
-                                href="/find-providers"
+                                href={searchHref}
                                 aria-label="Search for injectors"
-                                className="shrink-0 rounded-full flex items-center justify-center transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                                className="shrink-0 rounded-full flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 hover:shadow-lg font-body text-sm font-medium px-5 py-3 w-full sm:w-auto"
                                 style={{
-                                    width: 48,
-                                    height: 48,
                                     background: 'var(--color-espresso)',
+                                    color: 'var(--color-linen)',
                                 }}
                             >
+                                See real prices near you
                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                                     <path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="var(--color-linen)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
@@ -557,6 +581,28 @@ export default function HomeClient({
                             <p className="font-body" style={{ fontSize: '16px', color: 'var(--color-stone)', lineHeight: 1.7 }}>
                                 VerifiedAesthetics profiles rank in Google search, AI assistants, and local results — so patients find you before they find your competitors.
                             </p>
+                        </div>
+                    </RevealOnScroll>
+
+                    {/* Provider banner */}
+                    <RevealOnScroll>
+                        <div
+                            className="rounded-2xl px-8 py-10 md:px-12 mb-12 flex flex-col md:flex-row items-center gap-6 md:gap-10"
+                            style={{ background: 'var(--color-espresso)' }}
+                        >
+                            <p
+                                className="font-body text-center md:text-left flex-1"
+                                style={{ fontSize: '18px', color: 'var(--color-linen)', lineHeight: 1.6 }}
+                            >
+                                Your next patient is comparing prices right now. Claim your listing, publish your real prices, and stand on your confirmed credentials.
+                            </p>
+                            <Link
+                                href="/claim"
+                                className="shrink-0 rounded-full font-body text-sm font-bold px-6 py-3.5 transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                                style={{ background: 'var(--color-linen)', color: 'var(--color-espresso)' }}
+                            >
+                                Claim your listing - free
+                            </Link>
                         </div>
                     </RevealOnScroll>
 

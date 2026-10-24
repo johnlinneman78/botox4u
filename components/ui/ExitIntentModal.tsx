@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { X, Sparkles } from 'lucide-react'
@@ -8,6 +8,7 @@ import { X, Sparkles } from 'lucide-react'
 export function ExitIntentModal() {
     const [isVisible, setIsVisible] = useState(false)
     const [dismissed, setDismissed] = useState(false)
+    const hasFiredRef = useRef(false)
 
     useEffect(() => {
         // Check if user already dismissed this session
@@ -19,15 +20,22 @@ export function ExitIntentModal() {
             }
         }
 
-        // Show after 60 seconds
-        const timer = setTimeout(() => {
-            if (!dismissed) {
+        // True exit intent only: the pointer leaves the document through the
+        // top edge (heading for the tab bar, address bar, or window controls).
+        // Ordinary in-site navigation — menu taps, link clicks, scrolling —
+        // never produces this, so the quiz no longer interrupts browsing.
+        // Touch devices have no pointer exit, so it never fires there.
+        const handleMouseOut = (e: MouseEvent) => {
+            if (hasFiredRef.current) return
+            if (!e.relatedTarget && e.clientY <= 8) {
+                hasFiredRef.current = true
                 setIsVisible(true)
             }
-        }, 60000) // 60 seconds
+        }
 
-        return () => clearTimeout(timer)
-    }, [dismissed])
+        document.addEventListener('mouseout', handleMouseOut)
+        return () => document.removeEventListener('mouseout', handleMouseOut)
+    }, [])
 
     const handleClose = () => {
         setIsVisible(false)

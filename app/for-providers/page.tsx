@@ -43,8 +43,11 @@ export default function ForProvidersPage() {
                         <h1 className="text-5xl md:text-8xl font-display font-bold mb-8 leading-[0.9] tracking-tight text-balance">
                             The Standard for <span className="text-[#C9A96E] italic">Verification</span>.
                         </h1>
-                        <p className="text-xl md:text-2xl text-[#3D2B1F]/70 font-light max-w-2xl mx-auto leading-relaxed mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                        <p className="text-xl md:text-2xl text-[#3D2B1F]/70 font-light max-w-2xl mx-auto leading-relaxed mb-6 animate-in fade-in slide-in-from-bottom-8 duration-1000">
                             Patients are looking for credentials, not just reviews. Claim your profile to show your credentials, pricing and photos, and to have your NPI match confirmed.
+                        </p>
+                        <p className="text-base md:text-lg text-[#3D2B1F]/60 font-light max-w-2xl mx-auto leading-relaxed mb-12">
+                            InjectorIndex connects credential-confirmed clinics with customers who book on transparent pricing, not ads.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">

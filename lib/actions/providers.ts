@@ -100,9 +100,14 @@ export async function getProvidersWithSearch(filters: {
             `credentials.ilike.%${q}%`
         ]
 
-        // Add array contains conditions
+        // Add array contains conditions.
+        // NOTE: do not filter on `badges` here. It is not part of the
+        // providers select used anywhere in the app, and a PostgREST filter
+        // on a column the production table does not expose errors the WHOLE
+        // search request, so every text search returned zero results
+        // (the /claim clinic lookup showed "No clinic found" for real
+        // clinics). Name/city/description matching covers clinic search.
         orConditions.push(`treatment_slugs.cs.{"${qLower}"}`)
-        orConditions.push(`badges.cs.{"${q}"}`)
         orConditions.push(`services_offered.cs.{"${q}"}`)
 
         // Smart Acronym Fallback: If query is short (2-4 chars), try matching word initials

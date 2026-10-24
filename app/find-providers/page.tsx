@@ -1,11 +1,8 @@
-import { Suspense } from 'react'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCard'
-import { ProviderFilters } from '@/components/providers/ProviderFilters'
 import { Button } from '@/components/ui/Button'
 import { getProvidersWithSearch } from '@/lib/actions/providers'
-import { GeolocationSorter } from '@/components/providers/GeolocationSorter'
 import { NICHE } from '@/config/niche'
 import { Dna, ShieldCheck } from 'lucide-react'
 import { JsonLd, generateItemListSchema } from '@/components/seo/JsonLd'
@@ -83,9 +80,6 @@ export default async function FindProvidersPage({
             <JsonLd data={itemListSchema} />
             <div className="container mx-auto px-6">
                 <div className="mb-10">
-                    <Suspense fallback={null}>
-                        <GeolocationSorter />
-                    </Suspense>
                     <h1
                         className="text-4xl md:text-5xl font-display font-medium mb-3"
                         style={{ color: 'var(--color-espresso)' }}
@@ -93,16 +87,12 @@ export default async function FindProvidersPage({
                         Explore {query ? (query.charAt(0).toUpperCase() + query.slice(1)) : NICHE.name} Providers
                     </h1>
                     <p style={{ color: 'var(--color-stone)' }} className="font-body">
-                        Found <span className="font-semibold" style={{ color: 'var(--color-espresso)' }}>{providers.length}</span> verified specialists for
+                        Found <span className="font-semibold" style={{ color: 'var(--color-espresso)' }}>{providers.length}</span> providers listed for
                         <span className="font-semibold" style={{ color: 'var(--color-espresso)' }}>
                             {city || state ? ` ${city}${state ? `, ${state}` : ''}` : ` "${query || 'All Locations'}"`}
                         </span>
                     </p>
                 </div>
-
-                <Suspense fallback={<div className="h-32 bg-[var(--color-surface)] animate-pulse rounded-2xl mb-8 border border-[var(--color-border)]" />}>
-                    <ProviderFilters currentCity={city} currentState={state} />
-                </Suspense>
 
                 {/* Algorithm Callout */}
                 <div className="flex flex-col md:flex-row gap-6 mb-12">
