@@ -35,16 +35,16 @@ export function SuccessView({ provider }: { provider: any }) {
 
                     <div className="flex items-center justify-center gap-2 text-[#C9A96E] font-bold text-sm uppercase tracking-widest mb-4">
                         <Sparkles className="w-4 h-4" />
-                        <span>Profile Authenticated & Live</span>
+                        <span>Claim Received — In Review</span>
                     </div>
 
                     <h1 className="text-5xl md:text-6xl font-display font-bold text-[#3D2B1F] mb-6">You're All Set!</h1>
 
                     <p className="text-xl text-[#3D2B1F]/70 font-light leading-relaxed max-w-2xl mx-auto mb-4">
-                        Your practice profile for <strong className="text-[#3D2B1F]">{provider.name}</strong> is now live on the index. Your pricing transparency and credentials have been verified.
+                        Your claim for <strong className="text-[#3D2B1F]">{provider.name}</strong> has been received. We check every claim against public records before anything on the listing changes — that review is what keeps the index honest. Nothing is marked verified until the review is complete.
                     </p>
                     <p className="text-sm text-[#C9A96E] font-semibold mb-12">
-                        🎁 Your free beta access is active for 30 days — full analytics, leads, and visibility included.
+                        Watch your inbox — we'll email you the review outcome and your next steps.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
@@ -67,15 +67,15 @@ export function SuccessView({ provider }: { provider: any }) {
                     <div className="pt-12 border-t border-[#3D2B1F]/10 grid grid-cols-1 md:grid-cols-3 gap-8 text-xs font-bold text-[#3D2B1F]/50 uppercase tracking-widest">
                         <div className="flex items-center justify-center gap-2">
                             <Globe className="w-4 h-4" />
-                            <span>Published to CDN</span>
+                            <span>Claim Logged</span>
                         </div>
                         <div className="flex items-center justify-center gap-2">
                             <ShieldCheck className="w-4 h-4" />
-                            <span>NPI Database Sync Complete</span>
+                            <span>Manual Review Next</span>
                         </div>
                         <div className="flex items-center justify-center gap-2">
                             <Zap className="w-4 h-4" />
-                            <span>SMS Alerts Enabled</span>
+                            <span>Decision by Email</span>
                         </div>
                     </div>
                 </div>

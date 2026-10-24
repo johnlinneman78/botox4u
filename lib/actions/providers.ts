@@ -88,7 +88,6 @@ export async function getProvidersWithSearch(filters: {
 
     if (filters.query) {
         const q = filters.query.trim()
-        const qLower = q.toLowerCase()
 
         // Base search conditions for text columns - optimized for GIN index with pg_trgm
         let orConditions = [
@@ -99,20 +98,19 @@ export async function getProvidersWithSearch(filters: {
             `description.ilike.%${q}%`
         ]
 
-        // Add array contains conditions.
-        // NOTE: do not filter on `badges` here. It is not part of the
-        // providers select used anywhere in the app, and a PostgREST filter
-        // on a column the production table does not expose errors the WHOLE
-        // search request, so every text search returned zero results
-        // (the /claim clinic lookup showed "No clinic found" for real
-        // clinics). Name/city/description matching covers clinic search.
-        // Same rule for `credentials`: in production that column is jsonb,
-        // and ilike (~~*) has no jsonb operator — Postgres error 42883
-        // ("operator does not exist: jsonb ~~* unknown", confirmed in the
-        // Vercel runtime logs 2026-10-23) errored every text search the
-        // same way even after the badges condition was removed.
-        orConditions.push(`treatment_slugs.cs.{"${qLower}"}`)
-        orConditions.push(`services_offered.cs.{"${q}"}`)
+        // NOTE: no array/json "contains" conditions in this text search.
+        // `badges` does not exist in production, `credentials` is jsonb
+        // (ilike has no jsonb operator — Postgres error 42883), and at
+        // least one of treatment_slugs / services_offered is jsonb in
+        // production, so the array-literal operand (cs.{"..."}) gets
+        // parsed as JSON and dies with error 22P02 "invalid input syntax
+        // for type json" (42883 and 22P02 both confirmed in the Vercel
+        // runtime logs, 2026-10-23). Every poisoned condition errors the
+        // WHOLE request and the search returns zero results — the /claim
+        // clinic lookup showed "No clinic found" for real clinics.
+        // Name/city/state/business-type/description matching is what
+        // clinic lookup needs; treatment filtering lives in the
+        // structured filters further down, not in free text.
 
         // Smart Acronym Fallback: If query is short (2-4 chars), try matching word initials
         // e.g., "HS7" matches "Houston Studios 77"

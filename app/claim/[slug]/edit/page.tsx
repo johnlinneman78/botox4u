@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     robots: { index: false, follow: false },
 }
 
-export default async function EditPage({ params, searchParams }: { params: Promise<{ slug: string }>, searchParams: Promise<{ verify?: string }> }) {
+export default async function EditPage({ params, searchParams }: { params: Promise<{ slug: string }>, searchParams: Promise<{ verify?: string, email?: string }> }) {
     const { slug } = await params
     const sParams = await searchParams
 
@@ -49,7 +49,7 @@ export default async function EditPage({ params, searchParams }: { params: Promi
                     </div>
 
                     <div className="p-12 md:p-16 pt-8">
-                        <EditForm provider={provider} initialNpi={sParams.verify} />
+                        <EditForm provider={provider} initialNpi={sParams.verify} initialEmail={sParams.email} />
                     </div>
                 </div>
             </div>

@@ -33,7 +33,7 @@ const SKIN_TREATMENTS = [
     'LED Light Therapy',
 ]
 
-export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?: string }) {
+export function EditForm({ provider, initialNpi, initialEmail }: { provider: any, initialNpi?: string, initialEmail?: string }) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
@@ -68,6 +68,7 @@ export function EditForm({ provider, initialNpi }: { provider: any, initialNpi?:
 
             <input type="hidden" name="provider_id" value={provider.id} />
             <input type="hidden" name="npi_number" value={initialNpi} />
+            <input type="hidden" name="claim_email" value={initialEmail || ''} />
 
             {/* SECTION 1: PUBLIC PRICING (HIGH IMPACT) */}
             <div className="space-y-6">
