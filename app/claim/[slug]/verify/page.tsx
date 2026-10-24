@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { getProviderBySlug } from '@/lib/actions/providers'
 import { notFound } from 'next/navigation'
 import { VerifyForm } from './VerifyForm'
 import { Metadata } from 'next'
@@ -12,12 +12,13 @@ export const metadata: Metadata = {
 
 export default async function VerifyPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
-    const supabase = await createClient()
-    const { data: provider } = await supabase
-        .from('providers')
-        .select('*')
-        .eq('slug', slug)
-        .single()
+    // Fetch through the same path as the claim landing page, which resolves
+    // real slugs. The old lib/supabase/server client
+    // (createServerComponentClient from @supabase/auth-helpers-nextjs,
+    // handed the raw async cookies() from next/headers, which that package
+    // predates) returned no row for real slugs on Next 16, so this page
+    // 404'd for every clinic while the landing page worked.
+    const provider = await getProviderBySlug(slug)
 
     if (!provider) {
         notFound()

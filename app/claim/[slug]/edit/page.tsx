@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { getProviderBySlug } from '@/lib/actions/providers'
 import { notFound, redirect } from 'next/navigation'
 import { EditForm } from './EditForm'
 import { Metadata } from 'next'
@@ -17,12 +17,10 @@ export default async function EditPage({ params, searchParams }: { params: Promi
         redirect(`/claim/${slug}/verify`)
     }
 
-    const supabase = await createClient()
-    const { data: provider } = await supabase
-        .from('providers')
-        .select('*')
-        .eq('slug', slug)
-        .single()
+    // Same fetch path as the claim landing page (see verify/page.tsx: the
+    // lib/supabase/server client returned no row for real slugs, 404ing
+    // every claim step after the landing page).
+    const provider = await getProviderBySlug(slug)
 
     if (!provider) {
         notFound()

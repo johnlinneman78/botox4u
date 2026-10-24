@@ -18,7 +18,6 @@ import { NICHE } from '@/config/niche'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { JsonLd, generateBreadcrumbSchema, generateItemListSchema, generateFAQPageSchema } from '@/components/seo/JsonLd'
-import { GeolocationSorter } from '@/components/providers/GeolocationSorter'
 import { Suspense } from 'react'
 import { QuizBanner } from '@/components/lead-funnel/QuizBanner'
 
