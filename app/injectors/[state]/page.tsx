@@ -73,7 +73,7 @@ export default async function StatePage({ params }: StatePageProps) {
                 <StateHero
                     stateName={stateName}
                     providerCount={stats?.providerCount || 0}
-                    avgCost={stats?.avgCost || 15}
+                    avgCost={stats?.avgCost ?? null}
                     cityCount={stats?.cityCount || 0}
                 />
             </Suspense>

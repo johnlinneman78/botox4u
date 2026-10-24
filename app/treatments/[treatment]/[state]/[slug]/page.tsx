@@ -3,6 +3,7 @@ import { AtAGlance } from '@/components/seo/AtAGlance'
 import { CostComparisonTable } from '@/components/seo/CostComparisonTable'
 import { PriceMeter } from '@/components/city/PriceMeter'
 import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCard'
+import { PriceReportCTA } from '@/components/providers/PriceReportCTA'
 import { TREATMENTS, REVERSE_STATE_MAP } from '@/lib/constants'
 import { Badge } from '@/components/ui/Badge'
 import Link from 'next/link'
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: TreatmentCityPageProps): Prom
 
     return {
         title: `${treatment.name} in ${city}, ${state} | 2024 Cost & Best ${NICHE.providerTypePlural.charAt(0).toUpperCase() + NICHE.providerTypePlural.slice(1)}`,
-        description: `Compare ${treatment.name} costs, units, and results in ${city}. See average pricing from ${state} clinics and book top-rated specialized medical ${NICHE.providerTypePlural}.`,
+        description: `Compare ${treatment.name} costs, units, and results in ${city}, and book top-rated specialized medical ${NICHE.providerTypePlural}.`,
         openGraph: {
             title: `${treatment.name} in ${city}: What to Expect & Local Costs`,
             description: `A complete guide to ${treatment.name} in ${city}, including pricing, unit estimates, and clinic recommendations.`,
@@ -52,6 +53,10 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
     const providers = await getProvidersWithSearch({ city: cityName, state: stateCode, treatment: treatment.slug })
     const stats = await getTreatmentStats(treatment.slug, cityName, stateCode)
 
+    // No fallback: when no clinic here has a real price, avgCost is null
+    // and the page says "Price not published" instead of showing $15.
+    const avgCost = stats?.avgCost ?? null
+
     // JSON-LD Schema
     const jsonLd = {
         "@context": "https://schema.org",
@@ -62,13 +67,13 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
             "@type": "City",
             "name": cityName
         },
-        "offers": {
+        "offers": avgCost != null ? {
             "@type": "AggregateOffer",
             "priceCurrency": "USD",
-            "lowPrice": stats?.lowPrice || 10,
-            "highPrice": stats?.highPrice || 20,
+            "lowPrice": stats?.lowPrice,
+            "highPrice": stats?.highPrice,
             "offerCount": providers.length
-        }
+        } : undefined
     }
 
     const faqSchema = {
@@ -80,7 +85,9 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                 "name": `How much does ${treatment.name} cost in ${cityName}?`,
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": `In ${cityName}, the average cost for ${treatment.name} is approximately $${stats?.avgCost || 15} per unit. Total treatment session costs typically range from $${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 40 : 15)} to $${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 60 : 25)} depending on your anatomy.`
+                    "text": avgCost != null
+                        ? `In ${cityName}, the average cost for ${treatment.name} is approximately $${avgCost} per unit. Total treatment session costs typically range from $${avgCost * (treatment.slug.includes('masseter') ? 40 : 15)} to $${avgCost * (treatment.slug.includes('masseter') ? 60 : 25)} depending on your anatomy.`
+                        : `Prices for ${treatment.name} in ${cityName} are not published yet. Ask clinics for a per-unit quote — clinics set their own prices.`
                 }
             },
             {
@@ -142,9 +149,9 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
             <div className="container mx-auto px-4 -mt-10 relative z-20">
                 <AtAGlance
                     title={`${treatment.name} Overview`}
-                    summary={`Based on verified data from ${providers.length} clinics in ${cityName}, here is what you can expect for ${treatment.name} pricing and treatment parameters.`}
+                    summary={`Here is what to know about ${treatment.name} pricing and treatment parameters in ${cityName}.`}
                     items={[
-                        { label: 'Avg Cost', value: stats?.avgCost || 15, prefix: '$', suffix: `/${NICHE.priceUnit.split(' ').slice(-1)}` },
+                        { label: 'Avg Cost', value: avgCost != null ? avgCost : 'Price not published', prefix: avgCost != null ? '$' : undefined, suffix: avgCost != null ? `/${NICHE.priceUnit.split(' ').slice(-1)}` : undefined },
                         { label: 'Total Units', value: treatment.slug.includes('masseter') ? '40-60' : '15-25' },
                         { label: 'Providers', value: providers.length },
                         { label: 'Duration', value: '4-6', suffix: 'months' }
@@ -152,10 +159,19 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                 />
 
                 <div className="mt-12">
-                    <PriceMeter
-                        avgCost={stats?.avgCost || 15}
-                        city={cityName}
-                    />
+                    {avgCost != null ? (
+                        <PriceMeter
+                            avgCost={avgCost}
+                            city={cityName}
+                        />
+                    ) : (
+                        <>
+                            <p className="text-lg font-medium mb-4">
+                                Price not published for {treatment.name} in {cityName} yet.
+                            </p>
+                            <PriceReportCTA variant="missing-price" city={cityName} state={stateCode} />
+                        </>
+                    )}
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-20">
@@ -176,23 +192,23 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                                 {
                                     label: 'Conservative / Natural',
                                     units: treatment.slug.includes('masseter') ? '30-40 Units' : '10-15 Units',
-                                    costRange: `$${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 30 : 10)} - $${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 40 : 15)}`,
+                                    costRange: avgCost != null ? `$${avgCost * (treatment.slug.includes('masseter') ? 30 : 10)} - $${avgCost * (treatment.slug.includes('masseter') ? 40 : 15)}` : 'Price not published',
                                     notes: 'Ideal for first-time patients or subtle results.'
                                 },
                                 {
                                     label: 'Standard Treatment',
                                     units: treatment.slug.includes('masseter') ? '50-60 Units' : '20-30 Units',
-                                    costRange: `$${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 50 : 20)} - $${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 60 : 30)}`,
+                                    costRange: avgCost != null ? `$${avgCost * (treatment.slug.includes('masseter') ? 50 : 20)} - $${avgCost * (treatment.slug.includes('masseter') ? 60 : 30)}` : 'Price not published',
                                     notes: 'Most common dose for long-lasting results.'
                                 },
                                 {
                                     label: 'Strong / Robust',
                                     units: treatment.slug.includes('masseter') ? '60-80 Units' : '30-40 Units',
-                                    costRange: `$${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 60 : 30)} - $${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 80 : 40)}`,
+                                    costRange: avgCost != null ? `$${avgCost * (treatment.slug.includes('masseter') ? 60 : 30)} - $${avgCost * (treatment.slug.includes('masseter') ? 80 : 40)}` : 'Price not published',
                                     notes: 'Required for larger muscle mass or minimal movement.'
                                 }
                             ]}
-                            footer={`*Estimates based on an average cost of $${stats?.avgCost || 15} ${NICHE.priceUnit} in ${cityName}. Actual ${NICHE.priceUnit.split(' ').slice(-1)} required vary by individual anatomy.`}
+                            footer={avgCost != null ? `*Estimates based on an average cost of $${avgCost} ${NICHE.priceUnit} in ${cityName}. Actual ${NICHE.priceUnit.split(' ').slice(-1)} required vary by individual anatomy.` : `*No published prices yet for ${treatment.name} in ${cityName}. Ask clinics for a per-unit quote.`}
                         />
 
                         {providers.length === 0 && (
@@ -214,14 +230,20 @@ export default async function TreatmentCityPage({ params }: TreatmentCityPagePro
                                 </div>
                                 <div className="flex justify-between items-center text-sm">
                                     <span className="text-[#3D2B1F]/60">Avg Cost {NICHE.priceUnit}</span>
-                                    <span className="font-bold text-secondary">${stats?.avgCost || 15}</span>
+                                    <span className="font-bold text-secondary">{avgCost != null ? `$${avgCost}` : 'Price not published'}</span>
                                 </div>
                                 <hr className="border-gray-50" />
                                 <div className="flex justify-between items-center text-sm">
                                     <span className="text-gray-700 font-medium">Estimated Total</span>
                                     <span className="text-lg font-display font-bold text-primary">
-                                        ${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 40 : 15)} -
-                                        ${(stats?.avgCost || 15) * (treatment.slug.includes('masseter') ? 60 : 25)}
+                                        {avgCost != null ? (
+                                            <>
+                                                ${avgCost * (treatment.slug.includes('masseter') ? 40 : 15)} -
+                                                ${avgCost * (treatment.slug.includes('masseter') ? 60 : 25)}
+                                            </>
+                                        ) : (
+                                            'Ask for a quote'
+                                        )}
                                     </span>
                                 </div>
                             </div>

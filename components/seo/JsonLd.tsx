@@ -171,7 +171,7 @@ export const generateWebSiteSchema = () => {
     };
 };
 
-export const generateFAQPageSchema = (city: string, state: string, botoxLow: number, botoxHigh: number, providerCount: number) => {
+export const generateFAQPageSchema = (city: string, state: string, botoxLow: number | null, botoxHigh: number | null, providerCount: number) => {
     return {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -181,7 +181,9 @@ export const generateFAQPageSchema = (city: string, state: string, botoxLow: num
                 "name": `How much does Botox cost in ${city}, ${state}?`,
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": `Botox in ${city} typically costs $${botoxLow}-$${botoxHigh} per unit based on ${providerCount} indexed providers on VerifiedAesthetics.`
+                    "text": botoxLow != null && botoxHigh != null
+                        ? `Botox in ${city} typically costs $${botoxLow}-$${botoxHigh} per unit based on ${providerCount} indexed providers on VerifiedAesthetics.`
+                        : `Botox prices in ${city} are not published yet. Ask clinics for a per-unit quote — clinics set their own prices.`
                 }
             },
             {
