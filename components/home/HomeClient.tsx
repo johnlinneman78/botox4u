@@ -10,6 +10,7 @@ import { MorphingHeadline } from '@/components/ui/MorphingHeadline'
 import { TreatmentExplorer } from '@/components/ui/TreatmentExplorer'
 import { StatementSection } from '@/components/sections/StatementSection'
 import { ScrollCTA } from '@/components/ui/ScrollCTA'
+import { PriceReportCTA } from '@/components/providers/PriceReportCTA'
 
 // ─── PLACEHOLDER DATA ────────────────────────────────────
 
@@ -310,6 +311,12 @@ export default function HomeClient({
                     </span>
                 </div>
             </section>
+
+            {/* Price-report CTA: first page, right under the hero. Quick path
+                (city-only) by default — no provider or city prefilled here. */}
+            <div className="container-content">
+                <PriceReportCTA variant="full" />
+            </div>
 
             {/* ═══ SECTION 2: TRUST STRIP ═══ */}
             <section
