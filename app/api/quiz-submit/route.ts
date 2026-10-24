@@ -40,6 +40,11 @@ export async function POST(req: Request) {
         const { data: inserted, error } = await supabase
             .from('leads')
             .insert({
+                // leads.full_name is NOT NULL with no default (the table
+                // was built for provider lead forms). The quiz collects
+                // email only, so record that truthfully instead of
+                // inventing a name. (Production error 23502, 2026-10-23.)
+                full_name: 'Not provided (pricing quiz)',
                 email,
                 city: cityTier,
                 treatment_type: treatment,
