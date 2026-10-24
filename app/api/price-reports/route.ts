@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { Resend } from 'resend'
 import { z } from 'zod'
 import { checkRateLimit } from '@/lib/validation'
+import { NICHE } from '@/config/niche'
 
 // Anonymous "What did you pay?" submissions (price-guide phase 1).
 //
@@ -12,9 +14,14 @@ import { checkRateLimit } from '@/lib/validation'
 // Guide opt-in (owner's rule: optional, never required): if the visitor
 // checks the guide box and enters an email, the email is saved in
 // guide_requests ONLY — never on the price report, never linked to it.
-// The price stays anonymous even when the visitor opts in. What gets
-// sent, and when, is decided separately; this route only saves the
-// request and sends nothing.
+// The price stays anonymous even when the visitor opts in.
+//
+// Delivery (owner's decision, Oct 24, reversed from hold to send-now):
+// SEND the existing guide right away — the Botox Buyer's Guide, plus
+// the per-area pricing piece — and update the guide as more pricing
+// lands. The send happens here, right after the request is saved; a
+// failed send never fails the price report (the request stays saved
+// and the widget says so honestly).
 //
 // Every submission lands pending in price_reports and NOTHING from that
 // table is shown publicly in phase 1: no averages, no per-clinic prices
@@ -205,15 +212,48 @@ export async function POST(req: Request) {
         // The report is already saved at this point, so a guide-request
         // failure must never fail the report — it is logged for manual
         // recovery and the report still succeeds.
+        let guideSent = false
         if (data.guide_opt_in && data.guide_email?.trim()) {
+            const email = data.guide_email.trim()
             const { error: guideError } = await supabase.from('guide_requests').insert({
-                email: data.guide_email.trim(),
+                email,
                 source: 'widget',
             })
-            if (guideError) console.error('price-reports: failed to save guide request', guideError.message)
+            if (guideError) {
+                console.error('price-reports: failed to save guide request', guideError.message)
+            } else {
+                // Send the existing guide right away. A failed send is
+                // logged, never fatal: the request stays saved and the
+                // widget tells the visitor so honestly.
+                const apiKey = process.env.SENDGRID_API_KEY || process.env.RESEND_API_KEY
+                const senderEmail = process.env.CONTACT_EMAIL || NICHE.outreach.senderEmail
+                if (apiKey && senderEmail) {
+                    try {
+                        const resend = new Resend(apiKey)
+                        await resend.emails.send({
+                            from: `${NICHE.siteName} <${senderEmail}>`,
+                            to: email,
+                            subject: 'Your free pricing guide',
+                            html: `<div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                                <h2 style="color: #3D2B1F;">Your free pricing guide</h2>
+                                <p>Thanks for adding your price — you just made the guide more real.</p>
+                                <p>Here is the guide: <a href="https://${NICHE.domain}/botox-buyers-guide">The Botox Buyer&apos;s Guide</a>.</p>
+                                <p>And our latest pricing piece: <a href="https://${NICHE.domain}/blog/per-area-pricing-hides-how-many-units">Per-area pricing hides how many units you got</a>.</p>
+                                <p>This guide gets better as more people add their prices — we update it as more pricing lands.</p>
+                                <p style="color: #3D2B1F99; font-size: 13px;">You got this email because you asked for the free pricing guide after sharing what you paid. Your price itself stays anonymous and is never linked to this email.</p>
+                            </div>`,
+                        })
+                        guideSent = true
+                    } catch (sendError) {
+                        console.error('price-reports: failed to send guide email', sendError)
+                    }
+                } else {
+                    console.error('price-reports: guide email credentials missing, request saved unsent')
+                }
+            }
         }
 
-        return NextResponse.json({ success: true })
+        return NextResponse.json({ success: true, guide_sent: guideSent })
     } catch (error) {
         console.error('price-reports: failed to save report', error)
         return NextResponse.json({ error: 'Could not save your report. Please try again.' }, { status: 500 })

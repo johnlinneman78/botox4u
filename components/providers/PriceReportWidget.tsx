@@ -18,9 +18,8 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 // checks "Send me the free pricing guide" and enters an email, the email
 // is saved in guide_requests ONLY — never on the price report, never
 // linked to it. The price stays anonymous even when the visitor opts in.
-// Delivery (owner's decision, Oct 24): HOLD — requests are saved now;
-// contributors get first access when the full guide launches (phase 4).
-// This widget only saves the request and sends nothing.
+// Delivery (owner's decision, Oct 24): SEND the existing guide right
+// away, and update it as more pricing lands.
 //
 // Measurement is the deliverable; collection without display is the rule.
 // This widget saves reports for moderation and never shows them: no
@@ -107,6 +106,7 @@ export function PriceReportWidget({
 
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
+    const [guideSent, setGuideSent] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
     const viewSentRef = useRef(false)
@@ -242,6 +242,7 @@ export function PriceReportWidget({
                 setError(data.error || 'Could not save your report. Please try again.')
                 return
             }
+            setGuideSent(Boolean(data.guide_sent))
             setIsSuccess(true)
         } catch {
             setError('Could not save your report. Please try again.')
@@ -264,7 +265,9 @@ export function PriceReportWidget({
                     </p>
                     {guideOptIn && (
                         <p className="text-[#3D2B1F]/70 leading-relaxed pt-3">
-                            You asked for the free pricing guide — your request is saved.
+                            {guideSent
+                                ? 'Check your inbox — your free pricing guide is on its way.'
+                                : 'Your guide request is saved — we will send it shortly.'}
                         </p>
                     )}
                 </CardContent>
