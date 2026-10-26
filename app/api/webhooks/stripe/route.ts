@@ -26,6 +26,20 @@ export async function POST(req: NextRequest) {
     try {
         event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
     } catch (err: any) {
+        // Practice messages are stamped with the practice key, not the live
+        // key. If a practice stamp checks out, answer OK but do NOTHING with
+        // it: practice events must never change listings, send emails, or
+        // create keys.
+        const testSecret = process.env.STRIPE_WEBHOOK_SECRET_TEST;
+        if (testSecret) {
+            try {
+                stripe.webhooks.constructEvent(body, sig, testSecret);
+                console.log('Stripe test webhook acknowledged (not processed).');
+                return NextResponse.json({ received: true, test: true });
+            } catch {
+                // Not a valid practice stamp either; fall through to the error.
+            }
+        }
         return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
     }
 
