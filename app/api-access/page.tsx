@@ -21,7 +21,12 @@ export default function ApiAccessPage() {
         }
         setSubmitting(true);
         try {
-            await createApiCheckoutSession(plan, email);
+            const result = await createApiCheckoutSession(plan, email);
+            if (result?.url) {
+                window.location.href = result.url;
+                return;
+            }
+            throw new Error('No checkout URL returned');
         } catch (err) {
             console.error(err);
             setError('Payment session failed. Please try again.');

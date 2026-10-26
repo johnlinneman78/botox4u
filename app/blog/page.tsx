@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { BLOG_POSTS } from '@/lib/blog-data'
 import { ArrowRight, Clock, Search, BookOpen } from 'lucide-react'
 import { NICHE } from '@/config/niche'
+import BlogIndexNewsletter from '@/components/blog/BlogIndexNewsletter'
 
 export const metadata: Metadata = {
     title: "Botox Intelligence Blog 2026 | VerifiedAesthetics",
@@ -87,16 +88,7 @@ export default function BlogIndexPage() {
                 <div className="container mx-auto px-4 max-w-4xl text-center">
                     <h2 className="text-4xl md:text-5xl font-display font-bold text-[#3D2B1F] mb-6">Never overpay for Botox again.</h2>
                     <p className="text-xl text-[#3D2B1F]/60 font-light mb-12 max-w-2xl mx-auto">Submit your email to receive monthly pricing updates, new provider alerts, and patient safety reports for your local market.</p>
-                    <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-                        <input
-                            type="email"
-                            placeholder="you@example.com"
-                            className="flex-1 h-16 px-6 bg-white border border-[#3D2B1F]/10 rounded-2xl focus:outline-none focus:ring-4 focus:ring-[#C9A96E]/10 text-lg text-[#3D2B1F] placeholder:text-[#3D2B1F]/40 transition-all"
-                        />
-                        <button className="h-16 px-10 bg-[#C9A96E] text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:scale-[1.05] transition-transform shadow-xl shadow-[#C9A96E]/20">
-                            Join the Pulse
-                        </button>
-                    </div>
+                    <BlogIndexNewsletter />
                     <p className="mt-8 text-[11px] text-[#3D2B1F]/40 uppercase font-black tracking-[0.2em]">Join 2,400+ patients tracking the market.</p>
                 </div>
             </section>

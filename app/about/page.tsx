@@ -208,9 +208,9 @@ export default async function AboutPage() {
                             The scoring algorithm was developed through analysis of tens of thousands of patient reviews, identifying the specific language patterns that correlate with patient satisfaction, natural results, and provider trustworthiness. The platform is independently operated and has no financial relationships with product manufacturers, medical associations, or provider networks.
                         </p>
                         <div className="pt-8 text-center">
-                            <Link href="/contact" className="text-[#C9A96E] font-bold hover:underline">
+                            <a href="mailto:hello@verifiedaesthetics.com" className="text-[#C9A96E] font-bold hover:underline">
                                 Questions about the platform, methodology, or data: Contact support →
-                            </Link>
+                            </a>
                         </div>
                     </div>
                 </div>

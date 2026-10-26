@@ -535,9 +535,11 @@ export default function HomeClient({
                                     </p>
                                 </RevealOnScroll>
                                 <RevealOnScroll delay={0.15}>
-                                    <Button variant="primary" size="lg">
-                                        Find My Injector Match →
-                                    </Button>
+                                    <Link href="/quiz">
+                                        <Button variant="primary" size="lg">
+                                            Find My Injector Match →
+                                        </Button>
+                                    </Link>
                                 </RevealOnScroll>
                             </div>
                         </div>

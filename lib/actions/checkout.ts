@@ -98,5 +98,10 @@ export async function createApiCheckoutSession(planId: 'api_starter' | 'api_pro'
 
     if (!session.url) throw new Error('Failed to create session');
 
-    redirect(session.url);
+    // Return the URL instead of redirecting: a redirect thrown from a
+    // server action is caught by the caller's try/catch as an error,
+    // which is exactly how the api-access buttons showed
+    // "Payment session failed" even when Stripe created the session.
+    // The caller navigates to this URL.
+    return { url: session.url };
 }

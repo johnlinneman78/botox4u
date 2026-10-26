@@ -398,7 +398,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                             <Link href="/methodology" className="text-sm font-semibold hover:opacity-80 transition-opacity" style={{ color: 'var(--color-stone)' }}>
                                 📐 Selection Methodology →
                             </Link>
-                            <Link href="/blog/best-injectors-guide" className="text-sm font-semibold hover:opacity-80 transition-opacity" style={{ color: 'var(--color-stone)' }}>
+                            <Link href="/blog/how-to-find-good-botox-injector" className="text-sm font-semibold hover:opacity-80 transition-opacity" style={{ color: 'var(--color-stone)' }}>
                                 🔍 Patient Safe Guide →
                             </Link>
                         </div>
