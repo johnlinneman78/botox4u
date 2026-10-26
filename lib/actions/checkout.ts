@@ -66,9 +66,14 @@ export async function createCheckoutSession(providerId: string, planId: 'verifie
 
 export async function createApiCheckoutSession(planId: 'api_starter' | 'api_pro', email: string) {
     const plan = STRIPE_PLANS[planId];
-    if (!plan) throw new Error('Invalid plan');
+    if (!plan) return { error: 'Invalid plan' };
 
-    const session = await stripe.checkout.sessions.create({
+    // Return errors instead of throwing: a thrown server-action error
+    // loses its message on the way to the client, which hid the real
+    // Stripe failure behind a generic "Payment session failed" line.
+    let session;
+    try {
+        session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: [
             {
@@ -94,14 +99,15 @@ export async function createApiCheckoutSession(planId: 'api_starter' | 'api_pro'
             apiPlanId: planId,
             customerEmail: email,
         },
-    });
+        });
+    } catch (err) {
+        console.error('createApiCheckoutSession failed:', err);
+        return { error: err instanceof Error ? err.message : 'Stripe checkout failed' };
+    }
 
-    if (!session.url) throw new Error('Failed to create session');
+    if (!session.url) return { error: 'Failed to create session' };
 
-    // Return the URL instead of redirecting: a redirect thrown from a
-    // server action is caught by the caller's try/catch as an error,
-    // which is exactly how the api-access buttons showed
-    // "Payment session failed" even when Stripe created the session.
-    // The caller navigates to this URL.
+    // Return the URL instead of redirecting, so the caller navigates
+    // to Stripe itself. The caller handles result.error above.
     return { url: session.url };
 }
