@@ -1,7 +1,7 @@
 
 import { Metadata } from 'next'
-import { Brain, Database, LineChart, ShieldCheck, Star, Users, MapPin, DollarSign, Stethoscope, Heart, ArrowRight } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
+import { Brain, Database, LineChart, ShieldCheck, Star, Users } from 'lucide-react'
+import PulseSurveyForm from '@/components/pulse/PulseSurveyForm'
 
 export const metadata: Metadata = {
     title: 'The Botox Pulse | Live Pricing & Results Survey',
@@ -77,82 +77,12 @@ export default function PulsePage() {
                         <div id="survey" className="bg-[#F2EDE4] border border-[#3D2B1F]/10 p-8 md:p-12 rounded-[3.5rem] shadow-xl">
                             <div className="flex justify-between items-center mb-10">
                                 <div className="h-1 flex-1 bg-[#3D2B1F]/5 rounded-full overflow-hidden mr-4">
-                                    <div className="w-1/3 h-full bg-[#C9A96E]" />
+                                    <div className="w-full h-full bg-[#C9A96E]" />
                                 </div>
-                                <span className="text-[10px] font-black uppercase text-[#3D2B1F]/70 tracking-widest whitespace-nowrap">Step 1 of 4</span>
+                                <span className="text-[10px] font-black uppercase text-[#3D2B1F]/70 tracking-widest whitespace-nowrap">4 questions</span>
                             </div>
 
-                            <form className="space-y-8">
-                                {/* Location */}
-                                <div className="space-y-4">
-                                    <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-widest flex items-center gap-2">
-                                        <MapPin className="w-4 h-4 text-[#C9A96E]" />
-                                        Where was your treatment?
-                                    </label>
-                                    <input
-                                        type="text"
-                                        placeholder="City, State"
-                                        className="w-full h-16 px-6 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-2xl focus:outline-none focus:ring-4 focus:ring-[#C9A96E]/10 text-lg text-[#3D2B1F] transition-all placeholder:text-[#3D2B1F]/50"
-                                    />
-                                </div>
-
-                                {/* Per Unit Cost */}
-                                <div className="space-y-4">
-                                    <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-widest flex items-center gap-2">
-                                        <DollarSign className="w-4 h-4 text-[#C9A96E]" />
-                                        What did you pay per unit?
-                                    </label>
-                                    <div className="relative">
-                                        <span className="absolute left-6 top-1/2 -translate-y-1/2 text-[#3D2B1F]/70 text-lg">$</span>
-                                        <input
-                                            type="number"
-                                            placeholder="e.g. 14"
-                                            className="w-full h-16 pl-10 pr-6 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-2xl focus:outline-none focus:ring-4 focus:ring-[#C9A96E]/10 text-lg text-[#3D2B1F] transition-all placeholder:text-[#3D2B1F]/50"
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Injector */}
-                                <div className="space-y-4">
-                                    <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-widest flex items-center gap-2">
-                                        <Stethoscope className="w-4 h-4 text-[#C9A96E]" />
-                                        Who was your injector?
-                                    </label>
-                                    <input
-                                        type="text"
-                                        placeholder="Clinic or Provider Name"
-                                        className="w-full h-16 px-6 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-2xl focus:outline-none focus:ring-4 focus:ring-[#C9A96E]/10 text-lg text-[#3D2B1F] transition-all placeholder:text-[#3D2B1F]/50"
-                                    />
-                                </div>
-
-                                {/* Results Satisfaction */}
-                                <div className="space-y-4">
-                                    <label className="text-sm font-bold text-[#3D2B1F] uppercase tracking-widest flex items-center gap-2">
-                                        <Heart className="w-4 h-4 text-[#C9A96E]" />
-                                        How satisfied were you?
-                                    </label>
-                                    <div className="flex gap-3">
-                                        {[1, 2, 3, 4, 5].map((s) => (
-                                            <button
-                                                key={s}
-                                                type="button"
-                                                className="flex-1 h-14 bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 rounded-xl hover:border-[#C9A96E] hover:text-[#C9A96E] text-[#3D2B1F]/60 flex items-center justify-center transition-all group"
-                                            >
-                                                <Star className="w-5 h-5 group-hover:fill-[#C9A96E]" />
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <Button className="w-full h-18 bg-[#C9A96E] hover:bg-[#B5955B] text-white font-bold text-xl py-6 rounded-3xl shadow-xl hover:scale-[1.02] transition-all flex items-center justify-center gap-3">
-                                    Submit Local Data
-                                    <ArrowRight className="w-6 h-6" />
-                                </Button>
-
-                                <p className="text-[10px] text-[#3D2B1F]/70 text-center font-light leading-relaxed px-8">
-                                    Your specific pricing data will be anonymized and aggregated into our city indexes. We will never share your personal information with clinics.
-                                </p>
-                            </form>
+                            <PulseSurveyForm />
                         </div>
                     </div>
                 </div>
