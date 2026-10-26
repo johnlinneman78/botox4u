@@ -47,7 +47,7 @@ export function day2Html({ firstName }: Day2Props): string {
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">Both matter.</p>
 
   <div style="text-align:center;margin:32px 0;">
-    <a href="https://injectorindex.com" style="display:inline-block;background-color:#1A1A1A;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Find Transparent Providers →</a>
+    <a href="https://www.verifiedaesthetics.com" style="display:inline-block;background-color:#1A1A1A;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Find Transparent Providers →</a>
   </div>
 
   <p style="font-size:14px;line-height:1.6;color:#666;">Tomorrow: The Allergan rewards program most patients don't know about.</p>
@@ -55,7 +55,7 @@ export function day2Html({ firstName }: Day2Props): string {
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">—VerifiedAesthetics</p>
 
   <hr style="border:none;border-top:1px solid #ECE8E2;margin:32px 0;">
-  <p style="font-size:10px;color:#999;text-align:center;letter-spacing:0.05em;">© 2026 VerifiedAesthetics · Independent clinical data for the regenerative era.<br><a href="https://injectorindex.com/unsubscribe" style="color:#999;">Unsubscribe</a></p>
+  <p style="font-size:10px;color:#999;text-align:center;letter-spacing:0.05em;">© 2026 VerifiedAesthetics · Independent clinical data for the regenerative era.<br><a href="https://www.verifiedaesthetics.com/unsubscribe" style="color:#999;">Unsubscribe</a></p>
 
 </div>
 </body>

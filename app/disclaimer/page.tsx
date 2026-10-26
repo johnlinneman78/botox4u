@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: `Medical Disclaimer | ${NICHE.siteName}`,
         description: `Important medical disclaimer regarding the information provided on the ${NICHE.siteName} platform.`,
-        url: 'https://injectorindex.com/disclaimer',
+        url: 'https://www.verifiedaesthetics.com/disclaimer',
     }
 }
 

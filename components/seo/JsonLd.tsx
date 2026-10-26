@@ -22,7 +22,7 @@ export const generateMedicalClinicSchema = (provider: any) => {
         "description": provider.bio || provider.ai_description || `Top-rated aesthetic provider specializing in ${NICHE.name} treatments in ${provider.city}. Ranked by Clarity Score™ independent data.`,
         "image": provider.hero_image_url || provider.imageUrl,
         "telephone": provider.phone,
-        "url": `https://injectorindex.com/provider/${provider.slug}`,
+        "url": `https://www.verifiedaesthetics.com/provider/${provider.slug}`,
         "address": {
             "@type": "PostalAddress",
             "streetAddress": provider.address,
@@ -124,7 +124,7 @@ export const generateBreadcrumbSchema = (items: { name: string; item: string }[]
             "@type": "ListItem",
             "position": index + 1,
             "name": item.name,
-            "item": `https://injectorindex.com${item.item}`
+            "item": `https://www.verifiedaesthetics.com${item.item}`
         }))
     };
 };
@@ -138,7 +138,7 @@ export const generateItemListSchema = (providers: any[], city: string) => {
         "itemListElement": providers.map((provider, index) => ({
             "@type": "ListItem",
             "position": index + 1,
-            "url": `https://injectorindex.com/provider/${provider.slug}`,
+            "url": `https://www.verifiedaesthetics.com/provider/${provider.slug}`,
             "name": provider.name
         }))
     };
@@ -161,11 +161,11 @@ export const generateWebSiteSchema = () => {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "VerifiedAesthetics",
-        "url": "https://injectorindex.com",
+        "url": "https://www.verifiedaesthetics.com",
         "description": "Find and compare the best Botox injectors near you. Ranked by Clarity Score™ — credentials, injection quality, and patient outcomes.",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://injectorindex.com/find-providers?q={search_term_string}",
+            "target": "https://www.verifiedaesthetics.com/find-providers?q={search_term_string}",
             "query-input": "required name=search_term_string"
         }
     };

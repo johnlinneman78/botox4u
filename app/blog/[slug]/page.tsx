@@ -80,12 +80,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         "author": {
             "@type": "Organization",
             "name": "Verified Aesthetics",
-            "url": "https://injectorindex.com"
+            "url": "https://www.verifiedaesthetics.com"
         },
         "publisher": {
             "@type": "Organization",
             "name": "Verified Aesthetics",
-            "url": "https://injectorindex.com"
+            "url": "https://www.verifiedaesthetics.com"
         },
         "datePublished": post.publishDate,
         "dateModified": post.publishDate
@@ -108,9 +108,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://injectorindex.com" },
-            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://injectorindex.com/blog" },
-            { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://injectorindex.com/blog/${post.slug}` }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.verifiedaesthetics.com" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.verifiedaesthetics.com/blog" },
+            { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://www.verifiedaesthetics.com/blog/${post.slug}` }
         ]
     }
 

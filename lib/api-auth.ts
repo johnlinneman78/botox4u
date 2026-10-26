@@ -23,7 +23,7 @@ export async function validateApiKey(key: string | null) {
     }
 
     if (apiKey.calls_this_month >= apiKey.call_limit) {
-        return { valid: false, status: 429, error: 'Monthly limit reached. Upgrade at injectorindex.com/api-access' }
+        return { valid: false, status: 429, error: 'Monthly limit reached. Upgrade at www.verifiedaesthetics.com/api-access' }
     }
 
     // Increment call count

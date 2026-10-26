@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: `Common Aesthetic Fact Sheet — Science & Safety | ${NICHE.siteName}`,
         description: `Everything you need to know about ${NICHE.namePlural.toLowerCase()}, safety protocols, and expected results. Verified patient data for 2026.`,
-        url: 'https://injectorindex.com/botox-fact-sheet',
+        url: 'https://www.verifiedaesthetics.com/botox-fact-sheet',
     }
 }
 

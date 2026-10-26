@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
             url: `/provider/${provider.slug}`,
             images: [
                 {
-                    url: provider.hero_image_url || provider.imageUrl || `https://injectorindex.com/og-default.png`,
+                    url: provider.hero_image_url || provider.imageUrl || `https://www.verifiedaesthetics.com/og-default.png`,
                     width: 1200,
                     height: 630,
                     alt: `${provider.name} — ${provider.city}`,

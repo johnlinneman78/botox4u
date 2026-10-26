@@ -24,7 +24,7 @@ const endpoints = [
             { name: 'tier', type: 'string', required: false, description: 'Listing tier: FEATURED, VERIFIED, or FREE' },
             { name: 'limit', type: 'number', required: false, description: 'Max results (default: 10, max: 50)' },
         ],
-        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://injectorindex.com/api/v1/providers?city=portland&min_Clarity Score™=70&limit=5"',
+        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.verifiedaesthetics.com/api/v1/providers?city=portland&min_Clarity Score™=70&limit=5"',
         exampleResponse: `{
   "results": [
     {
@@ -36,7 +36,7 @@ const endpoints = [
       "style_tags": ["natural", "conservative"],
       "avg_price": 14,
       "booking_url": "https://example.com/book",
-      "profile_url": "https://injectorindex.com/provider/pearl-district-aesthetics"
+      "profile_url": "https://www.verifiedaesthetics.com/provider/pearl-district-aesthetics"
     }
   ],
   "total": 23,
@@ -51,7 +51,7 @@ const endpoints = [
         params: [
             { name: 'slug', type: 'string', required: true, description: 'Provider URL slug (path parameter)' },
         ],
-        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://injectorindex.com/api/v1/providers/pearl-district-aesthetics"',
+        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.verifiedaesthetics.com/api/v1/providers/pearl-district-aesthetics"',
         exampleResponse: `{
   "provider_id": "abc123",
   "name": "Pearl District Aesthetics",
@@ -61,7 +61,7 @@ const endpoints = [
   "address": "123 NW 10th Ave, Portland, OR 97209",
   "phone": "(503) 555-0100",
   "website": "https://example.com",
-  "profile_url": "https://injectorindex.com/provider/pearl-district-aesthetics",
+  "profile_url": "https://www.verifiedaesthetics.com/provider/pearl-district-aesthetics",
   "Clarity Score™": 87,
   "rating": 4.8,
   "review_count": 142,
@@ -86,7 +86,7 @@ const endpoints = [
         path: '/api/v1/cities',
         description: 'List all cities covered by VerifiedAesthetics with provider counts and average pricing data.',
         params: [],
-        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://injectorindex.com/api/v1/cities"',
+        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.verifiedaesthetics.com/api/v1/cities"',
         exampleResponse: `{
   "cities": [
     {
@@ -94,14 +94,14 @@ const endpoints = [
       "state": "OR",
       "provider_count": 90,
       "avg_price_per_unit": 14,
-      "url": "https://injectorindex.com/injectors/or/portland"
+      "url": "https://www.verifiedaesthetics.com/injectors/or/portland"
     },
     {
       "city": "Miami",
       "state": "FL",
       "provider_count": 95,
       "avg_price_per_unit": 16,
-      "url": "https://injectorindex.com/injectors/fl/miami"
+      "url": "https://www.verifiedaesthetics.com/injectors/fl/miami"
     }
   ],
   "total_cities": 22,
@@ -117,7 +117,7 @@ const endpoints = [
             { name: 'q', type: 'string', required: true, description: 'Search query (e.g., "natural looking botox portland")' },
             { name: 'limit', type: 'number', required: false, description: 'Max results (default: 10, max: 50)' },
         ],
-        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://injectorindex.com/api/v1/search?q=natural+looking+botox+portland&limit=5"',
+        exampleRequest: 'curl -H "x-api-key: YOUR_KEY" \\\n  "https://www.verifiedaesthetics.com/api/v1/search?q=natural+looking+botox+portland&limit=5"',
         exampleResponse: `{
   "results": [
     {
@@ -126,7 +126,7 @@ const endpoints = [
       "city": "Portland",
       "Clarity Score™": 87,
       "relevance_score": 0.94,
-      "profile_url": "https://injectorindex.com/provider/pearl-district-aesthetics"
+      "profile_url": "https://www.verifiedaesthetics.com/provider/pearl-district-aesthetics"
     }
   ],
   "query": "natural looking botox portland",
@@ -222,7 +222,7 @@ export default function ApiDocsPage() {
                                     </div>
                                     <pre className="p-4 text-sm text-gray-300 overflow-x-auto">
                                         <code>{`curl -H "x-api-key: YOUR_API_KEY" \\
-  "https://injectorindex.com/api/v1/providers?city=portland"`}</code>
+  "https://www.verifiedaesthetics.com/api/v1/providers?city=portland"`}</code>
                                     </pre>
                                 </div>
                             </div>
@@ -264,7 +264,7 @@ export default function ApiDocsPage() {
                 <section className="mb-20">
                     <h2 className="text-3xl font-display font-bold text-[#3D2B1F] mb-4">Base URL</h2>
                     <div className="bg-[#080e17] rounded-xl border border-[#3D2B1F]/10 p-6">
-                        <pre className="text-sm text-[#C9A96E]"><code>https://injectorindex.com/api/v1</code></pre>
+                        <pre className="text-sm text-[#C9A96E]"><code>https://www.verifiedaesthetics.com/api/v1</code></pre>
                     </div>
                     <p className="text-[#3D2B1F]/60 text-sm mt-3">All endpoints return JSON. Responses include <code className="text-[#3D2B1F]/70">powered_by</code> attribution.</p>
                 </section>

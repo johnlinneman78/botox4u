@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: `Privacy Policy | ${NICHE.siteName}`,
         description: `How we collect, use, and protect your personal information at ${NICHE.siteName}.`,
-        url: 'https://injectorindex.com/privacy',
+        url: 'https://www.verifiedaesthetics.com/privacy',
     }
 }
 

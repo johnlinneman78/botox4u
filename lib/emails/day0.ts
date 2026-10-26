@@ -11,7 +11,7 @@ export function day0Subject() {
 }
 
 export function day0Html({ firstName, pdfLink }: Day0Props): string {
-    const downloadUrl = pdfLink || 'https://injectorindex.com/downloads/botox-price-guide-2026.pdf'
+    const downloadUrl = pdfLink || 'https://www.verifiedaesthetics.com/downloads/botox-price-guide-2026.pdf'
 
     return `
 <!DOCTYPE html>
@@ -47,10 +47,10 @@ export function day0Html({ firstName, pdfLink }: Day0Props): string {
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">Talk tomorrow,<br>VerifiedAesthetics</p>
 
-  <p style="font-size:14px;line-height:1.6;color:#666;">P.S. — If you want to skip ahead and start comparing scored providers in your city, you can search now: <a href="https://injectorindex.com" style="color:#B5936B;text-decoration:underline;">VerifiedAesthetics.com →</a></p>
+  <p style="font-size:14px;line-height:1.6;color:#666;">P.S. — If you want to skip ahead and start comparing scored providers in your city, you can search now: <a href="https://www.verifiedaesthetics.com" style="color:#B5936B;text-decoration:underline;">VerifiedAesthetics.com →</a></p>
 
   <hr style="border:none;border-top:1px solid #ECE8E2;margin:32px 0;">
-  <p style="font-size:10px;color:#999;text-align:center;letter-spacing:0.05em;">© 2026 VerifiedAesthetics · Independent clinical data for the regenerative era.<br><a href="https://injectorindex.com/unsubscribe" style="color:#999;">Unsubscribe</a></p>
+  <p style="font-size:10px;color:#999;text-align:center;letter-spacing:0.05em;">© 2026 VerifiedAesthetics · Independent clinical data for the regenerative era.<br><a href="https://www.verifiedaesthetics.com/unsubscribe" style="color:#999;">Unsubscribe</a></p>
 
 </div>
 </body>

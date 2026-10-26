@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: `How the Clarity Score Works | ${NICHE.siteName}`,
         description: `Credentials, patient reviews, published pricing and contact details. Paid plans never change the score.`,
-        url: 'https://injectorindex.com/methodology',
+        url: 'https://www.verifiedaesthetics.com/methodology',
     },
 }
 

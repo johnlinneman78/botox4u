@@ -10,9 +10,9 @@ export const NICHE = {
     providerTypePlural: "providers",
     siteName: "VerifiedAesthetics",
     // Google has indexed the www host: 995 pages vs 5 on the bare domain.
-    // Vercel must redirect injectorindex.com -> www, not the reverse.
-    domain: "www.injectorindex.com",
-    baseUrl: "https://www.injectorindex.com",
+    // Vercel must redirect verifiedaesthetics.com -> www, not the reverse.
+    domain: "www.verifiedaesthetics.com",
+    baseUrl: "https://www.verifiedaesthetics.com",
     contactEmail: "hello@verifiedaesthetics.com",
     tagline: "Find the Best Botox & Filler Injectors Near You — Rated by Data, Not Ads",
     brandName: "VerifiedAesthetics",

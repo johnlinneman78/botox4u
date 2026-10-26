@@ -95,7 +95,7 @@ export function sanitizeQueryParams(searchParams: URLSearchParams | null): strin
     return cleanParams.toString()
 }
 
-export function sanitizeUrlString(rawUrl: string, fallbackOrigin = 'https://www.injectorindex.com'): string {
+export function sanitizeUrlString(rawUrl: string, fallbackOrigin = 'https://www.verifiedaesthetics.com'): string {
     if (!rawUrl) return ''
     try {
         const parsed = new URL(rawUrl, fallbackOrigin)
@@ -121,7 +121,7 @@ export default function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_
         if (lastPathRef.current === sanitizedPath) return
 
         try {
-            const origin = typeof window !== 'undefined' ? window.location.origin : 'https://www.injectorindex.com'
+            const origin = typeof window !== 'undefined' ? window.location.origin : 'https://www.verifiedaesthetics.com'
             const sanitizedLocation = `${origin}${sanitizedPath}`
 
             // Sanitize document.referrer before transmission

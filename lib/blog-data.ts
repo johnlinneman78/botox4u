@@ -2557,7 +2557,7 @@ This post is general information only, not medical advice. Talk through risks an
 
 ## Why this belongs on a price transparency site
 
-Verified Aesthetics, at injectorindex.com, is built on one belief: buyers make better choices when information is out in the open. Celebrity transparency helps that belief in a small way, because it replaces guessing with naming. Buyer transparency helps it more, because everyday people sharing what they paid and what was done turns a few famous stories into a usable picture.
+Verified Aesthetics, at www.verifiedaesthetics.com, is built on one belief: buyers make better choices when information is out in the open. Celebrity transparency helps that belief in a small way, because it replaces guessing with naming. Buyer transparency helps it more, because everyday people sharing what they paid and what was done turns a few famous stories into a usable picture.
 
 The next time a star names a procedure, treat it as useful data for your own research. Look the treatment up. Ask the hard questions. Then decide based on your face, your budget, and your goals. That's the glow up that counts: your plan, your budget, your face.
     `,

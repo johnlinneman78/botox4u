@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: `Provider Plans & Pricing — Scale Your Clinic | ${NICHE.siteName}`,
         description: `Choose the visibility tier that fits your clinical goals. Join high-intent patients searching for natural results and regenerative protocols.`,
-        url: 'https://injectorindex.com/pricing',
+        url: 'https://www.verifiedaesthetics.com/pricing',
     }
 }
 

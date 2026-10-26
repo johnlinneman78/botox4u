@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: `Terms of Service | ${NICHE.siteName}`,
         description: `The terms and conditions for using the ${NICHE.siteName} platform and services.`,
-        url: 'https://injectorindex.com/terms',
+        url: 'https://www.verifiedaesthetics.com/terms',
     }
 }
 

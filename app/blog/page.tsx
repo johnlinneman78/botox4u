@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Botox Intelligence Blog 2026 | VerifiedAesthetics",
         description: "Research, guides, and data on botox injectors, costs, and trends.",
-        url: 'https://injectorindex.com/blog',
+        url: 'https://www.verifiedaesthetics.com/blog',
     }
 }
 

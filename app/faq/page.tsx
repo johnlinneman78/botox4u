@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "FAQ | VerifiedAesthetics",
         description: "Common questions about finding botox injectors",
-        url: "https://injectorindex.com/faq",
+        url: "https://www.verifiedaesthetics.com/faq",
     }
 }
 
