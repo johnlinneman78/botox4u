@@ -47,7 +47,7 @@ export default function ForProvidersPage() {
                             Patients are looking for credentials, not just reviews. Claim your profile to show your credentials, pricing and photos, and to have your NPI match confirmed.
                         </p>
                         <p className="text-base md:text-lg text-[#3D2B1F]/60 font-light max-w-2xl mx-auto leading-relaxed mb-12">
-                            InjectorIndex connects credential-confirmed clinics with customers who book on transparent pricing, not ads.
+                            Verified Aesthetics connects credential-confirmed clinics with customers who book on transparent pricing, not ads.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">

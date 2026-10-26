@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { BLOG_POSTS } from '@/lib/blog-data'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { NICHE } from '@/config/niche'
-import { ArrowLeft, Clock, Mail, BarChart3 } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
+import { ArrowLeft, Clock } from 'lucide-react'
+import BlogCtaBar from '@/components/blog/BlogCtaBar'
 
 
 // This will be static by default because of generateStaticParams
@@ -167,45 +167,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </article>
 
             {/* Blog CTA Bar */}
-            <section className="py-20 px-4">
-                <div className="max-w-4xl mx-auto bg-[#F2EDE4] rounded-[3rem] p-12 md:p-16 shadow-2xl relative overflow-hidden border border-[#3D2B1F]/10">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#C9A96E]/5 rounded-full translate-x-1/2 -translate-y-1/2" />
-                    <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
-                        <div className="flex-1 text-center md:text-left">
-                            <div className="inline-flex items-center gap-2 text-[#C9A96E] font-black uppercase tracking-widest text-xs mb-4">
-                                <BarChart3 className="w-4 h-4" />
-                                Botox Pulse Data
-                            </div>
-                            <h2 className="text-3xl md:text-4xl font-display font-bold text-[#3D2B1F] mb-6">
-                                Get Free Botox Pricing for Your Area
-                            </h2>
-                            <p className="text-[#3D2B1F]/60 text-lg font-light leading-relaxed">
-                                Join 2,400+ patients getting monthly pricing updates, provider scores, and patient insights.
-                            </p>
-                        </div>
-                        <div className="w-full md:w-auto min-w-[320px]">
-                            <div className="flex flex-col gap-4">
-                                <div className="relative">
-                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#3D2B1F]/40 w-5 h-5" />
-                                    <input
-                                        type="email"
-                                        placeholder="Enter your email"
-                                        className="w-full h-16 pl-12 pr-6 bg-white border border-[#3D2B1F]/10 rounded-2xl focus:outline-none focus:ring-4 focus:ring-[#C9A96E]/10 text-lg text-[#3D2B1F] placeholder:text-[#3D2B1F]/40 transition-all"
-                                    />
-                                </div>
-                                <Button className="w-full h-16 bg-[#C9A96E] hover:bg-[#B5955B] text-white font-black uppercase tracking-widest text-xs rounded-2xl shadow-xl shadow-[#C9A96E]/20 transition-all hover:scale-[1.02]">
-                                    Get My Free Updates →
-                                </Button>
-                                <div className="text-center pt-2">
-                                    <Link href="/pulse" className="text-[10px] font-black uppercase tracking-widest text-[#C9A96E] hover:underline">
-                                        Take the 2-minute market survey →
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <BlogCtaBar />
         </main>
     )
 }
