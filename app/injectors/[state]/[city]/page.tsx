@@ -171,6 +171,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                 state={stateCode}
                 treatmentName={NICHE.name}
                 providerCount={providers.length}
+                hasPublishedPrice={stats?.avgCost != null}
             />
             {/* Optimized SEO Summary — Unique & Minimal */}
             <div className="container-content mt-6 mb-2">

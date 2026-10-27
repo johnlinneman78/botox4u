@@ -11,9 +11,10 @@ interface CityHeroProps {
     state: string
     treatmentName: string
     providerCount: number
+    hasPublishedPrice?: boolean
 }
 
-export function CityHero({ city, state, treatmentName, providerCount }: CityHeroProps) {
+export function CityHero({ city, state, treatmentName, providerCount, hasPublishedPrice = true }: CityHeroProps) {
     return (
         <section
             className="relative pt-32 pb-24 overflow-hidden border-b"
@@ -70,7 +71,11 @@ export function CityHero({ city, state, treatmentName, providerCount }: CityHero
                         className="text-lg md:text-xl font-body max-w-2xl mx-auto mb-12 leading-relaxed"
                         style={{ color: 'var(--color-stone)' }}
                     >
-                        Compare {providerCount} medical professionals, view real {NICHE.priceUnit} pricing, and check verified credentials. Ranked by clinical data, not advertising fees.
+                        Compare {providerCount} medical professionals, {hasPublishedPrice ? (
+                            <>view real {NICHE.priceUnit} pricing, and check verified credentials.</>
+                        ) : (
+                            <>check verified credentials, and help build the price pool. No clinic in {city} has published a price yet.</>
+                        )} Ranked by clinical data, not advertising fees.
                     </motion.p>
 
                     <motion.div
@@ -109,7 +114,7 @@ export function CityHero({ city, state, treatmentName, providerCount }: CityHero
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.4 }}
-                        className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto p-8 rounded-3xl border"
+                        className={`grid grid-cols-2 ${hasPublishedPrice ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-4 max-w-4xl mx-auto p-8 rounded-3xl border`}
                         style={{
                             background: 'var(--color-surface)',
                             borderColor: 'var(--color-border)',
@@ -120,12 +125,14 @@ export function CityHero({ city, state, treatmentName, providerCount }: CityHero
                             <div className="text-3xl font-display font-light mb-1" style={{ color: 'var(--color-espresso)' }}>{providerCount}</div>
                             <div className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: 'var(--color-taupe)' }}>Verified Clinics</div>
                         </div>
+                        {hasPublishedPrice && (
                         <div className="text-center md:text-left md:border-r border-[var(--color-border)] px-4 py-2">
                             <div className="text-3xl font-display font-light mb-1" style={{ color: 'var(--color-gold)' }}>
                                 <span className="text-xl align-top mr-0.5">$</span>{NICHE.priceRange.min}-{NICHE.priceRange.max}
                             </div>
                             <div className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: 'var(--color-taupe)' }}>Price Range</div>
                         </div>
+                        )}
                         <div className="text-center md:text-left md:border-r border-[var(--color-border)] px-4 py-2">
                             <div className="text-3xl font-display font-light mb-1" style={{ color: 'var(--color-espresso)' }}>4.8<span className="text-lg opacity-40 ml-1">/5</span></div>
                             <div className="flex flex-col gap-1 items-center md:items-start">
