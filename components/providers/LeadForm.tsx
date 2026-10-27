@@ -96,6 +96,13 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                     provider_name: providerName ?? undefined,
                     treatment: data.treatment_type ?? undefined,
                 })
+                // Conversion event (Oct 2026): a quote request is the
+                // sellable lead; legacy name kept above.
+                track('quote_request', {
+                    provider_id: providerId ?? undefined,
+                    provider_name: providerName ?? undefined,
+                    treatment: data.treatment_type ?? undefined,
+                })
                 setIsSuccess(true)
             } else {
                 setError(result.error || 'Submission could not be completed. Please review your details and try again.')

@@ -2,10 +2,18 @@
 
 import { ShieldCheck, Sparkles, ArrowRight, Share2, Globe, Zap, Check, Dna, Clock } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { track, providerParams } from '@/lib/analytics'
 
 export function SuccessView({ provider }: { provider: any }) {
     const [sharing, setSharing] = useState(false)
+
+    // Conversion event (Oct 2026): this page only renders after a
+    // claim is submitted, so mounting is the submission signal.
+    useEffect(() => {
+        track('claim_submitted', providerParams({ slug: provider?.slug, name: provider?.name, city: provider?.city, state: provider?.state }))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const handleShare = async () => {
         if (navigator.share) {

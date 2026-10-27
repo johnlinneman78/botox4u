@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { track } from '@/lib/analytics'
 
 // Blog index newsletter form, rebuilt: the old block was a bare input
 // and button with no form, no state, and no submit handler, so a
@@ -29,6 +30,7 @@ export default function BlogIndexNewsletter() {
             })
             if (!res.ok) throw new Error('Signup failed')
             setStatus('success')
+            track('newsletter_signup', { source: 'blog-index' })
         } catch {
             setStatus('error')
             setError('Something went wrong. Please try again.')

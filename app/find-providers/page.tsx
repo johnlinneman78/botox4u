@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCard'
+import FindProvidersTracker from '@/components/find-providers/FindProvidersTracker'
 import { Button } from '@/components/ui/Button'
 import { getProvidersWithSearch } from '@/lib/actions/providers'
 import { NICHE } from '@/config/niche'
@@ -77,6 +78,7 @@ export default async function FindProvidersPage({
             className="min-h-screen py-16"
             style={{ background: 'var(--color-bg)' }}
         >
+            <FindProvidersTracker query={query} city={city} state={state} tier={tier} type={type} view={view} resultCount={providers.length} />
             <JsonLd data={itemListSchema} />
             <div className="container mx-auto px-6">
                 <div className="mb-10">

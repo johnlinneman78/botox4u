@@ -49,10 +49,21 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     const providers = await getProvidersWithSearch({ city: cityName, state: stateCode })
     const providerCount = providers.length > 0 ? providers.length : 'top'
     const avgPrice = providers.map(p => p.price_per_unit).filter(Boolean)[0]
-    const title = `Botox in ${cityName}, ${stateCode}: Prices & Verified Injectors (${year})`
-    const description = avgPrice
-        ? `Compare ${providerCount} Botox & filler injectors in ${cityName}. See price per unit (from $${avgPrice}), confirmed credentials and patient reviews side by side. No paid placement. Updated ${month} ${year}.`
-        : `Compare ${providerCount} Botox & filler injectors in ${cityName}, ${stateCode}. Confirmed credentials, published pricing and patient reviews side by side. No paid placement. Updated ${month} ${year}.`
+    // Zero-click, high-impression search terms (Oct 2026 Search Console):
+    // "botox houston" 183 impressions / 0 clicks, "botox chicago" 155 / 0.
+    // Front-load the exact search phrase in the title and lead the
+    // description with the price-transparency hook that already works
+    // elsewhere in search. No price is invented: with no real price
+    // pool yet, the copy promises comparison and credentials, not a rate.
+    const isZeroClickCity = cityName === 'Houston' || cityName === 'Chicago'
+    const title = isZeroClickCity
+        ? `Botox ${cityName}: Prices & Verified Injectors (${year})`
+        : `Botox in ${cityName}, ${stateCode}: Prices & Verified Injectors (${year})`
+    const description = isZeroClickCity
+        ? `Botox in ${cityName}, ${stateCode} — compare verified injectors, confirmed credentials and published pricing side by side. No paid placement. Updated ${month} ${year}.`
+        : avgPrice
+            ? `Compare ${providerCount} Botox & filler injectors in ${cityName}. See price per unit (from $${avgPrice}), confirmed credentials and patient reviews side by side. No paid placement. Updated ${month} ${year}.`
+            : `Compare ${providerCount} Botox & filler injectors in ${cityName}, ${stateCode}. Confirmed credentials, published pricing and patient reviews side by side. No paid placement. Updated ${month} ${year}.`
     const url = `/${NICHE.baseSlug}/${state.toLowerCase()}/${city.toLowerCase()}`
 
     return {

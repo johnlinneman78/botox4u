@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { CheckCircle, Star, User, ArrowRight, Search, Activity, Shield, CheckCircle2, ShieldCheck, X } from 'lucide-react'
 import { motion, AnimatePresence, Variants } from 'framer-motion'
 import { EnrichedProvider } from '@/lib/types/enrichment'
+import { track, providerParams } from '@/lib/analytics'
 import { LeadForm } from './LeadForm'
 import { formatCurrency } from '@/lib/utils'
 
@@ -236,7 +237,7 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
 
                     {/* Row 5: CTA */}
                     <div className="border-t border-[#3D2B1F]/10 pt-4 mt-2 flex flex-col gap-3">
-                        <Link href={`/provider/${provider.slug}`} className="flex justify-between items-center group/cta w-full">
+                        <Link href={`/provider/${provider.slug}`} className="flex justify-between items-center group/cta w-full" onClick={() => track('provider_profile_click', { ...providerParams({ slug: provider.slug, name: provider.name, city: provider.city, state: provider.state, score: score }), source: 'provider_card' })}>
                             <span className="font-sans font-medium text-[14px] text-[#3D2B1F]">
                                 {ctaText}
                             </span>
@@ -262,6 +263,7 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                         href={`/provider/${provider.slug}`}
                         className="absolute inset-0 z-10 focus:outline-none"
                         aria-label={`View details for ${provider.name}`}
+                        onClick={() => track('provider_profile_click', { ...providerParams({ slug: provider.slug, name: provider.name, city: provider.city, state: provider.state, score: score }), source: 'provider_card' })}
                     />
                 )}
             </motion.div>

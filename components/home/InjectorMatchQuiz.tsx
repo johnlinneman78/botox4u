@@ -134,6 +134,9 @@ export default function InjectorMatchQuiz() {
 
             setMatches(providers.slice(0, 3))
             track('quiz_completed', { city: selectedCity, matches: providers.slice(0, 3).length })
+            // Conversion event (Oct 2026): same completion, under the
+            // name GA4 will mark as a key event. Legacy name kept above.
+            track('quiz_complete', {})
             setIsSubmitted(true)
 
             // GA4: Track successful completion (Key Event)

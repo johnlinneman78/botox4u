@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Mail, BarChart3, CheckCircle2 } from 'lucide-react'
+import { track } from '@/lib/analytics'
 import { Button } from '@/components/ui/Button'
 
 export default function BlogCtaBar() {
@@ -27,6 +28,7 @@ export default function BlogCtaBar() {
             })
             if (!res.ok) throw new Error('Signup failed')
             setStatus('success')
+            track('newsletter_signup', { source: 'blog-post' })
         } catch {
             setStatus('error')
             setError('Something went wrong. Please try again.')

@@ -9,14 +9,18 @@
 export type AnalyticsEvent =
     | 'lead_submitted'          // patient sent an inquiry to a provider
     | 'lead_form_start'         // patient interacted with lead form
-    | 'quiz_completed'          // finished the injector match quiz
+    | 'quiz_completed'          // finished the injector match quiz (legacy name, kept)
+    | 'quiz_complete'           // finished the injector match quiz (conversion event, Oct 2026)
+    | 'quote_request'           // patient sent a quote request (conversion event, Oct 2026)
     | 'quiz_email_submitted'    // gave an email for quiz results
     | 'provider_outbound_click' // clicked through to a provider's own site
     | 'provider_phone_click'    // tapped a provider phone number
     | 'provider_maps_click'     // clicked through to Google Maps
+    | 'provider_profile_click'  // clicked a provider card through to its profile (funnel step, Oct 2026)
     | 'provider_search'         // user executed a search or filtered providers
     | 'newsletter_signup'
     | 'claim_started'           // a provider began claiming a listing
+    | 'claim_submitted'         // a provider claim was submitted (conversion event, Oct 2026)
     | 'calculator_used'
     | 'price_guide_download'
 
@@ -30,13 +34,17 @@ export const EVENT_PARAM_ALLOWLIST: Record<AnalyticsEvent, readonly string[]> = 
     lead_submitted: ['provider_id', 'provider_name', 'provider_slug', 'provider_city', 'provider_state', 'treatment'],
     lead_form_start: ['provider_id', 'provider_name', 'provider_slug', 'provider_city', 'provider_state'],
     quiz_completed: ['result_tier', 'recommended_treatment'],
+    quiz_complete: ['result_tier', 'recommended_treatment'],
+    quote_request: ['provider_id', 'provider_name', 'provider_slug', 'provider_city', 'provider_state', 'treatment'],
     quiz_email_submitted: ['success'],
     provider_outbound_click: ['provider_id', 'provider_name', 'provider_slug', 'provider_city', 'provider_state', 'destination_domain', 'source'],
     provider_phone_click: ['provider_id', 'provider_name', 'provider_slug', 'provider_city', 'provider_state', 'source'],
     provider_maps_click: ['provider_id', 'provider_name', 'provider_slug', 'provider_city', 'provider_state', 'source'],
+    provider_profile_click: ['provider_id', 'provider_name', 'provider_slug', 'provider_city', 'provider_state', 'source'],
     provider_search: ['search_city', 'search_state', 'filter_tier', 'filter_type', 'filter_view', 'has_search_query', 'location_resolved', 'result_count', 'source'],
     newsletter_signup: ['source'],
     claim_started: ['provider_id', 'provider_name', 'provider_slug'],
+    claim_submitted: ['provider_id', 'provider_name', 'provider_slug'],
     calculator_used: ['treatment_type', 'total_units', 'estimated_range'],
     price_guide_download: ['city', 'guide_slug'],
 } as const
