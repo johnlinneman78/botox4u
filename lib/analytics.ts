@@ -23,6 +23,7 @@ export type AnalyticsEvent =
     | 'claim_submitted'         // a provider claim was submitted (conversion event, Oct 2026)
     | 'calculator_used'
     | 'price_guide_download'
+    | 'price_report_submitted' // anonymous price report submitted (seed, Oct 2026)
 
 /**
  * Strict parameter allowlist per event.
@@ -47,6 +48,7 @@ export const EVENT_PARAM_ALLOWLIST: Record<AnalyticsEvent, readonly string[]> = 
     claim_submitted: ['provider_id', 'provider_name', 'provider_slug'],
     calculator_used: ['treatment_type', 'total_units', 'estimated_range'],
     price_guide_download: ['city', 'guide_slug'],
+    price_report_submitted: ['city', 'treatment', 'source'],
 } as const
 
 /**

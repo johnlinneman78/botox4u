@@ -41,6 +41,9 @@ export const SUPPORTED_CITIES: readonly DirectoryCity[] = [
     { slug: "madison", name: "Madison", state: "WI" },
     { slug: "boise", name: "Boise", state: "ID" },
     { slug: "phoenix", name: "Phoenix", state: "AZ" },
+    // Seed city, Oct 28, 2026: Asheville NC joins Austin and Scottsdale
+    // for the Botox + Lip Filler paid-price seed. No other seed city.
+    { slug: "asheville", name: "Asheville", state: "NC" },
 ] as const
 
 // Fast lookup sets

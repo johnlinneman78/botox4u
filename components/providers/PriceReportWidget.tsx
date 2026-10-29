@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
+import { track } from '@/lib/analytics'
+import { contributorKey } from '@/lib/price-pool-seed'
 
 // Anonymous "What did you pay?" widget — price-guide phase 1.
 //
@@ -244,6 +246,29 @@ export function PriceReportWidget({
             }
             setGuideSent(Boolean(data.guide_sent))
             setIsSuccess(true)
+            // Seed give-to-get (Oct 28, 2026): a successful report unlocks
+            // the full breakdown for that seed city + treatment in this
+            // browser only. No name, email, or clinic is stored in the key.
+            // No gift card or draw is attached — that piece was left out.
+            try {
+                const citySlug = (city || clinic?.city || '').trim().toLowerCase().replace(/\s+/g, '-')
+                const treatmentKey =
+                    category === 'toxin' && toxinProduct.toLowerCase() === 'botox'
+                        ? 'botox'
+                        : category === 'filler' && productValue.toLowerCase().includes('lip')
+                            ? 'lip-filler'
+                            : null
+                if (citySlug && treatmentKey) {
+                    localStorage.setItem(contributorKey(citySlug, treatmentKey), '1')
+                }
+                track('price_report_submitted', {
+                    city: citySlug || undefined,
+                    treatment: treatmentKey || undefined,
+                    source: 'price-report-widget',
+                })
+            } catch {
+                // A failed unlock or analytics event must never break the report.
+            }
         } catch {
             setError('Could not save your report. Please try again.')
         } finally {
