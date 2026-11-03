@@ -98,7 +98,7 @@ export default async function ClaimLandingPage({ params }: { params: Promise<{ s
                                 { step: '1', label: 'Verify', desc: 'Confirm email/NPI' },
                                 { step: '2', label: 'Edit', desc: 'Update your data' },
                                 { step: '3', label: 'Pricing', desc: 'List your rates' },
-                                { step: '4', label: 'Live', desc: 'Boost your rank' }
+                                { step: '4', label: 'Live', desc: 'Go live' }
                             ].map((s) => (
                                 <div key={s.step} className="flex flex-col items-center text-center">
                                     <div className="w-10 h-10 rounded-full bg-primary text-[#3D2B1F] flex items-center justify-center font-bold mb-4 shadow-lg">

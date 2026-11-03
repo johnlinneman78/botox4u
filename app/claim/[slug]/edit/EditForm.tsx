@@ -309,7 +309,7 @@ export function EditForm({ provider, initialNpi, initialEmail }: { provider: any
             <div className="pt-8 border-t border-[#3D2B1F]/10 flex flex-col md:flex-row gap-6 items-center justify-between">
                 <div className="flex items-center gap-2 text-[#3D2B1F]/50">
                     <ShieldCheck className="w-5 h-5" />
-                    <span className="text-sm font-medium">Verified by NPI Integration · Free for 30 days</span>
+                    <span className="text-sm font-medium">Verified by NPI Integration · Free claimed listing</span>
                 </div>
                 <button
                     disabled={loading}

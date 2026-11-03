@@ -37,7 +37,7 @@ export default async function VerifyPage({ params }: { params: Promise<{ slug: s
                         </div>
                         <h1 className="text-3xl font-display font-bold text-[#3D2B1F] mb-2">Verify Your Practice</h1>
                         <p className="text-[#3D2B1F]/60 font-light">To protect patient trust, we require verification of your clinic email and NPI credential.</p>
-                        <p className="text-xs text-[#C9A96E] mt-2 font-semibold">🎁 Free for 30 days — no credit card required.</p>
+                        <p className="text-xs text-[#C9A96E] mt-2 font-semibold">Free claimed listing — no credit card required.</p>
                     </div>
 
                     <div className="p-12 pt-8">

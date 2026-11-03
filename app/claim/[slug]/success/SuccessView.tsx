@@ -1,6 +1,6 @@
 'use client'
 
-import { ShieldCheck, Sparkles, ArrowRight, Share2, Globe, Zap, Check, Dna, Clock } from 'lucide-react'
+import { ShieldCheck, Sparkles, ArrowRight, Share2, Globe, Zap, Check } from 'lucide-react'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { track, providerParams } from '@/lib/analytics'
@@ -88,20 +88,14 @@ export function SuccessView({ provider }: { provider: any }) {
                     </div>
                 </div>
 
-                {/* WHAT'S INCLUDED IN YOUR FREE 30 DAYS */}
+                {/* WHAT'S INCLUDED IN YOUR FREE CLAIMED LISTING */}
                 <div className="bg-[#F2EDE4] rounded-[3rem] border border-[#3D2B1F]/10 p-12 md:p-16 mb-12">
-                    <div className="flex items-center gap-3 mb-8">
-                        <Clock className="w-5 h-5 text-[#C9A96E]" />
-                        <h2 className="text-2xl font-display font-bold text-[#3D2B1F]">What's Included in Your Free 30 Days</h2>
-                    </div>
+                    <h2 className="text-2xl font-display font-bold text-[#3D2B1F] mb-8">What&apos;s Included in Your Free Claimed Listing</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {[
                             'Full directory visibility',
-                            'Patient lead notifications via SMS/email',
-                            'Weekly profile analytics report',
-                            'Clarity Score™ updates as data refreshes',
-                            'Clinical Quality badge on your profile',
-                            'Click-to-call tracking',
+                            'Update your practice details after review',
+                            'Clarity Score\u2122 updates as data refreshes',
                         ].map(f => (
                             <div key={f} className="flex items-center gap-3 p-3 rounded-xl">
                                 <div className="w-5 h-5 rounded-full bg-[#8A9E8D]/10 flex items-center justify-center shrink-0">
@@ -111,91 +105,9 @@ export function SuccessView({ provider }: { provider: any }) {
                             </div>
                         ))}
                     </div>
-                    <p className="text-xs text-[#3D2B1F]/50 font-light mt-6 pt-6 border-t border-[#3D2B1F]/10">
-                        After 30 days, choose from Verified ($49/mo) or Featured ($99/mo) to keep your enhanced listing active. No auto-charge — we'll send a reminder before your trial ends.
+                    <p className="text-sm text-[#3D2B1F]/70 font-medium mt-6 pt-6 border-t border-[#3D2B1F]/10">
+                        Claiming is free. No paid tier is offered here. Payment never changes your ranking or Clarity Score, and credential verification is never sold.
                     </p>
-                </div>
-
-                {/* UPGRADE OPTIONS (POST-BETA) */}
-                <div className="space-y-8">
-                    <div className="text-center">
-                        <h2 className="text-3xl font-display font-bold text-[#3D2B1F] mb-4">When Your Trial Ends</h2>
-                        <p className="text-[#3D2B1F]/60 font-light">Choose the tier that best fits your practice. No commitment — cancel anytime.</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {/* FEATURED TIER — $99/mo */}
-                        <div className="relative p-[1px] bg-gradient-to-br from-[#C9A96E] via-[#C9A96E]/50 to-[#101827] rounded-[3rem] shadow-2xl overflow-hidden group">
-                            <div className="bg-[#F2EDE4] rounded-[3rem] p-10 h-full flex flex-col">
-                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C9A96E]/10 text-[#C9A96E] text-[10px] font-black uppercase tracking-widest mb-6 self-start border border-[#C9A96E]/20">
-                                    <Dna className="w-3 h-3" />
-                                    Most Popular
-                                </div>
-                                <h3 className="text-3xl font-black text-[#3D2B1F] mb-2 tracking-tight">Featured</h3>
-                                <div className="flex items-baseline gap-1 mb-8">
-                                    <span className="text-4xl font-black text-[#C9A96E]">$99</span>
-                                    <span className="text-[#3D2B1F]/60 font-light">/month</span>
-                                </div>
-
-                                <ul className="space-y-4 mb-12 flex-grow">
-                                    {[
-                                        'Top of search results for your city',
-                                        '5x More Lead Traffic (Guaranteed)',
-                                        'Click-to-Call Tracking & Recording',
-                                        'Direct Landing Page Link',
-                                        'Zero Commission on Leads'
-                                    ].map(f => (
-                                        <li key={f} className="flex items-start gap-3">
-                                            <div className="mt-1 w-5 h-5 rounded-full bg-[#C9A96E]/10 flex items-center justify-center flex-shrink-0">
-                                                <Check className="w-3 h-3 text-[#C9A96E]" />
-                                            </div>
-                                            <span className="text-sm text-[#3D2B1F]/70 font-medium leading-tight">{f}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-
-                                <Link
-                                    href={`/claim/${provider.slug}/upgrade?tier=featured`}
-                                    className="w-full bg-[#C9A96E] hover:bg-[#B5955B] text-white py-5 rounded-2xl font-bold text-lg hover:shadow-xl hover:scale-[1.02] transition-all text-center block"
-                                >
-                                    Upgrade to Featured
-                                </Link>
-                            </div>
-                        </div>
-
-                        {/* VERIFIED TIER — $49/mo */}
-                        <div className="bg-[#F2EDE4] border border-[#3D2B1F]/10 p-10 rounded-[3rem] shadow-xl flex flex-col">
-                            <h3 className="text-3xl font-black text-[#3D2B1F] mb-2 tracking-tight">Verified</h3>
-                            <div className="flex items-baseline gap-1 mb-8">
-                                <span className="text-4xl font-black text-[#3D2B1F]">$49</span>
-                                <span className="text-[#3D2B1F]/60 font-light">/month</span>
-                            </div>
-
-                            <ul className="space-y-4 mb-12 flex-grow">
-                                {[
-                                    'Verified Professional Badge',
-                                    'Highlighted Profile in Directory',
-                                    'Monthly Analytics Report',
-                                    'Remove Competitive Listings',
-                                    'Advanced Bio & Gallery'
-                                ].map(f => (
-                                    <li key={f} className="flex items-start gap-3">
-                                        <div className="mt-1 w-5 h-5 rounded-full bg-[#3D2B1F]/5 flex items-center justify-center flex-shrink-0">
-                                            <Check className="w-3 h-3 text-[#3D2B1F]/70" />
-                                        </div>
-                                        <span className="text-sm text-[#3D2B1F]/60 font-medium leading-tight">{f}</span>
-                                    </li>
-                                ))}
-                            </ul>
-
-                            <Link
-                                href={`/claim/${provider.slug}/upgrade?tier=verified`}
-                                className="w-full bg-[#3D2B1F]/5 hover:bg-white/[0.08] text-[#3D2B1F] py-5 rounded-2xl font-bold text-lg hover:shadow-xl hover:scale-[1.02] transition-all text-center border border-white/[0.08] block"
-                            >
-                                Get Verified Badge
-                            </Link>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

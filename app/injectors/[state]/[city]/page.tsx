@@ -50,12 +50,15 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     const providerCount = providers.length > 0 ? providers.length : 'top'
     const avgPrice = providers.map(p => p.price_per_unit).filter(Boolean)[0]
     // Zero-click, high-impression search terms (Oct 2026 Search Console):
-    // "botox houston" 183 impressions / 0 clicks, "botox chicago" 155 / 0.
-    // Front-load the exact search phrase in the title and lead the
-    // description with the price-transparency hook that already works
-    // elsewhere in search. No price is invented: with no real price
-    // pool yet, the copy promises comparison and credentials, not a rate.
-    const isZeroClickCity = cityName === 'Houston' || cityName === 'Chicago'
+    // "botox houston" 183 impressions / 0 clicks, "botox chicago" 155 / 0,
+    // plus the Nov 3 3-month export: Los Angeles, New York, Miami,
+    // Nashville, Dallas, Atlanta, Boston all at position 40+ with
+    // thousands of impressions. Front-load the exact search phrase
+    // in the title for all of them and lead the description with the
+    // price-transparency hook that already works elsewhere in search.
+    // No price is invented: with no real price pool yet, the copy
+    // promises comparison and credentials, not a rate.
+    const isZeroClickCity = ['Houston', 'Chicago', 'Los Angeles', 'New York', 'Miami', 'Nashville', 'Dallas', 'Atlanta', 'Boston'].includes(cityName)
     const title = isZeroClickCity
         ? `Botox ${cityName}: Prices & Verified Injectors (${year})`
         : `Botox in ${cityName}, ${stateCode}: Prices & Verified Injectors (${year})`

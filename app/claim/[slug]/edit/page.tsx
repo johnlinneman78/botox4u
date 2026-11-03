@@ -40,7 +40,7 @@ export default async function EditPage({ params, searchParams }: { params: Promi
                             </div>
                             <h1 className="text-4xl font-display font-bold text-[#3D2B1F] mb-2">Claim Your Profile</h1>
                             <p className="text-[#3D2B1F]/60 font-light">Confirm your practice details and pricing to update your 2026 Index Score.</p>
-                            <p className="text-xs text-[#C9A96E] mt-2 font-semibold">🎁 Free for 30 days — no credit card required.</p>
+                            <p className="text-xs text-[#C9A96E] mt-2 font-semibold">Free claimed listing — no credit card required.</p>
                         </div>
                         <div className="px-6 py-4 bg-[#C9A96E]/10 border border-[#C9A96E]/20 text-[#3D2B1F] rounded-3xl text-center">
                             <div className="text-xs uppercase font-bold text-[#C9A96E] mb-1">Current Score</div>
