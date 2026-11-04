@@ -22,6 +22,9 @@ import { Suspense } from 'react'
 import { QuizBanner } from '@/components/lead-funnel/QuizBanner'
 import { PriceReportCTA } from '@/components/providers/PriceReportCTA'
 import { featuredNoteFor, isFeaturedClaimed, orderFeaturedFirst } from '@/lib/featured-listings'
+import { PriceReportStickyBar } from '@/components/providers/PriceReportStickyBar'
+import { SeedPriceRange } from '@/components/price-pool/SeedPriceRange'
+import { SEED_CITIES } from '@/lib/price-pool-seed'
 
 interface CityPageProps {
     params: Promise<{ state: string; city: string }>
@@ -230,6 +233,45 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                 <div className="container-content">
                     <PriceReportCTA variant="full" city={cityName} />
                 </div>
+
+                {/* Seed price ranges (Nov 3, 2026): only on the three seed
+                    city pages (Asheville, Austin, Scottsdale). At 0-19
+                    approved reports each range shows an honest collecting
+                    state, never a range or a median. */}
+                {(() => {
+                    const seed = SEED_CITIES.find((c) => c.name.toLowerCase() === cityName.toLowerCase() && c.state === stateCode)
+                    if (!seed) return null
+                    return (
+                        <div className="mb-10">
+                            <h2 className="text-2xl font-display font-medium mb-4" style={{ color: 'var(--color-espresso)' }}>
+                                Community-reported prices in {seed.name}
+                            </h2>
+                            <p className="text-sm mb-6" style={{ color: 'var(--color-stone)' }}>
+                                Real prices people reported paying, reviewed before anything shows. No range appears until 20 reviewed reports.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <SeedPriceRange citySlug={seed.slug as 'asheville' | 'austin' | 'scottsdale'} state={seed.state} treatmentKey="botox" />
+                                <SeedPriceRange citySlug={seed.slug as 'asheville' | 'austin' | 'scottsdale'} state={seed.state} treatmentKey="lip-filler" />
+                            </div>
+                        </div>
+                    )
+                })()}
+
+                {/* Top-of-listings price strip (Nov 3, 2026): the form CTA
+                    used to sit only below the hero, stats, and map, so most
+                    visitors never reached it. This strip sits right above
+                    the provider list and jumps straight to the form. */}
+                <div className="rounded-3xl border p-5 mb-10 flex flex-wrap items-center gap-4" style={{ background: '#3D2B1F', borderColor: '#3D2B1F' }}>
+                    <p className="flex-1 min-w-56 text-[#FAF8F5] leading-snug">
+                        <strong>What did you pay in {cityName}?</strong>{' '}
+                        <span className="opacity-80">No clinic here publishes prices yet — the only real prices come from people who were treated. 30 seconds, anonymous.</span>
+                    </p>
+                    <a href="#price-report" className="shrink-0 rounded-full bg-[#FAF8F5] text-[#3D2B1F] font-medium px-6 py-3 text-sm">
+                        Add what you paid →
+                    </a>
+                </div>
+
+                <PriceReportStickyBar city={cityName} />
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
                     <div className="lg:col-span-2" id="listings">

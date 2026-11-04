@@ -196,37 +196,41 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                                                 <div className="w-12 h-12 rounded-full bg-[#FAF8F5] border border-[#3D2B1F]/10 flex items-center justify-center shrink-0">
                                                     <User className="w-6 h-6 text-[#3D2B1F]/40" />
                                                 </div>
-                                                <div>
+                                                <div className="min-w-0 flex-1">
                                                     <h4 className="font-sans font-medium text-[17px] text-[#3D2B1F] mb-0.5">
                                                         {practitioner.name}{practitioner.credentials ? `, ${practitioner.credentials}` : ''}
                                                     </h4>
                                                     <div className="w-12 h-[1px] bg-[#3D2B1F]/10 my-3 hidden md:block"></div>
 
                                                     <div className="space-y-1.5 font-sans text-[14px]">
-                                                        <div className="text-[#A89B8C]">
-                                                            <span className="inline-block w-20 md:w-28 text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">Specialty</span>
-                                                            {practitioner.taxonomy || 'Aesthetics'}
+                                                        <div className="text-[#A89B8C] grid grid-cols-[104px_minmax(0,1fr)] gap-x-2 items-baseline">
+                                                            <span className="text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">Specialty</span>
+                                                            <span className="min-w-0">{practitioner.taxonomy || 'Aesthetics'}</span>
                                                         </div>
-                                                        <div className="text-[#A89B8C] flex items-center gap-1.5">
-                                                            <span className="inline-block w-20 md:w-28 text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">NPI</span>
-                                                            #{practitioner.npi_number || 'Verification pending'}
-                                                            {practitioner.is_npi_verified && (
-                                                                <span className="text-[#8A9E8D] font-medium flex items-center gap-1 ml-1.5 border border-[#8A9E8D]/20 bg-[#8A9E8D]/10 px-2 py-0.5 rounded-full text-xs">
-                                                                    Verified <CheckCircle className="w-3 h-3" />
-                                                                </span>
-                                                            )}
+                                                        <div className="text-[#A89B8C] grid grid-cols-[104px_minmax(0,1fr)] gap-x-2 items-baseline">
+                                                            <span className="text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">NPI</span>
+                                                            <span className="min-w-0 flex flex-wrap items-center gap-1.5">
+                                                                <span className="break-all">#{practitioner.npi_number || 'Verification pending'}</span>
+                                                                {practitioner.is_npi_verified && (
+                                                                    <span className="text-[#8A9E8D] font-medium flex items-center gap-1 shrink-0 border border-[#8A9E8D]/20 bg-[#8A9E8D]/10 px-2 py-0.5 rounded-full text-xs">
+                                                                        Verified <CheckCircle className="w-3 h-3" />
+                                                                    </span>
+                                                                )}
+                                                            </span>
                                                         </div>
-                                                        <div className="text-[#A89B8C]">
-                                                            <span className="inline-block w-20 md:w-28 text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">NPI Enumeration</span>
-                                                            {enumYear > 0 ? (
-                                                                <>
-                                                                    {enumYear}
-                                                                </>
-                                                            ) : 'Not on file'}
+                                                        <div className="text-[#A89B8C] grid grid-cols-[104px_minmax(0,1fr)] gap-x-2 items-baseline">
+                                                            <span className="text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold leading-tight">NPI Enumeration</span>
+                                                            <span className="min-w-0">
+                                                                {enumYear > 0 ? (
+                                                                    <>
+                                                                        {enumYear}
+                                                                    </>
+                                                                ) : 'Not on file'}
+                                                            </span>
                                                         </div>
-                                                        <div className="text-[#A89B8C]">
-                                                            <span className="inline-block w-20 md:w-28 text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">State</span>
-                                                            {provider.state}
+                                                        <div className="text-[#A89B8C] grid grid-cols-[104px_minmax(0,1fr)] gap-x-2 items-baseline">
+                                                            <span className="text-[#3D2B1F]/40 text-xs uppercase tracking-wider font-bold">State</span>
+                                                            <span className="min-w-0">{provider.state}</span>
                                                         </div>
                                                     </div>
                                                 </div>

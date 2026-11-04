@@ -37,7 +37,7 @@ export function PriceReportCTA({
     const detailed = Boolean(providerId && providerName)
 
     return (
-        <div className="my-8 rounded-[2rem] border border-[#3D2B1F]/10 bg-[#FAF8F5] p-6 md:p-8">
+        <div id="price-report" className="my-8 rounded-[2rem] border border-[#3D2B1F]/10 bg-[#FAF8F5] p-6 md:p-8 scroll-mt-24">
             {variant === 'missing-price' ? (
                 <>
                     <p className="font-display text-xl md:text-2xl font-medium text-[#3D2B1F] leading-snug">
