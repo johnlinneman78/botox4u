@@ -1,4 +1,4 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
@@ -13,16 +13,43 @@ import ListingLink from '../_components/ListingLink'
 import Logo from '@/components/layout/Logo'
 
 export default async function ProviderDashboard() {
-    const supabase = createServerComponentClient({ cookies })
-    const { data: { session } } = await supabase.auth.getSession()
+    // Next 16: cookies() is async and must be awaited. The old
+    // auth-helpers createServerComponentClient({ cookies }) passed the
+    // un-awaited function, which broke session reading on this page and
+    // threw into the error boundary ("Something went wrong!") for every
+    // signed-in provider, regardless of claim state. Use @supabase/ssr
+    // with awaited cookies and the anon key (RLS still applies).
+    const cookieStore = await cookies()
+    const supabase = createServerClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        {
+            cookies: {
+                getAll() {
+                    return cookieStore.getAll()
+                },
+                setAll(cookiesToSet) {
+                    try {
+                        cookiesToSet.forEach(({ name, value, options }) =>
+                            cookieStore.set(name, value, options)
+                        )
+                    } catch {
+                        // Called from a Server Component; setting cookies
+                        // here is best-effort only.
+                    }
+                },
+            },
+        }
+    )
+    const { data: { user } } = await supabase.auth.getUser()
 
-    if (!session) redirect('/provider/login')
+    if (!user) redirect('/provider/login')
 
     // Find provider associated with this user
     const { data: provider, error } = await supabase
         .from('providers')
         .select('id, name, listing_tier, score, slug, stripe_customer_id, views_30d, clicks_30d')
-        .eq('user_id', session.user.id)
+        .eq('user_id', user.id)
         .single()
 
     if (error || !provider) {
