@@ -21,7 +21,7 @@ import { JsonLd, generateBreadcrumbSchema, generateItemListSchema, generateFAQPa
 import { Suspense } from 'react'
 import { QuizBanner } from '@/components/lead-funnel/QuizBanner'
 import { PriceReportCTA } from '@/components/providers/PriceReportCTA'
-import { featuredClaimedFor, featuredNoteFor } from '@/lib/featured-listings'
+import { featuredNoteFor, isFeaturedClaimed, orderFeaturedFirst } from '@/lib/featured-listings'
 
 interface CityPageProps {
     params: Promise<{ state: string; city: string }>
@@ -121,7 +121,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
         clarityScore: p.clarityScore ?? p.score_total ?? null
     }));
 
-    const itemListSchema = generateItemListSchema(providers.slice(0, 50), cityName)
+    const itemListSchema = generateItemListSchema(orderFeaturedFirst(providers).slice(0, 50), cityName)
     const breadcrumbs = generateBreadcrumbSchema([
         { name: 'Home', item: '/' },
         { name: 'Directory', item: `/${NICHE.baseSlug}` },
@@ -242,35 +242,26 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                             </h2>
                         </div>
 
-                        {/* Free featured row for claimed listings (see lib/featured-listings.ts).
-                            Clearly labeled, separate from the ranked list below, and the
-                            featured provider ALSO stays in that ranked list in its normal
-                            position, so this never changes ranking or Clarity Score. */}
-                        {featuredClaimedFor(providers).length > 0 && (
-                            <div className="mb-8 rounded-3xl border p-6" style={{ background: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
-                                <p className="text-[10px] font-black uppercase tracking-widest mb-1" style={{ color: 'var(--color-stone)' }}>
-                                    Featured · Free claimed listing
-                                </p>
-                                <p className="text-xs mb-6" style={{ color: 'var(--color-stone)' }}>
-                                    This placement does not change ranking or Clarity Score.
-                                </p>
-                                <div className="space-y-8">
-                                    {featuredClaimedFor(providers).map((provider: any) => (
-                                        <div key={provider.id}>
-                                            <p className="text-xs mb-3" style={{ color: 'var(--color-stone)' }}>
-                                                {featuredNoteFor(provider.slug)}
-                                            </p>
-                                            <EnhancedProviderCard provider={provider} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
+                        {/* Free featured listings (see lib/featured-listings.ts):
+                            a claimed provider is pinned to the TOP of this list,
+                            clearly labeled, ahead of the score/rating order. Their
+                            Clarity Score itself does not change. */}
                         <div className="space-y-8">
                             {providers.length > 0 ? (
-                                providers.slice(0, 100).map((provider: any) => (
-                                    <EnhancedProviderCard key={provider.id} provider={provider} />
+                                orderFeaturedFirst(providers).slice(0, 100).map((provider: any) => (
+                                    <div key={provider.id}>
+                                        {isFeaturedClaimed(provider.slug) && (
+                                            <div className="mb-3">
+                                                <p className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-stone)' }}>
+                                                    Featured · Free claimed listing
+                                                </p>
+                                                <p className="text-xs" style={{ color: 'var(--color-stone)' }}>
+                                                    {featuredNoteFor(provider.slug)}. Pinned to the top as a free thank-you for claiming — this does not change its Clarity Score.
+                                                </p>
+                                            </div>
+                                        )}
+                                        <EnhancedProviderCard provider={provider} />
+                                    </div>
                                 ))
                             ) : (
                                 <div
