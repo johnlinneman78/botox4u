@@ -21,6 +21,7 @@ import { JsonLd, generateBreadcrumbSchema, generateItemListSchema, generateFAQPa
 import { Suspense } from 'react'
 import { QuizBanner } from '@/components/lead-funnel/QuizBanner'
 import { PriceReportCTA } from '@/components/providers/PriceReportCTA'
+import { featuredClaimedFor, featuredNoteFor } from '@/lib/featured-listings'
 
 interface CityPageProps {
     params: Promise<{ state: string; city: string }>
@@ -240,6 +241,31 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                                 Verified Providers in {cityName}
                             </h2>
                         </div>
+
+                        {/* Free featured row for claimed listings (see lib/featured-listings.ts).
+                            Clearly labeled, separate from the ranked list below, and the
+                            featured provider ALSO stays in that ranked list in its normal
+                            position, so this never changes ranking or Clarity Score. */}
+                        {featuredClaimedFor(providers).length > 0 && (
+                            <div className="mb-8 rounded-3xl border p-6" style={{ background: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
+                                <p className="text-[10px] font-black uppercase tracking-widest mb-1" style={{ color: 'var(--color-stone)' }}>
+                                    Featured · Free claimed listing
+                                </p>
+                                <p className="text-xs mb-6" style={{ color: 'var(--color-stone)' }}>
+                                    This placement does not change ranking or Clarity Score.
+                                </p>
+                                <div className="space-y-8">
+                                    {featuredClaimedFor(providers).map((provider: any) => (
+                                        <div key={provider.id}>
+                                            <p className="text-xs mb-3" style={{ color: 'var(--color-stone)' }}>
+                                                {featuredNoteFor(provider.slug)}
+                                            </p>
+                                            <EnhancedProviderCard provider={provider} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
                         <div className="space-y-8">
                             {providers.length > 0 ? (

@@ -28,7 +28,7 @@ export default function ProviderLoginPage() {
             if (error) {
                 setError(error.message)
             } else {
-                router.push('/admin/dashboard')
+                router.push('/provider/dashboard')
                 router.refresh()
             }
         } catch (err: any) {
@@ -58,8 +58,9 @@ export default function ProviderLoginPage() {
                         <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 flex items-start gap-3">
                             <span className="text-blue-500 mt-0.5">ℹ️</span>
                             <p className="text-xs text-blue-800 leading-relaxed">
-                                <strong>Beta Notice:</strong> We are currently in the process of rolling out self-service logins.
-                                Please check your invitation email for access details.
+                                <strong>Claimed listings:</strong> after you verify your claim, you choose your own
+                                dashboard password on the setup page. Sign in here with that password.
+                                Claiming is free.
                             </p>
                         </div>
 

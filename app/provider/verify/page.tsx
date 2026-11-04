@@ -1,17 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 import { Badge } from '@/components/ui/Badge'
 import { CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react'
-import { Suspense } from 'react'
+import { verifyClaimToken } from '@/lib/actions/claim'
 
 function VerifyContent() {
     const searchParams = useSearchParams()
     const token = searchParams.get('token')
     const router = useRouter()
-    const supabase = createClient()
 
     const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading')
     const [message, setMessage] = useState('')
@@ -23,51 +21,23 @@ function VerifyContent() {
             setStatus('error')
             setMessage('Invalid verification link.')
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token])
 
     const handleVerification = async (token: string) => {
-        // 1. Find the account with this token
-        const { data: account, error: fetchError } = await supabase
-            .from('provider_accounts')
-            .select('*, providers(name)')
-            .eq('verification_token', token)
-            .single()
-
-        if (fetchError || !account) {
+        const result = await verifyClaimToken(token)
+        if (!result.success) {
             setStatus('error')
-            setMessage('Invalid or expired verification link.')
+            setMessage(result.message || 'Verification failed.')
             return
         }
-
-        // 2. Mark account as verified and provider as claimed
-        const { error: updateAccountError } = await supabase
-            .from('provider_accounts')
-            .update({
-                verified: true,
-                verification_token: null,
-                last_login: new Date().toISOString()
-            })
-            .eq('id', account.id)
-
-        const { error: updateProviderError } = await supabase
-            .from('providers')
-            .update({
-                claimed: true,
-                crm_status: 'verified' // Step 10: Engaged -> Verified
-            })
-            .eq('id', account.provider_id)
-
-        if (updateAccountError || updateProviderError) {
-            setStatus('error')
-            setMessage('Failed to finalise verification. Please contact support.')
-            return
-        }
-
         setStatus('success')
-
-        // Auto-redirect to dashboard after 3 seconds
+        // Next step is choosing a password, which signs the claimant into
+        // the dashboard. Do NOT send them straight to /provider/dashboard:
+        // that page needs a session and a linked provider, and a fresh
+        // claimant has no password yet. That was the old break.
         setTimeout(() => {
-            router.push(`/provider/dashboard?id=${account.provider_id}`)
+            router.push(`/provider/set-password?token=${encodeURIComponent(result.setupToken!)}`)
         }, 3000)
     }
 
@@ -89,7 +59,7 @@ function VerifyContent() {
                         </div>
                         <h1 className="text-2xl font-display font-bold text-primary">Access Verified!</h1>
                         <p className="text-xl text-[#3D2B1F]/50">
-                            Welcome, <span className="font-bold">Clinic Partner</span>. We&apos;re preparing your dashboard.
+                            Welcome, <span className="font-bold">Clinic Partner</span>. Next, choose a password for your dashboard.
                         </p>
                         <div className="flex items-center justify-center gap-2 text-xs font-bold text-secondary uppercase tracking-widest mt-8">
                             <Sparkles className="w-4 h-4 fill-secondary animate-pulse" /> Redirecting in 3 seconds...

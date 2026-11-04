@@ -160,6 +160,11 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                         📍 {provider.city}, {provider.state}
                         {provider.address && ` · ${provider.address}`}
                     </p>
+                    {provider.hours && (
+                        <p className="font-body text-sm mt-2" style={{ color: 'var(--color-stone)' }}>
+                            🕒 {provider.hours}
+                        </p>
+                    )}
                 </RevealOnScroll>
             </section>
 
@@ -297,6 +302,20 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 container-reading">
                     {/* Unique Description Column */}
                     <div className="space-y-6">
+                        {provider.description && (
+                            <RevealOnScroll delay={0.05}>
+                                <h2 className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--color-taupe)' }}>About this clinic</h2>
+                                <p
+                                    className="font-body leading-relaxed"
+                                    style={{ fontSize: '16px', color: 'var(--color-stone)' }}
+                                >
+                                    {provider.description}
+                                </p>
+                                <p className="text-[10px] italic" style={{ color: 'var(--color-taupe)' }}>
+                                    Clinic-supplied description.
+                                </p>
+                            </RevealOnScroll>
+                        )}
                         <RevealOnScroll delay={0.05}>
                             <h2 className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--color-taupe)' }}>Clinical Context</h2>
                             <p
