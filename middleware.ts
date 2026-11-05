@@ -1,4 +1,4 @@
-import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
+import { createServerClient } from '@supabase/ssr'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { parseCoordinateStrings } from '@/lib/utils/geo'
@@ -15,35 +15,65 @@ function isAdminEmail(email: string | undefined | null): boolean {
 }
 
 export async function middleware(request: NextRequest) {
-    const response = NextResponse.next()
-    const supabase = createMiddlewareClient({ req: request, res: response })
+    // @supabase/ssr middleware pattern: one client for login, dashboard and
+    // middleware alike (see lib/supabase/client.ts). The old auth-helpers
+    // middleware client disagreed with the dashboard's SSR client about
+    // whether a provider was signed in, which produced the Nov 4
+    // login↔dashboard redirect loop.
+    let supabaseResponse = NextResponse.next({
+        request,
+    })
+    const supabase = createServerClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        {
+            cookies: {
+                getAll() {
+                    return request.cookies.getAll()
+                },
+                setAll(cookiesToSet) {
+                    // RequestCookies.set takes (name, value) only in this
+                    // Next version; attributes ride on the response below.
+                    cookiesToSet.forEach(({ name, value }) =>
+                        request.cookies.set(name, value)
+                    )
+                    supabaseResponse = NextResponse.next({
+                        request,
+                    })
+                    cookiesToSet.forEach(({ name, value, options }) =>
+                        supabaseResponse.cookies.set(name, value, options)
+                    )
+                },
+            },
+        }
+    )
 
     const {
-        data: { session },
-    } = await supabase.auth.getSession()
+        data: { user },
+    } = await supabase.auth.getUser()
 
     const path = request.nextUrl.pathname
 
     // Admin pages: signed in AND on the ADMIN_EMAILS allowlist
     if (path.startsWith('/admin')) {
-        if (!session) {
+        if (!user) {
             return NextResponse.redirect(new URL('/provider/login', request.url))
         }
-        if (!isAdminEmail(session.user?.email)) {
+        if (!isAdminEmail(user?.email)) {
             return new NextResponse('Not found', { status: 404 })
         }
-        return response
+        return supabaseResponse
     }
 
     // Protect dashboard routes
     if (path.startsWith('/provider/dashboard')) {
-        if (!session) {
+        if (!user) {
             return NextResponse.redirect(new URL('/provider/login', request.url))
         }
     }
 
     // Redirect to dashboard if logged in and trying to access login/register
-    if (session && (path === '/provider/login' || path === '/provider/register')) {
+    if (user && (path === '/provider/login' || path === '/provider/register')) {
         return NextResponse.redirect(new URL('/provider/dashboard', request.url))
     }
 
@@ -76,7 +106,7 @@ export async function middleware(request: NextRequest) {
         }
     }
 
-    return response
+    return supabaseResponse
 }
 
 export const config = {

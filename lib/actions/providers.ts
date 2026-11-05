@@ -70,8 +70,8 @@ export async function getProvidersWithSearch(filters: {
     let queryBuilder = supabase
         .from('providers')
         .select(`
-            id, name, slug, business_type, address, city, state, 
-            listing_tier, verified, price_per_unit,
+            id, name, slug, business_type, address, city, state,
+            listing_tier, verified, price_per_unit, website, phone,
             lat, lng, hero_image_url,
             rating, average_rating, review_count, 
             services_offered, credentials, description,

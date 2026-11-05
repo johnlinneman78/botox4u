@@ -298,7 +298,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                                                     Featured · Free claimed listing
                                                 </p>
                                                 <p className="text-xs" style={{ color: 'var(--color-stone)' }}>
-                                                    {featuredNoteFor(provider.slug)}. Pinned to the top as a free thank-you for claiming — this does not change its Clarity Score.
+                                                    {featuredNoteFor(provider.slug)}. Pinned to the top as a free thank-you for claiming — this changes its display position, not its Clarity Score.
                                                 </p>
                                             </div>
                                         )}

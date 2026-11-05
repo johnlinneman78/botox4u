@@ -4,7 +4,7 @@ import { useState, Suspense } from 'react'
 import Link from 'next/link'
 import Logo from '@/components/layout/Logo'
 import { useSearchParams } from 'next/navigation'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { slugify } from '@/lib/utils'
 import { recordSignupClaim, createSignupProvider } from '@/lib/actions/provider-actions'
@@ -24,7 +24,7 @@ function ProviderSignupContent() {
     const plan = searchParams.get('plan') || 'free'
     const existingProviderId = searchParams.get('id')
 
-    const supabase = createClientComponentClient()
+    const supabase = createClient()
 
     const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault()

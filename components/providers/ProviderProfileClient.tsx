@@ -68,12 +68,13 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
     const reviews = provider.top_reviews || provider.reviews || []
     const services = provider.services_offered || []
 
-    // Same four parts as lib/scoring.ts and /methodology
+    // Same three parts as lib/scoring.ts (v4) and /methodology.
+    // Credentials are NOT a score part: NPI verification is a separate
+    // badge, and booking links are NOT scored (booking display is paid).
     const scoreBreakdown = [
-        { label: 'Confirmed credentials', score: provider.score?.breakdown?.credentials ?? 0, maxScore: SCORE_MAX.credentials },
         { label: 'Patient reviews', score: provider.score?.breakdown?.reviews ?? 0, maxScore: SCORE_MAX.reviews },
         { label: 'Published pricing', score: provider.score?.breakdown?.pricing ?? 0, maxScore: SCORE_MAX.pricing },
-        { label: 'Contact & booking', score: provider.score?.breakdown?.access ?? 0, maxScore: SCORE_MAX.access },
+        { label: 'Contact details', score: provider.score?.breakdown?.access ?? 0, maxScore: SCORE_MAX.access },
     ]
     const scoreNotes: string[] = provider.score?.notes || []
 

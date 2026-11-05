@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Logo from '@/components/layout/Logo'
 import { useRouter } from 'next/navigation'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createClient } from '@/lib/supabase/client'
 
 export default function ProviderLoginPage() {
     const [email, setEmail] = useState('')
@@ -12,7 +12,7 @@ export default function ProviderLoginPage() {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const router = useRouter()
-    const supabase = createClientComponentClient()
+    const supabase = createClient()
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()

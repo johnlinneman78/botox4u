@@ -8,27 +8,16 @@ import { SCORE_MAX } from '@/lib/scoring'
 
 export const metadata: Metadata = {
     title: `How the Clarity Score Works | ${NICHE.siteName}`,
-    description: `The Clarity Score™ measures how much you can confirm about a Botox or filler provider before booking: credentials, patient reviews, published pricing and contact details. Paid plans never change it.`,
+    description: `The Clarity Score™ measures how much you can confirm about a Botox or filler provider before booking: patient reviews, published pricing and contact details. Paid plans never change it.`,
     alternates: { canonical: '/methodology' },
     openGraph: {
         title: `How the Clarity Score Works | ${NICHE.siteName}`,
-        description: `Credentials, patient reviews, published pricing and contact details. Paid plans never change the score.`,
+        description: `Patient reviews, published pricing and contact details. Paid plans never change the score.`,
         url: 'https://www.verifiedaesthetics.com/methodology',
     },
 }
 
 const PARTS = [
-    {
-        icon: ShieldCheck,
-        title: 'Confirmed credentials',
-        points: SCORE_MAX.credentials,
-        items: [
-            ['20', 'The provider or one of its injectors matches a record in the federal NPI registry, and we have confirmed the match.'],
-            ['Up to 15', 'The confirmed injector’s license type: physician (MD/DO) 15, nurse practitioner or physician assistant 12, registered nurse 8.'],
-            ['5', 'A confirmed injector has held their NPI record for 5 years or more.'],
-        ],
-        note: 'We only award these points once a match is confirmed. A provider we haven’t checked yet scores 0 here, which says nothing bad about them, only that we can’t vouch for it yet.',
-    },
     {
         icon: Star,
         title: 'Patient reviews',
@@ -48,14 +37,13 @@ const PARTS = [
     },
     {
         icon: Phone,
-        title: 'Contact & booking',
+        title: 'Contact details',
         points: SCORE_MAX.access,
         items: [
             ['4', 'A working website.'],
             ['3', 'A listed phone number.'],
-            ['3', 'An online booking link.'],
         ],
-        note: 'Small, but it separates an active practice from a stale listing.',
+        note: 'Small, but it separates an active practice from a stale listing. Booking links are deliberately not scored: booking display is a paid benefit, and scoring it would tie payment to the score.',
     },
 ]
 
@@ -72,7 +60,7 @@ export default function MethodologyPage() {
                         How the Clarity Score™ works
                     </h1>
                     <p className="text-xl text-[#3D2B1F]/70 font-light leading-relaxed mb-6">
-                        The Clarity Score answers one question: how much can you confirm about this provider before you book? It runs from 0 to 100 and has four parts.
+                        The Clarity Score answers one question: how much can you confirm about this provider before you book? It runs from 0 to 100 and has three parts: reviews (40), published pricing (10) and contact details (7), rescaled from a raw maximum of 57 to 100. That rescaling keeps the ratios among the three parts; it does not keep the old weights or the old ranking order.
                     </p>
                     <p className="text-lg text-[#3D2B1F]/70 font-light leading-relaxed">
                         It is not a measure of how good someone&apos;s injections look. No directory can know that from public data, and we won&apos;t pretend to.
@@ -112,19 +100,20 @@ export default function MethodologyPage() {
                     <section>
                         <h2 className="text-2xl font-display font-bold text-[#3D2B1F] mb-3">When there&apos;s no score</h2>
                         <p>
-                            If a provider has fewer than 5 reviews and no confirmed NPI record, we show &quot;Not enough data&quot; instead of a number. A low number built on almost nothing would be unfair to them and useless to you.
+                            If a provider has fewer than 5 reviews, we show &quot;Not enough data&quot; instead of a number. A low number built on almost nothing would be unfair to them and useless to you.
                         </p>
                     </section>
 
                     <section>
                         <h2 className="text-2xl font-display font-bold text-[#3D2B1F] mb-3">Reading the number</h2>
-                        <p>A score above 70 almost always means we&apos;ve confirmed the provider&apos;s credentials. Providers we haven&apos;t verified yet usually land between 20 and 55, mainly because the credentials part is still empty. A lower score means we can confirm less, not that the provider is worse.</p>
+                        <p>A lower score means we can confirm less, not that the provider is worse. Scores from before November 2026 used a different formula that included credentials (40 points); those old scores are not comparable to current scores and must not be read as improvement or decline.</p>
                     </section>
 
                     <section>
                         <h2 className="text-2xl font-display font-bold text-[#3D2B1F] mb-3">What never counts</h2>
                         <ul className="list-disc pl-6 space-y-2">
-                            <li>Whether a provider pays us. Paid plans add photos, pricing and a visual highlight, never points or ranking.</li>
+                            <li>Whether a provider pays us. Paid plans add photos, pricing and a visual highlight, never points. A paid booking display never adds points, and a free featured placement changes display position at the top of a city page, not the calculated score.</li>
+                            <li>NPI verification. An NPI match is shown separately as an &quot;NPI Verified&quot; badge with its check date; no badge is not a penalty. An NPI match does not validate state licensure, and we keep license checks separate from the NPI check. &quot;Not checked,&quot; &quot;no matching record found&quot; and &quot;not applicable&quot; are different states.</li>
                             <li>How much product a clinic buys from a manufacturer, or loyalty-program status.</li>
                             <li>How many different treatments a clinic sells.</li>
                         </ul>
