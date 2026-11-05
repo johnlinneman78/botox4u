@@ -38,7 +38,7 @@ export function CityStats({ avgCost, providerCount, avgRating, city }: CityStats
             label: 'Quality Score',
             value: 'Audited',
             suffix: '',
-            description: 'Scored on confirmed credentials, patient reviews, published pricing and contact details.'
+            description: 'Scored on patient reviews, published pricing and contact details. NPI verification is shown separately and never adds points.'
         }
     ]
 
