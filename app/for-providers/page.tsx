@@ -175,7 +175,7 @@ export default function ForProvidersPage() {
                             </div>
                             <h3 className="text-2xl font-bold mb-4">You Own the Lead</h3>
                             <p className="text-[#3D2B1F]/60 leading-relaxed font-light">
-                                We don't hide your phone number or website behind a wall. Every premium listing gets direct click-throughs to your booking page. No middleman, no commission.
+                                We don't hide your phone number or website behind a wall. No middleman, no commission.
                             </p>
                         </div>
                     </div>
@@ -193,7 +193,7 @@ export default function ForProvidersPage() {
                         <div className="relative z-10">
                             <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">Ready to claim your profile?</h2>
                             <p className="text-xl md:text-2xl font-medium mb-12 opacity-90 text-balance">
-                                Claim your practice today. Claiming is free, and paid plans never change your ranking.
+                                Claim your practice today. Claiming is free, and your ranking is never for sale.
                             </p>
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                                 <Link href="/claim">
