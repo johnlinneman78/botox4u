@@ -69,6 +69,13 @@ export default function ProviderProfileClient({ provider, themes, cityAvgCost = 
         .join('')
         .slice(0, 2)
 
+    // business_type is a raw DB enum. 'organization' is an old import value
+    // that reads as nonsense in customer copy ("Washington organization"),
+    // so display a human label instead. Other values pass through as-is.
+    const businessTypeLabel =
+        provider.businessType === 'organization' ? 'Medical Spa'
+        : provider.businessType || 'Aesthetic Medicine Provider'
+
     // Calculate dynamic scores for the visual profile
     const clarityScore: number | null = provider.score_total ?? provider.clarityScore ?? null
     const reviews = provider.top_reviews || provider.reviews || []
@@ -171,35 +178,32 @@ export default function ProviderProfileClient({ provider, themes, cityAvgCost = 
                     )}
                 </div>
 
-                {/* Provider Info — staggered reveal */}
-                <RevealOnScroll>
-                    <h1
-                        className="font-display font-light mb-2"
-                        style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', color: 'var(--color-espresso)' }}
-                    >
-                        {provider.name} — {provider.city} {provider.businessType || 'Medical Spa'}
-                    </h1>
-                </RevealOnScroll>
+                {/* Provider Info — renders plain: it is above the fold and must be
+                    readable on first paint (RevealOnScroll starts at opacity 0).
+                    The heading is name + city only: the raw business_type value
+                    ("organization") leaked into it as a stray word. */}
+                <h1
+                    className="font-display font-light mb-2"
+                    style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', color: 'var(--color-espresso)' }}
+                >
+                    {provider.name} — {provider.city}
+                </h1>
 
-                <RevealOnScroll delay={0.05}>
-                    <p
-                        className="font-body uppercase mb-4"
-                        style={{ fontSize: '12px', letterSpacing: '0.06em', color: 'var(--color-stone)' }}
-                    >
-                        {provider.businessType || 'Aesthetic Medicine Provider'}
-                    </p>
-                </RevealOnScroll>
+                <p
+                    className="font-body uppercase mb-4"
+                    style={{ fontSize: '12px', letterSpacing: '0.06em', color: 'var(--color-stone)' }}
+                >
+                    {businessTypeLabel}
+                </p>
 
-                <RevealOnScroll delay={0.1}>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                        {npiBadge && <Badge variant="sage" title={npiBadge.detail}>{npiBadge.label}</Badge>}
-                        {provider.npi_specialty && <Badge variant="sage">{provider.npi_specialty}</Badge>}
-                        {provider.allergan_tier && provider.allergan_tier !== 'None' && (
-                            <Badge variant="sage">Allergan {provider.allergan_tier}</Badge>
-                        )}
-                        {provider.verified && <Badge variant="gold">Verified Profile</Badge>}
-                    </div>
-                </RevealOnScroll>
+                <div className="flex flex-wrap gap-2 mb-4">
+                    {npiBadge && <Badge variant="sage" title={npiBadge.detail}>{npiBadge.label}</Badge>}
+                    {provider.npi_specialty && <Badge variant="sage">{provider.npi_specialty}</Badge>}
+                    {provider.allergan_tier && provider.allergan_tier !== 'None' && (
+                        <Badge variant="sage">Allergan {provider.allergan_tier}</Badge>
+                    )}
+                    {provider.verified && <Badge variant="gold">Verified Profile</Badge>}
+                </div>
 
                 {npiBadge && (
                     <>
@@ -212,17 +216,15 @@ export default function ProviderProfileClient({ provider, themes, cityAvgCost = 
                     </>
                 )}
 
-                <RevealOnScroll delay={0.15}>
-                    <p className="font-body text-sm" style={{ color: 'var(--color-stone)' }}>
-                        📍 {provider.city}, {provider.state}
-                        {provider.address && ` · ${provider.address}`}
+                <p className="font-body text-sm" style={{ color: 'var(--color-stone)' }}>
+                    📍 {provider.city}, {provider.state}
+                    {provider.address && ` · ${provider.address}`}
+                </p>
+                {provider.hours && (
+                    <p className="font-body text-sm mt-2" style={{ color: 'var(--color-stone)' }}>
+                        🕒 {provider.hours}
                     </p>
-                    {provider.hours && (
-                        <p className="font-body text-sm mt-2" style={{ color: 'var(--color-stone)' }}>
-                            🕒 {provider.hours}
-                        </p>
-                    )}
-                </RevealOnScroll>
+                )}
             </section>
 
             {/* ═══ VERIFIED CREDENTIALS (NEW) ═══ */}
@@ -389,7 +391,7 @@ export default function ProviderProfileClient({ provider, themes, cityAvgCost = 
                             >
                                 {provider.ai_description || (reviews[0]?.text
                                     ? `Observed clinical performance for ${provider.name} in the ${provider.city} market indicates a focus on ${services[0] || 'aesthetic excellence'}. Patient feedback highlights: "${reviews[0].text.substring(0, 180)}..."`
-                                    : `This ${provider.city} ${provider.businessType || 'clinic'} is indexed by VerifiedAesthetics. Our data audit focuses on verified credentials, published pricing, and patient reviews in the ${provider.state} region.`)}
+                                    : `This ${provider.city} ${businessTypeLabel.toLowerCase()} is indexed by VerifiedAesthetics. Our data audit focuses on verified credentials, published pricing, and patient reviews in the ${provider.state} region.`)}
                             </p>
                             <div className="pt-6">
                                 {provider.city && provider.state && (
