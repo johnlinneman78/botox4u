@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/Badge'
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
 import { ScrollCTA } from '@/components/ui/ScrollCTA'
 import { PriceReportCTA } from '@/components/providers/PriceReportCTA'
+import { LeadForm } from '@/components/providers/LeadForm'
 import { formatCurrency } from '@/lib/utils'
 import { NICHE } from '@/config/niche'
 import { ChevronRight, ShieldCheck, Search, Activity, Sparkles, Star, Info, User, CheckCircle } from 'lucide-react'
@@ -18,6 +19,9 @@ import { ChevronRight, ShieldCheck, Search, Activity, Sparkles, Star, Info, User
 interface ProviderProfileClientProps {
     provider: Record<string, any>
     themes: Record<string, any>
+    /** City average per-unit price (getCityStats), null when no clinic in
+        the city publishes one. Shown only when this clinic has no price. */
+    cityAvgCost?: number | null
 }
 
 // ─── Animated Progress Bar (framer-motion) ──────────────
@@ -56,8 +60,9 @@ function ProgressBar({ label, score, maxScore, index }: { label: string; score: 
     )
 }
 
-export default function ProviderProfileClient({ provider, themes }: ProviderProfileClientProps) {
+export default function ProviderProfileClient({ provider, themes, cityAvgCost = null }: ProviderProfileClientProps) {
     const [imageError, setImageError] = useState(false)
+    const [leadModalOpen, setLeadModalOpen] = useState(false)
     const initials = (provider.name || 'IP')
         .split(' ')
         .map((w: string) => w[0])
@@ -79,6 +84,17 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
     ]
     const scoreNotes: string[] = provider.score?.notes || []
 
+    // The price the visitor sees first. The clinic's own published
+    // per-unit price wins; otherwise the real city average (never an
+    // invented number, never a generic range). The quote button comes
+    // AFTER this number — never before it.
+    const botoxPrice: number | null =
+        (provider.pricePerUnit as number | null) ||
+        (provider.enriched_attrs?.price_per_unit_botox as number | null) ||
+        null
+    const hasBotoxPrice = botoxPrice != null
+    const estimatePrice = hasBotoxPrice ? botoxPrice : cityAvgCost
+
     const isRealImageUrl = (url: string | undefined | null): boolean => {
         if (!url || url.length < 5) return false
         if (url.includes('placeholder') || url.includes('unsplash.com')) return false
@@ -99,6 +115,25 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
         <div style={{ paddingTop: 'var(--nav-height)', background: 'var(--color-bg)' }}>
             {/* ═══ HERO ZONE ═══ */}
             <section className="container-content pt-6 pb-8">
+                {/* Unclaimed profile: say so plainly — the listing may be
+                    incomplete, and the visitor should know that. */}
+                {!provider.claimed && (
+                    <div
+                        className="mb-6 px-5 py-4 rounded-xl flex flex-wrap items-center gap-3"
+                        style={{ background: 'rgba(201,169,110,0.12)', border: '1px solid rgba(201,169,110,0.35)' }}
+                    >
+                        <p className="font-body text-sm flex-1" style={{ color: 'var(--color-espresso)' }}>
+                            This provider hasn&apos;t claimed their profile yet — information may be incomplete.
+                        </p>
+                        <Link
+                            href="/claim"
+                            className="font-body text-sm font-medium underline underline-offset-4 shrink-0"
+                            style={{ color: 'var(--color-espresso)' }}
+                        >
+                            Is this your practice? Claim it — free →
+                        </Link>
+                    </div>
+                )}
                 {/* Hero Image / Placeholder */}
                 <div
                     className="relative w-full overflow-hidden mb-8 flex items-center justify-center"
@@ -128,12 +163,6 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                                 style={{ fontSize: '64px', color: 'var(--color-espresso)', opacity: 0.15 }}
                             >
                                 {initials}
-                            </span>
-                            <span
-                                className="font-body uppercase text-xs font-medium"
-                                style={{ color: 'var(--color-taupe)', letterSpacing: '0.08em' }}
-                            >
-                                Upload Photo
                             </span>
                         </div>
                     )}
@@ -170,9 +199,14 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                 </RevealOnScroll>
 
                 {npiBadge && (
-                    <p className="font-body text-xs mb-4" style={{ color: 'var(--color-stone)' }}>
-                        {npiBadge.detail}
-                    </p>
+                    <>
+                        <p className="font-body text-xs mb-1" style={{ color: 'var(--color-stone)' }}>
+                            {npiBadge.detail}
+                        </p>
+                        <p className="font-body text-xs mb-4" style={{ color: 'var(--color-taupe)' }}>
+                            We confirmed this injector exists in the federal NPI registry. That checks identity, not skill or results.
+                        </p>
+                    </>
                 )}
 
                 <RevealOnScroll delay={0.15}>
@@ -388,7 +422,7 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                                         { label: 'NPI Enumeration', value: enumerationText, icon: ShieldCheck },
                                         { label: 'Primary Focus', value: services[0] || 'Aesthetic Medicine', icon: Search },
                                         { label: 'Price Index', value: priceDisplay, icon: Activity },
-                                        { label: 'Audit Standard', value: 'Credentials, Reviews & Pricing', icon: Sparkles }
+                                        { label: 'Score Inputs', value: 'Reviews, Pricing & Contact', icon: Sparkles }
                                     ].map((item, i) => (
                                         <div key={i} className="flex items-center justify-between p-4 rounded-xl border border-[var(--color-border)] bg-white/50">
                                             <div className="flex items-center gap-3">
@@ -580,6 +614,45 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                     </h2>
                 </RevealOnScroll>
 
+                {/* What it costs here — the number first, the quote button
+                    after it. Never a phone-number ask before a number. */}
+                <RevealOnScroll>
+                    <div
+                        className="mb-6 p-5 rounded-xl"
+                        style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
+                    >
+                        {hasBotoxPrice ? (
+                            <p className="font-body leading-relaxed" style={{ fontSize: '15px', color: 'var(--color-espresso)' }}>
+                                Botox here: <strong>{formatCurrency(botoxPrice)}/unit.</strong>
+                                {estimatePrice != null && (
+                                    <> A typical session (20–50 units) runs about <strong>{formatCurrency(estimatePrice * 20)}–{formatCurrency(estimatePrice * 50)}</strong>.</>
+                                )}
+                            </p>
+                        ) : cityAvgCost != null ? (
+                            <p className="font-body leading-relaxed" style={{ fontSize: '15px', color: 'var(--color-espresso)' }}>
+                                This clinic hasn&apos;t published a price. {provider.city} runs about{' '}
+                                <strong>{formatCurrency(cityAvgCost)} a unit</strong> on average, based on published
+                                clinic prices.
+                                {estimatePrice != null && (
+                                    <> A typical session (20–50 units) runs about <strong>{formatCurrency(estimatePrice * 20)}–{formatCurrency(estimatePrice * 50)}</strong>.</>
+                                )}
+                            </p>
+                        ) : (
+                            <p className="font-body leading-relaxed" style={{ fontSize: '15px', color: 'var(--color-espresso)' }}>
+                                No published price yet.
+                            </p>
+                        )}
+                        <button
+                            type="button"
+                            onClick={() => setLeadModalOpen(true)}
+                            className="mt-4 px-6 py-3 rounded-full font-body font-medium text-sm transition-all hover:-translate-y-px"
+                            style={{ background: 'var(--color-espresso)', color: 'var(--color-linen)' }}
+                        >
+                            Request a consultation →
+                        </button>
+                    </div>
+                </RevealOnScroll>
+
                 <div className="space-y-0">
                     {(provider.pricePerUnit || provider.enriched_attrs?.price_per_unit_botox) && (
                         <RevealOnScroll delay={0}>
@@ -675,6 +748,7 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                     providerName={provider.name}
                     city={provider.city}
                     state={provider.state}
+                    ctaLabel="Share your Botox price"
                 />
 
                 {provider.enriched_attrs?.new_patient_special && (
@@ -750,6 +824,38 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                     {NICHE.copy.footerDisclaimer || "Information is provided for educational purposes only. Always consult a medical professional."}
                 </p>
             </section>
+
+            {/* ═══ CONSULTATION MODAL (opened from Services & Pricing) ═══ */}
+            {leadModalOpen && (
+                <div
+                    className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center p-4"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Request a consultation"
+                >
+                    <div
+                        className="absolute inset-0 bg-black/50"
+                        onClick={() => setLeadModalOpen(false)}
+                    />
+                    <div className="relative w-full max-w-md max-h-[90vh] overflow-y-auto">
+                        <button
+                            type="button"
+                            aria-label="Close"
+                            onClick={() => setLeadModalOpen(false)}
+                            className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 text-lg leading-none flex items-center justify-center"
+                            style={{ color: 'var(--color-espresso)' }}
+                        >
+                            ×
+                        </button>
+                        <LeadForm
+                            providerId={provider.id}
+                            providerName={provider.name}
+                            city={provider.city}
+                            state={provider.state}
+                        />
+                    </div>
+                </div>
+            )}
 
             {/* ═══ SCROLL-TRIGGERED CTA BAR ═══ */}
             <ScrollCTA

@@ -98,6 +98,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
     ])
 
     const localProviders = await getProvidersWithSearch({ city: provider.city, state: provider.state, limit: 12 })
+    const cityStats = await getCityStats(provider.city)
     const relatedProviders = localProviders.filter(p => p.slug !== provider.slug).slice(0, 8)
 
     const scoreText = formatScore(provider.score_total ?? provider.clarityScore)
@@ -121,7 +122,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                 "name": `What is a Clarity Score™ and how did ${provider.name} score?`,
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": `The Clarity Score™ measures how much a patient can confirm about a provider before booking: confirmed credentials (40 points), patient reviews (40), published pricing (10) and contact and booking details (10). Paid plans never change it. ${provider.name}: ${scoreText}.`
+                    "text": `The Clarity Score™ measures how much a patient can confirm about a provider before booking: patient reviews (40 points), published pricing (10) and contact details (7), rescaled from 57. Practitioner NPI matching is shown separately and never adds points. Paid plans never change it. ${provider.name}: ${scoreText}.`
                 }
             },
             {
@@ -129,7 +130,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                 "name": `How do I compare Botox providers in ${provider.city}?`,
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": `VerifiedAesthetics lets you compare over ${localProviders.length > 5 ? localProviders.length + '+' : 'several'} verified providers in ${provider.city} by Clarity Score™, estimated pricing, and patient sentiments. Visit our comprehensive ${provider.city} provider rankings page to explore credentials and independent data across the state of ${provider.state}.`
+                    "text": `VerifiedAesthetics lets you compare over ${localProviders.length > 5 ? localProviders.length + '+' : 'several'} providers listed in ${provider.city} by Clarity Score™, estimated pricing, and patient sentiments. Visit our comprehensive ${provider.city} provider rankings page to explore credentials and independent data across the state of ${provider.state}.`
                 }
             }
         ]
@@ -142,7 +143,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
             <JsonLd data={breadcrumbs} />
             <JsonLd data={faqSchema} />
 
-            <ProviderProfileClient provider={provider} themes={themes} />
+            <ProviderProfileClient provider={provider} themes={themes} cityAvgCost={cityStats?.avgCost ?? null} />
 
             {/* COMPARE PROVIDERS CROSS-LINKING SECTION */}
             {relatedProviders.length > 0 && (
@@ -195,7 +196,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                             What is a Clarity Score™ and how did {provider.name} score?
                         </h3>
                         <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                            The Clarity Score™ measures how much a patient can confirm about a provider before booking: confirmed credentials (40 points), patient reviews (40), published pricing (10) and contact and booking details (10). Paid plans never change it. {provider.name}: {scoreText}. <Link href="/methodology" className="underline">How the score works</Link>.
+                            The Clarity Score™ measures how much a patient can confirm about a provider before booking: patient reviews (40 points), published pricing (10) and contact details (7), rescaled from 57. Practitioner NPI matching is shown separately and never adds points. Paid plans never change it. {provider.name}: {scoreText}. <Link href="/methodology" className="underline">How the score works</Link>.
                         </p>
                     </div>
 
@@ -204,7 +205,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                             How do I compare Botox providers in {provider.city}?
                         </h3>
                         <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                            VerifiedAesthetics lets you compare over {localProviders.length > 5 ? localProviders.length + '+' : 'several'} verified providers in {provider.city} by Clarity Score™, estimated pricing, and patient sentiments. Visit our comprehensive {provider.city} provider rankings page to explore medical credentials, before and after insights, and independent data across the state of {provider.state}.
+                            VerifiedAesthetics lets you compare over {localProviders.length > 5 ? localProviders.length + '+' : 'several'} providers listed in {provider.city} by Clarity Score™, estimated pricing, and patient sentiments. Visit our comprehensive {provider.city} provider rankings page to explore medical credentials, before and after insights, and independent data across the state of {provider.state}.
                         </p>
                     </div>
                 </div>

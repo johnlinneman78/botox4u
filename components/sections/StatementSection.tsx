@@ -1,28 +1,21 @@
 'use client'
 
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useRef } from 'react'
 import Link from 'next/link'
-import { motion, useInView, animate } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 
-interface StatementSectionProps {
-    topScore?: number
-}
+// Short trust explanation — what the score is, in plain words.
+//
+// The old version animated a big "94" as if it were a score. It wasn't
+// any provider's score; it was decoration, and it sat next to a stale
+// description of the formula. This version says what the Clarity Score
+// actually measures (v4: patient reviews 40, published pricing 10,
+// contact details 7, rescaled from 57) and keeps NPI matching separate,
+// because NPI verification is not part of the score.
 
-export function StatementSection({ topScore = 94 }: StatementSectionProps) {
-    const [displayScore, setDisplayScore] = useState(0)
+export function StatementSection() {
     const sectionRef = useRef(null)
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
-
-    useEffect(() => {
-        if (isInView) {
-            const controls = animate(0, topScore, {
-                duration: 1.6,
-                ease: [0.16, 1, 0.3, 1],
-                onUpdate: (value) => setDisplayScore(Math.round(value))
-            })
-            return () => controls.stop()
-        }
-    }, [isInView, topScore])
 
     return (
         <section
@@ -34,7 +27,7 @@ export function StatementSection({ topScore = 94 }: StatementSectionProps) {
                 textAlign: 'center',
             }}
         >
-            {/* Interactive blooming glow */}
+            {/* Soft glow */}
             <motion.div
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none z-0"
                 style={{
@@ -47,28 +40,12 @@ export function StatementSection({ topScore = 94 }: StatementSectionProps) {
                 transition={{ duration: 2.5, ease: "easeOut" }}
             />
 
-            {/* Giant background number - dopamine moment */}
-            <motion.span
-                className="font-display absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0"
-                style={{
-                    fontSize: 'clamp(200px, 30vw, 400px)',
-                    fontWeight: 300,
-                    color: 'rgba(201, 169, 110, 0.04)',
-                    lineHeight: 1,
-                }}
-                initial={{ opacity: 0, scale: 0.9, y: '-45%' }}
-                animate={isInView ? { opacity: 1, scale: 1, y: '-50%' } : {}}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            >
-                {displayScore}
-            </motion.span>
-
             {/* Foreground content */}
             <motion.div
                 className="relative z-10 max-w-4xl mx-auto"
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             >
                 <span
                     className="font-body uppercase font-bold block mb-6"
@@ -93,7 +70,7 @@ export function StatementSection({ topScore = 94 }: StatementSectionProps) {
                     }}
                 >
                     The number that tells you <br className="hidden md:block" />
-                    everything ads <em className="italic" style={{ color: 'var(--color-gold)' }}>won&apos;t.</em>
+                    what you can confirm <em className="italic" style={{ color: 'var(--color-gold)' }}>before you book.</em>
                 </h2>
 
                 <p
@@ -105,7 +82,9 @@ export function StatementSection({ topScore = 94 }: StatementSectionProps) {
                         maxWidth: '600px',
                     }}
                 >
-                    Our Clarity Score™ analyzes clinical credentials, verified patient outcome signals, and price transparency to score every provider independently. No pay-to-play, no shortcuts.
+                    The Clarity Score summarizes patient-review, published-pricing, and contact-information signals.
+                    Practitioner NPI matching is shown separately — it never adds points, and no badge is never a
+                    penalty. No pay-to-play, no shortcuts.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">

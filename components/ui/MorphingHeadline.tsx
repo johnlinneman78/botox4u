@@ -17,8 +17,11 @@
 //
 // Verified city: "In Portland, clinics publish Botox at $12–$17 a unit.
 // Most people learn their price at the front desk."
-// Anywhere else: "Clinics publish Botox prices. Most people learn their
-// price at the front desk."
+// Anywhere else: "Check what Botox costs in your city. Most people learn
+// their price at the front desk." — the old fallback ("Clinics publish
+// Botox prices") contradicted the subheadline ("Clinics hide their
+// prices") on the same screen, so it now states the visitor's task
+// instead of a claim about what clinics publish.
 
 interface HeroPriceLineProps {
     city?: string | null
@@ -45,7 +48,7 @@ export function MorphingHeadline({ city, range }: HeroPriceLineProps) {
                 </>
             ) : (
                 <>
-                    Clinics publish Botox prices.{' '}
+                    Check what Botox costs in your city.{' '}
                     Most people learn their price at the front desk.
                 </>
             )}

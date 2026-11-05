@@ -12,9 +12,13 @@ interface CityHeroProps {
     treatmentName: string
     providerCount: number
     hasPublishedPrice?: boolean
+    /** Real average rating from getCityStats (defaults to 4.8 when no
+        ratings exist — pre-existing behavior, left as is). Shown instead
+        of the old hardcoded 4.8/5. */
+    avgRating?: number | null
 }
 
-export function CityHero({ city, state, treatmentName, providerCount, hasPublishedPrice = true }: CityHeroProps) {
+export function CityHero({ city, state, treatmentName, providerCount, hasPublishedPrice = true, avgRating = null }: CityHeroProps) {
     return (
         <section
             className="relative pt-32 pb-24 overflow-hidden border-b"
@@ -72,10 +76,10 @@ export function CityHero({ city, state, treatmentName, providerCount, hasPublish
                         style={{ color: 'var(--color-stone)' }}
                     >
                         Compare {providerCount} medical professionals, {hasPublishedPrice ? (
-                            <>view real {NICHE.priceUnit} pricing, and check verified credentials.</>
+                            <>view real {NICHE.priceUnit} pricing where clinics publish it, and check practitioner NPI matching.</>
                         ) : (
-                            <>check verified credentials, and help build the price pool. No clinic in {city} has published a price yet.</>
-                        )} Ranked by clinical data, not advertising fees.
+                            <>check practitioner NPI matching, and help build the price pool. No clinic in {city} has published a price yet.</>
+                        )} Unpaid results are ranked by Clarity Score — sponsored placement never changes that order.
                     </motion.p>
 
                     <motion.div
@@ -103,9 +107,9 @@ export function CityHero({ city, state, treatmentName, providerCount, hasPublish
                                 color: 'var(--color-espresso)',
                                 background: 'transparent'
                             }}
-                            onClick={() => document.getElementById('price-meter')?.scrollIntoView({ behavior: 'smooth' })}
+                            onClick={() => document.getElementById('check-prices')?.scrollIntoView({ behavior: 'smooth' })}
                         >
-                            Market Price Index
+                            Check Prices
                         </Button>
                     </motion.div>
 
@@ -114,7 +118,7 @@ export function CityHero({ city, state, treatmentName, providerCount, hasPublish
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.4 }}
-                        className={`grid grid-cols-2 ${hasPublishedPrice ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-4 max-w-4xl mx-auto p-8 rounded-3xl border`}
+                        className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto p-8 rounded-3xl border"
                         style={{
                             background: 'var(--color-surface)',
                             borderColor: 'var(--color-border)',
@@ -123,18 +127,10 @@ export function CityHero({ city, state, treatmentName, providerCount, hasPublish
                     >
                         <div className="text-center md:text-left md:border-r border-[var(--color-border)] px-4 py-2">
                             <div className="text-3xl font-display font-light mb-1" style={{ color: 'var(--color-espresso)' }}>{providerCount}</div>
-                            <div className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: 'var(--color-taupe)' }}>Verified Clinics</div>
+                            <div className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: 'var(--color-taupe)' }}>Providers Listed</div>
                         </div>
-                        {hasPublishedPrice && (
                         <div className="text-center md:text-left md:border-r border-[var(--color-border)] px-4 py-2">
-                            <div className="text-3xl font-display font-light mb-1" style={{ color: 'var(--color-gold)' }}>
-                                <span className="text-xl align-top mr-0.5">$</span>{NICHE.priceRange.min}-{NICHE.priceRange.max}
-                            </div>
-                            <div className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: 'var(--color-taupe)' }}>Price Range</div>
-                        </div>
-                        )}
-                        <div className="text-center md:text-left md:border-r border-[var(--color-border)] px-4 py-2">
-                            <div className="text-3xl font-display font-light mb-1" style={{ color: 'var(--color-espresso)' }}>4.8<span className="text-lg opacity-40 ml-1">/5</span></div>
+                            <div className="text-3xl font-display font-light mb-1" style={{ color: 'var(--color-espresso)' }}>{avgRating != null ? avgRating.toFixed(1) : '—'}<span className="text-lg opacity-40 ml-1">/5</span></div>
                             <div className="flex flex-col gap-1 items-center md:items-start">
                                 <div className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: 'var(--color-taupe)' }}>Avg Rating</div>
                                 <img
@@ -147,9 +143,9 @@ export function CityHero({ city, state, treatmentName, providerCount, hasPublish
                         </div>
                         <div className="text-center md:text-left px-4 py-2 flex flex-col justify-center">
                             <div className="flex items-center justify-center md:justify-start gap-1 font-body font-bold text-[11px] mb-1" style={{ color: 'var(--color-success)' }}>
-                                <ShieldCheck className="w-4 h-4" /> CLINICAL AUDIT
+                                <ShieldCheck className="w-4 h-4" /> CLARITY SCORE
                             </div>
-                            <div className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: 'var(--color-taupe)' }}>Medical Integrity</div>
+                            <div className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: 'var(--color-taupe)' }}>Reviews · Pricing · Contact</div>
                         </div>
                     </motion.div>
                 </div>

@@ -66,10 +66,13 @@ export function PriceReportWidget({
     initialPath = 'quick',
     initialClinic = null,
     initialCity,
+    initialTreatment,
 }: {
     initialPath?: Path
     initialClinic?: ClinicOption | null
     initialCity?: string
+    /** Preselects the treatment in the form (Botox, or Lip Filler). */
+    initialTreatment?: 'botox' | 'lip-filler'
 }) {
     // A prefilled clinic forces the detailed path; otherwise the caller
     // picks the path (quick by default).
@@ -90,9 +93,9 @@ export function PriceReportWidget({
     const [showClinicList, setShowClinicList] = useState(false)
 
     // Shared: product + quantity + total.
-    const [category, setCategory] = useState<Category>('toxin')
+    const [category, setCategory] = useState<Category>(initialTreatment === 'lip-filler' ? 'filler' : 'toxin')
     const [toxinProduct, setToxinProduct] = useState<string>('Botox')
-    const [fillerProduct, setFillerProduct] = useState('')
+    const [fillerProduct, setFillerProduct] = useState(initialTreatment === 'lip-filler' ? 'Lip filler' : '')
     const [quantity, setQuantity] = useState('')
     const [totalPaid, setTotalPaid] = useState('')
 
@@ -306,7 +309,7 @@ export function PriceReportWidget({
                 <CardTitle>What did you pay?</CardTitle>
                 <p className="text-[#3D2B1F]/60 leading-relaxed pt-2">
                     Add your price — you make the guide real. Real prices from real people, not a yearly survey.
-                    Anonymous, about 30 seconds. Your report is saved for review, and we never show one person&apos;s
+                    About 30 seconds. Your report is saved for review, and we never show one person&apos;s
                     report on its own.
                 </p>
             </CardHeader>

@@ -124,7 +124,8 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                     </div>
                     <h3 className="text-2xl font-display font-bold text-[#3D2B1F] mb-3">Request Sent!</h3>
                     <p className="text-[#3D2B1F]/60 mb-8 max-w-[280px] mx-auto text-sm leading-relaxed">
-                        Thank you. Your consultation inquiry has been forwarded to {providerName ? <strong className="text-[#3D2B1F]">{providerName}</strong> : `verified providers in ${city}`}.
+                        Thank you. We&apos;ll review your request before forwarding it to a participating provider.
+                        This does not book an appointment.
                     </p>
                     <Button variant="outline" onClick={() => setIsSuccess(false)} className="px-8 border-[#3D2B1F]/10 text-[#3D2B1F]/70 hover:bg-[#3D2B1F]/5">
                         Done
@@ -147,7 +148,7 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                     {providerName ? `Connect with ${providerName}` : `Find ${city} Specialists`}
                 </CardTitle>
                 <p className="text-xs text-[#3D2B1F]/50">
-                    {providerName ? 'Independent directory listing · Direct clinic inquiry' : 'Connect with verified local specialists'}
+                    {providerName ? 'Independent directory listing · We review requests before forwarding' : 'Connect with local specialists'}
                 </p>
             </CardHeader>
             <CardContent>
@@ -274,7 +275,8 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                     </Button>
 
                     <p className="text-[10px] text-gray-700 text-center leading-tight mt-4 italic">
-                        Your contact info is sent directly to {providerName || 'local specialists'}. No spam, ever.
+                        We review your request before forwarding it to a participating provider. This does not book
+                        an appointment. No spam, ever.
                     </p>
                 </form>
             </CardContent>

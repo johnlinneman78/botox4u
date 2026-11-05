@@ -23,15 +23,15 @@ export function CityFAQ({ city, avgCost }: CityFAQProps) {
         },
         {
             q: `How do I find a reputable Botox injector in ${city}?`,
-            a: `Look for board-certified plastic surgeons, dermatologists, or specialized aesthetic injectors with a Clarity Score™ above 70. On VerifiedAesthetics.com, our primary directory automatically filters for providers who pass our safety audit (55+ Score). Providers with the "Verified" badge have been cross-referenced against the federal NPI database for licensure and credential validity.`
+            a: `Look for board-certified plastic surgeons, dermatologists, or specialized aesthetic injectors with a Clarity Score™ above 70. Providers with an NPI badge have a practitioner whose record we matched in the federal NPI registry — that confirms the practitioner exists in the registry; it is not a license check and it says nothing about skill or results.`
         },
         {
             q: `How is the Clarity Score™ ranking determined for ${city} clinics?`,
-            a: `Clinics in ${city} are ranked by Clarity Score™, a 0–100 measure of how much you can confirm before booking: confirmed credentials (40 points), patient reviews adjusted for how many there are (40), published pricing (10) and contact and booking details (10). Paid plans never change the ranking. Our methodology page shows exactly how each part is calculated.`
+            a: `Clinics in ${city} are ranked by Clarity Score™, a 0–100 measure of how much you can confirm before booking: patient reviews (40 points), published pricing (10) and contact details (7), rescaled from 57. Practitioner NPI matching is shown separately and never adds points. Paid plans never change the ranking. Our methodology page shows exactly how each part is calculated.`
         },
         {
             q: `Why do some providers show "Not enough data"?`,
-            a: `A provider in ${city} gets a Clarity Score™ once it has at least 5 reviews or a confirmed NPI registry record. Below that, a number would say more about our data than about the clinic, so we show "Not enough data" instead. It is not a judgment of the provider.`
+            a: `A provider in ${city} gets a Clarity Score™ once it has at least 5 reviews. Below that, a number would say more about our data than about the clinic, so we show "Not enough data" instead. An NPI match alone does not grant a score. It is not a judgment of the provider.`
         },
         {
             q: `Does offering newer treatments raise a clinic's score?`,

@@ -23,11 +23,22 @@ export default function Navbar() {
         return () => { document.body.style.overflow = '' }
     }, [mobileOpen])
 
+    // Consumer nav, in the order a visitor actually needs it: check
+    // prices first, then find providers, then how it works. Providers
+    // get their own path (For Providers button + mobile provider
+    // group) — they never compete with the buyer actions. The quiz is
+    // deliberately NOT in the nav: it lives at /quiz, reached from the
+    // price widget's secondary link only.
     const navLinks = [
-        { href: '/find-providers', label: 'Find an Injector' },
+        { href: '/#check-prices', label: 'Check Prices' },
+        { href: '/find-providers', label: 'Find Providers' },
         { href: '/#how-it-works', label: 'How It Works' },
-        { href: '/for-providers', label: 'For Providers' },
-        { href: '/blog', label: 'Learn' },
+    ]
+
+    const providerLinks = [
+        { href: '/claim', label: 'Find and Claim Your Listing' },
+        { href: '/for-providers', label: 'Provider Information' },
+        { href: '/provider/login', label: 'Provider Sign In' },
     ]
 
     return (
@@ -89,8 +100,9 @@ export default function Navbar() {
                                 {link.label}
                             </Link>
                         ))}
+                        <div className="h-6 w-px bg-[#3D2B1F]/10 mx-2" />
                         <Link
-                            href="/find-providers"
+                            href="/for-providers"
                             className="font-body font-medium text-sm rounded-pill transition-all hover:-translate-y-px"
                             style={{
                                 padding: '10px 24px',
@@ -100,7 +112,7 @@ export default function Navbar() {
                                 transitionTimingFunction: 'var(--ease)',
                             }}
                         >
-                            Find My Injector Match
+                            For Providers
                         </Link>
                     </nav>
 
@@ -177,7 +189,54 @@ export default function Navbar() {
                         </button>
 
                         <nav className="flex flex-col gap-2">
+                            <p
+                                className="font-body text-[10px] font-bold uppercase tracking-[0.2em] px-4 pt-2 pb-1"
+                                style={{ color: 'var(--color-taupe)' }}
+                            >
+                                Find care
+                            </p>
                             {navLinks.map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    onClick={() => setMobileOpen(false)}
+                                    className="font-body font-medium text-lg py-3 px-4 rounded-lg transition-colors"
+                                    style={{
+                                        color: 'var(--color-surface)',
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.background = 'rgba(250,248,245,0.05)'
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.background = 'transparent'
+                                    }}
+                                >
+                                    {link.label}
+                                </Link>
+                            ))}
+                            <Link
+                                href="/#share-price"
+                                onClick={() => setMobileOpen(false)}
+                                className="font-body font-medium text-lg py-3 px-4 rounded-lg transition-colors"
+                                style={{
+                                    color: 'var(--color-surface)',
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.background = 'rgba(250,248,245,0.05)'
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.background = 'transparent'
+                                }}
+                            >
+                                Share a Treatment Price
+                            </Link>
+                            <p
+                                className="font-body text-[10px] font-bold uppercase tracking-[0.2em] px-4 pt-6 pb-1"
+                                style={{ color: 'var(--color-taupe)' }}
+                            >
+                                For providers
+                            </p>
+                            {providerLinks.map((link) => (
                                 <Link
                                     key={link.href}
                                     href={link.href}
@@ -200,7 +259,7 @@ export default function Navbar() {
 
                         <div className="mt-8">
                             <Link
-                                href="/find-providers"
+                                href="/claim"
                                 onClick={() => setMobileOpen(false)}
                                 className="block text-center font-body font-medium text-base rounded-pill py-3.5 transition-all"
                                 style={{
@@ -208,7 +267,7 @@ export default function Navbar() {
                                     color: 'var(--color-deep)',
                                 }}
                             >
-                                Find My Injector Match
+                                Claim Your Listing — Free
                             </Link>
                         </div>
 

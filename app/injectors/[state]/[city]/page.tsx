@@ -5,10 +5,11 @@ import { REVERSE_STATE_MAP, STATE_MAP, TREATMENTS } from '@/lib/constants'
 import { CityStats } from '@/components/city/CityStats'
 import { CostComparisonTable } from '@/components/seo/CostComparisonTable'
 import { CityFAQ } from '@/components/city/CityFAQ'
-import { PriceMeter } from '@/components/city/PriceMeter'
 import { PromoteClinicCard } from '@/components/providers/PromoteClinicCard'
 import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCard'
 import { CityHero } from '@/components/city/CityHero'
+import { PriceWidget } from '@/components/price-pool/PriceWidget'
+import { CityProviderList } from '@/components/city/CityProviderList'
 import Hero from '@/components/Hero'
 import CityMap from '@/components/CityMap'
 import { LeadForm } from '@/components/providers/LeadForm'
@@ -19,12 +20,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { JsonLd, generateBreadcrumbSchema, generateItemListSchema, generateFAQPageSchema } from '@/components/seo/JsonLd'
 import { Suspense } from 'react'
-import { QuizBanner } from '@/components/lead-funnel/QuizBanner'
 import { PriceReportCTA } from '@/components/providers/PriceReportCTA'
 import { orderFeaturedFirst, splitFeatured } from '@/lib/featured-listings'
 import { PriceReportStickyBar } from '@/components/providers/PriceReportStickyBar'
-import { SeedPriceRange } from '@/components/price-pool/SeedPriceRange'
-import { SEED_CITIES } from '@/lib/price-pool-seed'
 
 interface CityPageProps {
     params: Promise<{ state: string; city: string }>
@@ -64,13 +62,13 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     // promises comparison and credentials, not a rate.
     const isZeroClickCity = ['Houston', 'Chicago', 'Los Angeles', 'New York', 'Miami', 'Nashville', 'Dallas', 'Atlanta', 'Boston'].includes(cityName)
     const title = isZeroClickCity
-        ? `Botox ${cityName}: Prices & Verified Injectors (${year})`
-        : `Botox in ${cityName}, ${stateCode}: Prices & Verified Injectors (${year})`
+        ? `Botox ${cityName}: Prices & Injectors (${year})`
+        : `Botox in ${cityName}, ${stateCode}: Prices & Injectors (${year})`
     const description = isZeroClickCity
-        ? `Botox in ${cityName}, ${stateCode} — compare verified injectors, confirmed credentials and published pricing side by side. No paid placement. Updated ${month} ${year}.`
+        ? `Botox in ${cityName}, ${stateCode} — compare injectors, confirmed credentials and published pricing side by side. Sponsored placements are clearly labeled. Updated ${month} ${year}.`
         : avgPrice
-            ? `Compare ${providerCount} Botox & filler injectors in ${cityName}. See price per unit (from $${avgPrice}), confirmed credentials and patient reviews side by side. No paid placement. Updated ${month} ${year}.`
-            : `Compare ${providerCount} Botox & filler injectors in ${cityName}, ${stateCode}. Confirmed credentials, published pricing and patient reviews side by side. No paid placement. Updated ${month} ${year}.`
+            ? `Compare ${providerCount} Botox & filler injectors in ${cityName}. See price per unit (from $${avgPrice}), confirmed credentials and patient reviews side by side. Sponsored placements are clearly labeled. Updated ${month} ${year}.`
+            : `Compare ${providerCount} Botox & filler injectors in ${cityName}, ${stateCode}. Confirmed credentials, published pricing and patient reviews side by side. Sponsored placements are clearly labeled. Updated ${month} ${year}.`
     const url = `/${NICHE.baseSlug}/${state.toLowerCase()}/${city.toLowerCase()}`
 
     return {
@@ -184,13 +182,13 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                 treatmentName={NICHE.name}
                 providerCount={providers.length}
                 hasPublishedPrice={stats?.avgCost != null}
+                avgRating={stats?.avgRating}
             />
             {/* Optimized SEO Summary — Unique & Minimal */}
             <div className="container-content mt-6 mb-2">
                 <div className="max-w-3xl">
                     <p className="text-[15px] leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                        Our {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })} report for {cityName} analyzes {providers.length} aesthetic clinics to determine clinical quality without paid orientation.
-                        Each provider is audited for credentialing and pricing transparency.
+                        Our {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })} report for {cityName} covers {providers.length} aesthetic clinics. Each listing shows published pricing where available, patient reviews, and practitioner NPI matching where confirmed.
                         {stats?.avgCost ? ` Local market analysis shows average pricing in ${cityName} is currently $${stats.avgCost} per unit.` : ''}
                     </p>
                 </div>
@@ -215,130 +213,27 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                     />
                 </div>
 
-                <div className="mt-12 mb-16">
-                    {stats?.avgCost != null ? (
-                        <PriceMeter
-                            avgCost={stats.avgCost}
-                            city={cityName}
-                        />
-                    ) : (
-                        <>
-                            <p className="text-lg font-medium mb-4" style={{ color: 'var(--color-espresso)' }}>
-                                Price not published for {cityName} yet.
-                            </p>
-                            <PriceReportCTA variant="missing-price" city={cityName} state={stateCode} />
-                        </>
-                    )}
-                </div>
-
-                {/* Price-report CTA: right where city prices are shown.
-                    Prefills the quick path with this city. Branch phase 1:
-                    opens the widget inline only; nothing submitted displays
-                    publicly. */}
-                <div className="container-content">
-                    <PriceReportCTA variant="full" city={cityName} />
-                </div>
-
-                {/* Seed price ranges (Nov 3, 2026): only on the three seed
-                    city pages (Asheville, Austin, Scottsdale). At 0-19
-                    approved reports each range shows an honest collecting
-                    state, never a range or a median. */}
-                {(() => {
-                    const seed = SEED_CITIES.find((c) => c.name.toLowerCase() === cityName.toLowerCase() && c.state === stateCode)
-                    if (!seed) return null
-                    return (
-                        <div className="mb-10">
-                            <h2 className="text-2xl font-display font-medium mb-4" style={{ color: 'var(--color-espresso)' }}>
-                                Community-reported prices in {seed.name}
-                            </h2>
-                            <p className="text-sm mb-6" style={{ color: 'var(--color-stone)' }}>
-                                Real prices people reported paying, reviewed before anything shows. No range appears until 20 reviewed reports.
-                            </p>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <SeedPriceRange citySlug={seed.slug as 'asheville' | 'austin' | 'scottsdale'} state={seed.state} treatmentKey="botox" />
-                                <SeedPriceRange citySlug={seed.slug as 'asheville' | 'austin' | 'scottsdale'} state={seed.state} treatmentKey="lip-filler" />
-                            </div>
-                        </div>
-                    )
-                })()}
-
-                {/* Top-of-listings price strip (Nov 3, 2026): the form CTA
-                    used to sit only below the hero, stats, and map, so most
-                    visitors never reached it. This strip sits right above
-                    the provider list and jumps straight to the form. */}
-                <div className="rounded-3xl border p-5 mb-10 flex flex-wrap items-center gap-4" style={{ background: '#3D2B1F', borderColor: '#3D2B1F' }}>
-                    <p className="flex-1 min-w-56 text-[#FAF8F5] leading-snug">
-                        <strong>What did you pay in {cityName}?</strong>{' '}
-                        <span className="opacity-80">No clinic here publishes prices yet — the only real prices come from people who were treated. 30 seconds, anonymous.</span>
-                    </p>
-                    <a href="#price-report" className="shrink-0 rounded-full bg-[#FAF8F5] text-[#3D2B1F] font-medium px-6 py-3 text-sm">
-                        Add what you paid →
-                    </a>
+                {/* One price summary at the top: the widget shows a real
+                    patient-reported range when the pool has one, or an honest
+                    empty state with the share ask when it doesn't. It also
+                    shows the clinic-published average when one exists.
+                    (Replaces the old PriceMeter, the duplicate PriceReportCTA
+                    'full' block, the seed-only SeedPriceRange section, and
+                    the "What did you pay" dark strip — one of each now.) */}
+                <div className="mt-10 mb-12">
+                    <PriceWidget
+                        cities={NICHE.cities}
+                        fixedCity={{ name: cityName, state: stateCode, slug: `${state.toLowerCase()}/${city.toLowerCase()}` }}
+                        initialAvgCost={stats?.avgCost ?? null}
+                        initialProviderCount={stats?.providerCount ?? providers.length}
+                    />
                 </div>
 
                 <PriceReportStickyBar city={cityName} />
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
                     <div className="lg:col-span-2" id="listings">
-                        <div className="flex justify-between items-center mb-8">
-                            <h2
-                                className="text-3xl font-display font-medium"
-                                style={{ color: 'var(--color-espresso)' }}
-                            >
-                                Verified Providers in {cityName}
-                            </h2>
-                        </div>
-
-                        {/* Sponsored section (see lib/featured-listings.ts):
-                            featured providers render here, ABOVE the unpaid
-                            results, in their own clearly labeled section —
-                            never mixed into the ranked order. The Featured
-                            tag on each card is in addition to this label. */}
-                        {featuredProviders.length > 0 && (
-                            <section aria-label="Sponsored providers" className="mb-12">
-                                <div className="mb-4">
-                                    <p className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-stone)' }}>
-                                        Sponsored · Featured
-                                    </p>
-                                    <p className="text-xs mt-1" style={{ color: 'var(--color-stone)' }}>
-                                        Providers may purchase a clearly labeled advertising position. Payment never changes their Clarity Score, verification status, or position within the unpaid results.
-                                    </p>
-                                </div>
-                                <div className="space-y-8">
-                                    {featuredProviders.map((provider: any) => (
-                                        <div key={provider.id}>
-                                            <EnhancedProviderCard provider={provider} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </section>
-                        )}
-
-                        {/* Unpaid results, in their independent order. */}
-                        <div className="space-y-8">
-                            {providers.length > 0 ? (
-                                unpaidProviders.slice(0, 100).map((provider: any) => (
-                                    <div key={provider.id}>
-                                        <EnhancedProviderCard provider={provider} />
-                                    </div>
-                                ))
-                            ) : (
-                                <div
-                                    className="p-16 text-center rounded-3xl border shadow-sm"
-                                    style={{ background: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
-                                >
-                                    <h3
-                                        className="text-2xl font-display font-medium mb-4"
-                                        style={{ color: 'var(--color-espresso)' }}
-                                    >
-                                        Verifying Providers in {cityName}
-                                    </h3>
-                                    <p className="max-w-md mx-auto mb-8 leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                                        We're currently verifying pricing and clinical credentials for clinics in {cityName}. Check back soon for the full report.
-                                    </p>
-                                </div>
-                            )}
-                        </div>
+                        <CityProviderList city={cityName} featured={featuredProviders} unpaid={unpaidProviders} />
 
                         <div className="mt-20">
                             <CostComparisonTable
@@ -367,10 +262,6 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                         />
                         <PromoteClinicCard city={cityName} />
                     </div>
-                </div>
-
-                <div className="mt-24 mb-16">
-                    <QuizBanner city={cityName} />
                 </div>
 
                 <div className="mt-24 mb-16">
@@ -433,7 +324,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
                             <div className="space-y-5 text-[15px] leading-relaxed" style={{ color: 'var(--color-stone)' }}>
                                 <p>
-                                    {cityName} has <strong style={{ color: 'var(--color-espresso)' }}>{providers.length}+ verified aesthetic injectors</strong> on VerifiedAesthetics
+                                    {cityName} has <strong style={{ color: 'var(--color-espresso)' }}>{providers.length} aesthetic providers listed</strong> on VerifiedAesthetics
                                     {stats?.avgCost != null ? (
                                         <>, with an average Botox price of <strong style={{ color: 'var(--color-espresso)' }}>${stats.avgCost} per unit</strong> as of {new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}.</>
                                     ) : (
@@ -449,38 +340,8 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                                         <strong style={{ color: 'var(--color-espresso)' }}> ${Math.round(stats.avgCost * 30)} to ${Math.round(stats.avgCost * 50)}</strong>.
                                     </p>
                                 )}
-                                <p>
-                                    Our rankings show a high adoption rate of clinical innovations like Daxxify (for longevity) and biostimulators like Sculptra among {cityName}'s top-tier injectors.
-                                </p>
                             </div>
                         </div>
-
-                        {providers.length > 0 && (
-                            <div className="pt-10 border-t" style={{ borderColor: 'var(--color-border)' }}>
-                                <h3
-                                    className="text-xl font-display font-medium mb-6"
-                                    style={{ color: 'var(--color-espresso)' }}
-                                >
-                                    Top Clinical Rankings in {cityName}
-                                </h3>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                    {providers.slice(0, 4).map((p: any) => (
-                                        <div
-                                            key={p.id}
-                                            className="flex items-center justify-between p-4 rounded-xl border bg-white"
-                                            style={{ borderColor: 'var(--color-border)' }}
-                                        >
-                                            <Link href={`/provider/${p.slug}`} className="font-semibold text-sm hover:text-[var(--color-gold)] transition-colors">
-                                                {p.name}
-                                            </Link>
-                                            <div className="text-xs font-bold" style={{ color: 'var(--color-gold)' }}>
-                                                Score: {formatScore(p.clarityScore ?? p.score_total)}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
 
                         <div className="mt-12 flex flex-wrap gap-6 justify-center">
                             <Link href="/blog/pricing-report-2026" className="text-sm font-semibold hover:opacity-80 transition-opacity" style={{ color: 'var(--color-stone)' }}>
@@ -495,59 +356,6 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                         </div>
                     </div>
                 </section>
-
-                <div className="mt-24 pt-16 border-t" style={{ borderColor: 'var(--color-border)' }}>
-                    <div
-                        className="text-xl font-display font-medium mb-8"
-                        style={{ color: 'var(--color-espresso)' }}
-                    >
-                        Complete Provider Directory: {cityName}
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        {providers.map((p: any) => (
-                            <Link
-                                key={`dir-${p.id}`}
-                                href={`/provider/${p.slug}`}
-                                className="text-sm hover:text-[var(--color-gold)] transition-colors truncate font-medium"
-                                style={{ color: 'var(--color-stone)' }}
-                            >
-                                {p.name}
-                            </Link>
-                        ))}
-                    </div>
-                    {providers.length === 0 && (
-                        <p className="text-sm italic" style={{ color: 'var(--color-stone)' }}>No additional providers found in {cityName} at this time.</p>
-                    )}
-                    <p className="mt-12 text-[10px] uppercase tracking-wider leading-relaxed max-w-2xl" style={{ color: 'var(--color-taupe)' }}>
-                        This directory includes all observed and elite injectors in the {cityName} area. We continuously audit and add new clinics based on clinical excellence and pricing transparency.
-                    </p>
-                </div>
-
-                {NICHE.cities.filter(c => c.slug.startsWith(state.toLowerCase() + '/') && c.slug !== `${state.toLowerCase()}/${city.toLowerCase()}`).length > 0 && (
-                    <div className="mt-16 pt-16 border-t" style={{ borderColor: 'var(--color-border)' }}>
-                        <h2 className="text-xl font-display font-medium mb-6" style={{ color: 'var(--color-espresso)' }}>
-                            Nearby Cities in {stateName}
-                        </h2>
-                        <div className="flex flex-wrap gap-4">
-                            {NICHE.cities
-                                .filter(c => c.slug.startsWith(state.toLowerCase() + '/') && c.slug !== `${state.toLowerCase()}/${city.toLowerCase()}`)
-                                .map(c => {
-                                    const cName = c.slug.split('/')[1].split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
-                                    return (
-                                        <Link
-                                            key={c.slug}
-                                            href={`/${NICHE.baseSlug}/${c.slug}`}
-                                            className="px-4 py-2 border rounded-full text-sm font-medium hover:bg-black/5 transition-colors"
-                                            style={{ borderColor: 'var(--color-border)', color: 'var(--color-stone)' }}
-                                        >
-                                            Botox in {cName}
-                                        </Link>
-                                    )
-                                })
-                            }
-                        </div>
-                    </div>
-                )}
 
                 <div className="mt-16">
                     <MedicalDisclaimer />
