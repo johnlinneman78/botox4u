@@ -12,7 +12,7 @@ import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
 import { ScrollCTA } from '@/components/ui/ScrollCTA'
 import { PriceReportCTA } from '@/components/providers/PriceReportCTA'
 import { LeadForm } from '@/components/providers/LeadForm'
-import { formatCurrency } from '@/lib/utils'
+import { formatCurrency, businessTypeLabel } from '@/lib/utils'
 import { NICHE } from '@/config/niche'
 import { ChevronRight, ShieldCheck, Search, Activity, Sparkles, Star, Info, User, CheckCircle } from 'lucide-react'
 
@@ -69,12 +69,8 @@ export default function ProviderProfileClient({ provider, themes, cityAvgCost = 
         .join('')
         .slice(0, 2)
 
-    // business_type is a raw DB enum. 'organization' is an old import value
-    // that reads as nonsense in customer copy ("Washington organization"),
-    // so display a human label instead. Other values pass through as-is.
-    const businessTypeLabel =
-        provider.businessType === 'organization' ? 'Medical Spa'
-        : provider.businessType || 'Aesthetic Medicine Provider'
+    // Human label for the raw business_type DB enum (see lib/utils).
+    const businessTypeLabelValue = businessTypeLabel(provider.businessType)
 
     // Calculate dynamic scores for the visual profile
     const clarityScore: number | null = provider.score_total ?? provider.clarityScore ?? null
@@ -193,7 +189,7 @@ export default function ProviderProfileClient({ provider, themes, cityAvgCost = 
                     className="font-body uppercase mb-4"
                     style={{ fontSize: '12px', letterSpacing: '0.06em', color: 'var(--color-stone)' }}
                 >
-                    {businessTypeLabel}
+                    {businessTypeLabelValue}
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -391,7 +387,7 @@ export default function ProviderProfileClient({ provider, themes, cityAvgCost = 
                             >
                                 {provider.ai_description || (reviews[0]?.text
                                     ? `Observed clinical performance for ${provider.name} in the ${provider.city} market indicates a focus on ${services[0] || 'aesthetic excellence'}. Patient feedback highlights: "${reviews[0].text.substring(0, 180)}..."`
-                                    : `This ${provider.city} ${businessTypeLabel.toLowerCase()} is indexed by VerifiedAesthetics. Our data audit focuses on verified credentials, published pricing, and patient reviews in the ${provider.state} region.`)}
+                                    : `This ${provider.city} ${businessTypeLabelValue.toLowerCase()} is indexed by VerifiedAesthetics. Our data audit focuses on verified credentials, published pricing, and patient reviews in the ${provider.state} region.`)}
                             </p>
                             <div className="pt-6">
                                 {provider.city && provider.state && (

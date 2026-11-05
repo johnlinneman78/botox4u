@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { formatScore } from '@/lib/scoring'
+import { businessTypeLabel } from '@/lib/utils'
 import { Star, X, Info, ShieldCheck, Search, Activity, Shield, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { LeadForm } from './LeadForm'
@@ -97,7 +98,7 @@ export function TopScoringCard({ provider }: TopScoringCardProps) {
                     {initials}
                 </div>
                 <div className={`mt-2 text-[10px] font-black uppercase tracking-[0.2em] ${textColor} opacity-60`}>
-                    Verified {provider.business_type || 'Clinic'}
+                    Verified {businessTypeLabel(provider.business_type, 'Clinic')}
                 </div>
             </div>
         )

@@ -7,7 +7,7 @@ import { motion, AnimatePresence, Variants } from 'framer-motion'
 import { EnrichedProvider } from '@/lib/types/enrichment'
 import { track, providerParams } from '@/lib/analytics'
 import { LeadForm } from './LeadForm'
-import { formatCurrency } from '@/lib/utils'
+import { formatCurrency, businessTypeLabel } from '@/lib/utils'
 import { isFeatured } from '@/lib/featured-listings'
 import { npiBadgeFor } from '@/lib/npi-badge'
 
@@ -172,7 +172,7 @@ export function EnhancedProviderCard({ provider, cityAvgCost }: EnhancedProvider
                                 {provider.name}
                             </h3>
                             <p className="font-sans text-[12px] text-[#A89B8C]">
-                                {provider.business_type || 'Aesthetic Clinic'} · {provider.city}, {provider.state}
+                                {businessTypeLabel(provider.business_type, 'Aesthetic Clinic')} · {provider.city}, {provider.state}
                             </p>
                             {(featured || npiBadge) && (
                                 <div className="flex flex-wrap gap-2 mt-2">
@@ -296,7 +296,11 @@ export function EnhancedProviderCard({ provider, cityAvgCost }: EnhancedProvider
                             >
                                 City average {formatCurrency(cityAvgCost)}/unit
                             </div>
-                        ) : null}
+                        ) : (
+                            <div className="font-sans text-[14px] text-[#A89B8C]">
+                                Price not published
+                            </div>
+                        )}
                     </div>
 
                     {/* Row 5: CTA */}

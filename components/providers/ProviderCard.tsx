@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { CheckCircle, MapPin, Star, Trophy, Calendar, Info, ShieldCheck, User, ArrowRight } from 'lucide-react'
-import { formatCurrency } from '@/lib/utils'
+import { formatCurrency, businessTypeLabel } from '@/lib/utils'
 
 interface ProviderCardProps {
     provider: {
@@ -66,7 +66,7 @@ export function ProviderCard({ provider }: ProviderCardProps) {
                             {provider.name}
                         </h3>
                         <p className="font-sans text-[12px] text-[#A89B8C]">
-                            {provider.businessType || 'Aesthetic Clinic'} · {provider.city}, {provider.state}
+                            {businessTypeLabel(provider.businessType, 'Aesthetic Clinic')} · {provider.city}, {provider.state}
                         </p>
                     </div>
 

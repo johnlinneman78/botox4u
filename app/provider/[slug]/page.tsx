@@ -6,7 +6,7 @@ import { Metadata } from 'next'
 import { NICHE } from '@/config/niche'
 import { JsonLd, generateMedicalClinicSchema, generateBreadcrumbSchema, generateReviewSchema } from '@/components/seo/JsonLd'
 import { analyzeReviewThemes } from '@/components/providers/SemanticInsights'
-import { formatCurrency } from '@/lib/utils'
+import { formatCurrency, businessTypeLabel } from '@/lib/utils'
 import ProviderProfileClient from '@/components/providers/ProviderProfileClient'
 
 interface ProviderProfileProps {
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: ProviderProfileProps): Promis
     // Meta Description logic
     const scoreText = formatScore(provider.score_total ?? provider.clarityScore)
     const reviewsCount = provider.reviewCount || 0
-    const bizType = provider.businessType || 'Clinic'
+    const bizType = businessTypeLabel(provider.businessType, 'Clinic')
 
     // Simple hash to deterministically rotate patterns
     let hash = 0;
@@ -149,7 +149,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
             {relatedProviders.length > 0 && (
                 <section className="container-content py-16 border-t" style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface)' }}>
                     <h2 className="text-2xl font-display font-medium mb-8" style={{ color: 'var(--color-espresso)' }}>
-                        Compare {provider.businessType || 'Providers'} in {provider.city}
+                        Compare {businessTypeLabel(provider.businessType, 'Providers')} in {provider.city}
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {relatedProviders.map((p) => (

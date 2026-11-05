@@ -30,3 +30,11 @@ export function formatPhoneNumber(phone: string): string {
     }
     return phone
 }
+
+// business_type is a raw DB enum. 'organization' is an old import value
+// that reads as nonsense in customer copy ("Washington organization"), so
+// map it to a human label. Other values pass through as-is.
+export function businessTypeLabel(businessType?: string | null, fallback = 'Aesthetic Medicine Provider'): string {
+    if (businessType === 'organization') return 'Medical Spa'
+    return businessType || fallback
+}
