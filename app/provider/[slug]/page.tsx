@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { formatScore } from '@/lib/scoring'
-import { getProviderBySlug, getProvidersWithSearch } from '@/lib/actions/providers'
+import { getProviderBySlug, getProvidersWithSearch, getCityStats } from '@/lib/actions/providers'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import { NICHE } from '@/config/niche'

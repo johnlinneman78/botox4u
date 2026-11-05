@@ -29,6 +29,7 @@ import { SEED_CITIES, contributorKey } from '@/lib/price-pool-seed'
 export interface PriceWidgetCity {
     name: string
     slug: string // e.g. 'fl/miami'
+    state?: string // e.g. 'FL' — carried for callers that have it; the widget itself keys off slug
 }
 
 const TREATMENTS = [
