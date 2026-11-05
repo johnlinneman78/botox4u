@@ -66,21 +66,7 @@ const providerValueProps = [
     },
 ]
 
-// Framer motion variants
-const heroContainer = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.12 } },
-}
-
-const heroItem = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.6, ease: "easeOut" as const },
-    },
-}
-
+// Framer motion variants (below-fold grids only — the hero renders plain)
 const cardGrid = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.08 } },
@@ -211,14 +197,12 @@ export default function HomeClient({
                     }}
                 />
 
-                <motion.div
-                    className="container-content text-center relative z-10 py-20"
-                    variants={heroContainer}
-                    initial="hidden"
-                    animate="visible"
-                >
+                {/* No entrance animation on the hero: it is above the fold and must be
+                    readable on first paint. framer-motion initial="hidden" stays at
+                    opacity 0 until hydration, which left the headline invisible. */}
+                <div className="container-content text-center relative z-10 py-20">
                     {/* Eyebrow */}
-                    <motion.div variants={heroItem} className="flex justify-center mb-6">
+                    <div className="flex justify-center mb-6">
                         <span
                             className="font-body text-xs font-medium rounded-pill px-4 py-2 inline-flex items-center gap-2"
                             style={{
@@ -229,15 +213,15 @@ export default function HomeClient({
                         >
                             Real prices, from real people
                         </span>
-                    </motion.div>
+                    </div>
 
                     {/* Headline */}
-                    <motion.div variants={heroItem} className="mb-6">
+                    <div className="mb-6">
                         <MorphingHeadline city={heroCity} range={heroRange} />
-                    </motion.div>
+                    </div>
 
                     {/* Subheadline */}
-                    <motion.div variants={heroItem}>
+                    <div>
                         <p
                             className="font-body mx-auto mb-10"
                             style={{
@@ -249,10 +233,10 @@ export default function HomeClient({
                         >
                             Clinics hide their prices. We collect what people actually paid, to build accurate pricing and push the market toward transparent pricing. It starts with people like you.
                         </p>
-                    </motion.div>
+                    </div>
 
                     {/* Search Bar */}
-                    <motion.div variants={heroItem}>
+                    <div>
                         <div
                             className="mx-auto flex flex-col sm:flex-row items-center gap-3 p-3 rounded-pill"
                             style={{
@@ -305,20 +289,20 @@ export default function HomeClient({
                                 </svg>
                             </Link>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Below search: the live directory count. The quiz is
                         no longer teased here — it lives at /quiz, reached
                         from the price widget's secondary link only. */}
-                    <motion.div variants={heroItem}>
+                    <div>
                         <p
                             className="font-body text-center mt-4"
                             style={{ fontSize: '12px', color: 'var(--color-taupe)' }}
                         >
                             {providersIndexed > 0 ? `${providersIndexed.toLocaleString()} indexed Botox & filler providers` : 'Independent Botox & filler provider data'}
                         </p>
-                    </motion.div>
-                </motion.div>
+                    </div>
+                </div>
             </section>
 
             {/* ═══ SECTION 2: TRUST STRIP ═══ */}

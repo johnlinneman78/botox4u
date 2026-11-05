@@ -57,17 +57,17 @@ export default async function PricingPage() {
                         <span className="text-[#C9A96E]">Regenerative.</span>
                     </h1>
                     <p className="text-xl text-[#3D2B1F]/70 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
-                        The era of high-volume HA filler is ending. Patients in 2026 are searching for Polynucleotides, Bio-stimulators, and natural integrity. **VerifiedAesthetics** is the only platform that scores your clinic on clinical innovation — not marketing budget.
+                        The era of high-volume HA filler is ending. Patients in 2026 are searching for Polynucleotides, Bio-stimulators, and natural integrity. VerifiedAesthetics is the only platform that scores your clinic on clinical innovation — not marketing budget.
                     </p>
 
                     <div className="flex flex-wrap justify-center gap-6">
                         <div className="flex items-center gap-3 bg-[#3D2B1F]/5 px-6 py-3 rounded-2xl border border-[#3D2B1F]/10 shadow-2xl">
                             <Users className="w-5 h-5 text-[#C9A96E]" />
-                            <span className="text-sm font-bold text-gray-300">Targeting High-Net-Worth Patients</span>
+                            <span className="text-sm font-bold text-[#3D2B1F]">Targeting High-Net-Worth Patients</span>
                         </div>
                         <div className="flex items-center gap-3 bg-[#3D2B1F]/5 px-6 py-3 rounded-2xl border border-[#3D2B1F]/10 shadow-2xl">
                             <Scale className="w-5 h-5 text-[#8A9E8D]" />
-                            <span className="text-sm font-bold text-gray-300">Immutable Clarity Score™ Algorithm</span>
+                            <span className="text-sm font-bold text-[#3D2B1F]">Immutable Clarity Score™ Algorithm</span>
                         </div>
                     </div>
                 </div>

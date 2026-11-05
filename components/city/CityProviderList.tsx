@@ -20,9 +20,12 @@ interface CityProviderListProps {
     city: string
     featured: any[]
     unpaid: any[]
+    /** City's published-price average — passed to cards so a clinic with no
+        own price shows the labeled city average instead of a blank. */
+    cityAvgCost?: number | null
 }
 
-export function CityProviderList({ city, featured, unpaid }: CityProviderListProps) {
+export function CityProviderList({ city, featured, unpaid, cityAvgCost }: CityProviderListProps) {
     const [pricesOnly, setPricesOnly] = useState(false)
 
     const hasPublishedPrice = (p: any) => p.pricePerUnit != null || p.price_per_unit != null
@@ -74,7 +77,7 @@ export function CityProviderList({ city, featured, unpaid }: CityProviderListPro
                     <div className="space-y-8">
                         {featured.map((provider: any) => (
                             <div key={provider.id}>
-                                <EnhancedProviderCard provider={provider} />
+                                <EnhancedProviderCard provider={provider} cityAvgCost={cityAvgCost} />
                             </div>
                         ))}
                     </div>
@@ -86,7 +89,7 @@ export function CityProviderList({ city, featured, unpaid }: CityProviderListPro
                 {visibleUnpaid.length > 0 ? (
                     visibleUnpaid.slice(0, 100).map((provider: any) => (
                         <div key={provider.id}>
-                            <EnhancedProviderCard provider={provider} />
+                            <EnhancedProviderCard provider={provider} cityAvgCost={cityAvgCost} />
                         </div>
                     ))
                 ) : unpaid.length === 0 ? (

@@ -138,7 +138,10 @@ export default function ProviderProfileClient({ provider, themes, cityAvgCost = 
                 <div
                     className="relative w-full overflow-hidden mb-8 flex items-center justify-center"
                     style={{
-                        height: 400,
+                        // A logo is not a photo: at the full 400px hero height a square
+                        // logo fills the first viewport and pushes the name and score
+                        // below the fold (Georgetown). Logos get a short banner.
+                        height: heroIsLogo ? 220 : 400,
                         borderRadius: 'var(--radius-xl)',
                         background: hasImage
                             ? undefined
@@ -329,20 +332,24 @@ export default function ProviderProfileClient({ provider, themes, cityAvgCost = 
                             We don&apos;t have enough confirmed information to score this provider yet: fewer than 5 reviews and no confirmed NPI record.
                         </p>
                     ) : (
-                        <div className="space-y-4 max-w-xl">
-                            {scoreBreakdown.map((item, i) => (
-                                <ProgressBar key={item.label} label={item.label} score={item.score} maxScore={item.maxScore} index={i} />
-                            ))}
+                        <div className="grid gap-8 md:grid-cols-2">
+                            <div className="space-y-4">
+                                {scoreBreakdown.map((item, i) => (
+                                    <ProgressBar key={item.label} label={item.label} score={item.score} maxScore={item.maxScore} index={i} />
+                                ))}
+                            </div>
+                            <div>
+                                {scoreNotes.length > 0 && (
+                                    <ul className="space-y-1 font-body text-sm list-disc pl-5" style={{ color: 'var(--color-stone)' }}>
+                                        {scoreNotes.map(n => <li key={n}>{n}</li>)}
+                                    </ul>
+                                )}
+                                <a href="/methodology" className="inline-block mt-4 font-body text-sm underline" style={{ color: 'var(--color-espresso)' }}>
+                                    How the score works
+                                </a>
+                            </div>
                         </div>
                     )}
-                    {scoreNotes.length > 0 && (
-                        <ul className="mt-5 space-y-1 font-body text-sm list-disc pl-5" style={{ color: 'var(--color-stone)' }}>
-                            {scoreNotes.map(n => <li key={n}>{n}</li>)}
-                        </ul>
-                    )}
-                    <a href="/methodology" className="inline-block mt-4 font-body text-sm underline" style={{ color: 'var(--color-espresso)' }}>
-                        How the score works
-                    </a>
                 </RevealOnScroll>
             </section>
 

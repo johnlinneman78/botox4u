@@ -233,7 +233,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
                     <div className="lg:col-span-2" id="listings">
-                        <CityProviderList city={cityName} featured={featuredProviders} unpaid={unpaidProviders} />
+                        <CityProviderList city={cityName} featured={featuredProviders} unpaid={unpaidProviders} cityAvgCost={stats?.avgCost ?? null} />
 
                         <div className="mt-20">
                             <CostComparisonTable

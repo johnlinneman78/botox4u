@@ -13,6 +13,10 @@ import { npiBadgeFor } from '@/lib/npi-badge'
 
 interface EnhancedProviderCardProps {
     provider: EnrichedProvider
+    /** City's published-price average (from getCityStats). Shown ONLY when
+        the clinic publishes no per-unit price of its own, labeled as the
+        city average — never presented as this clinic's price. */
+    cityAvgCost?: number | null
 }
 
 export const cardItemVariants: Variants = {
@@ -27,7 +31,7 @@ export const cardItemVariants: Variants = {
     }
 }
 
-export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
+export function EnhancedProviderCard({ provider, cityAvgCost }: EnhancedProviderCardProps) {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isScanning, setIsScanning] = useState(false)
     const [scanPhase, setScanPhase] = useState(0)
@@ -281,11 +285,18 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                             </div>
                         )}
 
-                        {(provider.price_per_unit || provider.pricePerUnit) && (
+                        {(provider.price_per_unit || provider.pricePerUnit) ? (
                             <div className="font-sans font-medium text-[14px] text-[#3D2B1F]">
                                 From {formatCurrency(provider.price_per_unit || provider.pricePerUnit || 0)}/unit
                             </div>
-                        )}
+                        ) : cityAvgCost != null ? (
+                            <div
+                                className="font-sans text-[14px] text-[#A89B8C]"
+                                title="Average published price in this city — not this clinic's price"
+                            >
+                                City average {formatCurrency(cityAvgCost)}/unit
+                            </div>
+                        ) : null}
                     </div>
 
                     {/* Row 5: CTA */}
