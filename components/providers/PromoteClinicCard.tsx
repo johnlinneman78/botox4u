@@ -17,16 +17,12 @@ export function PromoteClinicCard({ city }: PromoteClinicCardProps) {
                     Want more patients in <span className="text-[#C9A96E]">{city}</span>?
                 </h3>
                 <p className="text-sm text-[#3D2B1F]/60 mb-8 leading-relaxed">
-                    Your free profile helps visitors review your practice information, services, and contact details.
-                    Featured placement, booking display, and quote leads are separate paid options.
+                    Your free profile helps visitors review your practice information, services, and contact details. Listing, claiming, and corrections are free, and stay free.
                 </p>
                 <div className="space-y-3">
                     <Button className="w-full bg-[#C9A96E] hover:bg-[#B5955B] text-white border-0 py-6 text-md font-bold shadow-lg shadow-[#C9A96E]/10">
-                        <Link href="/claim">Claim your listing — free</Link>
+                        <Link href="/claim">Claim your listing, free</Link>
                     </Button>
-                    <p className="text-[10px] text-center text-gray-700">
-                        Listing is free. Featured placement is $49.99 a month after a free 30-day trial (first 10 providers).
-                    </p>
                 </div>
             </CardContent>
         </Card>

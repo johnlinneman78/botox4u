@@ -54,7 +54,7 @@ const howItWorks = [
 const providerValueProps = [
     {
         title: 'Your Listing Stays Free',
-        description: 'Listing, corrections, claiming, photos, and your logo are free — and stay free. Only featured placement, booking display, and quote leads are paid.',
+        description: 'Listing, corrections, claiming, photos, and your logo are free, and stay free. There are no paid plans right now.',
     },
     {
         title: 'Your Clarity Score™ Does the Selling',

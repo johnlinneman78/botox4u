@@ -8,7 +8,16 @@ const supabase = createClient(
     process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
+// CANCELLED Nov 5, 2026 (John's decision): API access is removed until
+// the data is valuable enough for someone who wants it. No new API keys
+// are issued. The original request flow is kept below as reference and
+// is not called. Restore it from git history when API access returns.
 export async function requestApiKey(formData: FormData) {
+    return { success: false, error: 'API access is paused right now. No new keys are being issued.' }
+}
+
+// --- Paused implementation (kept for reference, not called) ---
+async function requestApiKeyPaused(formData: FormData) {
     const name = formData.get('name') as string
     const email = formData.get('email') as string
 

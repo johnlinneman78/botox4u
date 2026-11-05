@@ -102,6 +102,12 @@ export const NICHE = {
     metaDescriptionTemplate: "Compare top-rated Botox & filler injectors in {city}. See Clarity Scores™, real pricing, and verified credentials. Find natural results, ranked by data.",
 
     // Pricing tiers (for /pricing page)
+    // PARKED Nov 5, 2026 (John's decision): provider pricing is paused
+    // until there is more feedback, data, and engagement. The paid tiers
+    // below were removed; only the free listing is offered right now.
+    // The old tiers (Enhanced $49/mo, Featured $99/mo) are in git
+    // history. Restore them from there when pricing returns, do not
+    // retype them from memory.
     pricingTiers: [
         {
             id: "free",
@@ -114,38 +120,7 @@ export const NICHE = {
                 "Name, location & credential display",
                 "Clarity Score™ visible"
             ],
-            bestFor: "Individual providers getting started"
-        },
-        {
-            // id stays "verified" because Stripe price mapping and stored
-            // subscription_tier values use it. The display name is "Enhanced":
-            // a "verified" label must come from passing checks, not payment.
-            id: "verified",
-            name: "Enhanced",
-            price: 49,
-            interval: "month",
-            anchor: true,                        // highlighted tier
-            features: [
-                "Your photos, description and pricing on your profile",
-                "Real pricing listed for patients",
-                "Tracked 'Go to Website' clicks",
-                "Prominent Contact button",
-                "Does not change your ranking or Clarity Score™"
-            ],
-            bestFor: "Active med spas wanting more leads"
-        },
-        {
-            id: "featured",
-            name: "Featured",
-            price: 99,
-            interval: "month",
-            features: [
-                "Everything in Enhanced",
-                "\"Featured\" highlight on your profile card",
-                "Monthly profile-views and clicks report",
-                "Visual only: does not change your ranking or Clarity Score™"
-            ],
-            bestFor: "Market leaders wanting maximum visibility"
+            bestFor: "Every provider, listing is free and stays free"
         }
     ],
 

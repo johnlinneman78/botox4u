@@ -7,7 +7,30 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { NICHE } from '@/config/niche';
 
+// PARKED Nov 5, 2026 (John's decision): provider pricing is paused.
+// Card checkout is turned off: both checkout entry points below refuse
+// to create a session. No payment can be started from the site while
+// this guard is in place. The Stripe webhook stays live for records.
+// When pricing returns, remove the guard and restore the session
+// creation from git history. Do not delete this file: other pages
+// import these functions and expect their signatures.
+
+const CHECKOUT_PAUSED_MESSAGE =
+    'Payments are paused right now. Listing is free, and there are no paid plans at the moment.';
+
 export async function createCheckoutSession(providerId: string, planId: 'verified' | 'featured') {
+    throw new Error(CHECKOUT_PAUSED_MESSAGE);
+}
+
+export async function createApiCheckoutSession(planId: 'api_starter' | 'api_pro', email: string): Promise<{ error?: string; url?: string }> {
+    // Return errors instead of throwing: a thrown server-action error
+    // loses its message on the way to the client, which hid the real
+    // Stripe failure behind a generic "Payment session failed" line.
+    return { error: CHECKOUT_PAUSED_MESSAGE };
+}
+
+// --- Paused implementation (kept for reference, not called) ---
+async function createProviderCheckoutSessionPaused(providerId: string, planId: 'verified' | 'featured') {
     const supabase = await getSupabaseServer(await cookies());
     if (!supabase) throw new Error('Not authenticated');
 
@@ -64,7 +87,7 @@ export async function createCheckoutSession(providerId: string, planId: 'verifie
     redirect(session.url);
 }
 
-export async function createApiCheckoutSession(planId: 'api_starter' | 'api_pro', email: string) {
+async function createApiCheckoutSessionPaused(planId: 'api_starter' | 'api_pro', email: string) {
     const plan = STRIPE_PLANS[planId];
     if (!plan) return { error: 'Invalid plan' };
 

@@ -8,7 +8,6 @@ import { ExternalLink, Sparkles, User, LogOut } from 'lucide-react'
 import TierBadge from '../_components/TierBadge'
 import ClarityScoreCard from '../_components/TrueScoreCard'
 import StatsCard from '../_components/StatsCard'
-import BillingButton from '../_components/BillingButton'
 import ListingLink from '../_components/ListingLink'
 import Logo from '@/components/layout/Logo'
 
@@ -121,9 +120,12 @@ export default async function ProviderDashboard() {
                         </div>
 
                         {/* Bottom Actions Row */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-12 border-t border-[#3D2B1F]/10 mt-12">
+                        {/* Billing removed Nov 5, 2026: pricing is parked and
+                            there are no paid plans, so no billing button.
+                            The listing link stays: the dashboard is for
+                            free features (score, views, clicks). */}
+                        <div className="grid grid-cols-1 gap-6 pt-12 border-t border-[#3D2B1F]/10 mt-12">
                             <ListingLink slug={provider.slug} />
-                            <BillingButton customerId={provider.stripe_customer_id} />
                         </div>
 
                         {/* Beta Help Alert */}

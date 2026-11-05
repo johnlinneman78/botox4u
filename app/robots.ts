@@ -43,7 +43,6 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: '*',
             allow: [
                 '/',
-                '/docs',
                 '/llms.txt',
                 '/llms-full.txt',
             ],

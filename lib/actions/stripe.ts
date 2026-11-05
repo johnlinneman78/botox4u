@@ -6,6 +6,16 @@ import { getSupabaseServer } from '@/lib/supabase/factory'
 import { cookies } from 'next/headers'
 
 export async function createCheckoutSession(tier: 'featured' | 'premium') {
+    // PARKED Nov 5, 2026 (John's decision): provider pricing is paused.
+    // Card checkout is turned off: this entry point refuses to create
+    // a session. No payment can be started from the site while this
+    // guard is in place. When pricing returns, remove the guard and
+    // restore the session creation below from git history.
+    throw new Error('Payments are paused right now. Listing is free, and there are no paid plans at the moment.')
+}
+
+// --- Paused implementation (kept for reference, not called) ---
+async function createCheckoutSessionPaused(tier: 'featured' | 'premium') {
     if (!stripe) {
         throw new Error('Stripe is not configured')
     }

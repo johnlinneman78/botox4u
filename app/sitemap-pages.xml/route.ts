@@ -21,7 +21,6 @@ export async function GET() {
         { path: '/guides', priority: '0.6', changefreq: 'monthly' },
         { path: '/methodology', priority: '0.5', changefreq: 'monthly' },
         { path: '/faq', priority: '0.5', changefreq: 'monthly' },
-        { path: '/api-access', priority: '0.4', changefreq: 'monthly' },
         { path: '/privacy', priority: '0.3', changefreq: 'yearly' },
         { path: '/terms', priority: '0.3', changefreq: 'yearly' },
         { path: '/disclaimer', priority: '0.3', changefreq: 'yearly' },

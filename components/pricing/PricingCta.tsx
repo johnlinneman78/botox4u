@@ -1,9 +1,12 @@
-
 'use client';
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
-import { createCheckoutSession } from '@/lib/actions/checkout';
+
+// PARKED Nov 5, 2026 (John's decision): provider pricing is paused and
+// no payment can be started. The free plan still routes to /claim.
+// Any paid planId renders a disabled button and never calls checkout.
+// When pricing returns, restore the checkout call from git history.
 
 interface PricingCtaProps {
     planId: 'free' | 'verified' | 'featured';
@@ -12,41 +15,25 @@ interface PricingCtaProps {
     className?: string;
 }
 
-export function PricingCta({ planId, providerId, isLoggedIn, className }: PricingCtaProps) {
+export function PricingCta({ planId, isLoggedIn, className }: PricingCtaProps) {
     const [loading, setLoading] = useState(false);
 
-    const handleUpgrade = async () => {
-        // Handle Free Plan
-        if (planId === 'free') {
-            window.location.href = isLoggedIn ? '/provider/login' : '/claim';
-            return;
-        }
-
-        if (!isLoggedIn) {
-            window.location.href = `/claim?plan=${planId}&providerId=${providerId || ''}`;
-            return;
-        }
-
-        if (!providerId) {
-            // If logged in but no provider ID, they need to claim it first or we need to find it
-            window.location.href = `/provider/signup?plan=${planId}`;
-            return;
-        }
-
-        try {
-            setLoading(true);
-            await createCheckoutSession(providerId, planId);
-        } catch (error) {
-            console.error('Upgrade failed:', error);
-            alert('Failed to start checkout. Please try again.');
-        } finally {
-            setLoading(false);
-        }
+    const handleFree = () => {
+        setLoading(true);
+        window.location.href = isLoggedIn ? '/provider/login' : '/claim';
     };
+
+    if (planId !== 'free') {
+        return (
+            <Button disabled className={className}>
+                Paused
+            </Button>
+        );
+    }
 
     return (
         <Button
-            onClick={handleUpgrade}
+            onClick={handleFree}
             disabled={loading}
             className={className}
         >

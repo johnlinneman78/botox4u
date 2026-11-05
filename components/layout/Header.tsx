@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
-import { Menu, X, Shield, Calculator, Info, Sparkles, TrendingUp, Code } from 'lucide-react'
+import { Menu, X, Shield, Calculator, Info, Sparkles, TrendingUp } from 'lucide-react'
 import Logo from './Logo'
 
 export default function Header() {
@@ -13,7 +13,6 @@ export default function Header() {
         { href: '/find-providers', label: 'Find Providers', icon: Shield },
         { href: '/calculator', label: 'Cost Calculator', icon: Calculator },
         { href: '/blog', label: 'Insights', icon: TrendingUp },
-        { href: '/docs', label: 'Docs & API', icon: Code },
     ]
 
     return (

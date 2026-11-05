@@ -56,11 +56,6 @@ export default function ForProvidersPage() {
                                     List Your Practice
                                 </Button>
                             </Link>
-                            <Link href="/api-access" className="w-full sm:w-auto">
-                                <Button variant="outline" className="w-full sm:w-auto h-16 px-12 border-[#3D2B1F]/10 hover:bg-[#3D2B1F]/5 text-[#3D2B1F] font-bold text-lg rounded-2xl transition-all">
-                                    Explore API Data
-                                </Button>
-                            </Link>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,14 @@
 // Georgetown (grandfathered, Nov 3, 2026) first, then trial
 // providers in the order they accepted.
 //
-// LAUNCH OFFER: the first 10 providers get a free featured trial of
+// PARKED Nov 5, 2026 (John's decision): provider pricing is paused
+// until there is more feedback, data, and engagement. No new free
+// featured trials, no paid plans, no pricing ask in provider replies.
+// The launch offer below is on hold, not dead: restore it from git
+// history when pricing returns. Georgetown's grandfathered free spot
+// is unchanged by the park.
+//
+// LAUNCH OFFER (ON HOLD): the first 10 providers get a free featured trial of
 // 30 days. After 30 days the spot drops off unless the provider
 // chooses the paid plan. No card up front, no surprise charge, and no
 // trial starts without the provider actually accepting the offer.
