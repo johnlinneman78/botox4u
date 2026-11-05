@@ -113,7 +113,7 @@ export default function MethodologyPage() {
                         <h2 className="text-2xl font-display font-bold text-[#3D2B1F] mb-3">What never counts</h2>
                         <ul className="list-disc pl-6 space-y-2">
                             <li>Whether a provider pays us. Paid plans add photos, pricing and a visual highlight, never points. A paid booking display never adds points, and a free featured placement changes display position at the top of a city page, not the calculated score.</li>
-                            <li>NPI verification. An NPI match is shown separately as an &quot;NPI Verified&quot; badge with its check date; no badge is not a penalty. An NPI match does not validate state licensure, and we keep license checks separate from the NPI check. &quot;Not checked,&quot; &quot;no matching record found&quot; and &quot;not applicable&quot; are different states.</li>
+                            <li>NPI verification. An NPI match is shown separately as a badge naming whose record matched (with the check date where one exists); no badge is not a penalty. An NPI match does not validate state licensure, and we keep license checks separate from the NPI check. &quot;Not checked,&quot; &quot;no matching record found&quot; and &quot;not applicable&quot; are different states.</li>
                             <li>How much product a clinic buys from a manufacturer, or loyalty-program status.</li>
                             <li>How many different treatments a clinic sells.</li>
                         </ul>

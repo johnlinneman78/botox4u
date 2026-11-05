@@ -1,40 +1,67 @@
-// Free featured listings for claimed providers.
+// Featured providers — John's decision, Nov 4, 2026.
 //
-// This is NOT a paid tier and it does NOT change a provider's Clarity
-// Score. A provider listed here is pinned to the TOP of the ranked list
-// on their city page, clearly labeled as a free claimed listing, ahead
-// of the score/rating order — because they are a provider who actually
-// claimed their listing and gave us their information. Everyone else
-// keeps their normal order below them. Nothing here is sold:
-// Georgetown Allure Med Spa is the first provider to claim and manage
-// a listing, and this top spot is a free thank-you for that, decided
-// by John on Nov 3, 2026. Adding another provider to this list is a
-// deliberate owner decision, never automatic and never paid for
-// through checkout.
+// Featured is a PAID placement: a clearly labeled sponsored section
+// ABOVE the unpaid results on a city page, with a Featured tag. It
+// never changes a provider's Clarity Score, and it is never granted
+// just because a provider gave us information — a correction, a
+// description, or a logo is part of their free listing, not agreement
+// to be featured.
+//
+// SPONSORED-SECTION RULE (John, Nov 4, 2026): featured providers
+// render in their own labeled section above the unpaid list, never
+// mixed into the ranked order. The section carries this disclosure:
+// "Providers may purchase a clearly labeled advertising position.
+// Payment never changes their Clarity Score, verification status,
+// or position within the unpaid results." The unpaid list below
+// keeps its independent order.
+//
+// ORDERING: multiple sponsored spots order by acceptance date. Until
+// trial tracking lands, list order here IS acceptance order —
+// Georgetown (grandfathered, Nov 3, 2026) first, then trial
+// providers in the order they accepted.
+//
+// LAUNCH OFFER: the first 10 providers get a free featured trial of
+// 30 days. After 30 days the spot drops off unless the provider
+// chooses the paid plan. No card up front, no surprise charge, and no
+// trial starts without the provider actually accepting the offer.
+// The paid price is not set yet.
+//
+// GRANDFATHERED: Georgetown Allure Med Spa keeps its free featured
+// spot with no clock — it was promised a free spot on Nov 3, 2026,
+// before any trial term existed.
+//
+// A provider's own logo on their card is NOT part of featured: any
+// provider-supplied logo shows on the card as part of the listing.
 
-export const FEATURED_CLAIMED_LISTINGS: Array<{ slug: string; note: string }> = [
+export const FEATURED_PROVIDERS: Array<{ slug: string; why: string }> = [
     {
         slug: 'georgetown-allure-medical-spa-washington-dc',
-        note: 'First provider to claim and manage their listing',
+        why: 'Grandfathered founding spot, promised Nov 3, 2026, no trial clock',
     },
 ]
 
-export function featuredClaimedFor(providers: Array<{ slug?: string }>) {
-    const slugs = new Set(FEATURED_CLAIMED_LISTINGS.map((f) => f.slug))
-    return providers.filter((p) => p.slug && slugs.has(p.slug))
+export function isFeatured(slug?: string): boolean {
+    return !!slug && FEATURED_PROVIDERS.some((f) => f.slug === slug)
 }
 
-export function featuredNoteFor(slug: string): string {
-    return FEATURED_CLAIMED_LISTINGS.find((f) => f.slug === slug)?.note || 'Claimed listing'
-}
-
-export function isFeaturedClaimed(slug?: string): boolean {
-    return !!slug && FEATURED_CLAIMED_LISTINGS.some((f) => f.slug === slug)
-}
-
-// Featured claimed listings first, everyone else in their original order.
+// Featured providers first, everyone else in their original order.
 export function orderFeaturedFirst<T extends { slug?: string }>(providers: T[]): T[] {
-    const featured = providers.filter((p) => isFeaturedClaimed(p.slug))
-    const rest = providers.filter((p) => !isFeaturedClaimed(p.slug))
+    const featured = providers.filter((p) => isFeatured(p.slug))
+    const rest = providers.filter((p) => !isFeatured(p.slug))
     return [...featured, ...rest]
+}
+
+// Split a city list into the sponsored section and the unpaid list.
+// Featured keeps FEATURED_PROVIDERS list order (acceptance order until
+// trial tracking lands); the unpaid list keeps its independent order.
+export function splitFeatured<T extends { slug?: string }>(providers: T[]): {
+    featured: T[]
+    rest: T[]
+} {
+    const order = new Map(FEATURED_PROVIDERS.map((f, i) => [f.slug, i]))
+    const featured = providers
+        .filter((p) => p.slug && order.has(p.slug))
+        .sort((a, b) => (order.get(a.slug!) ?? 0) - (order.get(b.slug!) ?? 0))
+    const rest = providers.filter((p) => !isFeatured(p.slug))
+    return { featured, rest }
 }

@@ -5,6 +5,7 @@ import { track, providerParams } from '@/lib/analytics'
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ClarityBadge } from '@/components/ui/ClarityBadge'
+import { npiBadgeFor } from '@/lib/npi-badge'
 import { SCORE_MAX, formatScore } from '@/lib/scoring'
 import { Badge } from '@/components/ui/Badge'
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
@@ -84,6 +85,15 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
         return true
     }
     const hasImage = !imageError && (isRealImageUrl(provider.hero_image_url) || isRealImageUrl(provider.imageUrl))
+    // A logo is not a photo: forcing it to cover-crop the hero box blows a
+    // wide logo up and runs it off the edge (Georgetown, Nov 4). Logos render
+    // contained and centered; real photos still fill the box.
+    const heroImageSrc = isRealImageUrl(provider.hero_image_url) ? provider.hero_image_url : provider.imageUrl
+    const heroIsLogo = Boolean(heroImageSrc && heroImageSrc.toLowerCase().includes('logo'))
+    // Scoped NPI badge (lib/npi-badge.ts): states exactly whose record
+    // matched — never a clinic-wide claim. The old provider-flag-only
+    // check hid the badge when only practitioners were verified.
+    const npiBadge = npiBadgeFor(provider as any)
 
     return (
         <div style={{ paddingTop: 'var(--nav-height)', background: 'var(--color-bg)' }}>
@@ -102,10 +112,13 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                 >
                     {hasImage ? (
                         <img
-                            src={isRealImageUrl(provider.hero_image_url) ? provider.hero_image_url : provider.imageUrl}
+                            src={heroImageSrc}
                             alt={provider.name}
-                            className="w-full h-full object-cover"
-                            style={{ borderRadius: 'var(--radius-xl)' }}
+                            className={heroIsLogo ? 'max-w-full max-h-full object-contain' : 'w-full h-full object-cover'}
+                            style={{
+                                borderRadius: 'var(--radius-xl)',
+                                ...(heroIsLogo ? { padding: 24, background: 'var(--color-surface)' } : {}),
+                            }}
                             onError={() => setImageError(true)}
                         />
                     ) : (
@@ -147,7 +160,7 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
 
                 <RevealOnScroll delay={0.1}>
                     <div className="flex flex-wrap gap-2 mb-4">
-                        {provider.npi_verified && <Badge variant="sage">NPI Verified</Badge>}
+                        {npiBadge && <Badge variant="sage" title={npiBadge.detail}>{npiBadge.label}</Badge>}
                         {provider.npi_specialty && <Badge variant="sage">{provider.npi_specialty}</Badge>}
                         {provider.allergan_tier && provider.allergan_tier !== 'None' && (
                             <Badge variant="sage">Allergan {provider.allergan_tier}</Badge>
@@ -155,6 +168,12 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                         {provider.verified && <Badge variant="gold">Verified Profile</Badge>}
                     </div>
                 </RevealOnScroll>
+
+                {npiBadge && (
+                    <p className="font-body text-xs mb-4" style={{ color: 'var(--color-stone)' }}>
+                        {npiBadge.detail}
+                    </p>
+                )}
 
                 <RevealOnScroll delay={0.15}>
                     <p className="font-body text-sm" style={{ color: 'var(--color-stone)' }}>
@@ -408,20 +427,20 @@ export default function ProviderProfileClient({ provider, themes }: ProviderProf
                         {provider.practitioners.map((prac: any, i: number) => (
                             <RevealOnScroll key={i} delay={i * 0.1}>
                                 <div className="p-6 rounded-xl border relative" style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface)' }}>
-                                    {prac.npi_verified && (
+                                    {(prac.is_npi_verified || prac.npi_verified) && (
                                         <div className="absolute top-4 right-4">
                                             <Badge variant="sage" className="flex items-center gap-1.5 px-3 py-1">
                                                 <ShieldCheck className="w-3.5 h-3.5" />
-                                                NPI Verified
+                                                NPI record matched
                                             </Badge>
                                         </div>
                                     )}
                                     <div className="pr-24">
                                         <h3 className="font-display font-medium text-xl mb-1" style={{ color: 'var(--color-espresso)' }}>
-                                            {prac.first_name} {prac.last_name}{prac.license_type ? `, ${prac.license_type}` : ''}
+                                            {prac.name}{prac.credentials ? `, ${prac.credentials}` : ''}
                                         </h3>
                                         <p className="font-body text-sm font-medium mb-4" style={{ color: 'var(--color-taupe)' }}>
-                                            {prac.npi_taxonomy_description || prac.scraped_title || 'Aesthetic Provider'}
+                                            {prac.taxonomy || 'Aesthetic Provider'}
                                         </p>
                                     </div>
 

@@ -21,7 +21,7 @@ import { JsonLd, generateBreadcrumbSchema, generateItemListSchema, generateFAQPa
 import { Suspense } from 'react'
 import { QuizBanner } from '@/components/lead-funnel/QuizBanner'
 import { PriceReportCTA } from '@/components/providers/PriceReportCTA'
-import { featuredNoteFor, isFeaturedClaimed, orderFeaturedFirst } from '@/lib/featured-listings'
+import { orderFeaturedFirst, splitFeatured } from '@/lib/featured-listings'
 import { PriceReportStickyBar } from '@/components/providers/PriceReportStickyBar'
 import { SeedPriceRange } from '@/components/price-pool/SeedPriceRange'
 import { SEED_CITIES } from '@/lib/price-pool-seed'
@@ -125,6 +125,11 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
     }));
 
     const itemListSchema = generateItemListSchema(orderFeaturedFirst(providers).slice(0, 50), cityName)
+    // Sponsored section + unpaid list (see lib/featured-listings.ts):
+    // featured providers render above the unpaid results in their own
+    // labeled section, never mixed into the ranked order. The unpaid
+    // list keeps its independent order from the query.
+    const { featured: featuredProviders, rest: unpaidProviders } = splitFeatured(providers)
     const breadcrumbs = generateBreadcrumbSchema([
         { name: 'Home', item: '/' },
         { name: 'Directory', item: `/${NICHE.baseSlug}` },
@@ -284,24 +289,36 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                             </h2>
                         </div>
 
-                        {/* Free featured listings (see lib/featured-listings.ts):
-                            a claimed provider is pinned to the TOP of this list,
-                            clearly labeled, ahead of the score/rating order. Their
-                            Clarity Score itself does not change. */}
+                        {/* Sponsored section (see lib/featured-listings.ts):
+                            featured providers render here, ABOVE the unpaid
+                            results, in their own clearly labeled section —
+                            never mixed into the ranked order. The Featured
+                            tag on each card is in addition to this label. */}
+                        {featuredProviders.length > 0 && (
+                            <section aria-label="Sponsored providers" className="mb-12">
+                                <div className="mb-4">
+                                    <p className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-stone)' }}>
+                                        Sponsored · Featured
+                                    </p>
+                                    <p className="text-xs mt-1" style={{ color: 'var(--color-stone)' }}>
+                                        Providers may purchase a clearly labeled advertising position. Payment never changes their Clarity Score, verification status, or position within the unpaid results.
+                                    </p>
+                                </div>
+                                <div className="space-y-8">
+                                    {featuredProviders.map((provider: any) => (
+                                        <div key={provider.id}>
+                                            <EnhancedProviderCard provider={provider} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+
+                        {/* Unpaid results, in their independent order. */}
                         <div className="space-y-8">
                             {providers.length > 0 ? (
-                                orderFeaturedFirst(providers).slice(0, 100).map((provider: any) => (
+                                unpaidProviders.slice(0, 100).map((provider: any) => (
                                     <div key={provider.id}>
-                                        {isFeaturedClaimed(provider.slug) && (
-                                            <div className="mb-3">
-                                                <p className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-stone)' }}>
-                                                    Featured · Free claimed listing
-                                                </p>
-                                                <p className="text-xs" style={{ color: 'var(--color-stone)' }}>
-                                                    {featuredNoteFor(provider.slug)}. Pinned to the top as a free thank-you for claiming — this changes its display position, not its Clarity Score.
-                                                </p>
-                                            </div>
-                                        )}
                                         <EnhancedProviderCard provider={provider} />
                                     </div>
                                 ))

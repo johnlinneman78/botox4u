@@ -8,6 +8,8 @@ import { EnrichedProvider } from '@/lib/types/enrichment'
 import { track, providerParams } from '@/lib/analytics'
 import { LeadForm } from './LeadForm'
 import { formatCurrency } from '@/lib/utils'
+import { isFeatured } from '@/lib/featured-listings'
+import { npiBadgeFor } from '@/lib/npi-badge'
 
 interface EnhancedProviderCardProps {
     provider: EnrichedProvider
@@ -74,6 +76,25 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
 
     const score = provider.score_total ?? provider.score?.points ?? null;
 
+    // Featured = Georgetown (grandfathered) or a provider on a 30-day
+    // free trial, per lib/featured-listings.ts. Featured adds the
+    // sponsored section and the tag — nothing else.
+    const featured = isFeatured(provider.slug)
+    // A provider's own logo on their card is part of the listing, not
+    // the promotion, so it is NOT gated by featured status: any
+    // provider-supplied logo (uploaded to provider_images) shows here.
+    // Scraped photos never show as a logo.
+    const suppliedLogo = (() => {
+        const url = (provider as any).imageUrl as string | undefined
+        if (!url) return null
+        const lower = url.toLowerCase()
+        return lower.includes('provider_images') && lower.includes('logo') ? url : null
+    })()
+    // Scoped NPI badge (lib/npi-badge.ts): states exactly whose record
+    // matched. The old "NPI Verified" pill implied the whole clinic was
+    // verified; that claim is never made now.
+    const npiBadge = npiBadgeFor(provider as any)
+
     // Treatments mock logic based on enriched_attrs
     const treatments = [];
     if (provider.enriched_attrs?.price_per_unit_botox || provider.price_per_unit || provider.pricePerUnit) treatments.push('Botox');
@@ -126,6 +147,20 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                 </AnimatePresence>
 
                 <div className="p-6 md:p-8 flex flex-col flex-1">
+                    {/* Provider-supplied logo: shown on the card itself, so
+                        visitors see it without clicking through. Contained
+                        and centered — never cropped. */}
+                    {suppliedLogo && (
+                        <div className="flex items-center justify-center mb-6 pb-6 border-b border-[#3D2B1F]/10">
+                            <img
+                                src={suppliedLogo}
+                                alt={`${provider.name} logo`}
+                                className="max-w-full object-contain"
+                                style={{ maxHeight: 96 }}
+                            />
+                        </div>
+                    )}
+
                     {/* Row 1: Business identity + score */}
                     <div className="flex justify-between items-start mb-6 border-b border-[#3D2B1F]/10 pb-6">
                         <div>
@@ -135,6 +170,24 @@ export function EnhancedProviderCard({ provider }: EnhancedProviderCardProps) {
                             <p className="font-sans text-[12px] text-[#A89B8C]">
                                 {provider.business_type || 'Aesthetic Clinic'} · {provider.city}, {provider.state}
                             </p>
+                            {(featured || npiBadge) && (
+                                <div className="flex flex-wrap gap-2 mt-2">
+                                    {featured && (
+                                        <span className="px-2.5 py-1 bg-[#C9A96E]/15 text-[#3D2B1F] text-[10px] font-bold uppercase tracking-widest rounded-full">
+                                            Featured
+                                        </span>
+                                    )}
+                                    {npiBadge && (
+                                        <span
+                                            title={npiBadge.detail}
+                                            className="px-2.5 py-1 bg-[#8A9E8D]/15 text-[#3D2B1F] text-[10px] font-bold rounded-full flex items-center gap-1"
+                                        >
+                                            <ShieldCheck className="w-3 h-3 shrink-0" />
+                                            {npiBadge.label}
+                                        </span>
+                                    )}
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex flex-col items-end">
