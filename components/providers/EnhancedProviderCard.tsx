@@ -31,6 +31,31 @@ export const cardItemVariants: Variants = {
     }
 }
 
+/**
+ * Practitioner names in the database often already contain their credentials
+ * (e.g. "Maegan Griffin, MSN, NP-C"), so appending the credentials field
+ * verbatim would repeat them. Append only the credential tokens that are
+ * not already present in the name (case-insensitive token match, credentials
+ * split on commas). E.g. name "Amiee Morgan PA-C / Injector" with
+ * credentials "PA-C" renders as-is, with nothing appended.
+ */
+function practitionerHeading(name: string, credentials?: string | null): string {
+    if (!credentials) return name
+    const nameLower = name.toLowerCase()
+    const nameTokens = new Set(nameLower.split(/[^a-z0-9-]+/).filter(Boolean))
+    const missing = credentials
+        .split(',')
+        .map((token) => token.trim())
+        .filter((token) => {
+            if (!token) return false
+            const lower = token.toLowerCase()
+            // Multi-word credential: fall back to a substring check.
+            if (lower.includes(' ')) return !nameLower.includes(lower)
+            return !nameTokens.has(lower)
+        })
+    return missing.length > 0 ? `${name}, ${missing.join(', ')}` : name
+}
+
 export function EnhancedProviderCard({ provider, cityAvgCost }: EnhancedProviderCardProps) {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isScanning, setIsScanning] = useState(false)
@@ -227,7 +252,7 @@ export function EnhancedProviderCard({ provider, cityAvgCost }: EnhancedProvider
                                 </div>
                                 <div>
                                     <h4 className="font-sans font-medium text-[15px] text-[#3D2B1F] mb-0.5">
-                                        {leadPractitioner.name}{leadPractitioner.credentials ? `, ${leadPractitioner.credentials}` : ''}
+                                        {practitionerHeading(leadPractitioner.name, leadPractitioner.credentials)}
                                     </h4>
                                     <div className="flex items-center gap-1.5 font-sans text-[13px] text-[#A89B8C] mb-1">
                                         <span>{leadPractitioner.taxonomy || 'Aesthetics'}</span>
