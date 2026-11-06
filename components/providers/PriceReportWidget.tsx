@@ -84,7 +84,7 @@ export function PriceReportWidget({
     // Detailed path: clinic search + select.
     const [clinicQuery, setClinicQuery] = useState(
         initialClinic
-            ? `${initialClinic.name}${initialClinic.city ? ` — ${initialClinic.city}` : ''}${initialClinic.state ? `, ${initialClinic.state}` : ''}`
+            ? `${initialClinic.name}${initialClinic.city ? ` · ${initialClinic.city}` : ''}${initialClinic.state ? `, ${initialClinic.state}` : ''}`
             : ''
     )
     const [clinicOptions, setClinicOptions] = useState<ClinicOption[]>([])
@@ -283,19 +283,19 @@ export function PriceReportWidget({
         return (
             <Card className="max-w-xl mx-auto">
                 <CardHeader>
-                    <CardTitle>Thanks — your price is in the pool.</CardTitle>
+                    <CardTitle>Thanks, your price is in the pool.</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <p className="text-[#3D2B1F]/70 leading-relaxed">
                         You just made the guide more real. Your report goes to a review queue first. We never show one
-                        person&apos;s report on its own — any numbers we ever show will come from many reviewed reports
+                        person&apos;s report on its own. Any numbers we ever show will come from many reviewed reports
                         together, each carrying its date and how many reports it is based on.
                     </p>
                     {guideOptIn && (
                         <p className="text-[#3D2B1F]/70 leading-relaxed pt-3">
                             {guideSent
-                                ? 'Check your inbox — your free pricing guide is on its way.'
-                                : 'Your guide request is saved — we will send it shortly.'}
+                                ? 'Check your inbox. Your free pricing guide is on its way.'
+                                : 'Your guide request is saved. We will send it shortly.'}
                         </p>
                     )}
                 </CardContent>
@@ -308,7 +308,7 @@ export function PriceReportWidget({
             <CardHeader>
                 <CardTitle>What did you pay?</CardTitle>
                 <p className="text-[#3D2B1F]/60 leading-relaxed pt-2">
-                    Add your price — you make the guide real. Real prices from real people, not a yearly survey.
+                    Add your price. You make the guide real. Real prices from real people, not a yearly survey.
                     About 30 seconds. Your report is saved for review, and we never show one person&apos;s
                     report on its own.
                 </p>
@@ -320,8 +320,8 @@ export function PriceReportWidget({
                         <div className="grid grid-cols-2 gap-2">
                             {(
                                 [
-                                    { value: 'quick', label: 'Quick — city only' },
-                                    { value: 'detailed', label: 'Detailed — pick the clinic' },
+                                    { value: 'quick', label: 'Quick: city only' },
+                                    { value: 'detailed', label: 'Detailed: pick the clinic' },
                                 ] as const
                             ).map((option) => (
                                 <button
@@ -359,7 +359,7 @@ export function PriceReportWidget({
                                 autoComplete="off"
                             />
                             <p className="text-sm text-[#3D2B1F]/50">
-                                No clinic needed — your city is enough to grow the pool.
+                                No clinic needed. Your city is enough to grow the pool.
                             </p>
                         </div>
                     ) : (
@@ -370,7 +370,7 @@ export function PriceReportWidget({
                             <input
                                 id="price-clinic"
                                 type="text"
-                                value={clinic ? `${clinic.name}${clinic.city ? ` — ${clinic.city}` : ''}${clinic.state ? `, ${clinic.state}` : ''}` : clinicQuery}
+                                value={clinic ? `${clinic.name}${clinic.city ? ` · ${clinic.city}` : ''}${clinic.state ? `, ${clinic.state}` : ''}` : clinicQuery}
                                 onChange={(e) => searchClinics(e.target.value)}
                                 onFocus={() => {
                                     markStarted()
@@ -394,7 +394,7 @@ export function PriceReportWidget({
                                                 }}
                                             >
                                                 {option.name}
-                                                {option.city && <span className="text-[#3D2B1F]/50"> — {option.city}</span>}
+                                                {option.city && <span className="text-[#3D2B1F]/50"> · {option.city}</span>}
                                                 {option.state && <span className="text-[#3D2B1F]/50">, {option.state}</span>}
                                             </button>
                                         </li>
@@ -475,7 +475,7 @@ export function PriceReportWidget({
 
                     {category === 'biostimulator' && (
                         <p className="text-sm text-[#3D2B1F]/60 leading-relaxed">
-                            Sculptra is listed on its own, never as a filler — it works differently and is priced per vial.
+                            Sculptra is listed on its own, never as a filler. It works differently and is priced per vial.
                         </p>
                     )}
 
@@ -607,7 +607,7 @@ export function PriceReportWidget({
                                 className="mt-1 h-5 w-5 accent-[#3D2B1F]"
                             />
                             <span className="text-[#3D2B1F]/80 leading-relaxed">
-                                Send me the free pricing guide. Optional — only if you want it.
+                                Send me the free pricing guide. Optional, only if you want it.
                             </span>
                         </label>
                         {guideOptIn && (

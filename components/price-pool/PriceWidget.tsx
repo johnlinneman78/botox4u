@@ -213,7 +213,7 @@ export function PriceWidget({
                 <div className="mt-6">
                     {!selectedCity ? (
                         <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                            Pick a city and a treatment above — we&apos;ll show you what people actually paid, or tell
+                            Pick a city and a treatment above. We&apos;ll show you what people actually paid, or tell
                             you honestly if there isn&apos;t enough data yet.
                         </p>
                     ) : loading ? (
@@ -222,7 +222,7 @@ export function PriceWidget({
                         </p>
                     ) : unavailable ? (
                         <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                            Price data is unavailable right now. Try again shortly — or browse providers in{' '}
+                            Price data is unavailable right now. Try again shortly, or browse providers in{' '}
                             <Link href={cityPageHref} className="underline">
                                 {selectedCity.name}
                             </Link>
@@ -304,7 +304,7 @@ export function PriceWidget({
                                                 <p className="font-body text-sm mt-2 leading-relaxed" style={{ color: 'var(--color-stone)' }}>
                                                     Based on {cityPrice.pricedProviderCount || 'the'} clinics in{' '}
                                                     {selectedCity.name} that publish a per-unit price. This is what clinics
-                                                    list — not what patients paid.
+                                                    list, not what patients paid.
                                                 </p>
                                             </>
                                         ) : (
@@ -316,7 +316,7 @@ export function PriceWidget({
                                                     No clinic in {selectedCity.name} has published a price yet.
                                                 </p>
                                                 <p className="font-body text-sm mt-2 leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                                                    That&apos;s why the patient-reported range matters — it&apos;s the only real
+                                                    That&apos;s why the patient-reported range matters. It&apos;s the only real
                                                     price data here until clinics publish.
                                                 </p>
                                             </>
@@ -334,7 +334,7 @@ export function PriceWidget({
                             {hasRange && isContributor && pool!.breakdownByQuantity && pool!.breakdownByQuantity.length > 0 && (
                                 <div className="mt-4 rounded-2xl border p-5 md:p-6" style={{ background: 'white', borderColor: 'var(--color-border)' }}>
                                     <h3 className="font-body text-sm font-bold uppercase tracking-wider" style={{ color: 'var(--color-espresso)' }}>
-                                        Full breakdown — unlocked because you shared
+                                        Full breakdown, unlocked because you shared
                                     </h3>
                                     <div className="mt-3">
                                         <p className="font-body font-bold text-sm" style={{ color: 'var(--color-espresso)' }}>By amount</p>
@@ -419,7 +419,7 @@ export function PriceWidget({
                                     },
                                     {
                                         step: '3. Everyone can see',
-                                        text: 'The next patient sees real ranges before booking — and clinics feel the pressure to publish.',
+                                        text: 'The next patient sees real ranges before booking, and clinics feel the pressure to publish.',
                                     },
                                 ].map((s) => (
                                     <div key={s.step} className="rounded-2xl border p-4" style={{ background: 'white', borderColor: 'var(--color-border)' }}>

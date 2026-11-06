@@ -95,6 +95,16 @@ export function EnhancedProviderCard({ provider, cityAvgCost }: EnhancedProvider
         const lower = url.toLowerCase()
         return lower.includes('provider_images') && lower.includes('logo') ? url : null
     })()
+    // CULT fallback (Nov 6, 2026): CULT Aesthetics sent its real logo
+    // by email (Abby Parker, Nov 5) but the providers table has no logo
+    // on file for it (hero_image_url is NULL), so the mechanism above
+    // finds nothing. Show the real file for CULT cards only. No other
+    // provider gets a logo here: none on file, and no generated or fake
+    // logos are ever used.
+    const cultLogo = !suppliedLogo && /cult/i.test(provider.name ?? '')
+        ? '/images/redesign/cult-logo.png'
+        : null
+    const logoToShow = suppliedLogo ?? cultLogo
     // Scoped NPI badge (lib/npi-badge.ts): states exactly whose record
     // matched. The old "NPI Verified" pill implied the whole clinic was
     // verified; that claim is never made now.
@@ -108,8 +118,8 @@ export function EnhancedProviderCard({ provider, cityAvgCost }: EnhancedProvider
     if (treatments.length === 0) treatments.push('Aesthetics', 'Injectables');
 
     const ctaText = leadPractitioner
-        ? `${leadPractitioner.name} — ${provider.city}, ${provider.state}`
-        : `${provider.name} — ${provider.city}, ${provider.state}`;
+        ? `${leadPractitioner.name} · ${provider.city}, ${provider.state}`
+        : `${provider.name} · ${provider.city}, ${provider.state}`;
 
     return (
         <>
@@ -155,10 +165,10 @@ export function EnhancedProviderCard({ provider, cityAvgCost }: EnhancedProvider
                     {/* Provider-supplied logo: shown on the card itself, so
                         visitors see it without clicking through. Contained
                         and centered — never cropped. */}
-                    {suppliedLogo && (
+                    {logoToShow && (
                         <div className="flex items-center justify-center mb-6 pb-6 border-b border-[#3D2B1F]/10">
                             <img
-                                src={suppliedLogo}
+                                src={logoToShow}
                                 alt={`${provider.name} logo`}
                                 className="max-w-full object-contain"
                                 style={{ maxHeight: 96 }}
@@ -197,7 +207,7 @@ export function EnhancedProviderCard({ provider, cityAvgCost }: EnhancedProvider
 
                         <div className="flex flex-col items-end">
                             <div className="flex flex-col items-center">
-                                <span className="text-[20px] font-display font-bold text-[#3D2B1F] leading-none mb-0.5">{score === null ? '—' : `${Math.round(score)}/100`}</span>
+                                <span className="text-[20px] font-display font-bold text-[#3D2B1F] leading-none mb-0.5">{score === null ? 'Not scored' : `${Math.round(score)}/100`}</span>
                                 <span className="text-[10px] font-bold uppercase tracking-widest text-[#C9A96E] flex items-center gap-1">
                                     <ShieldCheck className="w-3 h-3" />
                                     Clarity
@@ -293,7 +303,7 @@ export function EnhancedProviderCard({ provider, cityAvgCost }: EnhancedProvider
                         ) : cityAvgCost != null ? (
                             <div
                                 className="font-sans text-[14px] text-[#A89B8C]"
-                                title="Average published price in this city — not this clinic's price"
+                                title="Average published price in this city, not this clinic's price"
                             >
                                 City average {formatCurrency(cityAvgCost)}/unit
                             </div>

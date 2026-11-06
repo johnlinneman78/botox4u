@@ -1,16 +1,27 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
 import { Button } from '@/components/ui/Button'
-import { MorphingHeadline } from '@/components/ui/MorphingHeadline'
-import { TreatmentExplorer } from '@/components/ui/TreatmentExplorer'
-import { StatementSection } from '@/components/sections/StatementSection'
 import { PriceWidget } from '@/components/price-pool/PriceWidget'
+import { PriceReportWidget } from '@/components/providers/PriceReportWidget'
+import { DividerPhoto } from '@/components/redesign/DividerPhoto'
 
-// ─── PLACEHOLDER DATA ────────────────────────────────────
+// Homepage — Catchafire-style redesign (Nov 6, 2026, branch
+// va/redesign-catchafire-v4). Warm cream background, white cards, bold
+// serif headlines, small-caps eyebrows, dark pill CTAs, in the site's
+// own cream / serif / dark-brown / gold language.
+//
+// Photos are ambiance dividers only, never one per provider card, never
+// repeated, each representative of its section. The testimonials section
+// from the preview is NOT built here: its three quotes (Maya, Sophia,
+// Priya) are sample copy, and sample copy is never presented as real
+// patient words. The founder quote stays: it is John's own words.
+//
+// All numbers come from live props (app/page.tsx counts the providers
+// table). Nothing is hardcoded.
 
 const cities = [
     { name: 'New York', slug: 'ny/new-york' },
@@ -31,23 +42,60 @@ const cities = [
     { name: 'Charlotte', slug: 'nc/charlotte' },
 ]
 
-
-
 const howItWorks = [
     {
-        step: '01',
-        title: 'Find Board-Certified Providers',
-        description: 'Search by city and verify their medical credentials instantly.',
+        step: 'Step 1',
+        title: 'Find your provider',
+        description: 'Search by city and check credentials in one place, before you fall for a pretty Instagram feed.',
     },
     {
-        step: '02',
-        title: 'Compare Verified Data',
-        description: 'Review independent data on pricing, specialty, and clinical background—not just star ratings.',
+        step: 'Step 2',
+        title: 'Compare real prices',
+        description: 'See what people actually paid, next to reviews and Clarity Scores, not just star ratings.',
     },
     {
-        step: '03',
-        title: 'Book with Confidence',
-        description: 'Choose a provider after checking their credentials, pricing and patient reviews side by side.',
+        step: 'Step 3',
+        title: 'Book with confidence',
+        description: 'Choose a provider after checking credentials, pricing, and patient reviews side by side.',
+    },
+]
+
+const treatments = [
+    {
+        title: 'Botox & Dysport',
+        description: 'The classic line smoother, and the most reported treatment on the site.',
+        link: '/find-providers?q=botox',
+        linkLabel: 'See Botox prices',
+    },
+    {
+        title: 'Lip Filler',
+        description: 'Natural fullness, done well. Compare clinics by score and price.',
+        link: '/find-providers?q=filler',
+        linkLabel: 'See lip filler prices',
+    },
+    {
+        title: 'Cheek & Jaw Filler',
+        description: 'Structure and lift. See who does it best near you.',
+        link: '/find-providers?q=cheek',
+        linkLabel: 'See filler prices',
+    },
+    {
+        title: 'Daxxify',
+        description: 'The longer lasting wrinkle relaxer. Find clinics that offer it.',
+        link: '/find-providers?q=daxxify',
+        linkLabel: 'See Daxxify prices',
+    },
+    {
+        title: 'Sculptra',
+        description: 'Gradual volume that builds over weeks. Compare providers.',
+        link: '/find-providers?q=sculptra',
+        linkLabel: 'See Sculptra prices',
+    },
+    {
+        title: 'Polynucleotides',
+        description: 'Skin health from the inside out. See who offers it near you.',
+        link: '/find-providers?q=polynucleotides',
+        linkLabel: 'See polynucleotide prices',
     },
 ]
 
@@ -58,7 +106,7 @@ const providerValueProps = [
     },
     {
         title: 'Your Clarity Score™ Does the Selling',
-        description: 'Patients trust independent scoring over paid ads. A strong Clarity Score™ tells them you earned your reputation — not bought it.',
+        description: 'Patients trust independent scoring over paid ads. A strong Clarity Score™ tells them you earned your reputation, not bought it.',
     },
     {
         title: 'Optimized for Google & Local SEO',
@@ -89,7 +137,6 @@ interface HomeClientProps {
     heroRange?: string | null;
 }
 
-// ─── HOMEPAGE ────────────────────────────────────────────
 export default function HomeClient({
     providersIndexed = 0,
     npiVerified = 0,
@@ -98,32 +145,9 @@ export default function HomeClient({
     heroRange = null
 }: HomeClientProps = {}) {
 
-    // Hero search: selections are carried into the results page as query
-    // params (city/state/q). Nothing here asks the browser for the user's
-    // location — the results page ranks what the visitor actually picked.
-    const [citySlug, setCitySlug] = useState('')
-    const [treatment, setTreatment] = useState('')
-
-    const selectedCity = cities.find((c) => c.slug === citySlug)
-    const searchParams = new URLSearchParams()
-    if (selectedCity) {
-        searchParams.set('city', selectedCity.name)
-        searchParams.set('state', selectedCity.slug.split('/')[0].toUpperCase())
-    }
-    if (treatment) {
-        searchParams.set('q', treatment)
-    }
-    const searchHref = searchParams.toString()
-        ? `/find-providers?${searchParams.toString()}`
-        : '/find-providers'
-
-    // Dynamic Stats
-    // Only show numbers we actually have. A row of zeros reads as a broken
-    // site, and a verification count we haven't earned reads as a false claim.
-    // Labels name exactly what was counted: providers listed in the
-    // directory, providers with a matched NPI record, and the cities
-    // those verified providers are in. "Cities Verified" would imply the
-    // cities themselves were verified — they weren't.
+    // Dynamic stats: only show numbers we actually have. A row of zeros
+    // reads as a broken site, and a verification count we have not earned
+    // reads as a false claim. Labels name exactly what was counted.
     const trustStats = [
         { value: providersIndexed, label: 'Providers Listed' },
         { value: npiVerified, label: 'NPI-Verified Providers' },
@@ -133,386 +157,373 @@ export default function HomeClient({
         .map(s => ({ number: s.value.toLocaleString(), label: s.label }))
 
     // The price widget preselects the visitor's city when the geo header
-    // resolved one that is in our list — a real location signal, never a guess.
+    // resolved one that is in our list, a real location signal, never a guess.
     const heroCitySlug = heroCity
         ? cities.find((c) => c.name.toLowerCase() === heroCity.toLowerCase())?.slug ?? null
         : null
 
     return (
         <>
-            {/* ═══ SECTION 0: PRICE WIDGET — FIRST ═══
-                The first thing a visitor sees is prices, not a headline
-                and not a contribution ask. The widget answers "what
-                should this cost in my city?" with real numbers, or says
-                honestly that there aren't enough yet. */}
-            <section className="relative" style={{ paddingTop: 'calc(var(--nav-height) + 24px)', background: 'linear-gradient(160deg, #F2EDE4 0%, #FAF8F5 45%, #EDE5DA 100%)' }}>
-                <div className="container-content pb-10">
-                    <PriceWidget cities={cities} defaultCitySlug={heroCitySlug} />
-
-                    {/* The story, in three lines, right under the widget:
-                        what we're about, what we're doing, why. */}
-                    <div className="mt-8 text-center mx-auto" style={{ maxWidth: '640px' }}>
-                        <p
-                            className="font-display font-light leading-snug"
-                            style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.7rem)', color: 'var(--color-espresso)' }}
-                        >
-                            Clinics hide prices. Patients report what they paid. We combine it into real ranges.
-                        </p>
-                        <p className="font-body mt-3 leading-relaxed" style={{ fontSize: '14px', color: 'var(--color-stone)' }}>
-                            No single report is ever published. Providers can pay for labeled sponsored placement —
-                            never for a higher Clarity Score, and never for a different order in the unpaid results.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            {/* ═══ SECTION 1: HERO ═══ */}
-            <section
-                className="relative flex items-center overflow-hidden"
-                style={{
-                    // Compact now that the widget leads: the hero is the
-                    // discovery section (find injectors), not the first screen.
-                    background: 'linear-gradient(160deg, #F2EDE4 0%, #FAF8F5 45%, #EDE5DA 100%)',
-                }}
-            >
-                {/* Decorative orbs */}
-                <div
-                    className="absolute pointer-events-none"
-                    style={{
-                        width: 500,
-                        height: 500,
-                        top: '-10%',
-                        right: '-5%',
-                        background: 'radial-gradient(circle, rgba(232,201,192,0.3) 0%, transparent 70%)',
-                    }}
-                />
-                <div
-                    className="absolute pointer-events-none"
-                    style={{
-                        width: 400,
-                        height: 400,
-                        bottom: '5%',
-                        left: '-8%',
-                        background: 'radial-gradient(circle, rgba(138,158,141,0.15) 0%, transparent 70%)',
-                    }}
-                />
-
-                {/* No entrance animation on the hero: it is above the fold and must be
-                    readable on first paint. framer-motion initial="hidden" stays at
-                    opacity 0 until hydration, which left the headline invisible. */}
-                <div className="container-content text-center relative z-10 py-20">
-                    {/* Eyebrow */}
-                    <div className="flex justify-center mb-6">
-                        <span
-                            className="font-body text-xs font-medium rounded-pill px-4 py-2 inline-flex items-center gap-2"
-                            style={{
-                                background: 'rgba(138, 158, 141, 0.12)',
-                                color: 'var(--color-sage)',
-                                border: '1px solid rgba(138, 158, 141, 0.2)',
-                            }}
-                        >
-                            Real prices, from real people
-                        </span>
-                    </div>
-
-                    {/* Headline */}
-                    <div className="mb-6">
-                        <MorphingHeadline city={heroCity} range={heroRange} />
-                    </div>
-
-                    {/* Subheadline */}
-                    <div>
-                        <p
-                            className="font-body mx-auto mb-10"
-                            style={{
-                                fontSize: '18px',
-                                color: 'var(--color-stone)',
-                                maxWidth: '560px',
-                                lineHeight: 1.6,
-                            }}
-                        >
-                            Clinics hide their prices. We collect what people actually paid, to build accurate pricing and push the market toward transparent pricing. It starts with people like you.
-                        </p>
-                    </div>
-
-                    {/* Search Bar */}
-                    <div>
-                        <div
-                            className="mx-auto flex flex-col sm:flex-row items-center gap-3 p-3 rounded-pill"
-                            style={{
-                                maxWidth: '640px',
-                                background: 'rgba(255,255,255,0.88)',
-                                backdropFilter: 'blur(12px)',
-                                border: '1px solid var(--color-border)',
-                                boxShadow: 'var(--shadow-xl)',
-                            }}
-                        >
-                            <select
-                                className="flex-1 w-full sm:w-auto bg-transparent font-body text-sm px-4 py-3 appearance-none cursor-pointer outline-none"
-                                style={{ color: 'var(--color-stone)' }}
-                                value={citySlug}
-                                onChange={(e) => setCitySlug(e.target.value)}
-                                aria-label="Your city"
-                            >
-                                <option value="" disabled>Your city or zip ▾</option>
-                                {cities.map((city) => (
-                                    <option key={city.name} value={city.slug}>{city.name}</option>
-                                ))}
-                            </select>
-                            <div className="hidden sm:block w-px h-8" style={{ background: 'var(--color-border)' }} />
-                            <select
-                                className="flex-1 w-full sm:w-auto bg-transparent font-body text-sm px-4 py-3 appearance-none cursor-pointer outline-none"
-                                style={{ color: 'var(--color-stone)' }}
-                                value={treatment}
-                                onChange={(e) => setTreatment(e.target.value)}
-                                aria-label="Treatment you are looking for"
-                            >
-                                <option value="" disabled>What are you looking for? ▾</option>
-                                <option value="botox">Botox & Dysport</option>
-                                <option value="filler">Lip Filler</option>
-                                <option value="cheek">Cheek & Jaw Filler</option>
-                                <option value="sculptra">Sculptra</option>
-                                <option value="daxxify">Daxxify</option>
-                            </select>
-                            <Link
-                                href={searchHref}
-                                aria-label="Search for injectors"
-                                className="shrink-0 rounded-full flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 hover:shadow-lg font-body text-sm font-medium px-5 py-3 w-full sm:w-auto"
-                                style={{
-                                    background: 'var(--color-espresso)',
-                                    color: 'var(--color-linen)',
-                                }}
-                            >
-                                Find injectors near you
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                    <path d="M3 9H15M15 9L10 4M15 9L10 14" stroke="var(--color-linen)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </Link>
-                        </div>
-                    </div>
-
-                    {/* Below search: the live directory count. The quiz is
-                        no longer teased here — it lives at /quiz, reached
-                        from the price widget's secondary link only. */}
-                    <div>
-                        <p
-                            className="font-body text-center mt-4"
-                            style={{ fontSize: '12px', color: 'var(--color-taupe)' }}
-                        >
-                            {providersIndexed > 0 ? `${providersIndexed.toLocaleString()} indexed Botox & filler providers` : 'Independent Botox & filler provider data'}
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            {/* ═══ SECTION 2: TRUST STRIP ═══ */}
-            <section
-                style={{
-                    background: 'var(--color-surface)',
-                    borderTop: '1px solid var(--color-border)',
-                    borderBottom: '1px solid var(--color-border)',
-                }}
-            >
-                <div className="container-content py-6">
-                    <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
-                        {trustStats.map((stat, i) => (
-                            <div key={stat.label} className="flex items-center gap-6 md:gap-10">
-                                <RevealOnScroll delay={i * 0.08}>
-                                    <div className="text-center">
-                                        <div
-                                            className="font-display font-medium"
-                                            style={{ fontSize: '28px', color: 'var(--color-espresso)' }}
-                                        >
-                                            {stat.number}
-                                        </div>
-                                        <div
-                                            className="font-body uppercase"
-                                            style={{ fontSize: '12px', color: 'var(--color-stone)', letterSpacing: '0.04em' }}
-                                        >
-                                            {stat.label}
-                                        </div>
-                                    </div>
-                                </RevealOnScroll>
-                                {i < trustStats.length - 1 && (
-                                    <span
-                                        className="hidden md:block rounded-full"
-                                        style={{ width: 4, height: 4, background: 'var(--color-border)' }}
-                                    />
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ═══ SECTION 3: HOW IT WORKS ═══ */}
-            <section className="py-20 lg:py-28" id="how-it-works">
+            {/* ═══ HERO ═══ */}
+            <section className="relative" style={{ paddingTop: 'calc(var(--nav-height) + 48px)', paddingBottom: '40px' }}>
                 <div className="container-content">
-                    <RevealOnScroll>
-                        <div className="text-center mb-16">
-                            <span
-                                className="font-body uppercase font-medium block mb-3"
-                                style={{ fontSize: '12px', letterSpacing: '0.08em', color: 'var(--color-sage)' }}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+                        <div>
+                            <p
+                                className="text-[11px] font-bold uppercase tracking-[0.14em]"
+                                style={{ color: 'var(--color-gold)' }}
                             >
-                                The VerifiedAesthetics Method
-                            </span>
-                            <h2
-                                className="font-display font-light text-balance"
-                                style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: 'var(--color-espresso)' }}
+                                Real prices, from real people
+                            </p>
+                            <h1
+                                className="font-display font-bold mt-4 mb-5"
+                                style={{ fontSize: 'clamp(44px, 5.6vw, 68px)', lineHeight: 1.08, letterSpacing: '-0.01em', color: 'var(--color-espresso)' }}
                             >
-                                Finding the right injector shouldn&apos;t be a guessing game.
-                            </h2>
+                                Know the <em style={{ fontStyle: 'italic', color: 'var(--color-gold)' }}>price</em> before you book.
+                            </h1>
+                            <p
+                                className="mb-7"
+                                style={{ fontSize: '19px', color: 'var(--color-stone)', maxWidth: '34rem', lineHeight: 1.6 }}
+                            >
+                                Clinics hide prices. Patients report what they paid. We turn those reports into real ranges, so you walk in knowing what a fair price looks like.
+                            </p>
+                            <div className="flex items-center gap-5 flex-wrap">
+                                <a
+                                    href="#check-prices"
+                                    className="inline-flex items-center justify-center min-h-[48px] px-6 rounded-full font-bold text-[15px] text-white transition-all hover:-translate-y-0.5"
+                                    style={{ background: 'var(--color-espresso)' }}
+                                >
+                                    Check treatment prices
+                                </a>
+                                <a
+                                    href="#how-it-works"
+                                    className="font-bold text-[15px] underline underline-offset-4"
+                                    style={{ color: 'var(--color-espresso)' }}
+                                >
+                                    See how it works
+                                </a>
+                            </div>
                         </div>
-                    </RevealOnScroll>
+                        <div className="relative w-full overflow-hidden rounded-[16px] aspect-[4/3] lg:aspect-[4/4.4]">
+                            <Image
+                                src="/images/redesign/hero-glow.webp"
+                                alt="Young woman with fresh, natural glowing skin in bright daylight"
+                                fill
+                                sizes="(max-width: 1024px) 100vw, 560px"
+                                className="object-cover"
+                                priority
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
 
+            {/* ═══ PRICE CHECKER + REPORT YOUR PRICE ═══ */}
+            <section id="check-prices" className="container-content scroll-mt-24">
+                <PriceWidget cities={cities} defaultCitySlug={heroCitySlug} />
+                <p className="text-[13px] mt-4" style={{ color: 'var(--color-stone)' }}>
+                    Based on moderated patient reports. Providers can pay for labeled sponsored placement, never for a higher Clarity Score, and never for a different order in the unpaid results.
+                </p>
+
+                <div className="mt-6">
+                    <PriceReportWidget />
+                    <p className="text-[13px] mt-3" style={{ color: 'var(--color-stone)' }}>
+                        Anonymous. Only combined ranges ever publish, never a single report.
+                    </p>
+                </div>
+
+                {/* Stats strip: live counts only */}
+                {trustStats.length > 0 && (
                     <div
-                        className="grid grid-cols-1 md:grid-cols-3"
-                        style={{ border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)' }}
+                        className="grid grid-cols-1 md:grid-cols-3 gap-6 rounded-[16px] border mt-14 p-6 md:px-8"
+                        style={{ background: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
                     >
-                        {howItWorks.map((item, i) => (
-                            <RevealOnScroll key={item.step} delay={i * 0.08}>
-                                <div
-                                    className="relative p-8 lg:p-10"
-                                    style={{
-                                        borderRight: i < 2 ? '1px solid var(--color-border)' : 'none',
-                                    }}
+                        {trustStats.map((stat) => (
+                            <div key={stat.label}>
+                                <b
+                                    className="block font-display font-bold"
+                                    style={{ fontSize: '32px', lineHeight: 1.1, color: 'var(--color-espresso)' }}
                                 >
-                                    <span
-                                        className="absolute top-4 right-4 font-display font-light select-none pointer-events-none"
-                                        style={{ fontSize: '64px', color: 'var(--color-surface)' }}
-                                    >
-                                        {item.step}
-                                    </span>
-                                    <div className="relative z-10">
-                                        <span
-                                            className="font-body uppercase font-medium block mb-2"
-                                            style={{ fontSize: '11px', letterSpacing: '0.08em', color: 'var(--color-taupe)' }}
-                                        >
-                                            Step {item.step}
-                                        </span>
-                                        <h3
-                                            className="font-display font-medium mb-3"
-                                            style={{ fontSize: '22px', color: 'var(--color-espresso)' }}
-                                        >
-                                            {item.title}
-                                        </h3>
-                                        <p
-                                            className="font-body"
-                                            style={{ fontSize: '15px', color: 'var(--color-stone)', lineHeight: 1.7 }}
-                                        >
-                                            {item.description}
-                                        </p>
-                                    </div>
-                                </div>
-                            </RevealOnScroll>
+                                    {stat.number}
+                                </b>
+                                <span className="text-[13px]" style={{ color: 'var(--color-stone)' }}>{stat.label}</span>
+                            </div>
                         ))}
                     </div>
-                </div>
+                )}
             </section>
 
-            {/* ═══ SECTION 3.5: TREATMENT EXPLORER ═══ */}
-            <TreatmentExplorer />
+            <div className="container-content">
+                <DividerPhoto
+                    src="/images/redesign/consultation-v4.webp"
+                    alt="Young woman patient talking with a young woman practitioner in a bright consultation room"
+                    caption="A real conversation first, then a plan."
+                />
+            </div>
 
-            {/* ═══ SECTION 4: TOP RATED PROVIDERS ═══ */}
-            <section className="py-20 lg:py-28" style={{ background: 'var(--color-surface)' }}>
+            {/* ═══ HOW IT WORKS ═══ */}
+            <section id="how-it-works" className="py-14 lg:py-20 scroll-mt-24">
                 <div className="container-content">
                     <RevealOnScroll>
-                        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 gap-4">
-                            <div>
-                                <span
-                                    className="font-body uppercase font-medium block mb-3"
-                                    style={{ fontSize: '12px', letterSpacing: '0.08em', color: 'var(--color-sage)' }}
-                                >
-                                    Top Clarity Scores™ This Month
-                                </span>
-                                <h2
-                                    className="font-display font-light"
-                                    style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: 'var(--color-espresso)' }}
-                                >
-                                    Highest-Rated Botox & Filler Providers Near You
-                                </h2>
-                            </div>
-                            <Link
-                                href="/find-providers"
-                                className="font-body text-sm font-medium transition-colors shrink-0"
-                                style={{ color: 'var(--color-espresso)' }}
+                        <div className="max-w-[640px] mb-9">
+                            <p
+                                className="text-[11px] font-bold uppercase tracking-[0.14em]"
+                                style={{ color: 'var(--color-gold)' }}
                             >
-                                See all providers →
-                            </Link>
+                                How it works
+                            </p>
+                            <h2
+                                className="font-display font-bold mt-3 mb-3"
+                                style={{ fontSize: 'clamp(32px, 4vw, 44px)', lineHeight: 1.08, color: 'var(--color-espresso)' }}
+                            >
+                                Finding the right injector should not be a guessing game.
+                            </h2>
+                            <p className="text-[17px]" style={{ color: 'var(--color-stone)' }}>
+                                Three steps, and you know more than the clinic&apos;s front desk expects you to.
+                            </p>
                         </div>
                     </RevealOnScroll>
 
                     <motion.div
-                        className="w-full flex flex-col items-center justify-center py-20 px-8 text-center"
-                        style={{
-                            background: 'rgba(255,255,255,0.6)',
-                            border: '1px dashed var(--color-border)',
-                            borderRadius: '24px'
-                        }}
+                        className="grid grid-cols-1 md:grid-cols-3 gap-5"
                         variants={cardGrid}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, margin: '-80px' }}
                     >
-                        <h3 className="font-display font-medium mb-3" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', color: 'var(--color-espresso)' }}>
-                            {npiVerified > 0
-                                ? `NPI verification is live — ${npiVerified.toLocaleString()} clinics verified`
-                                : 'NPI verification is live'}
-                        </h3>
-                        <p className="font-body text-base max-w-2xl mx-auto" style={{ color: 'var(--color-stone)' }}>
-                            NPI-verified profiles now appear across the directory. Real pricing arrives as clinics publish their prices and patients share what they paid.
-                        </p>
+                        {howItWorks.map((item) => (
+                            <motion.div key={item.step} variants={cardItem}>
+                                <div
+                                    className="bg-white border rounded-[16px] p-6 h-full"
+                                    style={{ borderColor: 'var(--color-border)' }}
+                                >
+                                    <p
+                                        className="text-[12px] font-bold uppercase tracking-[0.1em]"
+                                        style={{ color: 'var(--color-gold)' }}
+                                    >
+                                        {item.step}
+                                    </p>
+                                    <h3
+                                        className="font-display font-bold my-2"
+                                        style={{ fontSize: '25px', color: 'var(--color-espresso)' }}
+                                    >
+                                        {item.title}
+                                    </h3>
+                                    <p className="text-[15px]" style={{ color: 'var(--color-stone)' }}>
+                                        {item.description}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        ))}
                     </motion.div>
                 </div>
             </section>
 
-            {/* ═══ SECTION 4.5: STATEMENT ═══ */}
-            <StatementSection />
+            <div className="container-content">
+                <DividerPhoto
+                    src="/images/redesign/clinic-room.webp"
+                    alt="Calm, bright aesthetic clinic treatment room"
+                    caption="Quiet treatment rooms, ready for the next patient."
+                />
+            </div>
 
-            {/* ═══ SECTION 6: BROWSE BY CITY ═══ */}
-            <section className="py-20 lg:py-28" style={{ background: 'var(--color-deep)' }}>
+            {/* ═══ TREATMENTS ═══ */}
+            <section className="py-14 lg:py-20">
                 <div className="container-content">
                     <RevealOnScroll>
-                        <h2
-                            className="font-display font-light text-center mb-12"
-                            style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: 'var(--color-surface)' }}
-                        >
-                            Find Botox & Filler Injectors by City
-                        </h2>
+                        <div className="max-w-[640px] mb-9">
+                            <p
+                                className="text-[11px] font-bold uppercase tracking-[0.14em]"
+                                style={{ color: 'var(--color-gold)' }}
+                            >
+                                Treatments
+                            </p>
+                            <h2
+                                className="font-display font-bold mt-3 mb-3"
+                                style={{ fontSize: 'clamp(32px, 4vw, 44px)', lineHeight: 1.08, color: 'var(--color-espresso)' }}
+                            >
+                                Explore treatments. Tap one to learn more.
+                            </h2>
+                            <p className="text-[17px]" style={{ color: 'var(--color-stone)' }}>
+                                Real pricing, verified credentials, and Clarity Score rankings for every treatment we track.
+                            </p>
+                        </div>
                     </RevealOnScroll>
 
-                    <div className="flex flex-wrap justify-center gap-3">
-                        {cities.map((city, i) => (
-                            <RevealOnScroll key={city.name} delay={i * 0.03} y={16}>
-                                <Link
-                                    href={`/injectors/${city.slug}`}
-                                    className="font-body text-sm rounded-pill px-5 py-2.5 transition-all"
-                                    style={{
-                                        color: 'var(--color-taupe)',
-                                        border: '1px solid rgba(138, 158, 141, 0.25)',
-                                        background: 'transparent',
-                                        transitionDuration: 'var(--duration-med)',
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.color = 'var(--color-surface)'
-                                        e.currentTarget.style.borderColor = 'var(--color-sage)'
-                                        e.currentTarget.style.background = 'rgba(138, 158, 141, 0.1)'
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.color = 'var(--color-taupe)'
-                                        e.currentTarget.style.borderColor = 'rgba(138, 158, 141, 0.25)'
-                                        e.currentTarget.style.background = 'transparent'
-                                    }}
+                    <motion.div
+                        className="grid grid-cols-1 md:grid-cols-3 gap-5"
+                        variants={cardGrid}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: '-80px' }}
+                    >
+                        {treatments.map((t) => (
+                            <motion.div key={t.title} variants={cardItem}>
+                                <div
+                                    className="bg-white border rounded-[16px] p-6 h-full"
+                                    style={{ borderColor: 'var(--color-border)' }}
                                 >
-                                    {city.name}
-                                </Link>
-                            </RevealOnScroll>
+                                    <h3
+                                        className="font-display font-bold mb-1.5"
+                                        style={{ fontSize: '24px', color: 'var(--color-espresso)' }}
+                                    >
+                                        {t.title}
+                                    </h3>
+                                    <p className="text-[15px] mb-3.5" style={{ color: 'var(--color-stone)' }}>
+                                        {t.description}
+                                    </p>
+                                    <Link
+                                        href={t.link}
+                                        className="font-bold text-sm underline underline-offset-4"
+                                        style={{ color: 'var(--color-espresso)' }}
+                                    >
+                                        {t.linkLabel}
+                                    </Link>
+                                </div>
+                            </motion.div>
                         ))}
+                    </motion.div>
+                </div>
+            </section>
+
+            <div className="container-content">
+                <DividerPhoto
+                    src="/images/redesign/credentials-wall.webp"
+                    alt="Framed certificates and diplomas on a clinic wall"
+                    caption="The proof behind the score, framed on the wall."
+                />
+            </div>
+
+            {/* ═══ CLARITY SCORE ═══ */}
+            <section className="py-14 lg:py-20">
+                <div className="container-content">
+                    <div
+                        className="rounded-[20px] p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-10"
+                        style={{ background: 'var(--color-deep)', color: '#F5EFE6' }}
+                    >
+                        <div>
+                            <p
+                                className="text-[11px] font-bold uppercase tracking-[0.14em]"
+                                style={{ color: 'var(--color-gold)' }}
+                            >
+                                The Clarity Score
+                            </p>
+                            <h2
+                                className="font-display font-bold mt-3 mb-3.5 text-white"
+                                style={{ fontSize: 'clamp(30px, 3.6vw, 42px)', lineHeight: 1.08 }}
+                            >
+                                One number that tells you what you can confirm before you book.
+                            </h2>
+                            <p className="text-[16px] max-w-[36rem]" style={{ color: 'rgba(245,239,230,.78)' }}>
+                                The Clarity Score summarizes patient reviews, published pricing, and contact information. Booking links and quotes are worth zero points. NPI verification is shown separately and never adds points.
+                            </p>
+                            <p className="text-[16px] mt-3" style={{ color: 'rgba(245,239,230,.78)' }}>
+                                No pay to play, no shortcuts. <Link href="/methodology" className="font-bold underline underline-offset-4 text-white">Read the full methodology</Link>
+                            </p>
+                        </div>
+                        <div>
+                            <div className="flex flex-col">
+                                <div className="flex justify-between items-baseline gap-4 py-4 border-b" style={{ borderColor: 'rgba(245,239,230,.16)' }}>
+                                    <b className="font-display font-semibold text-[22px] text-white">Patient reviews</b>
+                                    <span className="text-sm text-right" style={{ color: 'rgba(245,239,230,.72)' }}>40 points</span>
+                                </div>
+                                <div className="flex justify-between items-baseline gap-4 py-4 border-b" style={{ borderColor: 'rgba(245,239,230,.16)' }}>
+                                    <b className="font-display font-semibold text-[22px] text-white">Published pricing</b>
+                                    <span className="text-sm text-right" style={{ color: 'rgba(245,239,230,.72)' }}>10 points</span>
+                                </div>
+                                <div className="flex justify-between items-baseline gap-4 py-4">
+                                    <b className="font-display font-semibold text-[22px] text-white">Contact information</b>
+                                    <span className="text-sm text-right" style={{ color: 'rgba(245,239,230,.72)' }}>7 points</span>
+                                </div>
+                            </div>
+                            <p className="text-[13px] mt-3.5" style={{ color: 'rgba(245,239,230,.6)' }}>
+                                Scores are rescaled to 100. A clinic with under 5 reviews shows as not enough data.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* ═══ SECTION 7: FOR PROVIDERS ═══ */}
+            {/* ═══ FOUNDER ═══ */}
+            <section className="py-14 lg:py-20">
+                <div className="container-content">
+                    <div
+                        className="rounded-[20px] border p-8 md:p-11 grid grid-cols-1 md:grid-cols-[88px_1fr] gap-7 items-center"
+                        style={{ background: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
+                    >
+                        <div
+                            className="w-[88px] h-[88px] rounded-full flex items-center justify-center font-display font-bold text-[30px] text-white"
+                            style={{ background: 'var(--color-espresso)' }}
+                            aria-hidden="true"
+                        >
+                            JL
+                        </div>
+                        <div>
+                            <blockquote
+                                className="font-display font-medium mb-4"
+                                style={{ fontSize: 'clamp(22px, 2.6vw, 28px)', lineHeight: 1.35, color: 'var(--color-espresso)' }}
+                            >
+                                &ldquo;I built VerifiedAesthetics because I was tired of the guesswork. Patients deserve to know two things before they book: <em style={{ color: 'var(--color-gold)' }}>is the pricing real</em>, and <em style={{ color: 'var(--color-gold)' }}>will I look like myself</em>?&rdquo;
+                            </blockquote>
+                            <cite className="not-italic text-sm" style={{ color: 'var(--color-stone)' }}>
+                                <b className="text-[15px]" style={{ color: 'var(--color-espresso)' }}>John Linneman</b> · Founder, VerifiedAesthetics
+                            </cite>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ═══ EXPLORE BY CITY ═══ */}
+            <section className="py-14 lg:py-20">
+                <div className="container-content">
+                    <RevealOnScroll>
+                        <div className="max-w-[640px] mb-9">
+                            <p
+                                className="text-[11px] font-bold uppercase tracking-[0.14em]"
+                                style={{ color: 'var(--color-gold)' }}
+                            >
+                                Explore by city
+                            </p>
+                            <h2
+                                className="font-display font-bold mt-3 mb-3"
+                                style={{ fontSize: 'clamp(32px, 4vw, 44px)', lineHeight: 1.08, color: 'var(--color-espresso)' }}
+                            >
+                                Real pricing, verified credentials, and Clarity Score rankings in every city.
+                            </h2>
+                        </div>
+                    </RevealOnScroll>
+
+                    <motion.div
+                        className="grid grid-cols-1 md:grid-cols-3 gap-4"
+                        variants={cardGrid}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: '-80px' }}
+                    >
+                        {cities.map((city) => (
+                            <motion.div key={city.name} variants={cardItem}>
+                                <Link
+                                    href={`/injectors/${city.slug}`}
+                                    className="block bg-white border rounded-[16px] p-5 transition-colors hover:border-[var(--color-gold)]"
+                                    style={{ borderColor: 'var(--color-border)' }}
+                                >
+                                    <h3
+                                        className="font-display font-bold mb-1"
+                                        style={{ fontSize: '23px', color: 'var(--color-espresso)' }}
+                                    >
+                                        {city.name}
+                                    </h3>
+                                    <p className="text-sm" style={{ color: 'var(--color-stone)' }}>
+                                        Browse providers in {city.name}
+                                    </p>
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* ═══ FOR PROVIDERS ═══ */}
             <section className="py-20 lg:py-28">
                 <div className="container-content">
                     <RevealOnScroll>
@@ -530,12 +541,11 @@ export default function HomeClient({
                                 Be the provider patients find when they&apos;re ready to book.
                             </h2>
                             <p className="font-body" style={{ fontSize: '16px', color: 'var(--color-stone)', lineHeight: 1.7 }}>
-                                VerifiedAesthetics profiles rank in Google search, AI assistants, and local results — so patients find you before they find your competitors.
+                                VerifiedAesthetics profiles rank in Google search, AI assistants, and local results, so patients find you before they find your competitors.
                             </p>
                         </div>
                     </RevealOnScroll>
 
-                    {/* Provider banner */}
                     <RevealOnScroll>
                         <div
                             className="rounded-2xl px-8 py-10 md:px-12 mb-12 flex flex-col md:flex-row items-center gap-6 md:gap-10"
@@ -588,7 +598,7 @@ export default function HomeClient({
                         <div className="text-center">
                             <Link href="/claim">
                                 <Button variant="secondary" size="lg">
-                                    Claim Your Profile — It&apos;s Free to Start
+                                    Claim Your Profile, It&apos;s Free to Start
                                 </Button>
                             </Link>
                         </div>

@@ -34,9 +34,21 @@ interface LeadFormProps {
     city?: string
     state?: string
     isPremium?: boolean
+    /** When provided, the visitor picks the clinic from this list instead
+        of the form targeting one fixed provider. First option is
+        "Any provider in {city}" (empty provider_id, city-wide request). */
+    providerOptions?: { id: string; name: string }[]
+    /** Shows the free-text message field (saved to leads.message). */
+    showMessage?: boolean
+    /** Overrides the card heading (default: "Connect with {providerName}"). */
+    title?: string
+    /** Overrides the card subheading. */
+    subtitle?: string
+    /** Overrides the submit button label. */
+    submitLabel?: string
 }
 
-export function LeadForm({ providerId, providerName, city, state, isPremium }: LeadFormProps) {
+export function LeadForm({ providerId, providerName, city, state, isPremium, providerOptions, showMessage, title, subtitle, submitLabel }: LeadFormProps) {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
     const [error, setError] = useState<string | null>(null)
@@ -145,15 +157,32 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
             )}
             <CardHeader className="pb-4">
                 <CardTitle className="text-xl font-display text-[#3D2B1F]">
-                    {providerName ? `Connect with ${providerName}` : `Find ${city} Specialists`}
+                    {title ?? (providerName ? `Connect with ${providerName}` : `Find ${city} Specialists`)}
                 </CardTitle>
                 <p className="text-xs text-[#3D2B1F]/50">
-                    {providerName ? 'Independent directory listing · We review requests before forwarding' : 'Connect with local specialists'}
+                    {subtitle ?? (providerName ? 'Independent directory listing · We review requests before forwarding' : 'Connect with local specialists')}
                 </p>
             </CardHeader>
             <CardContent>
                 <form onSubmit={handleSubmit(onSubmit)} onFocus={handleFormInteraction} className="space-y-4">
-                    <input type="hidden" {...register('provider_id')} />
+                    {providerOptions ? (
+                        <div className="grid grid-cols-1 gap-1">
+                            <label className="text-[11px] font-semibold text-[#3D2B1F]/50 ml-1 uppercase tracking-tight">Clinic / provider</label>
+                            <select
+                                {...register('provider_id')}
+                                className="w-full px-4 py-3 rounded-lg border border-[#3D2B1F]/10 bg-[#3D2B1F]/5 text-sm text-[#3D2B1F] focus:ring-2 focus:ring-[#C9A96E]/20 outline-none appearance-none"
+                            >
+                                <option value="">Any provider{city ? ` in ${city}` : ''}</option>
+                                {providerOptions.map((option) => (
+                                    <option key={option.id} value={option.id}>
+                                        {option.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    ) : (
+                        <input type="hidden" {...register('provider_id')} />
+                    )}
                     <input type="hidden" {...register('city')} />
                     <input type="hidden" {...register('state')} />
 
@@ -248,6 +277,19 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                             </select>
                         </div>
 
+                        {/* Message */}
+                        {showMessage && (
+                            <div className="grid grid-cols-1 gap-1">
+                                <label className="text-[11px] font-semibold text-[#3D2B1F]/50 ml-1 uppercase tracking-tight">Message</label>
+                                <textarea
+                                    {...register('message')}
+                                    rows={4}
+                                    placeholder="Anything the clinic should know? Areas, past treatments, questions."
+                                    className="w-full px-4 py-3 rounded-lg border border-[#3D2B1F]/10 bg-[#3D2B1F]/5 text-sm text-[#3D2B1F] focus:ring-2 focus:ring-[#C9A96E]/20 outline-none resize-vertical"
+                                />
+                            </div>
+                        )}
+
                         {/* Newsletter Opt-in */}
                         <div className="flex items-start gap-3 px-1 pt-2">
                             <div className="flex items-center h-5">
@@ -271,7 +313,7 @@ export function LeadForm({ providerId, providerName, city, state, isPremium }: L
                         disabled={isSubmitting}
                         className="w-full py-7 bg-[#C9A96E] hover:bg-[#B5955B] text-white shadow-xl shadow-[#C9A96E]/10 text-base font-bold transition-all hover:scale-[1.01] active:scale-[0.99]"
                     >
-                        {isSubmitting ? 'Sending Request...' : 'Request Info from Clinic'}
+                        {isSubmitting ? 'Sending Request...' : (submitLabel ?? 'Request Info from Clinic')}
                     </Button>
 
                     <p className="text-[10px] text-gray-700 text-center leading-tight mt-4 italic">

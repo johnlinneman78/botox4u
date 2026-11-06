@@ -19,11 +19,11 @@ export function CityFAQ({ city, avgCost }: CityFAQProps) {
     const faqs = [
         {
             q: `How much does Botox cost in ${city}?`,
-            a: `The average cost of Botox in ${city} is approximately $${avgCost} per unit. Most patients require between 20 and 50 units per session, depending on the treatment area — bringing typical session costs to $${lowEndTotal}–$${highEndTotal}. Forehead lines usually need 10–20 units, crow's feet 6–12 units per side, and frown lines (glabella) 20–25 units. Prices vary by provider credentials and clinic location.`
+            a: `The average cost of Botox in ${city} is approximately $${avgCost} per unit. Most patients require between 20 and 50 units per session, depending on the treatment area, bringing typical session costs to $${lowEndTotal}–$${highEndTotal}. Forehead lines usually need 10–20 units, crow's feet 6–12 units per side, and frown lines (glabella) 20–25 units. Prices vary by provider credentials and clinic location.`
         },
         {
             q: `How do I find a reputable Botox injector in ${city}?`,
-            a: `Look for board-certified plastic surgeons, dermatologists, or specialized aesthetic injectors with a Clarity Score™ above 70. Providers with an NPI badge have a practitioner whose record we matched in the federal NPI registry — that confirms the practitioner exists in the registry; it is not a license check and it says nothing about skill or results.`
+            a: `Look for board-certified plastic surgeons, dermatologists, or specialized aesthetic injectors with a Clarity Score™ above 70. Providers with an NPI badge have a practitioner whose record we matched in the federal NPI registry. That confirms the practitioner exists in the registry; it is not a license check and it says nothing about skill or results.`
         },
         {
             q: `How is the Clarity Score™ ranking determined for ${city} clinics?`,

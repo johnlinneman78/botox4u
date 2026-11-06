@@ -22,7 +22,7 @@ export function PriceReportStickyBar({ city }: { city?: string }) {
             <div className="mx-auto max-w-5xl flex items-center gap-3">
                 <p className="flex-1 text-sm leading-snug">
                     <strong>What did you pay{city ? ` in ${city}` : ''}?</strong>{' '}
-                    <span className="opacity-80">30 seconds — and it helps the next person know what they should pay.</span>
+                    <span className="opacity-80">30 seconds, and it helps the next person know what they should pay.</span>
                 </p>
                 <a href="#share-price" className="shrink-0">
                     <Button size="sm">Share your treatment price</Button>
