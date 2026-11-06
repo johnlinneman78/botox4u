@@ -300,7 +300,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                         providerName={`Providers in ${cityName}`}
                         providerOptions={providers.map((p: any) => ({ id: p.id, name: p.name }))}
                         showMessage
-                        title={`Get a price from a ${cityName} clinic.`}
+                        title={`Get a price from a clinic in ${cityName}.`}
                         subtitle="Tell us what you want and we pass it to the clinic."
                         submitLabel="Send my quote request"
                     />
