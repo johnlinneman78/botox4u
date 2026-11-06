@@ -18,6 +18,36 @@ const getSenderEmail = () => {
     return process.env.CONTACT_EMAIL || NICHE.outreach.senderEmail;
 }
 
+// Real-time lead alert recipient (Nov 6, 2026): the admin alert used
+// to fall back to the sender address (hello@verifiedaesthetics.com, a
+// Resend sender with no mailbox) whenever ADMIN_EMAIL was unset, so
+// John never saw quote requests as they arrived. The recipient now
+// falls back to John's Gmail — the same fallback the daily digest and
+// the quiz notifier already use. ADMIN_EMAIL in Vercel still wins
+// when it is set.
+const getAdminEmail = () => {
+    return process.env.ADMIN_EMAIL?.trim() || 'urielpro78@gmail.com'
+}
+
+// Test and audit rows share the leads table with real quote requests:
+// Feb 2026 stress tests (example.com emails, phone 5550109999), quiz
+// audit submissions (test-audit-2026@example.com, no name, no phone),
+// and audit requests (full_name 'Patient (Audit)'). None of those is
+// a customer asking for a quote, so none of them pages John.
+const isTestLead = (lead: { full_name?: string | null; email?: string | null; phone?: string | null }) => {
+    const email = (lead.email || '').toLowerCase()
+    const name = (lead.full_name || '').trim()
+    const digits = (lead.phone || '').replace(/\D/g, '')
+    return (
+        email.endsWith('@example.com') ||
+        email === 'test-audit-2026@example.com' ||
+        digits === '5550109999' ||
+        /^test[\s\-_]/i.test(name) ||
+        name === 'Not provided (pricing quiz)' ||
+        name === 'Patient (Audit)'
+    )
+}
+
 const getLeadEmailHtml = (lead: any, providerName: string) => `
   <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px; max-width: 600px; margin: 0 auto;">
     <h2 style="color: #1a2332; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">New Patient Inquiry</h2>
@@ -26,9 +56,11 @@ const getLeadEmailHtml = (lead: any, providerName: string) => `
         <p><strong>Patient Name:</strong> ${lead.full_name}</p>
         <p><strong>Email:</strong> ${lead.email}</p>
         <p><strong>Phone:</strong> ${lead.phone || 'N/A'}</p>
+        <p><strong>City / State:</strong> ${lead.city || 'N/A'}${lead.state ? `, ${lead.state}` : ''}</p>
         <p><strong>Intended Treatment:</strong> ${lead.treatment_type}</p>
         <p><strong>Considerations:</strong> ${lead.current_considerations || 'N/A'}</p>
         <p><strong>Message:</strong> ${lead.message || 'No message provided'}</p>
+        <p><strong>Submitted:</strong> ${lead.created_at ? new Date(lead.created_at).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }) : 'just now'}</p>
     </div>
     <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
     <p style="font-size: 12px; color: #666;">View all leads in your <a href="${process.env.NEXT_PUBLIC_APP_URL}/provider/dashboard">Provider Dashboard</a>.</p>
@@ -246,6 +278,10 @@ export async function submitLead(formData: FormData) {
     }
 
     // 3. Admin Notification (Manual Routing) + Patient Confirmation
+    // Nov 6, 2026: the admin alert is John's real-time notification.
+    // It goes to ADMIN_EMAIL, falling back to his Gmail (never the
+    // sender address), and only for real quote requests — test and
+    // audit rows are skipped (see isTestLead).
     const resend = getResend();
     if (resend) {
         // Send to Patient
@@ -260,16 +296,28 @@ export async function submitLead(formData: FormData) {
             console.error('Error sending patient confirmation:', patientEmailError)
         }
 
-        // Send to Admin
-        const adminEmail = process.env.ADMIN_EMAIL || getSenderEmail();
-        if (adminEmail) {
+        // Send to Admin — the instant alert. Skipped for test/audit
+        // rows (see isTestLead): only a real customer asking for a
+        // quote pages John, the second the request is saved.
+        const adminEmail = getAdminEmail();
+        if (isTestLead(lead)) {
+            console.log('Lead alert skipped (test/audit row):', lead.id, lead.email)
+        } else {
             try {
-                await resend.emails.send({
+                const { data: sent, error: sendError } = await resend.emails.send({
                     from: `System <${getSenderEmail()}>`,
                     to: adminEmail,
                     subject: `🚨 LEAD ALERT: ${lead.city || 'Direct'} - ${lead.full_name}`,
                     html: getLeadEmailHtml(lead, lead.providers?.name || 'City-Wide Request')
                 })
+                // The Resend SDK returns API rejections as result.error
+                // instead of throwing — inspect it, or a failed alert
+                // is invisible (the Oct 23 quiz-outage lesson).
+                if (sendError) {
+                    console.error('Admin lead alert rejected:', sendError)
+                } else {
+                    console.log('Admin lead alert sent:', sent?.id, 'to', adminEmail)
+                }
             } catch (adminEmailError) {
                 console.error('Error sending admin notification:', adminEmailError)
             }
