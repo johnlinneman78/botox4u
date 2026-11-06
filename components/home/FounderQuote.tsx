@@ -17,7 +17,7 @@ export default function FounderQuote() {
                             <div className="w-full h-full rounded-[2.5rem] overflow-hidden border-4 border-white shadow-lg relative">
                                 <Image
                                     src="/images/founder.jpg"
-                                    alt="John Linneman"
+                                    alt="John"
                                     fill
                                     className="object-cover"
                                 />
@@ -31,7 +31,7 @@ export default function FounderQuote() {
                             </h3>
 
                             <div className="mb-8">
-                                <div className="font-bold text-xl text-primary">John Linneman</div>
+                                <div className="font-bold text-xl text-primary">John</div>
                                 <div className="text-[#3D2B1F]/70 font-bold uppercase tracking-widest text-xs">Founder, {NICHE.siteName}</div>
                             </div>
 

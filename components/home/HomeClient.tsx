@@ -466,7 +466,7 @@ export default function HomeClient({
                                 &ldquo;I built VerifiedAesthetics because I was tired of the guesswork. Patients deserve to know two things before they book: <em style={{ color: 'var(--color-gold)' }}>is the pricing real</em>, and <em style={{ color: 'var(--color-gold)' }}>will I look like myself</em>?&rdquo;
                             </blockquote>
                             <cite className="not-italic text-sm" style={{ color: 'var(--color-stone)' }}>
-                                <b className="text-[15px]" style={{ color: 'var(--color-espresso)' }}>John Linneman</b> · Founder, VerifiedAesthetics
+                                <b className="text-[15px]" style={{ color: 'var(--color-espresso)' }}>John</b> · Founder, VerifiedAesthetics
                             </cite>
                         </div>
                     </div>

@@ -29,7 +29,7 @@ export default async function AboutPage() {
         "description": "Independent research platform that scores aesthetic medicine providers on natural results, fair pricing, and verified credentials.",
         "founder": {
             "@type": "Person",
-            "name": "John Linneman",
+            "name": "John",
             "sameAs": "https://www.linkedin.com/in/[john-linkedin-slug]"
         },
         "foundingDate": "2026",
