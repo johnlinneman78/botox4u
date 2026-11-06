@@ -15,6 +15,28 @@ function isAdminEmail(email: string | undefined | null): boolean {
 }
 
 export async function middleware(request: NextRequest) {
+    // Singapore bot block (Nov 6, 2026): ~26% of CDN requests arrive via the
+    // Singapore edge as automated crawls (824 GA users, 0s engagement, zero
+    // key events, ~2,970 requests/day). No real audience in SG, so turn
+    // those requests away before any page, auth, or database work runs.
+    // Only an explicit SG blocks; unknown or missing geo is allowed through.
+    if (request.headers.get('x-vercel-ip-country') === 'SG') {
+        return new NextResponse('Not available in your region.', { status: 403 })
+    }
+
+    const path = request.nextUrl.pathname
+
+    // Public pages need nothing from auth: let them through without the
+    // Supabase round-trip. (Middleware now runs on every page so the SG
+    // block covers the homepage and city pages, not just /provider/*.)
+    if (
+        !path.startsWith('/provider') &&
+        !path.startsWith('/admin') &&
+        path !== '/find-providers'
+    ) {
+        return NextResponse.next()
+    }
+
     // @supabase/ssr middleware pattern: one client for login, dashboard and
     // middleware alike (see lib/supabase/client.ts). The old auth-helpers
     // middleware client disagreed with the dashboard's SSR client about
@@ -51,8 +73,6 @@ export async function middleware(request: NextRequest) {
     const {
         data: { user },
     } = await supabase.auth.getUser()
-
-    const path = request.nextUrl.pathname
 
     // Admin pages: signed in AND on the ADMIN_EMAILS allowlist
     if (path.startsWith('/admin')) {
@@ -110,5 +130,9 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/provider/:path*', '/admin/:path*', '/find-providers'],
+    // Every page, so the SG block covers the homepage, city pages, provider
+    // pages, blog, etc. — except API routes, Next internals, and files.
+    // /api stays out on purpose: the Vercel cron hits /api/digest, and API
+    // routes are not what fires the GA tag.
+    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)'],
 }
