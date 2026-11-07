@@ -103,13 +103,8 @@ export function LeadForm({ providerId, providerName, city, state, isPremium, pro
             const result = await submitLead(formData)
 
             if (result.success) {
-                track('lead_submitted', {
-                    provider_id: providerId ?? undefined,
-                    provider_name: providerName ?? undefined,
-                    treatment: data.treatment_type ?? undefined,
-                })
-                // Conversion event (Oct 2026): a quote request is the
-                // sellable lead; legacy name kept above.
+                // Single submit event (Nov 2026): one submit = one key
+                // event. lead_submitted removed.
                 track('quote_request', {
                     provider_id: providerId ?? undefined,
                     provider_name: providerName ?? undefined,
