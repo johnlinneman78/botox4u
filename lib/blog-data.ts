@@ -19,7 +19,7 @@ export const BLOG_POSTS: BlogPost[] = [
         content: `
 You Googled "how much does Botox cost" and got seventeen different answers ranging from $200 to $1,200 per session. That's not helpful. Here's what's actually going on.
 
-Botox pricing is confusing because there's no standard — every clinic sets its own rates, and most won't tell you the price until you're sitting in the chair. That's the exact problem we built Verified Aesthetics to solve: we index real pricing data from providers across the country so you can compare before you book.
+Botox pricing is confusing because there's no standard — every clinic sets its own rates, and most won't tell you the price until you're sitting in the chair. That's the exact problem we built Verified Aesthetics to solve: patients report what they paid, and once a city has enough reports, we show the range so you can compare before you book.
 
 Here's what the data actually shows in 2026.
 
@@ -45,7 +45,7 @@ The wide ranges exist because pricing depends on three things: where you live, w
 
 Geography is the biggest pricing factor. A unit of Botox in San Francisco costs roughly 60% more than the same unit in Dallas.
 
-Here's what our provider data shows for average per-unit pricing across major U.S. cities:
+Here are rough per-unit estimates for major U.S. cities. They haven't been checked against clinic prices or patient reports:
 
 | City | Avg. Per Unit | Provider Count |
 |------|--------------|----------------|
@@ -59,7 +59,7 @@ Here's what our provider data shows for average per-unit pricing across major U.
 | Dallas, TX | $11 | 76 |
 | Houston, TX | $11 | 89 |
 
-*Note: Portland average ($14) and range ($11–$18) are based on current verified data from 90 local clinics.*
+*Note: The one checked range is Portland's: $12–$17 per unit, from prices Portland clinics published, checked in October 2026.*
 
 ## Per-Unit vs. Per-Area Pricing: Watch Out for This
 
@@ -71,7 +71,7 @@ Some clinics charge per unit (transparent). Others charge "per area" (opaque). H
 
 If a clinic only quotes per-area pricing and won't tell you the per-unit rate, that's a yellow flag. It doesn't mean they're bad — but it means you can't compare them accurately against other providers.
 
-At Verified Aesthetics, we index per-unit pricing wherever possible specifically because it's the only honest way to compare.
+At Verified Aesthetics, we show per-unit pricing wherever a clinic publishes it, because it's the only honest way to compare.
 
 ## What Drives the Price Up
 
@@ -103,7 +103,7 @@ Here's a quick framework for comparing Botox pricing without getting burned:
 
 **Compare to your city average.** If you're in Portland and someone quotes you $22/unit, you're paying 57% above average. That doesn't mean it's wrong — but you should understand what you're paying a premium for.
 
-**Check the provider's score.** On Verified Aesthetics, every indexed provider has a score based on natural results, fair pricing, patient trust, verified credentials, and transparency. Nobody pays for a higher score. It's just data.
+**Check the provider's score.** On Verified Aesthetics, every listed provider has a Clarity Score based on patient reviews, published per-unit prices and contact details. Nobody pays for a higher score.
 
 [Find Best Botox Providers in Portland →](/find-providers?q=Botox&location=Portland)
     `,
