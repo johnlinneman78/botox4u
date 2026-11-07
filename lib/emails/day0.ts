@@ -33,7 +33,7 @@ export function day0Html({ firstName, pdfLink }: Day0Props): string {
     <a href="${downloadUrl}" style="display:inline-block;background-color:#1A1A1A;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Download: 2026 Price Guide →</a>
   </div>
 
-  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">This guide covers verified pricing across 22 cities, what drives the cost difference between providers, and the 7 questions that save you hundreds per session.</p>
+  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">This guide covers rough price estimates for 22 cities, what drives the cost difference between providers, and 7 questions to ask before you book. Only the Portland range has been checked against clinic prices.</p>
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">But there's one thing the guide doesn't cover that I want to share right now:</p>
 
