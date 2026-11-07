@@ -79,7 +79,7 @@ export function CityHero({ city, state, treatmentName, providerCount, hasPublish
                             <>view real {NICHE.priceUnit} pricing where clinics publish it, and check practitioner NPI matching.</>
                         ) : (
                             <>check practitioner NPI matching, and help build the price pool. No clinic in {city} has published a price yet.</>
-                        )} Unpaid results are ranked by Clarity Score — sponsored placement never changes that order.
+                        )} Unpaid results are ranked by Clarity Score — featured placement never changes that order.
                     </motion.p>
 
                     <motion.div

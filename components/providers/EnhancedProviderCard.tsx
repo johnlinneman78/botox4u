@@ -105,9 +105,9 @@ export function EnhancedProviderCard({ provider, cityAvgCost }: EnhancedProvider
 
     const score = provider.score_total ?? provider.score?.points ?? null;
 
-    // Featured = Georgetown (grandfathered, free, no clock). Pricing is
-    // parked as of Nov 5, 2026: no new trials, no paid plans. See
-    // lib/featured-listings.ts. Featured adds the sponsored section
+    // Featured = Georgetown (grandfathered, free, no clock). Featured is
+    // free per John's Nov 6, 2026 rule: no trials, no paid plans. See
+    // lib/featured-listings.ts. Featured adds the featured section
     // and the tag, nothing else.
     const featured = isFeatured(provider.slug)
     // A provider's own logo on their card is part of the listing, not

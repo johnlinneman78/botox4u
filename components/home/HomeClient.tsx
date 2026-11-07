@@ -222,7 +222,7 @@ export default function HomeClient({
             <section id="check-prices" className="container-content scroll-mt-24">
                 <PriceWidget cities={cities} defaultCitySlug={heroCitySlug} />
                 <p className="text-[13px] mt-4" style={{ color: 'var(--color-stone)' }}>
-                    Based on moderated patient reports. Providers can pay for labeled sponsored placement, never for a higher Clarity Score, and never for a different order in the unpaid results.
+                    Based on moderated patient reports. Featured spots are free. A featured spot never changes a provider's Clarity Score, and never changes the order of the unpaid results.
                 </p>
 
                 <div className="mt-6">
