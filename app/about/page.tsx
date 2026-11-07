@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ShieldCheck, Target, DollarSign, Users, Globe, Scale, Fingerprint } from 'lucide-react'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getPlatformStats } from '@/lib/actions/providers'
+import { SUPPORTED_CITIES } from '@/lib/constants/locations'
 
 export const metadata: Metadata = {
     title: 'About Verified Aesthetics — Independent Provider Scoring for Aesthetic Medicine',
@@ -87,7 +88,7 @@ export default async function AboutPage() {
                         </div>
                         <div className="flex flex-col items-center justify-center pt-8 md:pt-0 pl-0 md:pl-4">
                             <div className="text-4xl md:text-5xl font-bold font-display text-[#3D2B1F] mb-2">
-                                {stats.cities.toLocaleString()}
+                                {SUPPORTED_CITIES.length}
                             </div>
                             <div className="text-[10px] font-black uppercase tracking-widest text-[#C9A96E]">Cities Covered</div>
                         </div>
@@ -232,7 +233,7 @@ export default async function AboutPage() {
                         </p>
                     </div>
                 </div>
-                Direct Independent Research • 22 Cities • 2026
+                Direct Independent Research • {SUPPORTED_CITIES.length} Cities • 2026
             </footer>
         </div>
     )

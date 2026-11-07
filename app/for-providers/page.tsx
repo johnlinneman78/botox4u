@@ -17,6 +17,7 @@ import {
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { NICHE } from '@/config/niche'
+import { SUPPORTED_CITIES } from '@/lib/constants/locations'
 
 export const metadata: Metadata = {
     title: 'For Providers — Scale Your Aesthetic Practice | VerifiedAesthetics',
@@ -208,7 +209,7 @@ export default function ForProvidersPage() {
 
                             <div className="mt-16 pt-12 border-t border-black/10 grid grid-cols-2 gap-8">
                                 <div>
-                                    <div className="text-3xl font-black mb-1">22</div>
+                                    <div className="text-3xl font-black mb-1">{SUPPORTED_CITIES.length}</div>
                                     <div className="text-[10px] font-bold uppercase tracking-widest opacity-60">Cities Indexed</div>
                                 </div>
                                 <div>
