@@ -7,7 +7,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: `Claim Your Free Provider Profile | ${NICHE.siteName}`,
-    description: `Are you an aesthetic injector? Claim your profile, verify your credentials, and start attracting high-intent patients today.`,
+    description: `Are you an aesthetic injector? Claim your free profile and keep your details, prices and contact information accurate.`,
     alternates: {
         canonical: '/claim',
     },
@@ -28,8 +28,7 @@ export default function ClaimDirectoryPage() {
                         Grow Your Practice with <span className="text-[#C9A96E]">{NICHE.siteName}</span>
                     </h1>
                     <p className="text-xl md:text-2xl text-[#3D2B1F]/70 font-light leading-relaxed max-w-2xl mb-12">
-                        Join the most transparent aesthetics directory. Claim your free profile to list your pricing,
-                        verify your medical credentials, and start receiving high-intent patient inquiries.
+                        Claim your free profile to correct your details, list your prices and add your contact information.
                     </p>
 
                     <ProviderLookup />
@@ -44,18 +43,18 @@ export default function ClaimDirectoryPage() {
                             <div className="h-14 w-14 bg-[#C9A96E]/10 rounded-2xl flex items-center justify-center text-[#C9A96E] mb-8">
                                 <ShieldCheck className="w-7 h-7" />
                             </div>
-                            <h3 className="text-2xl font-bold text-[#3D2B1F] mb-4">NPI Verification</h3>
+                            <h3 className="text-2xl font-bold text-[#3D2B1F] mb-4">Your NPI Number</h3>
                             <p className="text-[#3D2B1F]/60 leading-relaxed font-light">
-                                Authenticate your medical credentials with our direct NPI database integration. Earn the verification badge that 80% of patients look for.
+                                We match your profile to your NPI number so patients can look you up. An NPI is an ID number, not a license.
                             </p>
                         </div>
                         <div className="p-8 rounded-[2rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 hover:border-[#C9A96E]/20 transition-all">
                             <div className="h-14 w-14 bg-[#C9A96E]/10 rounded-2xl flex items-center justify-center text-[#C9A96E] mb-8">
                                 <ArrowRight className="w-7 h-7" />
                             </div>
-                            <h3 className="text-2xl font-bold text-[#3D2B1F] mb-4">Lead Generation</h3>
+                            <h3 className="text-2xl font-bold text-[#3D2B1F] mb-4">Published Prices</h3>
                             <p className="text-[#3D2B1F]/60 leading-relaxed font-light">
-                                Our users are high-intent patients ready to book. Verified profiles see a 4x increase in profile clicks and consultation requests.
+                                Patients here compare prices before they book. A published per-unit price counts toward your Clarity Score.
                             </p>
                         </div>
                         <div className="p-8 rounded-[2rem] bg-[#3D2B1F]/5 border border-[#3D2B1F]/10 hover:border-[#C9A96E]/20 transition-all">
