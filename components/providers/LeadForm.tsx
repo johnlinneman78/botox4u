@@ -136,7 +136,7 @@ export function LeadForm({ providerId, providerName, city, state, isPremium, pro
                     </div>
                     <h3 className="text-2xl font-display font-bold text-[#3D2B1F] mb-3">Request Sent!</h3>
                     <p className="text-[#3D2B1F]/60 mb-8 max-w-[280px] mx-auto text-sm leading-relaxed">
-                        Thank you. We&apos;ll review your request before forwarding it to a participating provider.
+                        Thanks, we got your request. It comes to us first, not to a clinic.
                         This does not book an appointment.
                     </p>
                     <Button variant="outline" onClick={() => setIsSuccess(false)} className="px-8 border-[#3D2B1F]/10 text-[#3D2B1F]/70 hover:bg-[#3D2B1F]/5">
@@ -160,7 +160,7 @@ export function LeadForm({ providerId, providerName, city, state, isPremium, pro
                     {title ?? (providerName ? `Connect with ${providerName}` : `Find ${city} Specialists`)}
                 </CardTitle>
                 <p className="text-xs text-[#3D2B1F]/50">
-                    {subtitle ?? (providerName ? 'Independent directory listing · We review requests before forwarding' : 'Connect with local specialists')}
+                    {subtitle ?? (providerName ? 'Independent directory listing · Requests come to us first' : 'Connect with local specialists')}
                 </p>
             </CardHeader>
             <CardContent>
@@ -300,7 +300,7 @@ export function LeadForm({ providerId, providerName, city, state, isPremium, pro
                                 />
                             </div>
                             <label className="text-[11px] text-[#3D2B1F]/60 leading-tight">
-                                Send me exclusive {NICHE.name} deals, pricing updates, and clinic specials in my area.
+                                Email me when the price range for my city is ready.
                                 <span className="text-gray-700"> No spam, unsubscribe anytime.</span>
                             </label>
                         </div>
@@ -313,12 +313,11 @@ export function LeadForm({ providerId, providerName, city, state, isPremium, pro
                         disabled={isSubmitting}
                         className="w-full py-7 bg-[#C9A96E] hover:bg-[#B5955B] text-white shadow-xl shadow-[#C9A96E]/10 text-base font-bold transition-all hover:scale-[1.01] active:scale-[0.99]"
                     >
-                        {isSubmitting ? 'Sending Request...' : (submitLabel ?? 'Request Info from Clinic')}
+                        {isSubmitting ? 'Sending Request...' : (submitLabel ?? 'Send my request')}
                     </Button>
 
                     <p className="text-[10px] text-gray-700 text-center leading-tight mt-4 italic">
-                        We review your request before forwarding it to a participating provider. This does not book
-                        an appointment. No spam, ever.
+                        Your request comes to us first, not to a clinic. This does not book an appointment. No spam.
                     </p>
                 </form>
             </CardContent>
