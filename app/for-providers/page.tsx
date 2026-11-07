@@ -20,7 +20,7 @@ import { NICHE } from '@/config/niche'
 
 export const metadata: Metadata = {
     title: 'For Providers — Scale Your Aesthetic Practice | VerifiedAesthetics',
-    description: 'The most semantically rich, AI-cited injector directory in the world. Help patients find you through search and AI agents like ChatGPT and Gemini.',
+    description: 'An independent directory where patients compare injectors by reviews and published prices. Claim your free profile and keep your details accurate.',
     alternates: {
         canonical: '/for-providers',
     },
@@ -124,10 +124,10 @@ export default function ForProvidersPage() {
                                             <span className="text-[#C9A96E] font-bold">Your Clinic</span>
                                         </p>
                                         <div className="pl-4 border-l-2 border-[#C9A96E]/30 my-6 py-2">
-                                            <p className="text-[#C9A96E] italic">// Why Your Profile Converts:</p>
-                                            <p className="text-[#3D2B1F]/70 mt-2">1. Verified NPI Credentials</p>
-                                            <p className="text-[#3D2B1F]/70 mt-1">2. Active State Licensure</p>
-                                            <p className="text-[#3D2B1F]/70 mt-1">3. 45 Reviews mentioning "Natural"</p>
+                                            <p className="text-[#C9A96E] italic">// What the Clarity Score counts:</p>
+                                            <p className="text-[#3D2B1F]/70 mt-2">1. Patient reviews</p>
+                                            <p className="text-[#3D2B1F]/70 mt-1">2. A published per-unit price</p>
+                                            <p className="text-[#3D2B1F]/70 mt-1">3. Contact details</p>
                                         </div>
                                     </div>
                                 </div>
@@ -224,7 +224,7 @@ export default function ForProvidersPage() {
             {/* FOOTER PUSH */}
             <footer className="py-12 border-t border-[#3D2B1F]/10 text-center">
                 <p className="text-[10px] text-[#3D2B1F]/50 uppercase tracking-widest font-black flex items-center justify-center gap-2">
-                    <ShieldCheck className="w-3 h-3 text-[#8A9E8D]" /> ISO 27001 Data Standard Compliance · Powered by Clarity Score™
+                    <ShieldCheck className="w-3 h-3 text-[#8A9E8D]" /> Powered by Clarity Score™
                 </p>
             </footer>
         </main>
