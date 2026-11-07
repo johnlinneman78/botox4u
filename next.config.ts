@@ -143,7 +143,7 @@ const nextConfig: NextConfig = {
             value: 'botox-4u.com',
           },
         ],
-        destination: 'https://verifiedaesthetics.com/:path*',
+        destination: 'https://www.verifiedaesthetics.com/:path*',
         permanent: true,
       },
 
