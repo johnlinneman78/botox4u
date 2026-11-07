@@ -130,7 +130,7 @@ export default function MethodologyPage() {
                         <h2 className="text-2xl font-display font-bold text-[#3D2B1F] mb-3">Something wrong?</h2>
                         <p>
                             If your listing has an error, <Link href="/claim" className="underline">claim your profile</Link> or email{' '}
-                            <a href={`mailto:${NICHE.contactEmail}`} className="underline">{NICHE.contactEmail}</a>. Corrections to credentials or pricing change the score the next time the page refreshes.
+                            <a href={`mailto:${NICHE.contactEmail}`} className="underline">{NICHE.contactEmail}</a>. Corrections to pricing or contact details change the score the next time the page refreshes. Credential corrections update the profile but don't change the score.
                         </p>
                     </section>
 
