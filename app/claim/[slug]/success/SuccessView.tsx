@@ -10,8 +10,14 @@ export function SuccessView({ provider }: { provider: any }) {
 
     // Conversion event (Oct 2026): this page only renders after a
     // claim is submitted, so mounting is the submission signal.
+    // Guarded by sessionStorage (Nov 2026) so a refresh or revisit
+    // of the success URL does not re-fire the event.
     useEffect(() => {
-        track('claim_submitted', providerParams({ slug: provider?.slug, name: provider?.name, city: provider?.city, state: provider?.state }))
+        const key = `claim_submitted:${provider?.slug ?? 'unknown'}`
+        if (typeof window !== 'undefined' && !window.sessionStorage.getItem(key)) {
+            window.sessionStorage.setItem(key, '1')
+            track('claim_submitted', providerParams({ slug: provider?.slug, name: provider?.name, city: provider?.city, state: provider?.state }))
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
