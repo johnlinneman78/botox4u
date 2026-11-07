@@ -133,19 +133,10 @@ export default function InjectorMatchQuiz() {
             }) as any[]
 
             setMatches(providers.slice(0, 3))
-            track('quiz_completed', { city: selectedCity, matches: providers.slice(0, 3).length })
-            // Conversion event (Oct 2026): same completion, under the
-            // name GA4 will mark as a key event. Legacy name kept above.
+            // Single completion event (Nov 2026): one completion = one
+            // key event. quiz_completed / matcher_complete removed.
             track('quiz_complete', {})
             setIsSubmitted(true)
-
-            // GA4: Track successful completion (Key Event)
-            if (typeof window.gtag === 'function') {
-                window.gtag('event', 'matcher_complete', {
-                    city: cityName,
-                    matches_count: providers.length
-                })
-            }
         } catch (error) {
             console.error('Match finding failed:', error)
             setMatches([])
