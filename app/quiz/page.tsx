@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     description: `Calculate your personalized ${NICHE.name.toLowerCase()} price estimate based on your city, treatment area, and experience level. Download our free 2026 Price Guide.`,
     openGraph: {
         title: `Personalized ${NICHE.name} Price Estimate | ${NICHE.siteName}`,
-        description: `Independent pricing data for ${NICHE.name.toLowerCase()} treatments across 22 major cities. Find out if you're overpaying.`,
+        description: `Rough ${NICHE.name.toLowerCase()} price estimates for 22 major cities. Not checked against clinic prices or patient reports.`,
     },
     alternates: {
         canonical: '/quiz',

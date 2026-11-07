@@ -367,9 +367,9 @@ export default function BotoxPriceQuiz() {
 
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                                         {[
-                                            { label: "Market Low", val: prices.low, sub: "Competitive range", icon: TrendingDown },
-                                            { label: "Fair Market", val: prices.avg, sub: "Recommended benchmark", icon: DollarSign, primary: true },
-                                            { label: "Market High", val: prices.high, sub: "Premium providers", icon: ShieldCheck }
+                                            { label: "Low estimate", val: prices.low, sub: "Competitive range", icon: TrendingDown },
+                                            { label: "Middle estimate", val: prices.avg, sub: "Rough estimate, not checked", icon: DollarSign, primary: true },
+                                            { label: "High estimate", val: prices.high, sub: "Premium providers", icon: ShieldCheck }
                                         ].map((item, i) => (
                                             <div key={i} className={`p-6 rounded-xl border transition-all ${item.primary ? 'bg-white/5 border-[#B5936B]' : 'bg-transparent border-white/10'
                                                 }`}>
@@ -419,7 +419,7 @@ export default function BotoxPriceQuiz() {
                                         Download the Full 2026 Price Guide
                                     </h3>
                                     <p className="text-sm text-[#666] font-light mb-6">
-                                        Unlock pricing for all 22 major cities, the Injector Red Flag Checklist, and our 5-day "Smart Patient" email masterclass.
+                                        Get rough price estimates for 22 major cities, the Injector Red Flag Checklist, and our 5-day "Smart Patient" email masterclass.
                                     </p>
 
                                     <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-3 max-w-md mx-auto">
@@ -482,7 +482,7 @@ export default function BotoxPriceQuiz() {
             </div>
 
             <p className="mt-8 text-center text-[10px] text-[#999] font-light leading-relaxed">
-                Price estimates are based on industry benchmarks for {NICHE.name} treatments.<br />
+                These are rough estimates. They haven't been checked against clinic prices or patient reports.<br />
                 Always consult with a qualified medical professional for exact pricing based on your unique anatomy.
             </p>
         </div>
