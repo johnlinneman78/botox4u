@@ -10,14 +10,14 @@ import { JsonLd, generateItemListSchema } from '@/components/seo/JsonLd'
 import { StaggeredGrid } from '@/components/ui/StaggeredGrid'
 
 export const metadata: Metadata = {
-    title: `Find & Compare Best ${NICHE.name} Providers | Clarity Score™ Verified`,
-    description: `Compare local ${NICHE.name} providers by clinical quality and pricing. Find top-rated injectors and medspas near you with our 100% data-driven Clarity Score™ ranking.`,
+    title: `Find & Compare Best ${NICHE.name} Providers | Clarity Score™`,
+    description: `Compare local ${NICHE.name} providers by patient reviews, published prices and contact details, ranked by the Clarity Score™.`,
     alternates: {
         canonical: '/find-providers',
     },
     openGraph: {
-        title: `Find & Compare Best ${NICHE.name} Providers | Clarity Score™ Verified`,
-        description: `Compare local ${NICHE.name} providers by clinical quality and pricing. Find top-rated injectors and medspas near you with our 100% data-driven Clarity Score™ ranking.`,
+        title: `Find & Compare Best ${NICHE.name} Providers | Clarity Score™`,
+        description: `Compare local ${NICHE.name} providers by patient reviews, published prices and contact details, ranked by the Clarity Score™.`,
         url: 'https://www.verifiedaesthetics.com/find-providers',
     }
 }
@@ -112,7 +112,6 @@ export default async function FindProvidersPage({
                             <h4 className="font-bold text-[var(--color-espresso)] text-sm mb-1 uppercase tracking-tight">Clarity Score™ Ranking Algorithm</h4>
                             <p className="text-xs leading-relaxed" style={{ color: 'var(--color-stone)' }}>
                                 Providers are ranked by how much you can confirm before booking:
-                                <b style={{ color: 'var(--color-espresso)' }}> confirmed credentials</b>,
                                 <b style={{ color: 'var(--color-espresso)' }}> patient reviews</b>,
                                 <b style={{ color: 'var(--color-espresso)' }}> published pricing</b> and contact details. Paid plans never change the order.
                             </p>
