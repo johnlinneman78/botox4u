@@ -185,7 +185,7 @@ export default function HomeClient({
                                 className="mb-7"
                                 style={{ fontSize: '19px', color: 'var(--color-stone)', maxWidth: '34rem', lineHeight: 1.6 }}
                             >
-                                Clinics hide prices. Patients report what they paid. We turn those reports into real ranges, so you walk in knowing what a fair price looks like.
+                                Most clinics don't post their prices. Patients report what they paid, and once a city has enough reports, we show the range so you know what's fair before you walk in.
                             </p>
                             <div className="flex items-center gap-5 flex-wrap">
                                 <a
@@ -345,7 +345,7 @@ export default function HomeClient({
                                 Explore treatments. Tap one to learn more.
                             </h2>
                             <p className="text-[17px]" style={{ color: 'var(--color-stone)' }}>
-                                Real pricing, verified credentials, and Clarity Score rankings for every treatment we track.
+                                Clarity Scores for every treatment we track, and price ranges as patients report them.
                             </p>
                         </div>
                     </RevealOnScroll>
@@ -488,7 +488,7 @@ export default function HomeClient({
                                 className="font-display font-bold mt-3 mb-3"
                                 style={{ fontSize: 'clamp(32px, 4vw, 44px)', lineHeight: 1.08, color: 'var(--color-espresso)' }}
                             >
-                                Real pricing, verified credentials, and Clarity Score rankings in every city.
+                                Clarity Scores in every city, and price ranges as patients report them.
                             </h2>
                         </div>
                     </RevealOnScroll>

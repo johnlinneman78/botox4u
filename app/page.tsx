@@ -8,7 +8,7 @@ import { findCityBotoxPrice } from '@/lib/city-botox-prices'
 
 export const metadata: Metadata = {
   title: `${NICHE.name} Injectors & MedSpas | ${NICHE.siteName}`,
-  description: `Compare local Botox and filler providers by credentials, published pricing and patient reviews. Independent, and rankings can't be bought.`,
+  description: `Compare Botox and filler providers by patient reviews and published prices. Share what you paid to help build real price ranges. Rankings can't be bought.`,
   alternates: {
     canonical: '/',
   }
