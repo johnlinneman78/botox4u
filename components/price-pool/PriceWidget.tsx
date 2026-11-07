@@ -316,8 +316,7 @@ export function PriceWidget({
                                                     No clinic in {selectedCity.name} has published a price yet.
                                                 </p>
                                                 <p className="font-body text-sm mt-2 leading-relaxed" style={{ color: 'var(--color-stone)' }}>
-                                                    That&apos;s why the patient-reported range matters. It&apos;s the only real
-                                                    price data here until clinics publish.
+                                                    Once 20 patients report what they paid, a patient range will show here.
                                                 </p>
                                             </>
                                         )

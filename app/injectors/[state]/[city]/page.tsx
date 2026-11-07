@@ -325,7 +325,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                     <p className="text-[16px] max-w-[40rem] mb-8" style={{ color: 'var(--color-stone)' }}>
                         {hasPublishedPrice
                             ? `Clinics in ${cityName} publish per-unit prices, and patients report what they paid. Together that is the real price picture here.`
-                            : `No ${cityName} clinic has published a per-unit price on its own listing yet. That is why the patient-reported range matters. It is the only real price data here until clinics publish.`}
+                            : `No ${cityName} clinic has published a per-unit price on its own listing yet. Once 20 patients report what they paid, a patient range will show here.`}
                     </p>
                     <PriceWidget
                         cities={NICHE.cities}
