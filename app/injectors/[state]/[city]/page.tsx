@@ -498,9 +498,6 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                         </div>
 
                         <div className="mt-12 flex flex-wrap gap-6 justify-center">
-                            <Link href="/blog/pricing-report-2026" className="text-sm font-semibold hover:opacity-80 transition-opacity" style={{ color: 'var(--color-stone)' }}>
-                                📊 Full Pricing Report →
-                            </Link>
                             <Link href="/methodology" className="text-sm font-semibold hover:opacity-80 transition-opacity" style={{ color: 'var(--color-stone)' }}>
                                 📐 Selection Methodology →
                             </Link>
