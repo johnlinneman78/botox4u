@@ -18,7 +18,6 @@ export const metadata: Metadata = {
 
 // Static page for calculator
 export default function CalculatorPage() {
-    const lastUpdated = "February 2026" // Statically set for SEO consistency
     const priceSchema = generatePriceSpecificationSchema(NICHE.priceRange.min, NICHE.priceRange.max, NICHE.priceUnit.split(' ').slice(-1)[0])
 
     return (
@@ -40,7 +39,6 @@ export default function CalculatorPage() {
                             <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            Pricing Data Updated: {lastUpdated}
                         </span>
                         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#3D2B1F]/5 text-[#3D2B1F]/60 rounded-full text-[10px] font-bold uppercase tracking-widest border border-[#3D2B1F]/10">
                             20 Major US Cities

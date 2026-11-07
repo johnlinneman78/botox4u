@@ -440,7 +440,7 @@ export default function CalculatorClient() {
                                         Market Data
                                     </Badge>
                                     <span className="text-sm text-[#3D2B1F]/70 font-medium">
-                                        Based on {cityData.providerCount} {CITY_OPTIONS.find(c => c.value === city)?.label} Providers
+                                        Rough estimate, not checked against clinic prices
                                     </span>
                                 </div>
                             </div>
@@ -450,7 +450,7 @@ export default function CalculatorClient() {
                                 <div className="flex-1">
                                     <h4 className="text-[#3D2B1F] font-bold mb-1">Audit Your Local Clinics</h4>
                                     <p className="text-[#3D2B1F]/70 text-xs leading-relaxed">
-                                        We'll cross-reference your quote against {cityData.providerCount} verified providers in {CITY_OPTIONS.find(c => c.value === city)?.label}.
+                                        This compares your quote to rough estimates. They haven't been checked against clinic prices or patient reports.
                                     </p>
                                 </div>
                                 <Link href="/audit" className="w-full md:w-auto">
@@ -478,7 +478,7 @@ export default function CalculatorClient() {
                                     <p className="text-xs font-bold text-[#3D2B1F]/50 uppercase">Est. Price Per {NICHE.priceUnit.split(' ').slice(-1)}</p>
                                     <p className="text-2xl font-bold text-[#3D2B1F] tabular-nums">${unitPrice} <span className="text-base font-normal text-[#3D2B1F]/60">/ {NICHE.priceUnit.split(' ').slice(-1)}</span></p>
                                     <p className="text-xs text-[#3D2B1F]/70">
-                                        Market Avg: ${pricing.mid}
+                                        Estimated avg: ${pricing.mid}
                                     </p>
                                 </div>
                             </div>
