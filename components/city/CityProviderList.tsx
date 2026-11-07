@@ -100,10 +100,10 @@ export function CityProviderList({ city, featured, unpaid, cityAvgCost, divider 
                 <section aria-label="Sponsored providers" className="mb-12">
                     <div className="mb-4">
                         <p className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-stone)' }}>
-                            Sponsored · Featured
+                            Featured
                         </p>
                         <p className="text-xs mt-1" style={{ color: 'var(--color-stone)' }}>
-                            Providers may purchase a clearly labeled advertising position. Payment never changes their Clarity Score, verification status, or position within the unpaid results.
+                            This spot is free. It never changes their Clarity Score or their position in the regular results.
                         </p>
                     </div>
                     <div className="space-y-8">
