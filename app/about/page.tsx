@@ -7,10 +7,10 @@ import { getPlatformStats } from '@/lib/actions/providers'
 
 export const metadata: Metadata = {
     title: 'About Verified Aesthetics — Independent Provider Scoring for Aesthetic Medicine',
-    description: 'Verified Aesthetics is an independent research platform that scores aesthetic injectors on natural results, fair pricing, and verified credentials. Nobody pays for a higher rank.',
+    description: 'Verified Aesthetics is an independent research platform that scores aesthetic injectors on patient reviews, published prices and contact details. Nobody pays for a higher rank.',
     openGraph: {
         title: 'About Verified Aesthetics — Independent Provider Scoring for Aesthetic Medicine',
-        description: 'Verified Aesthetics is an independent research platform that scores aesthetic injectors on natural results, fair pricing, and verified credentials. Nobody pays for a higher rank.',
+        description: 'Verified Aesthetics is an independent research platform that scores aesthetic injectors on patient reviews, published prices and contact details. Nobody pays for a higher rank.',
         url: '/about',
     },
     alternates: {
@@ -26,7 +26,7 @@ export default async function AboutPage() {
         "@type": "Organization",
         "name": "Verified Aesthetics",
         "url": "https://www.verifiedaesthetics.com",
-        "description": "Independent research platform that scores aesthetic medicine providers on natural results, fair pricing, and verified credentials.",
+        "description": "Independent research platform that scores aesthetic medicine providers on patient reviews, published prices and contact details.",
         "founder": {
             "@type": "Person",
             "name": "John",
@@ -78,7 +78,7 @@ export default async function AboutPage() {
             {/* 2. THE NUMBERS (Horizontal Stat Bar) */}
             <section className="relative z-20 -mt-10 mb-20 px-4">
                 <div className="container mx-auto max-w-5xl">
-                    <div className="bg-[#F2EDE4] rounded-[2.5rem] shadow-2xl border border-[#3D2B1F]/10 p-10 md:p-14 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-white/[0.06]">
+                    <div className="bg-[#F2EDE4] rounded-[2.5rem] shadow-2xl border border-[#3D2B1F]/10 p-10 md:p-14 grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-white/[0.06]">
                         <div className="flex flex-col items-center justify-center pt-8 md:pt-0">
                             <div className="text-4xl md:text-5xl font-bold font-display text-[#3D2B1F] mb-2">
                                 {stats.providers.toLocaleString()}
@@ -95,13 +95,7 @@ export default async function AboutPage() {
                             <div className="text-4xl md:text-5xl font-bold font-display text-[#3D2B1F] mb-2">
                                 {stats.reviews.toLocaleString()}+
                             </div>
-                            <div className="text-[10px] font-black uppercase tracking-widest text-[#C9A96E]">Patient Reviews</div>
-                        </div>
-                        <div className="flex flex-col items-center justify-center pt-8 md:pt-0 pl-0 md:pl-4">
-                            <div className="text-4xl md:text-5xl font-bold font-display text-[#3D2B1F] mb-2">
-                                4.2
-                            </div>
-                            <div className="text-[10px] font-black uppercase tracking-widest text-[#C9A96E]">Avg. Score Signals</div>
+                            <div className="text-[10px] font-black uppercase tracking-widest text-[#C9A96E]">Online Reviews Counted</div>
                         </div>
                     </div>
                 </div>
@@ -132,7 +126,7 @@ export default async function AboutPage() {
                             {
                                 icon: ShieldCheck,
                                 label: 'Credential Integrity',
-                                desc: 'Every indexed provider is cross-referenced against the federal NPI (National Provider Identifier) database, the government\'s official registry of licensed healthcare providers. If a provider\'s credentials don\'t verify, it affects their score.'
+                                desc: 'Where we can, we match each provider to their NPI (National Provider Identifier), a federal ID number for healthcare providers. An NPI is an ID number, not a license. It shows on the profile and does not change the score.'
                             },
                             {
                                 icon: Users,
@@ -203,7 +197,7 @@ export default async function AboutPage() {
                     </div>
                     <h2 className="text-3xl font-display font-bold text-[#3D2B1F] mb-8 tracking-tight">Built By</h2>
                     <div className="space-y-6 text-lg text-[#3D2B1F]/60 font-light leading-relaxed max-w-2xl mx-auto text-left">
-                        Verified Aesthetics was founded in 2026 as a research project to solve the "Review Gap" in aesthetic medicine. Within months, it grew from a regional experiment into a <strong className="text-[#3D2B1F]">national platform</strong> indexing providers across 22+ cities.
+                        Verified Aesthetics was founded in 2026 as a research project to solve the "Review Gap" in aesthetic medicine.
                         <p>
                             The scoring algorithm was developed through analysis of tens of thousands of patient reviews, identifying the specific language patterns that correlate with patient satisfaction, natural results, and provider trustworthiness. The platform is independently operated and has no financial relationships with product manufacturers, medical associations, or provider networks.
                         </p>
