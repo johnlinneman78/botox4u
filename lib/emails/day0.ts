@@ -1,5 +1,5 @@
 // Day 0: Immediate — Welcome + PDF Delivery
-// Subject: Your 2026 Botox Price Guide is here 📊
+// Subject: Your 2026 Botox Price Guide is here
 
 interface Day0Props {
     firstName: string
@@ -7,7 +7,7 @@ interface Day0Props {
 }
 
 export function day0Subject() {
-    return 'Your 2026 Botox Price Guide is here 📊'
+    return 'Your 2026 Botox Price Guide is here'
 }
 
 export function day0Html({ firstName, pdfLink }: Day0Props): string {
@@ -34,6 +34,16 @@ export function day0Html({ firstName, pdfLink }: Day0Props): string {
   </div>
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">This guide covers rough price estimates for 22 cities, what drives the cost difference between providers, and 7 questions to ask before you book. Only the Portland range has been checked against clinic prices.</p>
+
+  <div style="background-color:#F7F4F0;padding:20px 24px;border-radius:12px;margin:24px 0;">
+    <p style="font-size:16px;line-height:1.6;color:#1A1A1A;margin-top:0;"><strong>Share what you paid</strong></p>
+    <p style="font-size:15px;line-height:1.6;color:#444;">Clinics will not publish their prices, so we are building the guide from prices patients share.</p>
+    <p style="font-size:15px;line-height:1.6;color:#444;">If you have had Botox, Dysport, Xeomin, Daxxify, or filler, share what you paid. The form asks for the treatment, how many units you got, the total you paid, and your city. Clinic name is optional. It takes about 30 seconds.</p>
+    <p style="font-size:15px;line-height:1.6;color:#444;margin-bottom:0;">Anonymous. Only combined ranges ever publish, never a single report. Your report goes to a review queue first.</p>
+    <div style="text-align:center;margin:20px 0 4px;">
+      <a href="https://www.verifiedaesthetics.com#check-prices" style="display:inline-block;background-color:#1A1A1A;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Share what you paid →</a>
+    </div>
+  </div>
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">But there's one thing the guide doesn't cover that I want to share right now:</p>
 
