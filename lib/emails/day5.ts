@@ -24,13 +24,13 @@ export function day5Html({ firstName }: Day5Props): string {
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">Hi ${firstName},</p>
 
-  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">This is the last email in this series, and I want to leave you with the most important thing we've learned from analyzing 500+ aesthetic medicine providers.</p>
+  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">This is the last email in this series, and I want to leave you with the most important thing we've learned.</p>
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;"><strong>The #1 predictor of patient satisfaction isn't price, credentials, or office decor.</strong></p>
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">It's communication.</p>
 
-  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">The providers with the highest TrueScore ratings on VerifiedAesthetics share one thing: patients consistently describe feeling <em>heard</em> during consultations. They say things like:</p>
+  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">The providers patients describe best share one thing: patients consistently describe feeling <em>heard</em> during consultations. They say things like:</p>
 
   <div style="background-color:#F7F4F0;padding:20px 24px;border-radius:12px;margin:24px 0;">
     <p style="font-size:15px;line-height:1.8;color:#444;margin:0;">
@@ -39,8 +39,6 @@ export function day5Html({ firstName }: Day5Props): string {
       • "They showed me what to expect and didn't oversell"
     </p>
   </div>
-
-  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">When we run our semantic analysis on patient reviews across all 22 cities, the language patterns that correlate most strongly with high satisfaction aren't about price or results — they're about the quality of the conversation before the injection.</p>
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;"><strong>What this means for you:</strong></p>
 
@@ -57,6 +55,14 @@ export function day5Html({ firstName }: Day5Props): string {
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">That's what VerifiedAesthetics was built to surface. Not who has the best ads or the most Instagram followers, but who consistently makes patients feel informed, respected, and satisfied with their results.</p>
 
+  <div style="background-color:#F7F4F0;padding:20px 24px;border-radius:12px;margin:24px 0;">
+    <p style="font-size:16px;line-height:1.6;color:#1A1A1A;margin-top:0;"><strong>Share what you paid</strong></p>
+    <p style="font-size:15px;line-height:1.6;color:#444;margin-bottom:0;">This is the last ask in the series. If you have had a treatment, share what you paid before you go. Treatment, units, total paid, city. Clinic name is optional. About 30 seconds. Anonymous. Only combined ranges ever publish, never a single report. Your report goes to a review queue first.</p>
+    <div style="text-align:center;margin:20px 0 4px;">
+      <a href="https://www.verifiedaesthetics.com#check-prices" style="display:inline-block;background-color:#1A1A1A;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Share what you paid →</a>
+    </div>
+  </div>
+
   <div style="text-align:center;margin:32px 0;">
     <a href="https://www.verifiedaesthetics.com" style="display:inline-block;background-color:#B5936B;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Find Top-Rated Providers →</a>
   </div>
@@ -64,8 +70,6 @@ export function day5Html({ firstName }: Day5Props): string {
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">Thanks for reading this series. If you found it helpful, forward it to a friend who's considering Botox — they'll thank you.</p>
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">—VerifiedAesthetics</p>
-
-  <p style="font-size:14px;line-height:1.6;color:#666;">P.S. — Want a personalized analysis of providers in your specific area? Reply to this email with your city and I'll send you a custom comparison.</p>
 
   <hr style="border:none;border-top:1px solid #ECE8E2;margin:32px 0;">
   <p style="font-size:10px;color:#999;text-align:center;letter-spacing:0.05em;">© 2026 VerifiedAesthetics · Independent clinical data for the regenerative era.<br><a href="https://www.verifiedaesthetics.com/unsubscribe" style="color:#999;">Unsubscribe</a></p>
