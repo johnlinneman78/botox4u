@@ -50,6 +50,14 @@ export function day4Html({ firstName }: Day4Props): string {
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">A provider who takes time to explain your options — not just default to one brand — is one who's treating you as a patient, not a revenue line.</p>
 
+  <div style="background-color:#F7F4F0;padding:20px 24px;border-radius:12px;margin:24px 0;">
+    <p style="font-size:16px;line-height:1.6;color:#1A1A1A;margin-top:0;"><strong>Share what you paid</strong></p>
+    <p style="font-size:15px;line-height:1.6;color:#444;margin-bottom:0;">Which product did you get? Share what you paid for Botox, Dysport, Xeomin, or Daxxify. Treatment, units, total paid, city. Clinic name is optional. About 30 seconds. Anonymous. Only combined ranges ever publish, never a single report.</p>
+    <div style="text-align:center;margin:20px 0 4px;">
+      <a href="https://www.verifiedaesthetics.com#check-prices" style="display:inline-block;background-color:#1A1A1A;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Share what you paid →</a>
+    </div>
+  </div>
+
   <div style="text-align:center;margin:32px 0;">
     <a href="https://www.verifiedaesthetics.com" style="display:inline-block;background-color:#1A1A1A;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Find Multi-Toxin Providers →</a>
   </div>
