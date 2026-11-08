@@ -40,10 +40,18 @@ export function day1Html({ firstName }: Day1Props): string {
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">→ <strong>Their complication history.</strong> You can check your state medical board's website for any disciplinary actions. It takes 2 minutes. Do it.</p>
 
-  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">The bottom line: credentials are one factor, not the only factor. That's why VerifiedAesthetics's TrueScore weights credentials at 25 out of 100 points — important, but not the whole picture.</p>
+  <p style="font-size:16px;line-height:1.6;color:#1A1A1A;">The bottom line: credentials are one factor, not the only factor. That is why the Clarity Score comes from reviews, published pricing, and contact information. Booking links and quotes add no points.</p>
 
   <div style="text-align:center;margin:32px 0;">
-    <a href="https://www.verifiedaesthetics.com/methodology" style="display:inline-block;background-color:#1A1A1A;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">See How TrueScore Works →</a>
+    <a href="https://www.verifiedaesthetics.com/methodology" style="display:inline-block;background-color:#1A1A1A;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">See How the Score Works →</a>
+  </div>
+
+  <div style="background-color:#F7F4F0;padding:20px 24px;border-radius:12px;margin:24px 0;">
+    <p style="font-size:16px;line-height:1.6;color:#1A1A1A;margin-top:0;"><strong>Share what you paid</strong></p>
+    <p style="font-size:15px;line-height:1.6;color:#444;margin-bottom:0;">Have you had a treatment before? Share what you paid and help make the guide real. Treatment, units, total paid, city. Clinic name is optional. About 30 seconds. Anonymous. Only combined ranges ever publish, never a single report.</p>
+    <div style="text-align:center;margin:20px 0 4px;">
+      <a href="https://www.verifiedaesthetics.com#check-prices" style="display:inline-block;background-color:#1A1A1A;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Share what you paid →</a>
+    </div>
   </div>
 
   <p style="font-size:14px;line-height:1.6;color:#666;">Tomorrow: The touch-up trap (and how to avoid it).</p>
