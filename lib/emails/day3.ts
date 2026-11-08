@@ -45,6 +45,14 @@ export function day3Html({ firstName }: Day3Props): string {
 
   <p style="font-size:16px;line-height:1.6;color:#1A1A1A;"><strong>One more thing:</strong> Some providers offer "Botox days" or seasonal promotions where pricing drops 10-20% for a limited time. Ask if they run these, and when the next one is. Planning your treatments around promotions is the easiest money you'll save.</p>
 
+  <div style="background-color:#F7F4F0;padding:20px 24px;border-radius:12px;margin:24px 0;">
+    <p style="font-size:16px;line-height:1.6;color:#1A1A1A;margin-top:0;"><strong>Share what you paid</strong></p>
+    <p style="font-size:15px;line-height:1.6;color:#444;margin-bottom:0;">Did a loyalty program or a promotion change what you paid? Share the total you paid, with the treatment, units, and city. Clinic name is optional. About 30 seconds. Anonymous. Only combined ranges ever publish, never a single report.</p>
+    <div style="text-align:center;margin:20px 0 4px;">
+      <a href="https://www.verifiedaesthetics.com#check-prices" style="display:inline-block;background-color:#1A1A1A;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Share what you paid →</a>
+    </div>
+  </div>
+
   <div style="text-align:center;margin:32px 0;">
     <a href="https://www.verifiedaesthetics.com" style="display:inline-block;background-color:#1A1A1A;color:#ffffff;padding:16px 32px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Compare Pricing & Programs →</a>
   </div>
