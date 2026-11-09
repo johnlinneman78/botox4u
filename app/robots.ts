@@ -50,16 +50,21 @@ export default function robots(): MetadataRoute.Robots {
                 '/api/',
                 '/_next/',
                 '/admin/',
-                '/provider/login',
-                '/provider/signup',
-                '/provider/dashboard',
-                '/provider/verify',
-                '/provider/claim',
-                '/provider/new',
+                // $-anchored: these are single utility pages. Without the
+                // anchor, robots.txt prefix matching also blocked real
+                // provider pages whose slugs start with the same word
+                // (e.g. /provider/new-york-clinic-20 was blocked by
+                // '/provider/new'). Googlebot supports the $ end-anchor.
+                '/provider/login$',
+                '/provider/signup$',
+                '/provider/dashboard$',
+                '/provider/verify$',
+                '/provider/claim$',
+                '/provider/new$',
                 '/provider/*/intelligence-brief',
                 '/claim/',
-                '/search',
-                '/unsubscribe',
+                '/search$',
+                '/unsubscribe$',
                 '/*?price=',
                 '/*?rating=',
                 '/*?sort=',

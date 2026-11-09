@@ -70,6 +70,12 @@ const nextConfig: NextConfig = {
         destination: '/blog/daxxify-long-acting-tox-city-reports-2026',
         permanent: true,
       },
+      {
+        // Search Console 404, crawled Nov 5 2026: removed pricing post.
+        source: '/blog/pricing-report-2026',
+        destination: '/blog/how-much-does-botox-cost-2026',
+        permanent: true,
+      },
       // Old brand page removals to avoid ghost views
       {
         source: '/find-top-providers',
