@@ -24,9 +24,14 @@ export async function updateProviderProfile(formData: FormData) {
         }
 
         // Handle numeric fields safely
+        // Ruling 6 (Nov 7, 2026): a price the clinic posts in the
+        // dashboard goes to the clinic-posted columns, not
+        // price_per_unit — it displays as a separate labeled source
+        // ("Price posted by the clinic") with its date.
         const pricePerUnit = formData.get('price_per_unit');
         if (pricePerUnit) {
-            updates.price_per_unit = parseFloat(pricePerUnit as string);
+            updates.clinic_posted_price_per_unit = parseFloat(pricePerUnit as string);
+            updates.clinic_posted_price_at = new Date().toISOString();
         }
 
         const { error } = await supabase
@@ -197,9 +202,14 @@ export async function claimProviderProfile(formData: FormData) {
             updates.email = claimEmail
         }
 
+        // Ruling 6 (Nov 7, 2026): a price the clinic posts while
+        // claiming goes to the clinic-posted columns, not
+        // price_per_unit — it displays as a separate labeled source
+        // ("Price posted by the clinic") with its date.
         const pricePerUnit = formData.get('price_per_unit');
         if (pricePerUnit) {
-            updates.price_per_unit = parseFloat(pricePerUnit as string);
+            updates.clinic_posted_price_per_unit = parseFloat(pricePerUnit as string);
+            updates.clinic_posted_price_at = new Date().toISOString();
         }
 
         const philosophy = formData.get('philosophy') as string;

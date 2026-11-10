@@ -189,6 +189,12 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                                 <>Prices vary by clinic — {provider.name} does not publish a per-unit price here. Patients should consult directly with the practice for exact quotes tailored to their treatment goals.</>
                             )}
                         </p>
+                        {provider.clinic_posted_price_per_unit != null && (
+                            <p className="font-body text-sm leading-relaxed mt-2" style={{ color: 'var(--color-stone)' }}>
+                                Price posted by the clinic: ${provider.clinic_posted_price_per_unit} per unit
+                                {provider.clinic_posted_price_at ? ` (posted ${new Date(provider.clinic_posted_price_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })})` : ''}.
+                            </p>
+                        )}
                     </div>
 
                     <div>

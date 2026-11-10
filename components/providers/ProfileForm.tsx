@@ -88,7 +88,7 @@ export function ProfileForm({ provider }: { provider: any }) {
                                 name="price_per_unit"
                                 type="number"
                                 step="0.01"
-                                defaultValue={provider.price_per_unit}
+                                defaultValue={provider.clinic_posted_price_per_unit ?? provider.price_per_unit}
                                 className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-secondary/20 outline-none"
                             />
                         </div>

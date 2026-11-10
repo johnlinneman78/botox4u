@@ -337,6 +337,12 @@ export function EnhancedProviderCard({ provider, cityAvgCost }: EnhancedProvider
                                 Price not published
                             </div>
                         )}
+                        {provider.clinic_posted_price_per_unit != null && (
+                            <div className="font-sans text-[12px] text-[#A89B8C] mt-1">
+                                Price posted by the clinic: {formatCurrency(provider.clinic_posted_price_per_unit)}/unit
+                                {provider.clinic_posted_price_at ? ` · ${new Date(provider.clinic_posted_price_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}` : ''}
+                            </div>
+                        )}
                     </div>
 
                     {/* Row 5: CTA */}

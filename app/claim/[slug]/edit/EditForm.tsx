@@ -92,7 +92,7 @@ export function EditForm({ provider, initialNpi, initialEmail }: { provider: any
                                 type="number"
                                 name="price_per_unit"
                                 step="0.01"
-                                defaultValue={provider.price_per_unit}
+                                defaultValue={provider.clinic_posted_price_per_unit ?? provider.price_per_unit}
                                 className="w-full pl-12 pr-6 py-4 rounded-2xl border border-white/[0.08] bg-[#3D2B1F]/5 focus:bg-[#3D2B1F]/5 focus:ring-4 focus:ring-[#C9A96E]/10 outline-none transition-all text-lg text-[#3D2B1F] placeholder-gray-600"
                                 placeholder="12.00"
                             />

@@ -80,13 +80,15 @@ export function scoreProvider(p: any): ClarityScore {
     }
 
     // ── Price transparency (10) ─────────────────────────────────────────
-    const price = p?.price_per_unit ?? p?.botox_price_per_unit ?? p?.enriched_attrs?.price_per_unit_botox
+    // A price the clinic itself posted counts like any published
+    // per-unit price (ruling 6, Nov 7, 2026 — no weight change).
+    const price = p?.clinic_posted_price_per_unit ?? p?.price_per_unit ?? p?.botox_price_per_unit ?? p?.enriched_attrs?.price_per_unit_botox
     const pricing = price ? 10 : 0
     notes.push(price ? `Publishes pricing ($${price}/unit)` : 'No published per-unit price')
 
     // ── Contact details (7) ─────────────────────────────────────────────
-    // Website + phone only. Booking links are deliberately excluded: booking
-    // display is paid, and scoring it would tie payment to the score.
+    // Website + phone only. Booking links are deliberately excluded:
+    // they are neither pricing nor contact information.
     const access = (p?.website ? 4 : 0) + (p?.phone ? 3 : 0)
     if (p?.website) notes.push('Website listed')
     if (p?.phone) notes.push('Phone listed')
