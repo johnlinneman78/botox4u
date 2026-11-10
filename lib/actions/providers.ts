@@ -72,6 +72,7 @@ export async function getProvidersWithSearch(filters: {
         .select(`
             id, name, slug, business_type, address, city, state,
             listing_tier, verified, price_per_unit, website, phone,
+            clinic_posted_price_per_unit, clinic_posted_price_at,
             lat, lng, hero_image_url,
             rating, average_rating, review_count, 
             services_offered, credentials, description,

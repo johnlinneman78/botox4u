@@ -680,6 +680,27 @@ export default function ProviderProfileClient({ provider, themes, cityAvgCost = 
                         </RevealOnScroll>
                     )}
 
+                    {provider.clinic_posted_price_per_unit != null && (
+                        <RevealOnScroll delay={0.02}>
+                            <div
+                                className="flex items-center justify-between py-5"
+                                style={{ borderBottom: '1px solid var(--color-surface)' }}
+                            >
+                                <div>
+                                    <span className="font-display font-medium block" style={{ fontSize: '19px', color: 'var(--color-espresso)' }}>
+                                        Price posted by the clinic
+                                    </span>
+                                    <span className="font-body text-xs" style={{ color: 'var(--color-taupe)' }}>
+                                        {provider.clinic_posted_price_at ? `Posted ${new Date(provider.clinic_posted_price_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/Los_Angeles' })}` : 'Posted by the clinic'}
+                                    </span>
+                                </div>
+                                <span className="font-display font-medium" style={{ fontSize: '19px', color: 'var(--color-espresso)' }}>
+                                    {formatCurrency(Number(provider.clinic_posted_price_per_unit))}/{NICHE.priceUnit.split(' ').slice(-1)}
+                                </span>
+                            </div>
+                        </RevealOnScroll>
+                    )}
+
                     {provider.enriched_attrs?.price_per_unit_dysport && (
                         <RevealOnScroll delay={0.04}>
                             <div
