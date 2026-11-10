@@ -39,6 +39,9 @@ export async function generateStaticParams() {
         { slug: 'the-ick-disgust-psychology' },
         { slug: 'neurodivergent-tiktok-language' },
         { slug: 'fda-fake-botox-warning-2025' },
+        { slug: 'sculptra-vs-radiesse-comparison' },
+        { slug: 'juvederm-vs-restylane-comparison' },
+        { slug: 'botox-vs-dysport-comparison' },
     ]
 }
 
