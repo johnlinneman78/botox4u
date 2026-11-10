@@ -24,10 +24,9 @@
  *   No badge is not a penalty, and an unchecked record is not a zero.
  *   NPI match also does not validate state licensure; license checks are
  *   separate and must say so when shown.
- * - Booking links. Booking display is a paid benefit, so scoring it would
- *   tie payment to the score. A stored booking_url adds nothing, and a
- *   paid booking display adds nothing either. Paid booking clicks are
- *   tracked in a separate commercial layer, never as score points.
+ * - Booking links. Booking display is not a paid product (cut Nov 5,
+ *   2026), so there is nothing to score. A stored booking_url adds
+ *   nothing, and a booking display adds nothing either.
  *
  * If a provider has fewer than 5 reviews, there isn't enough data to
  * score fairly: points = null ("Not enough data").

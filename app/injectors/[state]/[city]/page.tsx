@@ -74,10 +74,10 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
         ? `Botox ${cityName}: Prices & Injectors (${year})`
         : `Botox in ${cityName}, ${stateCode}: Prices & Injectors (${year})`
     const description = isZeroClickCity
-        ? `Botox in ${cityName}, ${stateCode}. Compare injectors, confirmed credentials and published pricing side by side. Sponsored placements are clearly labeled. Updated ${month} ${year}.`
+        ? `Botox in ${cityName}, ${stateCode}. Compare injectors, confirmed credentials and published pricing side by side. Featured placements are clearly labeled. Updated ${month} ${year}.`
         : avgPrice
-            ? `Compare ${providerCount} Botox & filler injectors in ${cityName}. See price per unit (from $${avgPrice}), confirmed credentials and patient reviews side by side. Sponsored placements are clearly labeled. Updated ${month} ${year}.`
-            : `Compare ${providerCount} Botox & filler injectors in ${cityName}, ${stateCode}. Confirmed credentials, published pricing and patient reviews side by side. Sponsored placements are clearly labeled. Updated ${month} ${year}.`
+            ? `Compare ${providerCount} Botox & filler injectors in ${cityName}. See price per unit (from $${avgPrice}), confirmed credentials and patient reviews side by side. Featured placements are clearly labeled. Updated ${month} ${year}.`
+            : `Compare ${providerCount} Botox & filler injectors in ${cityName}, ${stateCode}. Confirmed credentials, published pricing and patient reviews side by side. Featured placements are clearly labeled. Updated ${month} ${year}.`
     const url = `/${NICHE.baseSlug}/${state.toLowerCase()}/${city.toLowerCase()}`
 
     return {
@@ -132,7 +132,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
     }));
 
     const itemListSchema = generateItemListSchema(orderFeaturedFirst(providers).slice(0, 50), cityName)
-    // Sponsored section + unpaid list (see lib/featured-listings.ts):
+    // Featured section + unpaid list (see lib/featured-listings.ts):
     // featured providers render above the unpaid results in their own
     // labeled section, never mixed into the ranked order. The unpaid
     // list keeps its independent order from the query.
@@ -202,7 +202,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                             Best Botox and filler providers in {cityName}, {stateCode}
                         </h1>
                         <p className="text-[18px] max-w-[36rem]" style={{ color: 'var(--color-stone)', lineHeight: 1.6 }}>
-                            Compare {providers.length} providers across {cityName}. Unpaid results are ranked by Clarity Score. Sponsored placement never changes that order.
+                            Compare {providers.length} providers across {cityName}. Unpaid results are ranked by Clarity Score. Featured placement never changes that order.
                         </p>
                     </div>
                     <aside

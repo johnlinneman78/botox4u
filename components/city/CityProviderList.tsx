@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { EnhancedProviderCard } from '@/components/providers/EnhancedProviderCard'
 import { DividerPhoto } from '@/components/redesign/DividerPhoto'
 
-// The unpaid provider list for a city page, with the sponsored section
+// The unpaid provider list for a city page, with the featured section
 // kept separate above it (see lib/featured-listings.ts — featured
 // providers never mix into the unpaid order).
 //
@@ -13,7 +13,7 @@ import { DividerPhoto } from '@/components/redesign/DividerPhoto'
 // use the same derivation as the treatment tags on the cards
 // (enriched_attrs / published per-unit price), so a pill never shows
 // a provider the card does not tag. Featured providers are never
-// filtered: a sponsored placement is a placement, not a price claim.
+// filtered: a featured placement is a placement, not a price claim.
 //
 // Heading copy: "Providers in {city}" — directory inclusion is not
 // verification, and the list is never described as verified as a whole.
@@ -92,12 +92,12 @@ export function CityProviderList({ city, featured, unpaid, cityAvgCost, divider 
                 <DividerPhoto src={divider.src} alt={divider.alt} caption={divider.caption} />
             )}
 
-            {/* Sponsored section: featured providers render here, ABOVE the
+            {/* Featured section: featured providers render here, ABOVE the
                 unpaid results, in their own clearly labeled section —
                 never mixed into the ranked order. The Featured tag on each
                 card is in addition to this label. */}
             {featured.length > 0 && (
-                <section aria-label="Sponsored providers" className="mb-12">
+                <section aria-label="Featured providers" className="mb-12">
                     <div className="mb-4">
                         <p className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--color-stone)' }}>
                             Featured
