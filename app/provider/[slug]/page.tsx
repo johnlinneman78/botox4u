@@ -192,7 +192,7 @@ export default async function ProviderProfilePage({ params }: ProviderProfilePro
                         {provider.clinic_posted_price_per_unit != null && (
                             <p className="font-body text-sm leading-relaxed mt-2" style={{ color: 'var(--color-stone)' }}>
                                 Price posted by the clinic: ${provider.clinic_posted_price_per_unit} per unit
-                                {provider.clinic_posted_price_at ? ` (posted ${new Date(provider.clinic_posted_price_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })})` : ''}.
+                                {provider.clinic_posted_price_at ? ` (posted ${new Date(provider.clinic_posted_price_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/Los_Angeles' })})` : ''}.
                             </p>
                         )}
                     </div>
