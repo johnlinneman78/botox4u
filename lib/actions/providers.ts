@@ -72,6 +72,7 @@ export async function getProvidersWithSearch(filters: {
         .select(`
             id, name, slug, business_type, address, city, state,
             listing_tier, verified, price_per_unit, website, phone,
+            clinic_posted_price_per_unit, clinic_posted_price_at,
             lat, lng, hero_image_url,
             rating, average_rating, review_count, 
             services_offered, credentials, description,
@@ -204,6 +205,8 @@ export async function getProvidersWithSearch(filters: {
             verified: p.verified || false,
             price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
             pricePerUnit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
+            clinic_posted_price_per_unit: p.clinic_posted_price_per_unit ?? null,
+            clinic_posted_price_at: p.clinic_posted_price_at ?? null,
             minTreatmentPrice: p.min_treatment_price,
             latitude: p.lat || 0,
             longitude: p.lng || 0,
@@ -384,6 +387,8 @@ export async function getTopScoringProviders(limit: number = 6, userLat?: number
                 score_total: scoreBreakdown.points,
                 points: scoreBreakdown.points,
                 price_per_unit: p.price_per_unit || p.botox_price_per_unit || p.enriched_attrs?.price_per_unit_botox,
+                clinic_posted_price_per_unit: p.clinic_posted_price_per_unit ?? null,
+                clinic_posted_price_at: p.clinic_posted_price_at ?? null,
                 imageUrl: (() => {
                     const url = p.hero_image_url || p.image_url;
                     if (!url || url.includes('placeholder') || url.includes('unsplash.com')) return null;
@@ -600,6 +605,8 @@ export async function getProviderBySlug(slug: string) {
         clarityScore: score.points,
         pricePerUnit: data.price_per_unit || data.botox_price_per_unit || data.enriched_attrs?.price_per_unit_botox,
         price_per_unit: data.price_per_unit || data.botox_price_per_unit || data.enriched_attrs?.price_per_unit_botox,
+        clinic_posted_price_per_unit: data.clinic_posted_price_per_unit ?? null,
+        clinic_posted_price_at: data.clinic_posted_price_at ?? null,
 
         // Warning & Scoring Fields
         warning_flag: data.warning_flag || false,

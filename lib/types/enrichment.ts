@@ -39,6 +39,10 @@ export interface EnrichedProvider {
     description?: string | null;
     pricePerUnit?: number | null;
     minTreatmentPrice?: number | null;
+    // Clinic-posted price (ruling 6, Nov 7, 2026): a separate labeled
+    // source, displayed as "Price posted by the clinic" with its date.
+    clinic_posted_price_per_unit?: number | null;
+    clinic_posted_price_at?: string | null;
     enriched_attrs?: any;
     reviews?: Review[];
 
