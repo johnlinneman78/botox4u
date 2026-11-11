@@ -154,6 +154,23 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
 
     const hasPublishedPrice = stats?.avgCost != null
 
+    // Clinic-posted prices (Task 3, Nov 10, 2026): prices clinics publish
+    // on their own websites, entered from Task 1. Computed live from the
+    // providers in this city — never hardcoded.
+    const postedPrices = providers
+        .map((p: any) => ({ price: Number(p.clinic_posted_price_per_unit), at: p.clinic_posted_price_at }))
+        .filter((x) => !isNaN(x.price) && x.price > 0)
+    const postedCount = postedPrices.length
+    const postedLow = postedCount > 0 ? Math.min(...postedPrices.map((x) => x.price)) : null
+    const postedHigh = postedCount > 0 ? Math.max(...postedPrices.map((x) => x.price)) : null
+    const postedLatest = postedCount > 0
+        ? postedPrices.map((x) => x.at).filter(Boolean).sort().slice(-1)[0]
+        : null
+    const fmtPostedPrice = (v: number) => (Number.isInteger(v) ? `$${v}` : `$${v.toFixed(2)}`)
+    const postedChecked = postedLatest
+        ? new Date(postedLatest).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/Los_Angeles' })
+        : null
+
     return (
         <main
             className="min-h-screen pb-24"
@@ -322,6 +339,18 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
                     >
                         What Botox costs in {cityName} right now.
                     </h2>
+                    {postedCount > 0 && postedLow != null && postedHigh != null && postedChecked && (
+                        <>
+                            <p className="text-[16px] max-w-[40rem] mb-2" style={{ color: 'var(--color-espresso)' }}>
+                                {postedCount === 1
+                                    ? `1 of ${providers.length} clinics listed in ${cityName} posts a Botox price on its own website: ${fmtPostedPrice(postedLow)} a unit. Last checked ${postedChecked}.`
+                                    : `${postedCount} of ${providers.length} clinics listed in ${cityName} post a Botox price on their own website. Posted prices run from ${fmtPostedPrice(postedLow)} to ${fmtPostedPrice(postedHigh)} a unit. Last checked ${postedChecked}.`}
+                            </p>
+                            <p className="text-[13px] max-w-[40rem] mb-8" style={{ color: 'var(--color-stone)' }}>
+                                These are prices clinics publish themselves. They are not patient reports. Specials and member prices are not included.
+                            </p>
+                        </>
+                    )}
                     <p className="text-[16px] max-w-[40rem] mb-8" style={{ color: 'var(--color-stone)' }}>
                         {hasPublishedPrice
                             ? `Clinics in ${cityName} publish per-unit prices, and patients report what they paid. Together that is the real price picture here.`
