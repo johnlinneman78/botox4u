@@ -14,6 +14,18 @@ function isAdminEmail(email: string | undefined | null): boolean {
     return allowed.includes(email.toLowerCase())
 }
 
+// First segments under /provider that are app routes, not provider slugs.
+// The 410 check for dead listings must never touch these.
+const PROVIDER_RESERVED_ROUTES = new Set([
+    'claim',
+    'dashboard',
+    'login',
+    'new',
+    'set-password',
+    'signup',
+    'verify',
+])
+
 export async function middleware(request: NextRequest) {
     // Singapore bot block (Nov 6, 2026): ~26% of CDN requests arrive via the
     // Singapore edge as automated crawls (824 GA users, 0s engagement, zero
@@ -69,6 +81,42 @@ export async function middleware(request: NextRequest) {
             },
         }
     )
+
+    // Dead provider listings return 410 Gone (Nov 11, 2026): the Nov 9 fix
+    // took deleted seed listings out of the sitemap, but the pages themselves
+    // still answered 404, so Search Console's 404 validation failed (600
+    // pending, 2 failed). A 410 tells Google the removal is intentional and
+    // counts as a fix for the 404 issue. Only when the lookup succeeds and
+    // finds nothing — on any error, fall through to the normal page (which
+    // 404s as before), so a database blip can never 410 a live listing.
+    // Runs before auth.getUser() so bot traffic on dead URLs gets a fast
+    // answer without the auth round-trip.
+    if (path.startsWith('/provider/')) {
+        const segments = path.split('/').filter(Boolean)
+        const slug = segments[1]
+        if (
+            slug &&
+            segments.length === 2 &&
+            !PROVIDER_RESERVED_ROUTES.has(slug)
+        ) {
+            const { data, error } = await supabase
+                .from('providers')
+                .select('slug')
+                .eq('slug', slug)
+                .maybeSingle()
+            if (!error && !data) {
+                return new NextResponse(
+                    '<!doctype html><html><head><title>Listing no longer available | VerifiedAesthetics</title><meta name="robots" content="noindex"></head><body style="font-family:sans-serif;max-width:560px;margin:80px auto;padding:0 20px"><h1>This provider listing is no longer available.</h1><p>The provider has been removed from VerifiedAesthetics.</p><p><a href="/find-providers">Browse providers</a></p></body></html>',
+                    {
+                        status: 410,
+                        headers: {
+                            'Content-Type': 'text/html; charset=utf-8',
+                        },
+                    }
+                )
+            }
+        }
+    }
 
     const {
         data: { user },
