@@ -8,6 +8,14 @@ import Footer from '@/components/layout/Footer'
 import GoogleAnalytics from '@/components/seo/GoogleAnalytics'
 import Script from 'next/script'
 
+// Nov 11, 2026: every page renders on demand so this middleware — including
+// the Singapore geo block — runs on every request. Static and ISR pages were
+// served from the edge cache without middleware ever running, which let
+// Singapore bots through on cached pages (and into GA4). At this traffic
+// level the extra serverless renders are trivial, and city pages now show
+// new posted prices immediately instead of needing a redeploy.
+export const dynamic = 'force-dynamic'
+
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600'],
